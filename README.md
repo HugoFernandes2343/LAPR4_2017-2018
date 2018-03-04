@@ -1,5 +1,5 @@
-COGSI Project Repository
-========================
+LAPR4/NSheets Project Repository
+================================
 
 # 1. General Notes about the Project of COGSI
 
