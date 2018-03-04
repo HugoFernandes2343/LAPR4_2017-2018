@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+             
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.materialsheet"/>         
+             
+    <g:HTMLPanel>
+
+	<m:MaterialRow marginTop="60">
+    		<g:Hyperlink text="Back to home" targetHistoryToken="{materialsheet}" />
+    		<g:Label ui:field="secondLabel"/>
+	</m:MaterialRow>
+	
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

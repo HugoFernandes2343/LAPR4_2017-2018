@@ -1,0 +1,39 @@
+# Directories #
+build/
+bin/
+target/
+
+.metadata
+.ideia
+
+# OS Files #
+.DS_Store
+desktop.ini
+Thumbs.db
+
+*.class
+*.iml
+*.ipr
+*.iws
+*~
+*#
+.*.swp
+.*.swo
+*.patch
+.settings
+._*
+
+# Gradle
+.gradle
+/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# GWT
+**/gwt-unitCache/
+
+# Specific to the project
+**/reports/
+
+
