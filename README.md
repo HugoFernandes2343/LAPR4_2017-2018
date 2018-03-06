@@ -1,25 +1,28 @@
 LAPR4/NSheets Project Repository
 ================================
 
-# 1. General Notes about the Project of COGSI
+# 1. General Notes about the Project
 
-COGSI has a project that runs during all the semester. The project is divided into 5 Sprints. Each Sprint has an average duration of 2 weeks.
+This project uses Maven.
 
-The goals for each Sprint will be published in Moodle, in a specific document.
+The default Maven lifecycle comprises of the following phases:
 
-Each and every student should develop his/her work for each sprint in his/her own individual repository (that should be similar to this one).
+	validate - validate the project is correct and all necessary information is available
+	compile - compile the source code of the project
+	test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+	package - take the compiled code and package it in its distributable format, such as a JAR.
+	verify - run any checks on results of integration tests to ensure quality criteria are met
+	install - install the package into the local repository, for use as a dependency in other projects locally
+	deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects. 
 
-By the end of each Sprint the teacher will select a small set of students to submit and present their developments for the Sprint.
+To build type:
 
-The selected students should submit their work to the common repository of the lab class.
+	mvn clean verify
 
-The selected students must present and discuss their work during a Sprint Review session (usually scheduled to a lecture).
+To execute type:
 
-Students get feedback from their work during the Sprint Review. They may improve their work and present the improvements at a special session by the end of the semester.
-
-In the Sprint Review students (presenting and attending) should compare the different presented solutions and select one of the them as the "team solution".  
-
-**Each student must present one Sprint during the semester!**
+	mvn gwt:run
+	
 
 # 2. Notes on the Organization of the Repositories
 

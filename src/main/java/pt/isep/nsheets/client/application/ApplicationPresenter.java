@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.PermanentSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+
 import pt.isep.nsheets.client.application.menu.MenuPresenter;
 
 public class ApplicationPresenter
