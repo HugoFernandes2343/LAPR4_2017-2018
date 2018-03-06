@@ -28,6 +28,9 @@ To execute type:
 
 See [https://github.com/aranega/antlr4-gwt](https://github.com/aranega/antlr4-gwt)
 
+**Notes**
+- The antlr4-gwt only works with antlr4 version 4.2.2!
+
 # X. Notes on the Organization of the Repositories
 
 **Common repository**

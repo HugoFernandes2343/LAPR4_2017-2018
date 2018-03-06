@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import pt.isep.nsheets.shared.CleanSheets;
+//import pt.isep.nsheets.shared.CleanSheets;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.Formula;
@@ -52,7 +52,7 @@ public class FormulaCompiler {
 	private FormulaCompiler() {
 		// Loads properties
 		Properties compilerProps = new Properties();
-		InputStream stream = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
+		InputStream stream=null ; //= CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
 		if (stream != null) {
 			try {
 				compilerProps.load(stream);

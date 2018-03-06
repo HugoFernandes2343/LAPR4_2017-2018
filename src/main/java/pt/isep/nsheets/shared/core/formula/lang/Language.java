@@ -60,7 +60,7 @@ public class Language {
 	private Language() {
 		// Loads properties
 		Properties language = new Properties();
-		InputStream stream = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
+		InputStream stream=null; // = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
 		if (stream != null) {
 			try {
 				language.load(stream);
