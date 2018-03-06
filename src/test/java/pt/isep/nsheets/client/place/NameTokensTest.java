@@ -32,6 +32,6 @@ import static org.junit.Assert.assertEquals;
 public class NameTokensTest {
     @Test
     public void testHomeToken() {
-        assertEquals("home", NameTokens.materialsheet);
+        assertEquals("materialsheet", NameTokens.materialsheet);
     }
 }
