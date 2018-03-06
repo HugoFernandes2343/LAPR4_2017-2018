@@ -35,6 +35,7 @@ import pt.isep.nsheets.shared.core.formula.UnaryOperator;
 
 /**
  * A factory for creating certain types of language elements.
+ * 
  * @author Einar Pehrson
  */
 public class Language {
@@ -50,67 +51,109 @@ public class Language {
 
 	/** The binary operators that are supported by the language */
 	private List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
-        
+
 	/** The functions that are supported by the language */
 	private List<Function> functions = new ArrayList<Function>();
+
+	private void initFunctions() {
+		functions.add(new Average());
+		functions.add(new And());
+		functions.add(new Count());
+		functions.add(new Do());
+		functions.add(new Factorial());
+		functions.add(new False());
+		functions.add(new If());
+		functions.add(new Not());
+		//functions.add(new NumericFunction());
+		functions.add(new Or());
+		functions.add(new Sum());
+		functions.add(new True());
+	}
+
+	private void initBinaryOperators() {
+		binaryOperators.add(new Adder());
+		binaryOperators.add(new Concatenator());
+		binaryOperators.add(new Divider());
+		binaryOperators.add(new Equal());
+		binaryOperators.add(new Exponentiator());
+		binaryOperators.add(new GreaterThan());
+		binaryOperators.add(new GreaterThanOrEqual());
+		binaryOperators.add(new LessThan());
+		binaryOperators.add(new LessThanOrEqual());
+		binaryOperators.add(new Multiplier());
+		binaryOperators.add(new NotEqual());
+		binaryOperators.add(new RangeReference());
+		binaryOperators.add(new Subtracter());
+	}
+
+	private void initUnaryOperators() {
+		// functions.add(new Average());
+		unaryOperators.add(new Negator());
+		unaryOperators.add(new Percent());
+	}
 
 	/**
 	 * Creates a new language.
 	 */
 	private Language() {
-		// Loads properties
-		Properties language = new Properties();
-		InputStream stream=null; // = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
-		if (stream != null) {
-			try {
-				language.load(stream);
-			} catch (IOException e) {
-				System.err.println("An I/O error occurred when loading language"
-					+ " properties file (" + PROPERTIES_FILENAME + ").");
-				return;
-			} finally {
-				try {
-					if (stream != null)
-						stream.close();
-				} catch (IOException e) {}
-			}
-
-			// Loads elements
-			for (Object className : language.keySet()) {
-				// Loads class and instantiates element
-				Class elementClass;
-				Object element;
-				try {
-					elementClass = Class.forName(getClass().getPackage()
-						.getName() + "." + (String)className);
-					element = elementClass.newInstance();
-				} catch (Exception e) {
-					// Skip this element, regardless of what went wrong
-					continue;
-				}
-
-				// Stores element
-				if (Function.class.isAssignableFrom(elementClass))
-					functions.add(Function.class.cast(element));
-				if (BinaryOperator.class.isAssignableFrom(elementClass))
-					binaryOperators.add(BinaryOperator.class.cast(element));
-				if (UnaryOperator.class.isAssignableFrom(elementClass))
-					unaryOperators.add(UnaryOperator.class.cast(element));
-
-			}
-		} else
-			System.err.println("Could not find language properties file ("
-				+ PROPERTIES_FILENAME + ").");
-
-		// Loads static methods from java.lang.Math that use double precision
-		for (Method method : Math.class.getMethods())
-			if (Modifier.isStatic(method.getModifiers()) &&
-						method.getReturnType() == Double.TYPE)
-				functions.add(new NumericFunction(method));
+		initFunctions();
+		initBinaryOperators();
+		initUnaryOperators();
 	}
+	
+//	private Language() {
+//		// Loads properties
+//		Properties language = new Properties();
+//		InputStream stream = null; // = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
+//		if (stream != null) {
+//			try {
+//				language.load(stream);
+//			} catch (IOException e) {
+//				System.err.println("An I/O error occurred when loading language" + " properties file ("
+//						+ PROPERTIES_FILENAME + ").");
+//				return;
+//			} finally {
+//				try {
+//					if (stream != null)
+//						stream.close();
+//				} catch (IOException e) {
+//				}
+//			}
+//
+//			// Loads elements
+//			for (Object className : language.keySet()) {
+//				// Loads class and instantiates element
+//				Class elementClass;
+//				Object element;
+//				try {
+//					elementClass = Class.forName(getClass().getPackage().getName() + "." + (String) className);
+//					element = elementClass.newInstance();
+//				} catch (Exception e) {
+//					// Skip this element, regardless of what went wrong
+//					continue;
+//				}
+//
+//				// Stores element
+//				if (Function.class.isAssignableFrom(elementClass))
+//					functions.add(Function.class.cast(element));
+//				if (BinaryOperator.class.isAssignableFrom(elementClass))
+//					binaryOperators.add(BinaryOperator.class.cast(element));
+//				if (UnaryOperator.class.isAssignableFrom(elementClass))
+//					unaryOperators.add(UnaryOperator.class.cast(element));
+//
+//			}
+//		} else
+//			System.err.println("Could not find language properties file (" + PROPERTIES_FILENAME + ").");
+//
+//		// Loads static methods from java.lang.Math that use double precision
+//		for (Method method : Math.class.getMethods())
+//			if (Modifier.isStatic(method.getModifiers()) && method.getReturnType() == Double.TYPE)
+//				functions.add(new NumericFunction(method));
+//	}
 
 	/**
 	 * Returns the singleton instance.
+	 * 
 	 * @return the singleton instance
 	 */
 	public static Language getInstance() {
@@ -119,9 +162,12 @@ public class Language {
 
 	/**
 	 * Returns the unary operator with the given identifier.
-         * @param identifier identifier
+	 * 
+	 * @param identifier
+	 *            identifier
 	 * @return the unary operator with the given identifier
-         * @throws csheets.core.formula.lang.UnknownElementException exception
+	 * @throws csheets.core.formula.lang.UnknownElementException
+	 *             exception
 	 */
 	public UnaryOperator getUnaryOperator(String identifier) throws UnknownElementException {
 		for (UnaryOperator operator : unaryOperators)
@@ -132,9 +178,12 @@ public class Language {
 
 	/**
 	 * Returns the binary operator with the given identifier.
-         * @param identifier identifier
+	 * 
+	 * @param identifier
+	 *            identifier
 	 * @return the binary operator with the given identifier
-         * @throws csheets.core.formula.lang.UnknownElementException exception
+	 * @throws csheets.core.formula.lang.UnknownElementException
+	 *             exception
 	 */
 	public BinaryOperator getBinaryOperator(String identifier) throws UnknownElementException {
 		for (BinaryOperator operator : binaryOperators)
@@ -142,12 +191,15 @@ public class Language {
 				return operator; // .clone()
 		throw new UnknownElementException(identifier);
 	}
-        
+
 	/**
 	 * Returns the function with the given identifier.
-         * @param identifier identifier
+	 * 
+	 * @param identifier
+	 *            identifier
 	 * @return the function with the given identifier
-         * @throws csheets.core.formula.lang.UnknownElementException exception
+	 * @throws csheets.core.formula.lang.UnknownElementException
+	 *             exception
 	 */
 	public Function getFunction(String identifier) throws UnknownElementException {
 		for (Function function : functions)
@@ -158,7 +210,9 @@ public class Language {
 
 	/**
 	 * Returns whether there is a function with the given identifier.
-         * @param identifier identifier
+	 * 
+	 * @param identifier
+	 *            identifier
 	 * @return whether there is a function with the given identifier
 	 */
 	public boolean hasFunction(String identifier) {
@@ -171,6 +225,7 @@ public class Language {
 
 	/**
 	 * Returns the functions that are supported by the syntax.
+	 * 
 	 * @return the functions that are supported by the syntax
 	 */
 	public Function[] getFunctions() {
