@@ -21,9 +21,12 @@
 
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
-<module rename-to='GwtMaterialBasic'>
+<module rename-to='NSheets'>
     <inherits name='com.google.gwt.user.User'/>
-    <inherits name='com.google.gwt.inject.Inject'/>
+    <!-- ANTLR4-GWT -->
+    <inherits name="org.antlr.v4.antlr4-runtime" />    
+        
+    <inherits name='com.google.gwt.inject.Inject'/>    
         
     <!--GWTP-->
     <inherits name='com.gwtplatform.dispatch.Dispatch'/>    
