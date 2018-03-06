@@ -27,7 +27,7 @@
 		<gin.version>2.1.2</gin.version>
 		<gwt-material.version>2.0.1</gwt-material.version>
 		<gwt.style>OBF</gwt.style>
-		<!-- <smartgwt.version>6.1-p20180228</smartgwt.version>  -->
+		<!-- <smartgwt.version>6.1-p20180228</smartgwt.version> -->
 
 		<!-- maven -->
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
@@ -67,18 +67,10 @@
 
 		<!-- For Smart GWT -->
 		<!-- To define the plugin version in your parent POM -->
-		<!-- 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.isomorphic</groupId>
-					<artifactId>isc-maven-plugin</artifactId>
-					<version>1.2.1</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
- 		-->
- 
+		<!-- <pluginManagement> <plugins> <plugin> <groupId>com.isomorphic</groupId> 
+			<artifactId>isc-maven-plugin</artifactId> <version>1.2.1</version> </plugin> 
+			</plugins> </pluginManagement> -->
+
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
 		<resources>
@@ -90,14 +82,24 @@
 		<plugins>
 
 			<!-- Smart GWT -->
-			<!-- 
+			<!-- <plugin> <groupId>com.isomorphic</groupId> <artifactId>isc-maven-plugin</artifactId> 
+				<version>1.2.1</version> </plugin> -->
+
+			<!-- Maven Antlr4 plugin -->
 			<plugin>
-				<groupId>com.isomorphic</groupId>
-				<artifactId>isc-maven-plugin</artifactId>
-				<version>1.2.1</version>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>4.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
- 			-->
- 
+
+			<!-- Maven compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -118,9 +120,9 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>${gwt.version}</version>
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
-					documentation at codehaus.org -->				
+					documentation at codehaus.org -->
 				<configuration>
-					<!--  <strict>true</strict>  -->
+					<!-- <strict>true</strict> -->
 
 					<testTimeOut>180</testTimeOut>
 					<mode>htmlunit</mode>
@@ -253,14 +255,9 @@
 		</dependency>
 
 		<!-- SmartGWT -->
-		<!-- 
-		<dependency>
-			<groupId>com.isomorphic.smartgwt.lgpl</groupId>
-			<artifactId>smartgwt-lgpl</artifactId>
-			<version>${smartgwt.version}</version>
-		</dependency>
- 		-->
- 
+		<!-- <dependency> <groupId>com.isomorphic.smartgwt.lgpl</groupId> <artifactId>smartgwt-lgpl</artifactId> 
+			<version>${smartgwt.version}</version> </dependency> -->
+
 		<!-- ANTLR4-GWT -->
 		<dependency>
 			<groupId>org.antlr</groupId>
