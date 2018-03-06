@@ -1,6 +1,6 @@
 grammar Formula;
 @header {
-    package pt.isep.nsheets.shared.core.formula.compiler;
+//    package pt.isep.nsheets.shared.core.formula.compiler;
 }
 	         
 expression
