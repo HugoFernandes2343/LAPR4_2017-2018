@@ -52,68 +52,70 @@ public class ExtensionManager {
 		= new TreeMap<String, Extension>();
 
 	/** The class loader used to load extensions */
-	private Loader loader = new Loader();
+	// not supported in gwt
+//	private Loader loader = new Loader();
 
 	/**
 	 * Creates the extension manager.
 	 */
 	private ExtensionManager() {
-		// Loads default extension properties
-		Properties extProps = new Properties();
-		InputStream stream=null; // = CleanSheets.class.getResourceAsStream("res/" + PROPERTIES_FILENAME);
-		if (stream != null)
-			try {
-				extProps.load(stream);
-			} catch (IOException e) {
-				System.err.println("Could not load default extension properties from: "
-					+ PROPERTIES_FILENAME);
-			} finally {
-				try {
-					if (stream != null)
-						stream.close();
-				} catch (IOException e) {}
-			}
-
-		// Loads user extension properties
-		File userExtPropsFile = new File(PROPERTIES_FILENAME);
-		if (userExtPropsFile.exists())
-			stream = null;
-			try {
-				stream = new FileInputStream(userExtPropsFile);
-				extProps.load(stream);
-			} catch (IOException e) {
-			} finally {
-				try {
-					if (stream != null)
-						stream.close();
-				} catch (IOException e) {}
-			}
-
-		// Loads extensions
-		for (Map.Entry<Object, Object> entry : extProps.entrySet()) {
-			// Resolves class path
-			String classPathProp = (String)entry.getValue();
-			URL classPath = null;
-			if (classPathProp.length() > 0) {
-				// Looks for resource
-				classPath = ExtensionManager.class.getResource(classPathProp);
-				if (classPath == null) {
-					// Looks for file
-					File classPathFile = new File(classPathProp);
-					if (classPathFile.exists())
-						try {
-							classPath = classPathFile.toURL();
-						} catch (MalformedURLException e) {}
-				}
-			}
-
-			// Loads class
-			String className = (String)entry.getKey();
-			if (classPath == null)
-				load(className);
-			else
-				load(className, classPath);
-		}
+		// (ATB) Need to rewrite this!
+//		// Loads default extension properties
+//		Properties extProps = new Properties();
+//		InputStream stream=null; // = CleanSheets.class.getResourceAsStream("res/" + PROPERTIES_FILENAME);
+//		if (stream != null)
+//			try {
+//				extProps.load(stream);
+//			} catch (IOException e) {
+//				System.err.println("Could not load default extension properties from: "
+//					+ PROPERTIES_FILENAME);
+//			} finally {
+//				try {
+//					if (stream != null)
+//						stream.close();
+//				} catch (IOException e) {}
+//			}
+//
+//		// Loads user extension properties
+//		File userExtPropsFile = new File(PROPERTIES_FILENAME);
+//		if (userExtPropsFile.exists())
+//			stream = null;
+//			try {
+//				stream = new FileInputStream(userExtPropsFile);
+//				extProps.load(stream);
+//			} catch (IOException e) {
+//			} finally {
+//				try {
+//					if (stream != null)
+//						stream.close();
+//				} catch (IOException e) {}
+//			}
+//
+//		// Loads extensions
+//		for (Map.Entry<Object, Object> entry : extProps.entrySet()) {
+//			// Resolves class path
+//			String classPathProp = (String)entry.getValue();
+//			URL classPath = null;
+//			if (classPathProp.length() > 0) {
+//				// Looks for resource
+//				classPath = ExtensionManager.class.getResource(classPathProp);
+//				if (classPath == null) {
+//					// Looks for file
+//					File classPathFile = new File(classPathProp);
+//					if (classPathFile.exists())
+//						try {
+//							classPath = classPathFile.toURL();
+//						} catch (MalformedURLException e) {}
+//				}
+//			}
+//
+//			// Loads class
+//			String className = (String)entry.getKey();
+//			if (classPath == null)
+//				load(className);
+//			else
+//				load(className, classPath);
+//		}
 	}
 
 	/**
@@ -150,16 +152,17 @@ public class ExtensionManager {
 	 * @param url the URL of the JAR-file or directory that contains the class
 	 * @return the extension that was loaded, or null if none was found.
 	 */
-	public Extension load(String className, URL url) {
-		loader.addURL(url);
-		try {
-			Class extensionClass = Class.forName(className, true, loader);
-			return load(extensionClass);
-		} catch (Exception e) {
-			System.err.println("Failed to load extension class " + className + ".");
-			return null;
-		}
-	}
+	// not supported in gwt
+//	public Extension load(String className, URL url) {
+//		loader.addURL(url);
+//		try {
+//			Class extensionClass = Class.forName(className, true, loader);
+//			return load(extensionClass);
+//		} catch (Exception e) {
+//			System.err.println("Failed to load extension class " + className + ".");
+//			return null;
+//		}
+//	}
 
 	/**
 	 * Loads the extension with the given class name.
@@ -167,63 +170,67 @@ public class ExtensionManager {
 	 * the abstract Extension class
 	 * @return the extension that was loaded, or null if none was found.
 	 */
-	public Extension load(String className) {
-		try {
-			Class extensionClass = Class.forName(className);
-			return load(extensionClass);
-		} catch (Exception e) {
-			System.err.println("Failed to load extension class " + className + ".");
-			return null;
-		}
-	}
+	// not supported in gwt
+//	public Extension load(String className) {
+//		try {
+//			Class extensionClass = Class.forName(className);
+//			return load(extensionClass);
+//		} catch (Exception e) {
+//			System.err.println("Failed to load extension class " + className + ".");
+//			return null;
+//		}
+//	}
 
 	/**
 	 * Instantiates the given extension class.
 	 * @param extensionClass a class that extends the abstract Extension class
 	 * @return the extension that was loaded, or null if none was found.
 	 */
-	public Extension load(Class extensionClass) {
-		try {
-			Extension extension = (Extension)extensionClass.newInstance();
-			extensionMap.put(extension.getName(), extension);
-			return extension;
-		} catch (IllegalAccessException iae) {
-			System.err.println("Could not access extension " + extensionClass.getName() + ".");
-			return null;
-		} catch (InstantiationException ie) {
-			System.err.println("Could not load extension from " + extensionClass.getName() + ".");
-			ie.printStackTrace();
-			return null;
-		}
-	}
+	// not supported in gwt
+//	public Extension load(Class extensionClass) {
+//		try {
+//			Extension extension = (Extension)extensionClass.newInstance();
+//			extensionMap.put(extension.getName(), extension);
+//			return extension;
+//		} catch (IllegalAccessException iae) {
+//			System.err.println("Could not access extension " + extensionClass.getName() + ".");
+//			return null;
+//		} catch (InstantiationException ie) {
+//			System.err.println("Could not load extension from " + extensionClass.getName() + ".");
+//			ie.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	/**
 	 * Returns the class loader used to load extensions.
 	 * @return the class loader used to load extensions
 	 */
-	public ClassLoader getLoader() {
-		return loader;
-	}
+	// not supported in gwt
+//	public ClassLoader getLoader() {
+//		return loader;
+//	}
 
 	/**
 	 * The class loader used to load extensions.
 	 */
-	public static class Loader extends URLClassLoader {
-
-		/**
-		 * Creates a new extension loader.
-		 */
-		public Loader() {
-			super(new URL[]{}, Loader.class.getClassLoader());
-		}
-
-		/**
-		 * Appends the specified URL to the list of URLs to search for classes
-		 * and resources.
-		 * @param url the URL to be added to the search path of URL:s
-		 */
-		protected void addURL(URL url) {
-			super.addURL(url);
-		}
-	}
+	// not supported in gwt
+//	public static class Loader extends URLClassLoader {
+//
+//		/**
+//		 * Creates a new extension loader.
+//		 */
+//		public Loader() {
+//			super(new URL[]{}, Loader.class.getClassLoader());
+//		}
+//
+//		/**
+//		 * Appends the specified URL to the list of URLs to search for classes
+//		 * and resources.
+//		 * @param url the URL to be added to the search path of URL:s
+//		 */
+//		protected void addURL(URL url) {
+//			super.addURL(url);
+//		}
+//	}
 }

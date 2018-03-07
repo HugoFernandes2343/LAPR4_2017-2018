@@ -21,8 +21,8 @@
 package pt.isep.nsheets.shared.core;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+// import java.io.ObjectInputStream;		// not supported in GWT
+// import java.io.ObjectOutputStream;	// not supported in GWT
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -282,39 +282,41 @@ public class SpreadsheetImpl implements Spreadsheet {
 	 * @throws IOException If any of the usual Input/Output related exceptions occur
 	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
 	 */
-	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-	    stream.defaultReadObject();
-
-		// Sets up event forwarder
-		eventForwarder = new EventForwarder();
-		for (Cell cell : cells.values())
-			cell.addCellListener(eventForwarder);
-		cellListeners = new ArrayList<CellListener>();
-
-		// Reads extensions
-		extensions = new HashMap<String, SpreadsheetExtension>();
-		int extCount = stream.readInt();
-		for (int i = 0; i < extCount; i++) {
-			try {
-				SpreadsheetExtension extension = (SpreadsheetExtension)stream.readObject();
-				extensions.put(extension.getName(), extension);
-			} catch (ClassNotFoundException e) {
-				System.err.println(e);
-			}
-		}
-	}
+	// Not supported in GWT
+//	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+//	    stream.defaultReadObject();
+//
+//		// Sets up event forwarder
+//		eventForwarder = new EventForwarder();
+//		for (Cell cell : cells.values())
+//			cell.addCellListener(eventForwarder);
+//		cellListeners = new ArrayList<CellListener>();
+//
+//		// Reads extensions
+//		extensions = new HashMap<String, SpreadsheetExtension>();
+//		int extCount = stream.readInt();
+//		for (int i = 0; i < extCount; i++) {
+//			try {
+//				SpreadsheetExtension extension = (SpreadsheetExtension)stream.readObject();
+//				extensions.put(extension.getName(), extension);
+//			} catch (ClassNotFoundException e) {
+//				System.err.println(e);
+//			}
+//		}
+//	}
 
 	/**
 	 * Customizes serialization, by writing extensions separately.
 	 * @param stream the object output stream to which the object is to be written
 	 * @throws IOException If any of the usual Input/Output related exceptions occur
 	 */
-	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.defaultWriteObject();
-
-		// Writes extensions
-		stream.writeInt(extensions.size());
-		for (SpreadsheetExtension extension : extensions.values())
-			stream.writeObject(extension);
-	}
+	// not supported in GWT
+//	private void writeObject(ObjectOutputStream stream) throws IOException {
+//		stream.defaultWriteObject();
+//
+//		// Writes extensions
+//		stream.writeInt(extensions.size());
+//		for (SpreadsheetExtension extension : extensions.values())
+//			stream.writeObject(extension);
+//	}
 }

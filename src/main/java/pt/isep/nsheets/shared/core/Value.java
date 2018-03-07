@@ -21,18 +21,24 @@
 package pt.isep.nsheets.shared.core;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.NumberFormat;
+//import java.text.DateFormat;		// Not supported in GWT
+import com.google.gwt.i18n.client.DateTimeFormat; // replaces java.text.DateFormat in gwt
+import com.google.gwt.i18n.client.LocaleInfo;
+//import java.text.Format;			// Not supported in GWT
+//import java.text.NumberFormat;	// Not supported in GWT
+import com.google.gwt.i18n.client.NumberFormat; // replaces java.text.NumberFormat in gwt
+
+import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
+//import java.text.ParsePosition;	// Not supported in GWT
 import java.util.Arrays;
-import java.util.Calendar;
+//import java.util.Calendar;		// Not supported in GWT
 import java.util.Date;
-import java.util.GregorianCalendar;
+//import java.util.GregorianCalendar;	// Not supported in GWT
 
 /**
  * A typed value that a cell can contain.
+ * 
  * @author Einar Pehrson
  */
 public class Value implements Comparable<Value>, Serializable {
@@ -74,16 +80,18 @@ public class Value implements Comparable<Value>, Serializable {
 	/**
 	 * Creates a null value.
 	 */
-	public Value() {}
+	public Value() {
+	}
 
 	/**
 	 * Creates a numeric value.
-	 * @param number the number of the value
+	 * 
+	 * @param number
+	 *            the number of the value
 	 */
 	public Value(Number number) {
 		this.type = Type.NUMERIC;
-		if ((number instanceof Float || number instanceof Double)
-			&& number.doubleValue() == number.longValue())
+		if ((number instanceof Float || number instanceof Double) && number.doubleValue() == number.longValue())
 			this.value = number.longValue();
 		else
 			this.value = number;
@@ -91,7 +99,9 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Creates a text value.
-	 * @param text the text of the value
+	 * 
+	 * @param text
+	 *            the text of the value
 	 */
 	public Value(String text) {
 		this.type = Type.TEXT;
@@ -100,7 +110,9 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Creates a boolean value.
-	 * @param booleanValue the boolean of the value
+	 * 
+	 * @param booleanValue
+	 *            the boolean of the value
 	 */
 	public Value(Boolean booleanValue) {
 		this.type = Type.BOOLEAN;
@@ -109,7 +121,9 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Creates a date value.
-	 * @param date the date of the value
+	 * 
+	 * @param date
+	 *            the date of the value
 	 */
 	public Value(Date date) {
 		this.type = Type.DATE;
@@ -118,15 +132,19 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Creates a one-dimensional matrix value (vector).
-	 * @param matrix the value vector
+	 * 
+	 * @param matrix
+	 *            the value vector
 	 */
 	public Value(Value[] matrix) {
-		this(new Value[][] {matrix});
+		this(new Value[][] { matrix });
 	}
 
 	/**
 	 * Creates a two-dimensional matrix value.
-	 * @param matrix the value matrix
+	 * 
+	 * @param matrix
+	 *            the value matrix
 	 */
 	public Value(Value[][] matrix) {
 		this.type = Type.MATRIX;
@@ -135,7 +153,9 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Creates an error value.
-	 * @param error the error of the value
+	 * 
+	 * @param error
+	 *            the error of the value
 	 */
 	public Value(Throwable error) {
 		this.type = Type.ERROR;
@@ -144,6 +164,7 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Returns the value in untyped form.
+	 * 
 	 * @return the value
 	 */
 	public final Object toAny() {
@@ -152,6 +173,7 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Returns the type of the value.
+	 * 
 	 * @return the type of the value
 	 */
 	public final Type getType() {
@@ -160,7 +182,9 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Returns whether the value is of the given type.
-	 * @param type the type of value to check against
+	 * 
+	 * @param type
+	 *            the type of value to check against
 	 * @return whether the value is of the given type
 	 */
 	public final boolean isOfType(Type type) {
@@ -169,106 +193,123 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Returns a numeric representation of the value.
+	 * 
 	 * @return a numeric representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public Number toNumber() throws IllegalValueTypeException {
 		if (type == Type.NUMERIC)
-			return (Number)value;
+			return (Number) value;
 		else
 			throw new IllegalValueTypeException(this, Type.NUMERIC);
 	}
 
 	/**
 	 * Returns a primitive numeric representation of the value.
+	 * 
 	 * @return a primitive numeric representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
-	public double toDouble() throws IllegalValueTypeException{
+	public double toDouble() throws IllegalValueTypeException {
 		return toNumber().doubleValue();
 	}
 
 	/**
 	 * Returns a text representation of the value.
+	 * 
 	 * @return a text representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public String toText() throws IllegalValueTypeException {
 		if (type == Type.TEXT)
-			return (String)value;
+			return (String) value;
 		else
 			throw new IllegalValueTypeException(this, Type.TEXT);
 	}
 
 	/**
 	 * Returns a boolean representation of the value.
+	 * 
 	 * @return a boolean representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public Boolean toBoolean() throws IllegalValueTypeException {
 		if (type == Type.BOOLEAN)
-			return (Boolean)value;
+			return (Boolean) value;
 		else
 			throw new IllegalValueTypeException(this, Type.BOOLEAN);
 	}
 
 	/**
 	 * Returns a date representation of the value.
+	 * 
 	 * @return a date representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public Date toDate() throws IllegalValueTypeException {
 		if (type == Type.DATE)
-			return (Date)value;
+			return (Date) value;
 		else
 			throw new IllegalValueTypeException(this, Type.DATE);
 	}
 
 	/**
 	 * Returns a matrix representation of the value.
+	 * 
 	 * @return a matrix representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public Value[][] toMatrix() throws IllegalValueTypeException {
 		if (type == Type.MATRIX)
-			return (Value[][])value;
+			return (Value[][]) value;
 		else
 			throw new IllegalValueTypeException(this, Type.MATRIX);
 	}
 
 	/**
 	 * Returns an error representation of the value.
+	 * 
 	 * @return an error representation of the value
-	 * @throws IllegalValueTypeException if the value cannot be converted to this type
+	 * @throws IllegalValueTypeException
+	 *             if the value cannot be converted to this type
 	 */
 	public Throwable toError() throws IllegalValueTypeException {
 		if (type == Type.ERROR)
-			return (Throwable)value;
+			return (Throwable) value;
 		else
 			throw new IllegalValueTypeException(this, Type.ERROR);
 	}
 
 	/**
 	 * Compares this value with the given value for order.
-	 * @param otherValue the value to compare to
-	 * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+	 * 
+	 * @param otherValue
+	 *            the value to compare to
+	 * @return a negative integer, zero, or a positive integer as this object is
+	 *         less than, equal to, or greater than the specified object.
 	 */
 	public int compareTo(Value otherValue) {
 		if (type == otherValue.getType())
 			try {
 				switch (type) {
-					case NUMERIC:
-						return ((Double)toDouble()).compareTo(otherValue.toDouble());
-					case TEXT:
-						return toText().compareTo(otherValue.toText());
-					case BOOLEAN:
-						return toBoolean().compareTo(otherValue.toBoolean());
-					case DATE:
-						return toDate().compareTo(otherValue.toDate());
-					case MATRIX:
-						return Arrays.hashCode((Object[])otherValue.toAny()) - Arrays.hashCode((Object[])value);
-					default:
-						return 0;
+				case NUMERIC:
+					return ((Double) toDouble()).compareTo(otherValue.toDouble());
+				case TEXT:
+					return toText().compareTo(otherValue.toText());
+				case BOOLEAN:
+					return toBoolean().compareTo(otherValue.toBoolean());
+				case DATE:
+					return toDate().compareTo(otherValue.toDate());
+				case MATRIX:
+					return Arrays.hashCode((Object[]) otherValue.toAny()) - Arrays.hashCode((Object[]) value);
+				default:
+					return 0;
 				}
 			} catch (IllegalValueTypeException e) {
 				return -1;
@@ -279,107 +320,120 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Returns whether the other object is an identical value .
-	 * @param other the object to check for equality
+	 * 
+	 * @param other
+	 *            the object to check for equality
 	 * @return true if the objects are equal
 	 */
 	public boolean equals(Object other) {
 		if (!(other instanceof Value) || other == null)
 			return false;
-		Value otherValue = (Value)other;
+		Value otherValue = (Value) other;
 		boolean nulls = value == null && otherValue.value == null;
-		return type == otherValue.type 
-		   && (nulls || (!nulls && value.equals(otherValue.value)));
+		return type == otherValue.type && (nulls || (!nulls && value.equals(otherValue.value)));
 	}
 
 	/**
 	 * Returns a string representation of the value.
+	 * 
 	 * @return a string representation of the value
 	 */
 	public String toString() {
 		if (value != null)
 			switch (type) {
-				case BOOLEAN:
-					return value.toString().toUpperCase();
-				case DATE:
-					return DateFormat.getDateTimeInstance(
-						DateFormat.SHORT, DateFormat.SHORT).format((Date)value);
-				case MATRIX:
-					Value[][] matrix = (Value[][])value;
-					String string = "{";
-					for (int row = 0; row < matrix.length; row++) {
-						for (int column = 0; column < matrix[row].length; column++) {
-							string += matrix[row][column];
-							if (column + 1 < matrix[row].length)
-								string += ";";
-						}
-						if (row + 1 < matrix.length)
-							string += ";\n";
+			case BOOLEAN:
+				return value.toString().toUpperCase();
+			case DATE:
+				return DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_SHORT).format((Date) value);
+			// return DateFormat.getDateTimeInstance(
+			// DateFormat.SHORT, DateFormat.SHORT).format((Date)value);
+			// return ""; // not supported by GWT
+			case MATRIX:
+				Value[][] matrix = (Value[][]) value;
+				String string = "{";
+				for (int row = 0; row < matrix.length; row++) {
+					for (int column = 0; column < matrix[row].length; column++) {
+						string += matrix[row][column];
+						if (column + 1 < matrix[row].length)
+							string += ";";
 					}
-					string += "}";
-					return string;
-				default:
-					return value.toString();
+					if (row + 1 < matrix.length)
+						string += ";\n";
+				}
+				string += "}";
+				return string;
+			default:
+				return value.toString();
 			}
 		else
 			return "";
 	}
 
 	/**
-	 * Returns a string representation of the value, using the given date or
-	 * number format.
-	 * @param format the format to use when converting the value 
+	 * Returns a string representation of the value, using the given date or number
+	 * format.
+	 * 
+	 * @param format
+	 *            the format to use when converting the value
 	 * @return a string representation of the value
 	 */
-	public String toString(Format format) {
-		if (value != null)
-			switch (type) {
-				case NUMERIC:
-					if (format instanceof NumberFormat)
-						return format.format((Number)value);
-					else
-						return value.toString();
-				case DATE:
-					if (format instanceof DateFormat)
-						return format.format((Date)value);
-				default:
-					return value.toString();
-			}
-		return "";
-	}
+	// not supported in GWT
+//	public String toString(Format format) {
+//		if (value != null)
+//			switch (type) {
+//			case NUMERIC:
+//				if (format instanceof NumberFormat)
+//					return format.format((Number) value);
+//				else
+//					return value.toString();
+//			case DATE:
+//				// if (format instanceof DateFormat) // not supported by GWT
+//				// return format.format((Date)value);
+//			default:
+//				return value.toString();
+//			}
+//		return "";
+//	}
 
 	/**
-	 * Attempts to parse a value from the given string. The value is matched
-	 * against the given types in order. If no types are supplied, conversion
-	 * will be attempted to boolean, date and numeric values. If no other
-	 * type matches, the value will be used as a string.
-	 * @param value the value
-	 * @param types the types for which parsing should be attempted
-         * @return return
+	 * Attempts to parse a value from the given string. The value is matched against
+	 * the given types in order. If no types are supplied, conversion will be
+	 * attempted to boolean, date and numeric values. If no other type matches, the
+	 * value will be used as a string.
+	 * 
+	 * @param value
+	 *            the value
+	 * @param types
+	 *            the types for which parsing should be attempted
+	 * @return return
 	 */
 	public static Value parseValue(String value, Type... types) {
 		// Uses default types
 		if (types.length == 0)
-			types = new Type[] {Type.BOOLEAN, Type.DATE, Type.NUMERIC};
+			types = new Type[] { Type.BOOLEAN, Type.DATE, Type.NUMERIC };
 
 		for (int i = 0; i < types.length; i++)
 			switch (types[i]) {
-				case BOOLEAN:
-					try {
-						return parseBooleanValue(value);
-					} catch (ParseException e) {}
-					break;
+			case BOOLEAN:
+				try {
+					return parseBooleanValue(value);
+				} catch (ParseException e) {
+				}
+				break;
 
-				case DATE:
-					try {
-						return parseDateValue(value);
-					} catch (ParseException e) {}
-					break;
-	
-				case NUMERIC:
-					try {
-						return parseNumericValue(value);
-					} catch (ParseException e) {}
-					break;
+			case DATE:
+				try {
+					return parseDateValue(value);
+				} catch (ParseException e) {
+				}
+				break;
+
+			case NUMERIC:
+				try {
+					return parseNumericValue(value);
+				} catch (ParseException e) {
+				}
+				break;
 			}
 
 		// Uses the string as the value
@@ -388,23 +442,42 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Attempts to parse a number from the given string.
-	 * @param value the value
+	 * 
+	 * @param value
+	 *            the value
 	 * @return the numeric value that was found
-	 * @throws ParseException if no numeric value was found
+	 * @throws ParseException
+	 *             if no numeric value was found
 	 */
+	// not supported in GWT
 	public static Value parseNumericValue(String value) throws ParseException {
-		ParsePosition position = new ParsePosition(0);
-		Number number = NumberFormat.getInstance().parse(value, position);
-		if (position.getIndex() == value.length())
-			return new Value(number);
-		throw new ParseException(value, position.getErrorIndex());
+		try {
+			// Need to change "," to decimalSeparator...
+			// "," is used in the grammar as a decimal separator
+			String decimalSeparator = LocaleInfo.getCurrentLocale().getNumberConstants().decimalSeparator();
+			String value2=value.replace(",", decimalSeparator);
+			
+			double numberValue = NumberFormat.getDecimalFormat().parse(value2);
+			return new Value(new Double(numberValue));
+		} catch (java.lang.NumberFormatException e) {
+			throw new ParseException(value, 0);
+		}
+
+		// ParsePosition position = new ParsePosition(0);
+		// Number number = NumberFormat.getInstance().parse(value, position);
+		// if (position.getIndex() == value.length())
+		// return new Value(number);
+		// throw new ParseException(value, position.getErrorIndex());
 	}
 
 	/**
 	 * Attempts to parse a boolean from the given string.
-	 * @param value the value
+	 * 
+	 * @param value
+	 *            the value
 	 * @return the boolean value that was found
-	 * @throws ParseException if no boolean value was found
+	 * @throws ParseException
+	 *             if no boolean value was found
 	 */
 	public static Value parseBooleanValue(String value) throws ParseException {
 		if (value.equalsIgnoreCase("true"))
@@ -417,52 +490,64 @@ public class Value implements Comparable<Value>, Serializable {
 
 	/**
 	 * Attempts to parse a date, time or date/time from the given string.
-	 * @param value the value
+	 * 
+	 * @param value
+	 *            the value
 	 * @return the date value that was found
-	 * @throws ParseException if no date value was found
+	 * @throws ParseException
+	 *             if no date value was found
 	 */
+	// not supported in gwt
 	public static Value parseDateValue(String value) throws ParseException {
-		ParsePosition position = new ParsePosition(0);
-
+		// ParsePosition position = new ParsePosition(0);
+		//
 		// Attempts to parse a date or date/time
-		DateFormat[] dateFormats = new DateFormat[] {
-			DateFormat.getDateInstance(DateFormat.SHORT),
-			DateFormat.getDateInstance(DateFormat.MEDIUM),
-			DateFormat.getDateInstance(DateFormat.LONG),
-			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT),
-			DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT),
-			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM),
-			DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM)
-		};
-		for (DateFormat format : dateFormats) {
-			Date date = format.parse(value, position);
-			if (position.getIndex() == value.length())
+		DateTimeFormat[] dateFormats = new DateTimeFormat[] {
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_SHORT),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_MEDIUM),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_LONG),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_FULL),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_SHORT),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_MEDIUM),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_LONG),
+				DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_FULL) };
+
+		for (DateTimeFormat format : dateFormats) {
+
+			try {
+				Date date = format.parse(value);
+
 				return new Value(date);
-			else if (position.getIndex() > 0)
-				position.setIndex(0);
+			} catch (java.lang.IllegalArgumentException e) {
+				throw new ParseException(value, 0);
+			}
 		}
 
-		// Attempts to parse a time in the current day
-		DateFormat[] timeFormats = new DateFormat[] {
-			DateFormat.getTimeInstance(DateFormat.SHORT),
-			DateFormat.getTimeInstance(DateFormat.MEDIUM),
-			DateFormat.getTimeInstance(DateFormat.LONG)
-		};
-		for (int i = 0; i < timeFormats.length; i++) {
-			Calendar datetime = new GregorianCalendar();
-			Date date = timeFormats[i].parse(value, position);
-			if (position.getIndex() == value.length()) {
-				datetime.setTime(date);
-				Calendar today = new GregorianCalendar();
-				datetime.set(
-					today.get(Calendar.YEAR), 
-					today.get(Calendar.MONTH), 
-					today.get(Calendar.DAY_OF_MONTH)
-				);
-				return new Value(datetime.getTime());
-			} else if (position.getIndex() > 0)
-				position.setIndex(0);
-		}
-		throw new ParseException(value, position.getErrorIndex());
+		throw new ParseException(value, 0);
+
+		// (ATB) Should we also do this: (?)
+		//
+		// // Attempts to parse a time in the current day
+		// DateFormat[] timeFormats = new DateFormat[] {
+		// DateFormat.getTimeInstance(DateFormat.SHORT),
+		// DateFormat.getTimeInstance(DateFormat.MEDIUM),
+		// DateFormat.getTimeInstance(DateFormat.LONG)
+		// };
+		// for (int i = 0; i < timeFormats.length; i++) {
+		// Calendar datetime = new GregorianCalendar();
+		// Date date = timeFormats[i].parse(value, position);
+		// if (position.getIndex() == value.length()) {
+		// datetime.setTime(date);
+		// Calendar today = new GregorianCalendar();
+		// datetime.set(
+		// today.get(Calendar.YEAR),
+		// today.get(Calendar.MONTH),
+		// today.get(Calendar.DAY_OF_MONTH)
+		// );
+		// return new Value(datetime.getTime());
+		// } else if (position.getIndex() > 0)
+		// position.setIndex(0);
+		// }
+		// throw new ParseException(value, position.getErrorIndex());
 	}
 }

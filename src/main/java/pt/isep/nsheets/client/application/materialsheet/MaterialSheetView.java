@@ -31,6 +31,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.dom.client.Style;
 
@@ -45,6 +46,7 @@ import gwt.material.design.client.data.component.RowComponent;
 import gwt.material.design.client.ui.MaterialBadge;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialIcon;
+import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.client.ui.table.MaterialDataTable;
@@ -91,9 +93,14 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
 		return firstButton;
 	}
 
+	public MaterialLabel getResultLabel() {
+		return resultLabel;
+	}
+	
 //	@UiField Label firstLabel;
 	@UiField MaterialTextBox firstBox;
 	@UiField MaterialButton firstButton;
+	@UiField MaterialLabel resultLabel;
 	
     // Replace this with your actual service interface, like so:
     // private PersonServiceAsync personService = GWT.create(PersonService.class);

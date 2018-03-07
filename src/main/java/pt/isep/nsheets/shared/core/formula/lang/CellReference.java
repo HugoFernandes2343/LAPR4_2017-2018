@@ -23,8 +23,8 @@ package pt.isep.nsheets.shared.core.formula.lang;
 import java.text.ParseException;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.regex.Matcher;	// not supported in gwt
+//import java.util.regex.Pattern;	// not supported in gwt
 
 import pt.isep.nsheets.shared.core.Address;
 import pt.isep.nsheets.shared.core.Cell;
@@ -47,8 +47,9 @@ public class CellReference implements Reference {
 	 * The regular expression pattern used to match cell references:
 	 * (\\$??)([a-zA-Z]+)(\\$??)(\\d+)$")
 	 */
-	private static final Pattern PATTERN = Pattern.compile(
-		"(\\$??)([a-zA-Z]+)(\\$??)(\\d+)$");
+	// not supported in gwt
+//	private static final Pattern PATTERN = Pattern.compile(
+//		"(\\$??)([a-zA-Z]+)(\\$??)(\\d+)$");
 
 	/** The string used to match the use of absolute references */
 	private static final String ABSOLUTE_OPERATOR = "$";
@@ -92,23 +93,24 @@ public class CellReference implements Reference {
 	 */
 	public CellReference(Spreadsheet spreadsheet, String reference) throws ParseException {
 		// Matches the expression
-		Matcher matcher = PATTERN.matcher(reference);
-		if (matcher.matches()) {
-
-			// Parses row and column indices
-			int row = Integer.parseInt(matcher.group(4)) - 1;
-			int column = -1;
-			String columnStr = matcher.group(2).toUpperCase();
-			for (int i = columnStr.length() - 1; i >= 0; i--)
-				column += (columnStr.charAt(i) - Address.LOWEST_CHAR + 1)
-					* Math.pow(Address.HIGHEST_CHAR - Address.LOWEST_CHAR + 1,
-					columnStr.length() - (i + 1));
-
-			// Stores members
-			this.cell = spreadsheet.getCell(new Address(column, row));
-			this.columnAbsolute = matcher.group(1).equals("$");
-			this.rowAbsolute = matcher.group(3).equals("$");
-		} else
+		// Not supported in gwt
+//		Matcher matcher = PATTERN.matcher(reference);
+//		if (matcher.matches()) {
+//
+//			// Parses row and column indices
+//			int row = Integer.parseInt(matcher.group(4)) - 1;
+//			int column = -1;
+//			String columnStr = matcher.group(2).toUpperCase();
+//			for (int i = columnStr.length() - 1; i >= 0; i--)
+//				column += (columnStr.charAt(i) - Address.LOWEST_CHAR + 1)
+//					* Math.pow(Address.HIGHEST_CHAR - Address.LOWEST_CHAR + 1,
+//					columnStr.length() - (i + 1));
+//
+//			// Stores members
+//			this.cell = spreadsheet.getCell(new Address(column, row));
+//			this.columnAbsolute = matcher.group(1).equals("$");
+//			this.rowAbsolute = matcher.group(3).equals("$");
+//		} else
 			throw new ParseException(reference, 0);
 	}
 

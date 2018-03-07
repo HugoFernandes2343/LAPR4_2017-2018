@@ -206,8 +206,9 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 	 * @throws IOException If any of the usual Input/Output related exceptions occur
 	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
 	 */
-	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		stream.defaultReadObject();
-		listeners = new ArrayList<WorkbookListener>();
-	}
+	// java.io.ObjectInputStream not supportted in GWT !
+//	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+//		stream.defaultReadObject();
+//		listeners = new ArrayList<WorkbookListener>();
+//	}
 }

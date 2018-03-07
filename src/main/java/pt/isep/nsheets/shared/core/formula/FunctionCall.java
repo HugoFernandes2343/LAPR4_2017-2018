@@ -21,8 +21,8 @@
 package pt.isep.nsheets.shared.core.formula;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+//import java.io.ObjectInputStream;		// not supported in gwt
+//import java.io.ObjectOutputStream;		// not supported in gwt
 
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Value;
@@ -112,23 +112,25 @@ public class FunctionCall implements Expression {
 	 * @throws IOException If any of the usual Input/Output related exceptions occur
 	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
 	 */
-	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		stream.defaultReadObject();
-		String identifier = (String)stream.readObject();
-		try {
-			function = LanguageManager.getInstance().getFunction(identifier);
-		} catch (UnknownElementException e) {
-			throw new IOException(e.toString());
-		}
-	}
+	// not supported in gwt
+//	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+//		stream.defaultReadObject();
+//		String identifier = (String)stream.readObject();
+//		try {
+//			function = LanguageManager.getInstance().getFunction(identifier);
+//		} catch (UnknownElementException e) {
+//			throw new IOException(e.toString());
+//		}
+//	}
 
 	/**
 	 * Customizes serialization by only writing the identifer of the function.
 	 * @param stream the object output stream to which the object is to be written
 	 * @throws IOException If any of the usual Input/Output related exceptions occur
 	 */
-	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.defaultWriteObject();
-		stream.writeObject(function.getIdentifier());
-	}
+	// not supported in gwt
+//	private void writeObject(ObjectOutputStream stream) throws IOException {
+//		stream.defaultWriteObject();
+//		stream.writeObject(function.getIdentifier());
+//	}
 }

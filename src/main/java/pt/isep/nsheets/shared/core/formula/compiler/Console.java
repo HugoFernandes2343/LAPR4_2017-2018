@@ -29,23 +29,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.StringReader;
-
-//import org.antlr.v4.runtime.ANTLRStringStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-// import org.antlr.v4.runtime.MismatchedTokenException;
-import org.antlr.v4.runtime.NoViableAltException;
 import org.antlr.v4.runtime.RecognitionException;
-//import org.antlr.v4.runtime.tree.CommonTree;
-import org.antlr.v4.runtime.tree.ParseTree;
-
 // import org.antlr.v4.collections.AST;
 import pt.isep.nsheets.shared.core.Address;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Spreadsheet;
-import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.Formula;
@@ -86,24 +75,24 @@ public class Console {
 		try {
 			while ((line = reader.readLine()) != null) {
 				try {
-				Formula formula = FormulaCompiler.getInstance().compile(cell, line);
+					Formula formula = FormulaCompiler.getInstance().compile(cell, line);
 
-				Expression expression = formula.getExpression();
-				printer.println("Formula: " + expression + " = " + expression.evaluate());
+					Expression expression = formula.getExpression();
+					printer.println("Formula: " + expression + " = " + expression.evaluate());
 
-//				ANTLRInputStream input = new ANTLRInputStream(line);
-//
-//				// create the buffer of tokens between the lexer and parser
-//				FormulaLexer lexer = new FormulaLexer(input);
-//				CommonTokenStream tokens = new CommonTokenStream(lexer);
-//
-//				FormulaParser parser = new FormulaParser(tokens);
-//				try {
-//					ParseTree tree = parser.expression();
-//					FormulaEvalVisitor eval = new FormulaEvalVisitor(cell);
-//					Expression expression = eval.visit(tree);
-//					printer.println("Formula: " + expression + " = " + expression.evaluate());
-//				} 
+					// ANTLRInputStream input = new ANTLRInputStream(line);
+					//
+					// // create the buffer of tokens between the lexer and parser
+					// FormulaLexer lexer = new FormulaLexer(input);
+					// CommonTokenStream tokens = new CommonTokenStream(lexer);
+					//
+					// FormulaParser parser = new FormulaParser(tokens);
+					// try {
+					// ParseTree tree = parser.expression();
+					// FormulaEvalVisitor eval = new FormulaEvalVisitor(cell);
+					// Expression expression = eval.visit(tree);
+					// printer.println("Formula: " + expression + " = " + expression.evaluate());
+					// }
 
 				} catch (RecognitionException e) {
 					// String message="Fatal recognition exception " + e.getClass().getName()+ " : "
