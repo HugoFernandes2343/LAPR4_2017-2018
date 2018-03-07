@@ -27,7 +27,7 @@ import java.io.ObjectOutputStream;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.compiler.IllegalFunctionCallException;
-import pt.isep.nsheets.shared.core.formula.lang.Language;
+import pt.isep.nsheets.shared.core.formula.lang.LanguageManager;
 import pt.isep.nsheets.shared.core.formula.lang.UnknownElementException;
 import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
 
@@ -116,7 +116,7 @@ public class FunctionCall implements Expression {
 		stream.defaultReadObject();
 		String identifier = (String)stream.readObject();
 		try {
-			function = Language.getInstance().getFunction(identifier);
+			function = LanguageManager.getInstance().getFunction(identifier);
 		} catch (UnknownElementException e) {
 			throw new IOException(e.toString());
 		}

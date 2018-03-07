@@ -33,11 +33,14 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     private Cell cell = null;
     int numberOfErros;
     private final StringBuilder errorBuffer;
+    
+    final private Language language;
 
-    public FormulaEvalVisitor(Cell cell) {
+    public FormulaEvalVisitor(Cell cell, Language lang) {
         this.cell = cell;
         numberOfErros = 0;
         errorBuffer = new StringBuilder();
+        this.language=lang;
     }
 
     public int getNumberOfErrors() {
@@ -57,7 +60,9 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     public Expression visitComparison(FormulaParser.ComparisonContext ctx) {
         if (ctx.getChildCount() == 3) {
             try {
-                BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
+                
                 return new BinaryOperation(
                         visit(ctx.getChild(0)),
                         operator,
@@ -84,13 +89,16 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
                 }
 
                 return new UnaryOperation(
-                        Language.getInstance().getUnaryOperator(ctx.getChild(operatorid).getText()),
+                        // Language.getInstance().getUnaryOperator(ctx.getChild(operatorid).getText()),
+                        this.language.getUnaryOperator(ctx.getChild(operatorid).getText()),
+                        
                         visit(ctx.getChild(operand))
                 );
 
             } else if (ctx.getChildCount() == 3) {
                 // Convert binary operation
-                BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                // BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
                 return new BinaryOperation(
                         visit(ctx.getChild(0)),
                         operator,
@@ -119,7 +127,8 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
         // Convert function call
         Function function = null;
         try {
-            function = Language.getInstance().getFunction(ctx.getChild(0).getText());
+            // function = Language.getInstance().getFunction(ctx.getChild(0).getText());
+            function = this.language.getFunction(ctx.getChild(0).getText());
         } catch (UnknownElementException ex) {
             addVisitError(ex.getMessage());
         }
@@ -145,7 +154,9 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     public Expression visitReference(FormulaParser.ReferenceContext ctx) {
         try {
             if (ctx.getChildCount() == 3) {
-                BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+                BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
+                
                 return new ReferenceOperation(
                         new CellReference(cell.getSpreadsheet(), ctx.getChild(0).getText()),
                         (RangeReference) operator,

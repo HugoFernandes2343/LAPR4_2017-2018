@@ -66,12 +66,13 @@ public class Do implements Function {
 		// Check that the function and conditional operator exist
 		Function function = null;
 		BinaryOperator condOp = null;
-		try {
-			function = Language.getInstance().getFunction(arguments[0].evaluate().toText());
-			condOp = Language.getInstance().getBinaryOperator(arguments[2].evaluate().toText());
-		} catch (UnknownElementException e) {
-			return new Value(e);
-		}
+//		try {
+// TODO: Fix me			
+//			function = Language.getInstance().getFunction(arguments[0].evaluate().toText());
+//			condOp = Language.getInstance().getBinaryOperator(arguments[2].evaluate().toText());
+//		} catch (UnknownElementException e) {
+//			return new Value(e);
+//		}
 		
 		// Check that the range dimensions agree
 		Value[][] opRange = arguments[1].evaluate().toMatrix();

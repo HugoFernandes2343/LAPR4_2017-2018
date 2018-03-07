@@ -40,62 +40,69 @@ import pt.isep.nsheets.shared.core.formula.UnaryOperator;
  */
 public class Language {
 
-	/** The singleton instance */
-	private static final Language instance = new Language();
-
-	/** The name of the file in which language properties are stored */
-	private static final String PROPERTIES_FILENAME = "res/language.props";
+//	/** The singleton instance */
+//	private static final Language instance = new Language();
+//
+//	/** The name of the file in which language properties are stored */
+//	private static final String PROPERTIES_FILENAME = "res/language.props";
 
 	/** The unary operators that are supported by the language */
-	private List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
+	protected List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
 
 	/** The binary operators that are supported by the language */
-	private List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
+	protected List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
 
 	/** The functions that are supported by the language */
-	private List<Function> functions = new ArrayList<Function>();
-
-	private void initFunctions() {
-		functions.add(new Average());
-		functions.add(new And());
-		functions.add(new Count());
-		functions.add(new Do());
-		functions.add(new Factorial());
-		functions.add(new False());
-		functions.add(new If());
-		functions.add(new Not());
-		//functions.add(new NumericFunction());
-		functions.add(new Or());
-		functions.add(new Sum());
-		functions.add(new True());
+	protected List<Function> functions = new ArrayList<Function>();
+	
+	private final String name;
+	
+	public String getName() {
+		return this.name;
 	}
 
-	private void initBinaryOperators() {
-		binaryOperators.add(new Adder());
-		binaryOperators.add(new Concatenator());
-		binaryOperators.add(new Divider());
-		binaryOperators.add(new Equal());
-		binaryOperators.add(new Exponentiator());
-		binaryOperators.add(new GreaterThan());
-		binaryOperators.add(new GreaterThanOrEqual());
-		binaryOperators.add(new LessThan());
-		binaryOperators.add(new LessThanOrEqual());
-		binaryOperators.add(new Multiplier());
-		binaryOperators.add(new NotEqual());
-		binaryOperators.add(new RangeReference());
-		binaryOperators.add(new Subtracter());
+	protected void initFunctions() {
+//		functions.add(new Average());
+//		functions.add(new And());
+//		functions.add(new Count());
+//		functions.add(new Do());
+//		functions.add(new Factorial());
+//		functions.add(new False());
+//		functions.add(new If());
+//		functions.add(new Not());
+//		//functions.add(new NumericFunction());
+//		functions.add(new Or());
+//		functions.add(new Sum());
+//		functions.add(new True());
 	}
 
-	private void initUnaryOperators() {
+	protected void initBinaryOperators() {
+//		binaryOperators.add(new Adder());
+//		binaryOperators.add(new Concatenator());
+//		binaryOperators.add(new Divider());
+//		binaryOperators.add(new Equal());
+//		binaryOperators.add(new Exponentiator());
+//		binaryOperators.add(new GreaterThan());
+//		binaryOperators.add(new GreaterThanOrEqual());
+//		binaryOperators.add(new LessThan());
+//		binaryOperators.add(new LessThanOrEqual());
+//		binaryOperators.add(new Multiplier());
+//		binaryOperators.add(new NotEqual());
+//		binaryOperators.add(new RangeReference());
+//		binaryOperators.add(new Subtracter());
+	}
+
+	protected void initUnaryOperators() {
 		// functions.add(new Average());
-		unaryOperators.add(new Negator());
-		unaryOperators.add(new Percent());
+//		unaryOperators.add(new Negator());
+//		unaryOperators.add(new Percent());
 	}
 
 	/**
 	 * Creates a new language.
 	 */
-	private Language() {
+	public Language(String name) {
+		this.name=name;
 		initFunctions();
 		initBinaryOperators();
 		initUnaryOperators();
@@ -156,9 +163,9 @@ public class Language {
 	 * 
 	 * @return the singleton instance
 	 */
-	public static Language getInstance() {
-		return instance;
-	}
+//	public static Language getInstance() {
+//		return instance;
+//	}
 
 	/**
 	 * Returns the unary operator with the given identifier.

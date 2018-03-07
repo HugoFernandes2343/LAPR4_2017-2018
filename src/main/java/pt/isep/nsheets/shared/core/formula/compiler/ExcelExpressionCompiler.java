@@ -30,6 +30,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.formula.Expression;
+import pt.isep.nsheets.shared.core.formula.lang.Language;
+import pt.isep.nsheets.shared.core.formula.lang.LanguageManager;
+
 import java.util.Collections;
 import java.util.List;
 import org.antlr.v4.runtime.BaseErrorListener;
@@ -47,11 +50,16 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
      * The character that signals that a cell's content is a formula ('=')
      */
     public static final char FORMULA_STARTER = '=';
+    
+    private Language language = null;
 
     /**
      * Creates the Excel expression compiler.
      */
     public ExcelExpressionCompiler() {
+    		// (ATB) Instantiate the language
+    		language=LanguageManager.getInstance().getLanguage("excel");
+//    		language=new ExcelLanguage();
     }
 
     public char getStarter() {
@@ -79,7 +87,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
         }
 
         // Visit the expression and returns it
-        FormulaEvalVisitor eval = new FormulaEvalVisitor(cell);
+        FormulaEvalVisitor eval = new FormulaEvalVisitor(cell, language);
         Expression result = eval.visit(tree);
         if (eval.getNumberOfErrors() > 0) {
             throw new FormulaCompilationException(eval.getErrorsMessage());

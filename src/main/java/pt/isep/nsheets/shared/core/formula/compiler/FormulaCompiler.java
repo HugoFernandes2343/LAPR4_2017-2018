@@ -41,57 +41,65 @@ public class FormulaCompiler {
 	private static final FormulaCompiler instance = new FormulaCompiler();
 
 	/** The name of the file in which compiler properties are stored */
-	private static final String PROPERTIES_FILENAME = "res/compilers.props";
+//	private static final String PROPERTIES_FILENAME = "res/compilers.props";
 
 	/** The expression compilers used to compile formulas */
 	private List<ExpressionCompiler> compilers = new ArrayList<ExpressionCompiler>();
+	
+	private void initCompilers() {
+		compilers.add(new ExcelExpressionCompiler());
+	}
 	
 	/**
 	 * Creates the formula compiler.
 	 */
 	private FormulaCompiler() {
-		// Loads properties
-		Properties compilerProps = new Properties();
-		InputStream stream=null ; //= CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
-		if (stream != null) {
-			try {
-				compilerProps.load(stream);
-			} catch (IOException e) {
-				System.err.println("An I/O error occurred when loading compiler"
-					+ " properties file (" + PROPERTIES_FILENAME + ").");
-				return;
-			} finally {
-				try {
-					if (stream != null)
-						stream.close();
-				} catch (IOException e) {}
-			}
-
-			// Loads elements
-			for (Object className : compilerProps.keySet()) {
-				// Loads class and instantiates element
-				Class elementClass;
-				Object element;
-				try {
-					//elementClass = Class.forName(getClass().getPackage()
-					//	.getName() + "." + (String)className);
-					elementClass = Class.forName((String)className);
-                                        
-					element = elementClass.newInstance();
-				} catch (Exception e) {
-					// Skip this element, regardless of what went wrong
-					e.printStackTrace();
-					continue;
-				}
-
-				// Stores element
-				if (ExpressionCompiler.class.isAssignableFrom(elementClass))
-					compilers.add(ExpressionCompiler.class.cast(element));
-			}
-		} else
-			System.err.println("Could not find compiler properties file ("
-				+ PROPERTIES_FILENAME + ").");
+		initCompilers();
 	}
+	
+//	private FormulaCompiler() {
+//		// Loads properties
+//		Properties compilerProps = new Properties();
+//		InputStream stream=null ; //= CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
+//		if (stream != null) {
+//			try {
+//				compilerProps.load(stream);
+//			} catch (IOException e) {
+//				System.err.println("An I/O error occurred when loading compiler"
+//					+ " properties file (" + PROPERTIES_FILENAME + ").");
+//				return;
+//			} finally {
+//				try {
+//					if (stream != null)
+//						stream.close();
+//				} catch (IOException e) {}
+//			}
+//
+//			// Loads elements
+//			for (Object className : compilerProps.keySet()) {
+//				// Loads class and instantiates element
+//				Class elementClass;
+//				Object element;
+//				try {
+//					//elementClass = Class.forName(getClass().getPackage()
+//					//	.getName() + "." + (String)className);
+//					elementClass = Class.forName((String)className);
+//                                        
+//					element = elementClass.newInstance();
+//				} catch (Exception e) {
+//					// Skip this element, regardless of what went wrong
+//					e.printStackTrace();
+//					continue;
+//				}
+//
+//				// Stores element
+//				if (ExpressionCompiler.class.isAssignableFrom(elementClass))
+//					compilers.add(ExpressionCompiler.class.cast(element));
+//			}
+//		} else
+//			System.err.println("Could not find compiler properties file ("
+//				+ PROPERTIES_FILENAME + ").");
+//	}
 
 	/**
 	 * Returns the singleton instance.
