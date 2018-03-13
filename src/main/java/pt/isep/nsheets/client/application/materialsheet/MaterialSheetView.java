@@ -25,15 +25,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.google.gwt.cell.client.Cell;
+import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.client.constants.Color;
@@ -47,11 +52,13 @@ import gwt.material.design.client.ui.MaterialBadge;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialTextArea;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.TableSubHeader;
 import gwt.material.design.client.ui.table.cell.TextColumn;
+import gwt.material.design.client.ui.table.cell.WidgetCell;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
 import gwt.material.design.jquery.client.api.JQueryElement;
 import pt.isep.nsheets.client.application.table.Person;
@@ -162,7 +169,7 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
             public String getValue(Person object) {
                 return object.getFirstName();
             }
-        }, "First Name");
+        }, "A");
 
         customTable.addColumn(new TextColumn<Person>() {
             @Override
@@ -173,7 +180,7 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
             public String getValue(Person object) {
                 return object.getLastName();
             }
-        }, "Last Name");
+        }, "B");
 
         customTable.addColumn(new TextColumn<Person>() {
             @Override
@@ -192,8 +199,93 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
             public String getValue(Person object) {
                 return object.getPhone();
             }
-        }, "Phone");
+        }, "C");
+        
+        // Example of a widget column!
+        // You can add any handler to the column cells widget.
+        customTable.addColumn(new WidgetColumn<Person, MaterialLabel>() {
+            @Override
+            public TextAlign textAlign() {
+                return TextAlign.CENTER;
+            }
+            @Override
+            public MaterialLabel getValue(Person object) {
+            	MaterialLabel badge = new MaterialLabel();
+                badge.setText("badge " + object.getId());
+                badge.setBackgroundColor(Color.BLUE);
+                badge.setLayoutPosition(Style.Position.RELATIVE);
+                
+                return badge;
+            }
+            
+            @Override
+            public MaterialLabel render(Context context, Person object) {
+            		MaterialLabel widget = getValue(object);
 
+                    // Add a click handler...
+                    widget.addClickHandler(event -> {
+                    		GWT.log("Column D clicked!");
+                    		//Window.alert("Row Double Clicked: " + event..getModel().getId());
+                        Window.alert("Rendering cell in column number: " + context.getColumn() + " for Person object: "+object.getFirstName());
+                    }); 
+
+            		
+            		Cell<MaterialLabel> cell=getCell();
+                // ((WidgetCell<Person,MaterialLabel>)getCell()).render(context, object, widget);
+                
+                GWT.log("Rendering cell in column number: " + context.getColumn() + " for Person object: "+object.getFirstName());
+                
+                //this.
+                // This dimensions should be relative to the parent!!!
+                widget.setWidth("100%");
+                widget.setHeight("100%");
+
+                GWT.log("Styles: " + widget.toString());
+                
+                return widget;
+              }
+        });        
+
+//        // Example of a widget column!
+//        // You can add any handler to the column cells widget.
+//        customTable.addColumn(new WidgetColumn<Person, MaterialTextArea>() {
+//            @Override
+//            public TextAlign textAlign() {
+//                return TextAlign.CENTER;
+//            }
+//            @Override
+//            public MaterialTextArea getValue(Person object) {
+//            	MaterialTextArea badge = new MaterialTextArea();
+//                badge.setText("badge " + object.getId());
+//                badge.setBackgroundColor(Color.BLUE);
+//                badge.setLayoutPosition(Style.Position.RELATIVE);
+//                
+//                // Add a click handler...
+//                badge.addClickHandler(event -> {
+//                		GWT.log("Column D clicked!");
+//                	}); 
+//                return badge;
+//            }
+//            
+//            @Override
+//            public MaterialTextArea render(Context context, Person object) {
+//            		MaterialTextArea widget = getValue(object);
+//            		Cell<MaterialTextArea> cell=getCell();
+//                // ((WidgetCell<Person,MaterialLabel>)getCell()).render(context, object, widget);
+//                
+//                GWT.log("Rendering cell in column number: " + context.getColumn() + " for Person object: "+object.getFirstName());
+//                
+//                //this.
+//                // This dimensions should be relative to the parent!!!
+//                widget.setWidth("100%");
+//                widget.setHeight("100%");
+//
+//                GWT.log("Styles: " + widget.toString());
+//                
+//                return widget;
+//              }
+//        }); 
+        
         for(int i = 0; i < 8; i++) {
             final int index = i;
             customTable.addColumn(new TextColumn<Person>() {
@@ -208,22 +300,22 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
             }, "Column " + index);
         }
 
-        // Example of a widget column!
-        // You can add any handler to the column cells widget.
-        customTable.addColumn(new WidgetColumn<Person, MaterialBadge>() {
-            @Override
-            public TextAlign textAlign() {
-                return TextAlign.CENTER;
-            }
-            @Override
-            public MaterialBadge getValue(Person object) {
-                MaterialBadge badge = new MaterialBadge();
-                badge.setText("badge " + object.getId());
-                badge.setBackgroundColor(Color.BLUE);
-                badge.setLayoutPosition(Style.Position.RELATIVE);
-                return badge;
-            }
-        });
+//        // Example of a widget column!
+//        // You can add any handler to the column cells widget.
+//        customTable.addColumn(new WidgetColumn<Person, MaterialBadge>() {
+//            @Override
+//            public TextAlign textAlign() {
+//                return TextAlign.CENTER;
+//            }
+//            @Override
+//            public MaterialBadge getValue(Person object) {
+//                MaterialBadge badge = new MaterialBadge();
+//                badge.setText("badge " + object.getId());
+//                badge.setBackgroundColor(Color.BLUE);
+//                badge.setLayoutPosition(Style.Position.RELATIVE);
+//                return badge;
+//            }
+//        });
 
         // Set the visible range of the table for  pager (later)
         customTable.setVisibleRange(0, 2001);
@@ -286,7 +378,8 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
 
         // Add a row select handler, called when a user selects a row.
         customTable.addRowSelectHandler(event -> {
-            GWT.log(event.getModel().getId() + ": " + event.isSelected());
+            //GWT.log(event.getModel().getId() + ": " + event.isSelected());
+            GWT.log("Row Selected: " + event.getModel().getId() + ": " + event.isSelected() + ", x:" + event.getMouseEvent().getPageX() + ", y: " + event.getMouseEvent().getPageY());
         });
 
         // Add a sort column handler, called when a user sorts a column.
@@ -322,7 +415,7 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
 
         // Add a row short press handler, called when a row is short pressed.
         customTable.addRowShortPressHandler(event -> {
-            //.log("Row Short Pressed: " + model.getId() + ", x:" + mouseEvent.getPageX() + ", y: " + mouseEvent.getPageY());
+            //GWT.log("Row Short Pressed: " + model.getId() + ", x:" + mouseEvent.getPageX() + ", y: " + mouseEvent.getPageY());
         });
 
         popupMenu.addSelectionHandler(selectionEvent -> {

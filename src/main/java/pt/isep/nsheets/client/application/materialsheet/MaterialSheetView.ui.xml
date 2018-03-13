@@ -13,22 +13,22 @@
 	<ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
 
 	<ui:style>
-	<!--
-	#fBox {
+	
+<!--	
+	#col3 {
 		background: red;
 		color: #fff;
+		padding-left: 0;
+		overflow: auto;
+		display: block; 
 	}
-	-->
+-->
 	
-	<!--
-	#customTable table tbody td:nth-child (5) {--><!--
-		background: #2196f3; --> <!--
-		color: #fff; --> <!--
-		border-bottom: 2px solid #1976d2;
-		-->
-		<!--
-	}
-	-->
+	#customTable table tbody td {
+		padding-left: 0 !important;
+		padding-right: 0 !important;		
+	}	
+	
 	</ui:style>
 
 	<g:HTMLPanel>
