@@ -172,11 +172,13 @@ ul.side-nav.fixed li:hover,ul.side-nav.fixed li.active {
 }
 
 /** Columns **/
+/**
 #customTable table tbody td:nth-child(3) {
-    background: #2196f3 !important;
+    background: #2196f3 !important; 
     color: #fff;
     border-bottom: 2px solid #1976d2;
 }
+**/
 
 /** (ATB) **/
 #customTable table tbody td {

@@ -1,12 +1,7 @@
 package pt.isep.nsheets.client.application.materialsheet;
 
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.Cell.Context;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.Window;
-
-import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
@@ -20,7 +15,9 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 	/** The highest character to be used in a column name */
 	public static final char HIGHEST_CHAR = 'Z';
 	
-	int colNumber=-1;
+	private MaterialSheetView view=null;
+	
+	private int colNumber=-1;
 	
 	public String getColumnName() {
 		String columnStr;
@@ -34,10 +31,12 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 
 	
 	// instance initialize
-	public SheetWidgetColumn(int column)
+	public SheetWidgetColumn(int column, MaterialSheetView view)
 	{
+		this.view=view;
 		this.colNumber=column;
-		this.setName(getColumnName());
+		if (this.colNumber>=0)
+			this.setName(getColumnName());
 	}
 
 	@Override
@@ -48,8 +47,11 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 	@Override
 	public MaterialLabel getValue(SheetCell object) {
 		MaterialLabel badge = new MaterialLabel();
-		badge.setText(object.getCell(this.colNumber).getValue().toString());
-		badge.setBackgroundColor(Color.BLUE);
+		if (this.colNumber==-1)
+			badge.setText(""+(object.getCell(0).getAddress().getRow()+1));
+		else
+			badge.setText(object.getCell(this.colNumber).getValue().toString());
+		//badge.setBackgroundColor(Color.BLUE);
 		badge.setLayoutPosition(Style.Position.RELATIVE);
 
 		return badge;
@@ -61,25 +63,12 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 
 		// Add a click handler...
 		widget.addClickHandler(event -> {
-			GWT.log("Column D clicked!");
-			// Window.alert("Row Double Clicked: " + event..getModel().getId());
-			Window.alert("Rendering cell in column number: " + context.getColumn() + " for Person object: "
-					/* + object.getFirstName()  */ );
+			if (context.getColumn()>0) {
+				this.view.setActiveCell(object.getCell(context.getColumn()-1));
+//				this.view.getTable().getTableTitle().setText(object.getCell(context.getColumn()-1).toString()+": "+object.getCell(context.getColumn()-1).getContent().toString());
+//				this.view.getFirstBox().setText(object.getCell(context.getColumn()-1).getContent().toString());
+			}
 		});
-
-		Cell<MaterialLabel> cell = getCell();
-		// ((WidgetCell<Person,MaterialLabel>)getCell()).render(context, object,
-		// widget);
-
-		GWT.log("Rendering cell in column number: " + context.getColumn() + " for Person object: "
-				/* + object.getFirstName() */ );
-
-		// this.
-		// This dimensions should be relative to the parent!!!
-		widget.setWidth("100%");
-		widget.setHeight("100%");
-
-		GWT.log("Styles: " + widget.toString());
 
 		return widget;
 	}

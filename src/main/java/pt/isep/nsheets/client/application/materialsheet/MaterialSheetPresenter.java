@@ -44,6 +44,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 
@@ -54,9 +55,9 @@ public class MaterialSheetPresenter extends Presenter<MaterialSheetPresenter.MyV
 		// public Label getFirstLabel();
 		public MaterialTextBox getFirstBox();
 
-		public MaterialButton getFirstButton();
+		public MaterialIcon getFirstButton();
 		
-		public MaterialLabel getResultLabel();
+		//public MaterialLabel getResultLabel();
 	}
 
 	@ProxyStandard
@@ -86,39 +87,39 @@ public class MaterialSheetPresenter extends Presenter<MaterialSheetPresenter.MyV
 	protected void onReset() {
 		super.onReset();
 
-		getView().getFirstBox().setText("=2+4-1");
+		// getView().getFirstBox().setText("=2+4-1");
 
 		getView().getFirstButton().addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				// Let's test formulas...
-				String source=getView().getFirstBox().getText();
-				
-				// Fetches a cell
-				Workbook workbook = new Workbook(1);
-				Spreadsheet sheet = workbook.getSpreadsheet(0);
-				Cell cell = sheet.getCell(new Address(0, 0));
-
-				Formula formula;
-				String result="";
-				try {
-					formula = FormulaCompiler.getInstance().compile(cell, source);
-					
-					Expression expression = formula.getExpression();
-					result="Formula: " + expression + " = " + expression.evaluate();
-					
-				} catch (FormulaCompilationException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-					result=e.getMessage();
-				} catch (IllegalValueTypeException e) {
-					// TODO Auto-generated catch block
-					// e.printStackTrace();
-					result=e.getMessage();
-				} finally {
-					getView().getResultLabel().setText(result);
-				}
+//				String source=getView().getFirstBox().getText();
+//				
+//				// Fetches a cell
+//				Workbook workbook = new Workbook(1);
+//				Spreadsheet sheet = workbook.getSpreadsheet(0);
+//				Cell cell = sheet.getCell(new Address(0, 0));
+//
+//				Formula formula;
+//				String result="";
+//				try {
+//					formula = FormulaCompiler.getInstance().compile(cell, source);
+//					
+//					Expression expression = formula.getExpression();
+//					result="Formula: " + expression + " = " + expression.evaluate();
+//					
+//				} catch (FormulaCompilationException e) {
+//					// TODO Auto-generated catch block
+//					//e.printStackTrace();
+//					result=e.getMessage();
+//				} catch (IllegalValueTypeException e) {
+//					// TODO Auto-generated catch block
+//					// e.printStackTrace();
+//					result=e.getMessage();
+//				} finally {
+//					getView().getResultLabel().setText(result);
+//				}
 
 				// Example on how to jump to another place
 //				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.about)
