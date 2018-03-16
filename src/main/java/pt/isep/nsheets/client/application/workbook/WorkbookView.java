@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package pt.isep.nsheets.client.application.materialsheet;
+package pt.isep.nsheets.client.application.workbook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
 
 //public class HomeView extends ViewImpl implements HomePresenter.MyView {
-public class MaterialSheetView extends NavigatedView implements MaterialSheetPresenter.MyView {
+public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
 
 	public static class CustomCategoryComponent extends CategoryComponent {
 		public CustomCategoryComponent(String category) {
@@ -91,7 +91,7 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
 	@UiField
 	MaterialPopupMenu popupMenu;
 
-	interface Binder extends UiBinder<Widget, MaterialSheetView> {
+	interface Binder extends UiBinder<Widget, WorkbookView> {
 	}
 
 	private pt.isep.nsheets.shared.core.Cell activeCell = null;
@@ -158,7 +158,7 @@ public class MaterialSheetView extends NavigatedView implements MaterialSheetPre
 	}
 
 	@Inject
-	MaterialSheetView(Binder uiBinder) {
+	WorkbookView(Binder uiBinder) {
 
 		initWidget(uiBinder.createAndBindUi(this));
 

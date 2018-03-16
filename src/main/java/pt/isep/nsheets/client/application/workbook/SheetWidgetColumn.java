@@ -1,11 +1,11 @@
-package pt.isep.nsheets.client.application.materialsheet;
+package pt.isep.nsheets.client.application.workbook;
 
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.dom.client.Style;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
-import pt.isep.nsheets.client.application.materialsheet.MaterialSheetView.SheetCell;
+import pt.isep.nsheets.client.application.workbook.WorkbookView.SheetCell;
 
 public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 
@@ -15,7 +15,7 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 	/** The highest character to be used in a column name */
 	public static final char HIGHEST_CHAR = 'Z';
 	
-	private MaterialSheetView view=null;
+	private WorkbookView view=null;
 	
 	private int colNumber=-1;
 	
@@ -31,7 +31,7 @@ public class SheetWidgetColumn extends WidgetColumn<SheetCell, MaterialLabel> {
 
 	
 	// instance initialize
-	public SheetWidgetColumn(int column, MaterialSheetView view)
+	public SheetWidgetColumn(int column, WorkbookView view)
 	{
 		this.view=view;
 		this.colNumber=column;

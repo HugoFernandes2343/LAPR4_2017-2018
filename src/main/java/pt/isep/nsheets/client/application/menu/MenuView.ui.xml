@@ -61,13 +61,13 @@
 				<m:MaterialImage width="100%" url="http://i.imgur.com/VaBxpGj.png" addStyleNames="{style.logo}"/>
 			</m.html:ListItem>
 			<m.html:ListItem waves="DEFAULT">
+				<m:MaterialLink targetHistoryToken="{tokens.getHome}" iconPosition="LEFT" iconType="HOME" text="Home"/>
+			</m.html:ListItem>
+			<m.html:ListItem waves="DEFAULT">
+				<m:MaterialLink targetHistoryToken="{tokens.getWorkbook}" iconPosition="LEFT" iconType="INSERT_DRIVE_FILE" text="Workbook"/>
+			</m.html:ListItem>
+			<m.html:ListItem waves="DEFAULT">
 				<m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE" text="About"/>
-			</m.html:ListItem>
-			<m.html:ListItem waves="DEFAULT">
-				<m:MaterialLink targetHistoryToken="{tokens.getMaterialSheet}" iconPosition="LEFT" iconType="CLOUD_DOWNLOAD" text="Material Sheet"/>
-			</m.html:ListItem>
-			<m.html:ListItem waves="DEFAULT">
-				<m:MaterialLink targetHistoryToken="{tokens.getSmartSheet}" iconPosition="LEFT" iconType="CLOUD_DOWNLOAD" text="Smart Sheet"/>
 			</m.html:ListItem>
         </m:MaterialSideNavPush>
         

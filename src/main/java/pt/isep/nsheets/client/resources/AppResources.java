@@ -19,10 +19,15 @@
  */
 package pt.isep.nsheets.client.resources;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public interface AppResources extends ClientBundle {
+	
+	AppResources INSTANCE = GWT.create(AppResources.class);
+	
     interface Normalize extends CssResource {
     }
 
@@ -34,4 +39,10 @@ public interface AppResources extends ClientBundle {
 
     @Source("css/style.gss")
     Style style();
+    
+	@Source("img/lapr4.png")
+	ImageResource lapr4();    
+	
+	@Source("img/csheets.png")
+	ImageResource csheets(); 	
 }

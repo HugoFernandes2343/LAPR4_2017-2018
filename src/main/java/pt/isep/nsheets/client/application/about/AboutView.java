@@ -12,27 +12,9 @@ class AboutView extends ViewImpl implements AboutPresenter.MyView {
 	interface Binder extends UiBinder<Widget, AboutView> {
 	}
 
-	// @UiField
-	// SimplePanel main;
-
-	@UiField
-	Label secondLabel;
-
 	@Inject
 	AboutView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	// @Override
-	// public void setInSlot(Object slot, IsWidget content) {
-	// if (slot == SecondPresenter.SLOT_Second) {
-	// main.setWidget(content);
-	// } else {
-	// super.setInSlot(slot, content);
-	// }
-	// }
-
-	public Label getSecondLabel() {
-		return secondLabel;
-	}
 }

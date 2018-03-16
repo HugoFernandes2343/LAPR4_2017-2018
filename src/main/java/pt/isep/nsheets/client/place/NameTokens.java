@@ -21,22 +21,22 @@ package pt.isep.nsheets.client.place;
 
 public class NameTokens {
 	
-	public static final String smartsheet = "smartsheet";
+	public static final String home = "home";
 	
 	public static final String about = "about";
 
-	public static final String materialsheet = "materialsheet";
+	public static final String workbook = "workbook";
 
-	public static String getMaterialSheet() {
-		return materialsheet;
+	public static String getWorkbook() {
+		return workbook;
 	}
 
 	public static String getAbout() {
 		return about;
 	}
 
-	public static String getSmartSheet() {
-		return smartsheet;
+	public static String getHome() {
+		return home;
 	}
 
 }

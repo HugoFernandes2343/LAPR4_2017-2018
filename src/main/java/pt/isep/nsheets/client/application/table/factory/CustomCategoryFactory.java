@@ -24,7 +24,7 @@ import gwt.material.design.client.data.DataView;
 import gwt.material.design.client.data.component.CategoryComponent;
 import gwt.material.design.client.data.component.CategoryComponent.OrphanCategoryComponent;
 import gwt.material.design.client.data.factory.CategoryComponentFactory;
-import pt.isep.nsheets.client.application.materialsheet.MaterialSheetView;
+import pt.isep.nsheets.client.application.workbook.WorkbookView;
 
 public class CustomCategoryFactory extends CategoryComponentFactory {
 
@@ -33,7 +33,7 @@ public class CustomCategoryFactory extends CategoryComponentFactory {
         CategoryComponent category = super.generate(dataView, categoryName);
 
         if(!(category instanceof OrphanCategoryComponent)) {
-            category = new MaterialSheetView.CustomCategoryComponent(categoryName);
+            category = new WorkbookView.CustomCategoryComponent(categoryName);
         }
         return category;
     }

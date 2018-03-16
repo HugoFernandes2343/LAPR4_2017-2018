@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+	<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+             
+             
+             
+    <g:HTMLPanel>
+      <m:MaterialRow>
+        <m:MaterialTitle title="Basic Card" />
+        <m:MaterialColumn grid="l4">
+          <m:MaterialCard backgroundColor="BLUE_GREY_DARKEN_1">
+            <m:MaterialCardContent textColor="WHITE">
+              <m:MaterialCardTitle text="Sample" iconType="POLYMER" iconPosition="RIGHT"/>
+              <m:MaterialLabel text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
+            </m:MaterialCardContent>
+            <m:MaterialCardAction>
+              <m:MaterialLink text="Link 1" iconType="POLYMER"/>
+              <m:MaterialLink text="Link 1" iconType="POLYMER"/>
+            </m:MaterialCardAction>
+          </m:MaterialCard>
+        </m:MaterialColumn>
+        <m:MaterialColumn grid="l4">
+          <m:MaterialCard backgroundColor="WHITE">
+            <m:MaterialCardContent textColor="BLACK">
+              <m:MaterialCardTitle  textColor="BLACK" text="Sample" iconType="FAVORITE" iconPosition="RIGHT" iconColor="RED"/>
+              <m:MaterialLabel text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
+            </m:MaterialCardContent>
+            <m:MaterialCardAction>
+              <m:MaterialLink text="Link 1" textColor="BLUE"/>
+              <m:MaterialLink text="Link 1" textColor="BLUE"/>
+            </m:MaterialCardAction>
+          </m:MaterialCard>
+        </m:MaterialColumn>
+         <m:MaterialColumn grid="l4">
+          <m:MaterialCard backgroundColor="WHITE">
+            <m:MaterialCardContent textColor="BLACK">
+              <m:MaterialCardTitle  textColor="BLACK" text="Sample" iconType="FAVORITE" iconPosition="RIGHT" iconColor="RED"/>
+              <m:MaterialLabel text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
+            </m:MaterialCardContent>
+            <m:MaterialCardAction>
+              <m:MaterialLink text="Link 1" textColor="BLUE"/>
+              <m:MaterialLink text="Link 1" textColor="BLUE"/>
+            </m:MaterialCardAction>
+          </m:MaterialCard>
+        </m:MaterialColumn>       
+      </m:MaterialRow>	        
+ 	        
+    </g:HTMLPanel>
+</ui:UiBinder>

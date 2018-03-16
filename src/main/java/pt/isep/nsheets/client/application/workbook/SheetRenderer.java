@@ -1,4 +1,4 @@
-package pt.isep.nsheets.client.application.materialsheet;
+package pt.isep.nsheets.client.application.workbook;
 
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.Scheduler;

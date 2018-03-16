@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package pt.isep.nsheets.client.application.materialsheet;
+package pt.isep.nsheets.client.application.workbook;
 
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -48,7 +48,7 @@ import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 
-public class MaterialSheetPresenter extends Presenter<MaterialSheetPresenter.MyView, MaterialSheetPresenter.MyProxy> {
+public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, WorkbookPresenter.MyProxy> {
 
 	interface MyView extends View {
 		// public Label getSecondLabel();
@@ -61,12 +61,12 @@ public class MaterialSheetPresenter extends Presenter<MaterialSheetPresenter.MyV
 	}
 
 	@ProxyStandard
-	@NameToken(NameTokens.materialsheet)
-	interface MyProxy extends ProxyPlace<MaterialSheetPresenter> {
+	@NameToken(NameTokens.workbook)
+	interface MyProxy extends ProxyPlace<WorkbookPresenter> {
 	}
 
 	@Inject
-	MaterialSheetPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
+	WorkbookPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
 		// super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 

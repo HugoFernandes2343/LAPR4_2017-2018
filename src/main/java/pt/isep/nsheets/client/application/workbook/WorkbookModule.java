@@ -17,13 +17,13 @@
  * limitations under the License.
  * #L%
  */
-package pt.isep.nsheets.client.application.materialsheet;
+package pt.isep.nsheets.client.application.workbook;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-public class MaterialSheetModule extends AbstractPresenterModule {
+public class WorkbookModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bindPresenter(MaterialSheetPresenter.class, MaterialSheetPresenter.MyView.class, MaterialSheetView.class, MaterialSheetPresenter.MyProxy.class);
+        bindPresenter(WorkbookPresenter.class, WorkbookPresenter.MyView.class, WorkbookView.class, WorkbookPresenter.MyProxy.class);
     }
 }

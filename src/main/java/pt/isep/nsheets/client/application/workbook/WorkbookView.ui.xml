@@ -46,7 +46,7 @@
 
 		<m:MaterialRow marginTop="60">
 			<m:MaterialTextBox 
-				m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell"
+				m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
 				active="true" grid="s11" iconType="FUNCTIONS" />
 				
 			<m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>	

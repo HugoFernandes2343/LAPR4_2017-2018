@@ -1,4 +1,4 @@
-package pt.isep.nsheets.client.application.smartsheet;
+package pt.isep.nsheets.client.application.home;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -10,19 +10,19 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.place.NameTokens;
 
-public class SmartSheetViewPresenter
-		extends Presenter<SmartSheetViewPresenter.MyView, SmartSheetViewPresenter.MyProxy> {
+public class HomePresenter
+		extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
 
 	interface MyView extends View {
 	}
 
-	@NameToken(NameTokens.smartsheet)
+	@NameToken(NameTokens.home)
 	@ProxyStandard
-	interface MyProxy extends ProxyPlace<SmartSheetViewPresenter> {
+	interface MyProxy extends ProxyPlace<HomePresenter> {
 	}
 
 	@Inject
-	SmartSheetViewPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
+	HomePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 	}
 

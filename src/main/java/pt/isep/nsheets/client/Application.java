@@ -64,6 +64,6 @@ public class Application implements Bootstrapper {
 	public void onBootstrap() {
 		// Nothing for now -> (ATB) Not really :-)
 
-		placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.materialsheet).build());
+		// placeManager.revealPlace(new PlaceRequest.Builder().nameToken(NameTokens.materialsheet).build());
 	}
 }
