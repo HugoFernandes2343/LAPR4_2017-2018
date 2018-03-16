@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 
 public class AboutPresenter extends Presenter<AboutPresenter.MyView, AboutPresenter.MyProxy>  {
@@ -23,6 +24,13 @@ public class AboutPresenter extends Presenter<AboutPresenter.MyView, AboutPresen
     @Inject
     AboutPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+    }
+    
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+
+        SetPageTitleEvent.fire("About", "A description of NSheets", "", "", this);
     }
         
 }

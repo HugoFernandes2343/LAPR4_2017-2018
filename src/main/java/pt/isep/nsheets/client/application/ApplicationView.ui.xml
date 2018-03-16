@@ -40,6 +40,13 @@
     <g:HTMLPanel ui:field="menu" />
     
     <m:MaterialContainer>
+            <m:MaterialPanel ui:field="titlePanel" backgroundColor="BLUE" textColor="WHITE"  marginTop="56" padding="56" shadow="1">
+            <m:MaterialPanel ui:field="panel">
+                <m:MaterialLabel ui:field="title" text="NSheets" fontSize="2.3em"/>
+                <m:MaterialLabel ui:field="description" text="A Sophisticated Web Spreadsheet Application." fontSize="1.1em"/>
+            </m:MaterialPanel>
+        </m:MaterialPanel>
+        
     		<g:HTMLPanel ui:field="main" addStyleNames="{style.panel}" />
     	</m:MaterialContainer>
       

@@ -45,4 +45,7 @@ public interface AppResources extends ClientBundle {
 	
 	@Source("img/csheets.png")
 	ImageResource csheets(); 	
+
+	@Source("img/nsheets_logo.png")
+	ImageResource nsheets_logo(); 
 }

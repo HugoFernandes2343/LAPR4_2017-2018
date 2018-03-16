@@ -29,11 +29,14 @@ import com.gwtplatform.mvp.client.presenter.slots.PermanentSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 import pt.isep.nsheets.client.application.menu.MenuPresenter;
+import pt.isep.nsheets.client.event.SetPageTitleEvent;
 
 public class ApplicationPresenter
-        extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
+        extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> 
+		implements SetPageTitleEvent.SetPageTitleHandler {
 	
     interface MyView extends View {
+    		void setPageTitle(String title, String description, String link, String specification);
     }
 
     public static final PermanentSlot<MenuPresenter> SLOT_MENU = new PermanentSlot<>();
@@ -66,5 +69,12 @@ public class ApplicationPresenter
         super.onBind();
 
         setInSlot(SLOT_MENU, menuPresenter);
+        
+        addRegisteredHandler(SetPageTitleEvent.TYPE, this);
     }
+    
+    @Override
+    public void onSetPageTitle(SetPageTitleEvent event) {
+        getView().setPageTitle(event.getTitle(), event.getDescription(), event.getLink(), event.getSpecification());
+    }    
 }

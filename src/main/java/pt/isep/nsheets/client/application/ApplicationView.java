@@ -27,6 +27,11 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialPanel;
+import gwt.material.design.client.ui.animate.MaterialAnimation;
+import gwt.material.design.client.ui.animate.Transition;
+
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
 
 	// @UiField
@@ -36,6 +41,11 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 	HTMLPanel menu;
 	@UiField
 	HTMLPanel main;
+	
+    @UiField
+    MaterialPanel panel, titlePanel;
+    @UiField
+    MaterialLabel title, description;	
 
 	interface Binder extends UiBinder<Widget, ApplicationView> {
 	}
@@ -56,5 +66,30 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 	// super.setInSlot(slot, content);
 	// }
 	// }
+	
+    @Override
+    public void setPageTitle(String title, String description, String link, String specification) {
+        this.title.setText(title);
+        this.description.setText(description);
+//        this.link = link;
+//        this.specification = specification;
+
+//        if (link.isEmpty()) {
+//            chipJava.setVisible(false);
+//            chipXml.setVisible(false);
+//        } else {
+//            chipJava.setVisible(true);
+//            chipXml.setVisible(true);
+//        }
+//
+//        if (specification.isEmpty()) {
+//            chipSpecification.setVisible(false);
+//        } else {
+//            chipSpecification.setVisible(true);
+//        }
+
+        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.title);
+        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.description);
+    }	
 
 }

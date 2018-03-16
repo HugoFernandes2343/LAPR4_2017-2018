@@ -20,17 +20,8 @@
 package pt.isep.nsheets.client.application.workbook;
 
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
-import pt.isep.nsheets.shared.core.Address;
-import pt.isep.nsheets.shared.core.Cell;
-import pt.isep.nsheets.shared.core.IllegalValueTypeException;
-import pt.isep.nsheets.shared.core.Spreadsheet;
-import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.core.formula.Expression;
-import pt.isep.nsheets.shared.core.formula.Formula;
-import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.inject.Inject;
@@ -41,23 +32,15 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-
-import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, WorkbookPresenter.MyProxy> {
 
 	interface MyView extends View {
-		// public Label getSecondLabel();
-		// public Label getFirstLabel();
 		public MaterialTextBox getFirstBox();
 
 		public MaterialIcon getFirstButton();
-		
-		//public MaterialLabel getResultLabel();
 	}
 
 	@ProxyStandard
@@ -130,4 +113,11 @@ public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, Workb
 
 		});
 	}
+	
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+
+        SetPageTitleEvent.fire("Workbook", "The current Workbook", "", "", this);
+    }
 }

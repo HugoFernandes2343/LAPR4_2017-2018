@@ -33,7 +33,7 @@ public class CustomCategoryFactory extends CategoryComponentFactory {
         CategoryComponent category = super.generate(dataView, categoryName);
 
         if(!(category instanceof OrphanCategoryComponent)) {
-            category = new WorkbookView.CustomCategoryComponent(categoryName);
+            // category = new WorkbookView.CustomCategoryComponent(categoryName);
         }
         return category;
     }

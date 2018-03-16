@@ -48,7 +48,7 @@
         <m:MaterialHeader>
         		<m:MaterialNavBar ui:field="navBar" width="100%" backgroundColor="BLUE" activates="sideBar" textColor="WHITE">
             <!-- <m:MaterialNavBar backgroundColor="PURPLE"> -->
-                <m:MaterialNavBrand text="My App" paddingLeft="20" />
+                <m:MaterialNavBrand text="NSheets" paddingLeft="20" />
                 <m:MaterialNavSection float="RIGHT">
                     <m:MaterialLink text="Login" href="#login"/>
                     <m:MaterialLink text="Signup" href="#signup" />
@@ -58,7 +58,7 @@
         
 		<m:MaterialSideNavPush ui:field="sideNav" m:id="sideBar" width="280" allowBodyScroll="true" showOnAttach="true">
 			<m.html:ListItem waves="DEFAULT" paddingBottom="22">
-				<m:MaterialImage width="100%" url="http://i.imgur.com/VaBxpGj.png" addStyleNames="{style.logo}"/>
+				<m:MaterialImage width="100%" resource="{res.nsheets_logo}" addStyleNames="{style.logo}"/>
 			</m.html:ListItem>
 			<m.html:ListItem waves="DEFAULT">
 				<m:MaterialLink targetHistoryToken="{tokens.getHome}" iconPosition="LEFT" iconType="HOME" text="Home"/>

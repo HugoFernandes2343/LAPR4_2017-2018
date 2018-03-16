@@ -24,24 +24,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.google.gwt.user.client.ui.Panel;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
-import gwt.material.design.client.constants.IconType;
-import gwt.material.design.client.data.component.CategoryComponent;
-import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.table.MaterialDataTable;
-import gwt.material.design.client.ui.table.TableSubHeader;
-import pt.isep.nsheets.client.application.table.service.FakePersonService;
-import pt.isep.nsheets.client.application.table.service.PersonServiceAsync;
 import pt.isep.nsheets.client.ui.NavigatedView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -51,19 +42,19 @@ import static gwt.material.design.jquery.client.api.JQuery.$;
 //public class HomeView extends ViewImpl implements HomePresenter.MyView {
 public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
 
-	public static class CustomCategoryComponent extends CategoryComponent {
-		public CustomCategoryComponent(String category) {
-			super(category);
-		}
-
-		@Override
-		protected void render(TableSubHeader subheader) {
-			super.render(subheader);
-
-			subheader.setOpenIcon(IconType.FOLDER_OPEN);
-			subheader.setCloseIcon(IconType.FOLDER);
-		}
-	}
+//	public static class CustomCategoryComponent extends CategoryComponent {
+//		public CustomCategoryComponent(String category) {
+//			super(category);
+//		}
+//
+//		@Override
+//		protected void render(TableSubHeader subheader) {
+//			super.render(subheader);
+//
+//			subheader.setOpenIcon(IconType.FOLDER_OPEN);
+//			subheader.setCloseIcon(IconType.FOLDER);
+//		}
+//	}
 
 	public MaterialTextBox getFirstBox() {
 		return firstBox;
@@ -83,7 +74,7 @@ public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyV
 	// Replace this with your actual service interface, like so:
 	// private PersonServiceAsync personService = GWT.create(PersonService.class);
 	// we are faking the service on the client side to avoid requiring a web server.
-	private PersonServiceAsync personService = GWT.create(FakePersonService.class);
+//	private PersonServiceAsync personService = GWT.create(FakePersonService.class);
 
 	@UiField
 	MaterialDataTable<SheetCell> customTable;
@@ -228,24 +219,24 @@ public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyV
 		// loadCategories();
 	}
 
-	protected void loadCategories() {
-		// Load the categories from the server
-		customTable.getView().setLoadMask(true);
-
-		personService.getCategories(new AsyncCallback<List<String>>() {
-			@Override
-			public void onSuccess(List<String> categories) {
-				for (String category : categories) {
-					customTable.addCategory(new CategoryComponent(category));
-				}
-				customTable.getView().setLoadMask(false);
-			}
-
-			@Override
-			public void onFailure(Throwable throwable) {
-				GWT.log("Getting people categories async call failed.", throwable);
-			}
-		});
-	}
+//	protected void loadCategories() {
+//		// Load the categories from the server
+//		customTable.getView().setLoadMask(true);
+//
+//		personService.getCategories(new AsyncCallback<List<String>>() {
+//			@Override
+//			public void onSuccess(List<String> categories) {
+//				for (String category : categories) {
+//					customTable.addCategory(new CategoryComponent(category));
+//				}
+//				customTable.getView().setLoadMask(false);
+//			}
+//
+//			@Override
+//			public void onFailure(Throwable throwable) {
+//				GWT.log("Getting people categories async call failed.", throwable);
+//			}
+//		});
+//	}
 
 }

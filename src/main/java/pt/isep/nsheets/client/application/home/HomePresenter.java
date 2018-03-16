@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 
 public class HomePresenter
@@ -26,4 +27,10 @@ public class HomePresenter
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 	}
 
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+
+        SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
+    }	
 }
