@@ -130,5 +130,5 @@ Images with gravizo
 
 ![Alt text](http://g.gravizo.com/source?https%3A%2F%2Fbitbucket.org%2FTLmaK0%2Fgravizo-example%2Fraw%2Fmaster%2Fsource.uml)
 
-![Alt text](http://g.gravizo.com/source?https%3A%2F%2Fbitbucket.org%2Flei-isep%2Fnsheets%2Fsrc%2Fmaster%2Fnet.puml)
+![Alt text](http://g.gravizo.com/source?https%3A%2F%2Fbitbucket.org%2Flei-isep%2Fnsheets%2Fraw%2Fmaster%2Fnet.puml)
 
