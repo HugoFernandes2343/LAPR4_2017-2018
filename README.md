@@ -125,3 +125,10 @@ For instance, the next image was generated with this command. The PlantUml file 
 ![Image generated with PlantUML](net.png)
 
 **Note:** You will need to have **gradle** installed in your system to execute the command.
+
+Images with gravizo
+
+![Alt text](http://g.gravizo.com/source?https%3A%2F%2Fbitbucket.org%2FTLmaK0%2Fgravizo-example%2Fraw%2Fmaster%2Fsource.uml)
+
+![Alt text](http://g.gravizo.com/source?https%3A%2F%2Fbitbucket.org%2Flei-isep%2Fnsheets%2Fraw%2Fmaster%2Fnet.puml)
+
