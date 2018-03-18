@@ -22,7 +22,10 @@ To build type:
 To execute type:
 
 	mvn gwt:run
-	
+
+To generate plantuml diagrams type:
+
+	mvn plantuml:generate
 
 # 2. Integration of ANTLR4 and GWT
 
