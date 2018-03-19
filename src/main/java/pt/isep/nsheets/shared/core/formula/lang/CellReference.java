@@ -26,6 +26,9 @@ import java.util.TreeSet;
 //import java.util.regex.Matcher;	// not supported in gwt
 //import java.util.regex.Pattern;	// not supported in gwt
 
+import com.google.gwt.regexp.shared.MatchResult;
+import com.google.gwt.regexp.shared.RegExp;
+
 import pt.isep.nsheets.shared.core.Address;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.Spreadsheet;
@@ -50,7 +53,8 @@ public class CellReference implements Reference {
 	// not supported in gwt
 //	private static final Pattern PATTERN = Pattern.compile(
 //		"(\\$??)([a-zA-Z]+)(\\$??)(\\d+)$");
-
+	private static final RegExp PATTERN = RegExp.compile("(\\$??)([a-zA-Z]+)(\\$??)(\\d+)$");
+	
 	/** The string used to match the use of absolute references */
 	private static final String ABSOLUTE_OPERATOR = "$";
 
@@ -111,6 +115,23 @@ public class CellReference implements Reference {
 //			this.columnAbsolute = matcher.group(1).equals("$");
 //			this.rowAbsolute = matcher.group(3).equals("$");
 //		} else
+		MatchResult matcher = PATTERN.exec(reference);
+		if (matcher!=null) {
+
+			// Parses row and column indices
+			int row = Integer.parseInt(matcher.getGroup(4)) - 1;
+			int column = -1;
+			String columnStr = matcher.getGroup(2).toUpperCase();
+			for (int i = columnStr.length() - 1; i >= 0; i--)
+				column += (columnStr.charAt(i) - Address.LOWEST_CHAR + 1)
+					* Math.pow(Address.HIGHEST_CHAR - Address.LOWEST_CHAR + 1,
+					columnStr.length() - (i + 1));
+
+			// Stores members
+			this.cell = spreadsheet.getCell(new Address(column, row));
+			this.columnAbsolute = matcher.getGroup(1).equals("$");
+			this.rowAbsolute = matcher.getGroup(3).equals("$");
+		} else		
 			throw new ParseException(reference, 0);
 	}
 
