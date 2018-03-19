@@ -1,4 +1,4 @@
-STUDENT **John Doe** (1122101) - Sprint 1 - Core01.1
+**John Doe** (s1122101) - Sprint 1 - Core01.1
 ===============================
 
 How to insert an image:
