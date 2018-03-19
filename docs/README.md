@@ -65,4 +65,15 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Blue | 			      			| 							|								 |		|
 | Blue | 			      			| 							|								 |		|
 
+# 4. Domain Model
+
+**Core**
+
+![Core Domain Model](domain_model_image1.png)
+
+**Formulas**
+
+![Formulas Domain Model](domain_model_formulas_image1.png)
+
+
 

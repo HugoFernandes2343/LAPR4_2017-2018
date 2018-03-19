@@ -1,0 +1,41 @@
+ @startuml domain_model_formulas_image1.png
+class Formula {
+	+Formula(Cell cell, Expression expression) 
+}
+interface Expression {
+	+Value evaluate()
+	+Object accept(ExpressionVisitor visitor)
+}
+interface Reference {
+}
+abstract class Operation {
+}
+class UnaryOperation {
+}
+class BinaryOperation {
+}
+class FunctionCall {
+}
+class Literal {
+}
+interface ExpressionVisitor {
+	+Object visitLiteral(Literal literal)
+	+Object visitUnaryOperation(UnaryOperation operation)
+	+Object visitBinaryOperation(BinaryOperation operation)
+	+Object visitReference(Reference reference)
+	+Object visitFunctionCall(FunctionCall call)
+}
+Expression <|-- Formula
+Expression <|-- Reference
+Expression <|-- Operation
+Expression <|-- FunctionCall
+Expression <|-- Literal
+Operation <|-- BinaryOperation
+Operation <|-- UnaryOperation
+Formula --> Reference : getReferences()
+Reference --> Cell : getCells();
+Cell --> Formula : getFormula
+BinaryOperation --> Expression : leftOperand
+BinaryOperation --> Expression : rightOperand
+UnaryOperation --> Expression : operand
+  @enduml

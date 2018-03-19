@@ -1,0 +1,95 @@
+ @startuml domain_model_image1.png
+ class Workbook {
+  + Workbook() 
+  + Workbook(int sheets)
+  + Workbook(String[][]... contents)
+ }
+ interface Spreadsheet {
+ 	+String getTitle()
+	+setTitle(String title)
+	+int getColumnCount()
+	+getRowCount()
+	+Cell getCell(Address address)
+	+Cell getCell(int column, int row)
+	+SortedSet<Cell> getCells(Address address1, Address address2)
+	+Cell[] getColumn(int index)
+	+Cell[] getRow(int index)
+ }
+ interface Cell {
+	+String getContent()
+	+setContent(String content)
+	+clear()
+	+SortedSet<Cell> getPrecedents()
+	+SortedSet<Cell> getDependents()
+	+copyFrom(Cell source)
+	+moveFrom(Cell source)
+ }
+ class Address {
+ 	+Address(int column, int row)
+ 	+int getColumn()
+ 	+int getRow()
+ 	+int compareTo(Address address) 
+ 	+String toString() 
+ }
+ class Value {
+ 	+Value()
+	+Value(Number number)
+	+Value(String text) 
+	+Value(Boolean booleanValue) 
+	+Value(Date date) 
+	+Value(Value[] matrix) 
+	+Value(Value[][] matrix) 
+	+Value(Throwable error) 
+	+Object toAny()
+	+boolean isOfType(Type type)
+	+Number toNumber()
+	+double toDouble()
+	+String toText()
+	+Boolean toBoolean() 
+	+public Date toDate()
+	+Value[][] toMatrix()
+	+Throwable toError()
+	+int compareTo(Value otherValue)
+	+String toString(Format format)
+	+Value parseValue(String value, Type... types)
+ }
+ enum Value.Type {
+		UNDEFINED
+		NUMERIC
+		TEXT
+		BOOLEAN
+		DATE
+		MATRIX
+		ERROR
+ }
+ interface WorkbookListener {
+	+spreadsheetInserted(Spreadsheet spreadsheet, int index)
+	+spreadsheetRemoved(Spreadsheet spreadsheet)
+	+spreadsheetRenamed(Spreadsheet spreadsheet)
+}
+interface CellListener {
+	+valueChanged(Cell cell)
+	+contentChanged(Cell cell)
+	+public void dependentsChanged(Cell cell)
+	+cellCleared(Cell cell)
+	+cellCopied(Cell cell, Cell source)
+}
+class SpreadsheetImpl {
+}
+class CellImpl {
+}
+Spreadsheet <|-- SpreadsheetImpl
+Cell <|-- CellImpl
+
+Workbook -left-> WorkbookListener : listeneers 
+ Workbook --> Spreadsheet : spreadsheets
+ Spreadsheet --> Cell : iterator
+ Spreadsheet --> CellListener : listeners
+ 
+ Cell --> Address : getAddress()
+ Cell --> Value : getValue()
+ Cell --> CellListener : listeners
+ 
+ Value --> Value.Type : getType()
+  
+ @enduml 
