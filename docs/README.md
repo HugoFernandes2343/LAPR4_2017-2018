@@ -41,28 +41,28 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 
 # 3. Detailed Planning
 
-| Team | Sprint1                                        | Sprint2                                      | Sprint3 							           |
+| Team | Student | Sprint1                                        | Sprint2                                      | Sprint3 							           |
 |------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
-| Red  | [John Doe/Core01.1](red/student-1122101/sp1)   | [John Doe/IPC01.2](red/student-1122101/sp2)  | [John Doe/Lang01.3](red/student-1122101/sp3) |
-| Red  |			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
+| Red  | [John Doe](student-1122101/) | [Core01.1](red/student-1122101/sp1)   | [IPC01.2](red/student-1122101/sp2)  | Lang01.3](red/student-1122101/sp3) |
+| Red  |			      			| 							|								 |		|
+| Red  | 			      			| 							|								 |		|
+| Red  | 			      			| 							|								 |		|
+| Red  | 			      			| 							|								 |		|
+| Red  | 			      			| 							|								 |		|
+| Red  | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|	
+| Green | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|
+| Green | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
+| Blue | 			      			| 							|								 |		|
 
 
