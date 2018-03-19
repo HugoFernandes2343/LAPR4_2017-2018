@@ -9,7 +9,7 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 
 | Team | Student Number     | Student Name                        | Link 							  |
 |------|--------------------|-------------------------------------|------------------------------------|
-| Red  | **s1122101**      			| John Doe					|[John Doe](s1122101/) |
+| Red  | **s1122101**      			| John Doe					|[John Doe](red/s1122101/) |
 | Red  |			      			| 							|								 |
 | Red  | 			      			| 							|								 |
 | Red  | 			      			| 							|								 |
