@@ -1,4 +1,4 @@
-STUDENT **John Doe** (1122101)
+**John Doe** (s1122101)
 ===============================
 
 # 1. Documentation for each Sprint
