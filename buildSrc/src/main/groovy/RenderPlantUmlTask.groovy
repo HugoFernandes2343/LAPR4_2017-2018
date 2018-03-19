@@ -41,6 +41,7 @@ import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFiles
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
@@ -59,14 +60,27 @@ class RenderPlantUmlTask extends DefaultTask {
   @InputFiles
   def FileTree inputFiles
 
-  @InputDirectory
+  @OutputFiles
+  def FileTree outputFiles
+  
+//  @InputDirectory
   def File InputDir
-
-  @OutputDirectory
+//
+//  @OutputDirectory
   def File outputDir
 
   def Path assetsPathInput //= project.projectDir.toPath().resolve('src/main/puml/')
   def Path assetsPathOutput //= project.projectDir.toPath().resolve('build/docs/javadoc/')
+
+//	@OutputFiles
+//	public List<File> getOutputFiles() {
+//    		List<File> outputFiles = new ArrayList<File>();
+//    		for (String split : getSplits()) {
+//        		outputFiles.add(getOutputFileForSplit(split));
+//    		}
+//    		return outputFiles;
+//	}
+
 
     File getDestination(File puml, String extension) {
         // eg: puml = /workspaces/project/src/main/java/csheets/application_start_image1.puml
@@ -109,6 +123,7 @@ class RenderPlantUmlTask extends DefaultTask {
     void execute(IncrementalTaskInputs inputs) {
       //----
       // Set global Paths
+// (ATB)      
       assetsPathInput = inputDir.toPath()
       assetsPathOutput = outputDir.toPath()
 
