@@ -1,4 +1,4 @@
-STUDENT **Joao Amaral** (1122334) - Sprint 1
+STUDENT **Jon Doe** (1122101) - Sprint 1
 ===============================
 
 How to insert an image:

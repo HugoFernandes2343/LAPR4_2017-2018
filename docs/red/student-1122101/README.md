@@ -1,4 +1,4 @@
-STUDENT **Joao Amaral** (1122334)
+STUDENT **John Doe** (1122101)
 ===============================
 
 # 1. Documentation for each Sprint

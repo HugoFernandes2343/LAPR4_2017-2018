@@ -31,7 +31,7 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Blue | 			      			| 							|								 |
 | Blue | 			      			| 							|								 |
 
-# 2. Panning Overview
+# 2. Planning Overview
 
 | Team | Sprin1     | Sprint2        | Sprint 3	  |
 |------|------------|----------------|-------------|
@@ -39,16 +39,30 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Green  | IPC      | Lang		    | Core		  |	
 | Blue  | Lang	    | Core	  		| IPC    	  |
 
-# 2. Sprints
+# 3. Detailed Planning
 
-The following table is used to register the work of the students that are selected to present at each Sprint Review. For instance, if I am Student "Maria Ferreira" (1133224) and I was selected to make the second presentation for Sprint 1 then I should update this table as illustrated.
+| Team | Sprint1                                        | Sprint2                                      | Sprint3 							           |
+|------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
+| Red  | [John Doe/Core01.1](red/student-1122101/sp1)   | [John Doe/IPC01.2](red/student-1122101/sp2)  | [John Doe/Lang01.3](red/student-1122101/sp3) |
+| Red  |			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
 
-**Documentation for each Sprint**
 
-|Sprint  | Sprint Presentation 1                  |  Sprint Presentation 2                |  Sprint Presentation 3                |  Sprint Presentation 4                |  Sprint Presentation 5                |
-|--------|----------------------------------------|---------------------------------------|---------------------------------------|---------------------------------------|---------------------------------------|
-| **1**  |[Joao Amaral](student-1122334/sp1)  |[Maria Ferreira](student-1133224/sp1) |                                       |                                       |																				|
-| **2**  |																				|																				|																				|																				|  																			|
-| **3**  |																				|																				|																				|																				|  																			|
-| **4**  |																				|																				|																				|																				|  																			|
-| **5**  |																				|																				|																				|																				|  																			|
