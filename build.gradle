@@ -1,7 +1,7 @@
 defaultTasks 'renderPlantUml'
 
 task renderPlantUml(type: RenderPlantUmlTask) {
-      inputDir = file("${projectDir}")
-      inputFiles = fileTree(dir: "${projectDir}", include: '**/*.puml')
-      outputDir = file("${projectDir}")
+      inputDir = file("${projectDir}/docs")
+      inputFiles = fileTree(dir: "${projectDir}/docs", include: '**/*.puml')
+      outputDir = file("${projectDir}/docs")
 }
