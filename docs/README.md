@@ -7,34 +7,38 @@ These are links for the individual pages/folders of each Student. The first two 
 
 For instance, if my name is Maria Ferreira and I have the Student Team Number 2 I should update the row number 2 in this table. I should also create a new folder in the repository, as illustrated.
 
-|Student Team Number |Student Name                         |Link         											  |
-|--------------------|-------------------------------------|------------------------------------|
-| **1**      				 | Joao Amaral 												 |[Joao Amaral](student-1122334/) |
-| **2**    					 | Maria Ferreira											 |[Maria Ferreira](student-1133224/) |
-| **3**    					 | 																		 |																	  |
-| **4**    					 | 																		 |																	  |
-| **5**    					 | 																		 |																	  |
-| **6**    					 | 																		 |																	  |
-| **7**    					 | 																		 |																	  |
-| **8**    					 | 																		 |																	  |
-| **9**    					 | 																		 |																	  |
-| **10**    				 | 																		 |																	  |
-| **11**    				 | 																		 |																	  |
-| **12**    				 | 																		 |																	  |
-| **13**    				 | 																		 |																	  |
-| **14**    				 | 																		 |																	  |
-| **15**    				 | 																		 |																	  |
-| **16**    				 | 																		 |																	  |
-| **17**    				 | 																		 |																	  |
-| **18**    				 | 																		 |																	  |
-| **19**    				 | 																		 |																	  |
-| **20**    				 | 																		 |																	  |
-| **21**    				 | 																		 |																	  |
-| **22**    				 | 																		 |																	  |
-| **23**    				 | 																		 |																	  |
-| **24**    				 | 																		 |																	  |
-| **25**    				 | 																		 |																	  |
+| Team | Student Number     | Student Name                        | Link 							  |
+|------|--------------------|-------------------------------------|------------------------------------|
+| White  | **1122101**      			| John Doe1					|[John Doe1](student-1122101/) |
+| Red  | 			      			| 							|								 |
+| Red  |			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Red  | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Green | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
+| Blue | 			      			| 							|								 |
 
+# 2. Panning Overview
+
+| Team | Sprin1     | Sprint2        | Sprint 3	  |
+|------|------------|----------------|-------------|
+| Red  | Core   		| IPC			| Lang        |
+| Green  | IPC      | Lang		    | Core		  |	
+| Blue  | Lang	    | Core	  		| IPC    	  |
 
 # 2. Sprints
 
