@@ -1,2 +1,2 @@
-STUDENT **John Doe** (1122101) - Sprint 3 - Lang01.3
+**John Doe** (s1122101) - Sprint 3 - Lang01.3
 ===============================
