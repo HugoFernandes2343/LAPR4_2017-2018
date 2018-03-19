@@ -43,7 +43,7 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 
 | Team | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
-| Red  | [John Doe](s1122101/) | [Core01.1](red/s1122101/sp1)            | [IPC01.2](red/s1122101/sp2)           | [Lang01.3](red/s1122101/sp3) |
+| Red  | [John Doe](red/s1122101/) | [Core01.1](red/s1122101/sp1)            | [IPC01.2](red/s1122101/sp2)           | [Lang01.3](red/s1122101/sp3) |
 | Red  |			      			| 							|								 |		|
 | Red  | 			      			| 							|								 |		|
 | Red  | 			      			| 							|								 |		|

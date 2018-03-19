@@ -1,2 +1,2 @@
-STUDENT **John Doe** (1122101) - Sprint 2
+STUDENT **John Doe** (1122101) - Sprint 2 - IPC02.1
 ===============================
