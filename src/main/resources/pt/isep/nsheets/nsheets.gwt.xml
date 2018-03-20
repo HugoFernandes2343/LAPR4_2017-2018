@@ -21,7 +21,7 @@
 
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
-<module rename-to='NSheets'>
+<module rename-to='nsheets'>
     <inherits name='com.google.gwt.user.User'/>
     <!-- ANTLR4-GWT -->
     <inherits name="org.antlr.v4.antlr4-runtime" />    

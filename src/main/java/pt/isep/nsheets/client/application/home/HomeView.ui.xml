@@ -5,7 +5,7 @@
              
              
              
-    <g:HTMLPanel>
+    <g:HTMLPanel ui:field="htmlPanel">
       <m:MaterialRow>
         <m:MaterialTitle title="Basic Card" />
         <m:MaterialColumn grid="l4">

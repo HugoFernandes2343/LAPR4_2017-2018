@@ -22,4 +22,17 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  
+  
+  <!-- Servlets for the workbooks -->
+  <servlet>
+    <servlet-name>workbooksServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>workbooksServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/workbooksService</url-pattern>
+  </servlet-mapping>  
 </web-app>
