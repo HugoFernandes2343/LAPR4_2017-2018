@@ -166,7 +166,7 @@
 					<compilerMetrics>true</compilerMetrics>
 
 					<runTarget>index.html</runTarget>
-					<module>pt.isep.nsheets.NSheets</module>
+					<module>pt.isep.nsheets.nsheets</module>
 				</configuration>
 				<executions>
 					<execution>

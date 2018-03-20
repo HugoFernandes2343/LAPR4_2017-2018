@@ -18,10 +18,12 @@ import pt.isep.nsheets.client.services.WorkbooksService;
 import pt.isep.nsheets.client.services.WorkbooksServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
-public class HomePresenter
-		extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
+public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
 
+	private MyView view;
+	
 	interface MyView extends View {
+		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
 	}
 
 	@NameToken(NameTokens.home)
@@ -32,6 +34,12 @@ public class HomePresenter
 	@Inject
 	HomePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+		
+		this.view=view;
+	}
+	
+	private void refreshView(ArrayList<WorkbookDescriptionDTO> contents) {
+		this.view.setContents(contents);
 	}
 
     @Override
@@ -40,21 +48,22 @@ public class HomePresenter
 
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
         
-//        // Test if we can access the server...
-//        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
-//        
-//        // Set up the callback object.
-//        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
-//          public void onFailure(Throwable caught) {
-//            // TODO: Do something with errors.
-//          }
-//
-//          public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
-//            //updateTable(result);
-//          }
-//        };
-//
-//        // Make the call to the stock price service.
-//        workbooksSvc.getWorkbooks(callback);
+        // Test if we can access the server...
+        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+        
+        // Set up the callback object.
+        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
+          public void onFailure(Throwable caught) {
+            // TODO: Do something with errors.
+          }
+
+          public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
+            //updateTable(result);
+        	  	refreshView(result);
+          }
+        };
+
+        // Make the call to the stock price service.
+        workbooksSvc.getWorkbooks(callback);
     }	
 }

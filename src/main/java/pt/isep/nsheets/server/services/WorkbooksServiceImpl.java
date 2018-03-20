@@ -17,8 +17,11 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 		// This is only for testing...
 	    ArrayList<WorkbookDescriptionDTO> workbooks = new ArrayList<WorkbookDescriptionDTO>();
 
-	    WorkbookDescriptionDTO wb=new WorkbookDescriptionDTO("teste");
+	    WorkbookDescriptionDTO wb=new WorkbookDescriptionDTO("workbook1", "Este workbook contem uma lista...");
 	    workbooks.add(wb);
+	    
+	    WorkbookDescriptionDTO wb2=new WorkbookDescriptionDTO("workbook notas", "Este workbook contem notas de disciplinas...");
+	    workbooks.add(wb2);
 	    
 		return workbooks;
 	}

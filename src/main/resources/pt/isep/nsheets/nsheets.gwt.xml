@@ -54,7 +54,7 @@
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
     <source path='shared'/>
-
+    
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="pt.isep.nsheets.client.gin.ClientModule"/>
 
