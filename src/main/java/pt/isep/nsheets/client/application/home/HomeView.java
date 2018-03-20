@@ -73,7 +73,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         
         MaterialCardTitle cardTitle=new MaterialCardTitle();
         cardTitle.setText(wb.getName());
-        cardTitle.setIconType(IconType.POLYMER);
+        cardTitle.setIconType(IconType.INSERT_DRIVE_FILE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
         MaterialLabel label=new MaterialLabel();
@@ -94,6 +94,8 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 		int colCount=1;
 		
 		MaterialRow row=null;
+		
+		htmlPanel.clear();
 		
 		for (WorkbookDescriptionDTO wb: contents) {
 			MaterialCard card=createCard(wb);
