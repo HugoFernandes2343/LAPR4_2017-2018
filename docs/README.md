@@ -70,29 +70,46 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 
 ## 4.1 Core
 
-### Core01 - Workbook View
-	Core01.1 - Workbook View
-	Core01.2 - Workbook and Cells Extensions (Style Extension)
-	Core01.3 - Comments Extension
-
-### Core02 - Sort
-	Core02.1 - Column Sort
-	Core02.2 - Sort Range of Cells
-	Core03.3 - Auto-Sorting
+### Core01 - Workbook View (Mandatory)
+	Core01.1 - Partial Workbook View (only one sheet)
+	Core01.2 - Complete Workbook View (support for references between sheets)
+	Core01.3 - More than one active Workbook (support for references between workbooks)
 	
-### Core03 - Images
-	Core03.1 - Insert Image
-	Core03.2 - Overlay Image 
-	Core03.3 - Persisting Images
+### Core02 - Extensions (Mandatory)
+	Core02.1 - Extension Mechanism supports Cells Decorators and a Configuration section in the Settings Page 
+	Core02.2 - Extension Mechanism supports Popup menus in Cells and Menu Options in the Navigator 
+	Core02.3 - Extension Mechanism supports enable/disable extensions
+
+### Core03 - Sort and Cells Dependencies
+	Core03.1 - Sort Range of Cells
+	Core03.2 - Filter Range of Cells
+	Core03.3 - Dependency Tree extension
+
+### Core04 - Charts
+	Core04.1 - Basic Chart Wizard
+	Core04.2 - Advanced Chart Wizard
+	Core04.3 - Dynamic Charts
 	
-
-- Criar tarefas que permitam associar workbooks
-
-- Criar reminders
-
-- Profile Edition
-
-
+### Core05 - Reminders and Tasks
+	Core05.1 - Reminders
+	Core05.2 - Task
+	Core05.3 - Tasks, Reminders, Events
+	
+### Core06 - Calendar
+	Core06.1 - Calendar Edition (the calendar of the user)
+	Core06.2 - Basic Agenda View
+	Core06.3 - Advanced Agenda View
+	
+### Core07 - Notes
+	Core06.1 - Notes View
+	Core06.2 - Lists
+	Core06.3 - Search and Export Notes
+	
+### Core08 - Base Extensions
+	Core08.1 - Comments in Cells Extension
+	Core08.2 - Images in Cells Extension
+	Core08.3 - Styles in Cells Extension
+	
 ## 4.2 IPC
 
 ### IPC01 - Register and Login (Mandatory)
@@ -135,18 +152,48 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 	IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)
 	IPC08.3 - Users should be able to post Images and make mentions of users (they should reveive an email if they are not online)
 
-
-- Chat com outras pessoas online
-
-- Visão online de edição de workbook
-
-- Importar e exportar para XML PDF, etc no servidor
-
-- Fazer segunda aplicação de administração ou apenas página de administração - permitir importar batch de utilizadores, exportar batch de workbooks, etc.
-
-
 ## 4.3 Lang
 
+### Lang01 - Formulas (Mandatory)
+	Lang01.1 - Block of Instructions
+	Lang01.2 - Monetary Language
+	Lang01.3 - Eval and While Loops
+
+### Lang02 - Variables
+	Lang02.1 - Temporary Variables
+	Lang02.2 - Global Variables
+	Lang02.3 - Arrays and Variable Editor
+	
+### Lang03 - Tools based on Formulas
+	Lang03.1 - Conditional Formating of Cells
+	Lang03.2 - Conditional Formating of Ranges
+	Lang03.3 - Tables and Filters
+	
+### Lang04 - Function Wizard
+	Lang04.1 - Insert Function Basic Wizard
+	Lang04.2 - Insert Function Intermediate Wizard
+	Lang04.3 - Insert Function Advanced Wizard
+		
+### Lang05 - Forms
+	Lang05.1 - Forms Editor
+	Lang05.2 - Forms and Variables
+	Lang05.3 - Advanced Forms
+		
+### Lang06 - Macros Script Language
+	Lang06.1 - Macros Language Window
+	Lang06.2 - Multiple Macros
+	Lang06.3 - Macros with Parameters
+	
+### Lang07 - Visual Basic Script Language
+	Lang07.1 - A language with a syntax similar to Visual Basic (no methods)
+	Lang07.2 - With methods without parameters
+	Lang07.3 - With methods with parameters
+
+### Lang08 - Java Script Language
+	Lang08.1 - A language with a syntax similar to Java (no methods)
+	Lang08.2 - With methods without parameters
+	Lang08.3 - With methods with parameters
+		
 
 # 5. Domain Model
 
