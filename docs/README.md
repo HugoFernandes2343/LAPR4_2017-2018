@@ -90,9 +90,9 @@ In this document four terms that are related to similar concepts are used: featu
 One can state that the functional increment is the unit of work in this project. Usually a functional increment can be specified using the formalism of "user stories". Also, a user story can be further described by the formalism of "use cases". For the most common and simpler cases we can say that one functional increment corresponds to one user story which, in turn, corresponds to one use case. That is why it is normally "safe" to use whatever term we prefer. However, one should pay attention during analysis, because sometimes that correspondence may not be true.
 
 Requirements are classified in three functional areas:
-- **Core**: These are requirements that are related to the architecture and common functionalities of NSheets
-- **Languages** These are requirements that are related to the formulas of NSheets and other aspects related to languages, parsers and grammars
-- **IPC**: These are requirements that explore interprocess communication
+	**Core**: These are requirements that are related to the architecture and common functionalities of NSheets
+	**Languages** These are requirements that are related to the formulas of NSheets and other aspects related to languages, parsers and grammars
+	**IPC**: These are requirements that explore interprocess communication
 
 
 ## 5.1 Core
