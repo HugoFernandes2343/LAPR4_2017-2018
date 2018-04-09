@@ -3,6 +3,17 @@ LAPR4/NSheets Project Documentation
 
 # 1. Organization
 
+Each **Class Section** (i.e., "Turma PL") **is a Team** in the LAPR4 Project. 
+
+Each Team will have its one fork of the NSheets repository.
+
+To help the management of the project each Team is further divided in 3 sub-teams named: Red, Green and Blue.
+
+The Requirements of the Project are also divided in three functional areas: Core, IPC and Lang.
+
+The Project will be developed during 3 Sprints. During each sprint, each sub-team works in a specific functional area. Each sub-team (and Student) must work in all three functional areas.
+
+Sub-teams should be defined before the start of the project and should remain stable during the project.
 
 # 2. Individual Pages
 
