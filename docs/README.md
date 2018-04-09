@@ -1,11 +1,12 @@
 LAPR4/NSheets Project Documentation
 ================================
 
-# 1. Individual Pages
+# 1. Organization
 
-These are links for the individual pages/folders of each Student. The first two are only examples. After knowing his/her Student Team Number, each student should update the table and the folder structure of the repository accordingly.
 
-For instance, if my name is Maria Ferreira and I have the Student Team Number 2 I should update the row number 2 in this table. I should also create a new folder in the repository, as illustrated.
+# 2. Individual Pages
+
+These are links for the individual pages/folders of each Student. The first one is only an example that you should delete when the team starts the project. Each student should update the table and the folder structure of the repository accordingly.
 
 | Team | Student Number     | Student Name                        | Link 							  |
 |------|--------------------|-------------------------------------|------------------------------------|
@@ -31,7 +32,9 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Blue | 			      			| 							|								 |
 | Blue | 			      			| 							|								 |
 
-# 2. Planning Overview
+# 3. Planning Overview
+
+This is a table that should display the overall planning of the team. This is simply and example and you should update the table with the plan of your team. 
 
 | Team | Sprin1     | Sprint2        | Sprint 3	  |
 |------|------------|----------------|-------------|
@@ -39,7 +42,7 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Green  | IPC      | Lang		    | Core		  |	
 | Blue  | Lang	    | Core	  		| IPC    	  |
 
-# 3. Detailed Planning
+# 4. Detailed Planning
 
 | Team | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
@@ -65,7 +68,7 @@ For instance, if my name is Maria Ferreira and I have the Student Team Number 2 
 | Blue | 			      			| 							|								 |		|
 | Blue | 			      			| 							|								 |		|
 
-# 4. Requirements
+# 5. Requirements
 
 The ultimate goal of this project is to develop the first version of Cleansheets for the Web! As such, it may be wise to study the previous desktop version. You may fork the desktop version available in [Bitbucket](https://bitbucket.org/lei-isep/csheets). Along with the code you may find the documentation (i.e., the manual) in 'manual/doc/lapr4_manual.pdf'. 
 
@@ -81,7 +84,7 @@ Requirements are classified in three functional areas:
 - **IPC**: These are requirements that explore interprocess communication
 
 
-## 4.1 Core
+## 5.1 Core
 
 ### Core01 - Workbook View (Mandatory)
 	Core01.1 - Partial Workbook View (only one sheet)
@@ -123,7 +126,7 @@ Requirements are classified in three functional areas:
 	Core08.2 - Images in Cells Extension
 	Core08.3 - Styles in Cells Extension
 	
-## 4.2 IPC
+## 5.2 IPC
 
 ### IPC01 - Register and Login (Mandatory)
 	IPC01.1 - Protect all the Pages (Except About) with a Login Page (i.e., Gatekeepers in GWTP). Define some hard-coded users to use for authentication. Define a super-user that is able to access **everything**
@@ -165,7 +168,7 @@ Requirements are classified in three functional areas:
 	IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)
 	IPC08.3 - Users should be able to post Images and make mentions of users (they should reveive an email if they are not online)
 
-## 4.3 Lang
+## 5.3 Lang
 
 ### Lang01 - Formulas (Mandatory)
 	Lang01.1 - Block of Instructions
@@ -208,7 +211,7 @@ Requirements are classified in three functional areas:
 	Lang08.3 - With methods with parameters
 		
 
-# 5. Domain Model
+# 6. Domain Model
 
 **Core**
 
