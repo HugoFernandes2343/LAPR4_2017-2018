@@ -217,9 +217,16 @@ Requirements are classified in three functional areas:
 ## 5.2 IPC
 
 ### IPC01 - Register and Login (Mandatory)
+
+- **IPC01.1 - Gatekeeper**
+
 	IPC01.1 - Protect all the Pages (Except About) with a Login Page (i.e., Gatekeepers in GWTP). Define some hard-coded users to use for authentication. Define a super-user that is able to access **everything**
-	IPC01.2 - Implement a Register Page
-	IPC01.3 - Implement a Security Section in the Profile of the User (to change password, delete account, etc.)
+	
+- **IPC01.2 - Implement a Register Page**
+	
+- **IPC01.3 - Security Profile**
+
+	Implement a Security Section in the Profile of the User (to change password, delete account, etc.)
 
 ### IPC02 - Search
 	IPC02.1 - Workbook Search 
