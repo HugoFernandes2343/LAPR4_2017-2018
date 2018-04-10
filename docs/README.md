@@ -148,9 +148,15 @@ Requirements are classified in three functional areas:
 
 - **Core04.1 - Basic Chart Wizard**
 
+	The application should have a new menu option to launch a wizard to help the user create a bar chart. The wizard should have 2 steps. In the first step, the user should input the name of the chart and the range of cells that contains the data for the plot of the chart. The user should also select if the data is in the rows or columns of the range and if the first row or the first column are to be considered labels. In the second step the wizard should display a preview of the chart. The wizard should allow the user to move between steps 1 and 2. If the wizard is confirmed the cell in the left upper corner of the range should have a mark (e.g., icon) that indicates that the cell has a chart associated with it. A popup menu option in the cell should provide access to the chart.
+
 - **Core04.2 - Advanced Chart Wizard**
 
+	The previous bar chart can now be configured to display bars side by side or stacked. The application should also support a new type of charts: pie charts. The wizard should now give the user the possibility to select the type of chart. The charts can now be produced using data that is in a different worksheet of the workbook. The application should now include a window (or page, or section in a page) that displays the list of existing charts and that can be used to enable/disable the display of each chart as well as give access to the chart wizard so that it is possible to change the existing charts. It should also be possible the delete existing charts using this window.
+
 - **Core04.3 - Dynamic Charts**
+
+	The charts should now be dynamic. A dynamic chart is a chart that is automatically updated when its source data changes. The application should now graphically mark the range of cells that are source to charts (e.g., with a surrounding border). Also, when the mouse hovers over the left upper corner of a range of cells that is the source of a chart a preview of the chart should appear.
 	
 ### Core05 - Reminders and Tasks
 	Core05.1 - Reminders
