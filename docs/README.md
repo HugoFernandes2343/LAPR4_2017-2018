@@ -158,15 +158,33 @@ Requirements are classified in three functional areas:
 
 	The charts should now be dynamic. A dynamic chart is a chart that is automatically updated when its source data changes. The application should now graphically mark the range of cells that are source to charts (e.g., with a surrounding border). Also, when the mouse hovers over the left upper corner of a range of cells that is the source of a chart a preview of the chart should appear.
 	
-### Core05 - Reminders and Tasks
-	Core05.1 - Reminders
-	Core05.2 - Task
-	Core05.3 - Tasks, Reminders, Events
+### Core05 - Contacts, Tasks and Reminders
+
+- **Core05.1 - Contacts**
+
+	Each user of the applications should have a list of contacts. A contact is another user of the application that has established a contact with the user of the application. A user of the application may establish a contact with another user by sending an invitation if he/she knows the email of the other user. A user may or not accept an invitation. A user can block/unblock invitations from other users.
+
+- **Core05.2 - Tasks**
+
+	It should be possible to create, edit and remove tasks. A task has a name, a description, and a list of contacts. A task also has a priority level (1 to 5) and a percentage of completion. The application should have a window to display and edit tasks. It should be possible to sort and filter the tasks using expressions based on its fields. For instance, it should be possible to only display tasks which are not completed. Tasks should be visible to all the contacts related to the task.
+
+- **Core05.3 - Reminders**
+	
+	It should be possible to create, edit and remove reminders. The user is notified when the due date of the reminder arrives. A reminder has a name, a description and a time stamp (due date). The application should only allow valid time stamps. The application should list all the existing reminders. When the due date of a reminder is reached the application should automatically display an alert to the user in a popup window. This popup window should display the name, description and due date of the reminder. The window should have two buttons. One button to close the window and the other button to remind again the user in a specific elapse of time (e.g., 5 minutes).
 	
 ### Core06 - Calendar
-	Core06.1 - Calendar Edition (the calendar of the user)
-	Core06.2 - Basic Agenda View
-	Core06.3 - Advanced Agenda View
+
+- **Core06.1 - Calendar**
+
+	The application should have a calendar view to display events. An event has a title, description, time stamp and duration. Events should be displayed in the calendar ordered by their time stamp. It should be possible to create, edit and delete events. The calendar should display all events.
+
+- **Core06.2 - Basic Agenda View**
+	
+	The calendar view should now evolve into an agenda view that may display several calendars. It should be possible to create, edit and remove calendars. Each user can have one or more calendars. Each calendar has a name (e.g., work, birthdays, home, etc.) and a textual description. It should be possible to associate a color to a calendar (events of that calendar are displayed with the color of the calendar). It should be possible to filter what calendars are displayed in the agenda view.	The agenda view can be implemented as a simple list of events (from the calendars). The view should display only actual and future events.
+
+- **Core06.3 - Advanced Agenda View**
+
+	The agenda view should now have a display area divided in 24 slots, one for each hour of the day. Each of the slots should have a small text displaying the hour of the day. The Events should be displayed in a size corresponding to its duration and in the color of the calendar. It should be possible to select the calendars to display in the view. When double clicking in an event its edit window should appear. It should be possible to switch between this new view and the previous view. The view should include buttons to move between days and to select the day to display. 
 	
 ### Core07 - Notes
 	Core06.1 - Notes View
