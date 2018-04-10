@@ -178,23 +178,36 @@ Requirements are classified in three functional areas:
 
 	The application should have a calendar view to display events. An event has a title, description, time stamp and duration. Events should be displayed in the calendar ordered by their time stamp. It should be possible to create, edit and delete events. The calendar should display all events.
 
-- **Core06.2 - Basic Agenda View**
+- **Core06.2 - Basic Agenda**
 	
 	The calendar view should now evolve into an agenda view that may display several calendars. It should be possible to create, edit and remove calendars. Each user can have one or more calendars. Each calendar has a name (e.g., work, birthdays, home, etc.) and a textual description. It should be possible to associate a color to a calendar (events of that calendar are displayed with the color of the calendar). It should be possible to filter what calendars are displayed in the agenda view.	The agenda view can be implemented as a simple list of events (from the calendars). The view should display only actual and future events.
 
-- **Core06.3 - Advanced Agenda View**
+- **Core06.3 - Advanced Agenda**
 
 	The agenda view should now have a display area divided in 24 slots, one for each hour of the day. Each of the slots should have a small text displaying the hour of the day. The Events should be displayed in a size corresponding to its duration and in the color of the calendar. It should be possible to select the calendars to display in the view. When double clicking in an event its edit window should appear. It should be possible to switch between this new view and the previous view. The view should include buttons to move between days and to select the day to display. 
 	
 ### Core07 - Notes
-	Core06.1 - Notes View
-	Core06.2 - Lists
-	Core06.3 - Search and Export Notes
+
+- **Core07.1 - Notes**
+
+	It should be possible to create, edit and remove text notes. A user can have one or more notes. There should be a window to list the textual notes of a user. A text note should be entered as multiline text in which the first line is interpreted as the title of the text note. The time stamp of the creation of the note should be also associated with the text note. The application should maintain the history of modifications for each text note. When a text note is selected, the application should display its history. For each version, the application should display the time stamp and the first line (i.e., the title).
+	
+- **Core07.2 - Lists**
+
+	It should be possible to create, edit and remove list notes. A list note is similar to a textual note but each line is displayed as a check box (that can be checked or unchecked). The first line is also interpreted as the title of the list note. It should be possible to generate a new version of a text note or list based on an old version of it. When this happens, the application should "open" the new version for edit with the same contents of the old version. This is the only "trace" that may eventually link to the old version.
+
+- **Core07.3 - Search and Export Notes**
+
+	It should be possible to search for notes (text and lists) within a time interval. The query expression should allow to search based on the title and/or contents of the notes. It should be possible to use regular expressions to search the contents of the notes that are within the time interval. It should be possible to open a specific note by double clicking on it in the result list. It should be possible to export the search results into a range in an worksheet.
 	
 ### Core08 - Base Extensions
-	Core08.1 - Comments in Cells Extension
-	Core08.2 - Images in Cells Extension
-	Core08.3 - Styles in Cells Extension
+
+- **Core08.1 - Comments in Cells Extension**
+
+- **Core08.2 - Images in Cells Extension**
+
+- **Core08.3 - Styles in Cells Extension**
+
 	
 ## 5.2 IPC
 
