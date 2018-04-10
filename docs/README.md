@@ -53,7 +53,7 @@ This is a table that should display the overall planning of the team. This is si
 | Green  | IPC      | Lang		    | Core		  |	
 | Blue  | Lang	    | Core	  		| IPC    	  |
 
-# 4. Detailed Planning
+# 4. Planning Detail
 
 | Team | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
@@ -98,7 +98,6 @@ Requirements are classified in three functional areas:
 	- Features that are mandatory are required to be developed by the team.  
 	- When a Feature is started it must be completed, i.e., all the three functional increments must be developed.
 	
-
 ## 5.1 Core
 
 ### Core01 - Workbook View (Mandatory)
