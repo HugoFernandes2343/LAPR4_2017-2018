@@ -81,9 +81,9 @@ This is a table that should display the overall planning of the team. This is si
 
 # 5. Requirements
 
-The ultimate goal of this project is to develop the first version of Cleansheets for the Web! As such, it may be wise to study the previous desktop version. You may fork the desktop version available in [Bitbucket](https://bitbucket.org/lei-isep/csheets). Along with the code you may find the documentation (i.e., the manual) in 'manual/doc/lapr4_manual.pdf'. 
+The ultimate goal of this project is to develop the first version of Cleansheets for the Web. As such, it may be wise to study the previous desktop version. You may fork the desktop version available in [Bitbucket](https://bitbucket.org/lei-isep/csheets). Along with the code you may find the documentation (i.e., the manual) in 'manual/doc/lapr4_manual.pdf'. 
 
-The requirements for this new version are similar to the ones of the previous version but some updates have been made by the Product Owner.
+The requirements for this new version are similar to the ones of the previous version but some updates have been made by the Product Owner. You may find the specific requirements for this edition further down in this section. 
 
 In this document four terms that are related to similar concepts are used: feature, functional increment, use case and user story. Although similar they are different. Features refer to the identification of a requirement in this document. Each requirement/feature is further divided into functional increments. Normally, each functional increment depends on the previous increment of the same feature. It can also depend on other features, but that is to be discovered during the normal process of analysis. Functional increments of a feature should be developed in sequence.
 
@@ -94,7 +94,7 @@ Requirements are classified in three functional areas:
 	- **Languages** These are requirements that are related to the formulas of NSheets and other aspects related to languages, parsers and grammars  
 	- **IPC**: These are requirements that explore interprocess communication  
 	
-**Some Rules**  
+**Rules for the Scheduling of Requirements**  
 	- Features that are mandatory are required to be developed by the team.  
 	- When a Feature is started it must be completed, i.e., all the three functional increments must be developed.
 	
