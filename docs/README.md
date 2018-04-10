@@ -104,7 +104,7 @@ Requirements are classified in three functional areas:
 	
 - Core01.1 - Partial Workbook View (only one sheet)
 	
-  Workbooks should be persisted in the server.
+	Workbooks should be persisted in the server.
 	
 - Core01.2 - Complete Workbook View (support for references between sheets)
 	
