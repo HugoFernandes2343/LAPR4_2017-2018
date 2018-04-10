@@ -45,10 +45,12 @@ These are the requirements for the project:
 
 The project uses some tools/frameworks. Some are declared as dependencies in Maven, so they are automatically setup. Others you may need to install as plugins in the IDE. These are the tools/frameworks:  
 - [GWT](http://www.gwtproject.org) (Java to Javascript transpiler and other related tools). You may download and install the GWT SDK although it is not mandatory.  
+  
   - **It is recommended to install the GWT plugin for the IDE**. In Eclipse select "Help/Eclipse Marketplace" and search for "GWT". Install "GWT Eclipse Plugin".     
 - [Plantuml](http://plantuml.com) (for building diagrams). You should download the Plantuml manual as a reference to learn its syntax.  
 - [Antlr4](http://www.antlr.org) (for building parsers and lexers). You may install Antlr plugins for the IDE but they are not mandatory.  
 - [GWTP](http://dev.arcbees.com/gwtp/) (*"The goal of GWTP is to offer an easy-to-use MVP architecture with minimal boilerplate, without compromising GWT's best features"*. GWTP uses dependency injection. See [Guice](https://github.com/google/guice))    
+  
   - **It is recommended to install the GWTP plugin for the IDE**. In Eclipse select "Help/Eclipse Marketplace" and search for "GWTP". Install "GWTP Plugin".      
 - [GWT Material Design](https://github.com/GwtMaterialDesign/gwt-material) (*"A Google Material Design wrapper for GWT"*. You may find further information about material design in [Google Material Design](https://material.io)). These are basically design guidelines that the UI of the application should follow.  
 
