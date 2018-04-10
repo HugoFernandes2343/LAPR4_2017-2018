@@ -104,11 +104,17 @@ Requirements are classified in three functional areas:
 	
 - Core01.1 - Partial Workbook View (only one sheet)
 	
-	Workbooks should be persisted in the server.
+	The workbook page should be related to one of the workbooks displayed in the home page. It should be possible to create a new empty workbook in the home page.
+	Workbooks should be persisted in the server. At this moment a workbook must only have one worksheet.
 	
 - Core01.2 - Complete Workbook View (support for references between sheets)
 	
+	The application should now support complete workbooks, i.e., workbooks with several worksheets. It should be possible to make references between sheets in the formulas.
+	It should also be possible to delete workbooks and update their metadata (name and description).
+	
 - Core01.3 - More than one active Workbook (support for references between workbooks)
+
+	It should be possible to open several workbooks at the same time. It should be possible to make references between workbooks in the formulas.
 	
 ### Core02 - Extensions (Mandatory)
 	Core02.1 - Extension Mechanism supports Cells Decorators and a Configuration section in the Settings Page 
@@ -185,7 +191,7 @@ Requirements are classified in three functional areas:
 ### IPC08 - Online Chat
 	IPC08.1 - Add a Page to allow for exchange text messages between all online users (a public chat room)
 	IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)
-	IPC08.3 - Users should be able to post Images and make mentions of users (they should reveive an email if they are not online)
+	IPC08.3 - Users should be able to post Images and make mentions of users (they should receive an email if they are not online)
 
 ## 5.3 Lang
 
