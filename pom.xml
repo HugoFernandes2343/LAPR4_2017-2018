@@ -15,7 +15,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>NSheets - A CSheets version for the Net built with GWT</name>
+	<name>NSheets - A CSheets version for the Web built with GWT</name>
 	<url>https://bitbucket.org/lei-isep/nsheets</url>
 
 	<properties>

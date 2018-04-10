@@ -102,9 +102,14 @@ Requirements are classified in three functional areas:
 ## 5.1 Core
 
 ### Core01 - Workbook View (Mandatory)
-	Core01.1 - Partial Workbook View (only one sheet)
-	Core01.2 - Complete Workbook View (support for references between sheets)
-	Core01.3 - More than one active Workbook (support for references between workbooks)
+	
+- Core01.1 - Partial Workbook View (only one sheet)
+	
+  Workbooks should be persisted in the server.
+	
+- Core01.2 - Complete Workbook View (support for references between sheets)
+	
+- Core01.3 - More than one active Workbook (support for references between workbooks)
 	
 ### Core02 - Extensions (Mandatory)
 	Core02.1 - Extension Mechanism supports Cells Decorators and a Configuration section in the Settings Page 
