@@ -102,31 +102,31 @@ Requirements are classified in three functional areas:
 
 ### Core01 - Workbook View (Mandatory)
 	
-- Core01.1 - Partial Workbook View (only one sheet)
+- **Core01.1 - Partial Workbook View**
 	
 	The workbook page should be related to one of the workbooks displayed in the home page. It should be possible to create a new empty workbook in the home page.
 	Workbooks should be persisted in the server. At this moment a workbook must only have one worksheet.
 	
-- Core01.2 - Complete Workbook View (support for references between sheets)
+- **Core01.2 - Complete Workbook View**
 	
 	The application should now support complete workbooks, i.e., workbooks with several worksheets. It should be possible to make references between sheets in the formulas.
 	It should also be possible to delete workbooks and update their metadata (name and description).
 	
-- Core01.3 - More than one active Workbook (support for references between workbooks)
+- **Core01.3 - Several Active Workbooks**
 
 	It should be possible to open several workbooks at the same time. It should be possible to make references between workbooks in the formulas.
 	
 ### Core02 - Extensions (Mandatory)
 
-- Core02.1 - Basic Extension Mechanism 
+- **Core02.1 - Basic Extension Mechanism**
 
 	Implement an extension mechanism that can be used to add functionality to the application. For the moment it should support extensions that add cell decorators. The application should also have a new settings page with a specific section for each extension. For testing purposes a new extension should be developed that changes the background color of numeric cells according to its value being positive or negative. The color should be configured in the settings page.
 	
-- Core02.2 - Full Extension Mechanism 
+- **Core02.2 - Full Extension Mechanism**
 	
 	The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
 	
-- Core02.3 - Enable/disable extensions
+- **Core02.3 - Enable/disable Extensions**
 
 	It should be possible to enable and disable extensions. At least one of the extensions of Core08 should be updated to support this feature. 
 
