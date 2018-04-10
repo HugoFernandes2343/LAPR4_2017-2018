@@ -117,9 +117,18 @@ Requirements are classified in three functional areas:
 	It should be possible to open several workbooks at the same time. It should be possible to make references between workbooks in the formulas.
 	
 ### Core02 - Extensions (Mandatory)
-	Core02.1 - Extension Mechanism supports Cells Decorators and a Configuration section in the Settings Page 
-	Core02.2 - Extension Mechanism supports Popup menus in Cells and Menu Options in the Navigator 
-	Core02.3 - Extension Mechanism supports enable/disable extensions
+
+- Core02.1 - Basic Extension Mechanism 
+
+	Implement an extension mechanism that can be used to add functionality to the application. For the moment it should support extensions that add cell decorators. The application should also have a new settings page with a specific section for each extension. For testing purposes a new extension should be developed that changes the background color of numeric cells according to its value being positive or negative. The color should be configured in the settings page.
+	
+- Core02.2 - Full Extension Mechanism 
+	
+	The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
+	
+- Core02.3 - Enable/disable extensions
+
+	It should be possible to enable and disable extensions. At least one of the extensions of Core08 should be updated to support this feature. 
 
 ### Core03 - Sort and Cells Dependencies
 	Core03.1 - Sort Range of Cells
