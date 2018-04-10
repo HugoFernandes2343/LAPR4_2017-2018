@@ -38,8 +38,8 @@ To execute type (in the root folder):
 These are the requirements for the project:  
 - Git  
 - JDK, version 8  
-- Maven
-- Gradle (for generating technical diagrams with Plantuml, such as UML diagrams)
+- Maven  
+- Gradle (for generating technical diagrams with Plantuml, such as UML diagrams)  
 - An IDE (Eclipse or other)  
 - We recommend using a front end for Git, such as Sourcetree
 
