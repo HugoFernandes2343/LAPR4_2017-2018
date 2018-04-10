@@ -204,10 +204,15 @@ Requirements are classified in three functional areas:
 
 - **Core08.1 - Comments in Cells Extension**
 
+	The application should have a new extension to associate textual comments with cells. The functionality should be similar to the one present in the desktop version of Cleansheets.
+
 - **Core08.2 - Images in Cells Extension**
+
+	The application should have a new extension similar to the previous one but regarding the possibility of associating images with cells.
 
 - **Core08.3 - Styles in Cells Extension**
 
+	The application should have a new extension to associate styles with cells. The functionality should be similar to the one present in the desktop version of Cleansheets.
 	
 ## 5.2 IPC
 
