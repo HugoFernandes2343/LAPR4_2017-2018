@@ -126,19 +126,31 @@ Requirements are classified in three functional areas:
 	
 	The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
 	
-- **Core02.3 - Enable/disable Extensions**
+- **Core02.3 - Enable/Disable Extensions**
 
 	It should be possible to enable and disable extensions. At least one of the extensions of Core08 should be updated to support this feature. 
 
-### Core03 - Sort and Cells Dependencies
-	Core03.1 - Sort Range of Cells
-	Core03.2 - Filter Range of Cells
-	Core03.3 - Dependency Tree extension
+### Core03 - Sort and Dependencies in Cells
+
+- **Core03.1 - Sort Range of Cells**
+
+	Sort a range of cells. A range of cells is a rectangular area delimited by an upper left corner and a lower right corner. The sorting is based on one or more columns of the range. It should be possible to select the order: ascending or descending. Interaction with the user should be based on a popup menu. It should be possible to sort data of the following types: numeric, text or date.
+
+- **Core03.2 - Filter Range of Cells**
+
+	It should be possible to filter a range of cells. The filter should be a boolean formula that is applied to each row (and a specific column of the range). If the result is true, the row is visible. If the result is false, the row should become invisible.
+	
+- **Core03.3 - Dependency Tree Extension**
+
+	This feature should implement a similar functionality to the one provided by the "Dependency Tree Extension" in the Desktop version of Cleansheets.	
 
 ### Core04 - Charts
-	Core04.1 - Basic Chart Wizard
-	Core04.2 - Advanced Chart Wizard
-	Core04.3 - Dynamic Charts
+
+- **Core04.1 - Basic Chart Wizard**
+
+- **Core04.2 - Advanced Chart Wizard**
+
+- **Core04.3 - Dynamic Charts**
 	
 ### Core05 - Reminders and Tasks
 	Core05.1 - Reminders
