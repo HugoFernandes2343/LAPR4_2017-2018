@@ -321,15 +321,15 @@ Requirements are classified in three functional areas:
 
 - **IPC08.1 - Public Chat**
 
-	Add a Page to allow for exchange text messages between all online users (a public chat room)
+	Add a Page/View to allow all online users to exchange text messages (i.e., a public chat room).
 	
 - **IPC08.2 - Private Chat**
 
-	Users should be able to create private chat rooms. They should invite other users (by using their email)
+	Users should now be able to create private chat rooms. They should invite other users (by using their email).
 
 - **IPC08.3 - Full Chat**
 
- 	Users should be able to post Images and make mentions of users (they should receive an email if they are not online)
+	Users should be able to post Images and make mentions of other users (they should receive a notification email if they are not online). 
  
 ## 5.3 Lang
 
