@@ -423,19 +423,31 @@ Requirements are classified in three functional areas:
 	
 ### Lang07 - Visual Basic Script Language
 
-- **Lang07.1 - A language with a syntax similar to Visual Basic (no methods)**
+- **Lang07.1 - Base Visual Basic Language**  
 
-- **Lang07.2 - With methods without parameters**
+	The application should support a language inspired in the syntax of [Visual Basic](https://en.wikipedia.org/wiki/Microsoft_Small_Basic). This language is to be an alterntive language to writing "Macros". This feature increment should have the same functionality as Lang06.1 but with the adaptations required by the syntax of the language.
 
-- **Lang07.3 - With methods with parameters**
+- **Lang07.2 - Visual Basic with Methods without Parameters**
+
+	This feature increment should have the same functionality as Lang06.2 but with the adaptations required by the syntax of the language.
+
+- **Lang07.3 - Visual Basic with Methods with parameters**
+
+	This feature increment should have the same functionality as Lang06.3 but with the adaptations required by the syntax of the language.
 
 ### Lang08 - Java Script Language
 
-- **Lang08.1 - A language with a syntax similar to Java (no methods)**
+- **Lang08.1 - Base Javascript Language**
 
-- **Lang08.2 - With methods without parameters**
+	The application should support a language inspired in the syntax of [Javascript](https://en.wikipedia.org/wiki/JavaScript#Syntax). This language is to be an alterntive language to writing "Macros". This feature increment should have the same functionality as Lang06.1 but with the adaptations required by the syntax of the language.
 
-- **Lang08.3 - With methods with parameters**
+- **Lang08.2 - Javascript with Methods without parameters**
+
+	This feature increment should have the same functionality as Lang06.2 but with the adaptations required by the syntax of the language.
+
+- **Lang08.3 - Javascript with Methods with parameters**
+		
+	This feature increment should have the same functionality as Lang06.3 but with the adaptations required by the syntax of the language.	
 		
 # 6. Domain Model
 
