@@ -351,9 +351,16 @@ Requirements are classified in three functional areas:
 
 - **Lang02.1 - Temporary Variables**
 
+	Add support for temporary variables. The name of temporary variables must start with the "_" sign. When a variable is referred in a formula for the first time, it is created. To set the value of a variable it must be used on the left of the assign operator (":="). Temporary variables are variables that only exist in the context of the execution of a formula. Therefore, it is possible for several formulas to use temporary variables with the same name and they will be different instances. Example: "= {_Counter:=1; WhileDo(Eval( "A"&_Counter)> 0; {C1:=C1+Eval("B"&_Counter); _Counter:=_Counter+1 }) }” . In this example, the cell C1 will get the sum of all the values of column B in that the corresponding values in column A are greater than zero.
+
 - **Lang02.2 - Global Variables**
 
+	Add support for global variables. Global variables are variables that exist in the context of the workbook and are persisted with the workbook. The name of global variables must start with the "@" sign. When a variable is referred in a formula for the first time it is created. To set the value of a variable it must be used on the left of the assign operator (":="). Attention should be given to synchronization problems. For an example of the use of global variables see Lang01.3.
+
 - **Lang02.3 - Arrays and Variable Editor**
+
+	Add support for array variables (temporary and global). Any variable can be an array. When accessing a variable only by its name it should be inferred the position 1 of the array. To explicitly access a position in a array variable the position index should be specified inside brackets (following the name of the variable). For example, the formula "=@abc[2]:=123" will set the position 2 of the global variable @abc to the value 123. Each position of an array can be of a different type. For instance it should be possible to have an array with numeric and alphanumeric values.
+	There should also be a window to display and edit the value of global variables. The values that appear in this window should be automatically updated when the variables are updated.
 	
 ### Lang03 - Tools based on Formulas
 	
