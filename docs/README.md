@@ -409,11 +409,17 @@ Requirements are classified in three functional areas:
 
 ### Lang06 - Macros Script Language
 	
-- **Lang06.1 - Macros Language Window**
+- **Lang06.1 - Macros Language**
+
+	The application should have a new option to open a window to edit and execute a single macro. Macros should be designed as a complete new language in the application. However, its initial grammar should be very simple and "inspired" in the language of the formulas. In particular, a macro is simply a sequence of formulas that are executed sequentially. The formulas are the same as those used in the cells. Each line of the macro may contain a formula or be a comment. A comment is a line that starts with the character ";". The lines of the macros must support all that is possible to do with the cell formulas that start with "=" (but in the macros the lines can not start with "="). The macro is to be associated with the current workbook. The result of executing a macro is the result of the last executed instruction. The new window should have an area to edit the text of the macro and button to run the macro. The result of the execution of the macro should also appear in the window.
 
 - **Lang06.2 - Multiple Macros**
 
+	The application should now support multiple macros. Each macro should have a name and should be associated with an workbook. The grammar of the macros should also have a mechanism to support the invocation of macros. It only should be possible to invoke macros of the same workbook. Special attention should be devoted to recursion (i.e., avoiding infinite recursion).
+
 - **Lang06.3 - Macros with Parameters**
+
+	Macros should now have parameters. The syntax for macros should now include an header that should include the name of the macro and its parameters (all parameters should have a distinct name). The parameters should be considered only input parameters. However, it should be possible to freely reference parameters inside the macro. That is to say that, inside a macro, parameters should be used like variables. Macros should support local variables that exist only in the context of a macro. This local variables should have a syntax similar to the one described for the temporary variables of formulas. The invocation of macros must now include the values for its parameters.
 	
 ### Lang07 - Visual Basic Script Language
 
