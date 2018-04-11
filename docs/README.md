@@ -291,12 +291,17 @@ Requirements are classified in three functional areas:
 	
 ### IPC06 - Workbook Sharing				
 
-- **IPC06.1 - A Page that displays all private Workbooks (all workbooks are by default private to the user)**
+- **IPC06.1 - Private Workbooks**
 
-- **IPC06.2 - A Page that displays public Workbooks. In the Workbook View it should be possible to make the Workbook public.**
+	The "Home" page should only display the workbooks that are created by the authenticated user. These workbooks are considered private to the user.  It should be possible to open, rename or delete a selected workbook in this page/view.
+	 
+- **IPC06.2 - Public Workbooks**
 
-- **IPC06.3 - A page with the workbooks that others have shared.**
+	It should be possible to make workbooks public. A public workbook is a workbooks that can be accessed by all users. The "Home" page should now be able to display private and public workbooks. It should be possible to apply filters to this view/page to display only private or public workbooks with specific names or descriptions (the application should accepted regular expressions to filter the workbooks). Public and private workbooks should have some visual distinction (e.g, icon).
 
+- **IPC06.3 - Share Workbooks**
+
+	It should be possible to apply individual sharing options to each workbook. A workbook can now be shared with only specific users. In this context, a public workbooks is simply a workbook that is shared with everyone. Also, the share should have a type: view, read-only, write. View only allows the listing of the name and description of the workbook. Read-only allow to open the workbooks but not to change it. Write should allow full edition.	
 
 ### IPC07 - Collaborative Workbook Editing
 
