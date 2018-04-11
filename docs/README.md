@@ -246,11 +246,17 @@ Requirements are classified in three functional areas:
 		
 ### IPC03 - PDF
 
-- **IPC03.1 - Basic PDF Export (Download)**
+- **IPC03.1 - Basic PDF Export**
 
-- **IPC03.2 - PDF Style Export (Download)**
+	It should be possible to export to PDF an entire workbook, a spreadsheet or a range of cells. The contents should include only the values of the cells (and not its formulas, for instance). The user should be able to select the content to be exported and also if the document should have a table of contents with links to the sections or not. If select, sections/chapters should be generated for each spreadsheet of the workbook. The generated PDF should be downloaded to the user local file system.
 
-- **IPC03.3 - PDF Complete Export (Download)**
+- **IPC03.2 - PDF Style Export**
+
+	The generated PDF should now mimic as far as possible the screen style of the exported contents. For instance, the formatting of the cells in the PDF should be similar to the screen. It should be also possible to configure the type of lines to use for cell delimitation, the type of line and color. This is to be applied when rendering all cells in the PDF. Note that this is different from the style used for cells borders in the screen.
+
+- **IPC03.3 - PDF Complete Export**
+
+	At this level, the export may include all the contents that are persisted with a workbook. For instance, all the following contents should be exported: the source of formulas, comments, images, macros, etc. However, the user should be given the possibility to select the type of contents to include in the PDF. Therefore, it is expected that the PDF includes sections that represent the visual aspect of the exported spreadsheets (as far as possible in a similar manner to how they are displayed on screen) and also new sections to include the contents that do not appear in the cells like, for instance, macros, comments or images. In each of this sections the contents should make references to the cells that are related to them (if they are related to cells).
 	
 ### IPC04 - XML
 
