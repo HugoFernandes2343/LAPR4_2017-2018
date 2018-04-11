@@ -105,11 +105,11 @@ Requirements are classified in three functional areas:
 - **Core01.1 - Partial Workbook View**
 	
 	The workbook page should be related to one of the workbooks displayed in the home page. It should be possible to create a new empty workbook in the home page.
-	Workbooks should be persisted in the server. At this moment a workbook must only have one worksheet.
+	Workbooks should be persisted in the server. At this moment a workbook must only have one spreadsheet.
 	
 - **Core01.2 - Complete Workbook View**
 	
-	The application should now support complete workbooks, i.e., workbooks with several worksheets. It should be possible to make references between sheets in the formulas.
+	The application should now support complete workbooks, i.e., workbooks with several spreadsheets. It should be possible to make references between sheets in the formulas.
 	It should also be possible to delete workbooks and update their metadata (name and description).
 	
 - **Core01.3 - Several Active Workbooks**
@@ -152,7 +152,7 @@ Requirements are classified in three functional areas:
 
 - **Core04.2 - Advanced Chart Wizard**
 
-	The previous bar chart can now be configured to display bars side by side or stacked. The application should also support a new type of charts: pie charts. The wizard should now give the user the possibility to select the type of chart. The charts can now be produced using data that is in a different worksheet of the workbook. The application should now include a window (or page, or section in a page) that displays the list of existing charts and that can be used to enable/disable the display of each chart as well as give access to the chart wizard so that it is possible to change the existing charts. It should also be possible the delete existing charts using this window.
+	The previous bar chart can now be configured to display bars side by side or stacked. The application should also support a new type of charts: pie charts. The wizard should now give the user the possibility to select the type of chart. The charts can now be produced using data that is in a different spreadsheet of the workbook. The application should now include a window (or page, or section in a page) that displays the list of existing charts and that can be used to enable/disable the display of each chart as well as give access to the chart wizard so that it is possible to change the existing charts. It should also be possible the delete existing charts using this window.
 
 - **Core04.3 - Dynamic Charts**
 
@@ -198,7 +198,7 @@ Requirements are classified in three functional areas:
 
 - **Core07.3 - Search and Export Notes**
 
-	It should be possible to search for notes (text and lists) within a time interval. The query expression should allow to search based on the title and/or contents of the notes. It should be possible to use regular expressions to search the contents of the notes that are within the time interval. It should be possible to open a specific note by double clicking on it in the result list. It should be possible to export the search results into a range in an worksheet.
+	It should be possible to search for notes (text and lists) within a time interval. The query expression should allow to search based on the title and/or contents of the notes. It should be possible to use regular expressions to search the contents of the notes that are within the time interval. It should be possible to open a specific note by double clicking on it in the result list. It should be possible to export the search results into a range in an spreadsheet.
 	
 ### Core08 - Base Extensions
 
@@ -224,19 +224,25 @@ Requirements are classified in three functional areas:
 	
 - **IPC01.2 - Register User**
 
-	The application should add the possibility of registering new users. 
+	The application should add the possibility of registering new users. The identification of a user should be based on his email. Each user should have an email, name, nickname and picture (i.e., face photo). The application should display the nickname and photo of the authenticated user in the top of every page. 
 	
 - **IPC01.3 - Security Profile**
 
-	Implement a Security Section in the Profile of the User (to change password, delete account, etc.)
+	The application should now have a new "Profile" page to allow users to manage their accounts. The user should be able to change his information (name, nickname and photo) and also delete the account. The super-user should be able to access all the accounts and be able to enable/disable accounts. When an account is disable its user is not able to authenticate.  
 
-### IPC02 - Search
+### IPC02 - Search and Replace
 
-- **IPC02.1 - Workbook Search**
+- **IPC02.1 - Spreadsheet Search**
+
+	The application should now allow for searching the contents of the active workbook. The new window should be composed of two parts. The first part (upper part of the window) should contain a text box for the user to enter a regular expression to be the basis for the search. This part should also contain a button to launch the search. The second part (lower part of the window) should be used to display the search results (cell coordinates and value or contents). The search should include no only the content of the cell (i.e., the text entered by the user) but also its value (that could have been calculated by a formula).
 
 - **IPC02.2 - Workbook Search and Replace**
 
-- **IPC02.3 - Global Search (Search on All workbooks of the user)**
+	The application should now have a new option for "Search and Replace". This new window should be similar to the search window but with an area to enter the replacing text. When search and replace is launched, when a match is found, the window should display "what" was found, "where" the match has occurred and how it will become after the replace. The user should then confirm the replacement or select next (to continue the search). The window should include a button to apply the replacing to all the matches without asking each time. Similarly to the search only option, this option should also have parameters to refine the search, for instance, what type of cells to include in the search (or if it should include formulas or comments). "Search" and "Search and Replace" should should include contents of all the spreadsheets of the active workbook. 
+
+- **IPC02.3 - Global Search/Replace**
+
+	The application should now support "Search" and "Search and Replace" to be applied for all the workbooks of the user (may they be active/open or not). It should be possible to apply the search to workbooks which name matches a specific regular expression.  
 		
 ### IPC03 - PDF
 
