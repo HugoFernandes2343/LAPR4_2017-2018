@@ -95,7 +95,10 @@ Requirements are classified in three functional areas:
 	- **IPC**: These are requirements that explore interprocess communication  
 	
 **Rules for the Scheduling of Requirements**  
-	- Features that are mandatory are required to be developed by the team.  
+	- The project is a team work. Important design decisions (e.g., with impact in the architecture or futures developments) must be discussed and taken as a group.  
+	- Each Feature Increment must is to be developed individually.  
+	- Features that are mandatory are required to be developed.  
+	- Some features may be dependent on others. Students must make sure that dependent features are ready and, if not, develop the required functionality.    
 	- When a Feature is started it must be completed, i.e., all the three functional increments must be developed.
 	
 ## 5.1 Core
@@ -274,11 +277,17 @@ Requirements are classified in three functional areas:
 	
 ### IPC05 - CLS/CSV Persistence
 
-- **IPC05.1 - Export to CSV (Download)**
+- **IPC05.1 - Export to CSV**
 
-- **IPC05.2 - Import/Export using the same native format as CSheets (Download/Upload)**
+	It should be possible to export the contents of an workbook, spreadsheet or part of a spreadsheet to a CSV file. As we want to optimize as much as possible the process the solution should not rely on any third party library. The application should have a window/page to configure the CSV format (e.g, field separator or string delimiter). The export should only include the value of the cells. The generated CSV should be downloaded to the user local file system.
 
-- **IPC05.3 - Import/Export using the same native format as CSheets and CSV**
+- **IPC05.2 - Export to CLS**
+
+	It should be possible to export an workbook to a CLS file. The CLS format is the native format used by the desktop version of Cleansheets. It should be possible to open the exported CLS file in the desktop version of Cleansheets. The generated CLS should be downloaded to the user local file system.
+
+- **IPC05.3 - Import/Export CSV and CLS**
+
+	It should be possible to import and export in both formats: CLS and CSV.
 	
 ### IPC06 - Workbook Sharing				
 
