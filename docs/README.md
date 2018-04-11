@@ -305,20 +305,32 @@ Requirements are classified in three functional areas:
 
 ### IPC07 - Collaborative Workbook Editing
 
-- **IPC07.1 - Concurrent editions of the same Workbook should display updates in realtime**
+- **IPC07.1 - Base Concurrent Edition**
 
-- **IPC07.2 - The Workbook View should display other users that are editing the same Workbook and display the cells that other users are editing.**
+	Concurrent editions of the same Workbook should display updates "as much as possible" in realtime. 
 
-- **IPC07.3 - The Workbook View should have an area to allow users to exchange small text messages**
+- **IPC07.2 - Full Concurrent Edition**
+
+	The Workbook View should display other users that are editing the same workbook and have a visual identification for the cells that other users are editing.
+	
+- **IPC07.3 - Message Exchange**
+
+	The Workbook View should have an area to allow collaborate users to exchange small text messages.
 
 ### IPC08 - Online Chat
 
-- **IPC08.1 - Add a Page to allow for exchange text messages between all online users (a public chat room)**
+- **IPC08.1 - Public Chat**
 
-- **IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)**
+	Add a Page to allow for exchange text messages between all online users (a public chat room)
+	
+- **IPC08.2 - Private Chat**
 
-- **IPC08.3 - Users should be able to post Images and make mentions of users (they should receive an email if they are not online)**
+	Users should be able to create private chat rooms. They should invite other users (by using their email)
 
+- **IPC08.3 - Full Chat**
+
+ 	Users should be able to post Images and make mentions of users (they should receive an email if they are not online)
+ 
 ## 5.3 Lang
 
 ### Lang01 - Formulas (Mandatory)
