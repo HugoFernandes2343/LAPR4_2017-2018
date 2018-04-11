@@ -260,11 +260,17 @@ Requirements are classified in three functional areas:
 	
 ### IPC04 - XML
 
-- **IPC04.1 - Export XML (Download)**
+- **IPC04.1 - Export XML**
 
-- **IPC04.2 - Import XML (Upload)**
+	It should be possible to export the contents of an workbook, spreadsheet or part of a spreadsheet to a XML file. As we want to optimize as much as possible the process the solution should not rely on any third party library. The application should have a window/page to configure the XML tags to use for each type of element. The export should only include the value of the cells. The generated XML should be downloaded to the user local file system.
+
+- **IPC04.2 - Import XML**
+	
+	It should be possible to import (i.e., upload) data from an XML file (this operation is the "inverse" of the previous one). Depending on the contents of the XML file, the data from the file can replace the contents of the active workbook, a spreadsheet or a range of a spreadsheet. 
 
 - **IPC04.3 - Full XML Import/Export**
+
+	The previous options should now include all the persisting elements of the workbooks (i.e., all the contents that are normally persisted with the workbook, such as macros, formatting styles, comments, etc.). The import should now ask the user if the file contents should replace or append the existing workbook contents.
 	
 ### IPC05 - CLS/CSV Persistence
 
