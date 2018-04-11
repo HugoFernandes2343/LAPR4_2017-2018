@@ -216,96 +216,145 @@ Requirements are classified in three functional areas:
 	
 ## 5.2 IPC
 
-### IPC01 - Register and Login (Mandatory)
+### IPC01 - Security (Mandatory)
 
-- **IPC01.1 - Gatekeeper**
+- **IPC01.1 - User Authentication**
 
-	IPC01.1 - Protect all the Pages (Except About) with a Login Page (i.e., Gatekeepers in GWTP). Define some hard-coded users to use for authentication. Define a super-user that is able to access **everything**
+	All the pages of the application should require an authenticated user (except the "About" page). The application should have a "Login" page (Hint: Gatekeepers in GWTP). Some hard-coded users should be defined to be initially used for authentication. There should also exist a super-user that is able to access **everything**.
 	
-- **IPC01.2 - Implement a Register Page**
+- **IPC01.2 - Register User**
+
+	The application should add the possibility of registering new users. 
 	
 - **IPC01.3 - Security Profile**
 
 	Implement a Security Section in the Profile of the User (to change password, delete account, etc.)
 
 ### IPC02 - Search
-	IPC02.1 - Workbook Search 
-	IPC02.2 - Workbook Search and Replace
-	IPC02.3 - Global Search (Search on All workbooks of the user)
+
+- **IPC02.1 - Workbook Search**
+
+- **IPC02.2 - Workbook Search and Replace**
+
+- **IPC02.3 - Global Search (Search on All workbooks of the user)**
 		
 ### IPC03 - PDF
-	IPC03.1 - Basic PDF Export (Download)
-	IPC03.2 - PDF Style Export (Download)
-	IPC03.3 - PDF Complete Export (Download)
+
+- **IPC03.1 - Basic PDF Export (Download)**
+
+- **IPC03.2 - PDF Style Export (Download)**
+
+- **IPC03.3 - PDF Complete Export (Download)**
 	
 ### IPC04 - XML
-	IPC04.1 - Export XML (Download)
-	IPC04.2 - Import XML (Upload)
-	IPC04.3 - Full XML Import/Export
+
+- **IPC04.1 - Export XML (Download)**
+
+- **IPC04.2 - Import XML (Upload)**
+
+- **IPC04.3 - Full XML Import/Export**
 	
 ### IPC05 - CLS/CSV Persistence
-	IPC05.1 - Export to CSV (Download)
-	IPC05.2 - Import/Export using the same native format as CSheets (Download/Upload)
-	IPC05.3 - Import/Export using the same native format as CSheets and CSV
+
+- **IPC05.1 - Export to CSV (Download)**
+
+- **IPC05.2 - Import/Export using the same native format as CSheets (Download/Upload)**
+
+- **IPC05.3 - Import/Export using the same native format as CSheets and CSV**
 	
 ### IPC06 - Workbook Sharing				
-	IPC06.1 - A Page that displays all private Workbooks (all workbooks are by default private to the user)
-	IPC06.2 - A Page that displays public Workbooks. In the Workbook View it should be possible to make the Workbook public.
-	IPC06.3 - A page with the workbooks that others have shared.
+
+- **IPC06.1 - A Page that displays all private Workbooks (all workbooks are by default private to the user)**
+
+- **IPC06.2 - A Page that displays public Workbooks. In the Workbook View it should be possible to make the Workbook public.**
+
+- **IPC06.3 - A page with the workbooks that others have shared.**
+
 
 ### IPC07 - Collaborative Workbook Editing
-	IPC07.1 - Concurrent editions of the same Workbook should display updates in realtime
-	IPC07.2 - The Workbook View should display other users that are editing the same Workbook and display the cells that other users are editing.
-	IPC07.3 - The Workbook View should have an area to allow users to exchange small text messages 
+
+- **IPC07.1 - Concurrent editions of the same Workbook should display updates in realtime**
+
+- **IPC07.2 - The Workbook View should display other users that are editing the same Workbook and display the cells that other users are editing.**
+
+- **IPC07.3 - The Workbook View should have an area to allow users to exchange small text messages**
 
 ### IPC08 - Online Chat
-	IPC08.1 - Add a Page to allow for exchange text messages between all online users (a public chat room)
-	IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)
-	IPC08.3 - Users should be able to post Images and make mentions of users (they should receive an email if they are not online)
+
+- **IPC08.1 - Add a Page to allow for exchange text messages between all online users (a public chat room)**
+
+- **IPC08.2 - Users should be able to create private chat rooms. They should invite other users (by using their email)**
+
+- **IPC08.3 - Users should be able to post Images and make mentions of users (they should receive an email if they are not online)**
 
 ## 5.3 Lang
 
 ### Lang01 - Formulas (Mandatory)
-	Lang01.1 - Block of Instructions
-	Lang01.2 - Monetary Language
-	Lang01.3 - Eval and While Loops
+
+- **Lang01.1 - Block of Instructions**
+
+- **Lang01.2 - Monetary Language**
+
+- **Lang01.3 - Eval and While Loops**
 
 ### Lang02 - Variables
-	Lang02.1 - Temporary Variables
-	Lang02.2 - Global Variables
-	Lang02.3 - Arrays and Variable Editor
+
+- **Lang02.1 - Temporary Variables**
+
+- **Lang02.2 - Global Variables**
+
+- **Lang02.3 - Arrays and Variable Editor**
 	
 ### Lang03 - Tools based on Formulas
-	Lang03.1 - Conditional Formating of Cells
-	Lang03.2 - Conditional Formating of Ranges
-	Lang03.3 - Tables and Filters
+	
+- **Lang03.1 - Conditional Formating of Cells**
+
+- **Lang03.2 - Conditional Formating of Ranges**
+
+- **Lang03.3 - Tables and Filters**
+
+	*esta duplicado em core?*
 	
 ### Lang04 - Function Wizard
-	Lang04.1 - Insert Function Basic Wizard
-	Lang04.2 - Insert Function Intermediate Wizard
-	Lang04.3 - Insert Function Advanced Wizard
+	
+- **Lang04.1 - Insert Function Basic Wizard**
+
+- **Lang04.2 - Insert Function Intermediate Wizard**
+
+- **Lang04.3 - Insert Function Advanced Wizard**
 		
 ### Lang05 - Forms
-	Lang05.1 - Forms Editor
-	Lang05.2 - Forms and Variables
-	Lang05.3 - Advanced Forms
-		
+
+- **Lang05.1 - Forms Editor**
+
+- **Lang05.2 - Forms and Variables**
+
+- **Lang05.3 - Advanced Forms**
+
 ### Lang06 - Macros Script Language
-	Lang06.1 - Macros Language Window
-	Lang06.2 - Multiple Macros
-	Lang06.3 - Macros with Parameters
+	
+- **Lang06.1 - Macros Language Window**
+
+- **Lang06.2 - Multiple Macros**
+
+- **Lang06.3 - Macros with Parameters**
 	
 ### Lang07 - Visual Basic Script Language
-	Lang07.1 - A language with a syntax similar to Visual Basic (no methods)
-	Lang07.2 - With methods without parameters
-	Lang07.3 - With methods with parameters
+
+- **Lang07.1 - A language with a syntax similar to Visual Basic (no methods)**
+
+- **Lang07.2 - With methods without parameters**
+
+- **Lang07.3 - With methods with parameters**
 
 ### Lang08 - Java Script Language
-	Lang08.1 - A language with a syntax similar to Java (no methods)
-	Lang08.2 - With methods without parameters
-	Lang08.3 - With methods with parameters
-		
 
+- **Lang08.1 - A language with a syntax similar to Java (no methods)**
+
+- **Lang08.2 - With methods without parameters**
+
+- **Lang08.3 - With methods with parameters**
+		
 # 6. Domain Model
 
 **Core**
