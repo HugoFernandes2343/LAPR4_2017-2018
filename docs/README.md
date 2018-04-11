@@ -366,12 +366,16 @@ Requirements are classified in three functional areas:
 	
 - **Lang03.1 - Conditional Formating of Cells**
 
+	Update the "style" extension so that it can be used for the conditional formatting of cells based on the result of the execution of formulas. For the style of a cell to be conditional it must have an associated formula and two formatting styles. One of the styles is applied when the formula evaluates to true and the other when it evaluates to false. The editing of these settings should be done in a window.
+
 - **Lang03.2 - Conditional Formating of Ranges**
+
+	Enable the application to apply conditional formatting to a range of cells (also in the style extension). The idea is that a single formula could be applied to all the cells in the range (one at a time) in order to evaluate what style to apply. For that to be possible it is necessary to add a new special kind of variable to the formulas that represents the "current" cell. This special variable could be named "_cell". For instance, the formula "=_cell >= 10" could be associated to a range format. In this case, the application would evaluate the formula for each cell in the range and apply the formatting style in accordance with the result of the formula. In this example, all cell in the range with a value greater or equal to 10 would receive the style associated with the true result and the others the style associated with the false result. The window for editing the settings should also be updated so that it is clear if the format is for a single cell or for a range. Within the window it should also be possible to remove existing conditional style formatting.
 
 - **Lang03.3 - Tables and Filters**
 
-	*esta duplicado em core?*
-	
+	Add new functionality to support the concept of "tables". A table is essentially a range of cells. The first row of this range of cells can be used as header of the table columns (the contents of these cells becomes the name of the columns). Once a table is defined it should be possible to filter its contents by using formulas. A formula that is used as a filter of a table is applied to each row of the table. If the result is true, the row is visible, if the result is false, the row should become invisible. To facilitate the writing of such formulas a new special variable should be added to formulas. This new variable should be an array variable that represents the value of the columns of the table for the current row. Lets consider, for instance, that the new variable is called "_col". For example, it should be possible to use "_col[2]" to get the value of column 2 for the current row. It should also be possible to use the name of the column instead of the index. For instance, if the header of column 2 is "cidade" it should be possible the get the value of this column for the current row by using "_col["cidade"]". An example of a filter for a table could be: "=or(_col["idade"]>10; _col[3]<123)". This extension should have a window that should be used to edit tables and its filters.
+		
 ### Lang04 - Function Wizard
 	
 - **Lang04.1 - Insert Function Basic Wizard**
