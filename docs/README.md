@@ -380,17 +380,32 @@ Requirements are classified in three functional areas:
 	
 - **Lang04.1 - Insert Function Basic Wizard**
 
+	The application should have an option to launch a wizard to aid the user in calling functions in formulas. This new window should display a list of possible functions. The construction of this list should be made dynamically based on the self-description of the functions. When a function is selected in the list its syntax should be displayed in a edit box. The "syntax" should include the name of the function and its parameters. For example, for the factorial function, that only has one parameter, the following text should be displayed in the edit box "= FACT(Number)". The window should also contain an area to display a text describing the selected function (i.e., help text). The window should have an "Apply" and a "Cancel" button. If the user selects the "Apply" button the text of the syntax of the function should be written in the "formula bar".
+
 - **Lang04.2 - Insert Function Intermediate Wizard**
 
+	The wizard window should display an edit box for each parameter of the selected function. The user should use these edit boxes to enter the values for each parameter of the function. As the user enters the values the wizard should display (in a new region of the window) the result of the execution of the formula or a message explaining the problem. The function list should now include also the operators as well as the functions that are dynamically loaded from java.lang.Math. The wizard should be now launched from an icon or button located in the "formula bar".
+
 - **Lang04.3 - Insert Function Advanced Wizard**
+
+	The wizard should now have an edit box where the formula is gradually constructed. The user should be able to edit the formula text freely. The functions or operators (and the values of its parameters/operands) selected from the list should now be inserted in the position of the cursor in the new edit box. The wizard should continue to have an area to display the evaluation of the formula (that should be produced dynamically, as the user edits the formula). The wizard should also have a new window that should display the structure of the formula expression like an abstract syntax tree (i.e., the structure resulting from the formula compilation). When the user clicks a tree element its respective text in the edit box should appear highlighted.
 		
 ### Lang05 - Forms
 
 - **Lang05.1 - Forms Editor**
 
+	The application should have a new option to launch a window for editing a form. A Form is a window that is designed by the end user and is used for interacting with the user (input and output). The new window should support the creation and testing of a Form. Forms should be very simple. A Form should be composed of rows, each row can be empty or have one or two visual widgets. The supported visual widgets are: button (to invoke actions); edit box (to enter data) and static text box (to display data). It should be possible to set the core properties of these widgets (like the text to display in a static text box, for instance). In the edit form window it should be possible to: add a new row; remove an existing row; edit an existing row; "play" the form and close the edit form window. The "play" button is for testing the appearance of a form during its design (see example in the next Figure). At the moment it is only required to support a single Form for each workbook. Macros and formulas should have a new function that can be used to display the form of the current workbook. Forms should have an icon or button to close the form. When the form is closed the function (in macros or formulas) who call it returns.
+	
+![Form](form1.png)	
+
 - **Lang05.2 - Forms and Variables**
 
+	In order for forms to become useful in formulas or macros it is necessary to associate data with the contents of the visual widgets. The mechanism used for that will be the binding of variables (macros or formulas variables) with the contents of the visual widgets. One simple way to achieve this is by using temporary variables (from macros and formulas). The matching between widgets and variables should be done by associating the ones with the same name. When displaying a form (in the context of a macro or a formula), if the temporary variables with the same name of widgets exist, them they are used to set the content of the widgets. For widgets for which no temporary variables with the same name are found then new temporary variables should be created. The user should be able to change the contents of edit boxes. When closing the form window the contents of the temporary variables should be updated from the contents of the corresponding visual widgets.
+
 - **Lang05.3 - Advanced Forms**
+
+	It should now be possible to create multiple forms for each workbook. To distinguish Forms, each one should have a unique name (within its workbook). The function (in macros and formulas) that displays the forms should now have one parameter that is used to pass the name of the form to display (since there can be several forms for each workbook).
+	When displaying a form it should be possible specify if it should be read only (i.e., it will display the value of the variables but does not allow any update) or writable (in this case the form should allow for the user to modify the values that are displayed). Writable forms should have a new "Update" button. When the user clicks in the update button the form closes and the current values of the widgets update the corresponding variables. If the user closes the form window by any other means the variables should not be updated. It should be also possible to specify the "mode" of the form window (when invoking the display of a form). Two modes are allowed: modal and modeless. A modal form window is a window that will block the macro or formula that call it until the user closes the form window. The macro or formula will only resume execution when the form is closed. A modeless for window is a window that will no block the calling macro or formula, i.e., the macro or formula will continue its execution in parallel with the display of the form. Modeless forms do not return anything. Model forms should return the name of the button that was used to close the window.
 
 ### Lang06 - Macros Script Language
 	
