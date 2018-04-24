@@ -37,7 +37,7 @@
 
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 	</properties>
-
+	
 	<repositories>
 		<repository>
 			<id>central</id>
