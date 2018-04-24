@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>eapli.framework.domain.AggregateRoot</OriginalElement>
+  <nodes>
+    <node x="4.0" y="345.0">eapli.framework.domain.DomainEntity</node>
+    <node x="57.5" y="124.0">eapli.framework.domain.DomainEvent</node>
+    <node x="521.0" y="80.0">eapli.framework.domain.Money</node>
+    <node x="257.0" y="113.0">eapli.framework.domain.Range</node>
+    <node x="324.5" y="0.0">eapli.framework.domain.ValueObject</node>
+    <node x="0.0" y="425.0">eapli.framework.domain.AggregateRoot</node>
+    <node x="252.0" y="248.0">eapli.framework.domain.TimePeriod</node>
+    <node x="146.0" y="500.0">eapli.framework.domain.DTOable</node>
+    <node x="0.0" y="500.0">eapli.framework.domain.Repository</node>
+    <node x="172.0" y="345.0">eapli.framework.domain.Authorisable</node>
+    <node x="331.0" y="345.0">eapli.framework.domain.Identifiable</node>
+    <node x="0.0" y="248.0">eapli.framework.domain.DomainEventBase</node>
+    <node x="279.0" y="500.0">eapli.framework.domain.Factory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="eapli.framework.domain.DomainEventBase" target="eapli.framework.domain.DomainEvent">
+      <point x="0.0" y="-26.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.domain.AggregateRoot" target="eapli.framework.domain.DomainEntity">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.domain.Money" target="eapli.framework.domain.ValueObject">
+      <point x="0.0" y="-59.0" />
+      <point x="604.5" y="55.0" />
+      <point x="415.33333333333337" y="55.0" />
+      <point x="36.33333333333337" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.domain.Range" target="eapli.framework.domain.ValueObject">
+      <point x="0.0" y="-26.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.domain.TimePeriod" target="eapli.framework.domain.Range">
+      <point x="0.0" y="-26.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="eapli.framework.domain.DomainEvent" target="eapli.framework.domain.ValueObject">
+      <point x="0.0" y="-15.0" />
+      <point x="116.0" y="55.0" />
+      <point x="342.6666666666667" y="55.0" />
+      <point x="-36.333333333333314" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="233.0" y="286.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

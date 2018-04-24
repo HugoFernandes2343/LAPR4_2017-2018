@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository</OriginalElement>
+  <nodes>
+    <node x="216.08333333333334" y="160.0">eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository</node>
+    <node x="125.140625" y="0.0">eapli.framework.persistence.repositories.Repository</node>
+    <node x="8.0" y="160.0">eapli.framework.persistence.repositories.impl.jpa.JpaRepository</node>
+    <node x="20.026041666666657" y="80.0">eapli.framework.persistence.repositories.IterableRepository</node>
+    <node x="33.0" y="315.0">eapli.framework.persistence.activerecord.ActiveRecord</node>
+    <node x="188.02604166666666" y="80.0">eapli.framework.persistence.repositories.DeleteableRepository</node>
+    <node x="377.0" y="315.0">eapli.framework.persistence.activerecord.Identity</node>
+    <node x="0.0" y="470.0">eapli.framework.persistence.activerecord.Finder</node>
+    <node x="0.0" y="395.0">eapli.framework.persistence.activerecord.DeleteableActiveRecord</node>
+    <node x="0.0" y="240.0">eapli.framework.persistence.repositories.impl.jpa.JpaRepository.JpaPagedIterator</node>
+    <node x="227.0" y="315.0">eapli.framework.persistence.activerecord.Identifiable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="eapli.framework.persistence.repositories.impl.jpa.JpaRepository" target="eapli.framework.persistence.repositories.IterableRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="68.0" y="140.0" />
+      <point x="57.02604166666666" y="140.0" />
+      <point x="-37.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="54.333333333333314" y="-15.0" />
+      <point x="351.91666666666663" y="140.0" />
+      <point x="368.390625" y="140.0" />
+      <point x="368.390625" y="50.0" />
+      <point x="213.515625" y="50.0" />
+      <point x="37.875" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.jpa.JpaRepository.JpaPagedIterator" target="eapli.framework.persistence.repositories.impl.jpa.JpaRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository" target="eapli.framework.persistence.repositories.IterableRepository">
+      <point x="-54.33333333333334" y="-15.0" />
+      <point x="243.25" y="130.0" />
+      <point x="131.02604166666666" y="130.0" />
+      <point x="37.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.IterableRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="0.0" y="-15.0" />
+      <point x="94.02604166666666" y="60.0" />
+      <point x="163.015625" y="60.0" />
+      <point x="-12.625" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.activerecord.DeleteableActiveRecord" target="eapli.framework.persistence.activerecord.ActiveRecord">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.DeleteableRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="0.0" y="-15.0" />
+      <point x="271.52604166666663" y="60.0" />
+      <point x="188.265625" y="60.0" />
+      <point x="12.625" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.jpa.JpaRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="-40.0" y="-15.0" />
+      <point x="28.0" y="140.0" />
+      <point x="6.734375" y="140.0" />
+      <point x="6.734375" y="50.0" />
+      <point x="137.765625" y="50.0" />
+      <point x="-37.875" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository" target="eapli.framework.persistence.repositories.DeleteableRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="297.58333333333337" y="140.0" />
+      <point x="313.27604166666663" y="140.0" />
+      <point x="41.75" y="15.0" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.impl.jpa.JpaRepository" target="eapli.framework.persistence.repositories.DeleteableRepository">
+      <point x="40.0" y="-15.0" />
+      <point x="108.0" y="140.0" />
+      <point x="229.77604166666666" y="140.0" />
+      <point x="-41.75" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="199.0" y="95.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
