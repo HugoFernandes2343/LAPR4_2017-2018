@@ -13,7 +13,7 @@ Similarly to the desktop version, this new web version will use Java as the base
 
 # 2. Quick Startup
 
-This project uses Maven.
+This project uses Maven. It will run the web application using Tomcat.
 
 The default Maven lifecycle comprises of the following phases:
 
@@ -27,11 +27,24 @@ The default Maven lifecycle comprises of the following phases:
 
 To build type (in the root folder):
 
-	mvn clean verify
+	mvn clean install
 
 To execute type (in the root folder):
 
-	mvn gwt:run
+	mvn tomcat7:run-war-only
+
+Your application is now deployed at [http://127.0.0.1:8082/sheets](http://127.0.0.1:8082/sheets).
+	
+To start GWT Dev Mode, type in another shell/terminal/console:
+
+	mvn gwt:run -pl nsheets
+
+On success, the GWT Dev Mode window opens. Click *Launch Default Browser* to open it in GWT Dev Mode.
+
+With GWT Dev Mode You can now make changes to your client Java code. Changes become immediately available as soon as you reloaded your page in the browser.
+
+Note: You should always do a "mvn clean" before doing a production compile so you can be sure you start from a clean state without anything Dev Mode  might has produced.
+	
 	
 # 3. Requirements
 	

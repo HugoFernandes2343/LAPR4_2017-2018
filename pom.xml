@@ -11,11 +11,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.isep.nsheets</groupId>
-	<artifactId>nsheets</artifactId>
+	<artifactId>nsheets-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
-	<name>NSheets - A CSheets version for the Web built with GWT</name>
+    <modules>
+        <module>server</module>
+        <module>shared</module>
+        <module>nsheets</module>
+    </modules>
+
+	<name>NSheets - Parent</name>
 	<url>https://bitbucket.org/lei-isep/nsheets</url>
 
 	<properties>
@@ -32,10 +38,15 @@
 		<!-- maven -->
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<target.jdk>1.8</target.jdk>
 
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		
+		<tomcat.webport>8082</tomcat.webport>
+        <tomcat.ajpport>8182</tomcat.ajpport>
+        <tomcat.context>/nsheets</tomcat.context>
 	</properties>
 	
 	<repositories>
@@ -61,23 +72,7 @@
 
 	<build>
 
-		<!-- Para instalar as dependencias do Smart GWT no repositorio local do 
-			Maven fazer: mvn isc:install -Dproduct=SMARTGWT -Dlicense=LGPL -DbuildNumber=6.1p 
-			-DbuildDate=2018-02-28 -Dworkdir=/tmp -->
-
-		<!-- For Smart GWT -->
-		<!-- To define the plugin version in your parent POM -->
-		<!-- <pluginManagement> <plugins> <plugin> <groupId>com.isomorphic</groupId> 
-			<artifactId>isc-maven-plugin</artifactId> <version>1.2.1</version> </plugin> 
-			</plugins> </pluginManagement> -->
-
-		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
+        <defaultGoal>clean install  tomcat7:run-war-only</defaultGoal>
 
 		<plugins>
 
@@ -103,10 +98,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
-			<!-- Smart GWT -->
-			<!-- <plugin> <groupId>com.isomorphic</groupId> <artifactId>isc-maven-plugin</artifactId> 
-				<version>1.2.1</version> </plugin> -->
 
 			<!-- Maven Antlr4 plugin -->
 			<plugin>
@@ -147,36 +138,31 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>${gwt.version}</version>
-				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
-					documentation at codehaus.org -->
-				<configuration>
-					<!-- <strict>true</strict> -->
-
-					<testTimeOut>180</testTimeOut>
-					<mode>htmlunit</mode>
-					<includes>**/*GwtTest.java</includes>
-
-					<copyWebapp>true</copyWebapp>
-					<hostedWebapp>${webappDirectory}</hostedWebapp>
-
-					<extraJvmArgs>-Xmx1g</extraJvmArgs>
-					<logLevel>INFO</logLevel>
-					<style>${gwt.style}</style>
-					<compileReport>true</compileReport>
-					<compilerMetrics>true</compilerMetrics>
-
-					<runTarget>index.html</runTarget>
-					<module>pt.isep.nsheets.nsheets</module>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
+			
+			<!-- Tomcat Maven Plugin -->
+			<plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <path>${tomcat.context}</path>
+                    <port>${tomcat.webport}</port>
+                    <ajpPort>${tomcat.ajpport}</ajpPort>
+                    <systemProperties>
+                        <JAVA_OPTS>-XX:MaxPermSize=256m</JAVA_OPTS>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>                
+            </plugin>            
 		</plugins>
 	</build>
 
@@ -281,10 +267,6 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- SmartGWT -->
-		<!-- <dependency> <groupId>com.isomorphic.smartgwt.lgpl</groupId> <artifactId>smartgwt-lgpl</artifactId> 
-			<version>${smartgwt.version}</version> </dependency> -->
 
 		<!-- ANTLR4-GWT -->
 		<dependency>
