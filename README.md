@@ -43,9 +43,34 @@ On success, the GWT Dev Mode window opens. Click *Launch Default Browser* to ope
 
 With GWT Dev Mode You can now make changes to your client Java code. Changes become immediately available as soon as you reloaded your page in the browser.
 
-Note: You should always do a "mvn clean" before doing a production compile so you can be sure you start from a clean state without anything Dev Mode  might has produced.
+**Important Note**: You should always do a "mvn clean" before doing a production compile so you can be sure you start from a clean state without anything Dev Mode  might has produced.
+
+###How to Debug in Eclipse###
 	
-	
+You should start by opening the project in Eclipse. Select "File/Import...", then "Existing Projects into Workspace" and then select the folder where the clone of the project is located .
+
+**Debug the server code**
+
+To debug the server code (i.e., java code that is not transpiled to javascript and runs in the server) you should use mvnDebug instead of mvn when starting tomcat. For example: 
+
+	mvnDebug tomcat7:run-war-only
+
+In Eclipse create a new debug configuration using "Run/Debug Configurations..." and then create a new "Remote Java Application" configuration. Select "nsheets" for project and leave the other fields unchanged. You may now click "Debug".  
+
+You may set breakpoints in the server code of the project and Eclipse will stop in that location.
+
+**Debug the client code**
+
+Make sure you have started Tomcat either using mvn or mvnDebug (if you also wish to debug the server code).
+
+Then, in another terminal/console, make sure you start GWT Dev Mode. For example:
+
+	mvn gwt:run -pl nsheets
+
+In Eclipse create a new debug configuration using "Run/Debug Configurations..." and then create a new "Launch Chrome" configuration. In the url enter "http://127.0.0.1:8082/nsheets/" and in the project select "nsheets". Finish by clicking in the "Debug" button to start the debug session.
+
+You may set breakpoints in the client code of the project and Eclipse will stop in that location.
+		
 # 3. Requirements
 	
 These are the requirements for the project:  
