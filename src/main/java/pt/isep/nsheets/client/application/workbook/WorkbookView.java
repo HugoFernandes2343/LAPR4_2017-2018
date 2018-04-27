@@ -33,14 +33,16 @@ import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.table.MaterialDataTable;
-import pt.isep.nsheets.client.ui.NavigatedView;
+// import pt.isep.nsheets.client.ui.NavigatedView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
 
+import com.gwtplatform.mvp.client.ViewImpl;
+
 //public class HomeView extends ViewImpl implements HomePresenter.MyView {
-public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
+public class WorkbookView extends ViewImpl /*NavigatedView*/ implements WorkbookPresenter.MyView {
 
 //	public static class CustomCategoryComponent extends CategoryComponent {
 //		public CustomCategoryComponent(String category) {
