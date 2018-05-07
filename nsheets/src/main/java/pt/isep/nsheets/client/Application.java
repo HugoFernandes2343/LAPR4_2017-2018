@@ -25,16 +25,10 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.PreBootstrapper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-
-import pt.isep.nsheets.client.place.NameTokens;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Application implements Bootstrapper {
-
-	// private final Logger logger = Logger.getLogger(Application.class.getName());
 
 	public static class PreApplicationImpl implements PreBootstrapper {
 		private final Logger logger = Logger.getLogger(PreApplicationImpl.class.getName());
@@ -50,13 +44,9 @@ public class Application implements Bootstrapper {
 	}
 
 	private final PlaceManager placeManager;
-	// private final SecurityDelegate securityDelegate;
 
 	@Inject
-	public Application(
-			// SecurityDelegate securityDelegate,
-			PlaceManager placeManager) {
-		// this.securityDelegate = securityDelegate;
+	public Application(PlaceManager placeManager) {
 		this.placeManager = placeManager;
 	}
 

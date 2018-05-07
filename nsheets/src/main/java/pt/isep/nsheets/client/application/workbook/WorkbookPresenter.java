@@ -50,27 +50,16 @@ public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, Workb
 
 	@Inject
 	WorkbookPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
-		// super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
 		this.placeManager = placeManager;
 	}
 
-	// @Override
-	// public void prepareFromRequest(PlaceRequest request) {
-	// super.prepareFromRequest(request);
-	//
-	// name=request.getParameter("name", "Default value");
-	// }
-
-	// @Inject
 	PlaceManager placeManager;
 
 	@Override
 	protected void onReset() {
 		super.onReset();
-
-		// getView().getFirstBox().setText("=2+4-1");
 
 		getView().getFirstButton().addClickHandler(new ClickHandler() {
 

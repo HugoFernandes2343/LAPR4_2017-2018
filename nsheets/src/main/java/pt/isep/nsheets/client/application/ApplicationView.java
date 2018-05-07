@@ -34,9 +34,6 @@ import gwt.material.design.client.ui.animate.Transition;
 
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
 
-	// @UiField
-	// SimplePanel main;
-
 	@UiField
 	HTMLPanel menu;
 	@UiField
@@ -57,36 +54,11 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 		bindSlot(ApplicationPresenter.SLOT_MENU, menu);
 		bindSlot(ApplicationPresenter.SLOT_CONTENT, main);
 	}
-
-	// @Override
-	// public void setInSlot(Object slot, IsWidget content) {
-	// if (slot == ApplicationPresenter.SLOT_CONTENT) {
-	// main.setWidget(content);
-	// } else {
-	// super.setInSlot(slot, content);
-	// }
-	// }
 	
     @Override
     public void setPageTitle(String title, String description, String link, String specification) {
         this.title.setText(title);
         this.description.setText(description);
-//        this.link = link;
-//        this.specification = specification;
-
-//        if (link.isEmpty()) {
-//            chipJava.setVisible(false);
-//            chipXml.setVisible(false);
-//        } else {
-//            chipJava.setVisible(true);
-//            chipXml.setVisible(true);
-//        }
-//
-//        if (specification.isEmpty()) {
-//            chipSpecification.setVisible(false);
-//        } else {
-//            chipSpecification.setVisible(true);
-//        }
 
         new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.title);
         new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.description);

@@ -32,36 +32,6 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 	@Inject
 	HomeView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-//		// Try to programmatically add a row, column and card
-//		MaterialRow row=new MaterialRow();
-//		
-//	    MaterialColumn col=new MaterialColumn();
-//	    col.setGrid("l4");
-//	    row.add(col);
-//	    
-//	    MaterialCard card=new MaterialCard();
-//	    card.setBackgroundColor(Color.BLUE_DARKEN_1);
-//	    
-//        MaterialCardContent cardContent=new MaterialCardContent();
-//        cardContent.setTextColor(Color.WHITE);
-//        
-//        MaterialCardTitle cardTitle=new MaterialCardTitle();
-//        cardTitle.setText("Sample");
-//        cardTitle.setIconType(IconType.POLYMER);
-//        cardTitle.setIconPosition(IconPosition.RIGHT);
-//
-//        MaterialLabel label=new MaterialLabel();
-//        label.setText("Era uma vez um texto bastante extenso...");
-//
-//        cardContent.add(cardTitle);
-//        cardContent.add(label);
-//        
-//        card.add(cardContent);
-//	    
-//	    col.add(card);      
-//	    
-//		htmlPanel.add(row);
 	}
 	
 	private MaterialCard createCard(WorkbookDescriptionDTO wb) {
@@ -89,8 +59,6 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
 	@Override
 	public void setContents(ArrayList<WorkbookDescriptionDTO> contents) {
-		// TODO Auto-generated method stub
-		
 		int colCount=1;
 		
 		MaterialRow row=null;
