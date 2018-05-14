@@ -7,19 +7,19 @@ Each **Class Section** (i.e., "Turma PL") **is a Team** in the LAPR4 Project.
 
 Each Team will have its one fork of the NSheets repository.
 
-To help the management of the project each Team is further divided in 3 sub-teams named: Red, Green and Blue.
+To help the management of the project each Team is further divided in 3 groups named: Red, Green and Blue.
 
 The Requirements of the Project are also divided in three functional areas: Core, IPC and Lang.
 
-The Project will be developed during 3 Sprints. During each sprint, each sub-team works in a specific functional area. Each sub-team (and Student) must work in all three functional areas.
+The Project will be developed during 3 Sprints. During each sprint, each group works in a specific functional area. Each group (and student) must work in all three functional areas.
 
-Sub-teams should be defined before the start of the project and should remain stable during the project.
+Groups should be defined before the start of the project and should remain stable during the project.
 
 # 2. Individual Pages
 
 These are links for the individual pages/folders of each Student. The first one is only an example that you should delete when the team starts the project. Each student should update the table and the folder structure of the repository accordingly.
 
-| Team | Student Number     | Student Name                        | Link 							  |
+| Group | Student Number     | Student Name                        | Link 							  |
 |------|--------------------|-------------------------------------|------------------------------------|
 | Red  | **s1122101**      			| John Doe					|[John Doe](red/s1122101/) |
 | Red  |			      			| 							|								 |
@@ -47,7 +47,7 @@ These are links for the individual pages/folders of each Student. The first one 
 
 This is a table that should display the overall planning of the team. This is simply and example and you should update the table with the plan of your team. 
 
-| Team | Sprin1     | Sprint2        | Sprint 3	  |
+| Group | Sprin1     | Sprint2        | Sprint 3	  |
 |------|------------|----------------|-------------|
 | Red  | Core   		| IPC			| Lang        |
 | Green  | IPC      | Lang		    | Core		  |	
@@ -55,7 +55,7 @@ This is a table that should display the overall planning of the team. This is si
 
 # 4. Planning Detail
 
-| Team | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
+| Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | Red  | [John Doe](red/s1122101/) | [Core01.1](red/s1122101/sp1)            | [IPC01.2](red/s1122101/sp2)           | [Lang01.3](red/s1122101/sp3) |
 | Red  |			      			| 							|								 |		|
@@ -95,8 +95,8 @@ Requirements are classified in three functional areas:
 	- **IPC**: These are requirements that explore interprocess communication  
 	
 **Rules for the Scheduling of Requirements**  
-	- The project is a team work. Important design decisions (e.g., with impact in the architecture or futures developments) must be discussed and taken as a group.  
-	- Each Feature Increment must is to be developed individually.  
+	- The project is a team work. Important design decisions (e.g., with impact in the architecture or futures developments) must be discussed and taken as a team.  
+	- Each Feature Increment must be developed individually.  
 	- Features that are mandatory are required to be developed.  
 	- Some features may be dependent on others. Students must make sure that dependent features are ready and, if not, develop the required functionality.    
 	- When a Feature is started it must be completed, i.e., all the three functional increments must be developed.
@@ -449,7 +449,171 @@ Requirements are classified in three functional areas:
 		
 	This feature increment should have the same functionality as Lang06.3 but with the adaptations required by the syntax of the language.	
 		
-# 6. Domain Model
+# 6. Grading/Assessment
+
+Assessment and grading will take place during sprint reviews.
+
+The version to be reviewed in each sprint must be closed before the first class of the following Tuesdays:
+- **Sprint 1: Jun, 5**
+- **Sprint 2: Jun, 12**
+- **Sprint 3: Jun, 19**
+
+The grade of each sprint has a weight of 20% in the final score of the project. 
+
+As described next, each student will have an individual technical assessment during one of the sprints. Besides contributing to the assessment of the group during the sprint this assessment will also have an weight of 40% in the final score of the project.
+
+Each group is responsible for one functional area in a sprint. Each group will be assessed by the corresponding teacher of the functional area (in the first class after the sprint deadline).
+
+## Sprint Reviews 
+
+Sprint reviews take place in the first class of the functional area (core, ipc or lang) after the sprint deadline.
+
+The expected duration of a sprint review is 60 minutes.
+
+There are three phases in the sprint review:
+- **Phase 1: Deployment**
+- **Phase 2: Functional Demonstration**
+- **Phase 3: Technical Analysis**
+
+### Phase 1: Sprint Overview and Deployment
+
+During this phase one of the members of the group:
+
+- gives and overview of the developed issues/tasks and group work during the sprint
+- demonstrate to the teacher how the application was deployed (e.g., the application will be executed from inside the IDE; the application will be executed from a local web server; the application will be executed from a local virtual machine, etc.).
+
+This phase should take 1 to 5 minutes
+
+** Grading **
+
+Rubric **T- Team Work**
+
+*This grade is the same for all the members of the group.*
+
+Weight: 10% of the sprint grade.
+
+- **0- non implemented / unacceptable.** **There are no evidences of team work**. There are almost no issues and commits are very rudimentary in its descriptions and frequency.
+
+- **1- attempt.** **There are small evidences of team work**. Some issues seem correct in terms of their life-cycle. Connections between issues and commits is very rudimentary. The description of issues seem to have some significant problems. 
+ 
+- **2- many defects.** **There are some evidences of team work**. Several issues seem correct in terms of their life-cycle. Connections between issues and commits is frequent but may be improved (e.g., commits are not used to control the state of issues). The description of issues is accurate. 
+
+- **3- some defects.** **There are evidences of a team process of decision making** in which the student participates actively although some minor problems may exist such as dependencies discovered only late in the process. Issues and commits are almost fully connected. 
+
+- **3,5- correct.** **There are evidences of a team process of decision making** in which the student participates actively and that results in the **assignment of tasks in a clear and managed way and in a timely fashion**. Issues and commits are fully connected.
+
+- **4- exceptional.** There are evidences of a team process of decision making which is leaded and coordinated by the student and that results in the assignment of tasks in a clear and managed way and in a timely fashion. There are evidences of group tasks such as integration, tests or deployment activities.
+
+Rubric **D- Deployment**
+
+*This grade is the same for all the members of the group.*
+
+Weight: 20% of the sprint grade.
+
+- **0- non implemented / unacceptable.** The group was unable to demonstrate the application outside of the IDE.
+
+- **1- attempt.** The application **runs without the IDE in a local web server**. The group was able to demonstrate the application without any major fault but **after the deadline** (there may have been some minor integration problems before the demonstration). The demonstration was based on the tagged version from Bitbucket that was dowloaded from the moodle.
+
+- **2- many defects.** The application **runs without the IDE in a local web server**. The group was able to demonstrate the application **within the deadline** although with some minor runtime faults during the demonstration or without running all the tests or with significant test failures not justified. The correct version was used (tagged in Bitbucket and uploaded to moodle).
+
+- **3- some defects.** The application **runs without the IDE in a web server in local virtual machine**. The group was able to demonstrate the application **within the deadline and without runtime faults during the demonstration** and running all the tests with "significant" coverage. The correct version was used (tagged in Bitbucket and uploaded to moodle).
+
+- **3,5- correct.** The application **runs without the IDE in a web server in local virtual machine or container and can be accessed "externally"**. The group was able to demonstrate the application **within the deadline and without runtime faults during the demonstration** and running all the tests with "significant" coverage. The correct version was used (tagged in Bitbucket and uploaded to moodle).
+
+- **4- exceptional.** The application **runs without the IDE in a web server in remote virtual machine or container (i.e., in the cloud)**. The group was able to demonstrate the application **within the deadline and without runtime faults during the demonstration** and running all the tests with "significant" coverage. The correct version was used (tagged in Bitbucket and uploaded to moodle).  If applicable, the group did take into account evolution aspects of the solution such as support for files from previous versions or upgrading the database from previous versions.
+ 
+### Phase 2: Functional Demonstration
+
+During this phase each one of the members of the group will demonstrate the functionalities developed for their feature increment. **This demonstration is individual and mandatory**.
+
+This phase should take 20 to 25 minutes for all the students of the group.
+
+** Grading **
+
+Rubric **R- Requirements Fulfillment**
+
+*This grade is individual.*
+
+Weight: 30% of the sprint grade.
+
+- **0- non implemented / unacceptable.** The student did not develop any solution for the requirements.
+
+- **1- attempt.** The student did not fulfill the requirements because of interpretation faults that were not properly justified.
+
+- **2- many defects.** The student did fulfill all the requirements although with some faults in the interpretation that reveal an insufficient knowledge of the problem domain.
+
+- **3- some defects.** The student did fulfill all the requirements and also did justify the eventual options related to the interpretation/analysis of the problem.
+
+- **3,5- correct.** The student did fulfill the requirements, justified the options and also presented a critical analysis of the requirements and options that is an evidence of his understanding of the problem domain.
+
+- **4- exceptional.** The previous item is true and the student also discuss alternatives that are supported by a rich understanding of the problem domain. These alternatives can be related to the problem domain or to high level architecture of solutions.
+
+Rubric **A- Application Operation**
+
+*This grade is individual.*
+
+Weight: 10% of the sprint grade.
+
+- **0- non implemented / unacceptable.** The student was not present or did not demonstrate his/her user story.
+
+- **1- attempt.** The student tried to present his user story but was unable because he was not able to "locate" his features or the application did not function properly in the context of his features.
+
+- **2- many defects.** The student was not able to locate and/or demonstrate a significant percentage of his user story features and it became inconclusive if features were developed or not.
+
+- **3- some defects.** The student was able to present all the functionalities of the user story although with some insecurity or small unexpected behavior in the application.
+
+- **3,5- correct.** The student was able to present all the user story without any incident and justified the options in the operation of the application regarding the user story.
+
+- **4- exceptional.** The student was able to present all the user story without any incident. He also discussed possible alternatives with a robust analysis of justifications against or in favor of the alternatives in terms of the operation of the application.
+
+
+### Phase 3: Technical Assessment
+
+During this phase the teacher selects (randomly) 1/3 of members of the group to assess technically.
+
+This technically assessment will be essentially based in evidences in the code and technical documentation.
+
+This phase should take 30 to 35 minutes for all the selected students.
+
+** Grading **
+
+Rubric **A- Requirements Analysis**
+
+*This grade is the average of the grades of the assessed students.*
+
+Weight: 15% of the sprint grade.
+
+- **0- non implemented / unacceptable.** There is no technical documentation relating the analysis for the user story.
+
+- **1- attempt.** There is some technical documentation about the user story but it contains essentially the original description of the requirement.
+
+- **2- many defects.** There is some technical documentation about the user story that goes further from the description of the requirement. It should include records about "studies" relating to the problem that make sense to the user story but are incomplete and are not sufficient to justify a possible solution. The analysis is essentially supported by textual descriptions.
+
+- **3- some defects.** There is a robust analysis of the problem with well chosen technical artifacts (diagrams, grammars, etc.) for its documentation although some may have errors, such as referencing inexistent artifacts or having small notation errors.
+
+- **3,5- correct.** There is a robust and very complete analysis of the problem with well chosen technical artifacts (diagrams, grammars, etc.) for its documentation and without errors.
+
+- **4- exceptional.** The previous item is true and the technical document has an outstanding quality in its technical artifacts and written description of the problem and its analysis.
+
+Rubric **DI- Design and Implementation**
+
+*This grade is the average of the grades of the assessed students.*
+
+Height: 15% of the sprint grade.
+
+- **0- non implemented / unacceptable.** There is no technical documentation relating the design of the user story.
+
+- **1- attempt.** The design documentation is very incipient (i.e., no technical artifacts or very incomplete/wrong), the code is very badly structured (e.g., long methods, lacking of comments, badly formatted code, code that does not follow the coding conventions of the language). Also there are no tests present (or they have no real value).
+
+- **2- many defects.** The code follows good practices although some design patterns should have been applied. The technical documentation covers the majority of the solution although it may have some errors. However the appropriate type of technical artifacts for documenting design are present and the idea behind the solution is understandable. Code does not "goes against" the design options of the original code of the project. Unit tests seem to cover a significant amount of functionalities (e.g., more than 50%) but there was not test first approach.
+
+- **3- some defects.** Unit tests do cover a significant amount of functionalities (e.g., more than 80%) and there are some evidences of a test first approach. The code does not "break" the design options of the original project code and the code follows the good practices of the technical area (e.g., synchronization for IPC, design patterns, grammar design for Lang). Also, the technical documentation (e.g., diagrams) is very complete and without significant errors.
+
+- **3,5- correct.** There is a clear test-driven development approach and tests seem to cover a significant part of functionalities (e.g., more than 50%). The design follows good practices (and design patterns) and there is a coherence and integration in all the design options that are clearly and correctly documented and related to the analysis of the problem.
+
+- **4- exceptional.** The previous item is true and the technical document has an outstanding quality in its technical artifacts and written description of the design of the solution. Tests seem to cover the main behavior of the user story.
+
+# 7. Domain Class Diagrams
 
 **Core**
 
