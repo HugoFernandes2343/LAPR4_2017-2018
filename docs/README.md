@@ -454,13 +454,18 @@ Requirements are classified in three functional areas:
 Assessment and grading will take place during sprint reviews.
 
 The version to be reviewed in each sprint must be closed before the first class of the following Tuesdays:
+
 - **Sprint 1: Jun, 5**
+
 - **Sprint 2: Jun, 12**
+
 - **Sprint 3: Jun, 19**
 
 The grade of each sprint has a weight of 20% in the final score of the project. 
 
-As described next, each student will have an individual technical assessment during one of the sprints. Besides contributing to the assessment of the group during the sprint this assessment will also have an weight of 40% in the final score of the project.
+As described next, each student will have an **individual technical assessment during one of the sprints**. Besides contributing to the assessment of the group during the sprint this assessment will also have an weight of 40% in the final score of the project.
+
+**Project Final Score = Sprint 1 Score &ast; 0,2 + Sprint 2 Score &ast; 0,2 + Sprint 3 Score &ast; 0,2 + Individual Technical Score &ast; 0,4**
 
 Each group is responsible for one functional area in a sprint. Each group will be assessed by the corresponding teacher of the functional area (in the first class after the sprint deadline).
 
@@ -474,6 +479,8 @@ There are three phases in the sprint review:
 - **Phase 1: Deployment**
 - **Phase 2: Functional Demonstration**
 - **Phase 3: Technical Analysis**
+
+In the final of this session the **teacher should give feedback** about the performance of the students **and also inform of their scores**. 
 
 ### Phase 1: Sprint Overview and Deployment
 
@@ -612,6 +619,34 @@ Height: 15% of the sprint grade.
 - **3,5- correct.** There is a clear test-driven development approach and tests seem to cover a significant part of functionalities (e.g., more than 50%). The design follows good practices (and design patterns) and there is a coherence and integration in all the design options that are clearly and correctly documented and related to the analysis of the problem.
 
 - **4- exceptional.** The previous item is true and the technical document has an outstanding quality in its technical artifacts and written description of the design of the solution. Tests seem to cover the main behavior of the user story.
+
+## Grade Improvement
+
+It is possible to improve the score in the following individual rubrics:
+
+- **R- Requirements Fulfillment**
+
+- **A- Requirements Analysis**
+
+- **DI- Design and Implementation**
+
+Improvements in the **A** and **DI** rubrics only affect the individual technical assessment of the student.
+
+Rules for the improvement:
+
+- only scores equal or greater than 1 can be improved;
+
+- the improvement can result in a maximum of 1 value in the increment of the score (in the scale 1-4); 
+
+- the improvement must be performed until the next class with the same teacher (in the same week);
+
+- the student may propose the improvement in the end of the sprint review and **the teacher must accept it**.
+
+**Notes:** 
+
+- The teacher may refuse a proposal of improvement for several reasons. For instance, the redesign/refactoring may require to much time to complete or the historical performance of the student does not provide sufficient guarantees of success. 
+
+- An improvement may result in downgrade of the score if the student does not attain the defined goals. 
 
 # 7. Domain Class Diagrams
 
