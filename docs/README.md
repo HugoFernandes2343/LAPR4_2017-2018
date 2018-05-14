@@ -555,7 +555,7 @@ Weight: 30% of the sprint grade.
 
 - **4- exceptional.** The previous item is true and the student also discuss alternatives that are supported by a rich understanding of the problem domain. These alternatives can be related to the problem domain or to high level architecture of solutions.
 
-Rubric **A- Application Operation**
+Rubric **O- Application Operation**
 
 *This grade is individual.*
 
@@ -629,8 +629,6 @@ It is possible to improve the score in the following individual rubrics:
 - **A- Requirements Analysis**
 
 - **DI- Design and Implementation**
-
-Improvements in the **A** and **DI** rubrics only affect the individual technical assessment of the student.
 
 Rules for the improvement:
 
