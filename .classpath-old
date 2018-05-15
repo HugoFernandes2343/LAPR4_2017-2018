@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="nsheets/src/main/java"/>
-	<classpathentry kind="src" path="util/src/main/java"/>
-	<classpathentry kind="src" path="framework/src/main/java"/>
 	<classpathentry kind="src" path="shared/target/generated-sources/antlr4"/>
 	<classpathentry kind="src" path="nsheets/src/main/resources"/>
 	<classpathentry kind="src" path="nsheets/src/test/java"/>
@@ -17,7 +15,7 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/nsheets-1.0-SNAPSHOT/WEB-INF/classes"/>

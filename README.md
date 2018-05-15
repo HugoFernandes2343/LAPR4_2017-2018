@@ -33,7 +33,7 @@ To execute type (in the root folder):
 
 	mvn tomcat7:run-war-only
 
-Your application is now deployed at [http://127.0.0.1:8082/sheets](http://127.0.0.1:8082/sheets).
+Your application is now deployed at [http://127.0.0.1:8082/nsheets](http://127.0.0.1:8082/nsheets).
 	
 To start GWT Dev Mode, type in another shell/terminal/console:
 
