@@ -1,4 +1,4 @@
-**John Doe** (s1122101) - Sprint 1 - Core01.1
+**John Doe** (s4567890) - Sprint 1 - Core00.0
 ===============================
 
 # 1. General Notes
