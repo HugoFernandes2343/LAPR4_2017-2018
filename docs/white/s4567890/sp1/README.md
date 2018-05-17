@@ -9,9 +9,15 @@
 
 *In this section you should describe the requirements for this sprint.*
 
+*This is simply an example of documentation*
+
+Core00.0 - The Home page should present metadata about all workbooks (i.e., Workbook Descriptions). This metadata should be persisted in a relational database (using JPA). In the UI of the Home page it should be possible to add a new Workbook Description.
+
 # 3. Analysis
 
 *In this section you should describe the study/analysis/research you developed in order to design a solution.*
+
+![Analysis SD](analysis.png)
 
 # 4. Design
 
