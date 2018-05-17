@@ -13,9 +13,19 @@
 
 Core00.0 - The Home page should present metadata about all workbooks (i.e., Workbook Descriptions). This metadata should be persisted in a relational database (using JPA). In the UI of the Home page it should be possible to add a new Workbook Description.
 
+We can further specify this textual requirements as user stories.
+
+Proposal:
+
+US1 - As the Product Owner I want that the workbooks that are displayed in the Home Page come from a relational database so that they are persisted and can be updated.
+
+US2 - As a User of the Application I want to be able to add new Workbook Descriptions when I am in the Home Page.
+
 # 3. Analysis
 
 *In this section you should describe the study/analysis/research you developed in order to design a solution.*
+
+The main idea for the "workflow" of this feature increment.
 
 ![Analysis SD](analysis.png)
 
