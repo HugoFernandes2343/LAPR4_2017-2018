@@ -35,7 +35,7 @@ public class Contact implements AggregateRoot<Long>, Serializable {
     private Long pk=null;    
     
     // This should be the Business ID
-    @Column(unique = true)
+    //  @Column(unique = true)
     private String name=null;
     
     private String firstName=null;

@@ -16,4 +16,6 @@ public interface RepositoryFactory {
     ExtensionSettings setSettings(ExtensionSettings settings);
     
     ContactRepository contacts();
+    
+    WorkbookDescriptionRepository workbookDescriptions();
 }

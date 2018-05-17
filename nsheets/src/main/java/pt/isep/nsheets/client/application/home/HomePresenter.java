@@ -3,6 +3,7 @@ package pt.isep.nsheets.client.application.home;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -10,6 +11,9 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
+import gwt.material.design.client.ui.MaterialToast;
+
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -24,6 +28,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 	
 	interface MyView extends View {
 		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
+		void addClickHandler(ClickHandler ch);
 	}
 
 	@NameToken(NameTokens.home)
@@ -36,6 +41,8 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 		
 		this.view=view;
+		
+		this.view.addClickHandler( event -> MaterialToast.fireToast("New Workbook Created from new HOME...", "rounded") );		
 	}
 	
 	private void refreshView(ArrayList<WorkbookDescriptionDTO> contents) {

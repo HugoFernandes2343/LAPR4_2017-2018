@@ -18,17 +18,17 @@ public class ExtensionSettings {
 	private Properties extensionProperties = null;
 
 	public ExtensionSettings() {
-            extensionProperties=new Properties();
-            setDefaultProperties();
+		extensionProperties = new Properties();
+		setDefaultProperties();
 	}
-        
-        public ExtensionSettings(Properties props) {
-            extensionProperties=props;
-        }
+
+	public ExtensionSettings(Properties props) {
+		extensionProperties = props;
+	}
 
 	private void setDefaultProperties() {
 		this.extensionProperties.setProperty(REPOSITORY_FACTORY_KEY, "JpaRepositoryFactory");
-		this.extensionProperties.setProperty(PERSISTENCE_UNIT_KEY, "lapr4.csheets-crm-extension-PU");
+		this.extensionProperties.setProperty(PERSISTENCE_UNIT_KEY, "lapr4.NSheetsPU");
 	}
 
 	public String getPersistenceUnitName() {
@@ -38,9 +38,9 @@ public class ExtensionSettings {
 	public String getRepositoryFactory() {
 		return this.extensionProperties.getProperty(REPOSITORY_FACTORY_KEY);
 	}
-        
-        // Test if this will work in acceptance tests...
-        public Properties properties() {
-            return extensionProperties;
-        }
+
+	// Test if this will work in acceptance tests...
+	public Properties properties() {
+		return extensionProperties;
+	}
 }

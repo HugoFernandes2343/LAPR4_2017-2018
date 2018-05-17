@@ -12,6 +12,7 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistenc
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.ContactRepository;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.RepositoryFactory;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookDescriptionRepository;
 
 /**
  *
@@ -30,4 +31,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaContactRepository(this.settings);
     }
 
+    @Override
+    public WorkbookDescriptionRepository workbookDescriptions() {
+        return new JpaWorkbookDescriptionRepository(this.settings);
+    }
 }
