@@ -179,7 +179,11 @@ Since the service is a servlet it must be declared in the **web.xml** file of th
 
 The main idea for the "workflow" of this feature increment.
 
+Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing this feature increment (i.e., integrating with a database)
+
 ![Analysis SD](analysis.png)
+
+Some remarks: (to be included soon...) 
 
 # 4. Design
 

@@ -5,10 +5,32 @@ skinparam packageStyle rect
 skinparam defaultFontName FG Virgil
 skinparam shadowing false
 
-User -> HomeView
-HomeView -> HomePresenter
-HomePresenter -> HomeServices
-HomeServices -> WorkbookDescriptionRepository
-WorkbookDescriptionRepository -> Database
+actor User
+boundary HomeView
+control HomePresenter
+control HomeServices
+entity WorkbookDescriptionRepository
+database Database 
+
+box "NSheets Client"
+participant HomeView
+participant HomePresenter 
+end box
+
+box "Server"
+participant HomeServices
+participant WorkbookDescriptionRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> HomePresenter : onReveal() / navigate to page 
+HomePresenter ->> HomeServices : getWorkbooks()
+HomeServices -> WorkbookDescriptionRepository : findAll()
+WorkbookDescriptionRepository -> Database : fetch
+HomeServices ->> HomePresenter : onSuccess() 
+HomePresenter -> HomeView : setContents()
 
 @enduml
