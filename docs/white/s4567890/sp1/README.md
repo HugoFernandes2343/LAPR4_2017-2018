@@ -3,7 +3,7 @@
 
 # 1. General Notes
 
-*In this section you should register important notes regarding your work during the sprint. For instance, if you spend significant time helping a colleague or if you work in more than a feature.*
+*In this section you should register important notes regarding your work during the sprint. For instance, if you spend significant time helping a colleague or if you work in more than one feature increment.*
 
 # 2. Requirements
 
@@ -175,7 +175,7 @@ Since the service is a servlet it must be declared in the **web.xml** file of th
 	</servlet-mapping> 
 	
 
-## 3.4 Analysis SD Diagram
+## 3.4 Analysis Diagrams
 
 The main idea for the "workflow" of this feature increment.
 
@@ -203,14 +203,13 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 - **Sequence Diagrams.** These SDs are more than simple System Sequence Diagrams since we already peek at the code (for studying it) and they provide already an idea about the possible design. Therefore we choose to use these more extended diagrams instead of simple SSDs. These already include the MVP pattern and the Repository (for the persistence). **However these are not design diagrams since the classes presented here may not be final design classes.**
 
-
 # 4. Design
 
 *In this section you should present the design solution for the requirements of this sprint.*
 
-## 4.1. Functional Tests
+## 4.1. Tests
 
-*In this section you should describe the design of the functional tests that cover the requirements of the sprint.*
+*In this section you should describe the design of the tests that cover the requirements of the sprint.*
 
 ## 4.2. Requirements Realization
 
@@ -226,7 +225,7 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 # 5. Implementation
 
-*If required present in this section mode details of the implementation. For instance, configuration files, grammar files, etc. You may reference important commits.*
+*If required you should present in this section more details about the implementation. For instance, configuration files, grammar files, etc. You may also explain the organization of you code. You may reference important commits.*
 
 # 6. Integration/Demonstration
 
@@ -242,7 +241,7 @@ Some Questions/Issues identified during the work in this feature increment:
 
 # 8. Work Log
 
-*Insert here a log of you daily work. This is in essence the log of your daily standup meetings.*
+*Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
 
 Commits:
 
