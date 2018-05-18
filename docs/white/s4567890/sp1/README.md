@@ -191,7 +191,7 @@ The main idea for the "workflow" of this feature increment.
 
 - **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
 
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
+**System Sequence Diagrams**
 
 **For US1**
 
@@ -201,11 +201,19 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 ![Analysis SD](analysis2.png)
 
-- **Sequence Diagrams.** These SDs are more than simple System Sequence Diagrams since we already peek at the code (for studying it) and they provide already an idea about the possible design. Therefore we choose to use these more extended diagrams instead of simple SSDs. These already include the MVP pattern and the Repository (for the persistence). **However these are not design diagrams since the classes presented here may not be final design classes.**
-
 # 4. Design
 
 *In this section you should present the design solution for the requirements of this sprint.*
+
+Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
+
+**For US1**
+
+![SD US1](design1.png)
+
+**For US2**
+
+![SD US2](design2.png)
 
 ## 4.1. Tests
 

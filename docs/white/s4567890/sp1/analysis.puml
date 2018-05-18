@@ -6,31 +6,16 @@ skinparam defaultFontName FG Virgil
 skinparam shadowing false
 
 actor User
-boundary HomeView
-control HomePresenter
-control HomeServices
-entity WorkbookDescriptionRepository
+
+User -> Browser : navigate to page 
+Browser ->> Server : getWorkbooks()
+
 database Database 
 
-box "NSheets Client"
-participant HomeView
-participant HomePresenter 
-end box
+Server -> Database : fetch
 
-box "Server"
-participant HomeServices
-participant WorkbookDescriptionRepository
-end box
+Server -->> Browser : return
 
-box "Database"
-participant Database
-end box
-
-User -> HomePresenter : onReveal() / navigate to page 
-HomePresenter ->> HomeServices : getWorkbooks()
-HomeServices -> WorkbookDescriptionRepository : findAll()
-WorkbookDescriptionRepository -> Database : fetch
-HomeServices ->> HomePresenter : onSuccess() 
-HomePresenter -> HomeView : setContents()
+Browser -> Browser : display
 
 @enduml
