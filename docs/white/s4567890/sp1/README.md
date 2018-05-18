@@ -25,22 +25,22 @@ US2 - As a User of the Application I want to be able to add new Workbook Descrip
 
 *In this section you should describe the study/analysis/research you developed in order to design a solution.*
 
-For this feature increment, since it is the first one to be developed in a new project I need to:
+For this feature increment, since it is the first one to be developed in a new project I need to:  
 
-- Understand how the application works and also understand the key aspects of GWT, since it is the main technology behind the application
+- Understand how the application works and also understand the key aspects of GWT, since it is the main technology behind the application  
 
-- Understand how the Home Page is implemented (for instance, how the UI gets the Workbook Descriptions that are displayed)
+- Understand how the Home Page is implemented (for instance, how the UI gets the Workbook Descriptions that are displayed)  
 
-- Understand how to integrate a relational database into the project (Will be assuming JPA since it is studied in EAPLI) 
+- Understand how to integrate a relational database into the project (Will be assuming JPA since it is studied in EAPLI)   
 
 ## 3.1 GWT and Project Structure
 
-1. Modules. From the pom.xml file we can see that the application is composed of 5 modules:
-  - **server**. It is the "server part" of the web application.
-  - **shared**. It contains code that is shared between the client (i.e., web application) and the server. 
-  - **nsheets**. It is the web application (i.e., Client).
-  - **util**. This is the same module as the one of EAPLI.
-  - **framework**. This is the same module as the one of EAPLI. 
+**Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
+- **server**. It is the "server part" of the web application.  
+- **shared**. It contains code that is shared between the client (i.e., web application) and the server.   
+- **nsheets**. It is the web application (i.e., Client).  
+- **util**. This is the same module as the one of EAPLI.  
+- **framework**. This is the same module as the one of EAPLI.   
   
 From [GWT Overview](http://www.gwtproject.org/overview.html): *"The GWT SDK contains the Java API libraries, compiler, and development server. It lets you write client-side applications in Java and deploy them as JavaScript."*
 
@@ -218,6 +218,42 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 ## 4.1. Tests
 
 *In this section you should describe the design of the tests that cover the requirements of the sprint.*
+
+Regarding tests we try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part). Therefore we focus on the domain classes and also on the services provided by the server.
+
+**Domain classes**
+
+For the Domain classes we will have a class that represents the entity **WorkbookDescription**. This entity will have attributes that, for the moment, will be based on the class **WorkbookDescriptionDTO**:
+	
+	- name (string)
+	- description (string) 
+
+Tests:  
+- We should ensure that a WorkbookDescription can be created when all the attributes are set.
+
+**Services/Controllers**
+
+For the services the application already has a service specified in the interface **WorkbooksService**:
+
+	@RemoteServiceRelativePath("workbooksService")
+	public interface WorkbooksService extends RemoteService {
+		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
+	}
+	
+This method seems to be sufficient for supporting US1 but not US2.
+
+For US2 we need a method that can be used to create a new WorkbookDescription given a WorkbookDescriptionDTO.
+
+The proposal is:
+
+	@RemoteServiceRelativePath("workbooksService")
+	public interface WorkbooksService extends RemoteService {
+		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
+		Long createWorkbookDescription(WorkbookDescriptionDTO);
+	}
+		
+Tests:  
+- If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks();		
 
 ## 4.2. Requirements Realization
 
