@@ -179,11 +179,30 @@ Since the service is a servlet it must be declared in the **web.xml** file of th
 
 The main idea for the "workflow" of this feature increment.
 
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing this feature increment (i.e., integrating with a database)
+**Use Cases**
+
+![Use Cases](us.png)
+
+- **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
+
+**Domain Model (for this feature increment)**
+
+![Domain Model](dm.png)
+
+- **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
+
+Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
+
+**For US1**
 
 ![Analysis SD](analysis.png)
 
-Some remarks: (to be included soon...) 
+**For US2**
+
+![Analysis SD](analysis2.png)
+
+- **Sequence Diagrams.** These SDs are more than simple System Sequence Diagrams since we already peek at the code (for studying it) and they provide already an idea about the possible design. Therefore we choose to use these more extended diagrams instead of simple SSDs. These already include the MVP pattern and the Repository (for the persistence). **However these are not design diagrams since the classes presented here may not be final design classes.**
+
 
 # 4. Design
 
