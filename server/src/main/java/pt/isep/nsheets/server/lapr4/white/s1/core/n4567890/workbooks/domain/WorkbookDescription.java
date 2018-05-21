@@ -34,7 +34,10 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 	private String name;
 	private String description;
 
-	public WorkbookDescription(String name, String description) {
+	public WorkbookDescription(String name, String description)  throws IllegalArgumentException {
+		if (name == null || description == null) {
+			throw new IllegalArgumentException("name or description must be non-null");
+		}
 		this.name = name;
 		this.description = description;
 	}

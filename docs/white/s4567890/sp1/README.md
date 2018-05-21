@@ -229,7 +229,13 @@ For the Domain classes we will have a class that represents the entity **Workboo
 	- description (string) 
 
 Tests:  
-- We should ensure that a WorkbookDescription can be created when all the attributes are set.
+- We should ensure that a WorkbookDescription can be created when all the attributes are set.  
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		System.out.println("ensureNullIsNotAllowed");
+		WorkbookDescription instance = new WorkbookDescription(null, null);
+	}
 
 **Services/Controllers**
 
