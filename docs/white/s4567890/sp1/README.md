@@ -205,25 +205,11 @@ The main idea for the "workflow" of this feature increment.
 
 *In this section you should present the design solution for the requirements of this sprint.*
 
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
 
-**For US1**
-
-![SD US1](design1.png)
-
-Notes:  
-- The diagram only depicts the less technical details of the scenario;  
-- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram. - **WorkbookServices** realizes the GWT RPC mechanism;
-- **ListWorkbookDescriptionController** is the *use case controller*;
-- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. For the moment it really does not seem necessary, adding only a new layer of indirection. *To remove?*
-
-**For US2**
-
-![SD US2](design2.png)
 
 ## 4.1. Tests
 
-*In this section you should describe the design of the tests that cover the requirements of the sprint.*
+*In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
 
 Regarding tests we try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part). Therefore we focus on the domain classes and also on the services provided by the server.
 
@@ -265,15 +251,49 @@ The proposal is:
 	@RemoteServiceRelativePath("workbooksService")
 	public interface WorkbooksService extends RemoteService {
 		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-		Long createWorkbookDescription(WorkbookDescriptionDTO);
+		Long addWorkbookDescription(WorkbookDescriptionDTO);
 	}
 		
 Tests:  
-- If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks();		
+- The tests on the controllers require the presence of a database.  
+- We will use the database in memory (H2).  
+- We will have a *controller* from adding new WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
+- We will have a *controller* from listing WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
+
+Verify the normal creation of an WorkbookDescription.  
+
+	@Test
+	public void testNormalBehaviour() throws Exception {
+		final String name = "Workbook1";
+		final String description = "Description for Workbook1";
+		final WorkbookDescription expected = new WorkbookDescription(name, description);
+		AddWorkbookDescriptionController ctrl = new AddWorkbookDescriptionController();
+		WorkbookDescription result = ctrl.addWorkbookDescription(name, description);
+		assertTrue("the added WorkbookDescription does not have the same data as input", expected.sameAs(result));
+	}
+ 
+ If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks();		
 
 ## 4.2. Requirements Realization
 
 *In this section you should present the design realization of the requirements.*
+
+Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
+
+**For US1**
+
+![SD US1](design1.png)
+
+Notes:  
+- The diagram only depicts the less technical details of the scenario;  
+- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
+- **WorkbookServices** realizes the GWT RPC mechanism;  
+- **ListWorkbookDescriptionController** is the *use case controller*;  
+- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. For the moment it really does not seem necessary, adding only a new layer of indirection. *To be removed?*  
+
+**For US2**
+
+![SD US2](design2.png)
 
 ## 4.3. Classes
 

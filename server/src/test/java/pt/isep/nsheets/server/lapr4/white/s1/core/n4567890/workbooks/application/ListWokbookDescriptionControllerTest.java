@@ -8,14 +8,17 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.ListWorkbookDescriptionController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ListWokbookDescriptionControllerTest {
 
 	   public ListWokbookDescriptionControllerTest() {
@@ -57,7 +60,8 @@ public class ListWokbookDescriptionControllerTest {
 
 	   // @Ignore
 	   @Test 
-	   public void ensureGetWorkbooksEmpty() {
+	   public void testAensureGetWorkbooksEmpty() {
+		   System.out.println("testAensureGetWorkbooksEmpty");
 		   
 		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
 		   
@@ -65,4 +69,24 @@ public class ListWokbookDescriptionControllerTest {
 		   
 		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
 	   }
+	   
+		@Test
+		public void testBtestDatabaseInsertion() throws Exception {
+			System.out.println("testBtestDatabaseInsertion");
+			
+			final String name = "Workbook1";
+			final String description = "Description for Workbook1";
+
+			final WorkbookDescription expected = new WorkbookDescription(name, description);
+
+			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
+
+			WorkbookDescription result = ctrlAdd.addWorkbookDescription(name, description);
+			
+			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
+			   
+			Iterable<WorkbookDescription> wbs=ctrlList.listWorkbookDescriptions();
+
+			assertTrue("the added WorkbookDescription is not in the database", wbs.iterator().hasNext());
+		}	   
 }

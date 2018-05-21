@@ -22,8 +22,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 
 	@Override
 	public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
-		// TODO Auto-generated method stub
-		
 		// Setup the persistence settings
 		PersistenceContext.setSettings(this.getPersistenceSettings());
 		

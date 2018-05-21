@@ -6,6 +6,6 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.Work
 public class ListWorkbookDescriptionController implements Controller {
 
     public Iterable<WorkbookDescription> listWorkbookDescriptions() {
-        return new ListWorkbookDescriptionService().allWorkbookDescriptions();
+        return new WorkbookDescriptionService().allWorkbookDescriptions();
     }
 }

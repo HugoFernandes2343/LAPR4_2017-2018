@@ -35,6 +35,7 @@ public class WorkbookDescriptionTest {
    @Test(expected = IllegalArgumentException.class)
    public void ensureNullIsNotAllowed() {
        System.out.println("ensureNullIsNotAllowed");
+       
        WorkbookDescription instance = new WorkbookDescription(null, null);
    }
 }

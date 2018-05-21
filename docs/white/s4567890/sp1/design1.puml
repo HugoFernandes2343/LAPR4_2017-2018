@@ -10,7 +10,7 @@ boundary HomeView
 control HomePresenter
 control WorkbookServices
 control ListWorkbookDescriptionController
-control ListWorkbookDescriptionService
+control WorkbookDescriptionService
 entity WorkbookDescriptionRepository
 database Database 
 
@@ -22,7 +22,7 @@ end box
 box "Server"
 participant WorkbookServices
 participant ListWorkbookDescriptionController
-participant ListWorkbookDescriptionService
+participant WorkbookDescriptionService
 participant WorkbookDescriptionRepository
 end box
 
@@ -33,8 +33,8 @@ end box
 User -> HomePresenter : onReveal() / navigate to page 
 HomePresenter ->> WorkbookServices : getWorkbooks()
 WorkbookServices -> ListWorkbookDescriptionController : listWorkbookDescriptions()
-ListWorkbookDescriptionController -> ListWorkbookDescriptionService : allWorkbookDescriptions()
-ListWorkbookDescriptionService -> WorkbookDescriptionRepository : findAll()
+ListWorkbookDescriptionController -> WorkbookDescriptionService : allWorkbookDescriptions()
+WorkbookDescriptionService -> WorkbookDescriptionRepository : findAll()
 WorkbookDescriptionRepository -> Database : fetch
 WorkbookServices ->> HomePresenter : onSuccess() 
 HomePresenter -> HomeView : setContents()

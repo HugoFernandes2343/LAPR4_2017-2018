@@ -34,7 +34,7 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 	private String name;
 	private String description;
 
-	public WorkbookDescription(String name, String description)  throws IllegalArgumentException {
+	public WorkbookDescription(String name, String description) throws IllegalArgumentException {
 		if (name == null || description == null) {
 			throw new IllegalArgumentException("name or description must be non-null");
 		}
@@ -67,8 +67,21 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 
 	@Override
 	public boolean sameAs(Object other) {
-		// FIXME implement this method
-		return false;
+		if (!(other instanceof WorkbookDescription)) {
+			return false;
+		}
+
+		final WorkbookDescription that = (WorkbookDescription) other;
+		if (this == that) {
+			return true;
+		}
+		if (!this.name.equals(that.name)) {
+			return false;
+		}
+		if (!this.description.equals(that.description)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -80,7 +93,7 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 	public Long id() {
 		return this.pk;
 	}
-	
+
 	public WorkbookDescriptionDTO toDTO() {
 		return new WorkbookDescriptionDTO(this.name, this.description);
 	}
