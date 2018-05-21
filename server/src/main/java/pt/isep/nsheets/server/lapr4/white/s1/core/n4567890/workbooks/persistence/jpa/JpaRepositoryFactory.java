@@ -5,12 +5,7 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.jpa;
 
-/**
- *
- * @author alexandrebraganca
- */
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSettings;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.ContactRepository;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.RepositoryFactory;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookDescriptionRepository;
 
@@ -20,15 +15,10 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
  */
 public class JpaRepositoryFactory implements RepositoryFactory {
 
-    private ExtensionSettings settings=null;
+    private PersistenceSettings settings=null;
     
-    public ExtensionSettings setSettings(ExtensionSettings settings) {
+    public PersistenceSettings setSettings(PersistenceSettings settings) {
         return this.settings=settings;
-    }
-
-    @Override
-    public ContactRepository contacts() {
-        return new JpaContactRepository(this.settings);
     }
 
     @Override

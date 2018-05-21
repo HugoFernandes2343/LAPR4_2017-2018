@@ -12,7 +12,6 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistenc
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSettings;
 
 /**
  * provides easy access to the persistence layer. works as a factory of
@@ -22,13 +21,24 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSe
  */
 public class PersistenceContext {
 
-        private ExtensionSettings settings=null;
+    private static PersistenceSettings settings=null;
     
-	public PersistenceContext(ExtensionSettings settings) {
+	public PersistenceContext(PersistenceSettings settings) {
             this.settings=settings;
 	}
+	
+	public static void setSettings(PersistenceSettings settings) {
+		PersistenceContext.settings=settings;
+	}
+	
+	public static PersistenceSettings getSettings() {
+		if (PersistenceContext.settings==null) {
+			PersistenceContext.settings=new PersistenceSettings(); 
+		}
+		return PersistenceContext.settings;
+	}
 
-	public RepositoryFactory repositories() {
+	public static RepositoryFactory repositories() {
 		// return new InMemoryRepositoryFactory();
 		// return new JpaRepositoryFactory();
 

@@ -5,17 +5,13 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence;
 
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSettings;
-
 /**
  * @author Paulo Gandra Sousa
  *
  */
 public interface RepositoryFactory {
 
-    ExtensionSettings setSettings(ExtensionSettings settings);
-    
-    ContactRepository contacts();
-    
+    PersistenceSettings setSettings(PersistenceSettings settings);
+        
     WorkbookDescriptionRepository workbookDescriptions();
 }

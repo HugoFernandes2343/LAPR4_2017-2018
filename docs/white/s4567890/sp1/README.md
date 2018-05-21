@@ -211,6 +211,12 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 ![SD US1](design1.png)
 
+Notes:  
+- The diagram only depicts the less technical details of the scenario;  
+- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram. - **WorkbookServices** realizes the GWT RPC mechanism;
+- **ListWorkbookDescriptionController** is the *use case controller*;
+- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. For the moment it really does not seem necessary, adding only a new layer of indirection. *To remove?*
+
 **For US2**
 
 ![SD US2](design2.png)
@@ -236,6 +242,10 @@ Tests:
 		System.out.println("ensureNullIsNotAllowed");
 		WorkbookDescription instance = new WorkbookDescription(null, null);
 	}
+
+Coverage:  
+- The actual coverage for class WorkbookDescription: 30%  
+- TODO: Add more tests, specially for the DTO. 
 
 **Services/Controllers**
 

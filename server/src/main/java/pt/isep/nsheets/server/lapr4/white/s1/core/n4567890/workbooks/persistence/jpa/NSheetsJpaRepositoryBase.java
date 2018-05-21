@@ -11,21 +11,22 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistenc
  */
 import eapli.framework.persistence.repositories.impl.jpa.JpaTxRepository;
 import eapli.util.Strings;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
+
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.ExtensionSettings;
 
-abstract class CrmJpaRepositoryBase<T, K extends Serializable> extends JpaTxRepository<T, K> {
+abstract class NSheetsJpaRepositoryBase<T, K extends Serializable> extends JpaTxRepository<T, K> {
 
-    private ExtensionSettings settings=null;
+    private PersistenceSettings settings=null;
     
-    CrmJpaRepositoryBase(String persistenceUnitName) {
+    NSheetsJpaRepositoryBase(String persistenceUnitName) {
         super(persistenceUnitName);
     }
 
-    CrmJpaRepositoryBase(ExtensionSettings settings) {
+    NSheetsJpaRepositoryBase(PersistenceSettings settings) {
         super(settings.getPersistenceUnitName());
         this.settings=settings;
     }
