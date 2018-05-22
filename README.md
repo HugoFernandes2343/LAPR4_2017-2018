@@ -130,8 +130,9 @@ To use this feature you need to install in your computer Docker ([Docker Communi
 
 The project includes the files *Dockerfile* and *docker-compose.yml* that are used to build the running environment.
 
-After building the **war** file of the project with *mvn clean install* you can execute the following command (in the root directory of the project) to run a production like environment:
+After building the **war** file of the project with *mvn clean install* you can execute the following commands (in the root directory of the project) to run a production like environment:
 
+	docker-compose build
 	docker-compose up -d 
 
 This will start the nsheets web application inside a container (running the Tomcat server) and exposing the application in port **8090**
