@@ -8,7 +8,9 @@ skinparam shadowing false
 actor User
 boundary HomeView
 control HomePresenter
-control HomeServices
+control WorkbookServices
+control AddWorkbookDescriptionController
+control WorkbookDescriptionService
 entity WorkbookDescriptionRepository
 entity WorkbookDescription
 database Database 
@@ -19,9 +21,11 @@ participant HomePresenter
 end box
  
 box "Server"
-participant HomeServices
-participant WorkbookDescriptionRepository
+participant WorkbookServices
+participant AddWorkbookDescriptionController
+participant WorkbookDescriptionService
 participant WorkbookDescription
+participant WorkbookDescriptionRepository
 end box
 
 box "Database"
@@ -30,12 +34,14 @@ end box
 
 User -> HomeView : click new workbook
 HomeView -> HomePresenter : onClick()
-HomePresenter ->> HomeServices : newWorkbookDescription
+HomePresenter ->> WorkbookServices : newWorkbookDescription(DTO)
+WorkbookServices -> AddWorkbookDescriptionController : addWorbookDescription(DTO)
+AddWorkbookDescriptionController -> WorkbookDescriptionService : addWorbookDescription(DTO)
 create WorkbookDescription
-HomeServices -> WorkbookDescription : wd = new
-HomeServices -> WorkbookDescriptionRepository : save(wb)
+WorkbookDescriptionService -> WorkbookDescription : wd = new
+WorkbookDescriptionService -> WorkbookDescriptionRepository : save(wb)
 WorkbookDescriptionRepository -> Database : write
-HomeServices ->> HomePresenter : onSuccess() 
+WorkbookServices ->> HomePresenter : onSuccess(DTO) 
 HomePresenter -> HomeView : setContents()
 
 @enduml
