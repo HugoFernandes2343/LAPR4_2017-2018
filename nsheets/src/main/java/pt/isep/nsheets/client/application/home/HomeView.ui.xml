@@ -9,7 +9,7 @@
  	        
     </g:HTMLPanel>
     
-    	<m:MaterialFAB>
+    <m:MaterialFAB>
  		<m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
  		<m:MaterialFABList>
  			<m:MaterialButton ui:field="newWorkbookButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="New Workbook" tooltipPosition="LEFT"/>

@@ -334,9 +334,45 @@ Notes:
 
 *Present and explain how you applied design patterns and best practices.*
 
+By memory we apply/use:  
+- Singleton  
+- Repository  
+- DTO  
+- MVP  
+
+**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes. 
+
 # 5. Implementation
 
 *If required you should present in this section more details about the implementation. For instance, configuration files, grammar files, etc. You may also explain the organization of you code. You may reference important commits.*
+
+**For US1**
+
+The UI for this US was already implemented. We simply implemented the server as described previously.
+
+**For US2**
+
+**UI: Button for adding a new Workbook Description**
+
+For this concern we decided to use a Material Widget called Material FAB (Floating Action Button). This is a kind of button that usually appears at the left bottom part of the screen and contains actions available for the elements of the page.  
+
+We updated the HomeView.ui.xml accordingly and declare the element with a tag *ui:field="newWorkbookButton"*. In the corresponding class View (i.e., HomeView) we bind that button to the corresponding widget class: 	
+
+	@UiField
+	MaterialButton newWorkbookButton;
+
+We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application. 
+
+We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
+
+Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
+
+	interface MyView extends View {
+		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
+		void addClickHandler(ClickHandler ch);
+	}
+
+Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
 
 # 6. Integration/Demonstration
 
