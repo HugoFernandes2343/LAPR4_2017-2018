@@ -15,9 +15,6 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
 	interface Binder extends UiBinder<Widget, MenuView> {
 	}
 
-	// @UiField
-	// SimplePanel main;
-
 	@UiField
 	MaterialNavBar navBar;
 	@UiField
@@ -26,9 +23,5 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
 	@Inject
 	MenuView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
-
-		// sideNav.addOpenedHandler(event -> getUiHandlers().setContentPush());
-		// sideNav.addClosedHandler(event -> getUiHandlers().setContentPush());
 	}
-
 }

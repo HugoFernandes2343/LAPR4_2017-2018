@@ -4,5 +4,5 @@
 
     <inherits name="pt.isep.nsheets.shared"/>
 
-    <source path="server"/>
+    <!-- <source path="server"/> -->
 </module>

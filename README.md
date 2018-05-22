@@ -33,7 +33,7 @@ To execute type (in the root folder):
 
 	mvn tomcat7:run-war-only
 
-Your application is now deployed at [http://127.0.0.1:8082/sheets](http://127.0.0.1:8082/sheets).
+Your application is now deployed at [http://127.0.0.1:8082/nsheets](http://127.0.0.1:8082/nsheets).
 	
 To start GWT Dev Mode, type in another shell/terminal/console:
 
@@ -122,4 +122,36 @@ For processing all **.puml** files inside the docs folder simply type in the roo
 
 	gradle
 
+# 7. Deployment with Docker and Ngrok
 
+To simulate a production like environment for deployment the project uses Docker (more specifically, docker-compose) and ngrok.
+
+To use this feature you need to install in your computer Docker ([Docker Community Edition](https://www.docker.com/community-edition)) as well as [ngrok](https://ngrok.com).
+
+The project includes the files *Dockerfile* and *docker-compose.yml* that are used to build the running environment.
+
+After building the **war** file of the project with *mvn clean install* you can execute the following command (in the root directory of the project) to run a production like environment:
+
+	docker-compose up -d 
+
+This will start the nsheets web application inside a container (running the Tomcat server) and exposing the application in port **8090**
+
+Simple use the url **http://localhost:8090/nsheets** in a browser to access the application.
+
+When you wish to stop the container type:
+
+	docker-compose down
+
+To make the application available to be accessed anywhere in the Internet start ngrok using:
+
+	ngrok http 8090
+	
+This command will provide a dynamic global url that can be used to access the application. For instance, if ngrok provides the url **http://97b418d3.ngrok.io** you can access the application from anywhere by using **http://97b418d3.ngrok.io/nsheets**
+
+###Deployment Alternatives###
+
+Alternative cloud deployments like Microsoft Azure, Amazon Web Services or Heroku can be used. Feel free to explore these services.
+
+
+ 
+ 

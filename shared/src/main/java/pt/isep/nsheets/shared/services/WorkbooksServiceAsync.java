@@ -10,4 +10,6 @@ public interface WorkbooksServiceAsync {
 
 	void getWorkbooks(AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback);
 
+	void addWorkbookDescription(WorkbookDescriptionDTO wdDto, AsyncCallback<WorkbookDescriptionDTO> callback);
+
 }

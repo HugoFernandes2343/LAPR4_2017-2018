@@ -28,33 +28,21 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 
+import com.gwtplatform.mvp.client.ViewImpl;
+
 import com.google.gwt.user.client.ui.Panel;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.table.MaterialDataTable;
-import pt.isep.nsheets.client.ui.NavigatedView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
 
-//public class HomeView extends ViewImpl implements HomePresenter.MyView {
-public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
-
-//	public static class CustomCategoryComponent extends CategoryComponent {
-//		public CustomCategoryComponent(String category) {
-//			super(category);
-//		}
-//
-//		@Override
-//		protected void render(TableSubHeader subheader) {
-//			super.render(subheader);
-//
-//			subheader.setOpenIcon(IconType.FOLDER_OPEN);
-//			subheader.setCloseIcon(IconType.FOLDER);
-//		}
-//	}
+// public class HomeView extends ViewImpl implements HomePresenter.MyView {
+// public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
+public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 	public MaterialTextBox getFirstBox() {
 		return firstBox;
@@ -65,16 +53,10 @@ public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyV
 	}
 
 
-	// @UiField Label firstLabel;
 	@UiField
 	MaterialTextBox firstBox;
 	@UiField
 	MaterialIcon firstButton;
-
-	// Replace this with your actual service interface, like so:
-	// private PersonServiceAsync personService = GWT.create(PersonService.class);
-	// we are faking the service on the client side to avoid requiring a web server.
-//	private PersonServiceAsync personService = GWT.create(FakePersonService.class);
 
 	@UiField
 	MaterialDataTable<SheetCell> customTable;
@@ -213,30 +195,5 @@ public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyV
 		super.onAttach();
 
 		// table.getTableTitle().setText("The Future Worksheet!");
-		//
-		// table.clearRowsAndCategories(true);
-		//
-		// loadCategories();
 	}
-
-//	protected void loadCategories() {
-//		// Load the categories from the server
-//		customTable.getView().setLoadMask(true);
-//
-//		personService.getCategories(new AsyncCallback<List<String>>() {
-//			@Override
-//			public void onSuccess(List<String> categories) {
-//				for (String category : categories) {
-//					customTable.addCategory(new CategoryComponent(category));
-//				}
-//				customTable.getView().setLoadMask(false);
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable throwable) {
-//				GWT.log("Getting people categories async call failed.", throwable);
-//			}
-//		});
-//	}
-
 }

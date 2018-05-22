@@ -1,0 +1,47 @@
+@startuml  design2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary HomeView
+control HomePresenter
+control WorkbookServices
+control AddWorkbookDescriptionController
+control WorkbookDescriptionService
+entity WorkbookDescriptionRepository
+entity WorkbookDescription
+database Database 
+
+box "NSheets Client"
+participant HomeView
+participant HomePresenter 
+end box
+ 
+box "Server"
+participant WorkbookServices
+participant AddWorkbookDescriptionController
+participant WorkbookDescriptionService
+participant WorkbookDescription
+participant WorkbookDescriptionRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> HomeView : click new workbook
+HomeView -> HomePresenter : onClick()
+HomePresenter ->> WorkbookServices : newWorkbookDescription(DTO)
+WorkbookServices -> AddWorkbookDescriptionController : addWorbookDescription(DTO)
+AddWorkbookDescriptionController -> WorkbookDescriptionService : addWorbookDescription(DTO)
+create WorkbookDescription
+WorkbookDescriptionService -> WorkbookDescription : wd = new
+WorkbookDescriptionService -> WorkbookDescriptionRepository : save(wb)
+WorkbookDescriptionRepository -> Database : write
+WorkbookServices ->> HomePresenter : onSuccess(DTO) 
+HomePresenter -> HomeView : setContents()
+
+@enduml

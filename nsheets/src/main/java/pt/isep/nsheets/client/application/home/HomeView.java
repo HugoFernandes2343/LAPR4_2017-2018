@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -13,12 +15,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
+import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCard;
 import gwt.material.design.client.ui.MaterialCardContent;
 import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialRow;
+import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
@@ -29,39 +33,12 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 	@UiField
 	HTMLPanel htmlPanel;
 
+	@UiField
+	MaterialButton newWorkbookButton;
+	
 	@Inject
 	HomeView(Binder uiBinder) {
-		initWidget(uiBinder.createAndBindUi(this));
-		
-//		// Try to programmatically add a row, column and card
-//		MaterialRow row=new MaterialRow();
-//		
-//	    MaterialColumn col=new MaterialColumn();
-//	    col.setGrid("l4");
-//	    row.add(col);
-//	    
-//	    MaterialCard card=new MaterialCard();
-//	    card.setBackgroundColor(Color.BLUE_DARKEN_1);
-//	    
-//        MaterialCardContent cardContent=new MaterialCardContent();
-//        cardContent.setTextColor(Color.WHITE);
-//        
-//        MaterialCardTitle cardTitle=new MaterialCardTitle();
-//        cardTitle.setText("Sample");
-//        cardTitle.setIconType(IconType.POLYMER);
-//        cardTitle.setIconPosition(IconPosition.RIGHT);
-//
-//        MaterialLabel label=new MaterialLabel();
-//        label.setText("Era uma vez um texto bastante extenso...");
-//
-//        cardContent.add(cardTitle);
-//        cardContent.add(label);
-//        
-//        card.add(cardContent);
-//	    
-//	    col.add(card);      
-//	    
-//		htmlPanel.add(row);
+		initWidget(uiBinder.createAndBindUi(this));		
 	}
 	
 	private MaterialCard createCard(WorkbookDescriptionDTO wb) {
@@ -89,8 +66,6 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
 	@Override
 	public void setContents(ArrayList<WorkbookDescriptionDTO> contents) {
-		// TODO Auto-generated method stub
-		
 		int colCount=1;
 		
 		MaterialRow row=null;
@@ -115,4 +90,11 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 		}
 		
 	}
+	
+	@Override
+	public void addClickHandler(ClickHandler ch) {
+		// TODO Auto-generated method stub
+		
+		newWorkbookButton.addClickHandler( ch );
+	}	
 }
