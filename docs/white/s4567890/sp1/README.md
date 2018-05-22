@@ -374,6 +374,28 @@ Since Presenters should only depend on a View interface we added a new method to
 
 Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
 
+**Code Organization**  
+
+We followed the recommended organization for packages:  
+- Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
+- For instance, we used **lapr4.white.s1.core.n4567890**
+
+The code for this sprint:  
+Project **server**    
+- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
+- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
+- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes 
+- Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
+
+Project **shared**  
+- Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
+- Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
+
+Project **NShests** 
+- Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
+- Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
+
+
 # 6. Integration/Demonstration
 
 *In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
