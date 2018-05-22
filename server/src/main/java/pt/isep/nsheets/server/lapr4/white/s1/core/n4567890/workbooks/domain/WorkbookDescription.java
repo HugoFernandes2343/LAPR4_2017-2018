@@ -97,4 +97,9 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 	public WorkbookDescriptionDTO toDTO() {
 		return new WorkbookDescriptionDTO(this.name, this.description);
 	}
+
+	public static WorkbookDescription fromDTO(WorkbookDescriptionDTO dto) throws IllegalArgumentException {
+		return new WorkbookDescription(dto.getName(), dto.getDescription());
+	}
+
 }

@@ -220,18 +220,13 @@ For the Domain classes we will have a class that represents the entity **Workboo
 	- name (string)
 	- description (string) 
 
-Tests:  
-- We should ensure that a WorkbookDescription can be created when all the attributes are set.  
+**Test:** We should ensure that a WorkbookDescription can be created when all the attributes are set.  
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
 		System.out.println("ensureNullIsNotAllowed");
 		WorkbookDescription instance = new WorkbookDescription(null, null);
 	}
-
-Coverage:  
-- The actual coverage for class WorkbookDescription: 30%  
-- TODO: Add more tests, specially for the DTO. 
 
 **Services/Controllers**
 
@@ -251,7 +246,7 @@ The proposal is:
 	@RemoteServiceRelativePath("workbooksService")
 	public interface WorkbooksService extends RemoteService {
 		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-		Long addWorkbookDescription(WorkbookDescriptionDTO);
+		WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
 	}
 		
 Tests:  
@@ -260,19 +255,55 @@ Tests:
 - We will have a *controller* from adding new WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
 - We will have a *controller* from listing WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
 
-Verify the normal creation of an WorkbookDescription.  
+Controller **AddWorkbookDescriptionController**
+
+**Test:** Verify the normal creation of an WorkbookDescription.  
 
 	@Test
 	public void testNormalBehaviour() throws Exception {
+		System.out.println("testNormalBehaviour");
 		final String name = "Workbook1";
 		final String description = "Description for Workbook1";
 		final WorkbookDescription expected = new WorkbookDescription(name, description);
 		AddWorkbookDescriptionController ctrl = new AddWorkbookDescriptionController();
-		WorkbookDescription result = ctrl.addWorkbookDescription(name, description);
+		WorkbookDescription result = ctrl.addWorkbookDescription(expected.toDTO());
 		assertTrue("the added WorkbookDescription does not have the same data as input", expected.sameAs(result));
 	}
+
+Controller **ListWorkbookDescriptionController**
+
+Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDING) to ensure the test methods are executed in order. This is useful since the memory database will have state changing between tests.
  
- If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks();		
+**Test:** At the beginning of the tests the memory database should be empty, so listWorkbookDiscriptions should return an empty set.
+
+	   @Test 
+	   public void testAensureGetWorkbooksEmpty() {
+		   System.out.println("testAensureGetWorkbooksEmpty");
+		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
+		   Iterable<WorkbookDescription> wbs=ctrl.listWorkbookDescriptions();
+		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
+	   } 
+ 
+**Test:** If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks().
+
+		@Test
+		public void testBtestDatabaseInsertion() throws Exception {
+			System.out.println("testBtestDatabaseInsertion");
+			final String name = "Workbook1";
+			final String description = "Description for Workbook1";
+			final WorkbookDescription expected = new WorkbookDescription(name, description);
+			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
+			WorkbookDescription result = ctrlAdd.addWorkbookDescription(expected.toDTO());
+			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
+			Iterable<WorkbookDescription> wbs=ctrlList.listWorkbookDescriptions();
+			assertTrue("the added WorkbookDescription is not in the database", wbs.iterator().hasNext());
+		}
+
+**Test Coverage**  
+- The actual coverage for domain classes: 61%
+- The actual coverage for application(controller) classes: 100%
+ 
+- TODO: Add more tests to increase the coverage of the domain class. 
 
 ## 4.2. Requirements Realization
 
@@ -289,7 +320,7 @@ Notes:
 - For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
 - **WorkbookServices** realizes the GWT RPC mechanism;  
 - **ListWorkbookDescriptionController** is the *use case controller*;  
-- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. For the moment it really does not seem necessary, adding only a new layer of indirection. *To be removed?*  
+- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. 
 
 **For US2**
 

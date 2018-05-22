@@ -81,7 +81,7 @@ public class ListWokbookDescriptionControllerTest {
 
 			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
 
-			WorkbookDescription result = ctrlAdd.addWorkbookDescription(name, description);
+			WorkbookDescription result = ctrlAdd.addWorkbookDescription(expected.toDTO());
 			
 			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
 			   
