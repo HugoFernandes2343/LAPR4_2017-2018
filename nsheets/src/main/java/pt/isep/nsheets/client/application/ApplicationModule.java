@@ -29,7 +29,8 @@ import pt.isep.nsheets.client.application.workbook.WorkbookModule;
 public class ApplicationModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        install(new HomeModule());
+
+    	install(new HomeModule());
 		install(new MenuModule());
 		install(new AboutModule());
 		install(new WorkbookModule());

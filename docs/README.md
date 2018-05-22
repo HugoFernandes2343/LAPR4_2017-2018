@@ -21,7 +21,8 @@ These are links for the individual pages/folders of each Student. The first one 
 
 | Group | Student Number     | Student Name                        | Link 							  |
 |------|--------------------|-------------------------------------|------------------------------------|
-| Red  | **s1122101**      			| John Doe					|[John Doe](red/s1122101/) |
+| White  | **s4567890**      			| John Doe					|[John Doe](white/s4567890/) |
+| Red  |     	 	 			| 						|						 |
 | Red  |			      			| 							|								 |
 | Red  | 			      			| 							|								 |
 | Red  | 			      			| 							|								 |
@@ -57,7 +58,8 @@ This is a table that should display the overall planning of the team. This is si
 
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
-| Red  | [John Doe](red/s1122101/) | [Core01.1](red/s1122101/sp1)            | [IPC01.2](red/s1122101/sp2)           | [Lang01.3](red/s1122101/sp3) |
+| White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1)            | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
+| Red  | 						| 				            | 					          | 	 |
 | Red  |			      			| 							|								 |		|
 | Red  | 			      			| 							|								 |		|
 | Red  | 			      			| 							|								 |		|

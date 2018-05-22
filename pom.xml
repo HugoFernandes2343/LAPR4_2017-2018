@@ -19,6 +19,8 @@
         <module>server</module>
         <module>shared</module>
         <module>nsheets</module>
+        <module>util</module>        
+        <module>framework</module>        
     </modules>
 
 	<name>NSheets - Parent</name>
@@ -280,5 +282,12 @@
 			<artifactId>antlr4gwt-annotations</artifactId>
 			<version>4.4.8</version>
 		</dependency>
+		
+		<!-- JPA -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.2</version>
+        </dependency>		
 	</dependencies>
 </project>
