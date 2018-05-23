@@ -5,6 +5,8 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence;
 
+import javax.persistence.EntityManager;
+
 /**
  * @author Paulo Gandra Sousa
  *
@@ -12,6 +14,6 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistenc
 public interface RepositoryFactory {
 
     PersistenceSettings setSettings(PersistenceSettings settings);
-        
+    
     WorkbookDescriptionRepository workbookDescriptions();
 }

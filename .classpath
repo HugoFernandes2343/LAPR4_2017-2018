@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="nsheets/src/main/java"/>
+	<classpathentry kind="src" path="server/src/test/resources"/>
 	<classpathentry kind="src" path="server/src/test/java"/>
 	<classpathentry kind="src" path="util/src/main/java"/>
 	<classpathentry kind="src" path="framework/src/main/java"/>

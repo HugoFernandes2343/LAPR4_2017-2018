@@ -2,7 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
   <persistence-unit name="lapr4.NSheetsPU">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.Contact</class> 
    <class>pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription</class>     
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->

@@ -33,6 +33,7 @@ public class AddWokbookDescriptionControllerTest {
 		// Other JPA properties that one might want to override from the ones in
 		// persistence.xml
 		// props.put("javax.persistence.jdbc.url", "jdbc:h2:mem:");
+		props.put("javax.persistence.jdbc.url", "jdbc:h2:mem:AddWokbookDescriptionControllerTest");
 		props.put("javax.persistence.schema-generation.database.action", "create");
 		// appProps.put("javax.persistence.jdbc.password", "");
 		// appProps.put("javax.persistence.jdbc.driver", "org.h2.Driver");

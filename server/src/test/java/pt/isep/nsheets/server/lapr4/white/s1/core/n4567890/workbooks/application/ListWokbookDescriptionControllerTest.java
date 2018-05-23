@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Properties;
 
+import org.eclipse.persistence.sessions.Session;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,6 +36,7 @@ public class ListWokbookDescriptionControllerTest {
 	        
 	        // Other JPA properties that one might want to override from the ones in persistence.xml 
 	        // props.put("javax.persistence.jdbc.url", "jdbc:h2:mem:");
+			props.put("javax.persistence.jdbc.url", "jdbc:h2:mem:ListWokbookDescriptionControllerTest");
 	        props.put("javax.persistence.schema-generation.database.action", "create");
 	        // appProps.put("javax.persistence.jdbc.password", "");
 	        // appProps.put("javax.persistence.jdbc.driver", "org.h2.Driver");
@@ -52,6 +54,7 @@ public class ListWokbookDescriptionControllerTest {
 
 	   @Before
 	   public void setUp() {
+	   
 	   }
 
 	   @After
