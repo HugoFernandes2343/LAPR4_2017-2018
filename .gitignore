@@ -37,3 +37,8 @@ gradle-app.setting
 **/reports/
 
 
+.idea/
+db/
+out/
+nsheets/nbactions.xml
+lib/javax.persistence.jar

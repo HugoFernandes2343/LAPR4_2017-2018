@@ -20,29 +20,35 @@
 package pt.isep.nsheets.client.place;
 
 public class NameTokens {
-	
-	public static final String home = "home";
-	
-	public static final String about = "about";
 
-	public static final String workbook = "workbook";
-        
-	public static final String settings = "settings";
+    public static final String home = "home";
 
-	public static String getWorkbook() {
-		return workbook;
-	}
+    public static final String about = "about";
 
-	public static String getAbout() {
-		return about;
-	}
+    public static final String workbook = "workbook";
 
-	public static String getHome() {
-		return home;
-	}
+    public static final String settings = "settings";
+    
+    public static final String login = "login";
 
-	public static String getSettings() {
-		return settings;
-	}
+    public static String getWorkbook() {
+        return workbook;
+    }
+
+    public static String getAbout() {
+        return about;
+    }
+
+    public static String getHome() {
+        return home;
+    }
+
+    public static String getLogin() {
+        return login;
+    }
+
+    public static String getSettings() {
+        return settings;
+    }
 
 }
