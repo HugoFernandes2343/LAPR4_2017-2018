@@ -26,6 +26,8 @@ public class NameTokens {
 	public static final String about = "about";
 
 	public static final String workbook = "workbook";
+        
+	public static final String settings = "settings";
 
 	public static String getWorkbook() {
 		return workbook;
@@ -37,6 +39,10 @@ public class NameTokens {
 
 	public static String getHome() {
 		return home;
+	}
+
+	public static String getSettings() {
+		return settings;
 	}
 
 }

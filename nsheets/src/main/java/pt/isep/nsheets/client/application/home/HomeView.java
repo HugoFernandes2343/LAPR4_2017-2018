@@ -35,7 +35,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
 	@UiField
 	MaterialButton newWorkbookButton;
-	
+
 	@Inject
 	HomeView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));		
