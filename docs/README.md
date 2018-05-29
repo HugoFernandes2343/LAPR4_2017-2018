@@ -71,7 +71,7 @@ This is a table that should display the overall planning of the team. This is si
 | Red  |[Ricardo Correia](red/s1151231/) |               |                 |    |
 | Green |[Carlos Rodrigues](green/s1151136/) |  [IPC06.1](green/s1151136/sp1)						|								 |		|
 | Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)					|								 |		|
-| Green |[João Santiago](green/s1160696/) 	 | [IPC04.1](green/s1160696/sp1)						|								 |		|
+| Green |[João Santiago](green/s1160696/) 	 | [IPC05.1](green/s1160696/sp1)						|								 |		|
 | Green |[Paulo Magalhães](green/s1160570/)  | [IPC01.1](green/s1160570/sp1)	 							|								 |		|
 | Green |[Nemanja Cosic](green/s1171776/)  	 | 							|								 |		|
 | Green |[Predrag Miljic](green/s1171787/) 	 | 							|								 |		|
