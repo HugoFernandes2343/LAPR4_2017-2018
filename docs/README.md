@@ -78,10 +78,10 @@ This is a table that should display the overall planning of the team. This is si
 | Green |[Zoran Protic](green/s1171815/) 		 | 							|								 |		|
 | Blue |[João Oliveira](blue/s1161248/)    | 							|								 |		|
 | Blue |[Ana Jesus](blue/s1130443/) 		   | 							|								 |		|
-| Blue |[José Silva](blue/s1150371/) 		   | 							|								 |		|
-| Blue |[Pedro Tedim](blue/s1091234/) 	   | 							|								 |		|
-| Blue |[Rodrigo Soares](blue/s1140420/)   | 							|								 |		|
-| Blue |[Daniel Fernandes](blue/s1150585/) | 							|								 |		|
+| Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|								 |		|
+| Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|								 |		|
+| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|								 |		|
+| Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|								 |		|
 | Blue |[Pietro Falco](blue/s1171786/)	 	 | 							|								 |		|
 | Blue |[Barbara Csonka](blue/s1171715/)   |              |                |    |
 
