@@ -3,7 +3,7 @@ LAPR4/NSheets Project Documentation
 
 # 1. Organization
 
-Each **Class Section** (i.e., "Turma PL") **is a Team** in the LAPR4 Project. 
+Each **Class Section** (i.e., "Turma PL") **is a Team** in the LAPR4 Project.
 
 Each Team will have its one fork of the NSheets repository.
 
@@ -22,36 +22,38 @@ These are links for the individual pages/folders of each Student. The first one 
 | Group | Student Number     | Student Name                        | Link 							  |
 |------|--------------------|-------------------------------------|------------------------------------|
 | White  | **s4567890**      			| John Doe					|[John Doe](white/s4567890/) |
-| Red  |     	 	 			| 						|						 |
-| Red  |			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Red  | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Green | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
-| Blue | 			      			| 							|								 |
+| Red  | **s1161569**    	 	 			| Hugo Carvalho			|[Hugo Carvalho](red/s1161569/)	   |
+| Red  | **s1161155**			      	| Hugo Fernandes 		|[Hugo Fernandes](red/s1161155/)	 |
+| Red  | **s1160777**		    			| Marco Carneiro		|[Marco Carneiro](red/s1160777/)	 |
+| Red  | **s1161109**			   			| David Santiago		|[David Santiago](red/s1161109/)	 |
+| Red  | **s1161110**			      	| David Maia				|[David Maia](red/s1161110/)			 |
+| Red  | **s1161213**	      			| Filipe Simão			|[Filipe Simão](red/s1161213/)		 |
+| Red  | **s1120608**			      	| Norberto Sousa 		|[Norberto Sousa](red/s1120608/)	 |
+| Red  | **s1151231**			      	| Ricardo Correia 	|[Ricardo Correia](red/s1151231/)	 |
+| Green | **s1151136**			        | Carlos Rodrigues	|[Carlos Rodrigues](green/s1151136/)	|
+| Green | **s1150575**	      			| João Vieira				|[João Vieira](green/s1150575/)				|
+| Green | **s1160696**	      			| João Santiago			|[João Santiago](green/s1160696/)			|
+| Green | **s1160570**			      	| Paulo Magalhães	  |[Paulo Magalhães](green/s1160570/)		|
+| Green | **s1171776**			      	| Nemanja	Cosic			|[Nemanja	Cosic](green/s1171776/)		  |
+| Green | **s1171787**			      	| Predrag	Miljic		|[Predrag Miljic](green/s1171787/)	  |
+| Green | **s1171815**			   			| Zoran Protic	  	|[Zoran Protic](green/s1171815/)			|
+| Blue | **s1161248**			      	| João Oliveira	  	|[João Oliveira](blue/s1161248/)	  |
+| Blue | **s1130443**			      	| Ana Jesus					|[Ana Jesus](blue/s1130443/)				|
+| Blue | **s1150371**			      	| José Silva 				|[José Silva](blue/s1150371/)				|
+| Blue | **s1091234**			     		| Pedro Tedim				|[Pedro Tedim](blue/s1091234/)		  |
+| Blue | **s1140420**			     		| Rodrigo Soares		|[Rodrigo Soares](blue/s1140420/)		|
+| Blue | **s1150585**			      	| Daniel Fernandes	|[Daniel Fernandes](blue/s1150585/)	|
+| Blue | **s1171786**		      		| Pietro Falco			|[Pietro Falco](blue/s1171786/)			|
+| Blue | **s1171715**			      	| Barbara Csonka		|[Barbara Csonka](blue/s1171715/)		|
 
 # 3. Planning Overview
 
-This is a table that should display the overall planning of the team. This is simply and example and you should update the table with the plan of your team. 
+This is a table that should display the overall planning of the team. This is simply and example and you should update the table with the plan of your team.
 
 | Group | Sprin1     | Sprint2        | Sprint 3	  |
 |------|------------|----------------|-------------|
 | Red  | Core   		| IPC			| Lang        |
-| Green  | IPC      | Lang		    | Core		  |	
+| Green  | IPC      | Lang		    | Core		  |
 | Blue  | Lang	    | Core	  		| IPC    	  |
 
 # 4. Planning Detail
@@ -59,33 +61,35 @@ This is a table that should display the overall planning of the team. This is si
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1)            | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
-| Red  | 						| 				            | 					          | 	 |
-| Red  |			      			| 							|								 |		|
-| Red  | 			      			| 							|								 |		|
-| Red  | 			      			| 							|								 |		|
-| Red  | 			      			| 							|								 |		|
-| Red  | 			      			| 							|								 |		|
-| Red  | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|	
-| Green | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|
-| Green | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
-| Blue | 			      			| 							|								 |		|
+| Red  |[Hugo Carvalho](red/s1161569/)   | 		 		       |   	             |	  |
+| Red  |[Hugo Fernandes](red/s1161155/)	 | 							 |								 |		|
+| Red  |[Marco Carneiro](red/s1160777/)  | 							 |								 |		|
+| Red  |[David Santiago](red/s1161109/)  | 							 |								 |		|
+| Red  |[David Maia](red/s1161110/)      | 							 |								 |		|
+| Red  |[Filipe Simão](red/s1161213/) 	 | 							 |								 |		|
+| Red  |[Norberto Sousa](red/s1120608/)  | 							 |								 |		|
+| Red  |[Ricardo Correia](red/s1151231/) |               |                 |    |
+| Green |[Carlos Rodrigues](green/s1151136/) | 							|								 |		|
+| Green |[João Vieira](green/s1150575/) 		 | 							|								 |		|
+| Green |[João Santiago](green/s1160696/) 	 | 							|								 |		|
+| Green |[Paulo Magalhães](green/s1160570/)  | 							|								 |		|
+| Green |[Nemanja Cosic](green/s1171776/)  	 | 							|								 |		|
+| Green |[Predrag Miljic](green/s1171787/) 	 | 							|								 |		|
+| Green |[Zoran Protic](green/s1171815/) 		 | 							|								 |		|
+| Blue |[João Oliveira](blue/s1161248/)    | 							|								 |		|
+| Blue |[Ana Jesus](blue/s1130443/) 		   | 							|								 |		|
+| Blue |[José Silva](blue/s1150371/) 		   | 							|								 |		|
+| Blue |[Pedro Tedim](blue/s1091234/) 	   | 							|								 |		|
+| Blue |[Rodrigo Soares](blue/s1140420/)   | 							|								 |		|
+| Blue |[Daniel Fernandes](blue/s1150585/) | 							|								 |		|
+| Blue |[Pietro Falco](blue/s1171786/)	 	 | 							|								 |		|
+| Blue |[Barbara Csonka](blue/s1171715/)   |              |                |    |
 
 # 5. Requirements
 
-The ultimate goal of this project is to develop the first version of Cleansheets for the Web. As such, it may be wise to study the previous desktop version. You may fork the desktop version available in [Bitbucket](https://bitbucket.org/lei-isep/csheets). Along with the code you may find the documentation (i.e., the manual) in 'manual/doc/lapr4_manual.pdf'. 
+The ultimate goal of this project is to develop the first version of Cleansheets for the Web. As such, it may be wise to study the previous desktop version. You may fork the desktop version available in [Bitbucket](https://bitbucket.org/lei-isep/csheets). Along with the code you may find the documentation (i.e., the manual) in 'manual/doc/lapr4_manual.pdf'.
 
-The requirements for this new version are similar to the ones of the previous version but some updates have been made by the Product Owner. You may find the specific requirements for this edition further down in this section. 
+The requirements for this new version are similar to the ones of the previous version but some updates have been made by the Product Owner. You may find the specific requirements for this edition further down in this section.
 
 In this document four terms that are related to similar concepts are used: feature, functional increment, use case and user story. Although similar they are different. Features refer to the identification of a requirement in this document. Each requirement/feature is further divided into functional increments. Normally, each functional increment depends on the previous increment of the same feature. It can also depend on other features, but that is to be discovered during the normal process of analysis. Functional increments of a feature should be developed in sequence.
 
@@ -95,45 +99,45 @@ Requirements are classified in three functional areas:
 	- **Core**: These are requirements that are related to the architecture and common functionalities of NSheets  
 	- **Languages** These are requirements that are related to the formulas of NSheets and other aspects related to languages, parsers and grammars  
 	- **IPC**: These are requirements that explore interprocess communication  
-	
+
 **Rules for the Scheduling of Requirements**  
 	- The project is a team work. Important design decisions (e.g., with impact in the architecture or futures developments) must be discussed and taken as a team.  
 	- Each Feature Increment must be developed individually.  
 	- Features that are mandatory are required to be developed.  
 	- Some features may be dependent on others. Students must make sure that dependent features are ready and, if not, develop the required functionality.    
 	- When a Feature is started it must be completed, i.e., all the three functional increments must be developed.
-	
+
 ## 5.1 Core
 
 ### Core01 - Workbook View (Mandatory)
-	
+
 - **Core01.1 - Partial Workbook View**
-	
+
 	The workbook page should be related to one of the workbooks displayed in the home page. It should be possible to create a new empty workbook in the home page.
 	Workbooks should be persisted in the server. At this moment a workbook must only have one spreadsheet.
-	
+
 - **Core01.2 - Complete Workbook View**
-	
+
 	The application should now support complete workbooks, i.e., workbooks with several spreadsheets. It should be possible to make references between sheets in the formulas.
 	It should also be possible to delete workbooks and update their metadata (name and description).
-	
+
 - **Core01.3 - Several Active Workbooks**
 
 	It should be possible to open several workbooks at the same time. It should be possible to make references between workbooks in the formulas.
-	
+
 ### Core02 - Extensions (Mandatory)
 
 - **Core02.1 - Basic Extension Mechanism**
 
 	Implement an extension mechanism that can be used to add functionality to the application. For the moment it should support extensions that add cell decorators. The application should also have a new settings page with a specific section for each extension. For testing purposes a new extension should be developed that changes the background color of numeric cells according to its value being positive or negative. The color should be configured in the settings page.
-	
+
 - **Core02.2 - Full Extension Mechanism**
-	
+
 	The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
-	
+
 - **Core02.3 - Enable/Disable Extensions**
 
-	It should be possible to enable and disable extensions. At least one of the extensions of Core08 should be updated to support this feature. 
+	It should be possible to enable and disable extensions. At least one of the extensions of Core08 should be updated to support this feature.
 
 ### Core03 - Sort and Dependencies in Cells
 
@@ -144,10 +148,10 @@ Requirements are classified in three functional areas:
 - **Core03.2 - Filter Range of Cells**
 
 	It should be possible to filter a range of cells. The filter should be a boolean formula that is applied to each row (and a specific column of the range). If the result is true, the row is visible. If the result is false, the row should become invisible.
-	
+
 - **Core03.3 - Dependency Tree Extension**
 
-	This feature should implement a similar functionality to the one provided by the "Dependency Tree Extension" in the Desktop version of Cleansheets.	
+	This feature should implement a similar functionality to the one provided by the "Dependency Tree Extension" in the Desktop version of Cleansheets.
 
 ### Core04 - Charts
 
@@ -162,7 +166,7 @@ Requirements are classified in three functional areas:
 - **Core04.3 - Dynamic Charts**
 
 	The charts should now be dynamic. A dynamic chart is a chart that is automatically updated when its source data changes. The application should now graphically mark the range of cells that are source to charts (e.g., with a surrounding border). Also, when the mouse hovers over the left upper corner of a range of cells that is the source of a chart a preview of the chart should appear.
-	
+
 ### Core05 - Contacts, Tasks and Reminders
 
 - **Core05.1 - Contacts**
@@ -174,9 +178,9 @@ Requirements are classified in three functional areas:
 	It should be possible to create, edit and remove tasks. A task has a name, a description, and a list of contacts. A task also has a priority level (1 to 5) and a percentage of completion. The application should have a window to display and edit tasks. It should be possible to sort and filter the tasks using expressions based on its fields. For instance, it should be possible to only display tasks which are not completed. Tasks should be visible to all the contacts related to the task.
 
 - **Core05.3 - Reminders**
-	
+
 	It should be possible to create, edit and remove reminders. The user is notified when the due date of the reminder arrives. A reminder has a name, a description and a time stamp (due date). The application should only allow valid time stamps. The application should list all the existing reminders. When the due date of a reminder is reached the application should automatically display an alert to the user in a popup window. This popup window should display the name, description and due date of the reminder. The window should have two buttons. One button to close the window and the other button to remind again the user in a specific elapse of time (e.g., 5 minutes).
-	
+
 ### Core06 - Calendar
 
 - **Core06.1 - Calendar**
@@ -184,19 +188,19 @@ Requirements are classified in three functional areas:
 	The application should have a calendar view to display events. An event has a title, description, time stamp and duration. Events should be displayed in the calendar ordered by their time stamp. It should be possible to create, edit and delete events. The calendar should display all events.
 
 - **Core06.2 - Basic Agenda**
-	
+
 	The calendar view should now evolve into an agenda view that may display several calendars. It should be possible to create, edit and remove calendars. Each user can have one or more calendars. Each calendar has a name (e.g., work, birthdays, home, etc.) and a textual description. It should be possible to associate a color to a calendar (events of that calendar are displayed with the color of the calendar). It should be possible to filter what calendars are displayed in the agenda view.	The agenda view can be implemented as a simple list of events (from the calendars). The view should display only actual and future events.
 
 - **Core06.3 - Advanced Agenda**
 
-	The agenda view should now have a display area divided in 24 slots, one for each hour of the day. Each of the slots should have a small text displaying the hour of the day. The Events should be displayed in a size corresponding to its duration and in the color of the calendar. It should be possible to select the calendars to display in the view. When double clicking in an event its edit window should appear. It should be possible to switch between this new view and the previous view. The view should include buttons to move between days and to select the day to display. 
-	
+	The agenda view should now have a display area divided in 24 slots, one for each hour of the day. Each of the slots should have a small text displaying the hour of the day. The Events should be displayed in a size corresponding to its duration and in the color of the calendar. It should be possible to select the calendars to display in the view. When double clicking in an event its edit window should appear. It should be possible to switch between this new view and the previous view. The view should include buttons to move between days and to select the day to display.
+
 ### Core07 - Notes
 
 - **Core07.1 - Notes**
 
 	It should be possible to create, edit and remove text notes. A user can have one or more notes. There should be a window to list the textual notes of a user. A text note should be entered as multiline text in which the first line is interpreted as the title of the text note. The time stamp of the creation of the note should be also associated with the text note. The application should maintain the history of modifications for each text note. When a text note is selected, the application should display its history. For each version, the application should display the time stamp and the first line (i.e., the title).
-	
+
 - **Core07.2 - Lists**
 
 	It should be possible to create, edit and remove list notes. A list note is similar to a textual note but each line is displayed as a check box (that can be checked or unchecked). The first line is also interpreted as the title of the list note. It should be possible to generate a new version of a text note or list based on an old version of it. When this happens, the application should "open" the new version for edit with the same contents of the old version. This is the only "trace" that may eventually link to the old version.
@@ -204,7 +208,7 @@ Requirements are classified in three functional areas:
 - **Core07.3 - Search and Export Notes**
 
 	It should be possible to search for notes (text and lists) within a time interval. The query expression should allow to search based on the title and/or contents of the notes. It should be possible to use regular expressions to search the contents of the notes that are within the time interval. It should be possible to open a specific note by double clicking on it in the result list. It should be possible to export the search results into a range in an spreadsheet.
-	
+
 ### Core08 - Base Extensions
 
 - **Core08.1 - Styles in Cells Extension**
@@ -218,7 +222,7 @@ Requirements are classified in three functional areas:
 - **Core08.3 - Images in Cells Extension**
 
 	The application should have a new extension similar to the previous one but regarding the possibility of associating images with cells.
-	
+
 ## 5.2 IPC
 
 ### IPC01 - Security (Mandatory)
@@ -226,11 +230,11 @@ Requirements are classified in three functional areas:
 - **IPC01.1 - User Authentication**
 
 	All the pages of the application should require an authenticated user (except the "About" page). The application should have a "Login" page (Hint: Gatekeepers in GWTP). Some hard-coded users should be defined to be initially used for authentication. There should also exist a super-user that is able to access **everything**.
-	
+
 - **IPC01.2 - Register User**
 
-	The application should add the possibility of registering new users. The identification of a user should be based on his email. Each user should have an email, name, nickname and picture (i.e., face photo). The application should display the nickname and photo of the authenticated user in the top of every page. 
-	
+	The application should add the possibility of registering new users. The identification of a user should be based on his email. Each user should have an email, name, nickname and picture (i.e., face photo). The application should display the nickname and photo of the authenticated user in the top of every page.
+
 - **IPC01.3 - Security Profile**
 
 	The application should now have a new "Profile" page to allow users to manage their accounts. The user should be able to change his information (name, nickname and photo) and also delete the account. The super-user should be able to access all the accounts and be able to enable/disable accounts. When an account is disable its user is not able to authenticate.  
@@ -243,12 +247,12 @@ Requirements are classified in three functional areas:
 
 - **IPC02.2 - Workbook Search and Replace**
 
-	The application should now have a new option for "Search and Replace". This new window should be similar to the search window but with an area to enter the replacing text. When search and replace is launched, when a match is found, the window should display "what" was found, "where" the match has occurred and how it will become after the replace. The user should then confirm the replacement or select next (to continue the search). The window should include a button to apply the replacing to all the matches without asking each time. Similarly to the search only option, this option should also have parameters to refine the search, for instance, what type of cells to include in the search (or if it should include formulas or comments). "Search" and "Search and Replace" should should include contents of all the spreadsheets of the active workbook. 
+	The application should now have a new option for "Search and Replace". This new window should be similar to the search window but with an area to enter the replacing text. When search and replace is launched, when a match is found, the window should display "what" was found, "where" the match has occurred and how it will become after the replace. The user should then confirm the replacement or select next (to continue the search). The window should include a button to apply the replacing to all the matches without asking each time. Similarly to the search only option, this option should also have parameters to refine the search, for instance, what type of cells to include in the search (or if it should include formulas or comments). "Search" and "Search and Replace" should should include contents of all the spreadsheets of the active workbook.
 
 - **IPC02.3 - Global Search/Replace**
 
 	The application should now support "Search" and "Search and Replace" to be applied for all the workbooks of the user (may they be active/open or not). It should be possible to apply the search to workbooks which name matches a specific regular expression.  
-		
+
 ### IPC03 - PDF
 
 - **IPC03.1 - Basic PDF Export**
@@ -262,7 +266,7 @@ Requirements are classified in three functional areas:
 - **IPC03.3 - PDF Complete Export**
 
 	At this level, the export may include all the contents that are persisted with a workbook. For instance, all the following contents should be exported: the source of formulas, comments, images, macros, etc. However, the user should be given the possibility to select the type of contents to include in the PDF. Therefore, it is expected that the PDF includes sections that represent the visual aspect of the exported spreadsheets (as far as possible in a similar manner to how they are displayed on screen) and also new sections to include the contents that do not appear in the cells like, for instance, macros, comments or images. In each of this sections the contents should make references to the cells that are related to them (if they are related to cells).
-	
+
 ### IPC04 - XML
 
 - **IPC04.1 - Export XML**
@@ -270,13 +274,13 @@ Requirements are classified in three functional areas:
 	It should be possible to export the contents of an workbook, spreadsheet or part of a spreadsheet to a XML file. As we want to optimize as much as possible the process the solution should not rely on any third party library. The application should have a window/page to configure the XML tags to use for each type of element. The export should only include the value of the cells. The generated XML should be downloaded to the user local file system.
 
 - **IPC04.2 - Import XML**
-	
-	It should be possible to import (i.e., upload) data from an XML file (this operation is the "inverse" of the previous one). Depending on the contents of the XML file, the data from the file can replace the contents of the active workbook, a spreadsheet or a range of a spreadsheet. 
+
+	It should be possible to import (i.e., upload) data from an XML file (this operation is the "inverse" of the previous one). Depending on the contents of the XML file, the data from the file can replace the contents of the active workbook, a spreadsheet or a range of a spreadsheet.
 
 - **IPC04.3 - Full XML Import/Export**
 
 	The previous options should now include all the persisting elements of the workbooks (i.e., all the contents that are normally persisted with the workbook, such as macros, formatting styles, comments, etc.). The import should now ask the user if the file contents should replace or append the existing workbook contents.
-	
+
 ### IPC05 - CLS/CSV Persistence
 
 - **IPC05.1 - Export to CSV**
@@ -290,31 +294,31 @@ Requirements are classified in three functional areas:
 - **IPC05.3 - Import/Export CSV and CLS**
 
 	It should be possible to import and export in both formats: CLS and CSV.
-	
+
 ### IPC06 - Workbook Sharing				
 
 - **IPC06.1 - Public Workbooks**
 
-	Workbooks should be considered public. A public workbook is a workbook that can be accessed by all users. The "Home" page should display all the workbooks. It should be possible to apply filters to this view/page to display only workbooks with specific names or descriptions (the application should accepted regular expressions to filter the workbooks). It should be possible to open, rename or delete a selected workbook in this page/view. 
-	
+	Workbooks should be considered public. A public workbook is a workbook that can be accessed by all users. The "Home" page should display all the workbooks. It should be possible to apply filters to this view/page to display only workbooks with specific names or descriptions (the application should accepted regular expressions to filter the workbooks). It should be possible to open, rename or delete a selected workbook in this page/view.
+
 - **IPC06.2 - Private Workbooks**
 
 	Workbooks that are created by the user should be considered private. The "Home" page should now be able to display private and public workbooks. It should be possible to apply filters to this view/page to display only private or public workbooks with specific names or descriptions (the application should accepted regular expressions to filter the workbooks). Public and private workbooks should have some visual distinction (e.g, icon).
-		 
+
 - **IPC06.3 - Share Workbooks**
 
-	It should be possible to apply individual sharing options to each workbook. A workbook can now be shared with only specific users. In this context, a public workbook is simply a workbook that is shared with everyone. Also, the share should have a type: view, read-only, write. View only allows the listing of the name and description of the workbook. Read-only allow to open the workbook but not to edit it. Write should allow full edition.	
+	It should be possible to apply individual sharing options to each workbook. A workbook can now be shared with only specific users. In this context, a public workbook is simply a workbook that is shared with everyone. Also, the share should have a type: view, read-only, write. View only allows the listing of the name and description of the workbook. Read-only allow to open the workbook but not to edit it. Write should allow full edition.
 
 ### IPC07 - Collaborative Workbook Editing
 
 - **IPC07.1 - Base Concurrent Edition**
 
-	Concurrent editions of the same Workbook should display updates "as much as possible" in realtime. 
+	Concurrent editions of the same Workbook should display updates "as much as possible" in realtime.
 
 - **IPC07.2 - Full Concurrent Edition**
 
 	The Workbook View should display other users that are editing the same workbook and have a visual identification for the cells that other users are editing.
-	
+
 - **IPC07.3 - Message Exchange**
 
 	The Workbook View should have an area to allow collaborate users to exchange small text messages.
@@ -324,15 +328,15 @@ Requirements are classified in three functional areas:
 - **IPC08.1 - Public Chat**
 
 	Add a Page/View to allow all online users to exchange text messages (i.e., a public chat room).
-	
+
 - **IPC08.2 - Private Chat**
 
 	Users should now be able to create private chat rooms. They should invite other users (by using their email).
 
 - **IPC08.3 - Full Chat**
 
-	Users should be able to post Images and make mentions of other users (they should receive a notification email if they are not online). 
- 
+	Users should be able to post Images and make mentions of other users (they should receive a notification email if they are not online).
+
 ## 5.3 Lang
 
 ### Lang01 - Formulas (Mandatory)
@@ -363,9 +367,9 @@ Requirements are classified in three functional areas:
 
 	Add support for array variables (temporary and global). Any variable can be an array. When accessing a variable only by its name it should be inferred the position 1 of the array. To explicitly access a position in a array variable the position index should be specified inside brackets (following the name of the variable). For example, the formula "=@abc[2]:=123" will set the position 2 of the global variable @abc to the value 123. Each position of an array can be of a different type. For instance it should be possible to have an array with numeric and alphanumeric values.
 	There should also be a window to display and edit the value of global variables. The values that appear in this window should be automatically updated when the variables are updated.
-	
+
 ### Lang03 - Tools based on Formulas
-	
+
 - **Lang03.1 - Conditional Formating of Cells**
 
 	Update the "style" extension so that it can be used for the conditional formatting of cells based on the result of the execution of formulas. For the style of a cell to be conditional it must have an associated formula and two formatting styles. One of the styles is applied when the formula evaluates to true and the other when it evaluates to false. The editing of these settings should be done in a window.
@@ -377,9 +381,9 @@ Requirements are classified in three functional areas:
 - **Lang03.3 - Tables and Filters**
 
 	Add new functionality to support the concept of "tables". A table is essentially a range of cells. The first row of this range of cells can be used as header of the table columns (the contents of these cells becomes the name of the columns). Once a table is defined it should be possible to filter its contents by using formulas. A formula that is used as a filter of a table is applied to each row of the table. If the result is true, the row is visible, if the result is false, the row should become invisible. To facilitate the writing of such formulas a new special variable should be added to formulas. This new variable should be an array variable that represents the value of the columns of the table for the current row. Lets consider, for instance, that the new variable is called "_col". For example, it should be possible to use "_col[2]" to get the value of column 2 for the current row. It should also be possible to use the name of the column instead of the index. For instance, if the header of column 2 is "cidade" it should be possible the get the value of this column for the current row by using "_col["cidade"]". An example of a filter for a table could be: "=or(_col["idade"]>10; _col[3]<123)". This extension should have a window that should be used to edit tables and its filters.
-		
+
 ### Lang04 - Function Wizard
-	
+
 - **Lang04.1 - Insert Function Basic Wizard**
 
 	The application should have an option to launch a wizard to aid the user in calling functions in formulas. This new window should display a list of possible functions. The construction of this list should be made dynamically based on the self-description of the functions. When a function is selected in the list its syntax should be displayed in a edit box. The "syntax" should include the name of the function and its parameters. For example, for the factorial function, that only has one parameter, the following text should be displayed in the edit box "= FACT(Number)". The window should also contain an area to display a text describing the selected function (i.e., help text). The window should have an "Apply" and a "Cancel" button. If the user selects the "Apply" button the text of the syntax of the function should be written in the "formula bar".
@@ -391,14 +395,14 @@ Requirements are classified in three functional areas:
 - **Lang04.3 - Insert Function Advanced Wizard**
 
 	The wizard should now have an edit box where the formula is gradually constructed. The user should be able to edit the formula text freely. The functions or operators (and the values of its parameters/operands) selected from the list should now be inserted in the position of the cursor in the new edit box. The wizard should continue to have an area to display the evaluation of the formula (that should be produced dynamically, as the user edits the formula). The wizard should also have a new window that should display the structure of the formula expression like an abstract syntax tree (i.e., the structure resulting from the formula compilation). When the user clicks a tree element its respective text in the edit box should appear highlighted.
-		
+
 ### Lang05 - Forms
 
 - **Lang05.1 - Forms Editor**
 
 	The application should have a new option to launch a window for editing a form. A Form is a window that is designed by the end user and is used for interacting with the user (input and output). The new window should support the creation and testing of a Form. Forms should be very simple. A Form should be composed of rows, each row can be empty or have one or two visual widgets. The supported visual widgets are: button (to invoke actions); edit box (to enter data) and static text box (to display data). It should be possible to set the core properties of these widgets (like the text to display in a static text box, for instance). In the edit form window it should be possible to: add a new row; remove an existing row; edit an existing row; "play" the form and close the edit form window. The "play" button is for testing the appearance of a form during its design (see example in the next Figure). At the moment it is only required to support a single Form for each workbook. Macros and formulas should have a new function that can be used to display the form of the current workbook. Forms should have an icon or button to close the form. When the form is closed the function (in macros or formulas) who call it returns.
-	
-![Form](form1.png)	
+
+![Form](form1.png)
 
 - **Lang05.2 - Forms and Variables**
 
@@ -410,7 +414,7 @@ Requirements are classified in three functional areas:
 	When displaying a form it should be possible specify if it should be read only (i.e., it will display the value of the variables but does not allow any update) or writable (in this case the form should allow for the user to modify the values that are displayed). Writable forms should have a new "Update" button. When the user clicks in the update button the form closes and the current values of the widgets update the corresponding variables. If the user closes the form window by any other means the variables should not be updated. It should be also possible to specify the "mode" of the form window (when invoking the display of a form). Two modes are allowed: modal and modeless. A modal form window is a window that will block the macro or formula that call it until the user closes the form window. The macro or formula will only resume execution when the form is closed. A modeless for window is a window that will no block the calling macro or formula, i.e., the macro or formula will continue its execution in parallel with the display of the form. Modeless forms do not return anything. Model forms should return the name of the button that was used to close the window.
 
 ### Lang06 - Macros Script Language
-	
+
 - **Lang06.1 - Macros Language**
 
 	The application should have a new option to open a window to edit and execute a single macro. Macros should be designed as a complete new language in the application. However, its initial grammar should be very simple and "inspired" in the language of the formulas. In particular, a macro is simply a sequence of formulas that are executed sequentially. The formulas are the same as those used in the cells. Each line of the macro may contain a formula or be a comment. A comment is a line that starts with the character ";". The lines of the macros must support all that is possible to do with the cell formulas that start with "=" (but in the macros the lines can not start with "="). The macro is to be associated with the current workbook. The result of executing a macro is the result of the last executed instruction. The new window should have an area to edit the text of the macro and button to run the macro. The result of the execution of the macro should also appear in the window.
@@ -422,7 +426,7 @@ Requirements are classified in three functional areas:
 - **Lang06.3 - Macros with Parameters**
 
 	Macros should now have parameters. The syntax for macros should now include an header that should include the name of the macro and its parameters (all parameters should have a distinct name). The parameters should be considered only input parameters. However, it should be possible to freely reference parameters inside the macro. That is to say that, inside a macro, parameters should be used like variables. Macros should support local variables that exist only in the context of a macro. This local variables should have a syntax similar to the one described for the temporary variables of formulas. The invocation of macros must now include the values for its parameters.
-	
+
 ### Lang07 - Visual Basic Script Language
 
 - **Lang07.1 - Base Visual Basic Language**  
@@ -448,9 +452,9 @@ Requirements are classified in three functional areas:
 	This feature increment should have the same functionality as Lang06.2 but with the adaptations required by the syntax of the language.
 
 - **Lang08.3 - Javascript with Methods with parameters**
-		
-	This feature increment should have the same functionality as Lang06.3 but with the adaptations required by the syntax of the language.	
-		
+
+	This feature increment should have the same functionality as Lang06.3 but with the adaptations required by the syntax of the language.
+
 # 6. Grading/Assessment
 
 Assessment and grading will take place during sprint reviews.
@@ -463,7 +467,7 @@ The version to be reviewed in each sprint must be closed before the first class 
 
 - **Sprint 3: Jun, 19**
 
-The grade of each sprint has a weight of 20% in the final score of the project. 
+The grade of each sprint has a weight of 20% in the final score of the project.
 
 As described next, each student will have an **individual technical assessment during one of the sprints**. Besides contributing to the assessment of the group during the sprint this assessment will also have an weight of 40% in the final score of the project.
 
@@ -471,7 +475,7 @@ As described next, each student will have an **individual technical assessment d
 
 Each group is responsible for one functional area in a sprint. Each group will be assessed by the corresponding teacher of the functional area (in the first class after the sprint deadline).
 
-## Sprint Reviews 
+## Sprint Reviews
 
 Sprint reviews take place in the first class of the functional area (core, ipc or lang) after the sprint deadline.
 
@@ -482,7 +486,7 @@ There are three phases in the sprint review:
 - **Phase 2: Functional Demonstration**
 - **Phase 3: Technical Analysis**
 
-In the final of this session the **teacher should give feedback** about the performance of the students **and also inform of their scores**. 
+In the final of this session the **teacher should give feedback** about the performance of the students **and also inform of their scores**.
 
 ### Phase 1: Sprint Overview and Deployment
 
@@ -503,11 +507,11 @@ Weight: 10% of the sprint grade.
 
 - **0- non implemented / unacceptable.** **There are no evidences of team work**. There are almost no issues and commits are very rudimentary in its descriptions and frequency.
 
-- **1- attempt.** **There are small evidences of team work**. Some issues seem correct in terms of their life-cycle. Connections between issues and commits is very rudimentary. The description of issues seem to have some significant problems. 
- 
-- **2- many defects.** **There are some evidences of team work**. Several issues seem correct in terms of their life-cycle. Connections between issues and commits is frequent but may be improved (e.g., commits are not used to control the state of issues). The description of issues is accurate. 
+- **1- attempt.** **There are small evidences of team work**. Some issues seem correct in terms of their life-cycle. Connections between issues and commits is very rudimentary. The description of issues seem to have some significant problems.
 
-- **3- some defects.** **There are evidences of a team process of decision making** in which the student participates actively although some minor problems may exist such as dependencies discovered only late in the process. Issues and commits are almost fully connected. 
+- **2- many defects.** **There are some evidences of team work**. Several issues seem correct in terms of their life-cycle. Connections between issues and commits is frequent but may be improved (e.g., commits are not used to control the state of issues). The description of issues is accurate.
+
+- **3- some defects.** **There are evidences of a team process of decision making** in which the student participates actively although some minor problems may exist such as dependencies discovered only late in the process. Issues and commits are almost fully connected.
 
 - **3,5- correct.** **There are evidences of a team process of decision making** in which the student participates actively and that results in the **assignment of tasks in a clear and managed way and in a timely fashion**. Issues and commits are fully connected.
 
@@ -530,7 +534,7 @@ Weight: 20% of the sprint grade.
 - **3,5- correct.** The application **runs without the IDE in a web server in local virtual machine or container and can be accessed "externally"**. The group was able to demonstrate the application **within the deadline and without runtime faults during the demonstration** and running all the tests with "significant" coverage. The correct version was used (tagged in Bitbucket and uploaded to moodle).
 
 - **4- exceptional.** The application **runs without the IDE in a web server in remote virtual machine or container (i.e., in the cloud)**. The group was able to demonstrate the application **within the deadline and without runtime faults during the demonstration** and running all the tests with "significant" coverage. The correct version was used (tagged in Bitbucket and uploaded to moodle).  If applicable, the group did take into account evolution aspects of the solution such as support for files from previous versions or upgrading the database from previous versions.
- 
+
 ### Phase 2: Functional Demonstration
 
 During this phase each one of the members of the group will demonstrate the functionalities developed for their feature increment. **This demonstration is individual and mandatory**.
@@ -636,17 +640,17 @@ Rules for the improvement:
 
 - only scores equal or greater than 1 can be improved;
 
-- the improvement can result in a maximum of 1 value in the increment of the score (in the scale 1-4); 
+- the improvement can result in a maximum of 1 value in the increment of the score (in the scale 1-4);
 
 - the improvement must be performed until the next class with the same teacher (in the same week);
 
 - the student may propose the improvement in the end of the sprint review and **the teacher must accept it**.
 
-**Notes:** 
+**Notes:**
 
-- The teacher may refuse a proposal of improvement for several reasons. For instance, the redesign/refactoring may require to much time to complete or the historical performance of the student does not provide sufficient guarantees of success. 
+- The teacher may refuse a proposal of improvement for several reasons. For instance, the redesign/refactoring may require to much time to complete or the historical performance of the student does not provide sufficient guarantees of success.
 
-- An improvement may result in downgrade of the score if the student does not attain the defined goals. 
+- An improvement may result in downgrade of the score if the student does not attain the defined goals.
 
 # 7. Domain Class Diagrams
 
@@ -657,6 +661,3 @@ Rules for the improvement:
 **Formulas**
 
 ![Formulas Domain Model](domain_model_formulas_image1.png)
-
-
-
