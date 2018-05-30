@@ -16,4 +16,6 @@ public interface RepositoryFactory {
     PersistenceSettings setSettings(PersistenceSettings settings);
     
     WorkbookDescriptionRepository workbookDescriptions();
+    
+    UserRepository user();
 }
