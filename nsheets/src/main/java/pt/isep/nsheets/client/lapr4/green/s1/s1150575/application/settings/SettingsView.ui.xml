@@ -9,15 +9,39 @@
     <ui:style>
 	
     </ui:style>	
-               
-    <g:HTMLPanel>
-        
-        <i>Configure your XML tags for each type of element</i>
-        <m:MaterialTextBox ui:field="txtWorkbook" label="Tag for Workbook" grid="s12"/>
-        <m:MaterialTextBox ui:field="txtWorksheet" label="Tag for Worksheet" grid="s12"/>
-        <m:MaterialTextBox ui:field="txtCell" label="Tag for Cell" grid="s12"/>
-        <m:MaterialButton ui:field="btnApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
+    
+    <m:MaterialRow>
+        <m:MaterialColumn grid="s12">
+            <m:MaterialTab ui:field="tab" indicatorColor="WHITE" shadow="1">
+                <m:MaterialTabItem waves="LIGHT" grid="s4">
+                    <m:MaterialLink text="XML" href="#tab1" textColor="WHITE"/>
+                </m:MaterialTabItem>
+                <m:MaterialTabItem waves="LIGHT" grid="s4">
+                    <m:MaterialLink text="CSV" href="#tab2" textColor="WHITE"/>
+                </m:MaterialTabItem>
+            </m:MaterialTab>
+        </m:MaterialColumn>
+
+        <m:MaterialColumn m:id="tab1" grid="s12">
+            <g:HTMLPanel>
+                
+                <m:MaterialLabel text="Configure your XML tags for each type of element"/>
+                <m:MaterialTextBox ui:field="txtXMLWorkbook" label="Tag for Workbook"/>
+                <m:MaterialTextBox ui:field="txtXMLWorksheet" label="Tag for Worksheet"/>
+                <m:MaterialTextBox ui:field="txtXMLCell" label="Tag for Cell"/>
+                <m:MaterialButton ui:field="btnXMLApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
+            </g:HTMLPanel>
+        </m:MaterialColumn>
+        <m:MaterialColumn m:id="tab2" grid="s12">
+            <g:HTMLPanel>
+                <m:MaterialLabel text="Configure your CSV tags for each type of element"/>
+                <m:MaterialTextBox ui:field="txtCSVWorkbook" label="Tag for Workbook"/>
+                <m:MaterialTextBox ui:field="txtCSVWorksheet" label="Tag for Worksheet"/>
+                <m:MaterialTextBox ui:field="txtCSVCell" label="Tag for Cell"/>
+                <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
 	
-    </g:HTMLPanel>
+            </g:HTMLPanel>
+        </m:MaterialColumn>
+    </m:MaterialRow>
     
 </ui:UiBinder>
