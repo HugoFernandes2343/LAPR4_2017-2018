@@ -13,23 +13,23 @@ Add the possibility of writing blocks (or sequences) of instructions. A block mu
 
 Proposal:
 
-US1 - Update grammar Formula.g4 to include new rules and operators:
+**US1** - Update grammar Formula.g4 to include new rules and operators:
 
 RULES:
 
-* assignment (CELL_REF ASSIGN comparison)
-* block
-* loopfor
-* atom (added loopfor, block and assignment)
+* **assignment** (CELL_REF ASSIGN comparison)
+* **block**
+* **loopfor**
+* **atom** (added loopfor, block and assignment)
 
 OPERATORS:
 
-* FOR ('FOR')
-* LCBRA ('{')
-* RCBRA ('}')
-* ASSIGN (':=')
+* **FOR** ('FOR')
+* **LCBRA** ('{')
+* **RCBRA** ('}')
+* **ASSIGN** (':=')
 
-US2 - Understand how the application works when inserting a new formula on the worksheet:
+**US2** - Understand how the application works when inserting a new formula on the worksheet:
   * Is it supposed to generate visitor and listener code automatically?
 
 # 3. Analysis
@@ -37,7 +37,7 @@ US2 - Understand how the application works when inserting a new formula on the w
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
   1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
-  ![block_Analysis SD](https://bitbucket.org/lei-isep/lapr4-18-2dl/src/0d8d9b784a24b43305f4eefbaa19f9c40b15b6e3/docs/blue/s1091234/sp1/block_analysis.PNG)
+  ![block_Analysis SD](block_analysis.png)
 
 ## 3.1 GWT and Project Structure
 
