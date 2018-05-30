@@ -1,4 +1,4 @@
-package pt.isep.nsheets.client.application.settings;
+package pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
