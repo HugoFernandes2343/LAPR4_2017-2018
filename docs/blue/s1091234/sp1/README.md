@@ -14,16 +14,20 @@ Add the possibility of writing blocks (or sequences) of instructions. A block mu
 Proposal:
 
 US1 - Update grammar Formula.g4 to include new rules and operators:
+
 RULES:
-  * assignment (CELL_REF ASSIGN comparison)
-  * block
-  * loopfor
-  * atom (added loopfor, block and assignment)
+
+* assignment (CELL_REF ASSIGN comparison)
+* block
+* loopfor
+* atom (added loopfor, block and assignment)
+
 OPERATORS:
-  * FOR ('FOR')
-  * LCBRA ('{')
-  * RCBRA ('}')
-  * ASSIGN (':=')
+
+* FOR ('FOR')
+* LCBRA ('{')
+* RCBRA ('}')
+* ASSIGN (':=')
 
 US2 - Understand how the application works when inserting a new formula on the worksheet:
   * Is it supposed to generate visitor and listener code automatically?
