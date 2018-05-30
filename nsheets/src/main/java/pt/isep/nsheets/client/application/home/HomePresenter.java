@@ -29,9 +29,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
 	interface MyView extends View {
 		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-
+                
 		void addClickHandler(ClickHandler ch);
-	}
+        }
 
 	@NameToken(NameTokens.home)
 	@ProxyStandard

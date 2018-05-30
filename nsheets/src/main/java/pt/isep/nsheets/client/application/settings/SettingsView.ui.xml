@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+             
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+    <ui:style>
+	
+    </ui:style>	
+               
+    <g:HTMLPanel>
+        
+        <i>Configure your XML tags for each type of element</i>
+        <m:MaterialTextBox ui:field="txtWorkbook" label="Tag for Workbook" grid="s12"/>
+        <m:MaterialTextBox ui:field="txtWorksheet" label="Tag for Worksheet" grid="s12"/>
+        <m:MaterialTextBox ui:field="txtCell" label="Tag for Cell" grid="s12"/>
+        <m:MaterialButton ui:field="btnApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
+	
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

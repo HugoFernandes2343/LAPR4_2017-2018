@@ -67,6 +67,9 @@
 				<m:MaterialLink targetHistoryToken="{tokens.getWorkbook}" iconPosition="LEFT" iconType="INSERT_DRIVE_FILE" text="Workbook"/>
 			</m.html:ListItem>
 			<m.html:ListItem waves="DEFAULT">
+				<m:MaterialLink targetHistoryToken="{tokens.getSettings}" iconPosition="LEFT" iconType="SETTINGS" text="Settings"/>
+			</m.html:ListItem>
+			<m.html:ListItem waves="DEFAULT">
 				<m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE" text="About"/>
 			</m.html:ListItem>
         </m:MaterialSideNavPush>

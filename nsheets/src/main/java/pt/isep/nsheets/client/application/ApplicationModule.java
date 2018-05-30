@@ -24,6 +24,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
 import pt.isep.nsheets.client.application.menu.MenuModule;
+import pt.isep.nsheets.client.application.settings.SettingsModule;
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
 
 public class ApplicationModule extends AbstractPresenterModule {
@@ -34,6 +35,7 @@ public class ApplicationModule extends AbstractPresenterModule {
 		install(new MenuModule());
 		install(new AboutModule());
 		install(new WorkbookModule());
+		install(new SettingsModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
     }
