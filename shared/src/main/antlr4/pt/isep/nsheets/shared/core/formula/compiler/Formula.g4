@@ -49,7 +49,7 @@ literal
 	;
 
 assignment  
-        :       CELL_REF ASSIGN comparison
+        :       reference ASSIGN comparison
         ;
 
 block
