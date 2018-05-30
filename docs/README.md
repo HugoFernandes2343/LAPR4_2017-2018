@@ -61,13 +61,13 @@ This is a table that should display the overall planning of the team. This is si
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1)            | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
-| Red  |[Hugo Carvalho](red/s1161569/)   | 		 		       |   	             |	  |
-| Red  |[Hugo Fernandes](red/s1161155/)	 | 							 |								 |		|
-| Red  |[Marco Carneiro](red/s1160777/)  | 							 |								 |		|
-| Red  |[David Santiago](red/s1161109/)  | 							 |								 |		|
-| Red  |[David Maia](red/s1161110/)      | 							 |								 |		|
-| Red  |[Filipe Simão](red/s1161213/) 	 | 							 |								 |		|
-| Red  |[Norberto Sousa](red/s1120608/)  | 							 |								 |		|
+| Red  |[Hugo Carvalho](red/s1161569/)   | [Core03.1](red/s1161569/sp1)	 		       |   	             |	  |
+| Red  |[Hugo Fernandes](red/s1161155/)	 | [Core05.1](red/s1161155/sp1) |								 |		|
+| Red  |[Marco Carneiro](red/s1160777/)  | [Core02.1](red/s1160777/sp1)	|						 |		|
+| Red  |[David Santiago](red/s1161109/)  | [Core07.1](red/s1161109/sp1) |								 |		|
+| Red  |[David Maia](red/s1161110/)      | [Core08.1](red/s1161110/sp1) |								 |		|
+| Red  |[Filipe Simão](red/s1161213/) 	 | [Core06.1](red/s1161213/sp1) |								 |		|
+| Red  |[Norberto Sousa](red/s1120608/)  | [Core01.1](red/s1120608/sp1) |								 |		|
 | Red  |[Ricardo Correia](red/s1151231/) |               |                 |    |
 | Green |[Carlos Rodrigues](green/s1151136/) |  [IPC06.1](green/s1151136/sp1)						|								 |		|
 | Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)					|								 |		|

@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
 import pt.isep.nsheets.client.application.menu.MenuModule;
-import pt.isep.nsheets.client.application.settings.SettingsModule;
+import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.SettingsModule;
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
 
 public class ApplicationModule extends AbstractPresenterModule {
