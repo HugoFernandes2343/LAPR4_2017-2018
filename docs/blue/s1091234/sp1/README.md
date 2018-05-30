@@ -37,7 +37,7 @@ US2 - Understand how the application works when inserting a new formula on the w
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
   1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
-  ![block_Analysis SD](block_analysis.png)
+  ![block_Analysis SD](https://bitbucket.org/lei-isep/lapr4-18-2dl/src/0d8d9b784a24b43305f4eefbaa19f9c40b15b6e3/docs/blue/s1091234/sp1/block_analysis.PNG)
 
 ## 3.1 GWT and Project Structure
 
