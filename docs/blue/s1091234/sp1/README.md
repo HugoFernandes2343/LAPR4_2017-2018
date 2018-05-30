@@ -35,7 +35,7 @@ OPERATORS:
 # 3. Analysis
 
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
-  1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
+  * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
   ![block_Analysis SD](block_analysis.png)
 
