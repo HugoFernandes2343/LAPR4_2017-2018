@@ -110,6 +110,7 @@ governing permissions and limitations under the License. #L% -->
             <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
             <m:MaterialFABList>
                 <m:MaterialButton ui:field="exportToXMLButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To XML" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="exportToCSVButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To CSV" tooltipPosition="LEFT"/>
             </m:MaterialFABList>
         </m:MaterialFAB>
     </g:HTMLPanel>
