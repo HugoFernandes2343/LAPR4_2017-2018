@@ -2,9 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:m="urn:import:gwt.material.design.client.ui">
-             
-    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
-    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
 	
     <ui:style>
 	
@@ -42,6 +42,11 @@
 	
             </g:HTMLPanel>
         </m:MaterialColumn>
+
+        <m:MaterialButton waves="LIGHT" size="MEDIUM" grid="s3" offset="s9">
+            <m:MaterialLink targetHistoryToken="{tokens.getExtensionManager}" iconPosition="LEFT" iconType="LAYERS" text="Extensions Manager" textColor="WHITE"/>
+        </m:MaterialButton>
+
     </m:MaterialRow>
     
 </ui:UiBinder>
