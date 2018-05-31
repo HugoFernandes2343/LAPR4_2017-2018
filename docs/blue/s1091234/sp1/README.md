@@ -37,7 +37,11 @@ OPERATORS:
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
   * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
-  ![block_Analysis SD](block_analysis.png)
+  ![block_Analysis](block_analysis.png)
+
+  * 1.1 - "=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}"
+
+  ![loopfor_analysis](loopfor_analysis.png)
 
 ## 3.1 GWT and Project Structure
 
