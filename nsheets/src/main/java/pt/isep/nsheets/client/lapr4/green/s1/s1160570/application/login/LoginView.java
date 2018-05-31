@@ -1,6 +1,7 @@
 package pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,7 +18,6 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
 class LoginView extends ViewImpl implements LoginPresenter.MyView {
 
-
     interface Binder extends UiBinder<Widget, LoginView> {
     }
     @UiField
@@ -31,10 +31,9 @@ class LoginView extends ViewImpl implements LoginPresenter.MyView {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
-    @UiHandler("btnLogin")
-    void onClick(ClickEvent e) {
-        MaterialToast.fireToast("Click Triggered");
-        
+    @Override
+    public void addClickHandler(ClickHandler ch) {
+        btnLogin.addClickHandler(ch);
     }
 
 }

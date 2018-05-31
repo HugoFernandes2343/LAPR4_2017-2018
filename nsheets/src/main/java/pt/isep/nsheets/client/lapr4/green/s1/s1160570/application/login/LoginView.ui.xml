@@ -8,6 +8,7 @@
 	
     <ui:style>
         .panel{
+        
         background: url("http://2.bp.blogspot.com/-x4D3EPELYRU/VMHu52a4qUI/AAAAAAAAHek/EmnIgqTtu_U/s0/fon116%2B2160x1920.png");
         background-size: 100%;
         padding: 0px !important;
