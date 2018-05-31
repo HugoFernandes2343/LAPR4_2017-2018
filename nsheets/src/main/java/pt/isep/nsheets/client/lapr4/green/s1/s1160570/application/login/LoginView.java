@@ -17,8 +17,6 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
 class LoginView extends ViewImpl implements LoginPresenter.MyView {
 
-    LoginController controller = new LoginController();
-    List<User> userList = controller.allUsers();
 
     interface Binder extends UiBinder<Widget, LoginView> {
     }
