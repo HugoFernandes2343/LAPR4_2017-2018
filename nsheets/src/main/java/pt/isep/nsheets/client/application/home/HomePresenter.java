@@ -58,7 +58,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 }
 
                 public void onSuccess(WorkbookDescriptionDTO result) {
-                    MaterialToast.fireToast("New Workbook Created...", "rounded");
+                   
 
                     refreshView();
                 }

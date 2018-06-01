@@ -30,6 +30,8 @@ public class NameTokens {
     public static final String settings = "settings";
 
     public static final String exportToXMLWindow = "exportToXMLWindow";
+    
+    public static final String exportToCSVWindow = "exportToCSVWindow";
 
     public static final String login = "login";
 
@@ -57,6 +59,10 @@ public class NameTokens {
 
     public static String getExportToXMLWindow() {
         return exportToXMLWindow;
+    }
+    
+    public static String getExportToCSVWindow() {
+        return exportToCSVWindow;
     }
 
     public static String getExtensionManager() { return extensionmanager; }

@@ -35,13 +35,15 @@
         </m:MaterialColumn>
         <m:MaterialColumn m:id="tab2" grid="s12">
             <g:HTMLPanel>
-                <m:MaterialLabel text="Configure your CSV tags for each type of element"/>
-                <m:MaterialTextBox ui:field="txtCSVWorkbook" label="Tag for Workbook"/>
-                <m:MaterialTextBox ui:field="txtCSVWorksheet" label="Tag for Worksheet"/>
-                <m:MaterialTextBox ui:field="txtCSVCell" label="Tag for Cell"/>
-                <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
-	
+                <m:MaterialLabel text="Configure the CSV delimiter that you wish"/>
+                <g:HTMLPanel>
+                <m:MaterialCheckBox ui:field="comma" text="," value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="pointComma" text=";" value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="barra" text="/" value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="point" text="." value="false" type="FILLED"/>
+                </g:HTMLPanel>     
             </g:HTMLPanel>
+            <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
         </m:MaterialColumn>
 
         <!--(1160777) Botao de abrir a pagina Extensions Manager-->

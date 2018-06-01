@@ -13,12 +13,10 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialPanel;
+import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialTextBox;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
-import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginPresenter;
-import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.ExtensionManagerPresenter;
 import pt.isep.nsheets.client.place.NameTokens;
 
 public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, SettingsPresenter.MyProxy> {
@@ -36,7 +34,15 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
         public MaterialButton getApplyButton();
 
         //1160777
-        MaterialButton getExtensionManagerButton();
+        public MaterialButton getExtensionManagerButton();
+        
+        public MaterialCheckBox getComma();
+        
+        public MaterialCheckBox getPointComma();
+        
+        public MaterialCheckBox getBarra();
+        
+        public MaterialCheckBox getPoint();
     }
 
     private SettingsPresenter.MyView view;
@@ -73,7 +79,16 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
             @Override
             public void onClick(ClickEvent event) {
+                
+                String box = getView().getComma().getText();
+                String box1 = getView().getPointComma().getText();
+                String box2 = getView().getBarra().getText();
+                String box3 = getView().getPoint().getText();
+                
 
+
+//                String delimiter = getView().getDropButton().getActivator();
+                
             }
 
         });
