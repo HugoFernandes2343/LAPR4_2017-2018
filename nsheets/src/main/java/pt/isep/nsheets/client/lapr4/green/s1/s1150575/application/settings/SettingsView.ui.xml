@@ -9,8 +9,9 @@
     <ui:style>
 	
     </ui:style>	
-    
+
     <m:MaterialRow>
+
         <m:MaterialColumn grid="s12">
             <m:MaterialTab ui:field="tab" indicatorColor="WHITE" shadow="1">
                 <m:MaterialTabItem waves="LIGHT" grid="s4">
@@ -43,9 +44,8 @@
             </g:HTMLPanel>
         </m:MaterialColumn>
 
-        <m:MaterialButton waves="LIGHT" size="MEDIUM" grid="s3" offset="s9">
-            <m:MaterialLink targetHistoryToken="{tokens.getExtensionManager}" iconPosition="LEFT" iconType="LAYERS" text="Extensions Manager" textColor="WHITE"/>
-        </m:MaterialButton>
+        <!--(1160777) Botao de abrir a pagina Extensions Manager-->
+        <m:MaterialButton ui:field="extensionManagerButton" grid="s3" offset="s9" waves="LIGHT" text="Extensions Manager" textColor="WHITE" iconPosition="LEFT" iconType="LAYERS" iconColor="WHITE"/>
 
     </m:MaterialRow>
     

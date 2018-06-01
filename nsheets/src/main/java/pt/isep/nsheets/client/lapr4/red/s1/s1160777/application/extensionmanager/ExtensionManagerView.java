@@ -1,6 +1,8 @@
-package pt.isep.nsheets.client.application.extensionmanager;
+package pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.ui.MaterialButton;
@@ -10,9 +12,16 @@ import gwt.material.design.client.ui.MaterialSwitch;
 import javax.inject.Inject;
 
 class ExtensionManagerView extends ViewImpl implements ExtensionManagerPresenter.MyView {
+
+    @UiField
+    MaterialButton applyButton;
+
+    @Override
+    public void addClickHandlerApplyButton(ClickHandler ch) { applyButton.addClickHandler(ch); }
+
     @Override
     public MaterialButton getApplyButton() {
-        return null;
+        return this.applyButton;
     }
 
     @Override

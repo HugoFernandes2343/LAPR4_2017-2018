@@ -33,7 +33,7 @@ public class NameTokens {
 
     public static final String login = "login";
 
-    public static final String extensionmanager = "extension manager";
+    public static final String extensionmanager = "extensionmanager";
 
     public static String getWorkbook() {
         return workbook;
@@ -59,8 +59,6 @@ public class NameTokens {
         return exportToXMLWindow;
     }
 
-    public static String getExtensionManager() {
-        return extensionmanager;
-    }
+    public static String getExtensionManager() { return extensionmanager; }
 
 }
