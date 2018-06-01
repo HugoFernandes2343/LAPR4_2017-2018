@@ -6,6 +6,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialButton;
@@ -31,6 +32,7 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
 
     @NameToken(NameTokens.extensionmanager)
     @ProxyStandard
+    @NoGatekeeper
     interface MyProxy extends ProxyPlace<ExtensionManagerPresenter> {
     }
 

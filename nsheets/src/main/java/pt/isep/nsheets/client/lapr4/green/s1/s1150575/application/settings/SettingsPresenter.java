@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
@@ -30,6 +31,7 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
     @NameToken(NameTokens.settings)
     @ProxyStandard
+    @NoGatekeeper
     interface MyProxy extends ProxyPlace<SettingsPresenter> {
     }
 

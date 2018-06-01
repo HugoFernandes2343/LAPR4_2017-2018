@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
+package pt.isep.nsheets.client.application;
 
 /**
  *

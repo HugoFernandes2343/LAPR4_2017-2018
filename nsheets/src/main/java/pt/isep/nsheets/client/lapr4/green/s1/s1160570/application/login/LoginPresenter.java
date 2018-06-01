@@ -10,18 +10,23 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialToast;
 import java.util.ArrayList;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentUser;
+import pt.isep.nsheets.client.application.LoggedInGateKeeper;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.services.UserDTO;
 import pt.isep.nsheets.shared.services.UsersService;
 import pt.isep.nsheets.shared.services.UsersServiceAsync;
-import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
     private MyView view;
+    private PlaceManager placeManager; 
 
     interface MyView extends View {
 
@@ -30,14 +35,19 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
     @NameToken(NameTokens.login)
     @ProxyStandard
+    @NoGatekeeper
     interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
     @Inject
-    LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
+    LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, LoggedInGateKeeper keeper, CurrentUser currentUser,PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
         this.view = view;
+        this.placeManager=placeManager;
 
+        
+        
+        
         this.view.addClickHandler((event) -> {
             UsersServiceAsync usersSvc = GWT.create(UsersService.class);
 
@@ -50,7 +60,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Insucess");
+                    PlaceRequest placeRequest=new PlaceRequest.Builder().nameToken(NameTokens.about).build();
+                    placeManager.revealPlace(placeRequest);
                 }
             };
             usersSvc.getUsers(callback);

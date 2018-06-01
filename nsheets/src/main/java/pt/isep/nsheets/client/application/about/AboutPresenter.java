@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -18,6 +19,7 @@ public class AboutPresenter extends Presenter<AboutPresenter.MyView, AboutPresen
     
     @NameToken(NameTokens.about)
     @ProxyStandard
+    @NoGatekeeper
     interface MyProxy extends ProxyPlace<AboutPresenter> {
     }
 

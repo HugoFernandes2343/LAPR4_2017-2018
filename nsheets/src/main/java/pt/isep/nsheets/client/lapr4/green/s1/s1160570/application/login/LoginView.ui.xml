@@ -37,7 +37,7 @@
             <m:MaterialColumn grid="s12 m8 l6" offset="l4" >
                 <m:MaterialPanel shadow="1" addStyleNames="{style.panel}">
                     <m:MaterialPanel addStyleNames="{style.fieldPanel}">
-                        <m:MaterialImage url="http://b.vimeocdn.com/ps/339/488/3394886_300.jpg" type="CIRCLE" addStyleNames="{style.imgProfile} z-depth-1"/>
+                        <m:MaterialImage url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbEAvzy1zZvYIGMhwV6iTxknZtnXXfhDMt2MpQ0iclCYl7Jg5N" type="CIRCLE" addStyleNames="{style.imgProfile} z-depth-1"/>
                         <m:MaterialTextBox ui:field="textEmail" type="EMAIL" placeholder="Email"/>
                         <m:MaterialTextBox ui:field="textPassword" type="PASSWORD" placeholder="Password" />
                         <m:MaterialButton ui:field="btnLogin" waves="LIGHT" text="Log In" width="100%"/>
