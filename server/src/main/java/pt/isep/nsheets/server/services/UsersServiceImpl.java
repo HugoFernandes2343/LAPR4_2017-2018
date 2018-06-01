@@ -40,16 +40,17 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         // Setup the persistence settings
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
-        ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+        ArrayList<UserDTO> users = new ArrayList<>();
 
         LoginController ctrl = new LoginController();
 
         Iterable<User> us = ctrl.allUsers();
 
-        us.forEach(wb -> users.add(wb.toDTO()));
+        for (User u : us) {
+            users.add(u.toDTO());
+        }
 
         return users;
     }
 
-    
 }
