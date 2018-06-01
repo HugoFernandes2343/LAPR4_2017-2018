@@ -29,6 +29,8 @@ public class NameTokens {
 
     public static final String settings = "settings";
     
+    public static final String exportToXMLWindow = "exportToXMLWindow";
+    
     public static final String login = "login";
 
     public static String getWorkbook() {
@@ -49,6 +51,10 @@ public class NameTokens {
 
     public static String getSettings() {
         return settings;
+    }
+
+    public static String getExportToXMLWindow() {
+        return exportToXMLWindow;
     }
 
 }
