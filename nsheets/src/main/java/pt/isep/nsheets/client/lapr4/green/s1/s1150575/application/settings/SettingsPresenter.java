@@ -1,5 +1,6 @@
 package pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings;
 
+import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.inject.Inject;
@@ -11,6 +12,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialCheckBox;
+import gwt.material.design.client.ui.MaterialDropDown;
+import gwt.material.design.client.ui.MaterialListBox;
 import gwt.material.design.client.ui.MaterialTextBox;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -27,6 +31,14 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
         public MaterialTextBox getCellBox();
 
         public MaterialButton getApplyButton();
+        
+        public MaterialCheckBox getComma();
+        
+        public MaterialCheckBox getPointComma();
+        
+        public MaterialCheckBox getBarra();
+        
+        public MaterialCheckBox getPoint();
     }
 
     @NameToken(NameTokens.settings)
@@ -50,7 +62,16 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
             @Override
             public void onClick(ClickEvent event) {
+                
+                String box = getView().getComma().getText();
+                String box1 = getView().getPointComma().getText();
+                String box2 = getView().getBarra().getText();
+                String box3 = getView().getPoint().getText();
+                
 
+
+//                String delimiter = getView().getDropButton().getActivator();
+                
             }
 
         });
