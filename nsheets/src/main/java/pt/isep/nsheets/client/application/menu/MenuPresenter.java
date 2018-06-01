@@ -10,22 +10,22 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 
 public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> implements MenuUiHandlers {
 
-    interface MyView extends View, HasUiHandlers<MenuUiHandlers> {
-    }
+	interface MyView extends View, HasUiHandlers<MenuUiHandlers> {
+	}
 
-    @Inject
-    MenuPresenter(EventBus eventBus, MyView view) {
-        super(eventBus, view);
+	@Inject
+	MenuPresenter(EventBus eventBus, MyView view) {
+		super(eventBus, view);
 
-        getView().setUiHandlers(this);
-    }
+		getView().setUiHandlers(this);
+	}
 
-    protected void onBind() {
-        super.onBind();
-    }
+	protected void onBind() {
+		super.onBind();
+	}
 
-    @Override
-    public void setContentPush() {
-        ContentPushEvent.fire(this);
-    }
+	@Override
+	public void setContentPush() {
+		ContentPushEvent.fire(this);
+	}
 }
