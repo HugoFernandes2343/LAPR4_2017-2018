@@ -39,6 +39,7 @@ import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormView;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -62,6 +63,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialPopupMenu popupMenu;
+
+    @UiField
+    MaterialIcon formButton;
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }
@@ -155,6 +159,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 }
             }
             // Window.alert("Hello");
+        });
+
+        formButton.addClickHandler(event -> {
+            //Window.alert("Hello");
+            new FormView();
+
         });
 
         // It is possible to create your own custom renderer per table
