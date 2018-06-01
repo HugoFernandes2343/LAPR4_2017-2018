@@ -29,6 +29,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -37,35 +38,37 @@ import gwt.material.design.client.ui.MaterialTextBox;
 
 public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, WorkbookPresenter.MyProxy> {
 
-	interface MyView extends View {
-		public MaterialTextBox getFirstBox();
+    interface MyView extends View {
 
-		public MaterialIcon getFirstButton();
-	}
+        public MaterialTextBox getFirstBox();
 
-	@ProxyStandard
-	@NameToken(NameTokens.workbook)
-	interface MyProxy extends ProxyPlace<WorkbookPresenter> {
-	}
+        public MaterialIcon getFirstButton();
+    }
 
-	@Inject
-	WorkbookPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
-		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+    @ProxyStandard
+    @NameToken(NameTokens.workbook)
+    @NoGatekeeper
+    interface MyProxy extends ProxyPlace<WorkbookPresenter> {
+    }
 
-		this.placeManager = placeManager;
-	}
+    @Inject
+    WorkbookPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-	PlaceManager placeManager;
+        this.placeManager = placeManager;
+    }
 
-	@Override
-	protected void onReset() {
-		super.onReset();
+    PlaceManager placeManager;
 
-		getView().getFirstButton().addClickHandler(new ClickHandler() {
+    @Override
+    protected void onReset() {
+        super.onReset();
 
-			@Override
-			public void onClick(ClickEvent event) {
-				// Let's test formulas...
+        getView().getFirstButton().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                // Let's test formulas...
 //				String source=getView().getFirstBox().getText();
 //				
 //				// Fetches a cell
@@ -93,16 +96,16 @@ public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, Workb
 //					getView().getResultLabel().setText(result);
 //				}
 
-				// Example on how to jump to another place
+                // Example on how to jump to another place
 //				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.about)
 //						.with("name", result).build();
 //
 //				placeManager.revealPlace(request);
-			}
+            }
 
-		});
-	}
-	
+        });
+    }
+
     @Override
     protected void onReveal() {
         super.onReveal();

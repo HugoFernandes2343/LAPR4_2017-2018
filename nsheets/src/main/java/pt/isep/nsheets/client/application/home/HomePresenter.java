@@ -16,6 +16,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -25,71 +26,73 @@ import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
 
-	private MyView view;
+    private MyView view;
 
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-                
-		void addClickHandler(ClickHandler ch);
-        }
+    interface MyView extends View {
 
-	@NameToken(NameTokens.home)
-	@ProxyStandard
-	interface MyProxy extends ProxyPlace<HomePresenter> {
-	}
+        void setContents(ArrayList<WorkbookDescriptionDTO> contents);
 
-	@Inject
-	HomePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
-		super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+        void addClickHandler(ClickHandler ch);
+    }
 
-		this.view = view;
+    @NameToken(NameTokens.home)
+    @ProxyStandard
+    @NoGatekeeper
+    interface MyProxy extends ProxyPlace<HomePresenter> {
+    }
 
-		this.view.addClickHandler(event -> {
+    @Inject
+    HomePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-			WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+        this.view = view;
 
-			// Set up the callback object.
-			AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
-				public void onFailure(Throwable caught) {
-					MaterialToast.fireToast("Error! " + caught.getMessage());
-				}
+        this.view.addClickHandler((ClickEvent event) -> {
 
-				public void onSuccess(WorkbookDescriptionDTO result) {
-					MaterialToast.fireToast("New Workbook Created...", "rounded");
-					
-					refreshView();
-				}
-			};
+            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
-			WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("WorkbookDescription 123",
-					"New WorkbookDescription 123 Description");
-			workbooksSvc.addWorkbookDescription(wdDto, callback);
-		});
-	}
+            // Set up the callback object.
+            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error!");
+                }
 
-	private void refreshView() {
-		WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+                public void onSuccess(WorkbookDescriptionDTO result) {
+                    MaterialToast.fireToast("New Workbook Created...", "rounded");
 
-		// Set up the callback object.
-		AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
-			public void onFailure(Throwable caught) {
-				// TODO: Do something with errors.
-			}
+                    refreshView();
+                }
+            };
 
-			public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
-				view.setContents(result);
-			}
-		};
+            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("WorkbookDescription 123",
+                    "New WorkbookDescription 123 Description");
+            workbooksSvc.addWorkbookDescription(wdDto, callback);
+        });
+    }
 
-		workbooksSvc.getWorkbooks(callback);
-	}
-	
-	@Override
-	protected void onReveal() {
-		super.onReveal();
+    private void refreshView() {
+        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
-		SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
+        // Set up the callback object.
+        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
+            public void onFailure(Throwable caught) {
+                // TODO: Do something with errors.
+            }
 
-		refreshView();
-	}
+            public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
+                view.setContents(result);
+            }
+        };
+
+        workbooksSvc.getWorkbooks(callback);
+    }
+
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+
+        SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
+
+        refreshView();
+    }
 }

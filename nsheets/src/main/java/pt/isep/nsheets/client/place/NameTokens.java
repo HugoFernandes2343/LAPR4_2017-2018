@@ -28,10 +28,12 @@ public class NameTokens {
     public static final String workbook = "workbook";
 
     public static final String settings = "settings";
-    
+
     public static final String exportToXMLWindow = "exportToXMLWindow";
-    
+
     public static final String login = "login";
+
+    public static final String extensionmanager = "extension manager";
 
     public static String getWorkbook() {
         return workbook;
@@ -55,6 +57,10 @@ public class NameTokens {
 
     public static String getExportToXMLWindow() {
         return exportToXMLWindow;
+    }
+
+    public static String getExtensionManager() {
+        return extensionmanager;
     }
 
 }

@@ -47,6 +47,7 @@ import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormView;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -72,6 +73,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialPopupMenu popupMenu;
+
+    @UiField
+    MaterialIcon formButton;
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }
@@ -175,9 +179,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.setTitle("Export to XML");
             MaterialWindow.setOverlay(true);
             MaterialLabel label1 = new MaterialLabel("Please select what you wish to export.");
-            MaterialRadioButton radioButtonWorkbook = new MaterialRadioButton("radioButtonWorkbook","Export Workbook"); 
-            MaterialRadioButton radioButtonWorksheet = new MaterialRadioButton("radioButtonWorksheet", "Export Worksheet"); 
-            MaterialRadioButton radioButtonPartOfWorksheet = new MaterialRadioButton("radioButtonPartOfWorksheet", "Export Part Of A Worksheet"); 
+            MaterialRadioButton radioButtonWorkbook = new MaterialRadioButton("radioButtonWorkbook", "Export Workbook");
+            MaterialRadioButton radioButtonWorksheet = new MaterialRadioButton("radioButtonWorksheet", "Export Worksheet");
+            MaterialRadioButton radioButtonPartOfWorksheet = new MaterialRadioButton("radioButtonPartOfWorksheet", "Export Part Of A Worksheet");
             radioButtonWorkbook.setName("Export");
             radioButtonWorksheet.setName("Export");
             radioButtonPartOfWorksheet.setName("Export");
@@ -221,8 +225,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p4.setTextAlign(TextAlign.RIGHT);
             p4.add(btnExport);
             window.add(p4);
-            
+
             window.open();
+        });
+
+        formButton.addClickHandler(event -> {
+            //Window.alert("Hello");
+            new FormView();
+
         });
 
         // It is possible to create your own custom renderer per table
@@ -258,6 +268,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     }
 
     @Override
+
     protected void onAttach() {
         super.onAttach();
 
