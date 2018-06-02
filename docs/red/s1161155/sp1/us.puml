@@ -1,0 +1,8 @@
+@startuml
+
+User -> (US1: Create Community tab)
+User -> (US2: Browse Contacts and Requests)
+User -> (US3: Add and accept friends)
+User -> (US4: Remove friends)
+
+@enduml
