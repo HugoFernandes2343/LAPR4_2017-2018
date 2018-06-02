@@ -24,24 +24,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
 
 import com.google.gwt.user.client.ui.Panel;
+import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
-import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialPanel;
-import gwt.material.design.client.ui.MaterialRadioButton;
-import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -67,6 +65,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialIcon firstButton;
     @UiField
     MaterialButton exportToXMLButton;
+    @UiField
+    MaterialButton macrosButton;
 
     @UiField
     MaterialButton exportToCSVButton;
@@ -229,6 +229,42 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p4.add(btnExport);
             window.add(p4);
 
+            window.open();
+        });
+
+
+        macrosButton.addClickHandler(event -> {
+            MaterialWindow window = new MaterialWindow();
+            window.setPadding(32);
+            window.setHeight("600px");
+            window.setTextAlign(TextAlign.LEFT);
+            window.setTitle("Create a Macro");
+            MaterialWindow.setOverlay(true);
+            MaterialPanel p0= new MaterialPanel();
+            MaterialLabel label = new MaterialLabel("Type of Macro");
+            MaterialComboBox macroOption = new MaterialComboBox();
+            macroOption.addItem("JavaScript");
+            p0.add(label);
+            p0.add(macroOption);
+            window.add(p0);
+            MaterialPanel p1 = new MaterialPanel();
+            MaterialLabel macroName= new MaterialLabel("Insert Macro's name");
+            MaterialTextBox macroNameT= new MaterialTextBox();
+            p1.add(macroName);
+            p1.add(macroNameT);
+            window.add(p1);
+            MaterialPanel p2= new MaterialPanel();
+            MaterialLabel label2 = new MaterialLabel("Insert Macro");
+            MaterialTextArea textArea = new MaterialTextArea();
+            p2.add(label2);
+            p2.add(textArea);
+            window.add(p2);
+            MaterialPanel p3= new MaterialPanel();
+            MaterialButton createB = new MaterialButton("Create");
+            MaterialButton cancelB = new MaterialButton("Cancel");
+            p3.add(createB);
+            p3.add(cancelB);
+            window.add(p3);
             window.open();
         });
 
