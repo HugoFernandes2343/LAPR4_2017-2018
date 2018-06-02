@@ -37,12 +37,7 @@ import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
-import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialPanel;
-import gwt.material.design.client.ui.MaterialRadioButton;
-import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -243,12 +238,19 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.setTextAlign(TextAlign.LEFT);
             window.setTitle("Create a Macro");
             MaterialWindow.setOverlay(true);
-            MaterialLabel label = new MaterialLabel("Type of Macro.");
+            MaterialLabel label = new MaterialLabel("Type of Macro");
             window.add(label);
             MaterialComboBox macroOption = new MaterialComboBox();
             macroOption.addItem("JavaScript");
             window.add(macroOption);
-
+            MaterialLabel label2 = new MaterialLabel("Insert Macro");
+            MaterialTextArea textArea = new MaterialTextArea();
+            window.add(label2);
+            window.add(textArea);
+            MaterialButton createB = new MaterialButton("Create");
+            window.add(createB);
+            MaterialButton cancelB = new MaterialButton("Cancel");
+            window.add(cancelB);
             window.open();
         });
 
