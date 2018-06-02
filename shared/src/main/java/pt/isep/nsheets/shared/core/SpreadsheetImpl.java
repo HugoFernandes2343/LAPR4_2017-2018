@@ -109,7 +109,10 @@ public class SpreadsheetImpl implements Spreadsheet {
 		}
 	}
 
-/*
+	public SpreadsheetImpl() {
+	}
+
+	/*
  * LOCATION
  */
 

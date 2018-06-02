@@ -2,15 +2,16 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:m="urn:import:gwt.material.design.client.ui">
-             
-    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
-    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
 	
     <ui:style>
 	
     </ui:style>	
-    
+
     <m:MaterialRow>
+
         <m:MaterialColumn grid="s12">
             <m:MaterialTab ui:field="tab" indicatorColor="WHITE" shadow="1">
                 <m:MaterialTabItem waves="LIGHT" grid="s4">
@@ -34,14 +35,20 @@
         </m:MaterialColumn>
         <m:MaterialColumn m:id="tab2" grid="s12">
             <g:HTMLPanel>
-                <m:MaterialLabel text="Configure your CSV tags for each type of element"/>
-                <m:MaterialTextBox ui:field="txtCSVWorkbook" label="Tag for Workbook"/>
-                <m:MaterialTextBox ui:field="txtCSVWorksheet" label="Tag for Worksheet"/>
-                <m:MaterialTextBox ui:field="txtCSVCell" label="Tag for Cell"/>
-                <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
-	
+                <m:MaterialLabel text="Configure the CSV delimiter that you wish"/>
+                <g:HTMLPanel>
+                <m:MaterialCheckBox ui:field="comma" text="," value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="pointComma" text=";" value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="barra" text="/" value="false" type="FILLED"/>
+                <m:MaterialCheckBox ui:field="point" text="." value="false" type="FILLED"/>
+                </g:HTMLPanel>     
             </g:HTMLPanel>
+            <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
         </m:MaterialColumn>
+
+        <!--(1160777) Botao de abrir a pagina Extensions Manager-->
+        <m:MaterialButton ui:field="extensionManagerButton" grid="s3" offset="s9" waves="LIGHT" text="Extensions Manager" textColor="WHITE" iconPosition="LEFT" iconType="LAYERS" iconColor="WHITE"/>
+
     </m:MaterialRow>
     
 </ui:UiBinder>

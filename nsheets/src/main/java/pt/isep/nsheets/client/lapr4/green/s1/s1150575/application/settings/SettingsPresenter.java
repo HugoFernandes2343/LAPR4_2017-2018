@@ -7,9 +7,13 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialTextBox;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -19,6 +23,8 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
     interface MyView extends View {
 
+        void addClickHandlerExtensionManager(ClickHandler ch);
+
         public MaterialTextBox getWorkbookBox();
 
         public MaterialTextBox getWorksheetBox();
@@ -26,7 +32,21 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
         public MaterialTextBox getCellBox();
 
         public MaterialButton getApplyButton();
+
+        //1160777
+        public MaterialButton getExtensionManagerButton();
+
+        public MaterialCheckBox getComma();
+
+        public MaterialCheckBox getPointComma();
+
+        public MaterialCheckBox getBarra();
+
+        public MaterialCheckBox getPoint();
     }
+
+    private SettingsPresenter.MyView view;
+    private PlaceManager placeManager;
 
     @NameToken(NameTokens.settings)
     @ProxyStandard
@@ -34,8 +54,18 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
     }
 
     @Inject
-    SettingsPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
+    SettingsPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+        this.view = view;
+        this.placeManager = placeManager;
+
+        /*
+         * @author <1160777>Marco Carneiro</1160777>
+         */
+        this.view.addClickHandlerExtensionManager(event -> {
+            PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
+            placeManager.revealPlace(placeRequest);
+        });
     }
 
     @Override
@@ -49,6 +79,12 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
             @Override
             public void onClick(ClickEvent event) {
 
+                String box = getView().getComma().getText();
+                String box1 = getView().getPointComma().getText();
+                String box2 = getView().getBarra().getText();
+                String box3 = getView().getPoint().getText();
+
+//                String delimiter = getView().getDropButton().getActivator();
             }
 
         });
