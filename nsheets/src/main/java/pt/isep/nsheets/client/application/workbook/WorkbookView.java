@@ -34,6 +34,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 import com.google.gwt.user.client.ui.Panel;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
+import gwt.material.design.addins.client.menubar.MaterialMenuBar;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
@@ -260,9 +261,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p2.add(textArea);
             window.add(p2);
             MaterialPanel p3= new MaterialPanel();
-            MaterialButton createB = new MaterialButton("Create");
+            MaterialButton runB = new MaterialButton("Run");
+            MaterialButton saveB = new MaterialButton("Save");
             MaterialButton cancelB = new MaterialButton("Cancel");
-            p3.add(createB);
+            p3.add(runB);
+            p3.add(saveB);
             p3.add(cancelB);
             window.add(p3);
             window.open();
@@ -352,7 +355,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p4.setTextAlign(TextAlign.RIGHT);
             p4.add(btnExport);
             window.add(p4);
-
             window.open();
         });
 
