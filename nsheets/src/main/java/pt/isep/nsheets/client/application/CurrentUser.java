@@ -5,12 +5,29 @@
  */
 package pt.isep.nsheets.client.application;
 
+import com.google.inject.Inject;
+import pt.isep.nsheets.shared.services.UserDTO;
+
 /**
  *
  * @author Paulo Jorge
  */
 public class CurrentUser {
-    public boolean isLoggedIn(){
-        return false;
+
+    boolean isLoggedIn;
+    UserDTO currentUser;
+
+    public void setCurrentUser(UserDTO currentUser) {
+        this.currentUser = currentUser;
     }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
+    
+
 }

@@ -35,13 +35,13 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
         //1160777
         public MaterialButton getExtensionManagerButton();
-        
+
         public MaterialCheckBox getComma();
-        
+
         public MaterialCheckBox getPointComma();
-        
+
         public MaterialCheckBox getBarra();
-        
+
         public MaterialCheckBox getPoint();
     }
 
@@ -50,21 +50,20 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
     @NameToken(NameTokens.settings)
     @ProxyStandard
-    @NoGatekeeper
     interface MyProxy extends ProxyPlace<SettingsPresenter> {
     }
 
     @Inject
-    SettingsPresenter(EventBus eventBus, MyView view, MyProxy proxy,PlaceManager placeManager) {
+    SettingsPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
         this.view = view;
-        this.placeManager=placeManager;
+        this.placeManager = placeManager;
 
         /*
          * @author <1160777>Marco Carneiro</1160777>
          */
         this.view.addClickHandlerExtensionManager(event -> {
-            PlaceRequest placeRequest=new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
+            PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
             placeManager.revealPlace(placeRequest);
         });
     }
@@ -79,16 +78,13 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
             @Override
             public void onClick(ClickEvent event) {
-                
+
                 String box = getView().getComma().getText();
                 String box1 = getView().getPointComma().getText();
                 String box2 = getView().getBarra().getText();
                 String box3 = getView().getPoint().getText();
-                
-
 
 //                String delimiter = getView().getDropButton().getActivator();
-                
             }
 
         });

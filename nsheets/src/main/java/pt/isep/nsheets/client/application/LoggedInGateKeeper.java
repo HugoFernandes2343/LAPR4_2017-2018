@@ -25,7 +25,7 @@ public class LoggedInGateKeeper implements Gatekeeper {
 
     @Override
     public boolean canReveal() {
-        return currentUser.isLoggedIn();
+        return true;
     }
 
 }
