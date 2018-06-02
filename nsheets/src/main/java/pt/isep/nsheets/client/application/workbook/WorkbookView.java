@@ -24,8 +24,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -238,19 +240,31 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.setTextAlign(TextAlign.LEFT);
             window.setTitle("Create a Macro");
             MaterialWindow.setOverlay(true);
+            MaterialPanel p0= new MaterialPanel();
             MaterialLabel label = new MaterialLabel("Type of Macro");
-            window.add(label);
             MaterialComboBox macroOption = new MaterialComboBox();
             macroOption.addItem("JavaScript");
-            window.add(macroOption);
+            p0.add(label);
+            p0.add(macroOption);
+            window.add(p0);
+            MaterialPanel p1 = new MaterialPanel();
+            MaterialLabel macroName= new MaterialLabel("Insert Macro's name");
+            MaterialTextBox macroNameT= new MaterialTextBox();
+            p1.add(macroName);
+            p1.add(macroNameT);
+            window.add(p1);
+            MaterialPanel p2= new MaterialPanel();
             MaterialLabel label2 = new MaterialLabel("Insert Macro");
             MaterialTextArea textArea = new MaterialTextArea();
-            window.add(label2);
-            window.add(textArea);
+            p2.add(label2);
+            p2.add(textArea);
+            window.add(p2);
+            MaterialPanel p3= new MaterialPanel();
             MaterialButton createB = new MaterialButton("Create");
-            window.add(createB);
             MaterialButton cancelB = new MaterialButton("Cancel");
-            window.add(cancelB);
+            p3.add(createB);
+            p3.add(cancelB);
+            window.add(p3);
             window.open();
         });
 
