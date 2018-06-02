@@ -47,7 +47,6 @@ public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, Workb
 
     @ProxyStandard
     @NameToken(NameTokens.workbook)
-    @NoGatekeeper
     interface MyProxy extends ProxyPlace<WorkbookPresenter> {
     }
 

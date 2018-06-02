@@ -37,7 +37,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @NameToken(NameTokens.home)
     @ProxyStandard
-    @NoGatekeeper
     interface MyProxy extends ProxyPlace<HomePresenter> {
     }
 
@@ -58,7 +57,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 }
 
                 public void onSuccess(WorkbookDescriptionDTO result) {
-                   
 
                     refreshView();
                 }

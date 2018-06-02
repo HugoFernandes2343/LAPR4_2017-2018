@@ -43,7 +43,6 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
 
     @NameToken(NameTokens.extensionmanager)
     @ProxyStandard
-    @NoGatekeeper
     interface MyProxy extends ProxyPlace<ExtensionManagerPresenter> {
     }
 
@@ -54,7 +53,6 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
         this.view = view;
 
         //getView().getSwitchPanelSelection().
-
         this.view.addClickHandlerApplyButton(event -> {
             //Add behaviour to persist the changes and apply the effects
             //of the extensions in use

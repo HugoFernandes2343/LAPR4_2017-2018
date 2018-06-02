@@ -25,8 +25,18 @@ class LoginView extends ViewImpl implements LoginPresenter.MyView {
     }
 
     @Override
+    public MaterialTextBox getTextEmail() {
+        return textEmail;
+    }
+
+    @Override
+    public MaterialTextBox getTextPassword() {
+        return textPassword;
+    }
+
+    @Override
     public void addClickHandler(ClickHandler ch) {
         btnLogin.addClickHandler(ch);
     }
-    
+
 }
