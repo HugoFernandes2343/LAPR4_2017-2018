@@ -39,7 +39,7 @@ import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormView;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -104,11 +104,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     void initWorkbook() {
         // Test the initialization of an Workbook
-
         String contents[][][] = {{ // first spreadsheet
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"},}};
-
         Workbook wb = new Workbook(contents);
         Spreadsheet sh = wb.getSpreadsheet(0);
 
@@ -163,7 +161,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         formButton.addClickHandler(event -> {
             //Window.alert("Hello");
-            new FormView();
+            new FormEditorView();
 
         });
 
