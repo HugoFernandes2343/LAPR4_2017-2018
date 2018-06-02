@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
+
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -40,15 +40,13 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         // Setup the persistence settings
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
-        ArrayList<UserDTO> users = new ArrayList<>();
+        ArrayList<UserDTO> users = new ArrayList<UserDTO>();
 
         LoginController ctrl = new LoginController();
 
         Iterable<User> us = ctrl.allUsers();
 
-        for (User u : us) {
-            users.add(u.toDTO());
-        }
+        us.forEach(u -> users.add(u.toDTO()));
 
         return users;
     }

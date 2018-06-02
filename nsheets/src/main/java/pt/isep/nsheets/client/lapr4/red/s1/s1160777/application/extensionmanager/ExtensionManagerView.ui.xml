@@ -11,14 +11,12 @@
     </ui:style>
 
     <g:HTMLPanel>
-
         <m:MaterialRow marginTop="60">
             <g:Hyperlink text="Back to Settings" targetHistoryToken="{tokens.getSettings}"/>
+            <m:MaterialLabel text="Basic view of the extensions"/>
+            <m:MaterialButton ui:field="applyButton" text="Apply" size="MEDIUM"/>
         </m:MaterialRow>
-
-        <m:MaterialLabel text="Basic view of the extensions"/>
-
-
     </g:HTMLPanel>
+
 
 </ui:UiBinder>
