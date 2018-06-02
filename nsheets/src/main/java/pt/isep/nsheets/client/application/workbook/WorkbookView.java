@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 import com.google.gwt.user.client.ui.Panel;
+import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
@@ -67,6 +68,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialIcon firstButton;
     @UiField
     MaterialButton exportToXMLButton;
+    @UiField
+    MaterialButton macrosButton;
 
     @UiField
     MaterialDataTable<SheetCell> customTable;
@@ -225,6 +228,23 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p4.setTextAlign(TextAlign.RIGHT);
             p4.add(btnExport);
             window.add(p4);
+
+            window.open();
+        });
+
+
+        macrosButton.addClickHandler(event -> {
+            MaterialWindow window = new MaterialWindow();
+            window.setPadding(32);
+            window.setHeight("600px");
+            window.setTextAlign(TextAlign.LEFT);
+            window.setTitle("Create a Macro");
+            MaterialWindow.setOverlay(true);
+            MaterialLabel label = new MaterialLabel("Type of Macro.");
+            window.add(label);
+            MaterialComboBox macroOption = new MaterialComboBox();
+            macroOption.addItem("JavaScript");
+            window.add(macroOption);
 
             window.open();
         });
