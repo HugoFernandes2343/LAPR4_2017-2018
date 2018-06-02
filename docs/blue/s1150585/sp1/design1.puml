@@ -1,0 +1,46 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+control FormEditorWindow
+control FormWindow
+control Form
+control FormEditorController
+database Database
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter
+participant FormEditorWindow
+participant FormWindow
+end box
+
+box "Server"
+participant WorkbookServices
+participant FormEditorController
+participant Form
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> WorkbookPresenter : onReveal() / navigate to page
+WorkbookPresenter ->> WorkbookServices : getCurrentWorkbook()
+User -> WorkbookPresenter : editForm() / Open a Window Editor
+WorkbookPresenter -> FormEditorWindow : open(currentWorkBook);
+FormEditorWindow -> FormEditorController : existsForm(currentWorkBook);
+FormEditorWindow -> FormEditorWindow : display() or create()
+FormEditorWindow -> FormWindow : preview()
+FormEditorWindow -> FormEditorController : save(Map <String,String> rows);
+FormEditorController -> Form : new(currentWorkbook, Map <String,String> rows);
+Form -> Form : createNewForm()
+Form -> Database : persist
+
+@enduml
