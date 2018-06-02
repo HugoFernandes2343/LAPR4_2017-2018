@@ -40,7 +40,7 @@ For this feature increment, since it is the first one to be developed in a new p
 
 ![form](newFormBotao.png)
 
-![form](formEditor.png)
+![form](FormEditor.png)
 
 
 ## 3.2 Form
