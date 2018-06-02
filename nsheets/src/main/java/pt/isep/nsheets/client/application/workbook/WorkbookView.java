@@ -119,12 +119,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     void initWorkbook() {
         // Test the initialization of an Workbook
 
-        String contents[][][] = {{ // first spreadsheet
-            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-            {"1", "2", "3", "4", "5", "6", "7"},}};
+        String contents[][] = { // first spreadsheet
+                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+                {"1", "2", "3", "4", "5", "6", "7"}};
 
-        Workbook wb = new Workbook(contents);
-        Spreadsheet sh = wb.getSpreadsheet(0);
+        Workbook wb = new Workbook("Workbook", "New Workbook", contents);
+        Spreadsheet sh = wb.getSheet();
 
         int columnNumber = 0;
 

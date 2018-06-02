@@ -20,31 +20,38 @@
  */
 package pt.isep.nsheets.shared.core;
 
+import eapli.framework.domain.AggregateRoot;
+
+import javax.persistence.*;
 import java.io.IOException;
-import java.io.ObjectInputStream;
+//import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * A workbook which can contain several spreadsheets.
  * @author Einar Pehrson
  */
-public class Workbook implements Iterable<Spreadsheet>, Serializable {
+public class Workbook implements  Serializable {
 
-	/** The unique version identifier used for serialization */
 	private static final long serialVersionUID = -6324252462576447242L;
 
-	/** The spreadsheets of which the workbook consists */
-	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
+	private String name;
+	private String description;
+
+
+//	/** The spreadsheets of which the workbook consists */
+//	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
+
+	private Spreadsheet sheet;
 
 	/** The cell listeners that have been registered on the cell */
 	private transient List<WorkbookListener> listeners
 		= new ArrayList<WorkbookListener>();
 
-	/** The number of spreadsheets that have been created in the workbook */
-	private int createdSpreadsheets;
+//	/** The number of spreadsheets that have been created in the workbook */
+//	private int createdSpreadsheets;
 
 	/**
 	 * Creates a new empty workbook.
@@ -52,92 +59,140 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 	public Workbook() {}
 
 	/**
-	 * Creates a new workbook, which initially contains the given number
-	 * of blank spreadsheets.
-	 * @param sheets the number of sheets to create initially
+	 * Creates a new workbook with one spreadsheet
+	 * @param name
+	 * @param desc
 	 */
-	public Workbook(int sheets) {
-		for (int i = 0; i < sheets; i++)
-			spreadsheets.add(new SpreadsheetImpl(this,
-				getNextSpreadsheetTitle()));
+	public Workbook(String name, String desc){
+		this.name = name;
+		this.description = desc;
+		this.sheet = new SpreadsheetImpl(this,"New Sheet");
 	}
+
+	/**
+	 * creates a new book from existing spreadsheet
+	 * @param name
+	 * @param description
+	 * @param sheet
+	 */
+	public Workbook(String name, String description, Spreadsheet sheet) {
+		this.name = name;
+		this.description = description;
+		this.sheet = sheet;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Spreadsheet getSheet() {
+		return sheet;
+	}
+
+
 
 	/**
 	 * Creates a new workbook, using the given content matrix to create
 	 * spreadsheets initially.
 	 * @param contents the content matrices to use when creating spreadsheets
 	 */
-	public Workbook(String[][]... contents) {
-		for (String[][] content : contents)
-			spreadsheets.add(new SpreadsheetImpl(this,
-				getNextSpreadsheetTitle(), content));
+	public Workbook(String name, String desc, String[][] contents) {
+		this.name = name;
+		this.description = desc;
+		this.sheet = new SpreadsheetImpl(this,"New Sheet", contents);
 	}
 
-	/**
-	 * Adds a blank spreadsheet to the end of the workbook.
-	 */
-	public void addSpreadsheet() {
-		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
-			getNextSpreadsheetTitle());
-		spreadsheets.add(spreadsheet);
-		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
-	}
+	//	/**
+//	 * Creates a new workbook, which initially contains the given number
+//	 * of blank spreadsheets.
+//	 * @param sheets the number of sheets to create initially
+//	 */
+//	public Workbook(int sheets) {
+//		for (int i = 0; i < sheets; i++)
+//			spreadsheets.add(new SpreadsheetImpl(this,
+//				getNextSpreadsheetTitle()));
+//	}
 
-	/**
-	 * Adds a new spreadsheet to the workbook, in which cells are initialized
-	 * with data from the given content matrix.
-	 * @param content the contents of the cells in the spreadsheet
-	 */
-	public void addSpreadsheet(String[][] content) {
-		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
-			getNextSpreadsheetTitle(), content);
-		spreadsheets.add(spreadsheet);
-		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
-	}
+//	/**
+//	 * Creates a new workbook, using the given content matrix to create
+//	 * spreadsheets initially.
+//	 * @param contents the content matrices to use when creating spreadsheets
+//	 */
+//	public Workbook(String[][]... contents) {
+//		for (String[][] content : contents)
+//			spreadsheets.add(new SpreadsheetImpl(this,
+//				getNextSpreadsheetTitle(), content));
+//	}
 
-	/**
-	 * Returns the title to be used for the next spreadsheet added.
-	 * @return the title to be used for the next spreadsheet added
-	 */
-	private String getNextSpreadsheetTitle() {
-		return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
-	}
+//	/**
+//	 * Adds a blank spreadsheet to the end of the workbook.
+//	 */
+//	public void addSpreadsheet() {
+//		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
+//			getNextSpreadsheetTitle());
+//		spreadsheets.add(spreadsheet);
+//		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
+//	}
 
-	/**
-	 * Adds a new blank spreadsheet to the workbook.
-         * @param spreadsheet spreadsheet
-	 */
-	public void removeSpreadsheet(Spreadsheet spreadsheet) {
-		spreadsheets.remove(spreadsheet);
-		// Remove references to the spreadsheet in remaining spreadsheets!
-		fireSpreadsheetRemoved(spreadsheet);
-	}
+//	/**
+//	 * Adds a new spreadsheet to the workbook, in which cells are initialized
+//	 * with data from the given content matrix.
+//	 * @param content the contents of the cells in the spreadsheet
+//	 */
+//	public void addSpreadsheet(String[][] content) {
+//		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
+//			getNextSpreadsheetTitle(), content);
+//		spreadsheets.add(spreadsheet);
+//		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
+//	}
 
-	/**
-	 * Returns the spreadsheet at the given index.
-	 * @param index the index of the spreadsheet in the workbook
-	 * @return the spreadsheet at the given index
-	 * @throws IndexOutOfBoundsException if the index is out of range (index less than 0 or index greater or equal |spreadsheets|)
-	 */
-	public Spreadsheet getSpreadsheet(int index) throws IndexOutOfBoundsException {
-		return spreadsheets.get(index);
-	}
+//	/**
+//	 * Returns the title to be used for the next spreadsheet added.
+//	 * @return the title to be used for the next spreadsheet added
+//	 */
+//	private String getNextSpreadsheetTitle() {
+//		return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
+//	}
 
-	/**
-	 * Returns the number of spreadsheets in the the workbook.
-	 * @return the number of spreadsheets in the the workbook
-	 */
-	public int getSpreadsheetCount() {
-		return spreadsheets.size();
-	}
+//	/**
+//	 * Adds a new blank spreadsheet to the workbook.
+//         * @param spreadsheet spreadsheet
+//	 */
+//	public void removeSpreadsheet(Spreadsheet spreadsheet) {
+//		spreadsheets.remove(spreadsheet);
+//		// Remove references to the spreadsheet in remaining spreadsheets!
+//		fireSpreadsheetRemoved(spreadsheet);
+//	}
 
-	/**
-	 * Returns an iterator over the spreadsheets in the workbook.
-	 * @return an iterator over the spreadsheets in the workbook
-	 */
-	public Iterator<Spreadsheet> iterator() {
-		return spreadsheets.iterator();
-	}
+//	/**
+//	 * Returns the spreadsheet at the given index.
+//	 * @param index the index of the spreadsheet in the workbook
+//	 * @return the spreadsheet at the given index
+//	 * @throws IndexOutOfBoundsException if the index is out of range (index less than 0 or index greater or equal |spreadsheets|)
+//	 */
+//	public Spreadsheet getSpreadsheet(int index) throws IndexOutOfBoundsException {
+//		return spreadsheets.get(index);
+//	}
+
+//	/**
+//	 * Returns the number of spreadsheets in the the workbook.
+//	 * @return the number of spreadsheets in the the workbook
+//	 */
+//	public int getSpreadsheetCount() {
+//		return spreadsheets.size();
+//	}
+
+//	/**
+//	 * Returns an iterator over the spreadsheets in the workbook. (needs to implement Iterable<Spreadsheet>)
+//	 * @return an iterator over the spreadsheets in the workbook
+//	 */
+//	public Iterator<Spreadsheet> iterator() {
+//		return spreadsheets.iterator();
+//	}
 
 /*
  * EVENT HANDLING
@@ -196,7 +251,7 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 			listener.spreadsheetRenamed(spreadsheet);
 	}
 
-/*
+	/*
  * GENERAL
  */
 
