@@ -22,7 +22,12 @@ import pt.isep.nsheets.shared.core.formula.lang.UnknownElementException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.Token;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.For;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Block;
 
 /**
  *
@@ -33,14 +38,14 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     private Cell cell = null;
     int numberOfErros;
     private final StringBuilder errorBuffer;
-    
+
     final private Language language;
 
     public FormulaEvalVisitor(Cell cell, Language lang) {
         this.cell = cell;
         numberOfErros = 0;
         errorBuffer = new StringBuilder();
-        this.language=lang;
+        this.language = lang;
     }
 
     public int getNumberOfErrors() {
@@ -62,7 +67,7 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
             try {
                 //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
                 BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
-                
+
                 return new BinaryOperation(
                         visit(ctx.getChild(0)),
                         operator,
@@ -91,7 +96,6 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
                 return new UnaryOperation(
                         // Language.getInstance().getUnaryOperator(ctx.getChild(operatorid).getText()),
                         this.language.getUnaryOperator(ctx.getChild(operatorid).getText()),
-                        
                         visit(ctx.getChild(operand))
                 );
 
@@ -156,7 +160,7 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
             if (ctx.getChildCount() == 3) {
                 //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
                 BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
-                
+
                 return new ReferenceOperation(
                         new CellReference(cell.getSpreadsheet(), ctx.getChild(0).getText()),
                         (RangeReference) operator,
@@ -180,11 +184,95 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
             return new Literal(Value.parseValue(ctx.getText()));
         } else {
             if (t.getType() == FormulaParser.STRING) {
-                String value = ctx.getText().substring(1, ctx.getText().length()-1);
+                String value = ctx.getText().substring(1, ctx.getText().length() - 1);
                 return new Literal(Value.parseValue(value, Value.Type.BOOLEAN, Value.Type.DATE));
             }
         }
 
+        return null;
+    }
+
+    @Override
+    public Expression visitLoopfor(FormulaParser.LoopforContext ctx) {
+        // Convert function call
+        Function forFunction = null;
+        Value value = null;
+        try {
+            // function = Language.getInstance().getFunction(ctx.getChild(0).getText());
+            forFunction = this.language.getFunction(ctx.getChild(0).getText());
+        } catch (UnknownElementException ex) {
+            addVisitError(ex.getMessage());
+        }
+
+        if (forFunction != null) {
+            List<Expression> args = new ArrayList<>();
+            if (ctx.getChildCount() > 3) {
+                for (int nChild = 2; nChild < ctx.getChildCount() - 1; nChild += 2) {
+                    args.add(visit(ctx.getChild(nChild)));
+                }
+            }
+            Expression[] argArray = args.toArray(new Expression[args.size()]);
+            Function loopfor = new For();
+            try {
+                value = loopfor.applyTo(argArray);
+            } catch (IllegalValueTypeException ex) {
+                Logger.getLogger(FormulaEvalVisitor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return new Literal(value);
+        }
+        return null;
+    }
+
+    @Override
+    public Expression visitAssignment(FormulaParser.AssignmentContext ctx) {
+        if (ctx.getChildCount() == 3) {
+            //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
+            BinaryOperator operator;
+            try {
+                operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
+                
+                return new BinaryOperation(
+                        visit(ctx.getChild(0)),
+                        operator,
+                        visit(ctx.getChild(2))
+                );
+            } catch (UnknownElementException ex) {
+                Logger.getLogger(FormulaEvalVisitor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        return visit(ctx.comparison());
+    }
+    
+    @Override
+    public Expression visitBlock(FormulaParser.BlockContext ctx){
+        // Convert function call
+        Function blockFunction = null;
+        Value value = null;
+        try {
+            // function = Language.getInstance().getFunction(ctx.getChild(0).getText());
+            blockFunction = this.language.getFunction(ctx.getChild(0).getText());
+        } catch (UnknownElementException ex) {
+            addVisitError(ex.getMessage());
+        }
+
+        if (blockFunction != null) {
+            List<Expression> args = new ArrayList<>();
+            if (1 < ctx.getChildCount()) {
+                for (int nChild = 1; nChild < ctx.getChildCount() - 1; nChild += 2) {
+                    args.add(visit(ctx.getChild(nChild)));
+                }
+            }
+            Expression[] argArray = args.toArray(new Expression[args.size()]);
+            Function block = new Block();
+            try {
+                value = block.applyTo(argArray);
+            } catch (IllegalValueTypeException ex) {
+                Logger.getLogger(FormulaEvalVisitor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return new Literal(value);
+        }
         return null;
     }
 
