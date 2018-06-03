@@ -1,0 +1,7 @@
+@startuml
+User -> Cell : Insert Block with Variables
+Cell->Formula : Process Block(s) with all Variable(s) and determine result
+Formula->Variable : create(value)
+Formula->VariableList : save(variable)
+Cell->User : Show the result
+@enduml
