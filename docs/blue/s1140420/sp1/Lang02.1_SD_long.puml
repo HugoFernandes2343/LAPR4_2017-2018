@@ -1,0 +1,43 @@
+@startuml
+participant "User" as User
+participant "CellImpl" as CellImpl
+participant "FormulaCompiler" as FormulaCompiler
+participant "ExpressionCompiler" as ExpressionCompiler
+participant "Formula" as Formula
+participant "VariableWrapper" as VariableWrapper
+participant "Variable" as Variable
+participant "Block" as Block
+participant "Attribution" as Attribution
+
+User -> CellImpl : Insert Block with Variables
+CellImpl->CellImpl : storeContent(content)
+CellImpl->FormulaCompiler : compile(this,content)
+
+
+activate CellImpl
+loop
+ FormulaCompiler->ExpressionCompiler : getStarter()
+ FormulaCompiler->ExpressionCompiler : compile(cell,source)
+    loop
+        opt GRAMMAR_TOKEN == VARIABLE
+         FormulaCompiler->VariableWrapper: create(cell, variableName)
+         VariableWrapper->Variable : create(variableName, 0.0)
+        end
+    end
+ FormulaCompiler->Formula : create()
+end
+opt GRAMMAR_TOKEN == LBRA
+    Formula->Block : applyTo (args)
+    Formula->Attribution : applyTo (args)
+    opt leftOperand instanceof VariableWrapper
+        Formula->Variable : setVariableValue (rightOp.toDouble())
+    end
+end
+deactivate CellImpl
+
+
+ CellImpl->CellImpl : updateDependencies()
+ CellImpl->CellImpl : removeDependent(this)
+ CellImpl->CellImpl : fireContentChanged()
+ CellImpl->CellImpl : reevaluate()
+@enduml
