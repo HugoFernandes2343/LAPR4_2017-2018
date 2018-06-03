@@ -41,12 +41,17 @@ function_call
 reference
 	:	CELL_REF
 		( ( COLON ) CELL_REF )?
+                | VARIABLE
 	;
 
 literal
 	:	NUMBER
 	|	STRING
 	;
+
+VARIABLE
+        : UND LETTER ( NUMBER | LETTER) *
+        ;
 
 assignment  
         :       reference ASSIGN comparison
@@ -101,6 +106,7 @@ LT		: '<' ;
 
 /* Text operators */
 AMP		: '&' ;
+UND             : '_' ;
 
 /* Arithmetic operators */
 PLUS	: '+' ;
