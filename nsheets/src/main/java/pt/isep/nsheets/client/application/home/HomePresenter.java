@@ -6,6 +6,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -17,9 +19,12 @@ import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
+import org.h2.message.DbException;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
+import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
@@ -30,7 +35,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     interface MyView extends View {
 
-        void setContents(ArrayList<WorkbookDescriptionDTO> contents);
+        void setContents(ArrayList<Workbook> contents);
 
         void addClickHandler(ClickHandler ch);
     }
@@ -50,21 +55,51 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
-            // Set up the callback object.
-            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
+            AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
+//                public void onFailure(Throwable caught) {
+//                    MaterialToast.fireToast("Error teste!");
+//                }
+
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error!");
+                    // Convenient way to find out which exception was thrown.
+                    //MaterialToast.fireToast("Error teste!");
+                    try {
+                        throw caught;
+                    } catch (IncompatibleRemoteServiceException e) {
+                        // this client is not compatible with the server; cleanup and refresh the browser
+                        MaterialToast.fireToast("this client is not compatible with the server; cleanup and refresh the browser");
+                    } catch (InvocationException e) {
+                        // the call didn't complete cleanly
+                        MaterialToast.fireToast("the call didn't complete cleanly");
+                    } catch (Throwable e) {
+                        // last resort -- a very unexpected exception
+                        MaterialToast.fireToast("last resort -- a very unexpected exception");
+                    }
                 }
 
-                public void onSuccess(WorkbookDescriptionDTO result) {
-
+                public void onSuccess(Workbook result) {
                     refreshView();
                 }
             };
 
-            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("WorkbookDescription 123",
-                    "New WorkbookDescription 123 Description");
-            workbooksSvc.addWorkbookDescription(wdDto, callback);
+            Workbook wb = SelectedWorkbookController.getActualWorkbook();
+            workbooksSvc.addWorkbook(wb, callback);
+
+//            // Set up the callback object.
+//            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
+//                public void onFailure(Throwable caught) {
+//                    MaterialToast.fireToast("Error!");
+//                }
+//
+//                public void onSuccess(WorkbookDescriptionDTO result) {
+//
+//                    refreshView();
+//                }
+//            };
+//
+//            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("WorkbookDescription 123",
+//                    "New WorkbookDescription 123 Description");
+//            workbooksSvc.addWorkbookDescription(wdDto, callback);
         });
     }
 
@@ -72,12 +107,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
         // Set up the callback object.
-        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
+        AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
             public void onFailure(Throwable caught) {
                 // TODO: Do something with errors.
             }
 
-            public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
+            public void onSuccess(ArrayList<Workbook> result) {
                 view.setContents(result);
             }
         };
