@@ -1,9 +1,14 @@
-**John Doe** (s4567890) - Sprint 1 - Core00.0
+**Rodrigo Soares** (s1140420) - Sprint 1 - Lang02.1
 ===============================
 
 # 1. General Notes
 
-*In this section you should register important notes regarding your work during the sprint. For instance, if you spend significant time helping a colleague or if you work in more than one feature increment.*
+The first 2 days (Tuesday and Wednesday) were dedicated to making sure everyone on Team BLUE was properly setup (sucks to be the Scrum Master :P). Barbara and Pietro in particular required a bit of extra care since they are not familiar with Java development at all - installing and configuring the IDE, giving them some pointers on Java, and promoting their integration into the group, as they were a bit left out during the skills module of LAPR4.
+
+TL;DR: No time for myself until Friday.
+
+Started exploring the app on Friday, stumbling around like a drunken sailor.
+
 
 # 2. Requirements
 
@@ -11,169 +16,71 @@
 
 *This is simply an example of documentation*
 
-Core00.0 - The Home page should present metadata about all workbooks (i.e., Workbook Descriptions). This metadata should be persisted in a relational database (using JPA). In the UI of the Home page it should be possible to add a new Workbook Description.
+Lang02.1 - Temporary Variables should be recognized within the scope of an input formula.
 
-We can further specify this textual requirements as user stories.
+Quoting the Product Owner:
+"Add support for temporary variables. The name of temporary variables must start with the "\_" sign. When a variable is referred in a formula for the first time, it is created. To set the value of a variable it must be used on the left of the assign operator (":="). Temporary variables are variables that only exist in the context of the execution of a formula. Therefore, it is possible for several formulas to use temporary variables with the same name and they will be different instances. Example: "= {\_Counter:=1; WhileDo(Eval( "A"&\_Counter)> 0; {C1:=C1+Eval("B"&\_Counter); \_Counter:=\_Counter+1 }) }” . In this example, the cell C1 will get the sum of all the values of column B in that the corresponding values in column A are greater than zero."
 
-Proposal:
+Instead of the previous example, which uses artefacts that will supposedly only be implemented in Sprints 2 or 3 (like "WhileDo" and "Eval", Lang01.3), let's use a simpler one:
 
-US1 - As the Product Owner I want that the workbooks that are displayed in the Home Page come from a relational database so that they are persisted and can be updated.
+  *"= {\_Counter:=1; \_Counter:=\_Counter+1 }*
 
-US2 - As a User of the Application I want to be able to add new Workbook Descriptions when I am in the Home Page.
+If that block goes into a Cell, and in conjunction with the specs for Lang01.1, the result must be "2" because a "Counter" variable is set to "1" and then incremented by "1".
+
+This behavior therefore seems to be a very basic acceptance criteria. Note, however, that the requirements state VARIABLES (plural), which means a given Formula can include declarations for multiple ones.
+
+Dependencies:
+
+Lang01.1 is a critical dependency, because if NSheets is not capable of processing Blocks of Instructions as a Formula, then there is really no User-side way to check if the Variables are actually storing their value.
+
+US - As a User of the Application I want to be able to use Variables in my Blocks of Instructions
 
 # 3. Analysis
 
-*In this section you should describe the study/analysis/research you developed in order to design a solution.*
+Things that concern this Sprint:
 
-For this feature increment, since it is the first one to be developed in a new project I need to:  
+- Understand how a Cell content is passed from the Client side over to the Core part of the app. This is already being done, so I just need to make sure I know where to capture the input String (I'm guessing it's a String) and then use parse it accordingly
 
-- Understand how the application works and also understand the key aspects of GWT, since it is the main technology behind the application  
+Things that do NOT concern this Sprint:
 
-- Understand how the Home Page is implemented (for instance, how the UI gets the Workbook Descriptions that are displayed)  
+- Understand how GWT works. The app is already capable of accepting input values and passing them to the Core section, so I probably won't have to dabble in the UI itself (based on GWT).  
 
-- Understand how to integrate a relational database into the project (Will be assuming JPA since it is studied in EAPLI)   
+- Understand how persistence is done. "Temporary Variables", as stated, only exist in the scope of a Formula, so they will not need to be Saved with the Workbook, which means I should ignore database/persistence concerns (Lang02.2 and/or Lang02.3 might have to, though)
 
-## 3.1 GWT and Project Structure
+## 3.1 Which classes/packages am I gonna interact with (mainly)?
 
-**Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
-- **server**. It is the "server part" of the web application.  
-- **shared**. It contains code that is shared between the client (i.e., web application) and the server.   
-- **nsheets**. It is the web application (i.e., Client).  
-- **util**. This is the same module as the one of EAPLI.  
-- **framework**. This is the same module as the one of EAPLI.   
-  
-From [GWT Overview](http://www.gwtproject.org/overview.html): *"The GWT SDK contains the Java API libraries, compiler, and development server. It lets you write client-side applications in Java and deploy them as JavaScript."*
+I've determined that I am probably going to spend my time in the "shared" Module of NSheets - that's where the "core", "formula" and "lang" packages are, after all.
 
-Therefore:
-  - The project is totally developed in Java, event for the UI parts.
-  - GWT uses a technique know as "transpilation" to translate Java code to Javascript. This is totally transparent to the user
-  - A GWT application is comprised of "GWT modules" (see [GWT Tutorial](http://www.gwtproject.org/doc/latest/tutorial/create.html)). These GWT modules are described in .gwt.xml files.
-   The nsheets project contains a .gwt.xml file named nsheets.gwt.xml (nsheets/src/main/resources/pt/isep/nsheets/nsheets.gwt.xml). One of the important contents of the file is the specification of the entry point of the application. However, since the application uses the [GWTP framework](http://dev.arcbees.com/gwtp/) the entry point is automatically provided (no need to specify it in the .gwt.xml file). In this case what is specified is the GIN client module pt.isep.nsheets.client.gin.ClientModule:
-   
-	    <extend-configuration-property name="gin.ginjector.modules"
-                                   value="pt.isep.nsheets.client.gin.ClientModule"/>
-                                   
-   It is from this **ClientModule** that the application starts.
-   Another important content of a .gwt.xml file is setting the paths for translatable code, .i.e., java code that should be translated to javascript. Usually the default source path is the client subpackage underneath where the .gwt.xml File is stored. In this case every code inside package pt.isep.nsheets.client and pt.isep.nsheets.shared will be translated to javascript. 
-   
-	<!-- Specify the paths for translatable code                    -->
-    <source path='client'/>
-    <source path='shared'/>
-        
-   The shared package is where shared code between server and client should reside. See [GWT - What to put in the shared folder?](https://stackoverflow.com/questions/5664601/gwt-what-to-put-in-the-shared-folder?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa) and also [using GWT RPC](http://www.gwtproject.org/doc/latest/tutorial/RPC.html).
-   
-   In this project the shared, server and client (i.e, nsheets) code are separated also in Maven modules (but they could all be in the same project/maven module). 
-   
-## 3.2 Application Startup and GWTP
+After some mind-numbing debugging, here's the notes I came up with:
 
-As described before the entry point for the application is the class **pt.isep.nsheets.client.gin.ClientModule**.
+- "pt.isep.nsheets.shared.core.CellImpl.storeContent()" is triggered whenever I press "ENTER" after typing something in a Cell. More importantly, the "Content" parameter IS the String to be parsed, which confirms my suspicion that the UI part is done.
+- Still on "storeContent()":
 
-GWTP follows the MVP (Model-View-Presenter) pattern. It uses [GIN dependency injection](http://dev.arcbees.com/gwtp/core/presenters/gin-bindings.html) to put together the parts of each MVP. How the GWTP structures the application and uses GIN to bind all the required elements is described in [GWTP Beginner's Tutorial](http://dev.arcbees.com/gwtp/tutorials/index.html).
+private void storeContent(String content) throws FormulaCompilationException {
+		// Parses formula
+		Formula formula = null;
+		if (content.length() > 1)
+			formula = FormulaCompiler.getInstance().compile(this, content);
 
-We can see that **ClientModule** installs the base presenter of the application:
+		// Stores content and formula
+		this.content = content;
+		this.formula = formula;
+		updateDependencies();
+	}
 
-	    install(new ApplicationModule());
-	        
-The **ApplicationModule** module install all the other modules of the application:
+It starts by creating a "null" Formula and THEN, by calling "FormulaCompiler.getInstance().compile(this, content);". Judging by the already existing comment of "//Parses formula", this is the stuff right here. I'm going to have to go into the "compile()" method, because that's all it takes for Formula to have all its attributes properly set.
 
-	    install(new HomeModule());
-		install(new MenuModule());
-		install(new AboutModule());
-		install(new WorkbookModule());   
+-Analysing the "compile()" method, it seems like it goes through a list of "compilers" that might be able to parse the formula if it makes sense to them. The only one added to that list is an "ExcelExpressionCompiler" (careful with that trademark), so let's dig into that.
 
-Each module represents an MVP page in the application.
+- Digging into "ExcelExpressionCompiler", I see that it's already taking care of defining and instantiating a basic Excel language.
 
-In this MVP pattern each presenter defines a specific interface that is use to communicate with the UI (i.e., the View). Therefore the presenter can be fully isolated from dependencies related to the UI. For instance, the View interface that is defined by the ApplicationPresenter only has one method:
+## 3.2 Grammar and Language  
 
-	interface MyView extends View {
-    		void setPageTitle(String title, String description, String link, String specification);
-    } 
+- Managed to find the Grammar "formula" for this "Excel Language" in "Other Sources", specifically "pt.isep.nsheets.shared.core.formula.compiler". Several definitions for "expression", "assignment", "comparison", but nothing for variables. I'll have to add rules for them here.
 
-In this specific case the only type that is "shared" between Presenter and View is the String.
-
-The View class is where all the UI code should be implemented. In GWT it is possible to create UI elements programmatically (see [GWT Build the UI](http://www.gwtproject.org/doc/latest/tutorial/buildui.html)). The UI can also be described in .ui.xml files using [UIBinder](http://www.gwtproject.org/doc/latest/DevGuideUiBinder.html). The NSheets project is using [GWT Material Design](https://github.com/GwtMaterialDesign/gwt-material) and therefore all the UI widgets are from that library. 
-
-In the case of the Application module we can see that there is a ApplicationView.ui.xml. This file declares some widgets. The attribute ui:field can be used to specify an id that can be then used to bind that element to a class in the code. For instance, in ApplicationView.ui.xml:
-
-	<m:MaterialPanel ui:field="panel">
-		<m:MaterialLabel ui:field="title" text="NSheets" fontSize="2.3em"/>
-		<m:MaterialLabel ui:field="description" text="A Sophisticated Web Spreadsheet Application." fontSize="1.1em"/>
-	</m:MaterialPanel>
-	
-It is set the ui:field attribute for two existing labels. In the code (ApplicationView.java) one can bind to Widgets classes. For instance:
-
-	@UiField
-    MaterialLabel title, description;
-    
-Then we can use this instances to access the widgets link in:
-
-	@Override
-	public void setPageTitle(String title, String description, String link, String specification) {
-        this.title.setText(title);
-        this.description.setText(description);
-        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.title);
-        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.description);
-    }    
+- Almost everything in this Grammar has a 1-to-1 match with "core" Java classes, so I'm probably gonna have to create one for "Variable", and maybe one for "VariableList" to ensure cases where someone inputs more than 1 Variable (I could do it as "List<Variable>", but I presume this will be crucial for further Sprints, so promoting it to Class)
 
 ## 3.3 Server and RPC
-
-The Home page displays what seems to be Workbooks that should reside in the server.
-
-In the method **onReveal** the Home presenter invokes a WorkbookService asynchronously. It uses the base communication mechanism of GWT called [GWT RPC](http://www.gwtproject.org/doc/latest/tutorial/RPC.html).
-
-Basically, it requires the definition of an interface for the service. In this case:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-	}
-	
-Note: The @RemoteServiceRelativePath annotation associates the service with a default path relative to the module base URL.
-
-When an RPC is invoked since it is always executed asynchronously we have to prove a callback: 
-
-	// Make the call to the stock price service.
-	workbooksSvc.getWorkbooks(callback);
-	
-The callback is simple a class that provides two methods, one for a successful result and the other for a failure:
-
-	// Set up the callback object.
-	AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
-		public void onFailure(Throwable caught) {
-			// TODO: Do something with errors.
-		}
-		public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
-			refreshView(result);
-		}
-	}; 
-
-Since the interface is code that must be accessed by both server and client code it should reside in the **shared** project.
-
-The interface must be implemented in the **server**. The implementation can be very simple, like the one presented in the project. In this case the server simply returns always the same objects:
-
-	@Override
-	public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
-	    ArrayList<WorkbookDescriptionDTO> workbooks = new ArrayList<WorkbookDescriptionDTO>();
-	    WorkbookDescriptionDTO wb=new WorkbookDescriptionDTO("workbook1", "Este workbook contem uma lista...");
-	    workbooks.add(wb);
-		WorkbookDescriptionDTO wb2=new WorkbookDescriptionDTO("workbook notas", "Este workbook contem notas de disciplinas...");
-	    workbooks.add(wb2);	    
-		return workbooks;
-	}
-
-Since the service is a servlet it must be declared in the **web.xml** file of the project (see file nsheets/src/main/webapp/WEB-INF/web.xml).
-
-	<!-- Servlets for the workbooks -->
-	<servlet>
-		<servlet-name>workbooksServiceServlet</servlet-name>
-		<servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>workbooksServiceServlet</servlet-name>
-		<!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-		<url-pattern>/nsheets/workbooksService</url-pattern>
-	</servlet-mapping> 
-	
 
 ## 3.4 Analysis Diagrams
 
@@ -195,7 +102,7 @@ The main idea for the "workflow" of this feature increment.
 
 **For US1**
 
-![Analysis SD](analysis.png)
+![SSD](analysis.png)
 
 **For US2**
 
@@ -216,9 +123,9 @@ Regarding tests we try to follow an approach inspired by test driven development
 **Domain classes**
 
 For the Domain classes we will have a class that represents the entity **WorkbookDescription**. This entity will have attributes that, for the moment, will be based on the class **WorkbookDescriptionDTO**:
-	
+
 	- name (string)
-	- description (string) 
+	- description (string)
 
 **Test:** We should ensure that a WorkbookDescription can be created when all the attributes are set.  
 
@@ -236,7 +143,7 @@ For the services the application already has a service specified in the interfac
 	public interface WorkbooksService extends RemoteService {
 		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
 	}
-	
+
 This method seems to be sufficient for supporting US1 but not US2.
 
 For US2 we need a method that can be used to create a new WorkbookDescription given a WorkbookDescriptionDTO.
@@ -248,7 +155,7 @@ The proposal is:
 		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
 		WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
 	}
-		
+
 Tests:  
 - The tests on the controllers require the presence of a database.  
 - We will use the database in memory (H2).  
@@ -273,17 +180,17 @@ Controller **AddWorkbookDescriptionController**
 Controller **ListWorkbookDescriptionController**
 
 Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDING) to ensure the test methods are executed in order. This is useful since the memory database will have state changing between tests.
- 
+
 **Test:** At the beginning of the tests the memory database should be empty, so listWorkbookDiscriptions should return an empty set.
 
-	   @Test 
+	   @Test
 	   public void testAensureGetWorkbooksEmpty() {
 		   System.out.println("testAensureGetWorkbooksEmpty");
 		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
 		   Iterable<WorkbookDescription> wbs=ctrl.listWorkbookDescriptions();
 		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
-	   } 
- 
+	   }
+
 **Test:** If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks().
 
 		@Test
@@ -302,8 +209,8 @@ Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDI
 **Test Coverage**  
 - The actual coverage for domain classes: 61%
 - The actual coverage for application(controller) classes: 100%
- 
-- TODO: Add more tests to increase the coverage of the domain class. 
+
+- TODO: Add more tests to increase the coverage of the domain class.
 
 ## 4.2. Requirements Realization
 
@@ -320,7 +227,7 @@ Notes:
 - For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
 - **WorkbookServices** realizes the GWT RPC mechanism;  
 - **ListWorkbookDescriptionController** is the *use case controller*;  
-- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription. 
+- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription.
 
 **For US2**
 
@@ -340,7 +247,7 @@ By memory we apply/use:
 - DTO  
 - MVP  
 
-**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes. 
+**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes.
 
 # 5. Implementation
 
@@ -361,7 +268,7 @@ We updated the HomeView.ui.xml accordingly and declare the element with a tag *u
 	@UiField
 	MaterialButton newWorkbookButton;
 
-We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application. 
+We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application.
 
 We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
 
@@ -384,14 +291,14 @@ The code for this sprint:
 Project **server**    
 - pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
 - pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes 
+- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes
 - Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
 
 Project **shared**  
 - Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
 - Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
 
-Project **NShests** 
+Project **NShests**
 - Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
 - Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
 
@@ -400,7 +307,7 @@ Project **NShests**
 
 *In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
 
-# 7. Final Remarks 
+# 7. Final Remarks
 
 *In this section present your views regarding alternatives, extra work and future work on the issue.*
 
@@ -455,10 +362,3 @@ Commits:
 [Core00.0: Implementation - Added documentation.](https://bitbucket.org/lei-isep/nsheets/commits/48167bcfcc8c4bdd26f3352d16e41ca9eab072c1)
 
 [Core00.0: Implementation: Updated Presenter implementation for add new workbook description.](https://bitbucket.org/lei-isep/nsheets/commits/7fb703f3718178e6ffde4a49d0b959064585f209)
-
-
-
-
-
-
-
