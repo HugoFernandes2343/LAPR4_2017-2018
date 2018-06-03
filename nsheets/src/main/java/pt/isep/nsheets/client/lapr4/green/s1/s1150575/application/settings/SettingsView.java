@@ -8,7 +8,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialCheckBox;
+import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
@@ -20,16 +20,16 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
     MaterialButton btnCSVApply;
 
     @UiField
-    MaterialCheckBox comma;
+    MaterialRadioButton comma;
 
     @UiField
-    MaterialCheckBox pointComma;
+    MaterialRadioButton pointComma;
 
     @UiField
-    MaterialCheckBox barra;
+    MaterialRadioButton barra;
 
     @UiField
-    MaterialCheckBox point;
+    MaterialRadioButton point;
 
     @Override
     public void addClickHandlerExtensionManager(ClickHandler ch) {
@@ -61,33 +61,34 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
         return this.extensionManagerButton;
     }
 
+    @Override
+    public void addClickHandlerApplyCSV(ClickHandler ch) {
+        btnCSVApply.addClickHandler(ch);
+    }
+
     interface Binder extends UiBinder<Widget, SettingsView> {
 	}
 
     @Override
-    public MaterialCheckBox getComma() {
+    public MaterialRadioButton getComma() {
         return comma;
     }
 
     @Override
-    public MaterialCheckBox getPointComma() {
+    public MaterialRadioButton getPointComma() {
         return pointComma;
     }
 
     @Override
-    public MaterialCheckBox getBarra() {
+    public MaterialRadioButton getBarra() {
         return barra;
     }
 
     @Override
-    public MaterialCheckBox getPoint() {
+    public MaterialRadioButton getPoint() {
         return point;
     }
 
-//    @Override
-//    public MaterialDropDown getDropButton() {
-//        return btnDrop;
-//    }
 
     @Inject
     SettingsView(Binder uiBinder) {

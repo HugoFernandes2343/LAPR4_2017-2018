@@ -7,7 +7,10 @@
     <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
 	
     <ui:style>
-	
+	.block{
+      display: block;
+      margin-bottom: 10px;
+    }
     </ui:style>	
 
     <m:MaterialRow>
@@ -37,10 +40,10 @@
             <g:HTMLPanel>
                 <m:MaterialLabel text="Configure the CSV delimiter that you wish"/>
                 <g:HTMLPanel>
-                <m:MaterialCheckBox ui:field="comma" text="," value="false" type="FILLED"/>
-                <m:MaterialCheckBox ui:field="pointComma" text=";" value="false" type="FILLED"/>
-                <m:MaterialCheckBox ui:field="barra" text="/" value="false" type="FILLED"/>
-                <m:MaterialCheckBox ui:field="point" text="." value="false" type="FILLED"/>
+                    <m:MaterialRadioButton ui:field="comma" name="delimiter" text="," addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="pointComma" name="delimiter" text=";" addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="barra" name="delimiter" text="/" addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="point" name="delimiter" text="." addStyleNames="{style.block}"/>
                 </g:HTMLPanel>     
             </g:HTMLPanel>
             <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
