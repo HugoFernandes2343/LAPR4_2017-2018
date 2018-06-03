@@ -12,7 +12,7 @@ class Event {
 	String title
 	String description
 	Calendar timestamps
-	Calendar duration
+	Duration duration
 }
 
 class User{
@@ -21,6 +21,12 @@ class User{
 	Password password
 }
 
-Event <|-- User
+class Duration{
+    Integer from
+    Integer to
+    boolean isAllDay
+}
 
+Event <-- User
+Event <-- Duration
 @enduml
