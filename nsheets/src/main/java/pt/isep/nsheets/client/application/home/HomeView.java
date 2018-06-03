@@ -27,6 +27,7 @@ import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialRow;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSearch;
+import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
@@ -63,7 +64,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         });
     }
 
-    private MaterialCard createCard(WorkbookDescriptionDTO wb) {
+    private MaterialCard createCard(Workbook wb) {
         MaterialCard card = new MaterialCard();
         card.setBackgroundColor(Color.BLUE_DARKEN_1);
 
@@ -105,14 +106,14 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     }
 
     @Override
-    public void setContents(ArrayList<WorkbookDescriptionDTO> contents) {
+    public void setContents(ArrayList<Workbook> contents) {
         int colCount = 1;
 
         MaterialRow row = null;
 
         htmlPanel.clear();
 
-        for (WorkbookDescriptionDTO wb : contents) {
+        for (Workbook wb : contents) {
             MaterialCard card = createCard(wb);
 
             if (colCount == 1) {

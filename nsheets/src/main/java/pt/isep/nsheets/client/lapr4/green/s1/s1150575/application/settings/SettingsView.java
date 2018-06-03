@@ -14,6 +14,17 @@ import gwt.material.design.client.ui.MaterialTextBox;
 class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @UiField
+    MaterialTextBox txtXMLWorkbook;
+
+    @UiField
+    MaterialTextBox txtXMLWorksheet;
+
+    @UiField
+    MaterialTextBox txtXMLCell;
+
+    @UiField
+    MaterialButton btnXMLApply;
+    
     MaterialButton extensionManagerButton;
 
     @UiField
@@ -38,22 +49,31 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @Override
     public MaterialTextBox getWorkbookBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLWorkbook;
     }
 
     @Override
     public MaterialTextBox getWorksheetBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLWorksheet;
     }
 
     @Override
     public MaterialTextBox getCellBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLCell;
     }
 
     @Override
     public MaterialButton getApplyButton() {
-        return btnCSVApply;
+        return btnXMLApply;
+    }
+
+
+    interface Binder extends UiBinder<Widget, SettingsView> {
+    }
+
+    @Inject
+    SettingsView(Binder uiBinder) {
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
@@ -65,9 +85,6 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
     public void addClickHandlerApplyCSV(ClickHandler ch) {
         btnCSVApply.addClickHandler(ch);
     }
-
-    interface Binder extends UiBinder<Widget, SettingsView> {
-	}
 
     @Override
     public MaterialRadioButton getComma() {
@@ -87,12 +104,6 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
     @Override
     public MaterialRadioButton getPoint() {
         return point;
-    }
-
-
-    @Inject
-    SettingsView(Binder uiBinder) {
-        initWidget(uiBinder.createAndBindUi(this));
     }
 
 }
