@@ -1,0 +1,26 @@
+@startuml  dm.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+hide empty methods
+
+class Event {
+    User user
+	String title
+	String description
+	Calendar timestamps
+	Calendar duration
+}
+
+class User{
+	Email email
+	Nickname nick
+	Password password
+}
+
+Event <|-- User
+
+@enduml
