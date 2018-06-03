@@ -7,10 +7,14 @@
     <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
 	
     <ui:style>
-	
+	.block{
+      display: block;
+      margin-bottom: 10px;
+    }
     </ui:style>	
-    
+
     <m:MaterialRow>
+
         <m:MaterialColumn grid="s12">
             <m:MaterialTab ui:field="tab" indicatorColor="WHITE" shadow="1">
                 <m:MaterialTabItem waves="LIGHT" grid="s4">
@@ -34,18 +38,19 @@
         </m:MaterialColumn>
         <m:MaterialColumn m:id="tab2" grid="s12">
             <g:HTMLPanel>
-                <m:MaterialLabel text="Configure your CSV tags for each type of element"/>
-                <m:MaterialTextBox ui:field="txtCSVWorkbook" label="Tag for Workbook"/>
-                <m:MaterialTextBox ui:field="txtCSVWorksheet" label="Tag for Worksheet"/>
-                <m:MaterialTextBox ui:field="txtCSVCell" label="Tag for Cell"/>
-                <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
-	
+                <m:MaterialLabel text="Configure the CSV delimiter that you wish"/>
+                <g:HTMLPanel>
+                    <m:MaterialRadioButton ui:field="comma" name="delimiter" text="," addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="pointComma" name="delimiter" text=";" addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="barra" name="delimiter" text="/" addStyleNames="{style.block}"/>
+                    <m:MaterialRadioButton ui:field="point" name="delimiter" text="." addStyleNames="{style.block}"/>
+                </g:HTMLPanel>     
             </g:HTMLPanel>
+            <m:MaterialButton ui:field="btnCSVApply" text="Apply" waves="LIGHT" iconType="POLYMER" iconPosition="RIGHT" size="MEDIUM"/>
         </m:MaterialColumn>
 
-        <m:MaterialButton waves="LIGHT" size="MEDIUM" grid="s3" offset="s9">
-            <m:MaterialLink targetHistoryToken="{tokens.getExtensionManager}" iconPosition="LEFT" iconType="LAYERS" text="Extensions Manager" textColor="WHITE"/>
-        </m:MaterialButton>
+        <!--(1160777) Botao de abrir a pagina Extensions Manager-->
+        <m:MaterialButton ui:field="extensionManagerButton" grid="s3" offset="s9" waves="LIGHT" text="Extensions Manager" textColor="WHITE" iconPosition="LEFT" iconType="LAYERS" iconColor="WHITE"/>
 
     </m:MaterialRow>
     

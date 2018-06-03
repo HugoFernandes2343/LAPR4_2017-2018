@@ -5,6 +5,7 @@
  */
 package eapli.framework.domain;
 
+import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
 import java.util.Optional;
@@ -55,7 +56,7 @@ public interface Repository<T extends AggregateRoot<?>, I extends Serializable> 
      * @return the persisted entity - might be a different object than the
      *         parameter
      */
-    T save(T entity);
+    T save(T entity) throws DataConcurrencyException, DataIntegrityViolationException;
 
     /**
      * adds a new entity to the repository. if the entity already exists it will

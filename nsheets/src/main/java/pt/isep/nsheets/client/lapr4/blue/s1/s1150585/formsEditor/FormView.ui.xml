@@ -9,14 +9,10 @@ Uncomment this for XHTML entities
 
     </ui:style>
     <g:HTMLPanel>
-        <ma:window.MaterialWindow ui:field="formWindow" width="70%" title="Create Form">
-            <m:MaterialPanel padding="50" textAlign="CENTER" height="100px">
-                <m:MaterialIcon ui:field="addFormRowButton" iconType="ADD" tooltip="Add Row" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
-                <m:MaterialIcon ui:field="deleteFormRowButton" iconType="DELETE" tooltip="Delete Row" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
-                <m:MaterialIcon ui:field="editFormRowButton" iconType="EDIT" tooltip="Edit Row" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />            
-                <m:MaterialIcon ui:field="playFormButton" iconType="PLAY_ARROW" tooltip="Play Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
-                <m:MaterialIcon ui:field="saveFormButton" iconType="SAVE" tooltip="Save Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
+        <ma:window.MaterialWindow ui:field="formWindow" width="70%" title="Form">
+            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
+                <m:MaterialIcon ui:field="executeForm" iconType="FORWARD" tooltip="Execute Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
             </m:MaterialPanel>      
-       </ma:window.MaterialWindow>
+       </ma:window.MaterialWindow> 
     </g:HTMLPanel>
 </ui:UiBinder>

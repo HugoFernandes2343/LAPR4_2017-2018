@@ -16,17 +16,25 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
  */
 public class LoginController implements Controller {
 
+    private Iterable<User> userList;
+
     public Iterable<User> allUsers() {
         UserRepository userRepository = PersistenceContext.repositories().user();
         return userRepository.findAll();
     }
 
-//    public boolean checkUser(String email, String password) {
-//        for (User user : userList) {
-//            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public User User(String email, String password) {
+        UserRepository userRepository = PersistenceContext.repositories().user();
+        return userRepository.getUser_Email(email, password);
+    }
+
+    public boolean checkUser(String email, String password) {
+        for (User user : userList) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

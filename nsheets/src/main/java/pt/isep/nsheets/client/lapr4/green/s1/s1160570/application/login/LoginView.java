@@ -1,20 +1,13 @@
 package pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import javax.inject.Inject;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialTextBox;
-import gwt.material.design.client.ui.MaterialToast;
-import java.util.List;
-import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
-import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
 class LoginView extends ViewImpl implements LoginPresenter.MyView {
 
@@ -29,6 +22,16 @@ class LoginView extends ViewImpl implements LoginPresenter.MyView {
     @Inject
     LoginView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+    }
+
+    @Override
+    public MaterialTextBox getTextEmail() {
+        return textEmail;
+    }
+
+    @Override
+    public MaterialTextBox getTextPassword() {
+        return textPassword;
     }
 
     @Override

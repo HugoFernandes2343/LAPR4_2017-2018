@@ -52,6 +52,9 @@ public abstract class SpreadsheetExtension implements Spreadsheet {
 		this.name = name;
 	}
 
+	protected SpreadsheetExtension() {
+	}
+
 	/**
 	 * Returns the name of the extension to which the spreadsheet extension belongs.
 	 * @return the name of the extension to which the spreadsheet extension belongs

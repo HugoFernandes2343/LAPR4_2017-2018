@@ -7,10 +7,7 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistenc
 
 import javax.persistence.EntityManager;
 
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.RepositoryFactory;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookDescriptionRepository;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.UserRepository;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.*;
 
 /**
  *
@@ -28,6 +25,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public WorkbookDescriptionRepository workbookDescriptions() {
         return new JpaWorkbookDescriptionRepository(this.settings);
+    }
+
+    @Override
+    public WorkbookRepository workbooks() {
+        return new JpaWorkbookRepository(this.settings);
     }
 
     @Override
