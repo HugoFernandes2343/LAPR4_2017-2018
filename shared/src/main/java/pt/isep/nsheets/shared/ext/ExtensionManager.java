@@ -61,7 +61,7 @@ public class ExtensionManager {
 	private ExtensionManager() {
 		// (ATB) Need to rewrite this!
 //		// Loads default extension properties
-//		Properties extProps = new Properties();
+// 		Properties extProps = new Properties();
 //		InputStream stream=null; // = CleanSheets.class.getResourceAsStream("res/" + PROPERTIES_FILENAME);
 //		if (stream != null)
 //			try {

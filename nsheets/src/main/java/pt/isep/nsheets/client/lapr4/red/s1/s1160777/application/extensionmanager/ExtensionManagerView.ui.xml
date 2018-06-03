@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
+
+    <ui:style>
+
+    </ui:style>
+
+    <g:HTMLPanel>
+        <m:MaterialRow marginTop="60">
+            <g:Hyperlink text="Back to Settings" targetHistoryToken="{tokens.getSettings}"/>
+            <m:MaterialLabel text="Basic view of the extensions"/>
+            <m:MaterialButton ui:field="applyButton" text="Apply" size="MEDIUM"/>
+        </m:MaterialRow>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

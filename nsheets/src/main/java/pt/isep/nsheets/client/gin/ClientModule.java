@@ -31,25 +31,25 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 public class ClientModule extends AbstractPresenterModule {
+
     @Override
     protected void configure() {
         install(new DefaultModule.Builder().build());
-        
+
 //        install(new DefaultModule.Builder()
 //               // .tokenFormatter(RouteTokenFormatter.class)
 //                .defaultPlace(NameTokens.home)
 //                .errorPlace(NameTokens.home)
 //                .unauthorizedPlace(NameTokens.home)
 //                .build());
-        
         install(new RpcDispatchAsyncModule.Builder().build());
         install(new ApplicationModule());
 
         bind(ResourceLoader.class).asEagerSingleton();
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.about);
-        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.about);
-        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.about);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.login);
+        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.login);
+        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.login);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 public interface WorkbooksServiceAsync {
 

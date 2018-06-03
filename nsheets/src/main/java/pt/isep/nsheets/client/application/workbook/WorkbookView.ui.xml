@@ -1,111 +1,120 @@
 <!-- #%L GwtMaterial %% Copyright (C) 2015 - 2018 GwtMaterialDesign %% Licensed 
-	under the Apache License, Version 2.0 (the "License"); you may not use this 
-	file except in compliance with the License. You may obtain a copy of the 
-	License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
-	applicable law or agreed to in writing, software distributed under the License 
-	is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
-	KIND, either express or implied. See the License for the specific language 
-	governing permissions and limitations under the License. #L% -->
+under the Apache License, Version 2.0 (the "License"); you may not use this 
+file except in compliance with the License. You may obtain a copy of the 
+License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
+applicable law or agreed to in writing, software distributed under the License 
+is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License. #L% -->
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m="urn:import:gwt.material.design.client.ui"
-	xmlns:ma="urn:import:gwt.material.design.addins.client">
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
 
-	<ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
+    <ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
 
-	<ui:style>
+    <ui:style>
 	
-	/* The column with the row numbers */
-	#col0 {
-		background: #e0e0e0;
-	}
+        /* The column with the row numbers */
+        #col0 {
+        background: #e0e0e0;
+        }
 
-	/* The column header name should use 100% of the column width */
-	#customTable table thead th span {
-		max-width: 100% !important;
-	}
+        /* The column header name should use 100% of the column width */
+        #customTable table thead th span {
+        max-width: 100% !important;
+        }
 	
-	/* Remove the padding in the columns so that the cell occupies the all width */	
-	#customTable table thead tr th {
-		padding-left: 0 !important;
-		padding-right: 0 !important;	
-    		color: #3f3f3f;
-		background: #e0e0e0;
-		border-bottom: 2px solid #1976d2;
-		border-right: 2px solid #1976d2;
-	}
+        /* Remove the padding in the columns so that the cell occupies the all width */	
+        #customTable table thead tr th {
+        padding-left: 0 !important;
+        padding-right: 0 !important;	
+        color: #3f3f3f;
+        background: #e0e0e0;
+        border-bottom: 2px solid #1976d2;
+        border-right: 2px solid #1976d2;
+        }
 	
-	/* Remove pading in the cells (table data) */
-	#customTable table tbody td {
-		padding-left: 0 !important;
-		padding-right: 0 !important;		
-	}	
+        /* Remove pading in the cells (table data) */
+        #customTable table tbody td {
+        padding-left: 0 !important;
+        padding-right: 0 !important;		
+        }	
 	
-	</ui:style>
+    </ui:style>
 
-	<g:HTMLPanel>
+    <g:HTMLPanel>
 
-		<m:MaterialRow marginTop="60">
-			<m:MaterialTextBox 
-				m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
-				active="true" grid="s11" iconType="FUNCTIONS" />
-				
-			<m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>	
-		</m:MaterialRow>
+        <m:MaterialRow marginTop="60">
+            <m:MaterialTextBox 
+                m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
+                active="true" grid="s11" iconType="FUNCTIONS" />
+            <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />		
+            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>	
+        </m:MaterialRow>
 
-		<m:MaterialRow>
-			<!-- <m:table.MaterialInfiniteDataTable shadow="1" -->
-			<!-- ui:field="table" -->
-			<!-- height="calc(100vh - 131px)" -->
-			<!-- useLoadOverlay="false" -->
-			<!-- useStickyHeader="true" -->
-			<!-- useCategories="true" -->
-			<!-- selectionType="MULTIPLE"/> -->
+        <m:MaterialRow>
+            <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->
+            <!-- ui:field="table" -->
+            <!-- height="calc(100vh - 131px)" -->
+            <!-- useLoadOverlay="false" -->
+            <!-- useStickyHeader="true" -->
+            <!-- useCategories="true" -->
+            <!-- selectionType="MULTIPLE"/> -->
 
-			<m:table.MaterialDataTable shadow="1"
-				m:id="customTable" ui:field="customTable" height="calc(100vh - 131px)"
-				useLoadOverlay="false" useStickyHeader="true" useCategories="false"
-				useRowExpansion="false" selectionType="NONE" />
+            <m:table.MaterialDataTable shadow="1"
+                                                   m:id="customTable" ui:field="customTable" height="calc(100vh - 131px)"
+                                                   useLoadOverlay="false" useStickyHeader="true" useCategories="false"
+                                                   useRowExpansion="false" selectionType="NONE" />
 
-			<ma:popupmenu.MaterialPopupMenu
-				ui:field="popupMenu">
-				<m:MaterialLink display="BLOCK" text="Copy" iconType="CONTENT_COPY"
-					textColor="BLACK" />
-				<m:MaterialLink display="BLOCK" text="Paste"
-					iconType="CONTENT_PASTE" textColor="BLACK" />
-				<m:MaterialLink display="BLOCK" text="Rename"
-					iconType="EDIT" textColor="BLACK" />
+            <ma:popupmenu.MaterialPopupMenu
+                ui:field="popupMenu">
+                <m:MaterialLink display="BLOCK" text="Copy" iconType="CONTENT_COPY"
+                                                textColor="BLACK" />
+                <m:MaterialLink display="BLOCK" text="Paste"
+                                                iconType="CONTENT_PASTE" textColor="BLACK" />
+                <m:MaterialLink display="BLOCK" text="Rename"
+                                                iconType="EDIT" textColor="BLACK" />
 
-				<!-- Second level -->
-				<m:MaterialLink activates="moveTo" display="BLOCK"
-					text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">
-					<m:MaterialDropDown activator="moveTo" hover="true"
-						belowOrigin="true">
-						<m:MaterialLink display="BLOCK" text="Private"
-							iconType="CONTENT_COPY" textColor="BLACK" />
-						<m:MaterialLink display="BLOCK" text="Public"
-							iconType="CONTENT_PASTE" textColor="BLACK" />
-						<m:MaterialLink display="BLOCK" text="Shared"
-							iconType="EDIT" textColor="BLACK" />
+                <!-- Second level -->
+                <m:MaterialLink activates="moveTo" display="BLOCK"
+                                                text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">
+                    <m:MaterialDropDown activator="moveTo" hover="true"
+                                                            belowOrigin="true">
+                        <m:MaterialLink display="BLOCK" text="Private"
+                                                                iconType="CONTENT_COPY" textColor="BLACK" />
+                        <m:MaterialLink display="BLOCK" text="Public"
+                                                                iconType="CONTENT_PASTE" textColor="BLACK" />
+                        <m:MaterialLink display="BLOCK" text="Shared"
+                                                                iconType="EDIT" textColor="BLACK" />
 
-						<!-- Third level -->
-						<m:MaterialLink activates="others" display="BLOCK"
-							text="Others" iconType="DEVICES_OTHER" textColor="BLACK">
-							<m:MaterialDropDown activator="others" hover="true"
-								belowOrigin="true">
-								<m:MaterialLink display="BLOCK" iconColor="PURPLE"
-									text="Phone" iconType="PHONE" textColor="BLACK" />
-								<m:MaterialLink display="BLOCK" iconColor="GREEN"
-									text="Tablet" iconType="TABLET" textColor="BLACK" />
-								<m:MaterialLink display="BLOCK" iconColor="BLUE"
-									text="Laptop" iconType="LAPTOP" textColor="BLACK" />
-							</m:MaterialDropDown>
-						</m:MaterialLink>
+                        <!-- Third level -->
+                        <m:MaterialLink activates="others" display="BLOCK"
+                                                                text="Others" iconType="DEVICES_OTHER" textColor="BLACK">
+                            <m:MaterialDropDown activator="others" hover="true"
+                                                                            belowOrigin="true">
+                                <m:MaterialLink display="BLOCK" iconColor="PURPLE"
+                                                                                text="Phone" iconType="PHONE" textColor="BLACK" />
+                                <m:MaterialLink display="BLOCK" iconColor="GREEN"
+                                                                                text="Tablet" iconType="TABLET" textColor="BLACK" />
+                                <m:MaterialLink display="BLOCK" iconColor="BLUE"
+                                                                                text="Laptop" iconType="LAPTOP" textColor="BLACK" />
+                            </m:MaterialDropDown>
+                        </m:MaterialLink>
 
-					</m:MaterialDropDown>
-				</m:MaterialLink>
-			</ma:popupmenu.MaterialPopupMenu>
+                    </m:MaterialDropDown>
+                </m:MaterialLink>
+            </ma:popupmenu.MaterialPopupMenu>
 
-		</m:MaterialRow>
-	</g:HTMLPanel>
+        </m:MaterialRow>
+        <m:MaterialFAB>
+            <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
+            <m:MaterialFABList>
+                <m:MaterialButton ui:field="exportToXMLButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To XML" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="exportToCSVButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To CSV" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="macrosButton" type="FLOATING" waves="LIGHT" iconType="CODE" tooltip="Create Macros" tooltipPosition="LEFT"/>
+            </m:MaterialFABList>
+        </m:MaterialFAB>
+    </g:HTMLPanel>
+        
 
 </ui:UiBinder>

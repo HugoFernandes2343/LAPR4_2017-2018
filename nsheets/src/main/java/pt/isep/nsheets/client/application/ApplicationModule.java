@@ -23,19 +23,22 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
+import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginModule;
 import pt.isep.nsheets.client.application.menu.MenuModule;
-import pt.isep.nsheets.client.application.settings.SettingsModule;
+import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.SettingsModule;
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
 
 public class ApplicationModule extends AbstractPresenterModule {
+
     @Override
     protected void configure() {
 
-    	install(new HomeModule());
-		install(new MenuModule());
-		install(new AboutModule());
-		install(new WorkbookModule());
-		install(new SettingsModule());
+        install(new HomeModule());
+        install(new MenuModule());
+        install(new AboutModule());
+        install(new WorkbookModule());
+        install(new SettingsModule());
+        install(new LoginModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
     }

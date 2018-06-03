@@ -18,7 +18,7 @@
 
     <m:MaterialRow>
         <m:MaterialColumn grid="l4">
-          <m:MaterialCard backgroundColor="WHITE">
+          <m:MaterialCard backgroundColor="BLACK">
             <m:MaterialCardImage waves="LIGHT">
             		<m:MaterialImage resource="{res.csheets}" shadow="1"/>
               <m:MaterialCardTitle text="Sample"/>

@@ -27,6 +27,9 @@ atom
 	|	reference
 	|	literal
 	|	LPAR comparison RPAR
+        |       assignment
+        |       block
+        |       loopfor
 	;
 
 function_call
@@ -44,7 +47,21 @@ literal
 	:	NUMBER
 	|	STRING
 	;
-	
+
+assignment  
+        :       reference ASSIGN comparison
+        ;
+
+block
+        :       LCBRA comparison (SEMI comparison)* RCBRA
+        ;
+
+loopfor
+        :       FOR LCBRA assignment SEMI comparison (SEMI assignment)+ RCBRA
+        ;
+
+/* loopfor operator */
+FOR     : 'FOR';
 
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   
@@ -77,8 +94,8 @@ DIGIT : '0'..'9' ;
 /* Comparison operators */
 EQ		: '=' ;
 NEQ		: '<>' ;
-LTEQ	: '<=' ;
-GTEQ	: '>=' ;
+LTEQ            : '<=' ;
+GTEQ            : '>=' ;
 GT		: '>' ;
 LT		: '<' ;
 
@@ -89,7 +106,7 @@ AMP		: '&' ;
 PLUS	: '+' ;
 MINUS	: '-' ;
 MULTI	: '*' ;
-DIV		: '/' ;
+DIV	: '/' ;
 POWER	: '^' ;
 PERCENT : '%' ;
 
@@ -103,6 +120,11 @@ COMMA	: ',' ;
 SEMI	: ';' ;
 LPAR	: '(' ;
 RPAR	: ')' ; 
+LCBRA   : '{' ;
+RCBRA   : '}' ;
+
+/* assignment operator */ 
+ASSIGN  : ':=';
 
 /* White-space (ignored) */
 WS: ( ' ' | '\r' '\n' | '\n' | '\t' ) -> skip ;
