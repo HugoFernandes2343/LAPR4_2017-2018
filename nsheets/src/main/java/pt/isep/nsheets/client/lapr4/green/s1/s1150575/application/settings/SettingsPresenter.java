@@ -50,7 +50,12 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
             @Override
             public void onClick(ClickEvent event) {
-
+                String tagWorkbook = getView().getWorkbookBox().getValue();
+                String tagWorksheet = getView().getWorksheetBox().getValue();
+                String tagCells = getView().getCellBox().getValue();
+                getView().getWorkbookBox().setText("");
+                getView().getWorksheetBox().setText("");
+                getView().getCellBox().setText("");
             }
 
         });
