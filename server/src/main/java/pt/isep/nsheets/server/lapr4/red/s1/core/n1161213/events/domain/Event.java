@@ -5,6 +5,7 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Event implements AggregateRoot<Long>, Serializable {
@@ -34,7 +35,7 @@ public class Event implements AggregateRoot<Long>, Serializable {
      * Timestamp of the event
      */
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar timestamp;
+    private Date timestamp;
 
     /**
      * Duration of the event
@@ -51,8 +52,8 @@ public class Event implements AggregateRoot<Long>, Serializable {
     /**
      * Complete constructor
      */
-    public Event(String title, String description, User madeBy, Calendar timestamp, Duration duration){
-        if(title == null || description == null | madeBy == null || timestamp == null || duration == null){
+    public Event(String title, String description, User madeBy, Date timestamp, Duration duration){
+        if(title == null || description == null | madeBy == null || timestamp == null || duration == null) {
             throw new IllegalArgumentException("Error in the input data");
         }
 
@@ -83,7 +84,7 @@ public class Event implements AggregateRoot<Long>, Serializable {
         return this.pk;
     }
 
-    public Calendar whenIs(){
+    public Date whenIs(){
         return this.timestamp;
     }
 }

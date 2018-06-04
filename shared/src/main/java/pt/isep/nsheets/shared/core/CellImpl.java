@@ -104,7 +104,10 @@ public class CellImpl implements Cell {
 		reevaluate();
 	}
 
-/*
+	public CellImpl() {
+	}
+
+	/*
  * LOCATION
  */
 
