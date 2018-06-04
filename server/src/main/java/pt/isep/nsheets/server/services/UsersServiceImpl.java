@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.List;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
-import pt.isep.nsheets.shared.services.EmailDTO;
 
 import pt.isep.nsheets.shared.services.UserDTO;
 

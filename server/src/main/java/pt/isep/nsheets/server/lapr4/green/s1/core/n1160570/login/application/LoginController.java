@@ -17,11 +17,11 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
  */
 public class LoginController implements Controller {
 
-//    private Iterable<User> userList;
-//    public Iterable<User> allUsers() {
-//        UserRepository userRepository = PersistenceContext.repositories().user();
-//        return userRepository.findAll();
-//    }
+    public Iterable<User> allUsers() {
+        UserRepository userRepository = PersistenceContext.repositories().user();
+        return userRepository.findAll();
+    }
+
     public User User(Email email, String password) {
         UserRepository userRepository = PersistenceContext.repositories().user();
         return userRepository.getUser_Email(email, password);
