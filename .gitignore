@@ -42,3 +42,4 @@ db/
 out/
 nsheets/nbactions.xml
 lib/javax.persistence.jar
+/shared/nbproject/

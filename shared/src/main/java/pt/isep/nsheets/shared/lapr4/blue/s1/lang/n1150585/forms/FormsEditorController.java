@@ -41,7 +41,7 @@ public class FormsEditorController {
         teste.put("Isep5", "Linha5");
         return teste;*/
         
-       Form returnedForm = currentWorkbook.getForm();
+        Form returnedForm = currentWorkbook.getForm();
         Map<String, String> rows = returnedForm.getRows();
         return rows;
     }
