@@ -80,6 +80,10 @@ It starts by creating a "null" Formula and THEN, by calling "FormulaCompiler.get
 
 - Almost everything in this Grammar has a 1-to-1 match with "core" Java classes, so I'm probably gonna have to create one for "Variable", and maybe one for "VariableList" to ensure cases where someone inputs more than 1 Variable (I could do it as "List<Variable>", but I presume this will be crucial for further Sprints, so promoting it to Class)
 
+- With Pedro Tedim's help (1091234), I've been able to see in IntelliJ ANTLR plugin (I use NetBeans, FML) that ANTLR only recognizes a Variable IF it is made part of the "REFERENCE" rule in the Grammar. We thought it could be an Atom, but not so. It makes sense, given that a VARIABLE should behave just like a CELL_REF (e.g. "A1" or "B2"): they're both references.
+
+- There is indeed a "CellReference" class in "pt.isep.nsheets.shared.core.formula.lang", which implements "Reference". I'm probably gonna have to create a "VariableReference" in similar manner.
+
 ## 3.3 Server and RPC
 
 ## 3.4 Analysis Diagrams
