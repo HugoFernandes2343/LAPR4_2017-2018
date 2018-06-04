@@ -17,7 +17,7 @@ Proposal:
 
 RULES:
 
-* **assignment** (CELL_REF ASSIGN comparison)
+* **assignment** (reference ASSIGN comparison)
 * **block**
 * **loopfor**
 * **atom** (added loopfor, block and assignment)
@@ -66,7 +66,7 @@ Because an Assignment had binary characteristics (left and right operands), impl
 
 Since Assignment implements BinaryOperator, it's class should have the following methods available:
 
-![AssignmentClass_analysis](Assignment Class.png)
+![AssignmentClass_analysis](AssignmentClass.png)
 
 **CD-Assignment-** Method applyTo(Expression leftOperand, Expression rightOperand), is one the two methods refered in point 2 that are responsible for the processing of  the terminalNodes at the end of the visit and to return the result of the Expression.
 
@@ -213,7 +213,7 @@ By memory we apply/use:
 
 Some Questions/Issues identified during the work in this feature increment:
 
-1. 
+1.
 
 # 8. Work Log
 
