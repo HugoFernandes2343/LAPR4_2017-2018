@@ -1,0 +1,24 @@
+@startuml  analysis1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : initiates the creation of an event
+Browser ->> Browser : asks for the event information
+User -> Browser : enters the information
+Browser -> Server : newEvent()
+Browser ->> Browser : shows event and asks for confirmation
+User -> Browser : Confirms
+
+database Database 
+
+Browser -> Server : saveEvent()
+Server -> Database : save
+
+Browser -> Browser : shows success message
+
+@enduml

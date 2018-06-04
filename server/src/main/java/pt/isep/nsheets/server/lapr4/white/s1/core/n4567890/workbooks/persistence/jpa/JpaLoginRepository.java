@@ -5,7 +5,8 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.jpa;
 
-import java.util.Optional;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.UserRepository;
@@ -21,8 +22,9 @@ public class JpaLoginRepository extends NSheetsJpaRepositoryBase<User, Long> imp
     }
 
     @Override
-    public User getUser_Email(String email,String password) {
-        User u = matchOne("e.email=:email and e.password=:password", "email", email,"password",password);
+    public User getUser_Email(Email email, Password password) {
+        User u = matchOne("e.email=:email and e.password=:password", "email", email, "password", password);
         return u;
     }
+
 }

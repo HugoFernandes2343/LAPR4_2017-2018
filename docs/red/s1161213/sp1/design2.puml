@@ -1,0 +1,48 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary CalendarView
+control CalendarPresenter
+control EditEventController
+control EventService
+entity EventRepository
+entity Event
+database Database
+
+box "NSheets Client"
+participant CalendarView
+participant CalendarPresenter
+end box
+
+box "Server"
+participant EditEventController
+participant EventService
+participant Event
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> CalendarPresenter : selects event to edit
+CalendarPresenter --> EditEventController : create()
+CalendarPresenter -> EditEventController : selectEventToEdit()
+EditEventController --> EventService : create()
+EditEventController --> EventService : findEvent()
+EventService -> EventRepository : findEventByID()
+EventRepository  -> Database : fetch
+CalendarView --> User : Show event and the user makes alterations
+CalendarPresenter -> EditEventController : saveAlterations()
+EditEventController -> EventRepository : saveEvent(Event e)
+EventRepository  -> Database : save
+EditEventController ->> CalendarPresenter : onSuccess()
+CalendarPresenter -> CalendarView : setContents()
+CalendarView --> User: Shows success
+
+@enduml

@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.List;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
-import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
+
 import pt.isep.nsheets.shared.services.UserDTO;
 
 import pt.isep.nsheets.shared.services.UsersService;
@@ -63,12 +66,10 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
     public UserDTO getUser(String email, String password) {
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
-        UserDTO userDTO;
         LoginController ctrl = new LoginController();
 
-        userDTO = ctrl.User(email, password).toDTO();
+        return ctrl.User(new Email(email), new Password(password)).toDTO();
 
-        return userDTO;
     }
 
 }
