@@ -8,4 +8,6 @@ public class ListWorkbookController implements Controller {
     public Iterable<Workbook> listWorkbooks(){
         return new WorkbookService().allWorkbooks();
     }
+
+    public int getNrWorkbooks() {return new WorkbookService().getNrWorkbooks(); }
 }

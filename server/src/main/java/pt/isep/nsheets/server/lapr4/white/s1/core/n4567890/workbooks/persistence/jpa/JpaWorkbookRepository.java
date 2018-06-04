@@ -9,4 +9,9 @@ public class JpaWorkbookRepository extends NSheetsJpaRepositoryBase<WorkbookDTO,
     JpaWorkbookRepository(PersistenceSettings settings) {
         super(settings);
     }
+
+    @Override
+    public WorkbookDTO findByName(String name) {
+        return matchOne("e.name=:nm", "nm", name);
+    }
 }

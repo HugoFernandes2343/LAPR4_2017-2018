@@ -7,9 +7,10 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
@@ -17,40 +18,20 @@ import pt.isep.nsheets.shared.services.UserDTO;
  * @author Paulo Jorge
  */
 @Entity
-public class User implements AggregateRoot<Long>, Serializable {
+public class User implements AggregateRoot<Email>, Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long pk;
-
-    public enum UserType {
-
-        USER {
-
-            @Override
-            public String toString() {
-                return "User";
-            }
-        },
-        ADMIN {
-
-            @Override
-            public String toString() {
-                return "Admin";
-            }
-        }
-    };
-
-    private String email;
-    private String password;
-    private String nickname;
-    private String name;
+    @EmbeddedId
+    private Email email;
+    private Password password;
+    private Nickname nickname;
+    private Name name;
     private boolean activate;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public User(String email, String password, String nickname, String name) throws IllegalArgumentException {
+    public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
-            throw new IllegalArgumentException("email or password must be non-null");
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
         }
         this.email = email;
         this.password = password;
@@ -105,29 +86,25 @@ public class User implements AggregateRoot<Long>, Serializable {
     }
 
     @Override
-    public boolean is(Long id) {
-        return (this.pk.compareTo(id) == 0);
+    public boolean is(Email email) {
+        return (this.email.equals(this.email));
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     @Override
-    public Long id() {
-        return this.pk;
+    public Email id() {
+        return this.email;
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(this.email, this.password, this.name, this.nickname);
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
     }
 
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
-        return new User(dto.getEmail(), dto.getPassword(), dto.getName(), dto.getNickname());
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
     }
 
 }

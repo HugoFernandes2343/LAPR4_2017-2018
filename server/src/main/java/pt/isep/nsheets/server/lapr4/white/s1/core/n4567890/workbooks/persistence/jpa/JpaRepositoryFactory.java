@@ -36,4 +36,9 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public UserRepository user() {
         return new JpaLoginRepository(this.settings);
     }
+
+    @Override
+    public EventRepository events() {
+        return new JpaEventRepository(this.settings);
+    }
 }

@@ -15,7 +15,6 @@ import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
-import java.util.ArrayList;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -63,6 +62,34 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
         this.view = view;
         this.placeManager = placeManager;
 
+    }
+
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+
+        SetPageTitleEvent.fire("Settings", "", "", "", this);
+
+        getView().getApplyButton().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                String tagWorkbook = getView().getWorkbookBox().getValue();
+                String tagWorksheet = getView().getWorksheetBox().getValue();
+                String tagCells = getView().getCellBox().getValue();
+                getView().getWorkbookBox().setText("");
+                getView().getWorksheetBox().setText("");
+                getView().getCellBox().setText("");
+                
+                String box = getView().getComma().getText();
+                String box1 = getView().getPointComma().getText();
+                String box2 = getView().getBarra().getText();
+                String box3 = getView().getPoint().getText();
+
+//                String delimiter = getView().getDropButton().getActivator();
+            }
+
+        });
         /*
          * @author <1160777>Marco Carneiro</1160777>
          */
@@ -79,28 +106,6 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
                 
                 
-        });
-    }
-
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-
-        SetPageTitleEvent.fire("Settings", "", "", "", this);
-
-        getView().getApplyButton().addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-
-                String box = getView().getComma().getText();
-                String box1 = getView().getPointComma().getText();
-                String box2 = getView().getBarra().getText();
-                String box3 = getView().getPoint().getText();
-
-//                String delimiter = getView().getDropButton().getActivator();
-            }
-
         });
     }
 }

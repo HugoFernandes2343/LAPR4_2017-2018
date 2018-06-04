@@ -14,21 +14,37 @@ public class WorkbookService {
 
         ArrayList<Workbook> ret = new ArrayList<>();
         final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
-        for(WorkbookDTO wb : workbookRepository.findAll()){
+        for (WorkbookDTO wb : workbookRepository.findAll()) {
             ret.add(wb.toWorkbook());
         }
 
         return ret;
     }
 
-    public Workbook addWorkbook(Workbook wb) throws DataConcurrencyException, DataIntegrityViolationException {
+    public Workbook saveWorkbook(Workbook wb) throws DataConcurrencyException, DataIntegrityViolationException {
 
         final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
 
-        workbookRepository.save(WorkbookDTO.fromWorkbook(wb));
+        if (wb.isNewWb()) {
+            workbookRepository.save(WorkbookDTO.fromWorkbook(wb));
 
+        } else {
+            WorkbookDTO wbDTO= workbookRepository.findByName(wb.getName());
+            if(wbDTO == null){
+                workbookRepository.save(WorkbookDTO.fromWorkbook(wb));
+            } else {
+                wbDTO.setDescription(wb.getDescription());
+                wbDTO.setSheet(wb.getSheet());
+                workbookRepository.save(wbDTO);
+            }
+        }
         return wb;
     }
 
+    public int getNrWorkbooks(){
+        final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
+        ArrayList<WorkbookDTO> list = (ArrayList<WorkbookDTO>) workbookRepository.findAll();
+        return list.size();
+    }
 
 }

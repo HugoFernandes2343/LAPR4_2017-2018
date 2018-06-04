@@ -24,7 +24,7 @@
 <module rename-to='nsheets'>
     <inherits name='com.google.gwt.user.User'/>
     <!-- ANTLR4-GWT -->
-    <inherits name="org.antlr.v4.antlr4-runtime" />    
+    <inherits name="org.antlr.v4.antlr4-runtime" />  
         
     <inherits name='com.google.gwt.inject.Inject'/>    
         
