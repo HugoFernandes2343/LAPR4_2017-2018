@@ -6,16 +6,14 @@ skinparam defaultFontName FG Virgil
 skinparam shadowing false
 
 actor User
-boundary WorkbookView
 control WorkbookPresenter
 control FormEditorWindow
 control FormWindow
 control Form
 control FormEditorController
-database Database
+control Workbook
 
 box "NSheets Client"
-participant WorkbookView
 participant WorkbookPresenter
 participant FormEditorWindow
 participant FormWindow
@@ -24,12 +22,11 @@ end box
 box "Server"
 participant WorkbookServices
 participant FormEditorController
+participant Workbook
 participant Form
 end box
 
-box "Database"
-participant Database
-end box
+
 
 User -> WorkbookPresenter : onReveal() / navigate to page
 WorkbookPresenter ->> WorkbookServices : getCurrentWorkbook()
@@ -39,8 +36,7 @@ FormEditorWindow -> FormEditorController : existsForm(currentWorkBook);
 FormEditorWindow -> FormEditorWindow : display() or create()
 FormEditorWindow -> FormWindow : preview()
 FormEditorWindow -> FormEditorController : save(Map <String,String> rows);
-FormEditorController -> Form : new(currentWorkbook, Map <String,String> rows);
-Form -> Form : createNewForm()
-Form -> Database : persist
+FormEditorController -> Workbook : new(currentWorkbook, Map <String,String> rows);
+Workbook -> Form : newForm(form) /update form;
 
 @enduml
