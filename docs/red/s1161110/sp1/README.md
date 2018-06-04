@@ -12,7 +12,7 @@ Core08.1 - Styles in Cells Extension
 The application should have a new extension to associate styles with cells. The functionality should be similar to the one present in the desktop version of Cleansheets.
 It adds the option to change colour (text or background), text formatting, alignments and fonts of each cell on a spreadsheet.
 
--US1: As a system user I want to stylish my cells.
+-US1: As an user I want to be able to stylish the spreadsheet cells.
 
 # 3. Analysis
 
@@ -28,7 +28,7 @@ For this feature creation, since it is the first one to be developed regarding s
 
 **Use Cases**
 
-![Use Cases](us.png)
+![Use Cases](us.jpg)
 
 - **Use Cases**.
 
@@ -38,7 +38,7 @@ For this feature creation, since it is the first one to be developed regarding s
 
 **System Sequence Diagrams**
 
-![Analysis SD](analysis.png)
+![Analysis SD](ssd.jpg)
 
 # 4. Design
 
