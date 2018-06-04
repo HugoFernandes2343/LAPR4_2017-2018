@@ -1,34 +1,41 @@
-package pt.isep.nsheets.client.application.workbook;
+package pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.*;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormView;
 
 import javax.inject.Inject;
 
-public class MacrosView extends ViewImpl {
+public class MacrosView extends Composite {
 
-    @UiField
-    private final MaterialComboBox macroType = new MaterialComboBox();
-    @UiField
-    private final MaterialTextBox macroName = new MaterialTextBox();
-    @UiField
-    private final MaterialTextArea macroCode = new MaterialTextArea();
-    @UiField
-    private final MaterialButton saveButton = new MaterialButton("Save");
-    @UiField
-    private final MaterialButton cancelButton = new MaterialButton("Cancel");
-    @UiField
-    private final MaterialButton runButton = new MaterialButton("Run");
 
+    MaterialComboBox macroType = new MaterialComboBox();
+    @UiField
+    MaterialTextBox macroName = new MaterialTextBox();
+    @UiField
+    MaterialTextArea macroCode = new MaterialTextArea();
+    @UiField
+    MaterialButton saveButton = new MaterialButton("Save");
+    @UiField
+    MaterialButton cancelButton = new MaterialButton("Cancel");
+    @UiField
+    MaterialButton runButton = new MaterialButton("Run");
+
+    private static MacrosUiBinder uiBinder = GWT.create(MacrosUiBinder.class);
+
+    interface MacrosUiBinder extends UiBinder<Widget,MacrosView> {
+    }
 
     public MacrosView(){
 
+        initWidget(uiBinder.createAndBindUi(this));
         MaterialWindow window = new MaterialWindow();
         window.setPadding(32);
         window.setHeight("600px");

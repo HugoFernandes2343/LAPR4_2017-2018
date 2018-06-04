@@ -24,7 +24,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 
@@ -33,8 +32,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 import com.google.gwt.user.client.ui.Panel;
-import gwt.material.design.addins.client.combobox.MaterialComboBox;
-import gwt.material.design.addins.client.menubar.MaterialMenuBar;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
@@ -42,6 +39,7 @@ import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
+import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
