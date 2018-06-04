@@ -92,8 +92,7 @@ Because the Fuction interface had an existing method to process the applyTo(Expr
 
 1 - Interpreting the application flow, in this section I will show some Sequence Diagrams to explain how a formula will be processed and interpreted in Java.
 
-
-
+![FormulaCompiler_analysis](FormulaCompilerSD.png)
 
 
 
