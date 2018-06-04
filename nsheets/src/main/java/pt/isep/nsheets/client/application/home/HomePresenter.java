@@ -67,8 +67,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         
         this.view.renameClickHandler((ClickEvent event) -> {
             MaterialToast.fireToast("rename");
-//            Workbook w = SelectedWorkbookController.getActualWorkbook();
-//            w.setName();
             getView().getWorkbookTitle().setText("novo");
         });
         
