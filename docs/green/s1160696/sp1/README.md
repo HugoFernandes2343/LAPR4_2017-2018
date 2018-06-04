@@ -1,2 +1,2 @@
-**Jo√£o Vieira** (s1150575) - Sprint 1 - IPC04.1
+**Jo„o Santiago** (s1160696) - Sprint 1 - IPC05.1
 ===============================
