@@ -9,6 +9,7 @@ import java.util.SortedSet;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Value;
+import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
@@ -17,7 +18,7 @@ import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
  *
  * @author Rodrigo
  */
-public class VariableReference implements Reference{
+public class VariableReference implements Expression{
     /**
      * Variable name
      */
@@ -46,17 +47,7 @@ public class VariableReference implements Reference{
 
     @Override
     public Value evaluate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public SortedSet<Cell> getCells() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int compareTo(Reference reference) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return v.getValue();
     }
 
     @Override

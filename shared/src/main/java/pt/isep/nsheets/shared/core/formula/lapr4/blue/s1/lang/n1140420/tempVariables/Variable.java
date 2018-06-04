@@ -25,6 +25,10 @@ public class Variable {
         return name;
     }
 
+    public Value getValue() {
+        return value;
+    }
+
     public void setValue(Value value) {
         this.value = value;
     }
