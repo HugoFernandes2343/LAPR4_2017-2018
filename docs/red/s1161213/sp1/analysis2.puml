@@ -1,0 +1,26 @@
+@startuml  analysis2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : choses event to edit
+ 
+Browser ->> Server : searchEvent()
+
+database Database 
+
+Server -> Database : fetch
+
+Server -->> Browser : return
+
+Browser -> Browser : display event to edit
+
+User -> Browser : edit event
+
+Browser ->> Server : editEvent()
+Server -> Database : save
+@enduml

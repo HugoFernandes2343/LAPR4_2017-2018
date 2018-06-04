@@ -8,7 +8,7 @@
 
 IPC01.1 - All the pages of the application should require an authenticated user (except the "About" page). The application should have a "Login" page (Hint: Gatekeepers in GWTP). Some hard-coded users should be defined to be initially used for authentication. There should also exist a super-user that is able to access everything.
 
-US1 - As Product Owner, I want users (name and password) to come from a relational database, so they are persistent and we can log in and subsequently change the name or password.
+US1 - As Product Owner, I want users (email and password) to come from a relational database, so they are persistent and we can log in and subsequently change the email or password.
 
 US2 - As an application user, I wish to be able to log in to access my workbooks.
 
