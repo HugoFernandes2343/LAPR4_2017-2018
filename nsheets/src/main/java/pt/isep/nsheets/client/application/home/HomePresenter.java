@@ -60,7 +60,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Default name already in use!");
+                    MaterialToast.fireToast("Default name already in use! "+ caught.getMessage());
                 }
 
                 public void onSuccess(Workbook result) {
@@ -83,7 +83,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         // Set up the callback object.
         AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
             public void onFailure(Throwable caught) {
-                MaterialToast.fireToast("Error "+caught.toString());
+                MaterialToast.fireToast("Error "+caught.getMessage());
             }
 
             public void onSuccess(ArrayList<Workbook> result) {

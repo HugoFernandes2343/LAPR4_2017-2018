@@ -39,10 +39,6 @@ public class Workbook implements Serializable {
 
     private boolean newWb;
 
-
-//	/** The spreadsheets of which the workbook consists */
-//	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
-
     /**
      * The spreadsheets of which the workbook consists
      */
@@ -59,10 +55,10 @@ public class Workbook implements Serializable {
 
 
 
-    /**
-     * The number of spreadsheets that have been created in the workbook
-     */
-    public int createdSpreadsheets;
+//    /**
+//     * The number of spreadsheets that have been created in the workbook
+//     */
+//    public int createdSpreadsheets;
 
 
     /**
@@ -103,14 +99,14 @@ public class Workbook implements Serializable {
         this.name = name;
         this.description = description;
         this.spreadsheets = spreadsheets;
-        this.createdSpreadsheets = spreadsheets.size();
+//        this.createdSpreadsheets = spreadsheets.size();
         this.newWb = false;
     }
 
     public Workbook(String name, String description, int createdSpreadsheets) {
         this.name = name;
         this.description = description;
-        this.createdSpreadsheets = createdSpreadsheets;
+//        this.createdSpreadsheets = createdSpreadsheets;
         this.newWb = false;
     }
 

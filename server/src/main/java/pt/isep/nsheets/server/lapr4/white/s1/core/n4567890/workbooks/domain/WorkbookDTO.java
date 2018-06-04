@@ -23,8 +23,8 @@ public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
     private String name;
     private String description;
     private Spreadsheet sheet;
-    public ArrayList<Spreadsheet> spreadsheets = new ArrayList<>();
-    public int existingSpreadsheets;
+//    public ArrayList<Spreadsheet> spreadsheets = new ArrayList<>();
+//    public int existingSpreadsheets;
 
     public WorkbookDTO(String name, String description, Spreadsheet sheet) {
         this.name = name;
@@ -32,15 +32,15 @@ public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
         this.sheet = sheet;
     }
 
-    public WorkbookDTO(String name, String description, ArrayList<Spreadsheet> s){
-        
-        this.name = name;
-        this.description = description;
-        this.spreadsheets = s;
-        this.existingSpreadsheets = s.size();
-        
-    }
-    
+//    public WorkbookDTO(String name, String description, ArrayList<Spreadsheet> s){
+//
+//        this.name = name;
+//        this.description = description;
+//        this.spreadsheets = s;
+//        this.existingSpreadsheets = s.size();
+//
+//    }
+
     
     public WorkbookDTO() {
         this.name = "";
