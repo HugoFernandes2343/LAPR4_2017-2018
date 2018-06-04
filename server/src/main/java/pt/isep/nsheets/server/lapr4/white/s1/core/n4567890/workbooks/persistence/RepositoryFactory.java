@@ -19,4 +19,6 @@ public interface RepositoryFactory {
     WorkbookRepository workbooks();
     
     UserRepository user();
+
+    EventRepository events();
 }

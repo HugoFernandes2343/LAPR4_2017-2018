@@ -18,12 +18,10 @@
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package pt.isep.nsheets.shared.ext;
+package pt.isep.nsheets.shared.lapr4.red.s1160777.ext;
 
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.Spreadsheet;
-//import csheets.ui.ctrl.UIController;
-//import csheets.ui.ext.UIExtension;
 
 /**
  * An interface for extensions to the CleanSheets application.

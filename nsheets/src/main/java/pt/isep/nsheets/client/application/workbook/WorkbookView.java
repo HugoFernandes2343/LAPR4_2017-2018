@@ -29,6 +29,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -49,8 +50,12 @@ import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import java.util.HashMap;
+import java.util.Map;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
@@ -74,6 +79,15 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
+
+    @UiField
+    MaterialWindow windowconditional;
+
+    @UiField
+    MaterialLink editformat;
+
+    @UiField
+    MaterialButton confirm;
 
     @UiField
     MaterialButton exportToCSVButton;
@@ -126,12 +140,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
-                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-                {"1", "2", "3", "4", "5", "6", "7"}};
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
 
         Workbook wb = new Workbook("Workbook", "New Workbook", contents);
         Spreadsheet sh = wb.getSheet();
-
 
         int columnNumber = 0;
 
@@ -182,10 +195,31 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             // Window.alert("Hello");
         });
 
+        firstButton.addClickHandler(event -> {
+            if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
+                //Workbook wb = SelectedWorkbookController.getActualWorkbook();
+                Workbook wb = new Workbook("Teste1", "Teste2");
+                /*Map<String, String> teste = new HashMap<>();
+                teste.put("Isep0", "Linha0");
+                teste.put("Isep1", "Linha1");
+                teste.put("Isep2", "Linha2");
+                teste.put("Isep3", "Linha3");
+                teste.put("Isep4", "Linha4");
+                teste.put("Isep5", "Linha5");
+                Form form = new Form(teste);
+                wb.insertNewForm(form);*/
+                
+                if (!wb.formExists()) {
+                    new FormView(wb.getForm().getRows());
+                } else {
+                    Window.alert("This workbook dont have a form");
+                }
+            }
+        });
+
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
         });
-
 
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
@@ -201,6 +235,16 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // When you use the BaseRenderer you can override certain draw
         // methods to create elements the way you would like.
         customTable.getView().setRenderer(new SheetRenderer<SheetCell>());
+
+        editformat.addClickHandler(event -> {
+            windowconditional.open();
+
+        });
+
+        confirm.addClickHandler(event -> {
+            windowconditional.close();
+
+        });
 
         initWorkbook();
 
@@ -235,9 +279,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             radioButtonWorkbook.setName("Export");
             radioButtonWorksheet.setName("Export");
             radioButtonPartOfWorksheet.setName("Export");
-            
+
             window.add(label1);
-                       
+
             MaterialPanel p0 = new MaterialPanel();
             MaterialPanel p1 = new MaterialPanel();
             MaterialPanel p2 = new MaterialPanel();
@@ -250,7 +294,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.add(p0);
             window.add(p1);
             window.add(p2);
-                
+
             MaterialComboBox<Workbook> cworkbook = new MaterialComboBox<>();
             cworkbook.setPlaceholder("Choose the Workbook you want to export");
             cworkbook.setAllowClear(true);
@@ -270,9 +314,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 }
             };
             workbooksSvc.getWorkbooks(callback);
-            
+
             window.add(cworkbook);
-            
+
             MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
             cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
             cspreadsheets.setAllowClear(true);
@@ -285,7 +329,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                     }
                 }
             });
-            
+
             window.add(cspreadsheets);
 
             MaterialTextBox cellVertical = new MaterialTextBox();
@@ -303,10 +347,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.add(cellVertical);
             window.add(cellHorizontal);
             window.add(name);
-            
+
             MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
             window.add(label2);
-            
+
             MaterialRadioButton comma = new MaterialRadioButton();
             comma.setName("Delimiter");
             comma.setText(",");
@@ -326,28 +370,26 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             MaterialRadioButton twoPoints = new MaterialRadioButton();
             twoPoints.setName("Delimiter");
             twoPoints.setText(":");
-            
+
             MaterialPanel p3 = new MaterialPanel();
             MaterialPanel p4 = new MaterialPanel();
             MaterialPanel p5 = new MaterialPanel();
             MaterialPanel p7 = new MaterialPanel();
-            
+
             p3.setTextAlign(TextAlign.LEFT);
             p4.setTextAlign(TextAlign.LEFT);
             p5.setTextAlign(TextAlign.LEFT);
             p7.setTextAlign(TextAlign.LEFT);
-            
+
             p3.add(comma);
             p4.add(commaPoint);
             p5.add(barra);
             p7.add(twoPoints);
-            
+
             window.add(p3);
             window.add(p4);
             window.add(p5);
             window.add(p7);
-            
-            
 
             MaterialButton exportCSV = new MaterialButton("EXPORT");
             exportCSV.addClickHandler(evnt -> {
