@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor;
+package pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

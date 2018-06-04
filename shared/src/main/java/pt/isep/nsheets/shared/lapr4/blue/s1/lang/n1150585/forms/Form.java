@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.server.lapr4.blue.s1.lang.n1150585.forms;
+package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms;
 
 import java.util.HashMap;
 import java.util.Map;
+import pt.isep.nsheets.shared.core.Workbook;
 
 /**
  *
@@ -14,17 +15,19 @@ import java.util.Map;
  */
 public class Form {
 
-    Map<String, String> form;
+    Map<String, String> rows;
 
     public Form() {
-        form = new HashMap<>();
+        rows = new HashMap<>();
     }
+
     public Form(Map<String, String> form) {
-        this.form = form;
+        this.rows = form;
+
     }
-    
-    public Map<String, String> getForm() {
-        return form;
+
+    public Map<String, String> getRows() {
+        return rows;
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.server.lapr4.blue.s1.lang.n1150585.forms;
+package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms;
 
 /**
  *

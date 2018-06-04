@@ -5,6 +5,7 @@
  */
 package pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor;
 
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -22,6 +23,8 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.FormsEditorController;
 import pt.isep.nsheets.shared.core.Workbook;
 
 /**
@@ -56,8 +59,41 @@ public class FormEditorView extends Composite {
     }
 
     public FormEditorView() {
-        Workbook wb;
         initWidget(uiBinder.createAndBindUi(this));
+
+        Workbook wb = SelectedWorkbookController.getActualWorkbook();
+        FormsEditorController editorController = new FormsEditorController(wb);
+
+        if (editorController.existsForm() == true) {
+            formMap = editorController.getExistentForm();
+            Iterator it_form = formMap.entrySet().iterator();
+            while (it_form.hasNext()) {
+                Map.Entry pair = (Map.Entry) it_form.next();
+
+                MaterialLabel label = new MaterialLabel((String) pair.getKey());
+                MaterialTextBox txt = new MaterialTextBox();
+                txt.setValue((String) pair.getValue());
+                MaterialCheckBox cb = new MaterialCheckBox();
+
+                checkBoxMap.put(rowCount, cb);
+                textBoxMap.put(rowCount, txt);
+                labelMap.put(rowCount, label);
+
+                label.setPaddingLeft(100);
+                label.setPaddingRight(100);
+                label.setPaddingTop(50);
+
+                txt.setPaddingLeft(100);
+                txt.setPaddingRight(100);
+                txt.setPaddingTop(25);
+                txt.setPaddingBottom(25);
+                txt.add(cb);
+
+                formEditorWindow.add(label);
+                formEditorWindow.add(txt);
+                rowCount++;
+            }
+        }
         formEditorWindow.open();
 
         addFormRowButton.addClickHandler(event -> {
@@ -68,18 +104,17 @@ public class FormEditorView extends Composite {
             checkBoxMap.put(rowCount, checkBox);
             textBoxMap.put(rowCount, txt);
             labelMap.put(rowCount, label);
-            
-            
+
             label.setPaddingLeft(100);
             label.setPaddingRight(100);
             label.setPaddingTop(50);
-       
+
             txt.setPaddingLeft(100);
             txt.setPaddingRight(100);
             txt.setPaddingTop(25);
             txt.setPaddingBottom(25);
             txt.add(checkBox);
-           
+
             formEditorWindow.add(label);
             formEditorWindow.add(txt);
             rowCount++;
