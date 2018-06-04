@@ -1,2 +1,2 @@
-**Jo√£o Vieira** (s1150575) - Sprint 3 - Core00.0
+**Jo„o Santiago** (s1160696) - Sprint 3 - Core00.0
 ===============================
