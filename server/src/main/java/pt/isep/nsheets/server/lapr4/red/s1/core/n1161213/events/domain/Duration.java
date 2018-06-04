@@ -31,11 +31,15 @@ public class Duration implements ValueObject, Serializable {
     }
 
     /**
-     * Complete constructor. The time in this is saved with the following format: from 800(8h00) to 2300(23h00)
+     * Complete constructor. The time in this is saved with the following format: from 100(1h00) to 2400(24h00)
      */
     public Duration(Integer from, Integer to, boolean isAllDay){
         if(from == null || to == null){
             throw new IllegalArgumentException("Error in the input data");
+        }
+
+        if(from.compareTo(100) < 0 || to.compareTo(2400) > 0){
+            throw new IllegalArgumentException();
         }
 
         this.from = from;
