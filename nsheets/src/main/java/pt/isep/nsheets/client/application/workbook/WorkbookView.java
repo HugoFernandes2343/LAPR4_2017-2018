@@ -29,6 +29,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -49,6 +50,9 @@ import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import java.util.HashMap;
+import java.util.Map;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 import pt.isep.nsheets.shared.services.WorkbooksService;
@@ -126,12 +130,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
-                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-                {"1", "2", "3", "4", "5", "6", "7"}};
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
 
         Workbook wb = new Workbook("Workbook", "New Workbook", contents);
         Spreadsheet sh = wb.getSheet();
-
 
         int columnNumber = 0;
 
@@ -182,10 +185,21 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             // Window.alert("Hello");
         });
 
+        firstButton.addClickHandler(event -> {
+            if (firstBox.getText().equals("form")) {
+                Workbook wb = SelectedWorkbookController.getActualWorkbook();
+                Map<String, String> test = new HashMap<>();
+                test.put("Daniel", "Daniel123");
+                test.put("Carlos", "Carlos123");
+                test.put("Zé", "Zé123");
+                test.put("João", "João123");
+                new FormView(test);
+            }
+        });
+
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
         });
-
 
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
@@ -235,9 +249,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             radioButtonWorkbook.setName("Export");
             radioButtonWorksheet.setName("Export");
             radioButtonPartOfWorksheet.setName("Export");
-            
+
             window.add(label1);
-                       
+
             MaterialPanel p0 = new MaterialPanel();
             MaterialPanel p1 = new MaterialPanel();
             MaterialPanel p2 = new MaterialPanel();
@@ -250,7 +264,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.add(p0);
             window.add(p1);
             window.add(p2);
-                
+
             MaterialComboBox<Workbook> cworkbook = new MaterialComboBox<>();
             cworkbook.setPlaceholder("Choose the Workbook you want to export");
             cworkbook.setAllowClear(true);
@@ -270,9 +284,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 }
             };
             workbooksSvc.getWorkbooks(callback);
-            
+
             window.add(cworkbook);
-            
+
             MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
             cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
             cspreadsheets.setAllowClear(true);
@@ -285,7 +299,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                     }
                 }
             });
-            
+
             window.add(cspreadsheets);
 
             MaterialTextBox cellVertical = new MaterialTextBox();
@@ -303,10 +317,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             window.add(cellVertical);
             window.add(cellHorizontal);
             window.add(name);
-            
+
             MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
             window.add(label2);
-            
+
             MaterialRadioButton comma = new MaterialRadioButton();
             comma.setName("Delimiter");
             comma.setText(",");
@@ -326,28 +340,26 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             MaterialRadioButton twoPoints = new MaterialRadioButton();
             twoPoints.setName("Delimiter");
             twoPoints.setText(":");
-            
+
             MaterialPanel p3 = new MaterialPanel();
             MaterialPanel p4 = new MaterialPanel();
             MaterialPanel p5 = new MaterialPanel();
             MaterialPanel p7 = new MaterialPanel();
-            
+
             p3.setTextAlign(TextAlign.LEFT);
             p4.setTextAlign(TextAlign.LEFT);
             p5.setTextAlign(TextAlign.LEFT);
             p7.setTextAlign(TextAlign.LEFT);
-            
+
             p3.add(comma);
             p4.add(commaPoint);
             p5.add(barra);
             p7.add(twoPoints);
-            
+
             window.add(p3);
             window.add(p4);
             window.add(p5);
             window.add(p7);
-            
-            
 
             MaterialButton exportCSV = new MaterialButton("EXPORT");
             exportCSV.addClickHandler(evnt -> {
