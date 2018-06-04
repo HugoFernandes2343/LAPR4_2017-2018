@@ -305,7 +305,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             popupMenu.open();
         });
 
-        exportToCSVButton.addClickHandler(event -> { // FALTA ADICIONAR OS MATERIALS A WINDOW PARA FICAR COMPLETA
+        exportToCSVButton.addClickHandler(event -> {
             MaterialWindow window = new MaterialWindow();
             window.setPadding(32);
             window.setHeight("600px");
@@ -355,8 +355,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             };
             workbooksSvc.getWorkbooks(callback);
 
-            window.add(cworkbook);
-
+//            window.add(cworkbook);
             MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
             cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
             cspreadsheets.setAllowClear(true);
@@ -370,8 +369,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 }
             });
 
-            window.add(cspreadsheets);
-
+//            window.add(cspreadsheets);
             MaterialTextBox cellVertical = new MaterialTextBox();
             cellVertical.setPlaceholder("Vertical Address of the cell (A1)");
 
@@ -384,12 +382,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             cellVertical.setEnabled(true);
             cellHorizontal.setEnabled(true);
             name.setEnabled(true);
-            window.add(cellVertical);
-            window.add(cellHorizontal);
-            window.add(name);
+//            window.add(cellVertical);
+//            window.add(cellHorizontal);
+//            window.add(name);
 
             MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
-            window.add(label2);
+//            window.add(label2);
 
             MaterialRadioButton comma = new MaterialRadioButton();
             comma.setName("Delimiter");
@@ -426,11 +424,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             p5.add(barra);
             p7.add(twoPoints);
 
-            window.add(p3);
-            window.add(p4);
-            window.add(p5);
-            window.add(p7);
-
+//            window.add(p3);
+//            window.add(p4);
+//            window.add(p5);
+//            window.add(p7);
             MaterialButton exportCSV = new MaterialButton("EXPORT");
             exportCSV.addClickHandler(evnt -> {
                 WorkbooksServiceAsync wsvc = GWT.create(WorkbooksService.class);
@@ -443,7 +440,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                     @Override
                     public void onSuccess(Workbook result) {
-                        MaterialToast.fireToast("Exported successfully to the user local file system...", "rounded");
+                        MaterialToast.fireToast("Exported successfully!", "rounded");
 
                     }
                 };
@@ -454,7 +451,66 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             MaterialPanel p6 = new MaterialPanel();
             p6.setTextAlign(TextAlign.RIGHT);
             p6.add(exportCSV);
-            window.add(p6);
+//            window.add(p6);
+//            window.open();
+
+            radioButtonWorkbook.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent clickEvent) {
+                    window.add(cworkbook);
+                    window.remove(cspreadsheets);
+                    window.remove(cellVertical);
+                    window.remove(cellHorizontal);
+                    window.add(name);
+                    window.add(label2);
+                    window.add(p3);
+                    window.add(p4);
+                    window.add(p5);
+                    window.add(p7);
+                    window.add(p6);
+                }
+            });
+
+            radioButtonWorksheet.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent clickEvent) {
+                    window.add(cworkbook);
+                    window.add(cspreadsheets);
+                    window.remove(cellVertical);
+                    window.remove(cellHorizontal);
+                    window.add(name);
+                    window.add(label2);
+                    window.add(p3);
+                    window.add(p4);
+                    window.add(p5);
+                    window.add(p7);
+                    window.add(p6);
+                }
+            });
+
+            radioButtonPartOfWorksheet.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent clickEvent) {
+                    window.add(cworkbook);
+                    window.add(cspreadsheets);
+                    window.add(cellVertical);
+                    window.add(cellHorizontal);
+                    window.add(name);
+                    window.add(label2);
+                    window.add(p3);
+                    window.add(p4);
+                    window.add(p5);
+                    window.add(p7);
+                    window.add(p6);
+                }
+            });
+
+//            exportCSV.setWaves(WavesType.LIGHT);
+//            exportCSV.setSize(ButtonSize.MEDIUM);
+//            MaterialPanel p6 = new MaterialPanel();
+//            p6.setTextAlign(TextAlign.RIGHT);
+//            p6.add(exportCSV);
+//            window.add(p6);
             window.open();
         });
 
