@@ -11,11 +11,25 @@
     </ui:style>
 
     <g:HTMLPanel>
+
+        <!--Head Row-->
         <m:MaterialRow marginTop="60">
             <g:Hyperlink text="Back to Settings" targetHistoryToken="{tokens.getSettings}"/>
             <m:MaterialLabel text="Basic view of the extensions"/>
+        </m:MaterialRow>
+
+        <!--First extension (Color threshold)-->
+        <m:MaterialRow>
+            <m:MaterialSwitch ui:field="colorSwitch" value="true" grid="l0"/>
+            <m:MaterialLabel text="Color Threshold (ex: Negative and Positive numbers will be different colors!)" grid="l0"/>
+            <m:MaterialIcon ui:field="colorExtensionDef" iconType="MORE_VERT" iconColor="GREY" waves="DEFAULT" circle="true" grid="l0" offset="l5"/>
+        </m:MaterialRow>
+
+        <!--Apply Row-->
+        <m:MaterialRow>
             <m:MaterialButton ui:field="applyButton" text="Apply" size="MEDIUM"/>
         </m:MaterialRow>
+
     </g:HTMLPanel>
 
 

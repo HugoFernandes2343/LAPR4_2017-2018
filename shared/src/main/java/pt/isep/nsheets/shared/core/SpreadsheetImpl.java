@@ -32,9 +32,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.ext.Extension;
-import pt.isep.nsheets.shared.ext.ExtensionManager;
-import pt.isep.nsheets.shared.ext.SpreadsheetExtension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.SpreadsheetExtension;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
