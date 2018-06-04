@@ -10,19 +10,20 @@ This sprint was full of problems, it was hard to understand the design of the ap
 Core08.1 - Styles in Cells Extension
 
 The application should have a new extension to associate styles with cells. The functionality should be similar to the one present in the desktop version of Cleansheets.
+It adds the option to change colour (text or background), text formatting, alignments and fonts of each cell on a spreadsheet.
 
+-US1: As a system user I want to stylish my cells.
 
 # 3. Analysis
 
 For this feature creation, since it is the first one to be developed regarding style in cells I need to:  
 
-- Enable a button that allows to pop a menu for the user to choose two cells and change their colour, text formatting and alignments;
+- Enable a button that allows to pop a menu for the user to choose one cell and select the caracteristic to change: colour, text formatting or alignments (example: background colour);
 
-- After choosing the color the change should be applied;
+- After choosing the caracteristic I want to change, I may choose one change option (example: Black);
 
 
 ## 3.1 Analysis Diagrams
-
 
 
 **Use Cases**
@@ -206,9 +207,6 @@ Notes:
 - **ListWorkbookDescriptionController** is the *use case controller*;  
 - **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription.
 
-**For US2**
-
-![SD US2](design2.png)
 
 ## 4.3. Classes
 
@@ -290,6 +288,7 @@ Some Questions/Issues identified during the work in this feature increment:
 
 Commits:
 
+[Requirements Core08.1]()
 [Analysis Core08.1]()
 [Design Core08.1]()
 [Tests (documentation) Core08.1]()
