@@ -1,0 +1,42 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary CalendarView
+control CalendarPresenter
+control CreateEventController
+entity EventRepository
+entity Event
+database Database 
+
+box "NSheets Client"
+participant CalendarView
+participant CalendarPresenter
+end box
+
+box "Server"
+participant CreateEventController
+participant Event
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> CalendarPresenter : navigate to page\starts the creation of an event
+CalendarPresenter --> CreateEventController : create()
+CalendarView --> User : Asks the necessary data to create event
+CalendarPresenter -> CreateEventController : createEvent()
+CreateEventController --> Event : create()
+CreateEventController -> EventRepository : addEvent()
+EventRepository  -> Database : save
+CreateEventController ->> CalendarPresenter : onSuccess()
+CalendarPresenter -> CalendarView : setContents()
+CalendarView --> User: Shows success
+
+@enduml

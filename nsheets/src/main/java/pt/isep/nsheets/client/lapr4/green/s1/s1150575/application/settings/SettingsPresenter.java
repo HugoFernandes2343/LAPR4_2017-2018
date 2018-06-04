@@ -10,11 +10,11 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialCheckBox;
+import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -35,14 +35,17 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
         //1160777
         public MaterialButton getExtensionManagerButton();
+        
+        //1160696
+        public MaterialRadioButton getComma();
 
-        public MaterialCheckBox getComma();
+        public MaterialRadioButton getPointComma();
 
-        public MaterialCheckBox getPointComma();
+        public MaterialRadioButton getBarra();
 
-        public MaterialCheckBox getBarra();
-
-        public MaterialCheckBox getPoint();
+        public MaterialRadioButton getPoint();
+        
+        void addClickHandlerApplyCSV(ClickHandler ch);
     }
 
     private SettingsPresenter.MyView view;
@@ -66,6 +69,16 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
             PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
             placeManager.revealPlace(placeRequest);
         });
+        
+        this.view.addClickHandlerApplyCSV(event -> {
+            
+                
+                    MaterialToast.fireToast("Failure");
+                
+
+                
+                
+        });
     }
 
     @Override
@@ -78,7 +91,13 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 
             @Override
             public void onClick(ClickEvent event) {
-
+                String tagWorkbook = getView().getWorkbookBox().getValue();
+                String tagWorksheet = getView().getWorksheetBox().getValue();
+                String tagCells = getView().getCellBox().getValue();
+                getView().getWorkbookBox().setText("");
+                getView().getWorksheetBox().setText("");
+                getView().getCellBox().setText("");
+                
                 String box = getView().getComma().getText();
                 String box1 = getView().getPointComma().getText();
                 String box2 = getView().getBarra().getText();

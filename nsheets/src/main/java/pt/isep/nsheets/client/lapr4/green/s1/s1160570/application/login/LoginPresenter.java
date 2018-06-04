@@ -13,12 +13,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
-import pt.isep.nsheets.client.application.CurrentUser;
-import pt.isep.nsheets.client.application.LoggedInGateKeeper;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -69,6 +66,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 //                    placeManager.revealPlace(placeRequest);
                 }
             };
+
             usersSvc.getUser(getView().getTextEmail().getText(), getView().getTextPassword().getText(), callback);
         });
 

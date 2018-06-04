@@ -8,28 +8,39 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialCheckBox;
+import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @UiField
+    MaterialTextBox txtXMLWorkbook;
+
+    @UiField
+    MaterialTextBox txtXMLWorksheet;
+
+    @UiField
+    MaterialTextBox txtXMLCell;
+
+    @UiField
+    MaterialButton btnXMLApply;
+    
     MaterialButton extensionManagerButton;
 
     @UiField
     MaterialButton btnCSVApply;
 
     @UiField
-    MaterialCheckBox comma;
+    MaterialRadioButton comma;
 
     @UiField
-    MaterialCheckBox pointComma;
+    MaterialRadioButton pointComma;
 
     @UiField
-    MaterialCheckBox barra;
+    MaterialRadioButton barra;
 
     @UiField
-    MaterialCheckBox point;
+    MaterialRadioButton point;
 
     @Override
     public void addClickHandlerExtensionManager(ClickHandler ch) {
@@ -38,22 +49,31 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @Override
     public MaterialTextBox getWorkbookBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLWorkbook;
     }
 
     @Override
     public MaterialTextBox getWorksheetBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLWorksheet;
     }
 
     @Override
     public MaterialTextBox getCellBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return txtXMLCell;
     }
 
     @Override
     public MaterialButton getApplyButton() {
-        return btnCSVApply;
+        return btnXMLApply;
+    }
+
+
+    interface Binder extends UiBinder<Widget, SettingsView> {
+    }
+
+    @Inject
+    SettingsView(Binder uiBinder) {
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
@@ -61,37 +81,29 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
         return this.extensionManagerButton;
     }
 
-    interface Binder extends UiBinder<Widget, SettingsView> {
-	}
+    @Override
+    public void addClickHandlerApplyCSV(ClickHandler ch) {
+        btnCSVApply.addClickHandler(ch);
+    }
 
     @Override
-    public MaterialCheckBox getComma() {
+    public MaterialRadioButton getComma() {
         return comma;
     }
 
     @Override
-    public MaterialCheckBox getPointComma() {
+    public MaterialRadioButton getPointComma() {
         return pointComma;
     }
 
     @Override
-    public MaterialCheckBox getBarra() {
+    public MaterialRadioButton getBarra() {
         return barra;
     }
 
     @Override
-    public MaterialCheckBox getPoint() {
+    public MaterialRadioButton getPoint() {
         return point;
-    }
-
-//    @Override
-//    public MaterialDropDown getDropButton() {
-//        return btnDrop;
-//    }
-
-    @Inject
-    SettingsView(Binder uiBinder) {
-        initWidget(uiBinder.createAndBindUi(this));
     }
 
 }
