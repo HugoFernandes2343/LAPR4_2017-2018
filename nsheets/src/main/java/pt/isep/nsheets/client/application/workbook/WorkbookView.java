@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -71,7 +71,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialButton exportToCSVButton;
-    
+
     @UiField
     MaterialDataTable<SheetCell> customTable;
 
@@ -236,40 +236,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 
         macrosButton.addClickHandler(event -> {
-            MaterialWindow window = new MaterialWindow();
-            window.setPadding(32);
-            window.setHeight("600px");
-            window.setTextAlign(TextAlign.LEFT);
-            window.setTitle("Create a Macro");
-            MaterialWindow.setOverlay(true);
-            MaterialPanel p0= new MaterialPanel();
-            MaterialLabel label = new MaterialLabel("Type of Macro");
-            MaterialComboBox macroOption = new MaterialComboBox();
-            macroOption.addItem("JavaScript");
-            p0.add(label);
-            p0.add(macroOption);
-            window.add(p0);
-            MaterialPanel p1 = new MaterialPanel();
-            MaterialLabel macroName= new MaterialLabel("Insert Macro's name");
-            MaterialTextBox macroNameT= new MaterialTextBox();
-            p1.add(macroName);
-            p1.add(macroNameT);
-            window.add(p1);
-            MaterialPanel p2= new MaterialPanel();
-            MaterialLabel label2 = new MaterialLabel("Insert Macro");
-            MaterialTextArea textArea = new MaterialTextArea();
-            p2.add(label2);
-            p2.add(textArea);
-            window.add(p2);
-            MaterialPanel p3= new MaterialPanel();
-            MaterialButton runB = new MaterialButton("Run");
-            MaterialButton saveB = new MaterialButton("Save");
-            MaterialButton cancelB = new MaterialButton("Cancel");
-            p3.add(runB);
-            p3.add(saveB);
-            p3.add(cancelB);
-            window.add(p3);
-            window.open();
+            MacrosView macrosView = new MacrosView();
         });
 
         formButton.addClickHandler(event -> {
@@ -301,7 +268,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             popupMenu.setPopupPosition(event.getMouseEvent().getPageX(), event.getMouseEvent().getPageY());
             popupMenu.open();
         });
-        
+
         exportToCSVButton.addClickHandler(event -> {
             MaterialWindow window = new MaterialWindow();
             window.setPadding(32);
