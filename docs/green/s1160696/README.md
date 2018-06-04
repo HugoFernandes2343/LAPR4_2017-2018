@@ -1,4 +1,4 @@
-**João Santiago** (s1160696)
+**Joï¿½o Santiago** (s1160696)
 ===============================
 
 # 1. Documentation for each Sprint
