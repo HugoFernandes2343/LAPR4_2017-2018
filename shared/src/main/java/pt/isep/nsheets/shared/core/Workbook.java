@@ -37,10 +37,13 @@ public class Workbook implements Serializable {
     private String name;
     private String description;
 
+    private boolean newWb;
+
     /**
      * The spreadsheets of which the workbook consists
      */
     public List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
+
 
     private Spreadsheet sheet;
 
@@ -50,10 +53,13 @@ public class Workbook implements Serializable {
     private transient List<WorkbookListener> listeners
             = new ArrayList<WorkbookListener>();
 
+   
+
     /**
      * The number of spreadsheets that have been created in the workbook
      */
     public int createdSpreadsheets;
+
 
     /**
      * Creates a new empty workbook.
@@ -71,6 +77,7 @@ public class Workbook implements Serializable {
         this.name = name;
         this.description = desc;
         this.sheet = new SpreadsheetImpl(this, "New Sheet");
+        this.newWb = false;
     }
 
     /**
@@ -84,6 +91,7 @@ public class Workbook implements Serializable {
         this.name = name;
         this.description = description;
         this.sheet = sheet;
+        this.newWb = false;
     }
 
     public Workbook(String name, String description, List<Spreadsheet> spreadsheets) {
@@ -92,12 +100,14 @@ public class Workbook implements Serializable {
         this.description = description;
         this.spreadsheets = spreadsheets;
         this.createdSpreadsheets = spreadsheets.size();
+        this.newWb = false;
     }
 
     public Workbook(String name, String description, int createdSpreadsheets) {
         this.name = name;
         this.description = description;
         this.createdSpreadsheets = createdSpreadsheets;
+        this.newWb = false;
     }
 
     public String getName() {
@@ -110,6 +120,15 @@ public class Workbook implements Serializable {
 
     public Spreadsheet getSheet() {
         return sheet;
+    }
+
+
+    public boolean isNewWb() {
+        return newWb;
+    }
+
+    public void setNewWb(boolean newWb) {
+        this.newWb = newWb;
     }
 
     /**
@@ -205,8 +224,10 @@ public class Workbook implements Serializable {
 //	}
 
     /*
- * EVENT HANDLING
+     * EVENT HANDLING
      */
+
+
     /**
      * Registers the given listener on the workbook.
      *
@@ -238,12 +259,12 @@ public class Workbook implements Serializable {
      * Notifies all registered listeners that a spreadsheet has been inserted.
      *
      * @param spreadsheet the spreadsheet that was inserted
-     * @param index the index at which the spreadsheet was inserted
+     * @param index       the index at which the spreadsheet was inserted
      */
     private void fireSpreadsheetInserted(Spreadsheet spreadsheet, int index) {
-        for (WorkbookListener listener : listeners) {
+        for (WorkbookListener listener : listeners)
             listener.spreadsheetInserted(spreadsheet, index);
-        }
+
     }
 
     /**
@@ -264,6 +285,19 @@ public class Workbook implements Serializable {
      */
     @SuppressWarnings("unused")
     private void fireSpreadsheetRenamed(Spreadsheet spreadsheet) {
+        for (WorkbookListener listener : listeners)
+            listener.spreadsheetRenamed(spreadsheet);
+    }
+
+    /*
+     * GENERAL
+     */
+
+    /**
+     * Customizes deserialization by recreating the listener list.
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
         for (WorkbookListener listener : listeners) {
             listener.spreadsheetRenamed(spreadsheet);
         }

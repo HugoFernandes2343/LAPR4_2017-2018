@@ -23,7 +23,7 @@ package pt.isep.nsheets.shared.core;
 import java.io.Serializable;
 import java.util.SortedSet;
 
-import pt.isep.nsheets.shared.ext.Extensible;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extensible;
 
 /**
  * A spreadsheet which provides cell data and dependencies.
