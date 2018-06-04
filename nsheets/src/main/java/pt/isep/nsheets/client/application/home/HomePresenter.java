@@ -36,6 +36,8 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     private MyView view;
 
+    private int nrWb;
+
     interface MyView extends View {
 
         void setContents(ArrayList<Workbook> contents);
@@ -54,13 +56,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         this.view = view;
 
+
         this.view.addClickHandler((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
             AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Default name already in use! "+ caught.getMessage());
+                    MaterialToast.fireToast("Default name already in use! " + caught.getMessage());
                 }
 
                 public void onSuccess(Workbook result) {
@@ -70,7 +73,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
 
             Spreadsheet temp = null;
-            Workbook wb = new Workbook("New Workbook ", "description of workbook", temp);
+            Workbook wb = new Workbook("New Workbook " + nrWb++, "description of workbook", temp);
             wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
 
@@ -83,10 +86,11 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         // Set up the callback object.
         AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
             public void onFailure(Throwable caught) {
-                MaterialToast.fireToast("Error "+caught.getMessage());
+                MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
             public void onSuccess(ArrayList<Workbook> result) {
+                nrWb = result.size();
                 view.setContents(result);
             }
         };
