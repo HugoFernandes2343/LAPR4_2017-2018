@@ -6,6 +6,8 @@
 package pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -33,10 +35,6 @@ public class ExportToXMLView extends Composite {
     @UiField
     MaterialTextBox textBox2;
     @UiField
-    MaterialTextBox textBox3;
-    @UiField
-    MaterialTextBox textBox4;
-    @UiField
     MaterialRadioButton radioButtonWorkbook;
     @UiField
     MaterialRadioButton radioButtonWorksheet;
@@ -56,7 +54,7 @@ public class ExportToXMLView extends Composite {
 
         initWidget(uiBinder.createAndBindUi(this));
         window.setPadding(32);
-        window.setHeight("600px");
+        window.setHeight("450px");
         window.setTextAlign(TextAlign.LEFT);
         window.setTitle("Export to XML");
         MaterialWindow.setOverlay(true);
@@ -79,12 +77,8 @@ public class ExportToXMLView extends Composite {
         window.add(p2);
         textBox1.setEnabled(false);
         textBox2.setEnabled(false);
-        textBox3.setEnabled(false);
-        textBox4.setEnabled(false);
         window.add(textBox1);
         window.add(textBox2);
-        window.add(textBox3);
-        window.add(textBox4);
         btnPartFields.setWaves(WavesType.LIGHT);
         btnPartFields.setSize(ButtonSize.MEDIUM);
         btnPartFields.setEnabled(false);
@@ -98,12 +92,15 @@ public class ExportToXMLView extends Composite {
         p4.setTextAlign(TextAlign.RIGHT);
         p4.add(btnExport);
         window.add(p4);
-        radioButtonPartOfWorksheet.addClickHandler(event -> {
-            textBox1.setEnabled(true);
-            textBox2.setEnabled(true);
-            textBox3.setEnabled(true);
-            textBox4.setEnabled(true);
-            btnPartFields.setEnabled(true);
+        
+        radioButtonPartOfWorksheet.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
+                textBox1.setEnabled(event.getValue());
+                textBox2.setEnabled(event.getValue());
+                btnPartFields.setEnabled(event.getValue());
+            }
         });
 
         window.open();
@@ -115,14 +112,6 @@ public class ExportToXMLView extends Composite {
 
     public MaterialTextBox getTextBox2() {
         return textBox2;
-    }
-
-    public MaterialTextBox getTextBox3() {
-        return textBox3;
-    }
-
-    public MaterialTextBox getTextBox4() {
-        return textBox4;
     }
 
     public MaterialButton getBtnPartFields() {
