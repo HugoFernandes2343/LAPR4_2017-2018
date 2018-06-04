@@ -38,17 +38,17 @@ OPERATORS:
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
   * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
-  ![block_Analysis](block_analysis.png)
+  ![block_Analysis](block_analysis.PNG)
 
 2 - The FOR loop should also be implemented based on instruction blocks. For example, the formula"= FOR {A1: = 1 ; A1<10; A2: = A2 + A1; A1: = A1 + 1 }" executes a for loop in which: the first expression is the initialization, the second term is the boundary condition, all other expressions are performed for each iteration of the loop.
   * 2.1 - "=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}"
 
-  ![loopfor_analysis](loopfor_analysis.png)
+  ![loopfor_analysis](loopfor_analysis.PNG)
 
 3 - Add the assign operator (its symbol is ":="). This operator assigns to its left the result of the right expression. At the moment the left of the assign operator can only be a cell reference.
   * 3.1 - "=A2:=sum(A1;A4)"
 
-  ![assignment_analysis](assignment_analysis.png)
+  ![assignment_analysis](assignment_analysis.PNG)
 
 ## 3.2 Analysis Diagrams
 
@@ -189,32 +189,7 @@ Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDI
 
 - TODO: Add more tests to increase the coverage of the domain class.
 
-## 4.2. Requirements Realization
-
-*In this section you should present the design realization of the requirements.*
-
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
-
-**For US1**
-
-![SD US1](design1.png)
-
-Notes:  
-- The diagram only depicts the less technical details of the scenario;  
-- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
-- **WorkbookServices** realizes the GWT RPC mechanism;  
-- **ListWorkbookDescriptionController** is the *use case controller*;  
-- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription.
-
-**For US2**
-
-![SD US2](design2.png)
-
-## 4.3. Classes
-
-*Present and describe the major classes of you solution.*
-
-## 4.4. Design Patterns and Best Practices
+## 4.2. Design Patterns and Best Practices
 
 *Present and explain how you applied design patterns and best practices.*
 
@@ -228,58 +203,6 @@ By memory we apply/use:
 
 # 5. Implementation
 
-*If required you should present in this section more details about the implementation. For instance, configuration files, grammar files, etc. You may also explain the organization of you code. You may reference important commits.*
-
-**For US1**
-
-The UI for this US was already implemented. We simply implemented the server as described previously.
-
-**For US2**
-
-**UI: Button for adding a new Workbook Description**
-
-For this concern we decided to use a Material Widget called Material FAB (Floating Action Button). This is a kind of button that usually appears at the left bottom part of the screen and contains actions available for the elements of the page.  
-
-We updated the HomeView.ui.xml accordingly and declare the element with a tag *ui:field="newWorkbookButton"*. In the corresponding class View (i.e., HomeView) we bind that button to the corresponding widget class: 	
-
-	@UiField
-	MaterialButton newWorkbookButton;
-
-We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application.
-
-We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
-
-Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
-
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-		void addClickHandler(ClickHandler ch);
-	}
-
-Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
-
-**Code Organization**  
-
-We followed the recommended organization for packages:  
-- Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
-- For instance, we used **lapr4.white.s1.core.n4567890**
-
-The code for this sprint:  
-Project **server**    
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes
-- Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
-
-Project **shared**  
-- Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
-- Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
-
-Project **NShests**
-- Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
-- Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
-
-
 # 6. Integration/Demonstration
 
 *In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
@@ -290,7 +213,7 @@ Project **NShests**
 
 Some Questions/Issues identified during the work in this feature increment:
 
-1. The method getWorkbooks in the WorkbooksService returns an ArrayList. Maybe we should not bind the result to a specific collection implementation.
+1. 
 
 # 8. Work Log
 
