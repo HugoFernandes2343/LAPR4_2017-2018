@@ -7,6 +7,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.List;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
@@ -67,7 +68,7 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
 
         LoginController ctrl = new LoginController();
 
-        return ctrl.User(new Email(email), password).toDTO();
+        return ctrl.User(new Email(email), new Password(password)).toDTO();
 
     }
 
