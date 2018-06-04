@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -51,10 +52,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
         ListWorkbookController ctrl = new ListWorkbookController();
-
-        ArrayList<Workbook> workbooks = (ArrayList<Workbook>) ctrl.listWorkbooks();
-        workbooks.add(new Workbook("Name", "teste Description"));
-        return workbooks;
+        return (ArrayList<Workbook>) ctrl.listWorkbooks();
     }
 
     @Override
@@ -73,6 +71,12 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
             throw new DataException((Throwable) ex);
         }
 
+    }
+
+    public int getNrWorkbooks() {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        ListWorkbookController ctrl = new ListWorkbookController();
+        return ctrl.getNrWorkbooks();
     }
 
 

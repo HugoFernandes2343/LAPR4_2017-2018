@@ -31,82 +31,99 @@ import java.util.List;
 
 /**
  * A workbook which can contain several spreadsheets.
+ *
  * @author Einar Pehrson
  */
-public class Workbook implements  Serializable {
+public class Workbook implements Serializable {
 
-	private static final long serialVersionUID = -6324252462576447242L;
+    private static final long serialVersionUID = -6324252462576447242L;
 
-	private String name;
-	private String description;
+    private String name;
+    private String description;
+
+    private boolean newWb;
 
 
 //	/** The spreadsheets of which the workbook consists */
 //	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
 
-	private Spreadsheet sheet;
+    private Spreadsheet sheet;
 
-	/** The cell listeners that have been registered on the cell */
-	private transient List<WorkbookListener> listeners
-		= new ArrayList<WorkbookListener>();
+    /**
+     * The cell listeners that have been registered on the cell
+     */
+    private transient List<WorkbookListener> listeners
+            = new ArrayList<WorkbookListener>();
 
 //	/** The number of spreadsheets that have been created in the workbook */
 //	private int createdSpreadsheets;
 
-	/**
-	 * Creates a new empty workbook.
-	 */
-	public Workbook() {}
+    /**
+     * Creates a new empty workbook.
+     */
+    public Workbook() {
+    }
 
-	/**
-	 * Creates a new workbook with one spreadsheet
-	 * @param name
-	 * @param desc
-	 */
-	public Workbook(String name, String desc){
-		this.name = name;
-		this.description = desc;
-		this.sheet = new SpreadsheetImpl(this,"New Sheet");
-	}
+    /**
+     * Creates a new workbook with one spreadsheet
+     *
+     * @param name
+     * @param desc
+     */
+    public Workbook(String name, String desc) {
+        this.name = name;
+        this.description = desc;
+        this.sheet = new SpreadsheetImpl(this, "New Sheet");
+        this.newWb = false;
+    }
 
-	/**
-	 * creates a new book from existing spreadsheet
-	 * @param name
-	 * @param description
-	 * @param sheet
-	 */
-	public Workbook(String name, String description, Spreadsheet sheet) {
-		this.name = name;
-		this.description = description;
-		this.sheet = sheet;
-	}
+    /**
+     * creates a new book from existing spreadsheet
+     *
+     * @param name
+     * @param description
+     * @param sheet
+     */
+    public Workbook(String name, String description, Spreadsheet sheet) {
+        this.name = name;
+        this.description = description;
+        this.sheet = sheet;
+        this.newWb = false;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Spreadsheet getSheet() {
-		return sheet;
-	}
+    public Spreadsheet getSheet() {
+        return sheet;
+    }
 
+    public boolean isNewWb() {
+        return newWb;
+    }
 
+    public void setNewWb(boolean newWb) {
+        this.newWb = newWb;
+    }
 
-	/**
-	 * Creates a new workbook, using the given content matrix to create
-	 * spreadsheets initially.
-	 * @param contents the content matrices to use when creating spreadsheets
-	 */
-	public Workbook(String name, String desc, String[][] contents) {
-		this.name = name;
-		this.description = desc;
-		this.sheet = new SpreadsheetImpl(this,"New Sheet", contents);
-	}
+    /**
+     * Creates a new workbook, using the given content matrix to create
+     * spreadsheets initially.
+     *
+     * @param contents the content matrices to use when creating spreadsheets
+     */
+    public Workbook(String name, String desc, String[][] contents) {
+        this.name = name;
+        this.description = desc;
+        this.sheet = new SpreadsheetImpl(this, "New Sheet", contents);
+    }
 
-	//	/**
+    //	/**
 //	 * Creates a new workbook, which initially contains the given number
 //	 * of blank spreadsheets.
 //	 * @param sheets the number of sheets to create initially
@@ -194,74 +211,80 @@ public class Workbook implements  Serializable {
 //		return spreadsheets.iterator();
 //	}
 
-/*
- * EVENT HANDLING
- */
+    /*
+     * EVENT HANDLING
+     */
 
-	/**
-	 * Registers the given listener on the workbook.
-	 * @param listener the listener to be added
-	 */
-	public void addWorkbookListener(WorkbookListener listener) {
-		listeners.add(listener);
-	}
+    /**
+     * Registers the given listener on the workbook.
+     *
+     * @param listener the listener to be added
+     */
+    public void addWorkbookListener(WorkbookListener listener) {
+        listeners.add(listener);
+    }
 
-	/**
-	 * Removes the given listener from the workbook.
-	 * @param listener the listener to be removed
-	 */
-	public void removeWorkbookListener(WorkbookListener listener) {
-		listeners.remove(listener);
-	}
+    /**
+     * Removes the given listener from the workbook.
+     *
+     * @param listener the listener to be removed
+     */
+    public void removeWorkbookListener(WorkbookListener listener) {
+        listeners.remove(listener);
+    }
 
-	/**
-	 * Returns the listeners that have been registered on the workbook.
-	 * @return the listeners that have been registered on the workbook
-	 */
-	public WorkbookListener[] getWorkbookListeners() {
-		return listeners.toArray(new WorkbookListener[listeners.size()]);
-	}
+    /**
+     * Returns the listeners that have been registered on the workbook.
+     *
+     * @return the listeners that have been registered on the workbook
+     */
+    public WorkbookListener[] getWorkbookListeners() {
+        return listeners.toArray(new WorkbookListener[listeners.size()]);
+    }
 
-	/**
-	 * Notifies all registered listeners that a spreadsheet has been inserted.
-	 * @param spreadsheet the spreadsheet that was inserted
-	 * @param index the index at which the spreadsheet was inserted
-	 */
-	private void fireSpreadsheetInserted(Spreadsheet spreadsheet, int index) {
-		for (WorkbookListener listener : listeners)
-			listener.spreadsheetInserted(spreadsheet, index);
-	}
+    /**
+     * Notifies all registered listeners that a spreadsheet has been inserted.
+     *
+     * @param spreadsheet the spreadsheet that was inserted
+     * @param index       the index at which the spreadsheet was inserted
+     */
+    private void fireSpreadsheetInserted(Spreadsheet spreadsheet, int index) {
+        for (WorkbookListener listener : listeners)
+            listener.spreadsheetInserted(spreadsheet, index);
+    }
 
-	/**
-	 * Notifies all registered listeners that a spreadsheet has been removed.
-	 * @param spreadsheet the spreadsheet that was removed
-	 */
-	private void fireSpreadsheetRemoved(Spreadsheet spreadsheet) {
-		for (WorkbookListener listener : listeners)
-			listener.spreadsheetRemoved(spreadsheet);
-	}
+    /**
+     * Notifies all registered listeners that a spreadsheet has been removed.
+     *
+     * @param spreadsheet the spreadsheet that was removed
+     */
+    private void fireSpreadsheetRemoved(Spreadsheet spreadsheet) {
+        for (WorkbookListener listener : listeners)
+            listener.spreadsheetRemoved(spreadsheet);
+    }
 
-	/**
-	 * Notifies all registered listeners that a spreadsheet has been renamed.
-	 * @param spreadsheet the spreadsheet that was renamed
-	 */
-	@SuppressWarnings("unused")
-	private void fireSpreadsheetRenamed(Spreadsheet spreadsheet) {
-		for (WorkbookListener listener : listeners)
-			listener.spreadsheetRenamed(spreadsheet);
-	}
+    /**
+     * Notifies all registered listeners that a spreadsheet has been renamed.
+     *
+     * @param spreadsheet the spreadsheet that was renamed
+     */
+    @SuppressWarnings("unused")
+    private void fireSpreadsheetRenamed(Spreadsheet spreadsheet) {
+        for (WorkbookListener listener : listeners)
+            listener.spreadsheetRenamed(spreadsheet);
+    }
 
-	/*
- * GENERAL
- */
+    /*
+     * GENERAL
+     */
 
-	/**
-	 * Customizes deserialization by recreating the listener list.
-	 * @param stream the object input stream from which the object is to be read
-	 * @throws IOException If any of the usual Input/Output related exceptions occur
-	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
-	 */
-	// java.io.ObjectInputStream not supportted in GWT !
+    /**
+     * Customizes deserialization by recreating the listener list.
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
+    // java.io.ObjectInputStream not supportted in GWT !
 //	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 //		stream.defaultReadObject();
 //		listeners = new ArrayList<WorkbookListener>();

@@ -15,6 +15,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
+import com.ibm.icu.util.Calendar;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -24,6 +25,8 @@ import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
+import pt.isep.nsheets.server.services.WorkbooksServiceImpl;
+import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
@@ -56,25 +59,8 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
             AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
-//                public void onFailure(Throwable caught) {
-//                    MaterialToast.fireToast("Error teste!");
-//                }
-
                 public void onFailure(Throwable caught) {
-                    // Convenient way to find out which exception was thrown.
-                    //MaterialToast.fireToast("Error teste!");
-                    try {
-                        throw caught;
-                    } catch (IncompatibleRemoteServiceException e) {
-                        // this client is not compatible with the server; cleanup and refresh the browser
-                        MaterialToast.fireToast("this client is not compatible with the server; cleanup and refresh the browser");
-                    } catch (InvocationException e) {
-                        // the call didn't complete cleanly
-                        MaterialToast.fireToast("the call didn't complete cleanly");
-                    } catch (Throwable e) {
-                        // last resort -- a very unexpected exception
-                        MaterialToast.fireToast("last resort -- a very unexpected exception");
-                    }
+                    MaterialToast.fireToast("Default name already in use!");
                 }
 
                 public void onSuccess(Workbook result) {
@@ -82,24 +68,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 }
             };
 
-            Workbook wb = SelectedWorkbookController.getActualWorkbook();
+
+            Spreadsheet temp = null;
+            Workbook wb = new Workbook("New Workbook ", "description of workbook", temp);
+            wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
 
-//            // Set up the callback object.
-//            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
-//                public void onFailure(Throwable caught) {
-//                    MaterialToast.fireToast("Error!");
-//                }
-//
-//                public void onSuccess(WorkbookDescriptionDTO result) {
-//
-//                    refreshView();
-//                }
-//            };
-//
-//            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("WorkbookDescription 123",
-//                    "New WorkbookDescription 123 Description");
-//            workbooksSvc.addWorkbookDescription(wdDto, callback);
         });
     }
 
@@ -109,7 +83,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         // Set up the callback object.
         AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
             public void onFailure(Throwable caught) {
-                // TODO: Do something with errors.
+                MaterialToast.fireToast("Error "+caught.toString());
             }
 
             public void onSuccess(ArrayList<Workbook> result) {

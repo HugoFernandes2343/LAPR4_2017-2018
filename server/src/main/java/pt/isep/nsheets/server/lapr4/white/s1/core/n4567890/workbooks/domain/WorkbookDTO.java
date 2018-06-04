@@ -57,6 +57,18 @@ public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
         return sheet;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSheet(Spreadsheet sheet) {
+        this.sheet = sheet;
+    }
+
     public Workbook toWorkbook() {
         return new Workbook(this.name, this.description, this.sheet);
     }
