@@ -1,0 +1,47 @@
+@startuml
+hide empty methods
+
+class User  {
+	name
+	nickname
+	email
+	password
+}
+
+User -> Workbook : has
+
+class Workbook  {
+	name
+    description
+    sheet
+}
+
+Workbook -> Spreadsheet : has
+
+class Spreadsheet  {
+	workbook
+	title
+}
+
+Spreadsheet -> Cell : has
+
+class Cell  {
+	spreadsheet
+	address
+	value
+}
+
+Cell -> Value : has
+Cell -> Address : has
+
+class Value  {
+    type
+}
+
+
+class Address  {
+    row
+    column
+    representation
+}
+@enduml
