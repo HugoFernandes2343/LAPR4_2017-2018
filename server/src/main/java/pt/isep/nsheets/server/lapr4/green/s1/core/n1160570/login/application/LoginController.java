@@ -6,6 +6,7 @@
 package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application;
 
 import eapli.framework.application.Controller;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.UserRepository;
@@ -16,25 +17,14 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
  */
 public class LoginController implements Controller {
 
-    private Iterable<User> userList;
-
-    public Iterable<User> allUsers() {
-        UserRepository userRepository = PersistenceContext.repositories().user();
-        return userRepository.findAll();
-    }
-
-    public User User(String email, String password) {
+//    private Iterable<User> userList;
+//    public Iterable<User> allUsers() {
+//        UserRepository userRepository = PersistenceContext.repositories().user();
+//        return userRepository.findAll();
+//    }
+    public User User(Email email, String password) {
         UserRepository userRepository = PersistenceContext.repositories().user();
         return userRepository.getUser_Email(email, password);
-    }
-
-    public boolean checkUser(String email, String password) {
-        for (User user : userList) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

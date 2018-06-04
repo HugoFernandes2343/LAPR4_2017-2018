@@ -8,6 +8,8 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -23,34 +25,17 @@ public class User implements AggregateRoot<Long>, Serializable {
     @GeneratedValue
     private Long pk;
 
-    public enum UserType {
-
-        USER {
-
-            @Override
-            public String toString() {
-                return "User";
-            }
-        },
-        ADMIN {
-
-            @Override
-            public String toString() {
-                return "Admin";
-            }
-        }
-    };
-
-    private String email;
+    private Email email;
     private String password;
     private String nickname;
-    private String name;
+    private Name name;
     private boolean activate;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public User(String email, String password, String nickname, String name) throws IllegalArgumentException {
+    public User(Email email, String password, String nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
-            throw new IllegalArgumentException("email or password must be non-null");
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
         }
         this.email = email;
         this.password = password;
@@ -109,7 +94,7 @@ public class User implements AggregateRoot<Long>, Serializable {
         return (this.pk.compareTo(id) == 0);
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
@@ -123,11 +108,11 @@ public class User implements AggregateRoot<Long>, Serializable {
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(this.email, this.password, this.name, this.nickname);
+        return new UserDTO(email.toDTO(), password, name.toDTO(), this.nickname);
     }
 
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
-        return new User(dto.getEmail(), dto.getPassword(), dto.getName(), dto.getNickname());
+        return new User(Email.fromDTO(dto.getEmail()), dto.getPassword(), dto.getNickname(), Name.fromDTO(dto.getName()));
     }
 
 }
