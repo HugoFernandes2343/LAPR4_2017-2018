@@ -62,23 +62,6 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
         this.view = view;
         this.placeManager = placeManager;
 
-        /*
-         * @author <1160777>Marco Carneiro</1160777>
-         */
-        this.view.addClickHandlerExtensionManager(event -> {
-            PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
-            placeManager.revealPlace(placeRequest);
-        });
-        
-        this.view.addClickHandlerApplyCSV(event -> {
-            
-                
-                    MaterialToast.fireToast("Failure");
-                
-
-                
-                
-        });
     }
 
     @Override
@@ -106,6 +89,23 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
 //                String delimiter = getView().getDropButton().getActivator();
             }
 
+        });
+        /*
+         * @author <1160777>Marco Carneiro</1160777>
+         */
+        this.view.addClickHandlerExtensionManager(event -> {
+            PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(NameTokens.getExtensionManager()).build();
+            placeManager.revealPlace(placeRequest);
+        });
+        
+        this.view.addClickHandlerApplyCSV(event -> {
+            
+                
+                    MaterialToast.fireToast("Failure");
+                
+
+                
+                
         });
     }
 }
