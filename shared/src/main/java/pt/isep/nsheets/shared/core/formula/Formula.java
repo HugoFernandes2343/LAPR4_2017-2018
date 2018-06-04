@@ -26,6 +26,8 @@ import java.util.TreeSet;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Value;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
 import pt.isep.nsheets.shared.core.formula.util.CircularReferenceException;
 import pt.isep.nsheets.shared.core.formula.util.CircularReferenceFinder;
 import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
@@ -50,6 +52,12 @@ public class Formula implements Expression {
 	/** Returns the references in the expression */
 	private SortedSet<Reference> references;
 
+        /**
+         * Temporary Variables created for this Formula.
+         * Key - Variable name (unique in the Formula, but NOT the Cell)
+         */
+        private VariableList tempVariableList;
+        
 	/**
 	 * Creates a new formula.
 	 * @param cell the cell to which the formula belongs
@@ -59,8 +67,14 @@ public class Formula implements Expression {
 		// Stores members
 		this.cell = cell;
 		this.expression = expression;
+                tempVariableList = new VariableList();
 	}
 
+        public void addTempVariable(Variable variable) {
+            tempVariableList.addVariable(variable);
+        }
+
+        
 	public Value evaluate() throws IllegalValueTypeException {
 		if (!hasCircularReference())
 			return expression.evaluate();
