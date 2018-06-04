@@ -15,13 +15,13 @@ import java.io.Serializable;
 public class UserDTO implements Serializable {
 
     private EmailDTO email;
-    private String password;
+    private PasswordDTO password;
     private NameDTO name;
     private NicknameDTO nickname;
     private boolean activate;
     private UserTypeDTO userType;
 
-    public UserDTO(EmailDTO email, String password, NameDTO name, NicknameDTO nickname) {
+    public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -44,7 +44,7 @@ public class UserDTO implements Serializable {
         return this.email;
     }
 
-    public String getPassword() {
+    public PasswordDTO getPassword() {
         return this.password;
     }
 

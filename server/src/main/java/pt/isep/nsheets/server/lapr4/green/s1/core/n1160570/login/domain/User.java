@@ -11,8 +11,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
@@ -24,14 +22,14 @@ public class User implements AggregateRoot<Email>, Serializable {
 
     @EmbeddedId
     private Email email;
-    private String password;
+    private Password password;
     private Nickname nickname;
     private Name name;
     private boolean activate;
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public User(Email email, String password, Nickname nickname, Name name) throws IllegalArgumentException {
+    public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
             throw new IllegalArgumentException("email or password or nickname or name must be non-null");
         }
@@ -102,11 +100,11 @@ public class User implements AggregateRoot<Email>, Serializable {
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(email.toDTO(), password, name.toDTO(), nickname.toDTO());
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
     }
 
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
-        return new User(Email.fromDTO(dto.getEmail()), dto.getPassword(), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
     }
 
 }
