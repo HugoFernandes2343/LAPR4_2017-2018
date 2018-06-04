@@ -36,16 +36,19 @@ OPERATORS:
 ## 3.1 GRAMMAR ANALYSIS
 
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
+
   * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
 
   ![block_Analysis](block_analysis.PNG)
 
 2 - The FOR loop should also be implemented based on instruction blocks. For example, the formula"= FOR {A1: = 1 ; A1<10; A2: = A2 + A1; A1: = A1 + 1 }" executes a for loop in which: the first expression is the initialization, the second term is the boundary condition, all other expressions are performed for each iteration of the loop.
+
   * 2.1 - "=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}"
 
   ![loopfor_analysis](loopfor_analysis.PNG)
 
 3 - Add the assign operator (its symbol is ":="). This operator assigns to its left the result of the right expression. At the moment the left of the assign operator can only be a cell reference.
+
   * 3.1 - "=A2:=sum(A1;A4)"
 
   ![assignment_analysis](assignment_analysis.PNG)
@@ -78,6 +81,7 @@ Because the Fuction interface had an existing method to process the applyTo(Expr
 ![loopFor_analysis](loopFor.png)
 
 **CD-For-** Method applyTo(Expression[] arguments), is the one responsible for the processing of the BinaryOperators received in the arguments array. The binaryOperators for the expression **=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}** would be related to the following grammar rules:
+
   * arguments[0]-->Assignment
   * arguments[1]-->Comparison
   * arguments[2]-->Assignment
@@ -88,6 +92,7 @@ Because the Fuction interface had an existing method to process the applyTo(Expr
 
 1 - Interpreting the application flow, in this section I will show some Sequence Diagrams to explain how a formula will be processed and interpreted in Java.
 
+![FormulaCompiler_analysis](FormulaCompilerSD.png)
 
 
 

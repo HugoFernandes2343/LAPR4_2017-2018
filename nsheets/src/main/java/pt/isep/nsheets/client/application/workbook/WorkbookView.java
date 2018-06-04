@@ -74,6 +74,15 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
+    
+    @UiField
+    MaterialWindow windowconditional;
+    
+    @UiField
+    MaterialLink  editformat;
+    
+     @UiField
+    MaterialButton confirm;
 
     @UiField
     MaterialButton exportToCSVButton;
@@ -202,6 +211,16 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // methods to create elements the way you would like.
         customTable.getView().setRenderer(new SheetRenderer<SheetCell>());
 
+        editformat.addClickHandler(event -> {
+           windowconditional.open();
+
+        });
+        
+        confirm.addClickHandler(event -> {
+           windowconditional.close();
+
+        });
+        
         initWorkbook();
 
         // Set the visible range of the table for pager (later)

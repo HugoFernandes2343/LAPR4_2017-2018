@@ -20,12 +20,15 @@ import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
+import gwt.material.design.client.ui.MaterialCardTitle;
+import gwt.material.design.client.ui.MaterialLabel;
 import org.h2.message.DbException;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
-import pt.isep.nsheets.server.services.WorkbooksServiceImpl;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.WorkbookService;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookRepository;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
@@ -43,6 +46,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         void setContents(ArrayList<Workbook> contents);
 
         void addClickHandler(ClickHandler ch);
+        
+        void renameClickHandler(ClickHandler ch);
+        
+        void deleteClickHandler(ClickHandler ch);
+        
+        MaterialCardTitle getWorkbookTitle();
+        
+        MaterialLabel getWorkbookDescription();
     }
 
     @NameToken(NameTokens.home)
@@ -55,6 +66,17 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
+        
+        this.view.renameClickHandler((ClickEvent event) -> {
+            MaterialToast.fireToast("rename");
+//            Workbook w = SelectedWorkbookController.getActualWorkbook();
+//            w.setName();
+            getView().getWorkbookTitle().setText("novo");
+        });
+        
+        this.view.deleteClickHandler((ClickEvent event) -> {
+            MaterialToast.fireToast("delete");
+        });
 
 
         this.view.addClickHandler((ClickEvent event) -> {
