@@ -48,8 +48,9 @@ governing permissions and limitations under the License. #L% -->
             <m:MaterialTextBox 
                 m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
                 active="true" grid="s11" iconType="FUNCTIONS" />
+            <m:MaterialIcon ui:field="styleButton" iconType="MENU" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s11"/>
             <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />		
-            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>	
+            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>
         </m:MaterialRow>
 
         <m:MaterialRow>
