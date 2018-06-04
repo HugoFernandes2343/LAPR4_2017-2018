@@ -196,7 +196,7 @@ Lastly, I highlight the fact that I was dependent on other functionalities, main
 ----------------------------------------------------------------------------------------------------------------
 # 8. Work Log
 
-[Lang05.1 - Forms Editor Documentation (In Development.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b4c790c3aabcbec8735909b782ca6b2505c600e0)
+[Lang05.1 - Forms Editor Documentation (In Development).](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b4c790c3aabcbec8735909b782ca6b2505c600e0)
 
 [Lang05.1 - Partial implementation of the forms editor GUI.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9c53bce6654b4566565b1ad448a1bf61f3826c89)
 
@@ -210,4 +210,4 @@ Lastly, I highlight the fact that I was dependent on other functionalities, main
 
 [Lang 05.1 - Form Editor Testes](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)
 
-[Lang 05.1 - Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)
+[Lang 05.1 - Final adjustments of documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f60255b0961e25897e3882b9456171a695afea8a)
