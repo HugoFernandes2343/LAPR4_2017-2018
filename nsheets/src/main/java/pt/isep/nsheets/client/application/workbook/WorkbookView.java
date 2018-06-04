@@ -34,6 +34,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.google.gwt.user.client.ui.Widget;
 
+import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 import com.google.gwt.user.client.ui.Panel;
@@ -46,6 +47,9 @@ import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
+import gwt.material.design.client.ui.*;
+import gwt.material.design.client.ui.table.MaterialDataTable;
+import pt.isep.nsheets.shared.core.Address;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
@@ -100,6 +104,18 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialIcon formButton;
+
+    @UiField
+    MaterialButton sortButton;
+
+    @UiField
+    MaterialListValueBox<String> sortingTypeBox;
+    @UiField
+    MaterialListValueBox<String> dataTypeBox;
+    @UiField
+    MaterialTextBox upperCellInfo;
+    @UiField
+    MaterialTextBox lowerCellInfo;
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }
@@ -229,6 +245,30 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             //Window.alert("Hello");
             new FormEditorView();
 
+        });
+        dataTypeBox.add("Number");
+        dataTypeBox.add("Text");
+        dataTypeBox.add("Date");
+        sortingTypeBox.add("Ascending");
+        sortingTypeBox.add("Descending");
+        sortButton.addClickHandler(event -> {
+            // Show Loader
+            MaterialLoader.loading(true);
+            String sortingType=sortingTypeBox.getValue();
+            String dataType=dataTypeBox.getValue();
+            String lowerCell=lowerCellInfo.getText();
+            String upperCell=upperCellInfo.getText();
+            Spreadsheet sh=customTable.getRow(0).getData().sheet;
+            //sh.sortCells(upperCell,lowerCell,dataType,sortingType); Still needs work
+            List<SheetCell> rows = new ArrayList<>();
+            for (int k = 0; k < sh.getRowCount(); k++) {
+                rows.add(new SheetCell(sh, k));
+            }
+            customTable.clearRows(true);
+            customTable.setRowData(0, rows);
+            customTable.getView().setRedraw(true);
+            customTable.getView().refresh();
+            MaterialLoader.loading(false);
         });
 
         // It is possible to create your own custom renderer per table
