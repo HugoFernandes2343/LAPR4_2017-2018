@@ -55,6 +55,7 @@ import java.util.Map;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
@@ -78,14 +79,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
-    
+
     @UiField
     MaterialWindow windowconditional;
-    
+
     @UiField
-    MaterialLink  editformat;
-    
-     @UiField
+    MaterialLink editformat;
+
+    @UiField
     MaterialButton confirm;
 
     @UiField
@@ -195,14 +196,24 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         });
 
         firstButton.addClickHandler(event -> {
-            if (firstBox.getText().equals("form")) {
-                Workbook wb = SelectedWorkbookController.getActualWorkbook();
-                Map<String, String> test = new HashMap<>();
-                test.put("Daniel", "Daniel123");
-                test.put("Carlos", "Carlos123");
-                test.put("Zé", "Zé123");
-                test.put("João", "João123");
-                new FormView(test);
+            if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
+                //Workbook wb = SelectedWorkbookController.getActualWorkbook();
+                Workbook wb = new Workbook("Teste1", "Teste2");
+                /*Map<String, String> teste = new HashMap<>();
+                teste.put("Isep0", "Linha0");
+                teste.put("Isep1", "Linha1");
+                teste.put("Isep2", "Linha2");
+                teste.put("Isep3", "Linha3");
+                teste.put("Isep4", "Linha4");
+                teste.put("Isep5", "Linha5");
+                Form form = new Form(teste);
+                wb.insertNewForm(form);*/
+                
+                if (!wb.formExists()) {
+                    new FormView(wb.getForm().getRows());
+                } else {
+                    Window.alert("This workbook dont have a form");
+                }
             }
         });
 
@@ -226,15 +237,15 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         customTable.getView().setRenderer(new SheetRenderer<SheetCell>());
 
         editformat.addClickHandler(event -> {
-           windowconditional.open();
+            windowconditional.open();
 
         });
-        
+
         confirm.addClickHandler(event -> {
-           windowconditional.close();
+            windowconditional.close();
 
         });
-        
+
         initWorkbook();
 
         // Set the visible range of the table for pager (later)

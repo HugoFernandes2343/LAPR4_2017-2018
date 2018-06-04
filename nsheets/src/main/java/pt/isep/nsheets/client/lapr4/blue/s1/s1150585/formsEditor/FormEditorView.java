@@ -61,7 +61,8 @@ public class FormEditorView extends Composite {
     public FormEditorView() {
         initWidget(uiBinder.createAndBindUi(this));
 
-        Workbook wb = SelectedWorkbookController.getActualWorkbook();
+        Workbook wb = new Workbook("Teste1", "Teste2");
+        //Workbook wb = SelectedWorkbookController.getActualWorkbook();
         FormsEditorController editorController = new FormsEditorController(wb);
 
         if (editorController.existsForm() == true) {
@@ -93,8 +94,10 @@ public class FormEditorView extends Composite {
                 formEditorWindow.add(txt);
                 rowCount++;
             }
+            formEditorWindow.open();
+        } else {
+            formEditorWindow.open();
         }
-        formEditorWindow.open();
 
         addFormRowButton.addClickHandler(event -> {
             MaterialLabel label = new MaterialLabel("Row " + rowCount);
@@ -152,6 +155,7 @@ public class FormEditorView extends Composite {
         playFormButton.addClickHandler(event -> {
             Iterator it_label = labelMap.entrySet().iterator();
             Iterator it_textBox = textBoxMap.entrySet().iterator();
+            formMap.clear();
             while (it_label.hasNext()) {
                 Map.Entry pair_label = (Map.Entry) it_label.next();
                 Map.Entry pair_txt = (Map.Entry) it_textBox.next();
@@ -166,7 +170,20 @@ public class FormEditorView extends Composite {
 
         saveFormButton.addClickHandler(event
                 -> {
-            Window.alert("Hello");
+            Iterator it_label = labelMap.entrySet().iterator();
+            Iterator it_textBox = textBoxMap.entrySet().iterator();
+            formMap.clear();
+            while (it_label.hasNext()) {
+                Map.Entry pair_label = (Map.Entry) it_label.next();
+                Map.Entry pair_txt = (Map.Entry) it_textBox.next();
+
+                MaterialLabel label = (MaterialLabel) pair_label.getValue();
+                MaterialTextBox txt = (MaterialTextBox) pair_txt.getValue();
+
+                formMap.put(label.getValue(), txt.getValue());
+            }
+            editorController.addForm(formMap);
+            Window.alert("Form Saved");
         });
 
         editFormRowButton.addClickHandler(event

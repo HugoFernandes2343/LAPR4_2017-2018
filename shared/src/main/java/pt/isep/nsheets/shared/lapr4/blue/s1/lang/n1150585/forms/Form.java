@@ -7,6 +7,7 @@ package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.collections.MapUtils;
 import pt.isep.nsheets.shared.core.Workbook;
 
 /**
@@ -28,6 +29,14 @@ public class Form {
 
     public Map<String, String> getRows() {
         return rows;
+    }
+
+    public boolean isEmpty() {
+        if (rows.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -87,7 +87,7 @@ public class FormView extends Composite {
             } else if (check_count > 1) {
                 Window.alert("You can only select one line to execute");
             } else {
-                Window.alert("Executa Formula");
+                Window.alert("Execute");
             }
         });
     }

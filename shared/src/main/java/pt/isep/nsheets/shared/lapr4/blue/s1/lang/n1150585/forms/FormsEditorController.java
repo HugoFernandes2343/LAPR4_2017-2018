@@ -16,31 +16,33 @@ import pt.isep.nsheets.shared.core.Workbook;
 public class FormsEditorController {
 
     Workbook currentWorkbook;
-    Form form;
-    
+
     public FormsEditorController(Workbook wb) {
         this.currentWorkbook = wb;
-        this.form = new Form();
-    }
-    
-    public void addForm(Map<String, String> form) {
-        throw new java.lang.UnsupportedOperationException("Not Implemented");
     }
 
-    public boolean existsForm() { //Verifica se a form existe
-        return true;
+    public boolean addForm(Map<String, String> form) {
+        Form newForm = new Form(form);
+        return currentWorkbook.insertNewForm(newForm);
     }
-    
+
+    public boolean existsForm() {
+        return true;
+       // return currentWorkbook.formExists();
+    }
 
     public Map<String, String> getExistentForm() {
-        Map<String, String> test = new HashMap<>();
+       /* Map <String,String> teste = new HashMap<>(); 
+        teste.put("Isep0", "Linha0");
+        teste.put("Isep1", "Linha1");
+        teste.put("Isep2", "Linha2");
+        teste.put("Isep3", "Linha3");
+        teste.put("Isep4", "Linha4");
+        teste.put("Isep5", "Linha5");
+        return teste;*/
         
-        test.put("Daniel", "Daniel123");
-        test.put("Carlos", "Carlos123");
-        test.put("Zé", "Zé123");
-        test.put("João", "João123");
-        
-        return test;
-       
+       Form returnedForm = currentWorkbook.getForm();
+        Map<String, String> rows = returnedForm.getRows();
+        return rows;
     }
 }
