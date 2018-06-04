@@ -20,6 +20,14 @@ public class Variable {
         this.name = name;
         this.value = value;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
     
     /**
      * return true if the object is equal to this variable

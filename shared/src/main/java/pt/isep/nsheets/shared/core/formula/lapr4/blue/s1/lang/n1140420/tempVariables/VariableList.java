@@ -14,15 +14,17 @@ import java.util.Map;
  * @author Rodrigo
  */
 public class VariableList {
-    public Map<String, List<Variable>> variableList;
+    public Map<String, Variable> variableList;
 
     public VariableList() {
-        variableList = new HashMap<String, List<Variable>>();
+        variableList = new HashMap<String, Variable>();
     }
 
-    public VariableList(Map<String, List<Variable>> variableList) {
+    public VariableList(Map<String, Variable> variableList) {
         this.variableList = variableList;
     }
     
-    
+    public void addVariable(Variable v){
+        variableList.put (v.getName(), v);
+    }
 }
