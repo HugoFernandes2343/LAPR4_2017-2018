@@ -1,5 +1,9 @@
 package pt.isep.nsheets.shared.core.formula.lang;
 
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Assignment;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Block;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.For;
+
 public class ExcelLanguage extends Language {
 	
 	@Override
@@ -16,6 +20,9 @@ public class ExcelLanguage extends Language {
 		functions.add(new Or());
 		functions.add(new Sum());
 		functions.add(new True());
+                functions.add(new For());
+                functions.add(new Block());
+                
 	}
 
 	@Override
@@ -33,6 +40,7 @@ public class ExcelLanguage extends Language {
 		binaryOperators.add(new NotEqual());
 		binaryOperators.add(new RangeReference());
 		binaryOperators.add(new Subtracter());
+                binaryOperators.add(new Assignment());
 	}
 
 	@Override

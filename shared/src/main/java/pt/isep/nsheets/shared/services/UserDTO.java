@@ -14,54 +14,33 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class UserDTO implements Serializable {
 
-    public enum UserType {
-
-        USER {
-
-            @Override
-            public String toString() {
-                return "User";
-            }
-        },
-        ADMIN {
-
-            @Override
-            public String toString() {
-                return "Admin";
-            }
-        }
-    };
-    private String email;
+    private EmailDTO email;
     private String password;
-    private String name;
-    private String nickname;
+    private NameDTO name;
+    private NicknameDTO nickname;
     private boolean activate;
-    private UserType userType;
+    private UserTypeDTO userType;
 
-    public UserDTO(String email, String password, String name, String nickname) {
+    public UserDTO(EmailDTO email, String password, NameDTO name, NicknameDTO nickname) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.nickname = nickname;
         this.activate = true;
-        this.userType = UserType.USER;
+        this.userType = UserTypeDTO.USER;
     }
 
     // It is mandatory to have a default constructor with no arguments to be serializable!
     public UserDTO() {
-        this.email = "";
-        this.password = "";
-        this.name = "";
-        this.nickname = "";
         this.activate = true;
-        this.userType = UserType.USER;
+        this.userType = UserTypeDTO.USER;
     }
 
-    public UserType getUserType() {
+    public UserTypeDTO getUserType() {
         return userType;
     }
 
-    public String getEmail() {
+    public EmailDTO getEmail() {
         return this.email;
     }
 
@@ -69,11 +48,11 @@ public class UserDTO implements Serializable {
         return this.password;
     }
 
-    public String getName() {
+    public NameDTO getName() {
         return name;
     }
 
-    public String getNickname() {
+    public NicknameDTO getNickname() {
         return nickname;
     }
 

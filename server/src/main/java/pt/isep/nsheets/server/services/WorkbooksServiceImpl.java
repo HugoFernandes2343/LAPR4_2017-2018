@@ -42,7 +42,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         // props.put("javax.persistence.jdbc.user", "");
         // props.put("javax.persistence.schema-generation.database.action", "create");
         // props.put("eclipselink.logging.level", "FINE");
-
         return new PersistenceSettings(props);
     }
 
@@ -62,7 +61,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 
         AddWorkbookController ctrl = new AddWorkbookController();
 
-
         try {
             return ctrl.addWorkbook(wd);
         } catch (DataConcurrencyException ex) {
@@ -72,6 +70,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         }
 
     }
+
 
     public int getNrWorkbooks() {
         PersistenceContext.setSettings(this.getPersistenceSettings());
@@ -95,8 +94,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 //
 //        return workbooks;
 //    }
-
-
 //        @Override
 //        public WorkbookDescriptionDTO addWorkbookDescription (WorkbookDescriptionDTO wdDto)
 //			throws DataException {
@@ -116,5 +113,5 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 //            }
 //
 //            return wd.toDTO();
-//        }
+//        }  
 }

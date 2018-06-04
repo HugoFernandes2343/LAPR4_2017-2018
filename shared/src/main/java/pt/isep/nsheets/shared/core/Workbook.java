@@ -20,10 +20,6 @@
  */
 package pt.isep.nsheets.shared.core;
 
-import eapli.framework.domain.AggregateRoot;
-
-import javax.persistence.*;
-import java.io.IOException;
 //import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,6 +43,12 @@ public class Workbook implements Serializable {
 //	/** The spreadsheets of which the workbook consists */
 //	private List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
 
+    /**
+     * The spreadsheets of which the workbook consists
+     */
+    public List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
+
+
     private Spreadsheet sheet;
 
     /**
@@ -55,8 +57,13 @@ public class Workbook implements Serializable {
     private transient List<WorkbookListener> listeners
             = new ArrayList<WorkbookListener>();
 
-//	/** The number of spreadsheets that have been created in the workbook */
-//	private int createdSpreadsheets;
+
+
+    /**
+     * The number of spreadsheets that have been created in the workbook
+     */
+    public int createdSpreadsheets;
+
 
     /**
      * Creates a new empty workbook.
@@ -91,6 +98,22 @@ public class Workbook implements Serializable {
         this.newWb = false;
     }
 
+    public Workbook(String name, String description, List<Spreadsheet> spreadsheets) {
+
+        this.name = name;
+        this.description = description;
+        this.spreadsheets = spreadsheets;
+        this.createdSpreadsheets = spreadsheets.size();
+        this.newWb = false;
+    }
+
+    public Workbook(String name, String description, int createdSpreadsheets) {
+        this.name = name;
+        this.description = description;
+        this.createdSpreadsheets = createdSpreadsheets;
+        this.newWb = false;
+    }
+
     public String getName() {
         return name;
     }
@@ -102,6 +125,7 @@ public class Workbook implements Serializable {
     public Spreadsheet getSheet() {
         return sheet;
     }
+
 
     public boolean isNewWb() {
         return newWb;
@@ -133,7 +157,6 @@ public class Workbook implements Serializable {
 //			spreadsheets.add(new SpreadsheetImpl(this,
 //				getNextSpreadsheetTitle()));
 //	}
-
 //	/**
 //	 * Creates a new workbook, using the given content matrix to create
 //	 * spreadsheets initially.
@@ -144,7 +167,6 @@ public class Workbook implements Serializable {
 //			spreadsheets.add(new SpreadsheetImpl(this,
 //				getNextSpreadsheetTitle(), content));
 //	}
-
 //	/**
 //	 * Adds a blank spreadsheet to the end of the workbook.
 //	 */
@@ -154,7 +176,6 @@ public class Workbook implements Serializable {
 //		spreadsheets.add(spreadsheet);
 //		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
 //	}
-
 //	/**
 //	 * Adds a new spreadsheet to the workbook, in which cells are initialized
 //	 * with data from the given content matrix.
@@ -166,7 +187,6 @@ public class Workbook implements Serializable {
 //		spreadsheets.add(spreadsheet);
 //		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
 //	}
-
 //	/**
 //	 * Returns the title to be used for the next spreadsheet added.
 //	 * @return the title to be used for the next spreadsheet added
@@ -174,7 +194,6 @@ public class Workbook implements Serializable {
 //	private String getNextSpreadsheetTitle() {
 //		return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
 //	}
-
 //	/**
 //	 * Adds a new blank spreadsheet to the workbook.
 //         * @param spreadsheet spreadsheet
@@ -184,7 +203,6 @@ public class Workbook implements Serializable {
 //		// Remove references to the spreadsheet in remaining spreadsheets!
 //		fireSpreadsheetRemoved(spreadsheet);
 //	}
-
 //	/**
 //	 * Returns the spreadsheet at the given index.
 //	 * @param index the index of the spreadsheet in the workbook
@@ -194,7 +212,6 @@ public class Workbook implements Serializable {
 //	public Spreadsheet getSpreadsheet(int index) throws IndexOutOfBoundsException {
 //		return spreadsheets.get(index);
 //	}
-
 //	/**
 //	 * Returns the number of spreadsheets in the the workbook.
 //	 * @return the number of spreadsheets in the the workbook
@@ -202,7 +219,6 @@ public class Workbook implements Serializable {
 //	public int getSpreadsheetCount() {
 //		return spreadsheets.size();
 //	}
-
 //	/**
 //	 * Returns an iterator over the spreadsheets in the workbook. (needs to implement Iterable<Spreadsheet>)
 //	 * @return an iterator over the spreadsheets in the workbook
@@ -214,6 +230,7 @@ public class Workbook implements Serializable {
     /*
      * EVENT HANDLING
      */
+
 
     /**
      * Registers the given listener on the workbook.
@@ -251,6 +268,7 @@ public class Workbook implements Serializable {
     private void fireSpreadsheetInserted(Spreadsheet spreadsheet, int index) {
         for (WorkbookListener listener : listeners)
             listener.spreadsheetInserted(spreadsheet, index);
+
     }
 
     /**
@@ -259,8 +277,9 @@ public class Workbook implements Serializable {
      * @param spreadsheet the spreadsheet that was removed
      */
     private void fireSpreadsheetRemoved(Spreadsheet spreadsheet) {
-        for (WorkbookListener listener : listeners)
+        for (WorkbookListener listener : listeners) {
             listener.spreadsheetRemoved(spreadsheet);
+        }
     }
 
     /**
@@ -283,6 +302,56 @@ public class Workbook implements Serializable {
      * @param stream the object input stream from which the object is to be read
      * @throws IOException If any of the usual Input/Output related exceptions occur
      * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+        for (WorkbookListener listener : listeners) {
+            listener.spreadsheetRenamed(spreadsheet);
+        }
+    }
+
+//        public static Workbook fromDTO(WorkbookDTO dto)
+//        {
+//            List<Spreadsheet> spreadsheetList = new ArrayList<>();
+//            
+//            for (SpreadsheetDTO ssDTO : dto.spreadsheets)
+//            {
+//                spreadsheetList.add(SpreadsheetImpl.fromDTO(ssDTO));
+//            }
+//            return new Workbook(dto.id, dto.version, dto.name, dto.description, spreadsheetList);
+//        }
+//        
+//        /**
+//         * Similar to the above but uses a different workbook constructor to pass the
+//         * number of spreadsheets to be created instead of passing the actual spreadsheets
+//         * @param dto the DTO
+//         * @return a Workbook
+//         */
+//        public static Workbook fromDTOCreateSpreadsheets(WorkbookDTO dto)
+//        {
+//            return new Workbook(dto.name, dto.description, dto.existingSpreadsheets);
+//        }
+//        
+//        public WorkbookDTO toDTO()
+//        {
+//            List<SpreadsheetDTO> dtoList = new ArrayList<>();
+//            
+//            for (Spreadsheet spreadsheet : spreadsheets)
+//            {
+//                dtoList.add(spreadsheet.toDTO());            
+//            }
+//            
+//            return new WorkbookDTO(id, version, name, description, dtoList);
+//        }
+
+    /*
+ * GENERAL
+     */
+    /**
+     * Customizes deserialization by recreating the listener list.
+     *
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions
+     * occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot
+     * be found.
      */
     // java.io.ObjectInputStream not supportted in GWT !
 //	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
