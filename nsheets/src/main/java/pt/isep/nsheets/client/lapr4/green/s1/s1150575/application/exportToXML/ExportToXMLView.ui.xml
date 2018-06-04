@@ -23,10 +23,8 @@
                 <m:MaterialRadioButton ui:field="radioButtonWorkbook" text="Export Workbook"/>
                 <m:MaterialRadioButton ui:field="radioButtonWorksheet" text="Export Worksheet"/>
                 <m:MaterialRadioButton ui:field="radioButtonPartOfWorksheet" text="Export Part Of a Worksheet"/>
-                <m:MaterialTextBox ui:field="textBox1" label="Please insert the column you'd like to start importing"/>
-                <m:MaterialTextBox ui:field="textBox2" label="Please insert the line you'd like to start importing"/>
-                <m:MaterialTextBox ui:field="textBox3" label="Please insert the column you'd like to finish importing"/>
-                <m:MaterialTextBox ui:field="textBox4" label="Please insert the line you'd like to finish importing"/>
+                <m:MaterialTextBox ui:field="textBox1" label="Please insert the cell you'd like to start importing"/>
+                <m:MaterialTextBox ui:field="textBox2" label="Please insert the cell you'd like to finish importing"/>
                 <m:MaterialPanel>
                     <m:MaterialButton ui:field="btnPartFields" text="Apply"></m:MaterialButton>
                     <m:MaterialButton ui:field="btnExport" text="Export"></m:MaterialButton>
