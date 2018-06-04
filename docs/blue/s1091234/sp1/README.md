@@ -33,8 +33,7 @@ OPERATORS:
   * Is it supposed to generate visitor and listener code automatically?
 
 # 3. Analysis
-
-* **GRAMMAR**
+## 3.1 GRAMMAR ANALYSIS
 
 1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
   * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
@@ -51,177 +50,44 @@ OPERATORS:
 
   ![assignment_analysis](assignment_analysis.png)
 
-## 3.1 GWT and Project Structure
+## 3.2 Analysis Diagrams
 
-**Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
-- **server**. It is the "server part" of the web application.  
-- **shared**. It contains code that is shared between the client (i.e., web application) and the server.   
-- **nsheets**. It is the web application (i.e., Client).  
-- **util**. This is the same module as the one of EAPLI.  
-- **framework**. This is the same module as the one of EAPLI.   
+1 - Interpreting the already existing Classes and application flow I realized that to  travel between ParserTree nodes new methods were needed to visit new grammar rule nodes in class ExpressionEvalVisitor.
 
-From [GWT Overview](http://www.gwtproject.org/overview.html): *"The GWT SDK contains the Java API libraries, compiler, and development server. It lets you write client-side applications in Java and deploy them as JavaScript."*
+![ExpressionEvalVisitor_analysis](CD-FormulaEvalVisitor.png)
 
-Therefore:
-  - The project is totally developed in Java, event for the UI parts.
-  - GWT uses a technique know as "transpilation" to translate Java code to Javascript. This is totally transparent to the user
-  - A GWT application is comprised of "GWT modules" (see [GWT Tutorial](http://www.gwtproject.org/doc/latest/tutorial/create.html)). These GWT modules are described in .gwt.xml files.
-   The nsheets project contains a .gwt.xml file named nsheets.gwt.xml (nsheets/src/main/resources/pt/isep/nsheets/nsheets.gwt.xml). One of the important contents of the file is the specification of the entry point of the application. However, since the application uses the [GWTP framework](http://dev.arcbees.com/gwtp/) the entry point is automatically provided (no need to specify it in the .gwt.xml file). In this case what is specified is the GIN client module pt.isep.nsheets.client.gin.ClientModule:
-
-	    <extend-configuration-property name="gin.ginjector.modules"
-                                   value="pt.isep.nsheets.client.gin.ClientModule"/>
-
-   It is from this **ClientModule** that the application starts.
-   Another important content of a .gwt.xml file is setting the paths for translatable code, .i.e., java code that should be translated to javascript. Usually the default source path is the client subpackage underneath where the .gwt.xml File is stored. In this case every code inside package pt.isep.nsheets.client and pt.isep.nsheets.shared will be translated to javascript.
-
-	<!-- Specify the paths for translatable code                    -->
-    <source path='client'/>
-    <source path='shared'/>
-
-   The shared package is where shared code between server and client should reside. See [GWT - What to put in the shared folder?](https://stackoverflow.com/questions/5664601/gwt-what-to-put-in-the-shared-folder?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa) and also [using GWT RPC](http://www.gwtproject.org/doc/latest/tutorial/RPC.html).
-
-   In this project the shared, server and client (i.e, nsheets) code are separated also in Maven modules (but they could all be in the same project/maven module).
-
-## 3.2 Application Startup and GWTP
-
-As described before the entry point for the application is the class **pt.isep.nsheets.client.gin.ClientModule**.
-
-GWTP follows the MVP (Model-View-Presenter) pattern. It uses [GIN dependency injection](http://dev.arcbees.com/gwtp/core/presenters/gin-bindings.html) to put together the parts of each MVP. How the GWTP structures the application and uses GIN to bind all the required elements is described in [GWTP Beginner's Tutorial](http://dev.arcbees.com/gwtp/tutorials/index.html).
-
-We can see that **ClientModule** installs the base presenter of the application:
-
-	    install(new ApplicationModule());
-
-The **ApplicationModule** module install all the other modules of the application:
-
-	    install(new HomeModule());
-		install(new MenuModule());
-		install(new AboutModule());
-		install(new WorkbookModule());   
-
-Each module represents an MVP page in the application.
-
-In this MVP pattern each presenter defines a specific interface that is use to communicate with the UI (i.e., the View). Therefore the presenter can be fully isolated from dependencies related to the UI. For instance, the View interface that is defined by the ApplicationPresenter only has one method:
-
-	interface MyView extends View {
-    		void setPageTitle(String title, String description, String link, String specification);
-    }
-
-In this specific case the only type that is "shared" between Presenter and View is the String.
-
-The View class is where all the UI code should be implemented. In GWT it is possible to create UI elements programmatically (see [GWT Build the UI](http://www.gwtproject.org/doc/latest/tutorial/buildui.html)). The UI can also be described in .ui.xml files using [UIBinder](http://www.gwtproject.org/doc/latest/DevGuideUiBinder.html). The NSheets project is using [GWT Material Design](https://github.com/GwtMaterialDesign/gwt-material) and therefore all the UI widgets are from that library.
-
-In the case of the Application module we can see that there is a ApplicationView.ui.xml. This file declares some widgets. The attribute ui:field can be used to specify an id that can be then used to bind that element to a class in the code. For instance, in ApplicationView.ui.xml:
-
-	<m:MaterialPanel ui:field="panel">
-		<m:MaterialLabel ui:field="title" text="NSheets" fontSize="2.3em"/>
-		<m:MaterialLabel ui:field="description" text="A Sophisticated Web Spreadsheet Application." fontSize="1.1em"/>
-	</m:MaterialPanel>
-
-It is set the ui:field attribute for two existing labels. In the code (ApplicationView.java) one can bind to Widgets classes. For instance:
-
-	@UiField
-    MaterialLabel title, description;
-
-Then we can use this instances to access the widgets link in:
-
-	@Override
-	public void setPageTitle(String title, String description, String link, String specification) {
-        this.title.setText(title);
-        this.description.setText(description);
-        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.title);
-        new MaterialAnimation().transition(Transition.BOUNCEINLEFT).animate(this.description);
-    }    
-
-## 3.3 Server and RPC
-
-The Home page displays what seems to be Workbooks that should reside in the server.
-
-In the method **onReveal** the Home presenter invokes a WorkbookService asynchronously. It uses the base communication mechanism of GWT called [GWT RPC](http://www.gwtproject.org/doc/latest/tutorial/RPC.html).
-
-Basically, it requires the definition of an interface for the service. In this case:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-	}
-
-Note: The @RemoteServiceRelativePath annotation associates the service with a default path relative to the module base URL.
-
-When an RPC is invoked since it is always executed asynchronously we have to prove a callback:
-
-	// Make the call to the stock price service.
-	workbooksSvc.getWorkbooks(callback);
-
-The callback is simple a class that provides two methods, one for a successful result and the other for a failure:
-
-	// Set up the callback object.
-	AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
-		public void onFailure(Throwable caught) {
-			// TODO: Do something with errors.
-		}
-		public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
-			refreshView(result);
-		}
-	};
-
-Since the interface is code that must be accessed by both server and client code it should reside in the **shared** project.
-
-The interface must be implemented in the **server**. The implementation can be very simple, like the one presented in the project. In this case the server simply returns always the same objects:
-
-	@Override
-	public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
-	    ArrayList<WorkbookDescriptionDTO> workbooks = new ArrayList<WorkbookDescriptionDTO>();
-	    WorkbookDescriptionDTO wb=new WorkbookDescriptionDTO("workbook1", "Este workbook contem uma lista...");
-	    workbooks.add(wb);
-		WorkbookDescriptionDTO wb2=new WorkbookDescriptionDTO("workbook notas", "Este workbook contem notas de disciplinas...");
-	    workbooks.add(wb2);	    
-		return workbooks;
-	}
-
-Since the service is a servlet it must be declared in the **web.xml** file of the project (see file nsheets/src/main/webapp/WEB-INF/web.xml).
-
-	<!-- Servlets for the workbooks -->
-	<servlet>
-		<servlet-name>workbooksServiceServlet</servlet-name>
-		<servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>workbooksServiceServlet</servlet-name>
-		<!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-		<url-pattern>/nsheets/workbooksService</url-pattern>
-	</servlet-mapping>
+**CD-FormulaEvalVisitor-** methods in red are the ones created to visitLoopFor node and visitAssignment node of the ParserTree.
 
 
-## 3.4 Analysis Diagrams
+2 - After creating the methods mentioned in point 1 of 3.2 section new Classes were needed to process the terminal nodes visited in the visitLoopFor(LoopForContext ctx) and visitAssignment(AssignmentContext ctx) visits.
 
-The main idea for the "workflow" of this feature increment.
+**Assignment()**
+Because an Assignment had binary characteristics (left and right operands), implementing the already existing BinaryOperator interface in Class Assignment was the solution I implemented.
 
-**Use Cases**
+Since Assignment implements BinaryOperator, it's class should have the following methods available:
 
-![Use Cases](us.png)
+![AssignmentClass_analysis](Assignment Class.png)
 
-- **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
+**CD-Assignment-** Method applyTo(Expression leftOperand, Expression rightOperand), is one the two methods refered in point 2 that are responsible for the processing of  the terminalNodes at the end of the visit and to return the result of the Expression.
 
-**Domain Model (for this feature increment)**
 
-![Domain Model](dm.png)
+**For()**
+For this specific class I realized that it's behaviour would be that of a function. Since the for cicle should visit more than one rule, an array of Expressions should be created in order to process the for cicle and its result.
+Because the Fuction interface had an existing method to process the applyTo(Expressions[]arguments), the class For should implement said interface.
 
-- **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
+![loopFor_analysis](loopFor.png)
 
-**System Sequence Diagrams**
+**CD-For-** Method applyTo(Expression[] arguments), is the one responsible for the processing of the BinaryOperators received in the arguments array. The binaryOperators for the expression **=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}** would be related to the following grammar rules:
+  * arguments[0]-->Assignment
+  * arguments[1]-->Comparison
+  * arguments[2]-->Assignment
+  * arguments[3]-->Assignment
 
-**For US1**
-
-![Analysis SD](analysis.png)
-
-**For US2**
-
-![Analysis SD](analysis2.png)
 
 # 4. Design
 
-*In this section you should present the design solution for the requirements of this sprint.*
+1 - Interpreting the application flow, in this section I will show some Sequence Diagrams to explain how a formula will be processed and interpreted in Java.
+
 
 
 
