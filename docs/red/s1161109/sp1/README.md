@@ -71,13 +71,13 @@ The main idea for the "workflow" of this feature increment.
 
 - **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
 
-
+**For US1**
 ![Domain Model](UseCreate.jpg)
-
+**For US2**
 ![Domain Model](UseEdit.jpg)
-
+**For US3**
 ![Domain Model](UseGet.jpg)
-
+**For US4**
 ![Domain Model](delete.jpg)
 
 - **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
@@ -86,19 +86,19 @@ The main idea for the "workflow" of this feature increment.
 
 **For US1**
 
-![Analysis SD](analysis.jpg)
+![Analysis SD](add.jpg)
 
 **For US2**
 
-![Analysis SD](analysis2.jpg)
+![Analysis SD](edit.jpg)
 
 **For US3**
 
-![Analysis SD](analysis2.jpg)
+![Analysis SD](get.jpg)
 
 **For US4**
 
-![Analysis SD](analysis2.jpg)
+![Analysis SD](deletel.jpg)
 
 # 4. Design
 
