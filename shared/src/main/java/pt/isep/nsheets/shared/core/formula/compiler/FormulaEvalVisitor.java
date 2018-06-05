@@ -160,7 +160,7 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
         Token t = (Token) ctx.getChild(0).getPayload();
         try {
             if (t.getType() == FormulaParser.VARIABLE){
-                return new VariableReference(cell.getFormula(), t.getText());
+                return new VariableReference(cell, t.getText());
             }
             else if (ctx.getChildCount() == 3) {
                 //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());

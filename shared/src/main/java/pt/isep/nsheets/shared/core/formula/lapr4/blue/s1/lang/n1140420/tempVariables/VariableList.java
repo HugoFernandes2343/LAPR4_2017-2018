@@ -27,4 +27,12 @@ public class VariableList {
     public void addVariable(Variable v){
         variableList.put (v.getName(), v);
     }
+    
+    public boolean contains (String name){
+        return variableList.containsKey(name);
+    }
+    
+    public Variable get (String name){
+        return variableList.get(name);
+    }
 }

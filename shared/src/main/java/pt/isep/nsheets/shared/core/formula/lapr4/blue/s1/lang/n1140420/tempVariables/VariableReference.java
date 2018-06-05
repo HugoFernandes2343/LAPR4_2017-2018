@@ -25,20 +25,19 @@ public class VariableReference implements Expression{
     private final String name;
     
     /**
-     * The Formula this "VariableReference" is from
+     * The Cell this "VariableReference" is from
      */
-    private final Formula formula;
+    private final Cell cell;
     
     /**
      * The actual Variable referenced by this
      */
     private Variable v;
     
-    public VariableReference(Formula formula, String name) {
+    public VariableReference(Cell cell, String name) {
         this.name = name;
-        this.formula = formula;
-        this.v = new Variable(name, new Value(0)); //Start with "0" by default
-        formula.addTempVariable(v);
+        this.cell = cell;
+        this.v = ((CellImpl)cell).addVariable(name);
     }
 
     public void setVariableValue (Value value){
