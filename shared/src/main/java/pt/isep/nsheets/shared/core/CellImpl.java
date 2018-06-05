@@ -34,6 +34,8 @@ import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
 import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
@@ -76,7 +78,12 @@ public class CellImpl implements Cell {
 	/** The cell extensions that have been instantiated */
 	private transient Map<String, CellExtension> extensions = 
 		new HashMap<String, CellExtension>();
-
+        
+        /**
+         * List of Variables in this Cell
+         */
+        private VariableList variableList;
+        
 	/**
 	 * Creates a new cell at the given address in the given spreadsheet.
 	 * (not intended to be used directly).
@@ -203,12 +210,23 @@ public class CellImpl implements Cell {
 	private void storeContent(String content) throws FormulaCompilationException {
 		// Parses formula
 		Formula formula = null;
+                
+                /**
+                 * This magical "compile()" will internally (side-effects, woo!)
+                 * update "this" cell to have any Temp Variables found, but NOT
+                 * the formula
+                 */
 		if (content.length() > 1)
 			formula = FormulaCompiler.getInstance().compile(this, content);
 
 		// Stores content and formula
 		this.content = content;
 		this.formula = formula;
+                
+                /*
+                *Only at this stage will Formula contain actual Variables
+                */
+                this.formula.setTempVariableList(this.variableList);
 		updateDependencies();
 	}
 
@@ -435,4 +453,29 @@ public class CellImpl implements Cell {
 //		for (CellExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
+        
+        /**
+         * 1140420 Rodrigo, Sp1 Lang02.1.
+         * Created this method directly in the implementation (instead of the "Cell" interface)
+         * because I don't want to screw up anyone else's work this late
+         * This method determines if the Variable with the given "name" already
+         * exists or not, returning it if so.
+         * @param name
+         * @return 
+         */
+        public Variable addVariable(String name) {
+            if (variableList == null) { //If this is the 1st Variable
+                variableList = new VariableList();
+            }
+
+            Variable v;
+            if (!variableList.contains(name)) { //If the Variable is new
+                v = new Variable(name, new Value(0.0));
+                variableList.addVariable(v);
+            } else {
+                v = variableList.get(name);
+            }
+
+            return v;
+        }
 }

@@ -184,42 +184,46 @@ public class SpreadsheetImpl implements Spreadsheet {
 	}
 
 	private void sortAscending(SortedSet<Cell> sort) {
-        int rows=sort.last().getAddress().getRow()-sort.first().getAddress().getRow();
-        int columns=sort.last().getAddress().getColumn()-sort.first().getAddress().getColumn();
-        Cell list[]=(Cell[]) sort.toArray();
-            for(int j=0;j<sort.size();j++){
-                for(int k=1;k<sort.size()-1;k++){
-                    if(list[j].getContent().compareTo(list[k].getContent())>0){
-                        Cell temp=list[j];
-                        list[j]=list[k];
-                        list[k]=temp;
-                    }
-                }
-
+        int i=0;
+        Cell list[]=new Cell[sort.size()];
+        for(Cell cell:sort){
+        	list[i]=cell;
+        	i++;
+		}
+		for(int j=0;j<sort.size();j++){
+        	for(int k=1;k<sort.size()-1;k++){
+        		if(list[j].getContent().compareTo(list[k].getContent())>0){
+        			Cell temp=list[j];
+        			list[j]=list[k];
+        			list[k]=temp;
+        		}
+        	}
         }
 		updateCells(list);
 	}
 
 	private void sortDescending(SortedSet<Cell> sort) {
-        int rows=sort.last().getAddress().getRow()-sort.first().getAddress().getRow();
-        int columns=sort.last().getAddress().getColumn()-sort.first().getAddress().getColumn();
-        Cell list[]=(Cell[]) sort.toArray();
-            for(int j=0;j<sort.size();j++){
-                for(int k=1;k<sort.size()-1;k++) {
-					if (list[j].getContent().compareTo(list[k].getContent()) < 0) {
-						Cell temp = list[j];
-						list[j] = list[k];
-						list[k] = temp;
-					}
+		int i=0;
+		Cell list[]=new Cell[sort.size()];
+		for(Cell cell:sort){
+			list[i]=cell;
+			i++;
+		}
+		for(int j=0;j<sort.size();j++){
+			for(int k=1;k<sort.size()-1;k++) {
+				if (list[j].getContent().compareTo(list[k].getContent()) < 0) {
+					Cell temp = list[j];
+					list[j] = list[k];
+					list[k] = temp;
 				}
-
+			}
         }
 		updateCells(list);
 	}
 
 	private void updateCells(Cell list[]){
 	    for(int i=0;i<list.length;i++){
-	        cells.put(list[i].getAddress(),list[i]);
+	        cells.replace(list[i].getAddress(),list[i]);
         }
     }
 

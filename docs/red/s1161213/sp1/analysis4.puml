@@ -1,0 +1,22 @@
+@startuml  analysis2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : choses date in the calendar
+
+Browser ->> Server : searchEventsByDate()
+
+database Database
+
+Server -> Database : fetch
+
+Server -->> Browser : return
+
+Browser -> Browser : display events for that day
+
+@enduml
