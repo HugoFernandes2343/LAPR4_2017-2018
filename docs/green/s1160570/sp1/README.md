@@ -37,105 +37,7 @@ US2 - As an application user, I wish to be able to log in to access my workbooks
 
 # 4. Design
 
-## 4.1. Tests
-
-*In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
-
-Regarding tests we try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part). Therefore we focus on the domain classes and also on the services provided by the server.
-
-**Domain classes**
-
-For the Domain classes we will have a class that represents the entity **WorkbookDescription**. This entity will have attributes that, for the moment, will be based on the class **WorkbookDescriptionDTO**:
-
-	- name (string)
-	- description (string)
-
-**Test:** We should ensure that a WorkbookDescription can be created when all the attributes are set.  
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		System.out.println("ensureNullIsNotAllowed");
-		WorkbookDescription instance = new WorkbookDescription(null, null);
-	}
-
-**Services/Controllers**
-
-For the services the application already has a service specified in the interface **WorkbooksService**:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-	}
-
-This method seems to be sufficient for supporting US1 but not US2.
-
-For US2 we need a method that can be used to create a new WorkbookDescription given a WorkbookDescriptionDTO.
-
-The proposal is:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-		WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
-	}
-
-Tests:  
-- The tests on the controllers require the presence of a database.  
-- We will use the database in memory (H2).  
-- We will have a *controller* from adding new WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
-- We will have a *controller* from listing WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
-
-Controller **AddWorkbookDescriptionController**
-
-**Test:** Verify the normal creation of an WorkbookDescription.  
-
-	@Test
-	public void testNormalBehaviour() throws Exception {
-		System.out.println("testNormalBehaviour");
-		final String name = "Workbook1";
-		final String description = "Description for Workbook1";
-		final WorkbookDescription expected = new WorkbookDescription(name, description);
-		AddWorkbookDescriptionController ctrl = new AddWorkbookDescriptionController();
-		WorkbookDescription result = ctrl.addWorkbookDescription(expected.toDTO());
-		assertTrue("the added WorkbookDescription does not have the same data as input", expected.sameAs(result));
-	}
-
-Controller **ListWorkbookDescriptionController**
-
-Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDING) to ensure the test methods are executed in order. This is useful since the memory database will have state changing between tests.
-
-**Test:** At the beginning of the tests the memory database should be empty, so listWorkbookDiscriptions should return an empty set.
-
-	   @Test
-	   public void testAensureGetWorkbooksEmpty() {
-		   System.out.println("testAensureGetWorkbooksEmpty");
-		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
-		   Iterable<WorkbookDescription> wbs=ctrl.listWorkbookDescriptions();
-		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
-	   }
-
-**Test:** If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks().
-
-		@Test
-		public void testBtestDatabaseInsertion() throws Exception {
-			System.out.println("testBtestDatabaseInsertion");
-			final String name = "Workbook1";
-			final String description = "Description for Workbook1";
-			final WorkbookDescription expected = new WorkbookDescription(name, description);
-			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
-			WorkbookDescription result = ctrlAdd.addWorkbookDescription(expected.toDTO());
-			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
-			Iterable<WorkbookDescription> wbs=ctrlList.listWorkbookDescriptions();
-			assertTrue("the added WorkbookDescription is not in the database", wbs.iterator().hasNext());
-		}
-
-**Test Coverage**  
-- The actual coverage for domain classes: 61%
-- The actual coverage for application(controller) classes: 100%
-
-- TODO: Add more tests to increase the coverage of the domain class.
-
-## 4.2. Requirements Realization
+## 4.1. Requirements Realization
 
 *In this section you should present the design realization of the requirements.*
 
@@ -148,8 +50,8 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 Notes:  
 - The diagram only depicts the less technical details of the scenario;  
 - For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
-- **WorkbookServices** realizes the GWT RPC mechanism;  
-- **ListWorkbookDescriptionController** is the *use case controller*;  
+- **UserServices** realizes the GWT RPC mechanism;  
+- **LoginController** is the *use case controller*;  
 - **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription.
 
 **For US2**

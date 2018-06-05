@@ -68,7 +68,7 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
 
         LoginController ctrl = new LoginController();
 
-        return ctrl.User(new Email(email), new Password(password)).toDTO();
+        return ctrl.getUser(new Email(email), new Password(password)).toDTO();
 
     }
 
