@@ -1,4 +1,4 @@
-**David Santiago** (s1161109) - Sprint 1 - Core02.1
+**David Santiago** (s1161109) - Sprint 1 - Core07.1
 ===============================
 
 # 1. General Notes
