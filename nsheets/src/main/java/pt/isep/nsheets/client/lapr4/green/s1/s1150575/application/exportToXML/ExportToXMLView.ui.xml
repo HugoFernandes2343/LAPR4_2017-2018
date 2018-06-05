@@ -26,7 +26,6 @@
                 <m:MaterialTextBox ui:field="textBox1" label="Please insert the cell you'd like to start importing"/>
                 <m:MaterialTextBox ui:field="textBox2" label="Please insert the cell you'd like to finish importing"/>
                 <m:MaterialPanel>
-                    <m:MaterialButton ui:field="btnPartFields" text="Apply"></m:MaterialButton>
                     <m:MaterialButton ui:field="btnExport" text="Export"></m:MaterialButton>
                 </m:MaterialPanel>
             </m:MaterialPanel>

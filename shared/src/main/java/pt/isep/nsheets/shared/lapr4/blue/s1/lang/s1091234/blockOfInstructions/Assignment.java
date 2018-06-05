@@ -13,6 +13,7 @@ import pt.isep.nsheets.shared.core.formula.BinaryOperator;
 import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.lang.CellReference;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
 
 /**
  *
@@ -49,7 +50,30 @@ public class Assignment implements BinaryOperator {
                 Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
             }
             return value;
-        } else {
+            
+        //Rodrigo 1140420 was here for this "else if"
+        } else if (leftOperand instanceof VariableReference) {
+            Value rightOp = rightOperand.evaluate();
+            switch (rightOp.getType()) {
+                case NUMERIC:                    
+                    ((VariableReference) leftOperand).setVariableValue(new Value(rightOp.toDouble()));
+                    return new Value(rightOp.toDouble());
+
+                case BOOLEAN:
+                    ((VariableReference) leftOperand).setVariableValue(new Value(rightOp.toBoolean()));
+                    return new Value(rightOp.toBoolean());
+                case DATE:
+                    ((VariableReference) leftOperand).setVariableValue(new Value(rightOp.toDate()));
+                    return new Value(rightOp.toDate());
+                case TEXT:
+                    ((VariableReference) leftOperand).setVariableValue(new Value(rightOp.toText()));
+                    return new Value(rightOp.toText());
+                default:
+                    throw new IllegalValueTypeException(rightOp, Value.Type.NUMERIC);
+            }
+        }
+     
+        else {
             throw new UnsupportedOperationException("Not supported yet.");
         }
     }

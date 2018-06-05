@@ -26,6 +26,7 @@ import pt.isep.nsheets.shared.core.formula.FunctionCall;
 import pt.isep.nsheets.shared.core.formula.Literal;
 import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.UnaryOperation;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
 
 /**
  * A default implementation of an expression visitor, that simply visits all
@@ -58,6 +59,10 @@ public abstract class AbstractExpressionVisitor implements ExpressionVisitor {
 		return reference;
 	}
 
+        public Object visitVariableReference(VariableReference varReference) {
+		return varReference;
+	}
+        
 	public Object visitFunctionCall(FunctionCall call) {
 		for (Expression argument : call.getArguments())
 			argument.accept(this);

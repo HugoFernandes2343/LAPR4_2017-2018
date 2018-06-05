@@ -43,12 +43,16 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public RequestRepository requests() {
-        return new JpaRequestRepository(this.settings);
+    public TagsRepository tags() {
+        return new JpaTagsRepository(this.settings);
     }
 
     @Override
     public ContactRepository contacts() {
         return new JpaContactRepository(this.settings);
+    }
+
+    public RequestRepository requests() {
+        return new JpaRequestRepository(this.settings);
     }
 }

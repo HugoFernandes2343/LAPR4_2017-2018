@@ -21,6 +21,7 @@ import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialToast;
 
 /**
  *
@@ -40,8 +41,6 @@ public class ExportToXMLView extends Composite {
     MaterialRadioButton radioButtonWorksheet;
     @UiField
     MaterialRadioButton radioButtonPartOfWorksheet;
-    @UiField
-    MaterialButton btnPartFields;
     @UiField
     MaterialButton btnExport;
 
@@ -79,12 +78,8 @@ public class ExportToXMLView extends Composite {
         textBox2.setEnabled(false);
         window.add(textBox1);
         window.add(textBox2);
-        btnPartFields.setWaves(WavesType.LIGHT);
-        btnPartFields.setSize(ButtonSize.MEDIUM);
-        btnPartFields.setEnabled(false);
         MaterialPanel p3 = new MaterialPanel();
         p3.setTextAlign(TextAlign.LEFT);
-        p3.add(btnPartFields);
         window.add(p3);
         btnExport.setWaves(WavesType.LIGHT);
         btnExport.setSize(ButtonSize.MEDIUM);
@@ -92,17 +87,33 @@ public class ExportToXMLView extends Composite {
         p4.setTextAlign(TextAlign.RIGHT);
         p4.add(btnExport);
         window.add(p4);
-        
+
         radioButtonPartOfWorksheet.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> event) {
                 textBox1.setEnabled(event.getValue());
                 textBox2.setEnabled(event.getValue());
-                btnPartFields.setEnabled(event.getValue());
             }
         });
-
+        
+        btnExport.addClickHandler(event -> {
+            if(radioButtonPartOfWorksheet.isChecked() && (textBox1.getText().equals("") | textBox2.getText().equals(""))){
+                MaterialToast.fireToast("Part Of a Worksheet selected");
+                MaterialToast.fireToast("Please indicate a range");
+            } else if(radioButtonPartOfWorksheet.isChecked() && !textBox1.getText().equals("") && !textBox2.getText().equals("")){
+                MaterialToast.fireToast("Starting cell: "+textBox1.getText());
+                MaterialToast.fireToast("Ending cell: "+textBox2.getText());
+            }else if(radioButtonWorkbook.isChecked()){
+                MaterialToast.fireToast("Workbook selected");
+            } else if(radioButtonWorksheet.isChecked()){
+                MaterialToast.fireToast("Worksheet selected");
+            } else {
+                MaterialToast.fireToast("Please select an option!");
+            }
+            
+        });
+        
         window.open();
     }
 
@@ -112,10 +123,6 @@ public class ExportToXMLView extends Composite {
 
     public MaterialTextBox getTextBox2() {
         return textBox2;
-    }
-
-    public MaterialButton getBtnPartFields() {
-        return btnPartFields;
     }
 
     public MaterialButton getBtnExport() {
