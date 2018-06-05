@@ -50,40 +50,30 @@ For this project i had to understand how the application works and also understa
 
 **For US1**
 
-![Analysis SD](analysis.png)
+![Analysis SSD](analysis.png)
 
 # 4. Design
 
 ## 4.1. Tests
 
-**Domain Classes**
-
-- Form
-		pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms
-		TestForm
-
-
-- FormEditorController
-		pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms
-		TestFormEditorController
-
+- No tests were implemented because when the user clicks on the export button it already downloads the file (.csv).
 
 ## 4.2. Requirements Realization
 
 **For US1**
 
-![SD US1](design1.png)
+![SD](design.png)
 
 Notes:  
 
-- **WorkBookView** is the view whe appears the button and its implementation ;    
+- **WorkBookView** is the view whe appears the button and its implementation;    
 - **ExportToCSV** is the class that has the methods to export;
 - **Workbook** is a class.
 
 
 ## 4.3. Classes
 
-- **WorkBookView** is the view whe appears the button and its implementation ;    
+- **WorkBookView** is the view whe appears the button and its implementation;    
 - **ExportToCSV** is the class that has the methods to export;
 - **Workbook** is a class.
 -	**WorkbookView.ui** - XML scheme of the workbook view.
