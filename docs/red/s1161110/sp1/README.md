@@ -42,9 +42,6 @@ For this feature creation, since it is the first one to be developed regarding s
 
 # 4. Design
 
-*In this section you should present the design solution for the requirements of this sprint.*
-In terms of design there is only the need to add new methods on class SpreadsheetImpl for cell sorting with diferent configurations
-
 
 ## 4.1. Tests
 
@@ -56,60 +53,27 @@ Regarding tests we try to follow an approach inspired by test driven development
 
 For the Domain classes i will have to test the sorting methods added to class that represents the entity **Spreadsheet**. This entity will have methods that, for the moment, will be based on the class **SpreadsheetImpl**:
 
-  - sortAscendingNumber(Cell matrix[][])
-  - sortDescendingNumber(Cell matrix[][])
-  - sortAscendingText(Cell matrix[][])
-  - sortDescendingText(Cell matrix[][])
-  - sortAscendingDate(Cell matrix[][])
-  - sortDescendingDate(Cell matrix[][])
-
 **Test1:** I should ensure that are the cells are of the same data type(number(float)). Ascending case
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureOnlyNumberIsAllowedOnAscending {
-		System.out.println("ensureOnlyNumberIsAllowedOnAscending");
-		Cell[][] instance = spreadsheet.sortAscendingNumber(matrix);
-	}
 
 **Test2:** I should ensure that are the cells are of the same data type(text(string)). Ascending case
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureOnlyTextIsAllowedOnAscending {
-		System.out.println("ensureOnlyTextIsAllowedOnAscending");
-		Cell[][] instance = spreadsheet.sortAscendingText(matrix);
-	}
+
 
 **Test3:** I should ensure that are the cells are of the same data type(date). Ascending case
 
-  	@Test(expected = IllegalArgumentException.class)
-  		public void ensureOnlyDateIsAllowedOnAscending {
-  		System.out.println("ensureOnlyDateIsAllowedOnAscending");
-  		Cell[][] instance = spreadsheet.sortAscendingDate(matrix);
-  	}
+
 
 **Test4:** I should ensure that are the cells are of the same data type(number(float)). Descending case
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureOnlyNumberIsAllowedOnAscending {
-    	System.out.println("ensureOnlyNumberIsAllowedOnAscending");
-    	Cell[][] instance = spreadsheet.sortAscendingNumber(matrix);
-    }
+
 
 **Test5:** I should ensure that are the cells are of the same data type(text(string)). Descending case
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureOnlyTextIsAllowedOnDescending {
-    	System.out.println("ensureOnlyTextIsAllowedOnDescending");
-    	Cell[][] instance = spreadsheet.sortDescendingText(matrix);
-    }
+
 
 **Test6:** I should ensure that are the cells are of the same data type(date). Descending case
 
-      @Test(expected = IllegalArgumentException.class)
-      	public void ensureOnlyDateIsAllowedOnDescending {
-      	System.out.println("ensureOnlyDateIsAllowedOnDescending");
-      	Cell[][] instance = spreadsheet.sortDescendingDate(matrix);
-      }
 
 
 
@@ -117,72 +81,29 @@ For the Domain classes i will have to test the sorting methods added to class th
 
 For the services the application already has a service specified in the interface **WorkbooksService**:
 
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-	}
-
 This method seems to be sufficient for supporting US1 but not US2.
 
 For US2 we need a method that can be used to create a new WorkbookDescription given a WorkbookDescriptionDTO.
 
 The proposal is:
 
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-		WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
-	}
+
 
 Tests:  
-- The tests on the controllers require the presence of a database.  
-- We will use the database in memory (H2).  
-- We will have a *controller* from adding new WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
-- We will have a *controller* from listing WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
+-
 
 Controller **AddWorkbookDescriptionController**
 
 **Test:** Verify the normal creation of an WorkbookDescription.  
 
-	@Test
-	public void testNormalBehaviour() throws Exception {
-		System.out.println("testNormalBehaviour");
-		final String name = "Workbook1";
-		final String description = "Description for Workbook1";
-		final WorkbookDescription expected = new WorkbookDescription(name, description);
-		AddWorkbookDescriptionController ctrl = new AddWorkbookDescriptionController();
-		WorkbookDescription result = ctrl.addWorkbookDescription(expected.toDTO());
-		assertTrue("the added WorkbookDescription does not have the same data as input", expected.sameAs(result));
-	}
 
 Controller **ListWorkbookDescriptionController**
 
-Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDING) to ensure the test methods are executed in order. This is useful since the memory database will have state changing between tests.
 
 **Test:** At the beginning of the tests the memory database should be empty, so listWorkbookDiscriptions should return an empty set.
 
-	   @Test
-	   public void testAensureGetWorkbooksEmpty() {
-		   System.out.println("testAensureGetWorkbooksEmpty");
-		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
-		   Iterable<WorkbookDescription> wbs=ctrl.listWorkbookDescriptions();
-		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
-	   }
 
 **Test:** If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks().
-
-		@Test
-		public void testBtestDatabaseInsertion() throws Exception {
-			System.out.println("testBtestDatabaseInsertion");
-			final String name = "Workbook1";
-			final String description = "Description for Workbook1";
-			final WorkbookDescription expected = new WorkbookDescription(name, description);
-			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
-			WorkbookDescription result = ctrlAdd.addWorkbookDescription(expected.toDTO());
-			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
-			Iterable<WorkbookDescription> wbs=ctrlList.listWorkbookDescriptions();
-			assertTrue("the added WorkbookDescription is not in the database", wbs.iterator().hasNext());
-		}
 
 **Test Coverage**  
 - The actual coverage for domain classes: 61%
@@ -240,8 +161,6 @@ For this concern we decided to use a Material Widget called Material FAB (Floati
 
 We updated the HomeView.ui.xml accordingly and declare the element with a tag *ui:field="newWorkbookButton"*. In the corresponding class View (i.e., HomeView) we bind that button to the corresponding widget class: 	
 
-	@UiField
-	MaterialButton newWorkbookButton;
 
 We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application.
 
@@ -249,10 +168,6 @@ We chose to provide our click event globally but to simple use the click event h
 
 Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
 
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-		void addClickHandler(ClickHandler ch);
-	}
 
 Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
 
@@ -261,7 +176,6 @@ Then, we implemented the *addClickHandler* in the HomeView class and call this m
 We followed the recommended organization for packages:  
 
 The code for this sprint:  
-Project **server**    
 
 
 Project **shared**  
@@ -272,18 +186,45 @@ Project **NShests**
 
 # 6. Integration/Demonstration
 
-*In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
+I worked 2 days with my colleague on the Core02.1, we had little success but we tried to interact to design a program that make sense.
+My use Case functional idea is shown in this picture:
+![Functional](image.png)
 
 # 7. Final Remarks
 
-*In this section present your views regarding alternatives, extra work and future work on the issue.*
+In conclusion, I wasn't able o finish this Use Case,
 
 Some Questions/Issues identified during the work in this feature increment:
 
-1. The method getWorkbooks in the WorkbooksService returns an ArrayList. Maybe we should not bind the result to a specific collection implementation.
+1. Do this styles need to be persisted?
+2. How to interact client and shared, when shared needs to save gwt objects?
+
 
 # 8. Work Log
+Tuesday - May 29
+First day of work, I started by clonning the Repository. There was when the problems started: Intellij configurations errors, missing maven dependencies and some other errors.
 
+Wednesday - May 30
+On this day I solved all the problems and the team finally started the work together. I first analysed my Use Case and started to understand how would be the building of a plugin/extension on this project in particular. I started to understand that it would be a lot harder and I decided to help Core02.1 because that was the extension manager to see if I could understand more about extensions.
+
+Thursday (Holiday)- May 31
+I spent the day trying to help my colleague on the Core 02.1, research on plugin and extension use on java code was not very easy, and we spent a lot of time in the wrong path.
+One post on the moodle forum (https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=16860) made us understand what was the right path to work on. Later that day I decided to go back to my use case, with some ideas of how it would work.
+
+Friday - June 1
+This day was dedicated for gwt research, I never used it so there were too many problems in understanding the use of this framework and the interation with other parts of the code.
+
+Saturday - June 2
+I started the day by making the requirements and analysis of the use case.
+Decided to try to create an UI to test my knowledge in gwt, I made a button in the workbook page, and start the popup window to select the changes (more about the fucntionality on the documentation above).
+
+Sunday -  June 3
+Several problems on the UI implementation, as I already started the design and I wasn't sure it would work I tried more research.
+
+Monday - June 4
+The popup window started working, but the dropdown was causing several problems that wouldn't allow me to finish on time. After the meeting I decided to focus on the documentation.
+
+Tuesday - Delivery Day -  June 5
 
 
 Commits:
