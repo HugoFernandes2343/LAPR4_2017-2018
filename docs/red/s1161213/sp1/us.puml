@@ -5,9 +5,10 @@ skinparam packageStyle rect
 skinparam defaultFontName FG Virgil
 skinparam shadowing false
 
-User -> (US3: Remove Event)
-User -> (US2: Edit Event)
-User -> (US1: Create Event)
+User -> (US03: Display Events)
+User -> (US02: Remove Event)
+User -> (US02: Edit Event)
+User -> (US01: Create Event)
 
 
 @enduml

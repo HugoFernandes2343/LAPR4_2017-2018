@@ -1,0 +1,42 @@
+@startuml  design4.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary CalendarView
+control CalendarPresenter
+control ListEventsController
+entity EventRepository
+entity Event
+database Database
+
+box "NSheets Client"
+participant CalendarView
+participant CalendarPresenter
+end box
+
+box "Server"
+participant ListEventsController
+participant Event
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> CalendarPresenter : selects date in the calendar to see events
+CalendarPresenter --> ListEventsController : create()
+CalendarPresenter -> ListEventsController : listEvents(Date date)
+ListEventsController --> EventRepository : create()
+ListEventsController -> EventRepository : findByDateAndUser(User u, Date date)
+EventRepository  -> Database : fetch
+
+ListEventsController ->> CalendarPresenter : onSuccess()
+CalendarPresenter -> CalendarView : setContents()
+CalendarView --> User: Shows success
+
+@enduml

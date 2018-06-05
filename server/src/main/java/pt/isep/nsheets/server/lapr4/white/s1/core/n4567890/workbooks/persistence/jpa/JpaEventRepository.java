@@ -7,8 +7,10 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.jpa.*;
 
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class JpaEventRepository extends NSheetsJpaRepositoryBase<Event, Long> implements EventRepository {
@@ -18,12 +20,21 @@ public class JpaEventRepository extends NSheetsJpaRepositoryBase<Event, Long> im
     }
 
     public void deleteEvent(Long id){
-        super.deleteByPK(id);
+        deleteByPK(id);
     }
 
     public Event findById(Long id){
-        Optional<Event> e = super.findOne(id);
+        Optional<Event> e = findOne(id);
 
         return e.get();
+    }
+
+    @Override
+    public List<Event> findByUserAndDates(User u, Date date) {
+         HashMap<String, Object> params = new HashMap<>();
+         params.put("u", u);
+         params.put("date", date);
+         List<Event> ret = match("e.user = u and e.date = date", params);
+         return ret;
     }
 }
