@@ -18,31 +18,24 @@ US2 - As an application user, I wish to be able to log in to access my workbooks
 
 **Use Cases**
 
-![Use Cases](us.png)
+![Use Cases](Use Case Diagram1.jpg)
 
 - **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](dm.png)
+![Domain Model](Classe diagram.jpg)
 
-- **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
+- **Domain Model**. Since we found no specific requirements for the structure of User we follow the Structure of the existing DTO (UserDTO).
 
 **System Sequence Diagrams**
 
 **For US1**
 
-![Analysis SD](analysis.png)
+![Analysis SD](Sequence Diagram.jpg)
 
-**For US2**
-
-![Analysis SD](analysis2.png)
 
 # 4. Design
-
-*In this section you should present the design solution for the requirements of this sprint.*
-
-
 
 ## 4.1. Tests
 
