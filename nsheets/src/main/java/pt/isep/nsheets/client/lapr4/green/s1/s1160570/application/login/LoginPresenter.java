@@ -26,6 +26,8 @@ import pt.isep.nsheets.shared.services.UsersServiceAsync;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
+    CurrentUser user;
+
     interface MyView extends View {
 
         MaterialTextBox getTextEmail();
@@ -45,6 +47,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, CurrentUser currentUser) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
+        this.user = currentUser;
+
         getView().addClickHandler((ClickEvent event) -> {
 
             UsersServiceAsync usersSvc = GWT.create(UsersService.class);
@@ -59,11 +63,12 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
                 @Override
                 public void onSuccess(UserDTO result) {
-
+                    user.setCurrentUser(result);
+                    user.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
 
                     PlaceRequest placeRequest = new PlaceRequest.Builder()
-                            .nameToken(NameTokens.about)
+                            .nameToken(NameTokens.home)
                             .build();
                     placeManager.revealPlace(placeRequest);
                 }
@@ -72,6 +77,10 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
             usersSvc.getUser(getView().getTextEmail().getText(), getView().getTextPassword().getText(), callback);
         });
 
+    }
+
+    public CurrentUser getUser() {
+        return user;
     }
 
     @Override

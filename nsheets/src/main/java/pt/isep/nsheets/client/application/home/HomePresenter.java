@@ -25,16 +25,14 @@ import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialLabel;
 import org.h2.message.DbException;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.WorkbookService;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookRepository;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
-import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
 
@@ -47,13 +45,15 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         void setContents(ArrayList<Workbook> contents);
 
         void addClickHandler(ClickHandler ch);
+
         
+            
+
 //        void renameClickHandler( ClickHandler ch);
 //
 //        void deleteClickHandler(ClickHandler ch);
-        
         MaterialCardTitle getWorkbookTitle();
-        
+
         MaterialLabel getWorkbookDescription();
     }
 
@@ -74,22 +74,19 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 //            w.setName();
 //            getView().getWorkbookTitle().setText("novo");
 //        });
-
-
         this.view.addClickHandler((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
             AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error creating Workbook "+ caught.getMessage());
+                    MaterialToast.fireToast("Error creating Workbook " + caught.getMessage());
                 }
 
                 public void onSuccess(Workbook result) {
                     refreshView();
                 }
             };
-
 
             Spreadsheet temp = null;
             Workbook wb = new Workbook("New Workbook " + nrWb++, "description of workbook", temp);

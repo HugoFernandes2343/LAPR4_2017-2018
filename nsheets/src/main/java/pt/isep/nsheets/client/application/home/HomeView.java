@@ -31,10 +31,14 @@ import gwt.material.design.client.ui.MaterialRow;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSearch;
 import gwt.material.design.client.ui.MaterialToast;
+import pt.isep.nsheets.client.application.CurrentUser;
+import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginPresenter;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
+
+   
 
     interface Binder extends UiBinder<Widget, HomeView> {
     }
@@ -62,6 +66,10 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
     @UiField
     MaterialCard card;
+    
+    
+    
+    
 
 
     @Inject

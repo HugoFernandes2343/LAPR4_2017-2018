@@ -5,7 +5,7 @@
  */
 package pt.isep.nsheets.client.application;
 
-import com.google.inject.Inject;
+
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
