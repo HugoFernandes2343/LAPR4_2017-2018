@@ -110,15 +110,13 @@ The main idea for the "workflow" of this feature increment.
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](Lang02.1_CD.svg)
+![Domain Model](Lang02.1_CD.png)
 
 **System Sequence Diagrams**
 
 ![SSD](Lang02.1_SSD.svg)
 
 # 4. Design
-
-*In this section you should present the design solution for the requirements of this sprint.*
 
 . "CellImpl" reaches the "ExcelExpressionCompiler" after going through the more general "FormulaCompiler". This class goes through all available compilers ("Excel" being the only one available by default, additional ones will need to be added for the JavaScript and VisualBasic "inspired" languages).
 
@@ -132,9 +130,9 @@ The main idea for the "workflow" of this feature increment.
 
 ## 4.1. Tests
 
-*In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
+I have used the built-in "Console.java" class in "NShared" to test functionality as I developed it.
 
-I have used the built-in "Console.java" class in "NShared" to test functionality as I developed it. This is the biggest flaw of my contribution, because my less-than-standard aptitude at LPROG means I am not really sure how to test my methods (took me a LONG time to even discern what the logical flow would be)
+The lack of unit-testing is the biggest flaw of my work this week and the one I am the least proud of, because my less-than-standard aptitude at LPROG means I am not really sure how to test my methods (took me a LONG time to even discern what the logical flow would be)
 
 ## 4.4. Design Patterns and Best Practices
 
@@ -142,16 +140,21 @@ I have used the built-in "Console.java" class in "NShared" to test functionality
 In my opinion, the application has a potential Design issue:
 
 public class Formula{
-  //The Cell this Formula belongs to
-  private Cell cell;
+
+    //The Cell this Formula belongs to
+    private Cell cell;
+
 }
 
 public class Cell{
-  //The Formula in this Cell
-  private Formula formula;
+
+    //The Formula in this Cell
+    private Formula formula;
+
 }
 
 This reflexive association does not seem like a good practice, as most associations should be single-way whenever possible. However, I am not Mr. Einar Pehrson, so I can't imagine the issues he faced 13 years ago when building this from scratch, and this might be the best solution.
+It amuses me to no end, however, to write "Cell.getFormula().getCell().getFormula().getCell()(...)" until the heat death of the Universe.
 
 One Design flaw that I DO know is a bad practice that was introduced by me is the use of side-effects in "CellImpl.storeContent()":
 
