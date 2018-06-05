@@ -37,10 +37,6 @@ Note: For the purpose of keeping the user aware of the sorting operation a Mater
 
 ## 3.1 Analysis Diagrams
 
-The main idea for the "workflow" of this feature increment.
-
-**Use Case**
-
 ![Use Cases](us.png)
 
 - **Use Case**. Since the use case has a one-to-one correspondence with the User Story i do not add more detailed use case description in this section. I find that this use case is very simple in terms of concept and will add more specifications at a later stage.
@@ -51,23 +47,22 @@ The main idea for the "workflow" of this feature increment.
 
 **System Sequence Diagrams**
 
-![Analysis SD](analysis.png)
+![Analysis](analysis.png)
 
 # 4. Design
 
-*In this section you should present the design solution for the requirements of this sprint.*
-In terms of design there is only the need to add new methods on class SpreadsheetImpl for cell sorting with diferent configurations
+In terms of design there is only the need to add new methods on class SpreadsheetImpl for cell sorting with diferent configurations and the necessary buttons on the user interface.
 
 
 ## 4.1. Tests
 
-Regarding tests i try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part) but due to the problems encountered with the gwt framework, the tests will not be implemented by the time of delivery but they have been design to test all the invariants of this use case. Since the main focus of the use case is on updanting the actual spreadsheet according to the user´s instructions and this same spreadsheet is already located on the UI i have found no need for the implementation of both the controller and service patterns.
+  Regarding tests i try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part) but due to the problems encountered with the gwt framework, the tests will not be implemented by the time of delivery but they have been design to test all the invariants of this use case. Since the main focus of the use case is on updating the actual spreadsheet according to the user´s instructions and this spreadsheet is already located on the UI i have found no need for the implementation of both the controller and service patterns.
 
 **Domain classes**
 
-For the Domain classes i will have to test the sorting method added to the class that represents the entity **Spreadsheet**. This entity will have methods that, for the moment, will be based on the class **SpreadsheetImpl**:
+  For the Domain classes i will have to test the sorting method added to the class that represents the entity **Spreadsheet**. This entity will have methods that, for the moment, will be based on the class **SpreadsheetImpl** which implements the **Spreadsheet** interface:
 
-  - public void sortCells(String address1, String address2, String dataType, String sortType)
+      - public void sortCells(String address1, String address2, String dataType, String sortType)
 
 
 **Test1:** I should ensure that are the cells are of the same data type(number(float)). Ascending case
@@ -144,7 +139,7 @@ Notes:
 
 ## 4.3. Classes
 
-All the needed classes for the use case are already implemented. The only things that have been added are the new ui elements and the sortCells method of interface **Spreadsheet** implemented on the class **SpreadsheetImpl**.
+All the needed classes for the use case are already implemented. The only things that have been added are the new ui elements on **WorkBookView** and the sortCells method of interface **Spreadsheet** implemented on the class **SpreadsheetImpl**.
 
 ## 4.4. Design Patterns and Best Practices
 
@@ -154,62 +149,128 @@ By memory I apply/use:
 - MVP
 
 
-**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes.
-
 # 5. Implementation
 
-*If required you should present in this section more details about the implementation. For instance, configuration files, grammar files, etc. You may also explain the organization of you code. You may reference important commits.*
-
-
-**For US**
 
 **UI: Button for sorting the active spreadsheet**
 
-For this concern i decided to use a Material Widget called Icon button witch is also an extension of a MaterialButton (Icon Action Button). This is a kind of button that usually appears associated to a toolbar(spreadsheet header in this case).  
+For this concern i decided to use a Material Widget called MaterialButton. This is the button that will be used to activate the sorting process.  
 
-I updated the WorkBookView.ui.xml accordingly and declare the element with a tag *ui:field="sortButton"*. In the corresponding class View (i.e., WorkBookView) i bind that button to the corresponding widget class: 	
+I updated the WorkBookView.ui.xml accordingly and declare the element with a the tags **ui:field="sortButton" text="Sort" waves="LIGHT" textColor="WHITE" iconType="POLYMER"**. In the corresponding class View (i.e., WorkBookView) i bind that button to the corresponding widget class: 	
 
-	@UiField
-	MaterialButton sortButton;
+	 @UiField
+	 MaterialButton sortButton;
 
-I must now add the code that invokes the spreadsheet to find all the cells between the two specified ones by the user and sort those cells according to the user specifications. Once sorted the spreadsheet must update the content of the previous selected cells. The event that provides this function is the new sort button and the popup menu that will be provided by the user once the button is pressed.
 
-We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
+**UI: Text box for choosing the required cells**
 
-Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
+For this concern i decided to use a Material Widget called MaterialTextBox. These are the two text fiels in which the user will writte the reference of the upper left cell and lower right cell.  
 
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-		void addClickHandler(ClickHandler ch);
-	}
+I updated the WorkBookView.ui.xml accordingly and declare the elements with the tags **ui:field="upperCellInfo" label="Upper left cell"** and **ui:field="lowerCellInfo" label="Lower right cell"**. In the corresponding class View (i.e., WorkBookView) i bind these text boxes to the corresponding widget class: 	
 
-Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
+      @UiField
+      MaterialTextBox upperCellInfo;
+
+      @UiField
+      MaterialTextBox lowerCellInfo;
+
+
+**UI: List box for choosing the required sort parameters**
+
+For this concern i decided to use a Material Widget called MaterialListValueBox. These are the two fiels in which the user will one of the possible configurations regarding the data type to sort and the type of sort.  
+
+I updated the WorkBookView.ui.xml accordingly and declare the elements with the tags **ui:field="dataTypeBox" placeholder="choose data type"** and **ui:field="sortingTypeBox" placeholder="choose sorting type"**. In the corresponding class View (i.e., WorkBookView) i bind these list value boxes to the corresponding widget class and add the different values each box might take: 	
+
+      @UiField
+      MaterialListValueBox<String> dataTypeBox;
+          dataTypeBox.add("Number");
+          dataTypeBox.add("Text");
+          dataTypeBox.add("Date");
+
+      @UiField
+      MaterialListValueBox<String> sortingTypeBox;
+          sortingTypeBox.add("Ascending");
+          sortingTypeBox.add("Descending");
+
+
+I must now add the code that invokes the spreadsheet to find all the cells between the two specified ones by the user and sort those cells according to the user specifications. Once sorted the spreadsheet must update the content of the previous selected cells. The event that provides this function is the new sort button. For the porpuses of keeping the user aware of the operation in case it takes some time Material Widget called MaterialLoader is used to block the ui until the operation is completed with a load icon.
+
+      // Show Loader
+      MaterialLoader.loading(true);
+      // Remove loader
+      MaterialLoader.loading(false);
+
+
+**Sort methods**
+
+Since this process of ordering cells has many different workflows, i decided to divide it into multiple smaller methods in order to make it more easy to understand
+
+    - public void sortCells(String address1, String address2, String dataType, String sortType)
+      - private Address findAddress(String reference)
+      - private void sortDescending(SortedSet<Cell> sort)
+      - private void sortAscending(SortedSet<Cell> sort)
+      - private void updateCells(Cell list[])
+
+
+**sortCells:** This is the main method that will search the necessary addresses and decide which sort method to use according to both the data type and sorting type.
+
+    public void sortCells(String address1, String address2, String dataType, String sortType) {
+      Address add1=findAddress(address1);
+      Address add2=findAddress(address2);
+      if(add1==null || add2==null){
+        throw new UnsupportedOperationException();
+      }
+      SortedSet<Cell> sort=getCells(add1,add2);
+
+      if(sortType.equals("Ascending")){
+        sortAscending(sort);
+      }
+      if(sortType.equals("Descending")){
+        sortDescending(sort);
+      }
+    }
+
+
+
+**findAddress:** Iterates all the cells in order to find an  address matching the reference provided by the user. For ease of use for the user the cell reference will not be case sensitive.
+
+    public Address findAddress(String reference) {
+      for(Address add:cells.keySet()){
+  		if(add.toString().equalsIgnoreCase(reference)){
+  			return add;
+  		}
+  	}
+  	return null;
+    }
+
+**updateCells:** Updates the cells on the given addresses with the new values.
+
+    private void updateCells(Cell list[]){
+	    for(int i=0;i<list.length;i++){
+	        cells.put(list[i].getAddress(),list[i]);
+        }
+    }
 
 **Code Organization**  
 
-We followed the recommended organization for packages:  
+I followed the recommended organization for packages:  
 - Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
-- For instance, we used **lapr4.white.s1.core.n4567890**
+- In this case since i do not have to add new packages since i use existing classes and files;
 
 The code for this sprint:  
-Project **server**    
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes
-- Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
 
-Project **shared**  
-- Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
-- Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
+Project **shared**
+- Updated the interface: **pt.isep.nsheets.shared.core.Spreadsheet**: This interface as the header of the new sortCells method
+- Updated the class: **pt.isep.nsheets.shared.core.SpreadsheetImpl**: This class as the new sortCells method along with all the dependent private methods   
 
 Project **NShests**
-- Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
-- Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
+- Updated the classe: **pt.isep.nsheets.client.application.workbook.WorkbookView**: Added new ui fields for the sorting process  
+- Updated the file: **pt.isep.nsheets.client.application.workbook.WorkbookView.ui.xml**  
 
 
 # 6. Integration/Demonstration
 
-*In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
+Since the spreadsheet presentation on the ui was already developed by Jonh Doe i used his implementation and added the necessary instructions to refresh the presentation of the spreadsheet once the sort was completed. Saddly due to problems regarding the GWT framework it is not possible to test the sort methods which may be also providing problems due to certain casts of data(i.e DateFormat) that are not possible to execute. This issue may lead to the change of the classes developed by Jonh Doe (class **Value** to be precise). wITH
 
 # 7. Final Remarks
 
@@ -219,9 +280,14 @@ I have encountered many issues regarding gwt interactions with the implemented j
 
 ![SpreadsheetImplTest](SpreadsheetImplTest.png)
 
+Due to this issue and others regarding parse of different data types(i.e. DateFormat), i cannot assure that the sort method works. It runs in the application without crashing it but the values are not altered. Since i cannot test the method and according to firefox depuration tool the program executes the method as intended i cannot say if the problem is in the refreshing of the table or in the update of the cells on the spreadsheet.
 
 # 8. Work Log
 
-*Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
-
 Commits:
+
+[Core03.1: Initial draft of analysis and design. Study of the GWT framework](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9694ef36382fb73b1805cc0aefaf2c45d3c452be)
+
+[Core03.1: Updated documentation. Only thing missing from implementation is the sort method that is providing some errors](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/439ffb2a96393fe4784b2bb39e65a03ebd4307fe)
+
+[Core03.1: Updated documentation. Sort method implemented but with some problems regarding the update of the cell values and tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1e4685103bda585b91712fd0fade4ee207d8869f)

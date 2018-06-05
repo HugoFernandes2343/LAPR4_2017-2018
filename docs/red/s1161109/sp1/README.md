@@ -1,4 +1,4 @@
-**David Santiago** (s1161109) - Sprint 1 - Core02.1
+**David Santiago** (s1161109) - Sprint 1 - Core07.1
 ===============================
 
 # 1. General Notes
@@ -15,7 +15,7 @@ Core07.1 - User should create notes.
 
 **Proposal**:
 
-  - **US1** : User can view, edit and delete notes.
+  User can view, edit and delete notes.
 
 
 # 3. Analysis
@@ -102,7 +102,13 @@ The main idea for the "workflow" of this feature increment.
 
 # 4. Design
 
-*In this section you should present the design solution for the requirements of this sprint.*
+		There Will be 2 domain classes: Note and NoteVersion
+		
+		Note will have a User and an unique ID
+		
+		NoteVersion will have the text,title and date.
+		
+		In that way is Possible to Edit and acess various versions of the same note.
 
 
 
@@ -111,16 +117,6 @@ The main idea for the "workflow" of this feature increment.
 
 ## 4.2. Requirements Realization
 
-*In this section you should present the design realization of the requirements.*
-
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
-
-**For US1**
-
-![SD US1](design1.png)
-
-
-**For US2**
 
 
 
