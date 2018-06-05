@@ -1,4 +1,3 @@
-
 package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.ValueObject;
@@ -15,7 +14,7 @@ import pt.isep.nsheets.shared.services.EmailDTO;
 @Embeddable
 public class Email implements ValueObject, Serializable {
 
-  //  private static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
+    //  private static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
     private String email;
 
     protected Email() {
@@ -36,7 +35,7 @@ public class Email implements ValueObject, Serializable {
 
     @Override
     public String toString() {
-        return "Email{" + "email=" + email + '}';
+        return "Email: " + email;
     }
 
     @Override
@@ -72,4 +71,3 @@ public class Email implements ValueObject, Serializable {
         return new Email(dto.getEmail());
     }
 }
-

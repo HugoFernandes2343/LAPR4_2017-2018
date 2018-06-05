@@ -23,4 +23,8 @@ public interface RepositoryFactory {
     EventRepository events();
     
     TagsRepository tags();
+
+    RequestRepository requests();
+
+    ContactRepository contacts();
 }

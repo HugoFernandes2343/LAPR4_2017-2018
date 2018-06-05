@@ -6,12 +6,12 @@ skinparam defaultFontName FG Virgil
 skinparam shadowing false
 
 actor User
-boundary WorkbookView
 control WorkbookPresenter
 control FormWindow
 control Form
 control FormController
-database Database
+control WorkbookView
+control Workbook
 
 box "NSheets Client"
 participant WorkbookView
@@ -22,25 +22,21 @@ end box
 box "Server"
 participant WorkbookServices
 participant FormController
+participant Workbook
 participant Form
 end box
 
-box "Database"
-participant Database
-end box
 
-User -> WorkbookPresenter : onReveal() / navigate to page
+
+User -> WorkbookView : onReveal() / navigate to page
+WorkbookView -> WorkbookPresenter : onReveal() / navigate to page
 WorkbookPresenter ->> WorkbookServices : getCurrentWorkbook()
 User --> WorkbookView : Insert Formula
 WorkbookView --> WorkbookPresenter : setFormula();
 WorkbookPresenter --> FormController : getCurrentWorkbookForm()
-FormController --> Database : getCurrentWorkbookForm(workbook);
-WorkbookPresenter --> FormWindow : Open(getCurrentWorkbookForm)
-User --> FormWindow : Select the Instruction
-FormWindow --> FormController : getInstruction();
-FormController --> Form : getInstruction();
-FormController --> WorkbookServices : getActiveCell();
-FormController --> WorkbookServices : setContent(instruction);
-WorkbookServices -> Database : persist
+FormController --> Workbook : existsForm()
+FormController --> Workbook : getForm()
+FormController --> FormWindow : Open(getCurrentWorkbookForm)
+
 
 @enduml

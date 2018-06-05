@@ -13,9 +13,11 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -23,6 +25,8 @@ import pt.isep.nsheets.shared.services.UsersService;
 import pt.isep.nsheets.shared.services.UsersServiceAsync;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
+
+    CurrentUser user;
 
     interface MyView extends View {
 
@@ -40,8 +44,10 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     }
 
     @Inject
-    LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
+    LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, CurrentUser currentUser) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+
+        this.user = currentUser;
 
         getView().addClickHandler((ClickEvent event) -> {
 
@@ -57,19 +63,24 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
                 @Override
                 public void onSuccess(UserDTO result) {
-
+                    user.setCurrentUser(result);
+                    user.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
 
-//                    PlaceRequest placeRequest = new PlaceRequest.Builder()
-//                            .nameToken(NameTokens.about)
-//                            .build();
-//                    placeManager.revealPlace(placeRequest);
+                    PlaceRequest placeRequest = new PlaceRequest.Builder()
+                            .nameToken(NameTokens.home)
+                            .build();
+                    placeManager.revealPlace(placeRequest);
                 }
             };
 
             usersSvc.getUser(getView().getTextEmail().getText(), getView().getTextPassword().getText(), callback);
         });
 
+    }
+
+    public CurrentUser getUser() {
+        return user;
     }
 
     @Override

@@ -24,6 +24,8 @@ package pt.isep.nsheets.shared.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 
 /**
  * A workbook which can contain several spreadsheets.
@@ -32,10 +34,11 @@ import java.util.List;
  */
 public class Workbook implements Serializable {
 
-    private static final long serialVersionUID = -6324252462576447242L;
-
+    private static final long serialVersionUID = -632422462576447242L;
+    private Form form = new Form();
     private String name;
     private String description;
+    private Macro macro;
 
     private boolean newWb;
 
@@ -43,7 +46,6 @@ public class Workbook implements Serializable {
      * The spreadsheets of which the workbook consists
      */
     public List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
-
 
     private Spreadsheet sheet;
 
@@ -53,13 +55,10 @@ public class Workbook implements Serializable {
     private transient List<WorkbookListener> listeners
             = new ArrayList<WorkbookListener>();
 
-   
-
     /**
      * The number of spreadsheets that have been created in the workbook
      */
     public int createdSpreadsheets;
-
 
     /**
      * Creates a new empty workbook.
@@ -122,7 +121,6 @@ public class Workbook implements Serializable {
         return sheet;
     }
 
-
     public boolean isNewWb() {
         return newWb;
     }
@@ -141,6 +139,19 @@ public class Workbook implements Serializable {
         this.name = name;
         this.description = desc;
         this.sheet = new SpreadsheetImpl(this, "New Sheet", contents);
+    }
+
+    public boolean insertNewForm(Form form) {
+        this.form = form;
+        return true;
+    }
+
+    public boolean formExists() {
+        return form.isEmpty();
+    }
+
+    public Form getForm() {
+        return form;
     }
 
     //	/**
@@ -226,8 +237,6 @@ public class Workbook implements Serializable {
     /*
      * EVENT HANDLING
      */
-
-
     /**
      * Registers the given listener on the workbook.
      *
@@ -259,11 +268,12 @@ public class Workbook implements Serializable {
      * Notifies all registered listeners that a spreadsheet has been inserted.
      *
      * @param spreadsheet the spreadsheet that was inserted
-     * @param index       the index at which the spreadsheet was inserted
+     * @param index the index at which the spreadsheet was inserted
      */
     private void fireSpreadsheetInserted(Spreadsheet spreadsheet, int index) {
-        for (WorkbookListener listener : listeners)
+        for (WorkbookListener listener : listeners) {
             listener.spreadsheetInserted(spreadsheet, index);
+        }
 
     }
 
@@ -285,41 +295,34 @@ public class Workbook implements Serializable {
      */
     @SuppressWarnings("unused")
     private void fireSpreadsheetRenamed(Spreadsheet spreadsheet) {
-        for (WorkbookListener listener : listeners)
-            listener.spreadsheetRenamed(spreadsheet);
-    }
-
-    /*
-     * GENERAL
-     */
-
-    /**
-     * Customizes deserialization by recreating the listener list.
-     * @param stream the object input stream from which the object is to be read
-     * @throws IOException If any of the usual Input/Output related exceptions occur
-     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
         for (WorkbookListener listener : listeners) {
             listener.spreadsheetRenamed(spreadsheet);
         }
     }
 
-//        public static Workbook fromDTO(WorkbookDTO dto)
-//        {
-//            List<Spreadsheet> spreadsheetList = new ArrayList<>();
-//            
-//            for (SpreadsheetDTO ssDTO : dto.spreadsheets)
-//            {
-//                spreadsheetList.add(SpreadsheetImpl.fromDTO(ssDTO));
-//            }
-//            return new Workbook(dto.id, dto.version, dto.name, dto.description, spreadsheetList);
-//        }
-//        
-//        /**
-//         * Similar to the above but uses a different workbook constructor to pass the
-//         * number of spreadsheets to be created instead of passing the actual spreadsheets
-//         * @param dto the DTO
-//         * @return a Workbook
-//         */
+    /*
+     * GENERAL
+     */
+    /**
+     * Customizes deserialization by recreating the listener list.
+     *
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions
+     * occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot
+     * be found. for (WorkbookListener listener : listeners) {
+     * listener.spreadsheetRenamed(spreadsheet); } }
+     *
+     * // public static Workbook fromDTO(WorkbookDTO dto) // { //
+     * List<Spreadsheet> spreadsheetList = new ArrayList<>(); // // for
+     * (SpreadsheetDTO ssDTO : dto.spreadsheets) // { //
+     * spreadsheetList.add(SpreadsheetImpl.fromDTO(ssDTO)); // } // return new
+     * Workbook(dto.id, dto.version, dto.name, dto.description,
+     * spreadsheetList); // } // // /** // * Similar to the above but uses a
+     * different workbook constructor to pass the // * number of spreadsheets to
+     * be created instead of passing the actual spreadsheets // * @param dto the
+     * DTO // * @return a Workbook //
+     */
 //        public static Workbook fromDTOCreateSpreadsheets(WorkbookDTO dto)
 //        {
 //            return new Workbook(dto.name, dto.description, dto.existingSpreadsheets);
@@ -354,4 +357,8 @@ public class Workbook implements Serializable {
 //		stream.defaultReadObject();
 //		listeners = new ArrayList<WorkbookListener>();
 //	}
+
+    public void insertMacro(Macro macro){
+        this.macro=macro;
+    }
 }

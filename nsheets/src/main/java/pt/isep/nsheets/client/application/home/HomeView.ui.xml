@@ -23,10 +23,20 @@
                     <m:MaterialLabel ui:field="workbookDescription"/>                    
                 </m:MaterialCardContent>
                 <m:MaterialCardAction>
-                    <m:MaterialLink ui:field="renameLink" text="Rename" iconType="EDIT" iconColor="INDIGO" textColor="WHITE"/>
-                    <m:MaterialLink ui:field="deleteLink" text="Delete" iconType="DELETE" iconColor="GREY" textColor="WHITE"/>
+                    <m:MaterialLink ui:field="renameLink" text="Rename" iconType="EDIT" iconColor="INDIGO" textColor="WHITE"/>                    
+                    <m:MaterialLink ui:field="deleteLink" text="Delete" iconType="DELETE" iconColor="GREY" textColor="WHITE"/>  
                 </m:MaterialCardAction>
             </m:MaterialCard>
+            
+        <!--    <m:MaterialModal ui:field="modal">
+                <m:MaterialModalContent>
+                    <m:MaterialTitle title="Rename Workbook" description="Some description here..."/>
+                    <ma:autocomplete.MaterialAutoComplete ui:field="acModal" placeholder="Contacts" grid="s12"/>
+                </m:MaterialModalContent>
+                <m:MaterialModalFooter textAlign="RIGHT">
+                    <m:MaterialButton ui:field="btnClose" text="Close" type="FLAT" textColor="BLACK" waves="DEFAULT"/>
+                </m:MaterialModalFooter>
+            </m:MaterialModal> -->
  	       
         </g:HTMLPanel>
       

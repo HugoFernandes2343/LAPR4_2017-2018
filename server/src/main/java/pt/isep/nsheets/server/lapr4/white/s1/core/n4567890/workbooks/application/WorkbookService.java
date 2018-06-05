@@ -41,6 +41,7 @@ public class WorkbookService {
         return wb;
     }
 
+
     public int getNrWorkbooks(){
         final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
         ArrayList<WorkbookDTO> list = (ArrayList<WorkbookDTO>) workbookRepository.findAll();

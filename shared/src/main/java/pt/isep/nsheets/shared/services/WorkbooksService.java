@@ -15,5 +15,4 @@ public interface WorkbooksService extends RemoteService {
 
     Workbook addWorkbook(Workbook wd) throws DataException;
 
-
 }

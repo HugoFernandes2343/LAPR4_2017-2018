@@ -134,4 +134,6 @@ public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
 	 * @return the cell listeners that have been registered on the spreadsheet
 	 */
 	public CellListener[] getCellListeners();
+
+	public void sortCells(String address1, String address2, String dataType, String sortType);
 }

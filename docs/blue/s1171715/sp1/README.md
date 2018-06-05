@@ -5,7 +5,7 @@
 
 *In this section you should register important notes regarding your work during the sprint. For instance, if you spend significant time helping a colleague or if you work in more than one feature increment.*
 
-In my part of the project (Conditional Formatting Cell), I spent significant time to get the specification clear, even for myself. Since I have never used Java programming until now, I needed help to be a bit more familiar with the language - tehrefore, my team was really helping and patient with me, and they helped me everyday to get on track with the project. 
+In my part of the project (Conditional Formatting Cell), I spent significant time to get the specification clear, even for myself. Since I have never used Java programming neither GWT until now, I needed help to be a bit more familiar with the language - therefore, each person of my team was really helping and patient with me, and they helped me everyday to get on track with the project. 
 
 
 # 2. Requirements
@@ -24,11 +24,11 @@ Lang03.1 - The "Style" extension should be updated, so it can be used for condit
 
 In the best case scenario, from the users perspective, the usage of the application should work like the following:
 
-The user is able to select cells, and start formatting with the extension itself. Therefore, the application provides several formatting options for the user.
+The user is able to select cells, and start formatting with the extension itself by defining a formula. Therefore, the application provides several formatting options for the user.
 
 2) The user can select from the previously mentioned options.
 
-3) After that, the system alters cells stling, based on the condition given by the user. 
+3) After that, the system alters cells styling, based on the condition given by the user. 
 
  
 
@@ -44,14 +44,18 @@ For this feature increment, since it is the first to be developed in a new proje
 
 - Understand the working mechanishm of GWT
 
+Because of the lack of time, and because I had to get to know numerous new technologies to use, unfortunately I haven't been able to solve the whole task properly, and I couldn't manage the actual color-changing method. Of course, in order to fill in this gap, I would spend time to go deeper in the actual business logic, and to be more familiar using GWT. 
+
  
 
 # 4. Design
 
 *In this section you should present the design solution for the requirements of this sprint.*
 
-###### SEQUENCE DIAGRAM AND CLASS DIAGRAM HAS TO BE PASTED ######
+To make it clear for the user and for the developer team, I created different diagrams with all the essential parts.
 
+Sequence diagram: https://imgur.com/a/RCB0sGI
+Class diagram: 
 
 
 ## 4.1. Tests

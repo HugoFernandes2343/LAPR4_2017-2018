@@ -31,6 +31,10 @@ public class NameTokens {
 
     public static final String settings = "settings";
 
+    public static final String contacts = "contacts";
+
+    public static final String requests = "requests";
+
     public static final String exportToXMLWindow = "exportToXMLWindow";
     
     public static final String exportToCSVWindow = "exportToCSVWindow";
@@ -52,6 +56,14 @@ public class NameTokens {
     public static String getHome() {
         return home;
     }
+
+    public static String getContacts() {
+        return contacts;
+    }
+
+    public static String getRequests() { return requests; }
+
+    public static String getRequestsNumbers(){return "2";}
 
     public static String getLogin() {
         return login;

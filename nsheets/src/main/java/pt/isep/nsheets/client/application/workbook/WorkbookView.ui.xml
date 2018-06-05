@@ -50,8 +50,15 @@ governing permissions and limitations under the License. #L% -->
                 m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
                 active="true" grid="s11" iconType="FUNCTIONS" />
             <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />		
-            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>	
+            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>
+            <m:MaterialButton ui:field="sortButton" text="Sort" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
+            <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
+            <m:MaterialTextBox ui:field="lowerCellInfo" label="Lower right cell" grid="s2" />
+            <m:MaterialListValueBox ui:field="dataTypeBox" placeholder="choose data type" grid="s2" />
+            <m:MaterialListValueBox ui:field="sortingTypeBox" placeholder="choose sorting type" grid="s2" />
         </m:MaterialRow>
+
+
 
         <m:MaterialRow>
             <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->
