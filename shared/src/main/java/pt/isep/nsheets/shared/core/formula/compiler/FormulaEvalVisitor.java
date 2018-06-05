@@ -159,7 +159,7 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     public Expression visitReference(FormulaParser.ReferenceContext ctx) {
         Token t = (Token) ctx.getChild(0).getPayload();
         try {
-            if (t.getType() == FormulaParser.VARIABLE){
+             if (t.getType() == FormulaParser.VARIABLE){
                 return new VariableReference(cell, t.getText());
             }
             else if (ctx.getChildCount() == 3) {

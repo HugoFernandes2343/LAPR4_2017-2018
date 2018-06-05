@@ -12,10 +12,6 @@ Started exploring the app on Friday, stumbling around like a drunken sailor.
 
 # 2. Requirements
 
-*In this section you should describe the requirements for this sprint.*
-
-*This is simply an example of documentation*
-
 Lang02.1 - Temporary Variables should be recognized within the scope of an input formula.
 
 Quoting the Product Owner:
@@ -28,6 +24,8 @@ Instead of the previous example, which uses artefacts that will supposedly only 
 If that block goes into a Cell, and in conjunction with the specs for Lang01.1, the result must be "2" because a "Counter" variable is set to "1" and then incremented by "1".
 
 This behavior therefore seems to be a very basic acceptance criteria. Note, however, that the requirements state VARIABLES (plural), which means a given Formula can include declarations for multiple ones.
+
+Also, semantically speaking a Variable can be of any of the pre-defined "NUMERIC", "LITERAL" or "DATE" types. I must confess, however, that I will be looking at it as a "NUMERIC" type, as that seems to be the more realistic goal given my limited grasp of LPROG. In other words, I will try to ensure proper behavior as a "NUMERIC" and functional tests will assume as much, and if enough time remains I will try to make it work as "LITERAL" and/or "DATE"
 
 Dependencies:
 
@@ -84,7 +82,23 @@ It starts by creating a "null" Formula and THEN, by calling "FormulaCompiler.get
 
 - There is indeed a "CellReference" class in "pt.isep.nsheets.shared.core.formula.lang", which implements "Reference". I'm probably gonna have to create a "VariableReference" in similar manner.
 
+- Here are the proposed changes to "Formula.g4":
+
+reference
+	:	CELL_REF
+		( ( COLON ) CELL_REF )?
+                | VARIABLE
+	;
+
+  VARIABLE
+          : UND LETTER ( NUMBER | LETTER) *
+          ;
+
+UND             : '\_';
+
 ## 3.3 Server and RPC
+
+. No changes here, this only affects the "core" in "NShared"
 
 ## 3.4 Analysis Diagrams
 
@@ -92,232 +106,104 @@ The main idea for the "workflow" of this feature increment.
 
 **Use Cases**
 
-![Use Cases](us.png)
-
-- **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
+- **Use Cases**. There is only one Use-Case, and that is typing in a Formula with Variables
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](dm.png)
-
-- **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
+![Domain Model](Lang02.1_CD.svg)
 
 **System Sequence Diagrams**
 
-**For US1**
-
-![SSD](analysis.png)
-
-**For US2**
-
-![Analysis SD](analysis2.png)
+![SSD](Lang02.1_SSD.svg)
 
 # 4. Design
 
 *In this section you should present the design solution for the requirements of this sprint.*
 
+. "CellImpl" reaches the "ExcelExpressionCompiler" after going through the more general "FormulaCompiler". This class goes through all available compilers ("Excel" being the only one available by default, additional ones will need to be added for the JavaScript and VisualBasic "inspired" languages).
 
+. I have opted to create a new method "visitVariableReference()".
+
+. Created "VariableReference", which is to "Variable" the same as "CellReference" is to "Cell": a kind-of "pointer" that includes a "Variable" in it.
+
+. Altered "CellImpl.storeContent()" to copy Variable data to the FormulaCompiler
+
+![SD](Lang02.1_SD_long.png)
 
 ## 4.1. Tests
 
 *In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
 
-Regarding tests we try to follow an approach inspired by test driven development. However it is not realistic to apply it for all the application (for instance for the UI part). Therefore we focus on the domain classes and also on the services provided by the server.
-
-**Domain classes**
-
-For the Domain classes we will have a class that represents the entity **WorkbookDescription**. This entity will have attributes that, for the moment, will be based on the class **WorkbookDescriptionDTO**:
-
-	- name (string)
-	- description (string)
-
-**Test:** We should ensure that a WorkbookDescription can be created when all the attributes are set.  
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		System.out.println("ensureNullIsNotAllowed");
-		WorkbookDescription instance = new WorkbookDescription(null, null);
-	}
-
-**Services/Controllers**
-
-For the services the application already has a service specified in the interface **WorkbooksService**:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-	}
-
-This method seems to be sufficient for supporting US1 but not US2.
-
-For US2 we need a method that can be used to create a new WorkbookDescription given a WorkbookDescriptionDTO.
-
-The proposal is:
-
-	@RemoteServiceRelativePath("workbooksService")
-	public interface WorkbooksService extends RemoteService {
-		ArrayList<WorkbookDescriptionDTO> getWorkbooks();
-		WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
-	}
-
-Tests:  
-- The tests on the controllers require the presence of a database.  
-- We will use the database in memory (H2).  
-- We will have a *controller* from adding new WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
-- We will have a *controller* from listing WorkbookDescriptions. This controller will be invoked by the GWT RPC service.
-
-Controller **AddWorkbookDescriptionController**
-
-**Test:** Verify the normal creation of an WorkbookDescription.  
-
-	@Test
-	public void testNormalBehaviour() throws Exception {
-		System.out.println("testNormalBehaviour");
-		final String name = "Workbook1";
-		final String description = "Description for Workbook1";
-		final WorkbookDescription expected = new WorkbookDescription(name, description);
-		AddWorkbookDescriptionController ctrl = new AddWorkbookDescriptionController();
-		WorkbookDescription result = ctrl.addWorkbookDescription(expected.toDTO());
-		assertTrue("the added WorkbookDescription does not have the same data as input", expected.sameAs(result));
-	}
-
-Controller **ListWorkbookDescriptionController**
-
-Note: We will be using the annotation @FixMethodOrder(MethodSorters.NAME_ASCENDING) to ensure the test methods are executed in order. This is useful since the memory database will have state changing between tests.
-
-**Test:** At the beginning of the tests the memory database should be empty, so listWorkbookDiscriptions should return an empty set.
-
-	   @Test
-	   public void testAensureGetWorkbooksEmpty() {
-		   System.out.println("testAensureGetWorkbooksEmpty");
-		   ListWorkbookDescriptionController ctrl=new ListWorkbookDescriptionController();
-		   Iterable<WorkbookDescription> wbs=ctrl.listWorkbookDescriptions();
-		   assertTrue("the list of WorkbookDescriptions is not empty", !wbs.iterator().hasNext());
-	   }
-
-**Test:** If a WorkbookDescription is created it should be present in a following invocation of getWorkbooks().
-
-		@Test
-		public void testBtestDatabaseInsertion() throws Exception {
-			System.out.println("testBtestDatabaseInsertion");
-			final String name = "Workbook1";
-			final String description = "Description for Workbook1";
-			final WorkbookDescription expected = new WorkbookDescription(name, description);
-			AddWorkbookDescriptionController ctrlAdd = new AddWorkbookDescriptionController();
-			WorkbookDescription result = ctrlAdd.addWorkbookDescription(expected.toDTO());
-			ListWorkbookDescriptionController ctrlList=new ListWorkbookDescriptionController();
-			Iterable<WorkbookDescription> wbs=ctrlList.listWorkbookDescriptions();
-			assertTrue("the added WorkbookDescription is not in the database", wbs.iterator().hasNext());
-		}
-
-**Test Coverage**  
-- The actual coverage for domain classes: 61%
-- The actual coverage for application(controller) classes: 100%
-
-- TODO: Add more tests to increase the coverage of the domain class.
-
-## 4.2. Requirements Realization
-
-*In this section you should present the design realization of the requirements.*
-
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
-
-**For US1**
-
-![SD US1](design1.png)
-
-Notes:  
-- The diagram only depicts the less technical details of the scenario;  
-- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
-- **WorkbookServices** realizes the GWT RPC mechanism;  
-- **ListWorkbookDescriptionController** is the *use case controller*;  
-- **ListWorkbookDescriptionServices** is to group together all the services related to WorkbookDescription.
-
-**For US2**
-
-![SD US2](design2.png)
-
-## 4.3. Classes
-
-*Present and describe the major classes of you solution.*
+I have used the built-in "Console.java" class in "NShared" to test functionality as I developed it. This is the biggest flaw of my contribution, because my less-than-standard aptitude at LPROG means I am not really sure how to test my methods (took me a LONG time to even discern what the logical flow would be)
 
 ## 4.4. Design Patterns and Best Practices
 
-*Present and explain how you applied design patterns and best practices.*
 
-By memory we apply/use:  
-- Singleton  
-- Repository  
-- DTO  
-- MVP  
+In my opinion, the application has a potential Design issue:
 
-**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes.
+public class Formula{
+  //The Cell this Formula belongs to
+  private Cell cell;
+}
+
+public class Cell{
+  //The Formula in this Cell
+  private Formula formula;
+}
+
+This reflexive association does not seem like a good practice, as most associations should be single-way whenever possible. However, I am not Mr. Einar Pehrson, so I can't imagine the issues he faced 13 years ago when building this from scratch, and this might be the best solution.
+
+One Design flaw that I DO know is a bad practice that was introduced by me is the use of side-effects in "CellImpl.storeContent()":
+
+private void storeContent(String content) throws FormulaCompilationException {
+		// Parses formula
+		Formula formula = null;
+
+		if (content.length() > 1)
+			formula = FormulaCompiler.getInstance().compile(this, content);
+}
+
+When the "compile()" method executes, it internally sets the "VariableList" in "this" Cell, and I wish I found a way to make that more transparent. The problem is that as you dig deeper into the call-stack, most methods keep a hold of that "Cell" reference, so that is the best place to store variables.
+
+Other than the obivous "Visitor" pattern, I cannot think of any specific Patterns I might have used - no DTO for UI/UX, no Repository for persistence.
+
 
 # 5. Implementation
 
-*If required you should present in this section more details about the implementation. For instance, configuration files, grammar files, etc. You may also explain the organization of you code. You may reference important commits.*
-
-**For US1**
-
-The UI for this US was already implemented. We simply implemented the server as described previously.
-
-**For US2**
-
-**UI: Button for adding a new Workbook Description**
-
-For this concern we decided to use a Material Widget called Material FAB (Floating Action Button). This is a kind of button that usually appears at the left bottom part of the screen and contains actions available for the elements of the page.  
-
-We updated the HomeView.ui.xml accordingly and declare the element with a tag *ui:field="newWorkbookButton"*. In the corresponding class View (i.e., HomeView) we bind that button to the corresponding widget class: 	
-
-	@UiField
-	MaterialButton newWorkbookButton;
-
-We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application.
-
-We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
-
-Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
-
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-		void addClickHandler(ClickHandler ch);
-	}
-
-Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
-
 **Code Organization**  
 
-We followed the recommended organization for packages:  
+As stated previously, all development was done only on the "NShared" module - User Input and Persistence are not my concerns for this Sprint, so no need to deal with Client or Server.
+
+I followed the recommended organization for packages:  
 - Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
-- For instance, we used **lapr4.white.s1.core.n4567890**
+- I used **pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables** for NEW classes, and left a comment with my student number "1140420" in other classes I have made modifications to.
 
-The code for this sprint:  
-Project **server**    
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes
-- Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
+Here are the NEW classes:
+. Variable;
+. VariableReference - container for "Variable", works similarly to "CellReference";
+. VariableList - contains a HashMap that maps a Variable's "name" to the actual "Variable", so you can know if a Variable already exists or not;
 
-Project **shared**  
-- Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
-- Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
+Here is a brief summary of changed classes:
 
-Project **NShests**
-- Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
-- Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
-
+. AbstractVisitor - created "visitVariableReference()";
+. FormulaEvalVisitor.visitReference() - condition to detect "VARIABLE" tokens included;
+. ExpressionVisitor - created "visitVariableReference()"";
+. ExpressionBuilder - implements "visitVariableReference()";
+. CellImpl.storeContent()
+. CellImpl.addVariable() - adds a Variable if new, BUT returns it without adding if not.
+. Formula - added a field of "VariableList"
 
 # 6. Integration/Demonstration
 
 *In this section document your contribution and efforts to the integration of your work with the work of the other elements of the team and also your work regarding the demonstration (i.e., tests, updating of scripts, etc.)*
 
-# 7. Final Remarks
+# 7. Final Remarks and Tips for the next guy
 
-*In this section present your views regarding alternatives, extra work and future work on the issue.*
+. Big shoutout to Pedro Tedim (1091234) for helping me out with the Grammar. I came up with my rules, but having his input was a big confidence booster.
 
-Some Questions/Issues identified during the work in this feature increment:
+. I am positive the Grammar "Formula.g4" is correct, but an alternative I would explore would be to create a new rule for "variablereference" instead of including "VARIABLE" in "reference".
 
-1. The method getWorkbooks in the WorkbooksService returns an ArrayList. Maybe we should not bind the result to a specific collection implementation.
+. "pt.isep.nsheets.shared.core.formula.util.ReferenceFetcher" is a class I looked at pretty late in development. I don't think there's anything to change there, but trying out an implementation of the "visitVariableReference()" method here would be my next course of action.
 
 # 8. Work Log
 
