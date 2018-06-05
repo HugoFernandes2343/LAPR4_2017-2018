@@ -52,6 +52,14 @@ For this feature increment, since it is the first one to be developed in a new p
 
 ![form](form_view.png)
 
+**IMPORTANT NOTES**
+- At the client meeting I made it clear that for this iteration it wasn't needed to place specific actions in the working form. However, in the implementation beginning stages I placed a execution button there and for that reason I will leave it there for a future actions' implementation.
+
+- There are going to be passages in this documentation that will refer to those actions. Once more, they're meant to help the colleague that's going to make the next use case.
+
+- At the client meeting I have also clarified that for this use case it wasn't obligatory to make persistence of the forms. For time constraints and quality of other parts of my UC I chose not to implement that part.
+
+
 ## 3.3 Analysis Diagrams
 
 The main idea for the "workflow" of this feature increment.
@@ -193,10 +201,11 @@ Lastly, I highlight the fact that I was dependent on other functionalities, main
 
 
 # 7. Final Remarks
-----------------------------------------------------------------------------------------------------------------
+- **My final implementation doesn't contemplate my active workbook hence why it isn't completely correct. This happens because the method that returns the active workbook should have been implemented by the Core team. That didn't happen so I used workbooks created by me. Regardless, I've left comments of the instructions that should be used so that the Use Case works correctly**
+
 # 8. Work Log
 
-[Lang05.1 - Forms Editor Documentation (In Development.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b4c790c3aabcbec8735909b782ca6b2505c600e0)
+[Lang05.1 - Forms Editor Documentation (In Development).](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b4c790c3aabcbec8735909b782ca6b2505c600e0)
 
 [Lang05.1 - Partial implementation of the forms editor GUI.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9c53bce6654b4566565b1ad448a1bf61f3826c89)
 
@@ -210,4 +219,4 @@ Lastly, I highlight the fact that I was dependent on other functionalities, main
 
 [Lang 05.1 - Form Editor Testes](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)
 
-[Lang 05.1 - Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)
+[Lang 05.1 - Form Editor - Final adjustments of documentation ](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f60255b0961e25897e3882b9456171a695afea8a)
