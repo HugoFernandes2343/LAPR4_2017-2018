@@ -5,11 +5,13 @@
  */
 package pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros;
 
+import java.io.Serializable;
+
 /**
  *
  * @author josea
  */
-public class Macro {
+public class Macro implements Serializable {
 
     private String input;
     private String name;

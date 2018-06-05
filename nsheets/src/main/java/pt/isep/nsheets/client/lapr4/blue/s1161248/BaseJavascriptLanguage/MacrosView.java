@@ -11,6 +11,7 @@ import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.*;
+import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 public class MacrosView extends Composite {
 
 
+    @UiField
     MaterialComboBox macroType = new MaterialComboBox();
     @UiField
     MaterialTextBox macroName = new MaterialTextBox();
@@ -79,6 +81,7 @@ public class MacrosView extends Composite {
                 window.close();
             }else{
                 Macro macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getId());
+                //selectedWorkBook.getActualWorkbook()
                 //persiste this object
                 window.close();
             }
