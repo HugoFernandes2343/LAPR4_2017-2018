@@ -23,18 +23,12 @@ package pt.isep.nsheets.shared.core;
 import java.io.IOException;
 // import java.io.ObjectInputStream;		// not supported in GWT
 // import java.io.ObjectOutputStream;	// not supported in GWT
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.ext.Extension;
-import pt.isep.nsheets.shared.ext.ExtensionManager;
-import pt.isep.nsheets.shared.ext.SpreadsheetExtension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.SpreadsheetExtension;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
@@ -163,6 +157,71 @@ public class SpreadsheetImpl implements Spreadsheet {
 		}
 		return cell;
 	}
+
+	public void sortCells(String address1, String address2, String dataType, String sortType) {
+		Address add1=findAddress(address1);
+		Address add2=findAddress(address2);
+		if(add1==null || add2==null){
+			throw new UnsupportedOperationException();
+		}
+		SortedSet<Cell> sort=getCells(add1,add2);
+
+		if(sortType.equals("Ascending")){
+			sortAscending(sort);
+		}
+		if(sortType.equals("Descending")){
+			sortDescending(sort);
+		}
+	}
+
+	private Address findAddress(String reference){
+		for(Address add:cells.keySet()){
+			if(add.toString().equalsIgnoreCase(reference)){
+				return add;
+			}
+		}
+		return null;
+	}
+
+	private void sortAscending(SortedSet<Cell> sort) {
+        int rows=sort.last().getAddress().getRow()-sort.first().getAddress().getRow();
+        int columns=sort.last().getAddress().getColumn()-sort.first().getAddress().getColumn();
+        Cell list[]=(Cell[]) sort.toArray();
+            for(int j=0;j<sort.size();j++){
+                for(int k=1;k<sort.size()-1;k++){
+                    if(list[j].getContent().compareTo(list[k].getContent())>0){
+                        Cell temp=list[j];
+                        list[j]=list[k];
+                        list[k]=temp;
+                    }
+                }
+
+        }
+		updateCells(list);
+	}
+
+	private void sortDescending(SortedSet<Cell> sort) {
+        int rows=sort.last().getAddress().getRow()-sort.first().getAddress().getRow();
+        int columns=sort.last().getAddress().getColumn()-sort.first().getAddress().getColumn();
+        Cell list[]=(Cell[]) sort.toArray();
+            for(int j=0;j<sort.size();j++){
+                for(int k=1;k<sort.size()-1;k++) {
+					if (list[j].getContent().compareTo(list[k].getContent()) < 0) {
+						Cell temp = list[j];
+						list[j] = list[k];
+						list[k] = temp;
+					}
+				}
+
+        }
+		updateCells(list);
+	}
+
+	private void updateCells(Cell list[]){
+	    for(int i=0;i<list.length;i++){
+	        cells.put(list[i].getAddress(),list[i]);
+        }
+    }
 
 	public Cell getCell(int column, int row) {
 		return getCell(new Address(column, row));

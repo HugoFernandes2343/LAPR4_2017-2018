@@ -18,7 +18,7 @@
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package pt.isep.nsheets.shared.ext;
+package pt.isep.nsheets.shared.lapr4.red.s1160777.ext;
 
 import java.util.SortedSet;
 import java.util.TreeSet;

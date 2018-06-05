@@ -8,17 +8,13 @@ skinparam shadowing false
 actor User
 
 User -> Browser : navigate to page
-Browser ->> Server : getWorkbooks()
+Browser ->> Server : getCurrentWorkbook()
 Browser -->>Server : launchFormEditor()
 Server -->>Browser : existsForm()
 Browser -->>Server : editForm()
 Browser -->>Server : previewForm()
 Browser -->>Browser : display
 Browser -->>Server : SaveForm()
-
-database Database
-
-Server -> Database : fetch
 
 Server -->> Browser : return
 

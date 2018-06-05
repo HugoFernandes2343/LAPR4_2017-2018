@@ -12,11 +12,25 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
+import gwt.material.design.addins.client.window.MaterialWindow;
 
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
+
 import gwt.material.design.client.ui.*;
+import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialCard;
+import gwt.material.design.client.ui.MaterialCardAction;
+import gwt.material.design.client.ui.MaterialCardContent;
+import gwt.material.design.client.ui.MaterialCardTitle;
+import gwt.material.design.client.ui.MaterialColumn;
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialRow;
+import gwt.material.design.client.ui.MaterialNavBar;
+import gwt.material.design.client.ui.MaterialSearch;
+import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
@@ -66,6 +80,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
             navBarSearch.setVisible(false);
         });
     }
+
 
     private MaterialCard createCard(Workbook wb) {
         MaterialCard card = new MaterialCard();

@@ -9,7 +9,7 @@ import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.*;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormView;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 
 import javax.inject.Inject;
 

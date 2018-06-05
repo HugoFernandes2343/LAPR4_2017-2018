@@ -44,7 +44,7 @@ For this feature increment, since it is the first one to be developed in a new p
 
 
 ## 3.2 Form
-- It will be through the form’s view that the actions will be executed. There will be a button available that will allow to run an action one by one. For implementation reasons I couldn’t make two action running at the same time, hence why I chose to use checkboxes.
+- It will be through the form’s view that the actions will be executed. There will be a button available that will allow to run an action one by one (Future Implementations). For implementation reasons I couldn’t make two action running at the same time, hence why I chose to use checkboxes.
 
 - Each form line will be composed by two labels (one for the action name and another for the action instructions) and a checkbox.
 
@@ -79,7 +79,17 @@ The main idea for the "workflow" of this feature increment.
 
 ## 4.1. Tests
 
-*In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
+**Domain Classes**
+
+- Form
+		pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms
+		TestForm
+
+
+- FormEditorController
+		pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms
+		TestFormEditorController
+
 
 ## 4.2. Requirements Realization
 
@@ -102,7 +112,7 @@ Notes:
 Notes:  
 - The diagram only depicts the less technical details of the scenario;  
 - For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
-- **FormWindow** is the class that previews the end Form look and allows the actions to be triggered;
+- **FormWindow** is the class that previews the end Form look;
 - **FormEditorController** is the *use case controller*;  
 - **Form** is form's domain class that will be associated with the current workbook
 
@@ -114,7 +124,6 @@ Notes:
 -	**FormEditorController** - makes the connection between the forms editor window, the form’s domain class and persistency.
 -	**FormView.java** -  Creates the forms preview window. It’s triggered through the editor or if a function is called.
 -	**FormView.ui** - XML scheme of the forms view.
--	**FormController** - Makes the connection between forms preview window, the form’s domain class and presistency. It is also responsible for the implementation of the actions triggered in the form.
 -	**Form** -  Domain. It contains every form’s row (name and action).
 
 
@@ -159,12 +168,13 @@ In the forms viewer I chose to use a single button to trigger the actions’ for
 
 The code for this sprint:  
 Project **server**
-- Controllers and Domain: **pt.isep.nsheets.server.lapr4.blue.s1.lang.n1150585.forms**    
+- Controllers and Domain: **pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms**    
 
 
 
 Project **NShests**
 - Windows Creation: **pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor**
+**pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms**
 
 
 # 6. Integration/Demonstration
@@ -175,6 +185,7 @@ My contribution to the team consisted essentially in sharing my knowledge regard
 	-https://material.io/tools/icons/?style=baseline
 	-https://gwtmaterialdesign.github.io/gwt-material-demo/2.0-SNAPSHOT/#window
 
+The form function isn't called through the macros as asked on the problem statement. I've had some difficulties on the implementation. I've done LPROG last year, for that reason, had some difficulty understanding that part of the Use Case.
 
 Furthermore, I tried my best to integrate my Erasmus teammates. I have also helped installing Maven and all the tools needed to develop this application.
 
@@ -185,4 +196,18 @@ Lastly, I highlight the fact that I was dependent on other functionalities, main
 ----------------------------------------------------------------------------------------------------------------
 # 8. Work Log
 
-Commits:
+[Lang05.1 - Forms Editor Documentation (In Development.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b4c790c3aabcbec8735909b782ca6b2505c600e0)
+
+[Lang05.1 - Partial implementation of the forms editor GUI.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9c53bce6654b4566565b1ad448a1bf61f3826c89)
+
+[Lang05.1 - Create Forms UI and Controller (Partial).](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/36f92fbd3a895471a7714f215d9c9179634b2836)
+
+[Lang 05.1 - Form Editor - UI](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/4ddc94f84a10f0b7bf2bea5008294cc62ad127ec)
+
+[Lang 05.1 - Form Editor - Display the form by TextBox.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c5479372b10f39809e7c0157b1dd6937720fb350)
+
+[Lang 05.1 - Done for now. I can't call the created form with "FORM" function because the form itself is not associated with the current workbook. Waiting for Core01.1.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/50157dbfe181b7c8c108dfeff63aba94a572f1e2)
+
+[Lang 05.1 - Form Editor Testes](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)
+
+[Lang 05.1 - Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/24f4b58040d99873893fd13e9c8d65b76eebb5ea)

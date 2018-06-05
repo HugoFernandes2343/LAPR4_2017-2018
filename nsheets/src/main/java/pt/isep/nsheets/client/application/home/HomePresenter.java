@@ -67,14 +67,13 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
-        
+
 //        this.view.renameClickHandler((ClickEvent event) -> {
 //            MaterialToast.fireToast("rename");
 //            Workbook w = SelectedWorkbookController.getActualWorkbook();
 //            w.setName();
 //            getView().getWorkbookTitle().setText("novo");
 //        });
-
 
 
         this.view.addClickHandler((ClickEvent event) -> {

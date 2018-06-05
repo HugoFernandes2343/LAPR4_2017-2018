@@ -90,6 +90,7 @@ public class SettingsPresenter extends Presenter<SettingsPresenter.MyView, Setti
             }
 
         });
+
         /*
          * @author <1160777>Marco Carneiro</1160777>
          */
