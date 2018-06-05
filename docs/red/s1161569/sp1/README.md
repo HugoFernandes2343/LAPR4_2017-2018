@@ -284,6 +284,10 @@ Due to this issue and others regarding parse of different data types(i.e. DateFo
 
 # 8. Work Log
 
-*Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
-
 Commits:
+
+[Core03.1: Initial draft of analysis and design. Study of the GWT framework](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9694ef36382fb73b1805cc0aefaf2c45d3c452be)
+
+[Core03.1: Updated documentation. Only thing missing from implementation is the sort method that is providing some errors](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/439ffb2a96393fe4784b2bb39e65a03ebd4307fe)
+
+[Core03.1: Updated documentation. Sort method implemented but with some problems regarding the update of the cell values and tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1e4685103bda585b91712fd0fade4ee207d8869f)
