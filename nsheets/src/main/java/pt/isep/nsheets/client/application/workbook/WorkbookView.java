@@ -522,6 +522,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         customTable.getTableTitle().setText("The Future Worksheet!");
     }
 
+
     @Override
 
     protected void onAttach() {

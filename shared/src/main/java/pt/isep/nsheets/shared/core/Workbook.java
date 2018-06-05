@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 
 /**
  * A workbook which can contain several spreadsheets.
@@ -37,6 +38,7 @@ public class Workbook implements Serializable {
     private Form form = new Form();
     private String name;
     private String description;
+    private Macro macro;
 
     private boolean newWb;
 
@@ -355,4 +357,8 @@ public class Workbook implements Serializable {
 //		stream.defaultReadObject();
 //		listeners = new ArrayList<WorkbookListener>();
 //	}
+
+    public void insertMacro(Macro macro){
+        this.macro=macro;
+    }
 }
