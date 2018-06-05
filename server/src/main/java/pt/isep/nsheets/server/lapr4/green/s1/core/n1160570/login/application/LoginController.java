@@ -23,7 +23,7 @@ public class LoginController implements Controller {
         return userRepository.findAll();
     }
 
-    public User User(Email email, Password password) {
+    public User getUser(Email email, Password password) {
         UserRepository userRepository = PersistenceContext.repositories().user();
         return userRepository.getUser_Email(email, password);
     }
