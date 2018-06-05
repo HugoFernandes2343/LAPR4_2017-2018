@@ -33,7 +33,7 @@ import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
  */
 public class Workbook implements Serializable {
 
-    private static final long serialVersionUID = -6324252462576447242L;
+    private static final long serialVersionUID = -632422462576447242L;
     private Form form = new Form();
     private String name;
     private String description;

@@ -5,6 +5,7 @@
  */
 package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.collections.MapUtils;
@@ -14,8 +15,9 @@ import pt.isep.nsheets.shared.core.Workbook;
  *
  * @author dftsf
  */
-public class Form {
+public class Form implements Serializable {
 
+    private static final long serialVersionUID = -6324252458576447242L;
     Map<String, String> rows;
 
     public Form() {
