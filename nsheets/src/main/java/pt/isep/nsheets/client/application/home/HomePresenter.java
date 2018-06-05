@@ -16,6 +16,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import com.ibm.icu.util.Calendar;
+import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -47,9 +48,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         void addClickHandler(ClickHandler ch);
         
-        void renameClickHandler(ClickHandler ch);
-        
-        void deleteClickHandler(ClickHandler ch);
+//        void renameClickHandler( ClickHandler ch);
+//
+//        void deleteClickHandler(ClickHandler ch);
         
         MaterialCardTitle getWorkbookTitle();
         
@@ -67,16 +68,13 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         this.view = view;
         
-        this.view.renameClickHandler((ClickEvent event) -> {
-            MaterialToast.fireToast("rename");
+//        this.view.renameClickHandler((ClickEvent event) -> {
+//            MaterialToast.fireToast("rename");
 //            Workbook w = SelectedWorkbookController.getActualWorkbook();
 //            w.setName();
-            getView().getWorkbookTitle().setText("novo");
-        });
-        
-        this.view.deleteClickHandler((ClickEvent event) -> {
-            MaterialToast.fireToast("delete");
-        });
+//            getView().getWorkbookTitle().setText("novo");
+//        });
+
 
 
         this.view.addClickHandler((ClickEvent event) -> {
@@ -85,7 +83,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Default name already in use! " + caught.getMessage());
+                    MaterialToast.fireToast("Error creating Workbook "+ caught.getMessage());
                 }
 
                 public void onSuccess(Workbook result) {
