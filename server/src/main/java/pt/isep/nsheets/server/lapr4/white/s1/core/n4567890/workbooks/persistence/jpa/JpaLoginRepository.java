@@ -27,4 +27,11 @@ public class JpaLoginRepository extends NSheetsJpaRepositoryBase<User, Long> imp
         return u;
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        Email mail = new Email(email);
+        User u = matchOne("e.email=:mail ", "email", mail);
+        return u;
+    }
+
 }
