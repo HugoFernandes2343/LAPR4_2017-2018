@@ -27,6 +27,7 @@ import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginMod
 import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.SettingsModule;
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
+import pt.isep.nsheets.client.lapr4.red.s1.s1161109.application.notes.NotesModule;
 import pt.isep.nsheets.shared.core.Workbook;
 
 public class ApplicationModule extends AbstractPresenterModule {
@@ -41,7 +42,10 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new AboutModule());
         install(new WorkbookModule());
         install(new SettingsModule());
+        install(new NotesModule());
         install(new LoginModule());
+        
+        
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
     }

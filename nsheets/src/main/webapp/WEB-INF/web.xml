@@ -33,6 +33,11 @@
     <servlet-name>usersServiceServlet</servlet-name>
     <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>notesServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.NotesServiceImpl</servlet-class>
+  </servlet>
+  
   
   <servlet-mapping>
     <servlet-name>workbooksServiceServlet</servlet-name>
@@ -44,4 +49,9 @@
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/usersService</url-pattern>
   </servlet-mapping>   
+  <servlet-mapping>
+    <servlet-name>notesServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/noteService</url-pattern>
+  </servlet-mapping>
 </web-app>

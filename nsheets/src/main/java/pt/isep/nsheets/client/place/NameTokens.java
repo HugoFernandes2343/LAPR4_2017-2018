@@ -30,6 +30,8 @@ public class NameTokens {
     public static final String macros = "macros";
 
     public static final String settings = "settings";
+    
+    public static final String notes = "notes";
 
     public static final String exportToXMLWindow = "exportToXMLWindow";
     
@@ -47,6 +49,10 @@ public class NameTokens {
 
     public static String getAbout() {
         return about;
+    }
+    
+    public static String getNotes() {
+        return notes;
     }
 
     public static String getHome() {

@@ -6,6 +6,7 @@
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.jpa;
 
 import javax.persistence.EntityManager;
+import pt.isep.nsheets.server.lapr4.red.s1.core.n1161109.notes.persistence.NoteRepository;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.*;
 
@@ -40,5 +41,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public EventRepository events() {
         return new JpaEventRepository(this.settings);
+    }
+
+    @Override
+    public NoteRepository notes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
