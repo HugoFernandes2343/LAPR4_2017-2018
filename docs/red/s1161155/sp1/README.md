@@ -2,7 +2,7 @@
 ===============================
 
 # 1. General Notes
-   Was not able to finish the implementation, due to some persisting issues,
+   Was not able to finish the implementation, due to some persisting issues on the ideal Contact domain class structure I designed and the fact that the user portion is not fully implemented yet, so I could not acquire the current user at any given time.
 # 2. Requirements
 
 - **Core05.1 - Contacts**
@@ -69,21 +69,25 @@ Regarding tests we try to follow an approach inspired by test driven development
 
 **Domain classes**
 
-The Domain classes this feature revolves around are the entity **User** and **Request**. These entity will have attributes (some of which are **Email**'s and **Password**'s and are validated by those class's), these attributes are.
+The Domain classes this feature revolves around are the entity **User** and **Request** and **Contact**. These entity will have attributes (some of which are **Email**'s and **Password**'s and are validated by those class's), these attributes are.
     
    User:    
 	
 	- name (string)
+	- nickname (Nickname)
 	- pass (Password)
 	- mail (Email)
-	- contacts (ArrayList<Email>)
-	- requests (ArrayList<Requests>)
+	
 	
    Request:    
     
     - sender (Email)
     - reciever (Email)
     
+   Contact:
+    
+     - User1 (User)
+     - User2 (User)
 
 **Test:** We should ensure that a User can be created when all the attributes are set, save for the contacts and requests lists.  
 
@@ -236,12 +240,19 @@ Notes:
 
 ## 4.3. Classes
 
------- INSERT THE CLASSES THAT ARE CREATED FOR THIS FEATURE AND EXPLAIN THEM--------
+### Request
+    This class represents the connection between two email adresses.
+    One email address is from the user that sent the event and the other is from the user that will recieve it.
+    This class should be persisted in the database I managed to do that.
+### Contact
+    This class represents is the representation of the extablished connection between two users 
+    After the acceptance of a request by one of the user's from the other one.
+    This class should also be persisted in the database however I was not able to do that due to some table restrictions.
+    I tried to solve the problem but was unsuccessful.
 
 ## 4.4. Design Patterns and Best Practices
 
 By memory we apply/use:  
-- Singleton  
 - Repository  
 - MVP  
 
@@ -249,6 +260,50 @@ By memory we apply/use:
 
 
 # 5. Implementation
+ 
+- In respect to implementing my use case, I was unsuccessful in fully implementing the functionality, however I did manage to create all the query methods service classes and controllers, and the structure of the UI is represented with hardcoded examples of what I imagined for the funcionality.
+
+- For example, in the contacts tab inside the community tab there is a example of name, nickname and email displayed, as well as the button which I wanted to implement to allow for the deletion of a contact.
+
+- The connection between the UI and the server methods that would run the operations I needed is non existent because i would need to be able to access the current user and that feature was not correctly implemented.
+
+- The requirement of the user being able to block requests, was overlooked by me by mistake when interpreting the UC, this is why this particular feature inst displayed
+
 # 6. Integration/Demonstration
+
+- We can see in the sidenav an icon with the "Community" text next to it, by pressing this icon it shows the two views I  created.
+
+![Menu](Menu.png)
+
+- The request view, has a badge that is suposed to indicate the number of current requests, however currently there is a fixed number two as an example. By entering this page we can se that there is one test request presented there, this request is hard coded for presentation only of how it should present real requests once it is funcional.
+
+![Request](Requests.png)
+
+- The contacts view, this view features a search bar, that lets you look by nickname for one of your contacts, this is also dependent of being able to access the current user, this part of the view has no "example" list to search by, I do show how the nickname, name and email would be presented if this was functional with examples.
+
+![Contact](Contacts.png)
+
 # 7. Final Remarks
+
+As it stands the use case is not implemented I would have needed more time, and the current user to be available for accessing. In order to be able to even try to implement the connection between the UI and the server portion of my code, not to mention solving the Contact persistence issues.
+
 # 8. Work Log
+
+- In the first days of the first sprint all of my team was quite confused with the project in general, we struggled to understand how to and where to implement what.
+
+- We had the misfortune of not having classes in the 31st of May this was a shame, because that was the only class we had with the Professor responsible for the CORE area until the day of delivery, this caused us to have to figure things out by looking at the examples provided only, some of us had the luck of their UC's beign similar in structure to the ones already implemented, others however were not so fortunate and took quite a while to understand what the should do and how they should be doing it.
+
+- I started by doing the analysis and design of this UC, to do so I looked at the examples provided for guidance, a problem appeared because I couldnt seem to get the tool to convert .puml files to diagrams to work, so I decided to use the Visual Paradigm 15.0 program as that was the program we used before this project.
+
+- After finishing my analysis and design I chose to first implement the view, in order to be able to do so I relied heavily on the site [GWT Material Demo](https://gwtmaterialdesign.github.io/gwt-material-demo/), using this site I was able to understand how to create the panels and search bars and  cards i wanted using both the .xml files and the java code, for exameple the structure of the contacts tab is all created in the .ui.xml file and the request example that i hard coded is created in the java code as well as the text this card possesses.
+
+- Some issues occurred with h2 database, which slowed down my development considerably in the last days, this problem caused me to have to restart the computer everytime I used the h2 database because the program wouldnt run I managed to resolve this problem but it was quite at the last minute.
+
+- I implemented the services classes, the domain classes, Controllers and JPA repositories last, I managed to implement all the queries and methods that preceed them in the corresponding controllers, as well as persist the Request's, I did not however manage to solver a problem in the persistence of Contacts, the table has a problem when being created this issue could be solved if i had more time to solve it, however I would still not be able to implement the rest without the access to current user. 
+
+- Since I did not commit multiple times while I was implementing i only have 2 commits plus the last one to submit this text. However each of the two commits encompasses either the full Analysis + Desing or all the Code I wrote 
+
+##Commits:
+- [First commit with all the analysis and design](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c674bac3106275b4e9d9e4521b063e5d7208297a)
+
+- [Last commit with all the code I implemented "Implementation of my UI, all controllers services and domain classes that i add (my UC is not funcional)"](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7c3b2d9f8e0631adabc205c998047f68ae7ab041)
