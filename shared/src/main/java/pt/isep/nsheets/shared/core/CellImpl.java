@@ -35,9 +35,9 @@ import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
 import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
-import pt.isep.nsheets.shared.ext.CellExtension;
-import pt.isep.nsheets.shared.ext.Extension;
-import pt.isep.nsheets.shared.ext.ExtensionManager;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
 
 /**
  * The implementation of the <code>Cell</code> interface.
@@ -104,7 +104,10 @@ public class CellImpl implements Cell {
 		reevaluate();
 	}
 
-/*
+	public CellImpl() {
+	}
+
+	/*
  * LOCATION
  */
 

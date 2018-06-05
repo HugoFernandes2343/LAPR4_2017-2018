@@ -7,9 +7,10 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import javax.persistence.*;
+
+import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
@@ -17,21 +18,29 @@ import pt.isep.nsheets.shared.services.UserDTO;
  * @author Paulo Jorge
  */
 @Entity
-public class User implements AggregateRoot<Long>, Serializable {
+public class User implements AggregateRoot<Email>, Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long pk;
+    @EmbeddedId
+    private Email email;
+    private Password password;
+    private Nickname nickname;
+    private Name name;
+    private boolean activate;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
-    private String email;
-    private String password;
 
-    public User(String email, String password) throws IllegalArgumentException {
-        if (email == null || password == null) {
-            throw new IllegalArgumentException("email or password must be non-null");
+    public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
+        if (email == null || password == null || nickname == null || name == null) {
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
         }
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserType.USER;
+
     }
 
     // It is mandatory to have a default constructor with no arguments to be
@@ -39,12 +48,8 @@ public class User implements AggregateRoot<Long>, Serializable {
     protected User() {
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getPassword() {
-        return this.password;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -52,7 +57,7 @@ public class User implements AggregateRoot<Long>, Serializable {
         if (this.email == null) {
             return super.toString();
         } else {
-            return this.email + " " + this.password;
+            return this.email + " " + this.password + " " + this.nickname + " " + this.name;
         }
     }
 
@@ -69,25 +74,47 @@ public class User implements AggregateRoot<Long>, Serializable {
         if (!this.email.equals(that.email)) {
             return false;
         }
+        if (!this.nickname.equals(that.nickname)) {
+            return false;
+        }
+        if (!this.name.equals(that.name)) {
+            return false;
+        }
+        if (this.activate != that.activate) {
+            return false;
+        }
         return this.password.equals(that.password);
     }
 
     @Override
-    public boolean is(Long id) {
-        return (this.pk.compareTo(id) == 0);
+    public boolean is(Email email) {
+        return (this.email.equals(this.email));
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     @Override
-    public Long id() {
-        return this.pk;
+    public Email id() {
+        return this.email;
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(this.email, this.password);
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+    }
+
+
+    public Nickname getNickname() {
+        return nickname;
+    }
+
+    public Name getName() {
+        return name;
     }
 
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
-        return new User(dto.getEmail(), dto.getPassword());
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
     }
 
 }

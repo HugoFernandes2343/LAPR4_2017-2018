@@ -18,9 +18,9 @@ public class StyleView extends ViewImpl {
     @UiField
     public static MaterialButton confirmButton;
 
-    @UiField
+  /**  @UiField
     public static MaterialDropDown styleChooser;
-
+**/
     @UiField
     public static MaterialTextBox cellInfo;
 /**
@@ -38,10 +38,10 @@ public class StyleView extends ViewImpl {
         styleWindow.open();
 
     }
-
+    /**
     @UiHandler("dropdown")
     void onDropdown(SelectionEvent<Widget> callback){
         MaterialToast.fireToast("Selected : " + ((MaterialLink)callback.getSelectedItem()).getText());
-    }
+    }**/
 
 }

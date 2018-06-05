@@ -19,7 +19,7 @@ package pt.isep.nsheets.client.application.workbook;
  * limitations under the License.
  * #L%
  */
-
+/**
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -49,3 +49,4 @@ public class StylePresenter extends Presenter<StylePresenter.MyView, StylePresen
         super.onReveal();
     }
 }
+ **/

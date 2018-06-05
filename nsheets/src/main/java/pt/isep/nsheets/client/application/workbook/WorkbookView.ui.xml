@@ -8,7 +8,8 @@ KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License. #L% -->
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m="urn:import:gwt.material.design.client.ui"
-             xmlns:ma="urn:import:gwt.material.design.addins.client">
+            xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
+ xmlns:ma="urn:import:gwt.material.design.addins.client">
 
     <ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
 
@@ -45,13 +46,19 @@ governing permissions and limitations under the License. #L% -->
     <g:HTMLPanel>
 
         <m:MaterialRow marginTop="60">
-            <m:MaterialTextBox 
-                m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
+            <m:MaterialTextBox m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
                 active="true" grid="s11" iconType="FUNCTIONS" />
             <m:MaterialIcon ui:field="styleButton" iconType="MENU" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s11"/>
-            <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />		
+            <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
             <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>
+            <m:MaterialButton ui:field="sortButton" text="Sort" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
+            <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
+            <m:MaterialTextBox ui:field="lowerCellInfo" label="Lower right cell" grid="s2" />
+            <m:MaterialListValueBox ui:field="dataTypeBox" placeholder="choose data type" grid="s2" />
+            <m:MaterialListValueBox ui:field="sortingTypeBox" placeholder="choose sorting type" grid="s2" />
         </m:MaterialRow>
+
+
 
         <m:MaterialRow>
             <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->
@@ -63,42 +70,74 @@ governing permissions and limitations under the License. #L% -->
             <!-- selectionType="MULTIPLE"/> -->
 
             <m:table.MaterialDataTable shadow="1"
-                                                   m:id="customTable" ui:field="customTable" height="calc(100vh - 131px)"
-                                                   useLoadOverlay="false" useStickyHeader="true" useCategories="false"
-                                                   useRowExpansion="false" selectionType="NONE" />
+                                       m:id="customTable" ui:field="customTable" height="calc(100vh - 131px)"
+                                       useLoadOverlay="false" useStickyHeader="true" useCategories="false"
+                                       useRowExpansion="false" selectionType="NONE" />
+
+
+            <ma:window.MaterialWindow ui:field="windowconditional" title="Format Cell" toolbarColor="BLUE_DARKEN_2">
+                <m:MaterialRow marginBottom="0" margin="0" padding="20" layoutPosition="RELATIVE" depth="1">
+                    <m:MaterialLabel text="StyleExtensions" textColor="BLACK" />
+                </m:MaterialRow>
+                <m:MaterialListBox placeholder="operators">
+                    <m.html:Option text="equals to"/>
+                    <m.html:Option text="greather then"/>
+                    <m.html:Option text="greather or equal then"/>
+                    <m.html:Option text="less or equal then"/>
+                    <m.html:Option text="less then"/>
+                </m:MaterialListBox>
+                <m:MaterialTextBox ui:field="number" label="Number:" marginTop="50"/>
+
+                <m:MaterialListBox placeholder="true color">
+                    <m.html:Option text="blue"/>
+                    <m.html:Option text="green"/>
+                    <m.html:Option text="red"/>
+                </m:MaterialListBox>
+                <m:MaterialListBox placeholder="false color">
+                    <m.html:Option text="blue"/>
+                    <m.html:Option text="green"/>
+                    <m.html:Option text="red"/>
+                </m:MaterialListBox>
+                <m:MaterialButton ui:field="confirm" text="ok"  backgroundColor="BLACK" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
+
+            </ma:window.MaterialWindow>
+
+
 
             <ma:popupmenu.MaterialPopupMenu
                 ui:field="popupMenu">
+                <m:MaterialLink ui:field="editformat" display="BLOCK" text="format"
+                                iconType="EDIT" textColor="BLACK" />
                 <m:MaterialLink display="BLOCK" text="Copy" iconType="CONTENT_COPY"
-                                                textColor="BLACK" />
+                                textColor="BLACK" />
                 <m:MaterialLink display="BLOCK" text="Paste"
-                                                iconType="CONTENT_PASTE" textColor="BLACK" />
+                                iconType="CONTENT_PASTE" textColor="BLACK" />
                 <m:MaterialLink display="BLOCK" text="Rename"
-                                                iconType="EDIT" textColor="BLACK" />
+                                iconType="EDIT" textColor="BLACK" />
 
                 <!-- Second level -->
                 <m:MaterialLink activates="moveTo" display="BLOCK"
-                                                text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">
+                                text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">
                     <m:MaterialDropDown activator="moveTo" hover="true"
-                                                            belowOrigin="true">
+                                        belowOrigin="true">
                         <m:MaterialLink display="BLOCK" text="Private"
-                                                                iconType="CONTENT_COPY" textColor="BLACK" />
+                                        iconType="CONTENT_COPY" textColor="BLACK" />
                         <m:MaterialLink display="BLOCK" text="Public"
-                                                                iconType="CONTENT_PASTE" textColor="BLACK" />
+                                        iconType="CONTENT_PASTE" textColor="BLACK" />
                         <m:MaterialLink display="BLOCK" text="Shared"
-                                                                iconType="EDIT" textColor="BLACK" />
+                                        iconType="EDIT" textColor="BLACK" />
 
                         <!-- Third level -->
                         <m:MaterialLink activates="others" display="BLOCK"
-                                                                text="Others" iconType="DEVICES_OTHER" textColor="BLACK">
+                                        text="Others" iconType="DEVICES_OTHER" textColor="BLACK">
                             <m:MaterialDropDown activator="others" hover="true"
-                                                                            belowOrigin="true">
+                                                belowOrigin="true">
                                 <m:MaterialLink display="BLOCK" iconColor="PURPLE"
-                                                                                text="Phone" iconType="PHONE" textColor="BLACK" />
+                                                text="Phone" iconType="PHONE" textColor="BLACK" />
                                 <m:MaterialLink display="BLOCK" iconColor="GREEN"
-                                                                                text="Tablet" iconType="TABLET" textColor="BLACK" />
+                                                text="Tablet" iconType="TABLET" textColor="BLACK" />
                                 <m:MaterialLink display="BLOCK" iconColor="BLUE"
-                                                                                text="Laptop" iconType="LAPTOP" textColor="BLACK" />
+                                                text="Laptop" iconType="LAPTOP" textColor="BLACK" />
                             </m:MaterialDropDown>
                         </m:MaterialLink>
 
@@ -112,6 +151,7 @@ governing permissions and limitations under the License. #L% -->
             <m:MaterialFABList>
                 <m:MaterialButton ui:field="exportToXMLButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To XML" tooltipPosition="LEFT"/>
                 <m:MaterialButton ui:field="exportToCSVButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To CSV" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="macrosButton" type="FLOATING" waves="LIGHT" iconType="CODE" tooltip="Create Macros" tooltipPosition="LEFT"/>
             </m:MaterialFABList>
         </m:MaterialFAB>
     </g:HTMLPanel>

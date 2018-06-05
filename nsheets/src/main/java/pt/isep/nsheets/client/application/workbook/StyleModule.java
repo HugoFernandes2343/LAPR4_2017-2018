@@ -19,7 +19,7 @@ package pt.isep.nsheets.client.application.workbook;
  * limitations under the License.
  * #L%
  */
-
+/**
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
@@ -29,3 +29,4 @@ public class StyleModule extends AbstractPresenterModule {
         bindPresenter(StylePresenter.class, StylePresenter.MyView.class, StyleView.class, StylePresenter.MyProxy.class);
     }
 }
+**/

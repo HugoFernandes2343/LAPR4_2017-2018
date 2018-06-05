@@ -25,7 +25,7 @@ import java.util.SortedSet;
 
 import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.ext.Extensible;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extensible;
 
 /**
  * A cell in a spreadsheet.

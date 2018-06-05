@@ -10,7 +10,7 @@ public class WorkbookDescriptionDTO implements Serializable {
 	
 	public WorkbookDescriptionDTO(String name, String description) {
 		this.name=name;
-		this.description=description;		
+		this.description=description;
 	}
 
 	// It is mandatory to have a default constructor with no arguments to be serializable!

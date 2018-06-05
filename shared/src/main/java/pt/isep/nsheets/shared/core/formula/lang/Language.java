@@ -20,6 +20,8 @@
  */
 package pt.isep.nsheets.shared.core.formula.lang;
 
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Assignment;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.For;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -32,10 +34,11 @@ import java.util.Properties;
 import pt.isep.nsheets.shared.core.formula.BinaryOperator;
 import pt.isep.nsheets.shared.core.formula.Function;
 import pt.isep.nsheets.shared.core.formula.UnaryOperator;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Block;
 
 /**
  * A factory for creating certain types of language elements.
- * 
+ *
  * @author Einar Pehrson
  */
 public class Language {
@@ -45,23 +48,28 @@ public class Language {
 //
 //	/** The name of the file in which language properties are stored */
 //	private static final String PROPERTIES_FILENAME = "res/language.props";
+    /**
+     * The unary operators that are supported by the language
+     */
+    protected List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
 
-	/** The unary operators that are supported by the language */
-	protected List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
+    /**
+     * The binary operators that are supported by the language
+     */
+    protected List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
 
-	/** The binary operators that are supported by the language */
-	protected List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
+    /**
+     * The functions that are supported by the language
+     */
+    protected List<Function> functions = new ArrayList<Function>();
 
-	/** The functions that are supported by the language */
-	protected List<Function> functions = new ArrayList<Function>();
-	
-	private final String name;
-	
-	public String getName() {
-		return this.name;
-	}
+    private final String name;
 
-	protected void initFunctions() {
+    public String getName() {
+        return this.name;
+    }
+
+    protected void initFunctions() {
 //		functions.add(new Average());
 //		functions.add(new And());
 //		functions.add(new Count());
@@ -74,9 +82,11 @@ public class Language {
 //		functions.add(new Or());
 //		functions.add(new Sum());
 //		functions.add(new True());
-	}
+        functions.add(new For());
+        functions.add(new Block());
+    }
 
-	protected void initBinaryOperators() {
+    protected void initBinaryOperators() {
 //		binaryOperators.add(new Adder());
 //		binaryOperators.add(new Concatenator());
 //		binaryOperators.add(new Divider());
@@ -85,29 +95,30 @@ public class Language {
 //		binaryOperators.add(new GreaterThan());
 //		binaryOperators.add(new GreaterThanOrEqual());
 //		binaryOperators.add(new LessThan());
-//		binaryOperators.add(new LessThanOrEqual());
+		binaryOperators.add(new LessThanOrEqual());
 //		binaryOperators.add(new Multiplier());
 //		binaryOperators.add(new NotEqual());
 //		binaryOperators.add(new RangeReference());
 //		binaryOperators.add(new Subtracter());
-	}
+        binaryOperators.add(new Assignment());
+    }
 
-	protected void initUnaryOperators() {
-		// functions.add(new Average());
+    protected void initUnaryOperators() {
+        // functions.add(new Average());
 //		unaryOperators.add(new Negator());
 //		unaryOperators.add(new Percent());
-	}
+    }
 
-	/**
-	 * Creates a new language.
-	 */
-	public Language(String name) {
-		this.name=name;
-		initFunctions();
-		initBinaryOperators();
-		initUnaryOperators();
-	}
-	
+    /**
+     * Creates a new language.
+     */
+    public Language(String name) {
+        this.name = name;
+        initFunctions();
+        initBinaryOperators();
+        initUnaryOperators();
+    }
+
 //	private Language() {
 //		// Loads properties
 //		Properties language = new Properties();
@@ -157,85 +168,82 @@ public class Language {
 //			if (Modifier.isStatic(method.getModifiers()) && method.getReturnType() == Double.TYPE)
 //				functions.add(new NumericFunction(method));
 //	}
-
-	/**
-	 * Returns the singleton instance.
-	 * 
-	 * @return the singleton instance
-	 */
+    /**
+     * Returns the singleton instance.
+     *
+     * @return the singleton instance
+     */
 //	public static Language getInstance() {
 //		return instance;
 //	}
+    /**
+     * Returns the unary operator with the given identifier.
+     *
+     * @param identifier identifier
+     * @return the unary operator with the given identifier
+     * @throws csheets.core.formula.lang.UnknownElementException exception
+     */
+    public UnaryOperator getUnaryOperator(String identifier) throws UnknownElementException {
+        for (UnaryOperator operator : unaryOperators) {
+            if (identifier.equalsIgnoreCase(operator.getIdentifier())) {
+                return operator; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+    }
 
-	/**
-	 * Returns the unary operator with the given identifier.
-	 * 
-	 * @param identifier
-	 *            identifier
-	 * @return the unary operator with the given identifier
-	 * @throws csheets.core.formula.lang.UnknownElementException
-	 *             exception
-	 */
-	public UnaryOperator getUnaryOperator(String identifier) throws UnknownElementException {
-		for (UnaryOperator operator : unaryOperators)
-			if (identifier.equalsIgnoreCase(operator.getIdentifier()))
-				return operator; // .clone()
-		throw new UnknownElementException(identifier);
-	}
+    /**
+     * Returns the binary operator with the given identifier.
+     *
+     * @param identifier identifier
+     * @return the binary operator with the given identifier
+     * @throws csheets.core.formula.lang.UnknownElementException exception
+     */
+    public BinaryOperator getBinaryOperator(String identifier) throws UnknownElementException {
+        for (BinaryOperator operator : binaryOperators) {
+            if (identifier.equalsIgnoreCase(operator.getIdentifier())) {
+                return operator; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+    }
 
-	/**
-	 * Returns the binary operator with the given identifier.
-	 * 
-	 * @param identifier
-	 *            identifier
-	 * @return the binary operator with the given identifier
-	 * @throws csheets.core.formula.lang.UnknownElementException
-	 *             exception
-	 */
-	public BinaryOperator getBinaryOperator(String identifier) throws UnknownElementException {
-		for (BinaryOperator operator : binaryOperators)
-			if (identifier.equalsIgnoreCase(operator.getIdentifier()))
-				return operator; // .clone()
-		throw new UnknownElementException(identifier);
-	}
+    /**
+     * Returns the function with the given identifier.
+     *
+     * @param identifier identifier
+     * @return the function with the given identifier
+     * @throws csheets.core.formula.lang.UnknownElementException exception
+     */
+    public Function getFunction(String identifier) throws UnknownElementException {
+        for (Function function : functions) {
+            if (identifier.equalsIgnoreCase(function.getIdentifier())) {
+                return function; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+    }
 
-	/**
-	 * Returns the function with the given identifier.
-	 * 
-	 * @param identifier
-	 *            identifier
-	 * @return the function with the given identifier
-	 * @throws csheets.core.formula.lang.UnknownElementException
-	 *             exception
-	 */
-	public Function getFunction(String identifier) throws UnknownElementException {
-		for (Function function : functions)
-			if (identifier.equalsIgnoreCase(function.getIdentifier()))
-				return function; // .clone()
-		throw new UnknownElementException(identifier);
-	}
+    /**
+     * Returns whether there is a function with the given identifier.
+     *
+     * @param identifier identifier
+     * @return whether there is a function with the given identifier
+     */
+    public boolean hasFunction(String identifier) {
+        try {
+            return getFunction(identifier) != null;
+        } catch (UnknownElementException e) {
+            return false;
+        }
+    }
 
-	/**
-	 * Returns whether there is a function with the given identifier.
-	 * 
-	 * @param identifier
-	 *            identifier
-	 * @return whether there is a function with the given identifier
-	 */
-	public boolean hasFunction(String identifier) {
-		try {
-			return getFunction(identifier) != null;
-		} catch (UnknownElementException e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Returns the functions that are supported by the syntax.
-	 * 
-	 * @return the functions that are supported by the syntax
-	 */
-	public Function[] getFunctions() {
-		return functions.toArray(new Function[functions.size()]);
-	}
+    /**
+     * Returns the functions that are supported by the syntax.
+     *
+     * @return the functions that are supported by the syntax
+     */
+    public Function[] getFunctions() {
+        return functions.toArray(new Function[functions.size()]);
+    }
 }
