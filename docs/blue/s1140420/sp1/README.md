@@ -210,48 +210,36 @@ Here is a brief summary of changed classes:
 
 # 8. Work Log
 
-*Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
+I never drank an ounce of alcohol in my life, but I must have been drunk when I mentioned "[Lang03.1]" in my commits INSTEAD OF "[Lang02.1]".
 
-Commits:
+I also forgot, up until the last 24h or so, to include "[fixing issue #52]" to link them to my Bitbucket Issue. A mistake that I will not be making for Sprint 2...
 
-[Started new example documentation for John Doe Core00.0.](https://bitbucket.org/lei-isep/nsheets/commits/7d9ae99772cce77627454021ea814867a8ef3223)
+Important Commits:
 
-[Started UI code for Core00.0](https://bitbucket.org/lei-isep/nsheets/commits/88cd76f001939c0fd49ac124a258a3d6ee3dc087) This commit contains some experimental code for studying how the application works. Since it was done in a feature branch no harm to others.  
+[Updated UC distribution for Team BLUE and created default "sp1" folders and markdown files for my team Lang02.1.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d504dffbca27ea4db63fefb89c1243d5da39735b)
 
-[Core00.0 Added Analysis SD](https://bitbucket.org/lei-isep/nsheets/commits/e98286e5dbaf11bdd363d0228008acd86f4155c1)
+[Wrote Requirements and Analysis Lang02.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b039d15a5a03c8556949bc6ff30a8d03788af3fd)
 
-[Core00.0 - Added user stories](https://bitbucket.org/lei-isep/nsheets/commits/5238a88d01a46b4dd10e3d99c8977ac3950c4ea2)
+[Lang02.1 SSD](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7d1385db958d5c294d401374297dc787f171ff55)
 
-[Core00.0 - Added analysis how GWT and the application work](https://bitbucket.org/lei-isep/nsheets/commits/cbd2bf4669e9b781657ad909aaa27a425c5cbdfd)
+[Lang02.1 Introducing Variable](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1803d0d0c1cf554a3bed2f2ee5b5fa90b7c4e6af)
 
-[Core00.0 - Analysis: explain GWTP and MVP](https://bitbucket.org/lei-isep/nsheets/commits/0c3e56339fbd7fc8a421770ce041dc29b2b1af40)
+[Lang02.1 - Created Variable and VariableList](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/371695642805c1349f365c088325416fec1e94cd)
 
-[Core00.0 - Analysis: Explain Server and the RPC mechanism](https://bitbucket.org/lei-isep/nsheets/commits/a11f952fd69f03d45cbb804bbad98f7feabfe30e)
+[Lang02.1 - Some further insight into CellReference allows me to conclude "VariableReference" will be necessary](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8fe729d63868259c089f6e3d2c7eff2a62c683f6)
 
-[Core00.0 Worklog update](https://bitbucket.org/lei-isep/nsheets/commits/24c168ba5a7da770461fbebe566414ab98c90338)
+[Lang02.1 - Added VariableList to Formula ](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b3e1dcfef05625af98a0ff5529e5d8fa2118e041)
 
-[Core00.0 Analysis: update to the analysis sequence diagram with vision for integrating database/JPA.](https://bitbucket.org/lei-isep/nsheets/commits/30fbbeb02fa4a705eef213f30e0f7cd430550de9)
+[Lang02.1 - Added VariableReference, which will behave similarly as a CellReference](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ab661ec45fd478dc63b2187d8abfb27c5f34e7ed)
 
-[Core00.0 - Analysis: Added Use Cases, Domain Model and more detailed "Analysis" Sequence Diagrams.](https://bitbucket.org/lei-isep/nsheets/commits/ec2e2a5ad8b9a7bf1cfa49cf5d464811e365f7b2)
+[Lang02.1 - Added "visitVariableReference()" to Visitor classes. I was thinking of using the existing "visitReference()", but it seems to me like it's best to split this](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/238957cc7ab43510b1aab6ee7714152346cd5d82)
 
-[Updated some meta-descriptions in the example readme-md of Core00.0.](https://bitbucket.org/lei-isep/nsheets/commits/e2ad8d831bc730181e07af37651a814d245fe3e9)
+[Lang02.1 - Changed VariableReference to Expression, to avoid implementing some methods that seem unnecessary for now. Also want to avoid the "visits" to use those methods (like "getCells()") because if they do, they'd throw exceptions](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ae1d1a03a75235cbcd44aea8669bd12c8486bedc)
 
-[Core00.0: Analysis - Added system sequence diagrams / Design - SD moved to design section of documentation.](https://bitbucket.org/lei-isep/nsheets/commits/2e7873a1c56ab2c7844e19919fe13156edfcc332)
+[Lang02.1 - Changed Assignment operator class. Pedro Tedim suspects an "instance of" is necessary to recognize a "VariableReference". The man is clearly more comfortable with this grammar mumbo-jumbo than I am. Plus, his Lang01.1 UC seems to be working.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8f0cabad541517a47ae55011b7d1a642033ede08)
 
-[Core00.0: Design/Tests- First draft for tests.](https://bitbucket.org/lei-isep/nsheets/commits/42411adda325fbab58c7d770ddc8fbe2b962d8aa)
+[Lang02.1 - Editing FormulaEvalVisitor, "visitReference()". I've put "VARIABLE" in the "reference" rule in the Grammar, and this class seems to have "visits" for every single rule, so this is my best shot. Using the "Token" bullshit that I found in the "visitLiteral()" method](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c820ce9aad519ee86116b130d58e53b0356440e5)
 
-[Core00.0 - Design/Tests: Added test for domain class WorkbookDescription.](https://bitbucket.org/lei-isep/nsheets/commits/fc5831bc452d4b69c0c9f568849e7aeddae329d1)
+[Lang02.1 - Reworked VariableReference to have a Cell instead of a Formula: the processing steps have several references to "Cell", so it's basically saving VariableReferences in Cell 1st, and only AFTER the "compile()" method is done is it possible to assign Variables to a Formula](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f7deab7db4fd65b6651fe62f1e6b731112658507)
 
-[Core00.0: Design/Implementation - Added design/implementation for list WorkbookDescriptions. Updated the documentation.](https://bitbucket.org/lei-isep/nsheets/commits/cd7ef6dec31a7b7b95b01b16f4cc82fd8c9b0d66)
-
-[Core00.0 - Test/Design/Implementation: Added first draft for AddWorkbookDescription.](https://bitbucket.org/lei-isep/nsheets/commits/0fee8bbc971593596e23b5e4b5132f25f575e93e)
-
-[Core00.0 - Tests/Design/Implementation: The server code is completed.](https://bitbucket.org/lei-isep/nsheets/commits/414db8752df3ba7af3233470408486de57afda11)
-
-[Core00.0: Design - Updated SD for US add workbook description.](https://bitbucket.org/lei-isep/nsheets/commits/c5207e99c74b82209f46a123a93b9d0498efbe4e)
-
-[Core00.0: Implementation - Added documentation about implementation of US2 (Add Workbook Description)](https://bitbucket.org/lei-isep/nsheets/commits/323b1199ba277f063502e6e7bc9b13ccb59a2147)
-
-[Core00.0: Implementation - Added documentation.](https://bitbucket.org/lei-isep/nsheets/commits/48167bcfcc8c4bdd26f3352d16e41ca9eab072c1)
-
-[Core00.0: Implementation: Updated Presenter implementation for add new workbook description.](https://bitbucket.org/lei-isep/nsheets/commits/7fb703f3718178e6ffde4a49d0b959064585f209)
+[Lang02.1 - Reworked README.md, SSD, SD and CD to better reflect my work](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2536ea335f40ebb29aca837ad0663e5cdf7d2657)
