@@ -264,7 +264,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             String lowerCell=lowerCellInfo.getText();
             String upperCell=upperCellInfo.getText();
             Spreadsheet sh=customTable.getRow(0).getData().sheet;
-            //sh.sortCells(upperCell,lowerCell,dataType,sortingType); Still needs work
+            sh.sortCells(upperCell,lowerCell,dataType,sortingType); //Still needs work
             List<SheetCell> rows = new ArrayList<>();
             for (int k = 0; k < sh.getRowCount(); k++) {
                 rows.add(new SheetCell(sh, k));
