@@ -46,10 +46,10 @@ governing permissions and limitations under the License. #L% -->
     <g:HTMLPanel>
 
         <m:MaterialRow marginTop="60">
-            <m:MaterialTextBox 
-                m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
+            <m:MaterialTextBox m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
                 active="true" grid="s11" iconType="FUNCTIONS" />
-            <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />		
+            <m:MaterialIcon ui:field="styleButton" iconType="MENU" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s11"/>
+            <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
             <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>
             <m:MaterialButton ui:field="sortButton" text="Sort" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
             <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
@@ -74,12 +74,12 @@ governing permissions and limitations under the License. #L% -->
                                        useLoadOverlay="false" useStickyHeader="true" useCategories="false"
                                        useRowExpansion="false" selectionType="NONE" />
 
-            
+
             <ma:window.MaterialWindow ui:field="windowconditional" title="Format Cell" toolbarColor="BLUE_DARKEN_2">
                 <m:MaterialRow marginBottom="0" margin="0" padding="20" layoutPosition="RELATIVE" depth="1">
                     <m:MaterialLabel text="StyleExtensions" textColor="BLACK" />
                 </m:MaterialRow>
-                <m:MaterialListBox placeholder="operators"> 
+                <m:MaterialListBox placeholder="operators">
                     <m.html:Option text="equals to"/>
                     <m.html:Option text="greather then"/>
                     <m.html:Option text="greather or equal then"/>
@@ -87,23 +87,23 @@ governing permissions and limitations under the License. #L% -->
                     <m.html:Option text="less then"/>
                 </m:MaterialListBox>
                 <m:MaterialTextBox ui:field="number" label="Number:" marginTop="50"/>
-                        
-                <m:MaterialListBox placeholder="true color"> 
+
+                <m:MaterialListBox placeholder="true color">
                     <m.html:Option text="blue"/>
                     <m.html:Option text="green"/>
                     <m.html:Option text="red"/>
                 </m:MaterialListBox>
-                <m:MaterialListBox placeholder="false color"> 
+                <m:MaterialListBox placeholder="false color">
                     <m.html:Option text="blue"/>
                     <m.html:Option text="green"/>
                     <m.html:Option text="red"/>
                 </m:MaterialListBox>
                 <m:MaterialButton ui:field="confirm" text="ok"  backgroundColor="BLACK" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
-         
-            </ma:window.MaterialWindow>
-            
 
-            
+            </ma:window.MaterialWindow>
+
+
+
             <ma:popupmenu.MaterialPopupMenu
                 ui:field="popupMenu">
                 <m:MaterialLink ui:field="editformat" display="BLOCK" text="format"
@@ -114,7 +114,7 @@ governing permissions and limitations under the License. #L% -->
                                 iconType="CONTENT_PASTE" textColor="BLACK" />
                 <m:MaterialLink display="BLOCK" text="Rename"
                                 iconType="EDIT" textColor="BLACK" />
-   
+
                 <!-- Second level -->
                 <m:MaterialLink activates="moveTo" display="BLOCK"
                                 text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">

@@ -30,6 +30,7 @@ import javax.inject.Inject;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -95,6 +96,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialButton exportToCSVButton;
+
+    @UiField
+    MaterialIcon styleButton;
+
 
     @UiField
     MaterialDataTable<SheetCell> customTable;
@@ -224,7 +229,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 teste.put("Isep5", "Linha5");
                 Form form = new Form(teste);
                 wb.insertNewForm(form);*/
-                
+
                 if (!wb.formExists()) {
                     new FormView(wb.getForm().getRows());
                 } else {
@@ -304,6 +309,20 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             popupMenu.setPopupPosition(event.getMouseEvent().getPageX(), event.getMouseEvent().getPageY());
             popupMenu.open();
         });
+
+        styleButton.addClickHandler(event -> {
+            //Window.alert("Style Extension Activated");
+            new StyleView();
+            StyleView.confirmButton.addClickHandler(event1 -> {
+                //String style = StyleView.styleChooser.getActivatorElement().getAttribute();
+                //String cell= StyleView.cellInfo.getValue();
+                //String option = StyleView.colorChooser.getActivatorElement().getAttribute();
+                StyleView.styleWindow.close();
+            });
+
+        });
+
+
 
         exportToCSVButton.addClickHandler(event -> {
             MaterialWindow window = new MaterialWindow();

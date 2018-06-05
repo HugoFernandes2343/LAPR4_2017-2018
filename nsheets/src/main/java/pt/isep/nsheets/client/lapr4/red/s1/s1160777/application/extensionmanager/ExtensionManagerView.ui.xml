@@ -25,6 +25,13 @@
             <m:MaterialIcon ui:field="colorExtensionDef" iconType="MORE_VERT" iconColor="GREY" waves="DEFAULT" circle="true" grid="l0" offset="l5"/>
         </m:MaterialRow>
 
+        <!--Second extension (CellFormat threshold)-->
+        <m:MaterialRow>
+            <m:MaterialSwitch ui:field="styleExtension" value="true" grid="l0"/>
+            <m:MaterialLabel text="Style Format (Format different aspects of your workbook cells!)" grid="l0"/>
+            <m:MaterialIcon ui:field="styleExtensionDef" iconType="MORE_VERT" iconColor="GREY" waves="DEFAULT" circle="true" grid="l0" offset="l6"/>
+        </m:MaterialRow>
+
         <!--Apply Row-->
         <m:MaterialRow>
             <m:MaterialButton ui:field="applyButton" text="Apply" size="MEDIUM"/>
