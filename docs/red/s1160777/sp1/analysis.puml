@@ -7,10 +7,9 @@ skinparam shadowing false
 
 actor User
 
-User -> Browser : navigate to page
-Browser ->> Server : getExtensions()
-
-database Database
+User ->> Browser : navigate to page
+User ->> Browser : getExtensions()
+Browser -> return extensions
 
 Server -->> Browser : return
 

@@ -34,9 +34,13 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
 
         void addColorSwitchHandler(ValueChangeHandler vc);
 
+        void addStyleSwitchHandler(ValueChangeHandler vc);
+
         MaterialButton getApplyButton();
 
         MaterialSwitch getColorExtensionSwitch();
+
+        MaterialSwitch getStyleExtensionSwitch();
 
     }
 
@@ -80,7 +84,12 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
 
 
         this.view.addColorSwitchHandler(vc -> {
-            MaterialToast.fireToast("Value " + vc.getValue());//diplays the actual value
+            MaterialToast.fireToast("Color Value " + vc.getValue());//diplays the actual value
+            //will need to fetch the index and apply the value to the respective extension
+        });
+
+        this.view.addStyleSwitchHandler(vc -> {
+            MaterialToast.fireToast("Style Value " + vc.getValue());//diplays the actual value
             //will need to fetch the index and apply the value to the respective extension
         });
 
