@@ -41,4 +41,9 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public EventRepository events() {
         return new JpaEventRepository(this.settings);
     }
+
+    @Override
+    public TagsRepository tags() {
+        return new JpaTagsRepository(this.settings);
+    }
 }
