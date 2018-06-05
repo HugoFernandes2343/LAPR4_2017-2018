@@ -1,15 +1,18 @@
 package pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
+import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.*;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 
 import javax.inject.Inject;
 
@@ -64,6 +67,22 @@ public class MacrosView extends Composite {
         p3.add(this.cancelButton);
         window.add(p3);
         window.open();
+
+        cancelButton.addClickHandler(clickEvent -> {
+            window.close();
+        } );
+
+        saveButton.addClickHandler(clickEvent ->{
+            if(macroName.getText().isEmpty() || macroType.getId().isEmpty() || macroCode.getText().isEmpty()){
+                MaterialPopupMenu popup = new MaterialPopupMenu();
+                popup.open();
+                window.close();
+            }else{
+                Macro macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getId());
+                //persiste this object
+                window.close();
+            }
+        });
     }
 
 
