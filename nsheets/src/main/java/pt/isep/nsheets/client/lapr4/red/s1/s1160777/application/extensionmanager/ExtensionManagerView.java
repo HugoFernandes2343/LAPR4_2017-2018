@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCheckBox;
+import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialSwitch;
 import org.apache.xpath.operations.Bool;
 
@@ -22,8 +23,17 @@ class ExtensionManagerView extends ViewImpl implements ExtensionManagerPresenter
     @UiField
     MaterialSwitch colorSwitch;
 
+    @UiField
+    MaterialSwitch styleExtension;
+
+    @UiField
+    MaterialIcon colorExtensionDef;
+
     @Override
     public void addClickHandlerApplyButton(ClickHandler ch) { applyButton.addClickHandler(ch); }
+
+    @Override
+    public void addStyleSwitchHandler(ValueChangeHandler vc) { styleExtension.addValueChangeHandler(vc); }
 
     @Override
     public void addColorSwitchHandler(ValueChangeHandler vc) { colorSwitch.addValueChangeHandler(vc); }
@@ -35,6 +45,9 @@ class ExtensionManagerView extends ViewImpl implements ExtensionManagerPresenter
 
     @Override
     public MaterialSwitch getColorExtensionSwitch() { return this.colorSwitch; }
+
+    @Override
+    public MaterialSwitch getStyleExtensionSwitch() { return this.styleExtension;}
 
     interface Binder extends UiBinder<Widget, ExtensionManagerView> {
     }
