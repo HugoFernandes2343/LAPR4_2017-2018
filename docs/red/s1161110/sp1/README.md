@@ -182,8 +182,8 @@ Commits:
 
 [Analysis Core08.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/838b2cc7d9e9aad27ebac10872ff20f49db934e5)
 
-[Design Core08.1]()
+[Design Core08.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/e747c419bbe7cba2b1d9ef7ac742f1679152f046)
 
-[Tests (documentation) Core08.1]()
+[Tests (documentation) Core08.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/e747c419bbe7cba2b1d9ef7ac742f1679152f046)
 
 [Code Implementation Core08.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d378b9a9e8aebeda64bace81ef1f85ccfc68aedb)
