@@ -8,6 +8,6 @@ import pt.isep.nsheets.shared.core.Workbook;
 public class AddWorkbookController implements Controller {
     public Workbook addWorkbook(Workbook wb) throws DataConcurrencyException, DataIntegrityViolationException {
 
-        return new WorkbookService().addWorkbook(wb);
+        return new WorkbookService().saveWorkbook(wb);
     }
 }

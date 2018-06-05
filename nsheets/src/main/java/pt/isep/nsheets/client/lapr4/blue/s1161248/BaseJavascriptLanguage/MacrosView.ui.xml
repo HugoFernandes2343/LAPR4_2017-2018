@@ -12,9 +12,8 @@ Uncomment this for XHTML entities
     <ma:window.MaterialWindow ui:field="formWindow" width="70%" title="Create a Macro" textAlign="LEFT" padding="32"
                               height="600px">
         <m:MaterialPanel>
-            <m:MaterialLabel title="Type of Marco">
-                <cb:MaterialComboBox></cb:MaterialComboBox>
-            </m:MaterialLabel>
+            <m:MaterialLabel title="Type of Marco"></m:MaterialLabel>
+            <cb:MaterialComboBox ui:field="macroType"></cb:MaterialComboBox>
             <m:MaterialPanel title="Insert Macro's name">
                 <m:MaterialTextBox ui:field="macroName"></m:MaterialTextBox>
             </m:MaterialPanel>

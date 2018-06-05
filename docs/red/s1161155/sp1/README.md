@@ -2,6 +2,7 @@
 ===============================
 
 # 1. General Notes
+   Was not able to finish the implementation, due to some persisting issues,
 # 2. Requirements
 
 - **Core05.1 - Contacts**

@@ -36,4 +36,23 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public UserRepository user() {
         return new JpaLoginRepository(this.settings);
     }
+
+    @Override
+    public EventRepository events() {
+        return new JpaEventRepository(this.settings);
+    }
+
+    @Override
+    public TagsRepository tags() {
+        return new JpaTagsRepository(this.settings);
+    }
+
+    @Override
+    public ContactRepository contacts() {
+        return new JpaContactRepository(this.settings);
+    }
+
+    public RequestRepository requests() {
+        return new JpaRequestRepository(this.settings);
+    }
 }

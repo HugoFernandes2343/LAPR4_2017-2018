@@ -21,6 +21,8 @@ package pt.isep.nsheets.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+import pt.isep.nsheets.client.application.Contacts.ContactsModule;
+import pt.isep.nsheets.client.application.Requests.RequestsModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
 import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginModule;
@@ -38,6 +40,8 @@ public class ApplicationModule extends AbstractPresenterModule {
 
         install(new HomeModule());
         install(new MenuModule());
+        install(new ContactsModule());
+        install(new RequestsModule());
         install(new AboutModule());
         install(new WorkbookModule());
         install(new SettingsModule());

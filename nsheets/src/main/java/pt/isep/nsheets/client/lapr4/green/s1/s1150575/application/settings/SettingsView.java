@@ -24,7 +24,8 @@ class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @UiField
     MaterialButton btnXMLApply;
-    
+
+    @UiField
     MaterialButton extensionManagerButton;
 
     @UiField

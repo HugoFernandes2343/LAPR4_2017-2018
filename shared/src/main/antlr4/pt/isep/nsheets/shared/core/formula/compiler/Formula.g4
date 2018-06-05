@@ -62,7 +62,7 @@ block
         ;
 
 loopfor
-        :       FOR LCBRA assignment SEMI comparison (SEMI assignment)+ RCBRA
+        :       FOR LCBRA assignment SEMI comparison (SEMI comparison | SEMI assignment)+ RCBRA
         ;
 
 /* loopfor operator */

@@ -19,4 +19,12 @@ public interface RepositoryFactory {
     WorkbookRepository workbooks();
     
     UserRepository user();
+
+    EventRepository events();
+    
+    TagsRepository tags();
+
+    RequestRepository requests();
+
+    ContactRepository contacts();
 }

@@ -5,17 +5,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookController;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.ListWorkbookController;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.*;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDTO;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbooksService;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookDescriptionController;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.ListWorkbookDescriptionController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
@@ -50,10 +49,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
         ListWorkbookController ctrl = new ListWorkbookController();
-
-        ArrayList<Workbook> workbooks = (ArrayList<Workbook>) ctrl.listWorkbooks();
-        workbooks.add(new Workbook("Name", "teste Description"));
-        return workbooks;
+        return (ArrayList<Workbook>) ctrl.listWorkbooks();
     }
 
     @Override
@@ -72,6 +68,14 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         }
 
     }
+
+
+    public int getNrWorkbooks() {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        ListWorkbookController ctrl = new ListWorkbookController();
+        return ctrl.getNrWorkbooks();
+    }
+
 
 //    @Override
 //    public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
