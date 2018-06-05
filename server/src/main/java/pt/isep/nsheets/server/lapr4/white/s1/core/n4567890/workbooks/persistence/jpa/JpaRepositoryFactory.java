@@ -41,4 +41,14 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public EventRepository events() {
         return new JpaEventRepository(this.settings);
     }
+
+    @Override
+    public RequestRepository requests() {
+        return new JpaRequestRepository(this.settings);
+    }
+
+    @Override
+    public ContactRepository contacts() {
+        return new JpaContactRepository(this.settings);
+    }
 }

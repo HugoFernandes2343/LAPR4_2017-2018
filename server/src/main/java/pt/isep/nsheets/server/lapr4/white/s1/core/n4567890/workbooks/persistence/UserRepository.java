@@ -19,4 +19,6 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 public interface UserRepository extends Repository<User, Long> {
 
     public User getUser_Email(Email email, Password password);
+
+    public User getUserByEmail(String email);
 }
