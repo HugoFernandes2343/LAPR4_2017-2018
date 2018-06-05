@@ -1,26 +1,22 @@
 @startuml
-skinparam handwritten false
-skinparam monochrome true
-skinparam packageStyle rect
-skinparam defaultFontName FG Virgil
-skinparam shadowing false
-
 actor User
 
-User->System: opens the settings and selects the CSV tab
-System-->User: shows the csv tab
-User->System: chooses the type of delimiter that he wants in the CSV file
-System-->User: confirms his option
-User->System: selects export to csv button in the workbook page
-System-->User: asks what he wants to export (workbook, a spreadsheet of the workbook or part of a spreadsheet to a CSV file)
-User->System: chooses one of the options
-System-->User: confirms the option and crates a CSV file
+User->System: opens the "Export To CSV" button
+System-->User: shows a window with and asks what he wants to export (workbook, a spreadsheet of the workbook or part of a spreadsheet to a CSV file)
+User->System: selects one of the options
+System-->User: shows the information he has to give according the option he choosed
+User->System: give the information needed
+System-->User: asks for the type of delimiter he wants in the CSV file
+User->System: chooses the delimiter and select the export button
+System-->User: confirms the delimiter and exports the CSV file
 
-Browser ->> Server : getInfo()
+Browser ->> Server : getWokbooks()
 
 database Database
 
 Server -> Database : fetch
+
+Server -> Database : getWorkbooks()
 
 Server -->> Browser : return
 
