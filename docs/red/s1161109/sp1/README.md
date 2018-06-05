@@ -67,13 +67,10 @@ The main idea for the "workflow" of this feature increment.
 
 **Use Cases**
 
-![Use Cases](diag2/usecases.png)
+![Use Cases](usecases.jpg)
 
 - **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
 
-**Domain Model (for this feature increment)**
-
-![Domain Model](dm.png)
 
 - **Domain Model**. Since we found no specific requirements for the structure of Workbook Descriptions we follow the Structure of the existing DTO (WorkbookDescriptionDTO).
 
@@ -81,11 +78,19 @@ The main idea for the "workflow" of this feature increment.
 
 **For US1**
 
-![Analysis SD](analysis.png)
+![Analysis SD](UseCreate.jpg)
 
 **For US2**
 
-![Analysis SD](analysis2.png)
+![Analysis SD](UseGet.jpg)
+
+**For US3**
+
+![Analysis SD](UseEdit.jpg)
+
+**For US4**
+
+![Analysis SD](UseDelete.jpg)
 
 # 4. Design
 
@@ -104,12 +109,20 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 **For US1**
 
-![SD US1](design1.png)
+![SD US1](add.jpg)
 
 
 **For US2**
 
+![SD US1](edit.jpg)
 
+**For US3**
+
+![SD US1](get.jpg)
+
+**For US3**
+
+![SD US1](deletel.jpg)
 
 
 # 5. Implementation
