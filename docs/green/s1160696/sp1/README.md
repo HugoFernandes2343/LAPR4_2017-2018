@@ -21,7 +21,7 @@ For this project i had to understand how the application works and also understa
 
 - As the application user I want export to an CSV file.
 
-![CSV](ExportToCSVBtn)
+![CSV](ExportToCSVBtn.png)
 
 - I have to know how a workbook works. I want to export the entire workbook.
 
