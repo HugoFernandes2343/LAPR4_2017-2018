@@ -1,0 +1,10 @@
+grammar MonetaryLanguage;
+
+expression
+	: EQ comparison /* EOF */
+	;
+
+comparison
+	: concatenation
+		( ( EQ | NEQ | GT | LT | LTEQ | GTEQ ) concatenation )?
+	;

@@ -8,6 +8,7 @@ package pt.isep.nsheets.client.application;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
+import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
  *
@@ -16,11 +17,9 @@ import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 @DefaultGatekeeper
 public class LoggedInGateKeeper implements Gatekeeper {
 
-    private final CurrentUser currentUser;
-
     @Inject
-    public LoggedInGateKeeper(CurrentUser currentUser) {
-        this.currentUser = currentUser;
+    public LoggedInGateKeeper(UserDTO currentUser) {
+        CurrentUser.setCurrentUser(currentUser);
     }
 
     @Override
