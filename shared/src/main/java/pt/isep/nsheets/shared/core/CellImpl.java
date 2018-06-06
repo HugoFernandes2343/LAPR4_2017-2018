@@ -226,7 +226,7 @@ public class CellImpl implements Cell {
                 /*
                 *Only at this stage will Formula contain actual Variables
                 */
-                this.formula.setTempVariableList(this.variableList);
+                //this.formula.setTempVariableList(this.variableList);
 		updateDependencies();
 	}
 
