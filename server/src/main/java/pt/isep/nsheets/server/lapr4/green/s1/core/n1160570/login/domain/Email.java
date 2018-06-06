@@ -2,18 +2,19 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.ValueObject;
 import eapli.util.Strings;
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Embeddable;
+
 import pt.isep.nsheets.shared.services.EmailDTO;
 
 /**
- *
  * @author Paulo Jorge
  */
 @Embeddable
 public class Email implements ValueObject, Serializable {
-
+    private static final long serialVersionUID = 1L;
     //  private static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
     private String email;
 

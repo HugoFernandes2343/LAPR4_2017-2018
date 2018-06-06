@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(uniqueConstraints={
+/*@Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"u1", "u2"})
-})
+})*/
 public class Contact implements Serializable, AggregateRoot<Long> {
 
     private static final Long serialVersionUID = 1L;
@@ -22,15 +22,17 @@ public class Contact implements Serializable, AggregateRoot<Long> {
     private Long pk;
 
 
-    private User u1;
-    private User u2;
+    private String u1;
+
+
+    private String u2;
 
     protected  Contact(){
     }
 
     public Contact(User u1, User u2) {
-        this.u1 = u1;
-        this.u2 = u2;
+        this.u1 = u1.getEmail().toString();
+        this.u2 = u2.getEmail().toString();
     }
 
     @Override
