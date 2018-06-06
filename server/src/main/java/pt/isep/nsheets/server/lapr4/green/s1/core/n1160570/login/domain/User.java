@@ -20,6 +20,8 @@ import pt.isep.nsheets.shared.services.UserDTO;
 @Entity
 public class User implements AggregateRoot<Email>, Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @EmbeddedId
     private Email email;
     private Password password;
