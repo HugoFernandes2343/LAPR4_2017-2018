@@ -6,7 +6,6 @@
 package pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
