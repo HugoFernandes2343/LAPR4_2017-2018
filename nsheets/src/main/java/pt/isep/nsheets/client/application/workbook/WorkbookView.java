@@ -22,21 +22,13 @@ package pt.isep.nsheets.client.application.workbook;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import com.google.gwt.user.client.ui.Widget;
-
-import com.gwtplatform.mvp.client.ViewImpl;
-
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
@@ -45,24 +37,22 @@ import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
-import gwt.material.design.client.ui.*;
-import gwt.material.design.client.ui.table.MaterialDataTable;
-import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import static gwt.material.design.jquery.client.api.JQuery.$;
-import java.util.HashMap;
-import java.util.Map;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
-import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
-import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
-import pt.isep.nsheets.shared.services.DownloadService;
-import pt.isep.nsheets.shared.services.DownloadServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+
+import static gwt.material.design.jquery.client.api.JQuery.$;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -243,6 +233,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
+        });
+
+
+        /*Opens the prompt for the user to type the name of the CLS*/
+        exportToCLSButton.addClickHandler(event -> {
+            new ExportToCLSView(/*send the current workbook*/this.activeCell.getSpreadsheet().getWorkbook());
         });
 
         macrosButton.addClickHandler(event -> {
@@ -533,26 +529,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            p6.setTextAlign(TextAlign.RIGHT);
 //            p6.add(exportCSV);
 //            window.add(p6);
-
-            exportToCLSButton.addClickHandler(event1 -> {
-                DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
-                // Set up the callback object.
-                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        MaterialToast.fireToast("Error! " + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Workbook result) {
-                        MaterialToast.fireToast("Exported successfully!", "rounded");
-
-                    }
-                };
-                String fileInfo1 = "CLSFile.cls";
-                String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1;
-                Window.open( url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
-            });
 
             window.open();
         });
