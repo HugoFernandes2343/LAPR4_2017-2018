@@ -27,8 +27,8 @@ public class FormsEditorController {
     }
 
     public boolean existsForm() {
-        return true;
-       // return currentWorkbook.formExists();
+//        return true;
+        return currentWorkbook.formExists();
     }
 
     public Map<String, String> getExistentForm() {

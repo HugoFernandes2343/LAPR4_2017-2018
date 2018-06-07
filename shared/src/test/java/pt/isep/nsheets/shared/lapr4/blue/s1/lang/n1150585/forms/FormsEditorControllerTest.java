@@ -95,12 +95,12 @@ public class FormsEditorControllerTest {
         assertEquals(expResult2, result2);
 
         FormsEditorController instance3 = new FormsEditorController(wb3);
-        boolean expResult3 = true;
+        boolean expResult3 = false;
         boolean result3 = instance3.existsForm();
         assertEquals(expResult3, result3);
 
         FormsEditorController instance4 = new FormsEditorController(wb4);
-        boolean expResult4 = true;
+        boolean expResult4 = false;
         boolean result4 = instance4.existsForm();
         assertEquals(expResult4, result4);
 

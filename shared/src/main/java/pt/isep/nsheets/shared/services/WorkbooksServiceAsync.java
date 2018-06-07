@@ -13,6 +13,9 @@ public interface WorkbooksServiceAsync {
 	void addWorkbook(Workbook wd, AsyncCallback<Workbook> async);
 
 	void getWorkbooks(AsyncCallback<ArrayList<Workbook>> async);
+        
+        void deleteWorkbook(Workbook workbook, AsyncCallback<Workbook> callback);
+        
 
 //	void addWorkbookDescription(WorkbookDescriptionDTO wdDto, AsyncCallback<WorkbookDescriptionDTO> async);
 }

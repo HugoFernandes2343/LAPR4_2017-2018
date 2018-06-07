@@ -551,7 +551,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                     }
                 };
-                String fileInfo1 = "CLSFile";
+                String fileInfo1 = "CLSFile.cls";
                 String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1;
                 Window.open( url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
             });
