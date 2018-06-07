@@ -23,6 +23,8 @@ public class NameTokens {
 
     public static final String home = "home";
 
+    public static final String agenda = "agenda";
+
     public static final String about = "about";
 
     public static final String workbook = "workbook";
@@ -92,4 +94,6 @@ public class NameTokens {
     public static String getExtensionManager() { return extensionmanager; }
 
     public static String getXmlupload() { return xmlupload; }
+
+    public static String getAgenda(){ return agenda;}
 }

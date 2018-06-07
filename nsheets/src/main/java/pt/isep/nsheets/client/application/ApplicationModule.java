@@ -25,6 +25,7 @@ import pt.isep.nsheets.client.application.Contacts.ContactsModule;
 import pt.isep.nsheets.client.application.Requests.RequestsModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
+//import pt.isep.nsheets.client.lapr4.blue.s2.s1161248.Agenda.AgendaModule;
 import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginModule;
 import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.SettingsModule;
@@ -45,6 +46,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new WorkbookModule());
         install(new SettingsModule());
         install(new LoginModule());
+        //install(new AgendaModule());
         install(new XmlUploadModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
