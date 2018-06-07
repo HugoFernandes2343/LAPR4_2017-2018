@@ -11,8 +11,6 @@ import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.ui.*;
-import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 
 import javax.inject.Inject;
@@ -39,6 +37,7 @@ public class MacrosView extends Composite {
     }
 
     public MacrosView(){
+
 
         initWidget(uiBinder.createAndBindUi(this));
         MaterialWindow window = new MaterialWindow();
