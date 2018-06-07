@@ -96,13 +96,13 @@ For this feature increment, since it is the first one to be developed in a new p
 
 **Use Cases**
 
-![Use Cases](Use Case Diagram1.jpg)
+![Use Cases](UseCaseDiagram1.jpg)
 
 - **Use Cases**. Since these use cases have a one-to-one correspondence with the User Stories we do not add here more detailed use case descriptions. We find that these use cases are very simple and may eventually add more specification at a later stage if necessary.
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](Classe diagram.jpg)
+![Domain Model](Classe_diagram.jpg)
 
 - **Domain Model**. Since we found no specific requirements for the structure of User we follow the Structure of the existing DTO (UserDTO).
 
@@ -110,7 +110,7 @@ For this feature increment, since it is the first one to be developed in a new p
 
 **For US1**
 
-![Analysis SD](Sequence Diagram.jpg)
+![Analysis SD](Sequence_Diagram.jpg)
 
 
 # 4. Design
@@ -123,7 +123,7 @@ Following the guidelines for JPA from EAPLI we envision a scenario like the foll
 
 **For US1**
 
-![SD US1](Sequence Diagram2.jpg)
+![SD US1](Sequence_Diagram2.jpg)
 
 Notes:  
 - The diagram only depicts the less technical details of the scenario;  
