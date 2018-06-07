@@ -61,7 +61,7 @@ public class FormEditorView extends Composite {
     public FormEditorView() {
         initWidget(uiBinder.createAndBindUi(this));
 
-        Workbook wb = new Workbook("Teste1", "Teste2");
+        Workbook wb = new Workbook("Teste1", "Teste2","");
         //Workbook wb = SelectedWorkbookController.getActualWorkbook();
         FormsEditorController editorController = new FormsEditorController(wb);
 

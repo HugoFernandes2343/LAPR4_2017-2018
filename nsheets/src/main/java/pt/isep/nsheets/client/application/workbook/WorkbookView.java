@@ -164,7 +164,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        Workbook wb = new Workbook("Workbook", "New Workbook", contents);
+        Workbook wb = new Workbook("Workbook", "New Workbook", contents, "");
         Spreadsheet sh = wb.getSheet();
 
         int columnNumber = 0;
@@ -219,7 +219,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         firstButton.addClickHandler(event -> {
             if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
                 //Workbook wb = SelectedWorkbookController.getActualWorkbook();
-                Workbook wb = new Workbook("Teste1", "Teste2");
+                Workbook wb = new Workbook("Teste1", "Teste2", "");
                 /*Map<String, String> teste = new HashMap<>();
                 teste.put("Isep0", "Linha0");
                 teste.put("Isep1", "Linha1");

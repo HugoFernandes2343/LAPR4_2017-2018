@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Entity
 public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
@@ -23,13 +22,16 @@ public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
     private String name;
     private String description;
     private Spreadsheet sheet;
+    private String userMail;
+
 //    public ArrayList<Spreadsheet> spreadsheets = new ArrayList<>();
 //    public int existingSpreadsheets;
 
-    public WorkbookDTO(String name, String description, Spreadsheet sheet) {
+    public WorkbookDTO(String name, String description, Spreadsheet sheet, String usName) {
         this.name = name;
         this.description = description;
         this.sheet = sheet;
+        this.userMail = usName;
     }
 
 //    public WorkbookDTO(String name, String description, ArrayList<Spreadsheet> s){
@@ -83,11 +85,11 @@ public class WorkbookDTO implements AggregateRoot<Long>, Serializable {
     }
 
     public Workbook toWorkbook() {
-        return new Workbook(this.name, this.description, this.sheet);
+        return new Workbook(this.name, this.description, this.sheet, this.userMail);
     }
 
     public static WorkbookDTO fromWorkbook(Workbook wb) throws IllegalArgumentException {
-        return new WorkbookDTO(wb.getName(), wb.getDescription(), wb.getSheet());
+        return new WorkbookDTO(wb.getName(), wb.getDescription(), wb.getSheet(), wb.getUserMail());
     }
 
     @Override
