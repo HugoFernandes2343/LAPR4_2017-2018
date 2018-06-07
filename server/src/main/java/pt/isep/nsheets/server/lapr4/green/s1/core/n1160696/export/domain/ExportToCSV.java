@@ -102,9 +102,9 @@ public class ExportToCSV {
         
         
         List<Workbook> wb = Arrays.asList(
-                new Workbook("oi","oi"),
-                new Workbook("ola","ola"),
-                new Workbook("xau","xau")
+                new Workbook("oi","oi",""),
+                new Workbook("ola","ola",""),
+                new Workbook("xau","xau","")
         );
         
         writeLine(writer, Arrays.asList("Name", "Description"));

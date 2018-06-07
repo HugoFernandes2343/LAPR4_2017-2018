@@ -40,6 +40,8 @@ public class NameTokens {
     public static final String exportToCSVWindow = "exportToCSVWindow";
 
     public static final String login = "login";
+    
+    public static final String logout = "logout";
 
     public static final String extensionmanager = "extensionmanager";
 
@@ -68,6 +70,10 @@ public class NameTokens {
     public static String getLogin() {
         return login;
     }
+     public static String getLogout() {
+        return logout;
+    }
+    
 
     public static String getSettings() {
         return settings;
