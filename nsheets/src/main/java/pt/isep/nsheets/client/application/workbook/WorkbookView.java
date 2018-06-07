@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.jnlp.DownloadService;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -62,6 +61,8 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
+import pt.isep.nsheets.shared.services.DownloadService;
+import pt.isep.nsheets.shared.services.DownloadServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
