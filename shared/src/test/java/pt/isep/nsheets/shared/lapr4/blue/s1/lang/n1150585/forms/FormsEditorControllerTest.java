@@ -24,7 +24,7 @@ public class FormsEditorControllerTest {
 
     @Test
     public void testAddForm() {
-        Workbook wb = new Workbook("Teste1", "Teste2");
+        Workbook wb = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste = new HashMap<>();
         teste.put("Isep0", "Linha0");
         teste.put("Isep1", "Linha1");
@@ -33,7 +33,7 @@ public class FormsEditorControllerTest {
         teste.put("Isep4", "Linha4");
         teste.put("Isep5", "Linha5");
 
-        Workbook wb2 = new Workbook("Teste1", "Teste2");
+        Workbook wb2 = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste2 = new HashMap<>();
         teste2.put("Linha1", "Linha0");
         teste2.put("Linha2", "Linha1");
@@ -58,7 +58,7 @@ public class FormsEditorControllerTest {
      */
     @Test
     public void testExistsForm() {
-        Workbook wb = new Workbook("Teste1", "Teste2");
+        Workbook wb = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste = new HashMap<>();
         teste.put("Isep0", "Linha0");
         teste.put("Isep1", "Linha1");
@@ -69,7 +69,7 @@ public class FormsEditorControllerTest {
         Form form = new Form(teste);
         wb.insertNewForm(form);
 
-        Workbook wb2 = new Workbook("Teste1", "Teste2");
+        Workbook wb2 = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste2 = new HashMap<>();
         teste2.put("Linha1", "Linha0");
         teste2.put("Linha2", "Linha1");
@@ -79,8 +79,8 @@ public class FormsEditorControllerTest {
         Form form2 = new Form(teste2);
         wb2.insertNewForm(form2);
 
-        Workbook wb3 = new Workbook("Teste1", "Teste2");
-        Workbook wb4 = new Workbook("Teste1", "Teste2");
+        Workbook wb3 = new Workbook("Teste1", "Teste2","");
+        Workbook wb4 = new Workbook("Teste1", "Teste2","");
 
         System.out.println("existsForm");
 
@@ -111,7 +111,7 @@ public class FormsEditorControllerTest {
      */
     @Test
     public void testGetExistentForm() {
-        Workbook wb = new Workbook("Teste1", "Teste2");
+        Workbook wb = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste = new HashMap<>();
         teste.put("Isep0", "Linha0");
         teste.put("Isep1", "Linha1");
@@ -122,7 +122,7 @@ public class FormsEditorControllerTest {
         Form form = new Form(teste);
         wb.insertNewForm(form);
 
-        Workbook wb2 = new Workbook("Teste1", "Teste2");
+        Workbook wb2 = new Workbook("Teste1", "Teste2","");
         Map<String, String> teste2 = new HashMap<>();
         teste2.put("Linha1", "Linha0");
         teste2.put("Linha2", "Linha1");

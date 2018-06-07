@@ -52,6 +52,7 @@
                 <m:MaterialNavSection float="RIGHT">
                     <m:MaterialLink targetHistoryToken="{tokens.getLogin}"  text="Login"/>		
                     <m:MaterialLink text="Signup" href="#signup" />
+                    <m:MaterialLink  ui:field="btnLogout" text="Logout" />
                 </m:MaterialNavSection>
             </m:MaterialNavBar>
         </m:MaterialHeader>
@@ -91,6 +92,8 @@
             <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE" text="About"/>
             </m.html:ListItem>
+            
+
         </m:MaterialSideNavPush>
 
 
