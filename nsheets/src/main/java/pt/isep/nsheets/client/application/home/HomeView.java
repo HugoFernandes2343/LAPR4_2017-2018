@@ -113,7 +113,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         renameLink.setIconColor(Color.INDIGO);
         renameLink.setTextColor(Color.WHITE);
         renameLink.addClickHandler(event -> {
-            MaterialToast.fireToast("rename "+wb.getName());
+            MaterialToast.fireToast("rename "+wb.getName());            
         });
 
         MaterialLink deleteLink = new MaterialLink();
