@@ -61,7 +61,7 @@ This is a table that should display the overall planning of the team. This is si
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1)            | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
-| Red  |[Hugo Carvalho](red/s1161569/)   | [Core03.1](red/s1161569/sp1)	 		       |   	             |	  |
+| Red  |[Hugo Carvalho](red/s1161569/)   | [Core03.1](red/s1161569/sp1)	 		       | [IPC08.1](red/s1161569/sp2)  	      |	  |
 | Red  |[Hugo Fernandes](red/s1161155/)	 | [Core05.1](red/s1161155/sp1) |								 |		|
 | Red  |[Marco Carneiro](red/s1160777/)  | [Core02.1](red/s1160777/sp1)	|						 |		|
 | Red  |[David Santiago](red/s1161109/)  | [Core07.1](red/s1161109/sp1) |								 |		|
@@ -69,21 +69,21 @@ This is a table that should display the overall planning of the team. This is si
 | Red  |[Filipe Simão](red/s1161213/) 	 | [Core06.1](red/s1161213/sp1) |								 |		|
 | Red  |[Norberto Sousa](red/s1120608/)  | [Core01.1](red/s1120608/sp1) |								 |		|
 | Red  |[Ricardo Correia](red/s1151231/) |               |                 |    |
-| Green |[Carlos Rodrigues](green/s1151136/) |  [IPC06.1](green/s1151136/sp1)						|								 |		|
-| Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)					|								 |		|
-| Green |[João Santiago](green/s1160696/) 	 | [IPC05.1](green/s1160696/sp1)						|								 |		|
-| Green |[Paulo Magalhães](green/s1160570/)  | [IPC01.1](green/s1160570/sp1)	 							|								 |		|
+| Green |[Carlos Rodrigues](green/s1151136/) |  [IPC06.1](green/s1151136/sp1)|								 |		|
+| Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)|[Lang02.2](green/s1150575/sp2)|		|
+| Green |[João Santiago](green/s1160696/) 	 | [IPC05.1](green/s1160696/sp1)|								 |		|
+| Green |[Paulo Magalhães](green/s1160570/)  | [IPC01.1](green/s1160570/sp1)|[Lang01.2(green/s1160570/sp2)]|		|
 | Green |[Nemanja Cosic](green/s1171776/)  	 | 							|								 |		|
 | Green |[Predrag Miljic](green/s1171787/) 	 | 							|								 |		|
 | Green |[Zoran Protic](green/s1171815/) 		 | 							|								 |		|
-| Blue |[João Oliveira](blue/s1161248/)    | [Lang08.1](blue/s1161248/sp1)							|								 |		|
-| Blue |[Ana Jesus](blue/s1130443/) 		   | MIA							|								 |		|
+| Blue |[João Oliveira](blue/s1161248/)    | [Lang08.1](blue/s1161248/sp1)							|	[Core06.2](blue/s1161248/sp2)							 |		|
+| Blue |[Ana Jesus](blue/s1130443/) 		   | MIA							|	MIA							 |		|
 | Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|								 |		|
-| Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|								 |		|
-| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|								 |		|
-| Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|								 |		|
+| Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|	[Core01.2](blue/s1091234/sp2)							 |		|
+| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 |		|
+| Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|	[Core05.2](blue/s1150585/sp2)							 |		|
 | Blue |[Pietro Falco](blue/s1171786/)	 	 | [Lang04.1](blue/s1171786/sp1)							|								 |		|
-| Blue |[Barbara Csonka](blue/s1171715/)   | [Lang03.1](blue/s1171715/sp1)             |                |    |
+| Blue |[Barbara Csonka](blue/s1171715/)   | [Lang03.1](blue/s1171715/sp1)             | [Core03.2](blue/s1171715/sp2)               |    |
 
 # 5. Requirements
 

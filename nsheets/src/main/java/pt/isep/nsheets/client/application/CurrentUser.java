@@ -5,7 +5,6 @@
  */
 package pt.isep.nsheets.client.application;
 
-
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
@@ -13,33 +12,28 @@ import pt.isep.nsheets.shared.services.UserDTO;
  * @author Paulo Jorge
  */
 public class CurrentUser {
-
-    boolean isLoggedIn;
-    UserDTO currentUser;
-
-    public CurrentUser() {
-        isLoggedIn = false;
-    }
-
-    public void setCurrentUser(UserDTO currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public Boolean isLoggedIn() {
+    
+    static boolean isLoggedIn;
+    static UserDTO currentUser;
+    
+    public static boolean isIsLoggedIn() {
         return isLoggedIn;
     }
-
-    public void setIsLoggedIn(boolean isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
+    
+    public static void setIsLoggedIn(boolean isLoggedIn) {
+        CurrentUser.isLoggedIn = isLoggedIn;
     }
-
-    public boolean isIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public UserDTO getCurrentUser() {
+    
+    public static UserDTO getCurrentUser() {
         return currentUser;
     }
     
-
+    public static void setCurrentUser(UserDTO currentUser) {
+        CurrentUser.currentUser = currentUser;
+    }
+    
+    public static void logout() {
+        CurrentUser.setCurrentUser(null);
+        CurrentUser.setIsLoggedIn(false);
+    }
 }
