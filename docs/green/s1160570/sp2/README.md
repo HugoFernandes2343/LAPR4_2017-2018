@@ -14,39 +14,38 @@ Add a new formulas language (currently the application only has Excel formulas t
 Proposal:
 
 **US1** - Update grammar Formula.g4 to include new rules and operators:
-Proposal:
 
-**US1** - Update grammar Formula.g4 to include new rules and operators:
 
-RULES:
+Update RULES:
+**atom**
 
-* **assignment** (reference ASSIGN comparison)
-* **block**
-* **loopfor**
-* **atom** (added loopfor, block and assignment)
+Create RULES:
+* **expressionMonetary**
+* **euroExpression**
+* **poundExpression**
+* **dollarExpression**
+* **literalMonetary**
 
-OPERATORS:
-
-* **FOR** ('FOR')
-* **LCBRA** ('{')
-* **RCBRA** ('}')
-* **ASSIGN** (':=')
-
-**US2** - Understand how the application works when inserting a new formula on the worksheet:
-  * Is it supposed to generate visitor and listener code automatically?
+Create OPERATORS:
+* **START** ('#')
+* **EURO_FUN** ('EURO or euro')
+* **POUND_FUN** ('POUND or pound')
+* **DOLLAR_FUN** ('DOLLAR or dolar')
+* **EURO_SIGN** ('e')
+* **DOLLAR_SIGN** ('$')
+* **POUND_SIGN** ('£')
 
 # 3. Analysis
 ## 3.1 GRAMMAR ANALYSIS
 
-1 - A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block.
+### ExpressionMonetary
+1 - The expressionMonetary must start with the token Start ('#'), later it can call one of the following three rules poundExpression, dollarExpression, euroExpression.
 
-  * 1.1 - "= {1+ 2; sum (A1:A10); B3 + 4 }"
+### EuroExpression
 
-  ![block_Analysis](block_analysis.PNG)
+2 - The euroExpression must start whit the token EURO_FUN (EURO or euro), then you must present '{' so that you can call one of the rules again if you want poundExpression, dollarExpression, euroExpression, Comparison e finalmente finalizar com '}.
 
-2 - The FOR loop should also be implemented based on instruction blocks. For example, the formula"= FOR {A1: = 1 ; A1<10; A2: = A2 + A1; A1: = A1 + 1 }" executes a for loop in which: the first expression is the initialization, the second term is the boundary condition, all other expressions are performed for each iteration of the loop.
-
-  * 2.1 - "=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}"
+  * 2.1 - "#euro{20e+50e}"
 
   ![loopfor_analysis](loopfor_analysis.PNG)
 
