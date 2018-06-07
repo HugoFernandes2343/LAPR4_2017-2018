@@ -3,7 +3,7 @@
 
 # 1. General Notes
 
-During the execution of this Use Case, me and my colleagues had to help and introduce our two Erasmus colleagues to how LAPR4 works. It was particularly difficult since their background on technologies and methodologies are not directed towards our specific ways of doing these kinds of projects.
+During the execution of this Use Case, I and my colleagues were more difficult because although we were initially 7, 3 were erasmus and never appeared what harmed the group in the distribution of UC.
 
 # 2. Requirements
 
@@ -174,18 +174,6 @@ During the implementation of my UC I tried to be aware of what was going on with
 
 # 7. Final Remarks
 
-This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on LPROG course. I was also able to overcome my difficulties on the understanding of how antlr4 works and how we can use it to develop new languages that we can use in any case in the future.
+This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on EAPLI AND RCOMP course.
 
 # 8. Work Log
-
-Important Commits:
-
-[Started Documentaion](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/03919a57e9249f966f000a7a889d43562f729d43)
-
-[Started Analysis](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/03919a57e9249f966f000a7a889d43562f729d43)
-
-[Started implementing new grammar rules and tokens](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ac00c5f28a71bb5bbf598e2fa87f71e3a30ead2e)
-
-[Implemented new Classes to process new rules output](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/407a09222a536bb286fc34f4afd1b83edd559172)This commit was the biggest one, since it contains all the code implemented. Since all my new rules were related to each other It was better for me to implement all at once and commit all the changes at once.
-
-[Important change in grammar design](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ab8048e90a1eefd66df636b52275dc16e7605db2)This commit was extremely important since there was a flaw on my grammar design. The loopfor rule was only able to recognize one or more assignments after the boundary condition, with this commit the loopfor is now able to recognize one or more comparisons/assignments.
