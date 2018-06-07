@@ -87,6 +87,9 @@
                 </m:MaterialCollapsibleItem>
             </m:MaterialCollapsible>
             <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getXmlupload}" iconPosition="LEFT" iconType="VERTICAL_ALIGN_TOP" text="Upload a file"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getSettings}" iconPosition="LEFT" iconType="SETTINGS" text="Settings"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">

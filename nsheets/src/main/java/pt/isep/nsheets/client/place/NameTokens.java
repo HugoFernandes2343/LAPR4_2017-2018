@@ -45,6 +45,8 @@ public class NameTokens {
 
     public static final String extensionmanager = "extensionmanager";
 
+    public static final String xmlupload = "xmlupload";
+
     public static String getWorkbook() {
         return workbook;
     }
@@ -89,4 +91,5 @@ public class NameTokens {
 
     public static String getExtensionManager() { return extensionmanager; }
 
+    public static String getXmlupload() { return xmlupload; }
 }
