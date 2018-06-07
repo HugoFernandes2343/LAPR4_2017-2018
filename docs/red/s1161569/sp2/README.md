@@ -95,7 +95,7 @@ Since the service is a servlet it must be declared in the **web.xml** file of th
 	<!-- Servlets for the Messages -->
 	<servlet>
 		<servlet-name>chatServiceServlet</servlet-name>
-		<servlet-class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.application</servlet-class>
+		<servlet-class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.application.ChatServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>chatServiceServlet</servlet-name>
@@ -124,4 +124,90 @@ The main idea for the "workflow" of this feature increment.
 
 ![Analysis SD](analysis.png)
 
+# 4. Design
 
+## 4.1. Tests
+
+*In this section you should describe the design of the tests that, as much as possibe, cover the requirements of the sprint.*
+
+Regarding tests I try to follow an test driven development approach. I concentrate all the testing effort on the domain classes and also on the services provided by the server.
+
+**Domain classes**
+
+For the Domain classes I will have a class that represents the entity **Message**:
+	
+	- user (User)
+	- name (string)
+	- description (string) 
+
+**Test:** I should ensure that a Message can be created only when all the attributes are set.  
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowedOnMessage() {
+		System.out.println("ensureNullIsNotAllowedOnMessage");
+		Message instance = new Message(null, null);
+	}
+
+**Services/Controllers**
+
+For the services I must test the service specified in the interface **ChatService**:
+
+	@RemoteServiceRelativePath("chatService")
+	public interface ChatService extends RemoteService {
+		ArrayList<MessageDTO> getMessages();
+		MessageDTO addMessage(MessageDTO mDto) throws DataException;
+	}
+		
+Tests:  
+- The tests on the controllers require the presence of a database.  
+- I will use the database in memory (H2).  
+- I will have a *controller* from adding and fetching the public chat Messages. This controller will be invoked by the GWT RPC service.
+
+
+Controller **PublishPublicMessageController**
+
+**Test:** Verify the normal creation of a Message.  
+
+	@Test
+	public void testNormalBehaviour() throws Exception {
+		System.out.println("testNormalBehaviour");
+		final String text = "This is a public chat message";
+		final Date date = new Date();
+		final User user = new user();
+		final MessageDTO expected = new MessageDTO(user.toDTO(), text, date);
+		PublishPublicMessageController ctrl = new PublishPublicMessageController();
+		MessageDTO result = ctrl.addMessage(dto);
+		assertTrue("the added Message does not have the same data as input", Message.fromDTO(expected).sameAs(Message.fromDTO(result)));
+	}
+
+**Test:** At the beginning of the tests the memory database should be empty, so PublishPublicMessageController should return an empty set.
+
+	   @Test 
+	   public void testEnsureGetMessagesEmpty() {
+		   System.out.println("testEnsureGetMessagesEmpty");
+		   PublishPublicMessageController ctrl=new PublishPublicMessageController();
+		   Iterable<Messages> messageList=ctrl.getMessages();
+		   assertTrue("the list of Messages is not empty", !messageList.iterator().hasNext());
+	   } 
+ 
+**Test:** If a Message is created it should be present in a following invocation of getMessages().
+
+		@Test
+		public void testBtestDatabaseInsertion() throws Exception {
+			System.out.println("testBtestDatabaseInsertion");
+			final String text = "This is a public chat message";
+            final Date date = new Date();
+            final User user = new user();
+            final MessageDTO expected = new MessageDTO(user.toDTO(), text, date);
+			PublishPublicMessageController ctrl=new PublishPublicMessageController();
+			MessageDTO result = ctrl.addMessage(dto);
+			Iterable<Messages> messageList=ctrl.getMessages();
+			assertTrue("the added Message is not in the database", messageList.iterator().hasNext());
+		}
+
+**Test Coverage**  
+- The actual coverage for domain classes: 0%
+- The actual coverage for application(controller) classes: 0%
+ 
+
+## 4.2. Requirements Realization
