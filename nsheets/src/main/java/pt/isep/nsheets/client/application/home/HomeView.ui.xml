@@ -43,7 +43,8 @@
         <m:MaterialFAB>
             <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
             <m:MaterialFABList>
-                <m:MaterialButton ui:field="newWorkbookButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="New Workbook" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="newWorkbookButtonPublic" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="New Public Workbook" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="newWorkbookButtonPrivate" backgroundColor="LIGHT_GREEN_ACCENT_4" type="FLOATING" waves="LIGHT" iconType="LOCK" tooltip="New Private Workbook" tooltipPosition="LEFT"/>
             </m:MaterialFABList>
         </m:MaterialFAB>
  	
