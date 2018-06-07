@@ -118,7 +118,7 @@ The main idea for the "workflow" of this feature increment.
 
 ![Domain Model](dm.png)
 
-- **Domain Model**. 
+- **Domain Model**. The message entity will be represented by the class **Message** int server side and when transitioning to the client side will be represented by the **MessageDTO**. The reverse process also occurs. In therms of already existing entities this use case requires the use of the **User** entity developed by Paulo Magalhães (s1160570)  
 
 **System Sequence Diagrams**
 
