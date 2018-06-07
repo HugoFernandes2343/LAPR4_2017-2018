@@ -34,7 +34,7 @@ public class Form implements Serializable {
     }
 
     public boolean isEmpty() {
-        if (rows.isEmpty()) {
+        if (!rows.isEmpty()) {
             return true;
         } else {
             return false;

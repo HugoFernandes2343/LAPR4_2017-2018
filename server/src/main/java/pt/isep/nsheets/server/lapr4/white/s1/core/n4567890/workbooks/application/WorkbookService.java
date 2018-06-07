@@ -40,7 +40,14 @@ public class WorkbookService {
         }
         return wb;
     }
-
+    
+    public void deleteWorkbook(Workbook wb) throws DataConcurrencyException, DataIntegrityViolationException {
+        final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
+   
+            WorkbookDTO wbDTO= WorkbookDTO.fromWorkbook(wb);
+       
+            workbookRepository.save(wbDTO);          
+    }
 
     public int getNrWorkbooks(){
         final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();

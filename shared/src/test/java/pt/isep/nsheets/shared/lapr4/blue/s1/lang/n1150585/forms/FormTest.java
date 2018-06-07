@@ -83,7 +83,7 @@ public class FormTest {
 
         System.out.println("isEmpty");
         Form instance = new Form();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = wb3.getForm().isEmpty();
         assertEquals(expResult, result);
 
@@ -99,7 +99,7 @@ public class FormTest {
         wb.insertNewForm(form);
 
 
-        boolean expResult2 = false;
+        boolean expResult2 = true;
         boolean result2 = wb.getForm().isEmpty();
         assertEquals(expResult2, result2);
 
@@ -113,7 +113,7 @@ public class FormTest {
         Form form2 = new Form(teste2);
         wb2.insertNewForm(form2);
 
-        boolean expResult3 = false;
+        boolean expResult3 = true;
         boolean result3 = wb2.getForm().isEmpty();
         assertEquals(expResult3, result3);
 
