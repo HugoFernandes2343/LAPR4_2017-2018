@@ -61,6 +61,8 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
+import pt.isep.nsheets.shared.services.DownloadService;
+import pt.isep.nsheets.shared.services.DownloadServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
@@ -97,9 +99,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialButton exportToCSVButton;
 
+    //1160777
+    @UiField
+    MaterialButton exportToCLSButton;
+
     @UiField
     MaterialIcon styleButton;
-
 
     @UiField
     MaterialDataTable<SheetCell> customTable;
@@ -530,6 +535,27 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            p6.setTextAlign(TextAlign.RIGHT);
 //            p6.add(exportCSV);
 //            window.add(p6);
+
+            exportToCLSButton.addClickHandler(event1 -> {
+                DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
+                // Set up the callback object.
+                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Workbook result) {
+                        MaterialToast.fireToast("Exported successfully!", "rounded");
+
+                    }
+                };
+                String fileInfo1 = "CLSFile";
+                String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1;
+                Window.open( url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
+            });
+
             window.open();
         });
 
