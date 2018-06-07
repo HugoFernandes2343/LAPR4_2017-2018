@@ -29,11 +29,8 @@ import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginMod
 import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.SettingsModule;
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
-import pt.isep.nsheets.shared.core.Workbook;
 
 public class ApplicationModule extends AbstractPresenterModule {
-
-    private Workbook currentWorkbook;
 
     @Override
     protected void configure() {

@@ -12,13 +12,11 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
-import gwt.material.design.addins.client.window.MaterialWindow;
 
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 
-import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCard;
 import gwt.material.design.client.ui.MaterialCardAction;
@@ -32,13 +30,11 @@ import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSearch;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.CurrentUser;
-import pt.isep.nsheets.client.lapr4.green.s1.s1160570.application.login.LoginPresenter;
 import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
+import pt.isep.nsheets.shared.services.*;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
 
-   
 
     interface Binder extends UiBinder<Widget, HomeView> {
     }
@@ -53,7 +49,10 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     MaterialNavBar navBar, navBarSearch;
 
     @UiField
-    MaterialButton newWorkbookButton;
+    MaterialButton newWorkbookButtonPublic;
+
+    @UiField
+    MaterialButton newWorkbookButtonPrivate;
 
     @UiField
     MaterialLink renameLink, deleteLink;
@@ -66,15 +65,12 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
     @UiField
     MaterialCard card;
-    
-    
-    
-    
 
 
     @Inject
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+
 
         // add open handler
         txtSearch.addOpenHandler(openEvent -> {
@@ -92,37 +88,47 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
     private MaterialCard createCard(Workbook wb) {
         MaterialCard card = new MaterialCard();
-        card.setBackgroundColor(Color.BLUE_DARKEN_1);
 
         MaterialCardContent cardContent = new MaterialCardContent();
-        cardContent.setTextColor(Color.WHITE);
 
         MaterialCardTitle cardTitle = new MaterialCardTitle();
-        cardTitle.setText(wb.getName());
-        cardTitle.setIconType(IconType.INSERT_DRIVE_FILE);
-        cardTitle.setIconPosition(IconPosition.RIGHT);
 
         MaterialLabel label = new MaterialLabel();
-        label.setText(wb.getDescription());
 
         MaterialCardAction cardAction = new MaterialCardAction();
 
         MaterialLink renameLink = new MaterialLink();
+        MaterialLink deleteLink = new MaterialLink();
+
+        if (wb.getUserMail().equalsIgnoreCase("")) {
+            card.setBackgroundColor(Color.BLUE_DARKEN_1);
+            cardTitle.setIconType(IconType.INSERT_DRIVE_FILE);
+        } else {
+            card.setBackgroundColor(Color.LIGHT_GREEN_ACCENT_4);
+            cardTitle.setIconType(IconType.LOCK);
+        }
+
+        cardContent.setTextColor(Color.WHITE);
+
+        cardTitle.setText(wb.getName());
+        cardTitle.setIconPosition(IconPosition.RIGHT);
+
+        label.setText(wb.getDescription());
         renameLink.setText("Rename");
         renameLink.setIconType(IconType.EDIT);
         renameLink.setIconColor(Color.INDIGO);
         renameLink.setTextColor(Color.WHITE);
         renameLink.addClickHandler(event -> {
-            MaterialToast.fireToast("rename "+wb.getName());
+            MaterialToast.fireToast("rename " + wb.getName());
+
         });
 
-        MaterialLink deleteLink = new MaterialLink();
         deleteLink.setText("Delete");
         deleteLink.setIconType(IconType.DELETE);
         deleteLink.setIconColor(Color.GREY);
         deleteLink.setTextColor(Color.WHITE);
         deleteLink.addClickHandler(event -> {
-            MaterialToast.fireToast("delete "+wb.getName());
+            MaterialToast.fireToast("delete " + wb.getName());
         });
 
         cardContent.add(cardTitle);
@@ -135,6 +141,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         card.add(cardAction);
 
         return card;
+
     }
 
     @Override
@@ -145,46 +152,42 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
         htmlPanel.clear();
 
+
+
+
         for (Workbook wb : contents) {
-            MaterialCard card = createCard(wb);
+            if (wb.getUserMail().equalsIgnoreCase("") || wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail())) {
+                MaterialCard card = createCard(wb);
 
-//            workbookTitle.setText(wb.getName());
-//            workbookDescription.setText(wb.getDescription());
 
-            if (colCount == 1) {
-                row = new MaterialRow();
-                htmlPanel.add(row);
-                ++colCount;
-                if (colCount >= 4) {
-                    colCount = 1;
+                if (colCount == 1) {
+                    row = new MaterialRow();
+                    htmlPanel.add(row);
+                    ++colCount;
+                    if (colCount >= 4) {
+                        colCount = 1;
+                    }
                 }
+
+                MaterialColumn col = new MaterialColumn();
+                col.setGrid("l4");
+                row.add(col);
+
+                col.add(card);
             }
-
-            MaterialColumn col = new MaterialColumn();
-            col.setGrid("l4");
-            row.add(col);
-
-            col.add(card);
         }
 
     }
 
     @Override
-    public void addClickHandler(ClickHandler ch) {
-        // TODO Auto-generated method stub
-
-        newWorkbookButton.addClickHandler(ch);
+    public void addClickHandlerPublic(ClickHandler ch) {
+        newWorkbookButtonPublic.addClickHandler(ch);
     }
 
-//    @Override
-//    public void renameClickHandler(ClickHandler ch) {
-//        addClickHandler(ch);
-//    }
-//
-//    @Override
-//    public void deleteClickHandler(ClickHandler ch) {
-//        deleteLink.addClickHandler(ch);
-//    }
+    @Override
+    public void addClickHandlerPrivate(ClickHandler ch) {
+        newWorkbookButtonPrivate.addClickHandler(ch);
+    }
 
     @UiHandler("btnSearch")
     void onSearch(ClickEvent e) {

@@ -11,6 +11,7 @@ public class EditEventController implements Controller {
 
     private Event eventToEdit;
 
+    //preciso alterar
     public EditEventController(Long id) {
         this.repo = PersistenceContext.repositories().events();
         eventToEdit = repo.findById(id);

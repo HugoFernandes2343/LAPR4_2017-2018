@@ -5,6 +5,9 @@ import eapli.util.Strings;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import javax.persistence.Embeddable;
 
 import pt.isep.nsheets.shared.services.EmailDTO;
@@ -15,7 +18,7 @@ import pt.isep.nsheets.shared.services.EmailDTO;
 @Embeddable
 public class Email implements ValueObject, Serializable {
     private static final long serialVersionUID = 1L;
-    //  private static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
+    Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}");
     private String email;
 
     protected Email() {
@@ -23,14 +26,13 @@ public class Email implements ValueObject, Serializable {
     }
 
     public Email(String email) {
-        if (Strings.isNullOrEmpty(email)) {
-            throw new IllegalArgumentException("Email should neither be null nor empty");
+        
+        Matcher m = pattern.matcher(email);
+        
+        if (m.matches()) {
+            throw new IllegalArgumentException("Email not introduced correctly");
         }
 
-//        Matcher matcher = VALID_NAME_REGEX.matcher(email);
-//        if (!matcher.find()) {
-//            throw new IllegalArgumentException("Invalid Email: " + email);
-//        }
         this.email = email;
     }
 

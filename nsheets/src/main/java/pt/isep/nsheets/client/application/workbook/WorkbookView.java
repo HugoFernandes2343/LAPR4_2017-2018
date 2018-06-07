@@ -61,6 +61,8 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
+import pt.isep.nsheets.shared.services.DownloadService;
+import pt.isep.nsheets.shared.services.DownloadServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
@@ -97,9 +99,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialButton exportToCSVButton;
 
+    //1160777
+    @UiField
+    MaterialButton exportToCLSButton;
+
     @UiField
     MaterialIcon styleButton;
-
 
     @UiField
     MaterialDataTable<SheetCell> customTable;
@@ -164,7 +169,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        Workbook wb = new Workbook("Workbook", "New Workbook", contents);
+        Workbook wb = new Workbook("Workbook", "New Workbook", contents, "");
         Spreadsheet sh = wb.getSheet();
 
         int columnNumber = 0;
@@ -219,7 +224,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         firstButton.addClickHandler(event -> {
             if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
                 //Workbook wb = SelectedWorkbookController.getActualWorkbook();
-                Workbook wb = new Workbook("Teste1", "Teste2");
+                Workbook wb = new Workbook("Teste1", "Teste2", "");
                 /*Map<String, String> teste = new HashMap<>();
                 teste.put("Isep0", "Linha0");
                 teste.put("Isep1", "Linha1");
@@ -530,6 +535,27 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            p6.setTextAlign(TextAlign.RIGHT);
 //            p6.add(exportCSV);
 //            window.add(p6);
+
+            exportToCLSButton.addClickHandler(event1 -> {
+                DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
+                // Set up the callback object.
+                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Workbook result) {
+                        MaterialToast.fireToast("Exported successfully!", "rounded");
+
+                    }
+                };
+                String fileInfo1 = "CLSFile.cls";
+                String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1;
+                Window.open( url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
+            });
+
             window.open();
         });
 
