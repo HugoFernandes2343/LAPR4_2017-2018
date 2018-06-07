@@ -28,8 +28,8 @@ atom
     |   assignment
     |   block
     |   loopfor
-    |   (euroExpression|poundExpression|dollarExpression)
-    |   literalMonetary
+   // |   (euroExpression|poundExpression|dollarExpression)
+  //  |   literalMonetary
 	;
 
 function_call
