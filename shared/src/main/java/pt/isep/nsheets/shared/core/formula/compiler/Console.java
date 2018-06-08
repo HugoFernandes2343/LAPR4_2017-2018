@@ -64,7 +64,7 @@ public class Console {
 		}
 
 		// Fetches a cell
-		Workbook workbook = new Workbook("Workbook", "New Workbook 123");
+		Workbook workbook = new Workbook("Workbook", "New Workbook 123","");
 		Spreadsheet sheet = workbook.getSheet();
 		Cell cell = sheet.getCell(new Address(0, 0));
 

@@ -1,15 +1,15 @@
-**Pedro Tedim** (s1091234) - Sprint 1 - Lang01.1
+1**Pedro Tedim** (s1091234) - Sprint 1 - Lang01.1
 ===============================
 
 # 1. General Notes
 
-During the execution of this Use Case, me and my colleagues had to help and introduce our two Erasmus colleagues to how LAPR4 works. It was particularly difficult since their background on technologies and methodologies are not directed towards our specific ways of doing these kinds of projects.
+During the execution of this Use Case, I and my colleagues were more difficult because although we were initially 7, 3 were erasmus and never appeared what harmed the group in the distribution of UC.
 
 # 2. Requirements
 
 Lang01.1 - Block of Instructions
 
-Add the possibility of writing blocks (or sequences) of instructions. A block must be delimited by curly braces and its instructions must be separated by ";". The instructions of a block are executed sequentially and the block "result" is the result of the last statement of the block. For example, the formula "= {1+ 2; sum (A1:A10); B3 + 4 }" must result in the sequential execution of all expressions and the result is the value of the expression "B3 + 4". Add the assign operator (its symbol is ":="). This operator assigns to its left the result of the right expression. At the moment the left of the assign operator can only be a cell reference. The FOR loop should also be implemented based on instruction blocks. For example, the formula"= FOR {A1: = 1 ; A1<10; A2: = A2 + A1; A1: = A1 + 1 }" executes a for loop in which: the first expression is the initialization, the second term is the boundary condition, all other expressions are performed for each iteration of the loop.
+Add a new formulas language (currently the application only has Excel formulas that begin with the character "="). The new language should do only calculations related to currencies. The character that begins the formula should be "#". The formula should only accept the addition, subtraction, multiplication and division operators. Operands are monetary values in which it is necessary to provide the currency (e.g., 10.21e, 1.32£ or 0.20$). All expressions are required to be contained within brackets with the currency prefix in which we want the result, e.g., "#euro{10.32$ + 12.89£}" or "#dollar{ 10.32$ + 12.89£}" or "#pound{10.32$ + 12.89£}". For the user to use this language instead of the "regular" Excel language it should start the formula by the character "#" instead of the "=" character. The application should also provide a way for setting exchange rates (by means of a configuration). The implementation should avoid the use of numbers in floating point representation (e.g., float, double) in order to avoid precision problems.
 
 Proposal:
 
@@ -174,18 +174,6 @@ During the implementation of my UC I tried to be aware of what was going on with
 
 # 7. Final Remarks
 
-This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on LPROG course. I was also able to overcome my difficulties on the understanding of how antlr4 works and how we can use it to develop new languages that we can use in any case in the future.
+This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on EAPLI AND RCOMP course.
 
 # 8. Work Log
-
-Important Commits:
-
-[Started Documentaion](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/03919a57e9249f966f000a7a889d43562f729d43)
-
-[Started Analysis](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/03919a57e9249f966f000a7a889d43562f729d43)
-
-[Started implementing new grammar rules and tokens](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ac00c5f28a71bb5bbf598e2fa87f71e3a30ead2e)
-
-[Implemented new Classes to process new rules output](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/407a09222a536bb286fc34f4afd1b83edd559172)This commit was the biggest one, since it contains all the code implemented. Since all my new rules were related to each other It was better for me to implement all at once and commit all the changes at once.
-
-[Important change in grammar design](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ab8048e90a1eefd66df636b52275dc16e7605db2)This commit was extremely important since there was a flaw on my grammar design. The loopfor rule was only able to recognize one or more assignments after the boundary condition, with this commit the loopfor is now able to recognize one or more comparisons/assignments.

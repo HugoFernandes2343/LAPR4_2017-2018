@@ -151,6 +151,9 @@ governing permissions and limitations under the License. #L% -->
             <m:MaterialFABList>
                 <m:MaterialButton ui:field="exportToXMLButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To XML" tooltipPosition="LEFT"/>
                 <m:MaterialButton ui:field="exportToCSVButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To CSV" tooltipPosition="LEFT"/>
+                <!--1160777-->
+                <m:MaterialButton ui:field="exportToCLSButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to CLS" tooltipPosition="LEFT"/>
+                <!--1160777-->
                 <m:MaterialButton ui:field="macrosButton" type="FLOATING" waves="LIGHT" iconType="CODE" tooltip="Create Macros" tooltipPosition="LEFT"/>
             </m:MaterialFABList>
         </m:MaterialFAB>

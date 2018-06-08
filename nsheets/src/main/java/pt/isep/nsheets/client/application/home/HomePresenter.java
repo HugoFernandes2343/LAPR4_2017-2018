@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -15,24 +15,18 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
-import com.ibm.icu.util.Calendar;
-import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialLabel;
-import org.h2.message.DbException;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentUser;
-import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
-import pt.isep.nsheets.shared.services.WorkbooksService;
+import pt.isep.nsheets.shared.services.*;
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
 
@@ -44,17 +38,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         void setContents(ArrayList<Workbook> contents);
 
-        void addClickHandler(ClickHandler ch);
+        void addClickHandlerPublic(ClickHandler ch);
 
-        
-            
+        void addClickHandlerPrivate(ClickHandler ch);
 
-//        void renameClickHandler( ClickHandler ch);
-//
-//        void deleteClickHandler(ClickHandler ch);
-        MaterialCardTitle getWorkbookTitle();
+        void addEventChangeHandler(ValueChangeHandler<String> vc);
 
-        MaterialLabel getWorkbookDescription();
     }
 
     @NameToken(NameTokens.home)
@@ -68,13 +57,17 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         this.view = view;
 
-//        this.view.renameClickHandler((ClickEvent event) -> {
-//            MaterialToast.fireToast("rename");
-//            Workbook w = SelectedWorkbookController.getActualWorkbook();
-//            w.setName();
-//            getView().getWorkbookTitle().setText("novo");
-//        });
-        this.view.addClickHandler((ClickEvent event) -> {
+
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) ->{
+            if(event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")){
+                CurrentUser.setShowAll(true);
+            } else {
+                CurrentUser.setShowAll(false);
+            }
+            refreshView();
+        });
+
+        this.view.addClickHandlerPublic((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
@@ -89,9 +82,34 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             };
 
             Spreadsheet temp = null;
-            Workbook wb = new Workbook("New Workbook " + nrWb++, "description of workbook", temp);
+            Workbook wb = new Workbook("New Public Workbook " + nrWb++, "description of workbook", temp, "");
             wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
+
+        });
+
+        this.view.addClickHandlerPrivate((ClickEvent event) -> {
+
+            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+
+            AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error creating Workbook " + caught.getMessage());
+                }
+
+                public void onSuccess(Workbook result) {
+                    refreshView();
+                }
+            };
+
+            Spreadsheet temp = null;
+            if (CurrentUser.isIsLoggedIn()) {
+                Workbook wb = new Workbook("New Private Workbook " + nrWb++, "description of workbook", temp, CurrentUser.getCurrentUser().getEmail().getEmail());
+                wb.setNewWb(true);
+                workbooksSvc.addWorkbook(wb, callback);
+            } else {
+                MaterialToast.fireToast("Please login First!");
+            }
 
         });
     }
@@ -118,8 +136,26 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     protected void onReveal() {
         super.onReveal();
 
+//        --------------------------------------------------------
+
+        EmailDTO m = new EmailDTO("mail@isep.pt");
+        PasswordDTO p = new PasswordDTO("pass");
+        NicknameDTO nn = new NicknameDTO("user");
+        NameDTO n = new NameDTO("fn", "ln");
+        UserDTO temp = new UserDTO(m, p, n, nn);
+
+        CurrentUser.setCurrentUser(temp);
+        CurrentUser.setIsLoggedIn(true);
+
+//        ----------------------------------------------------------
+
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();
+    }
+
+    @Override
+    public MyView getView() {
+        return view;
     }
 }
