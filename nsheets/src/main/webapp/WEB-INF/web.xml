@@ -65,7 +65,7 @@
     <!--Download servlet, may be subject to changes-->
     <servlet>
         <servlet-name>downloadService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadImpl</servlet-class>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -73,5 +73,18 @@
         <url-pattern>/nsheets/downloadService</url-pattern>
     </servlet-mapping>
     <!--1160777-->
+
+    <!--1161110-->
+    <!--Upload Servlet-->
+    <servlet>
+      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
+    </servlet>
+   
+    <servlet-mapping>
+      <servlet-name>fileUploaderServlet</servlet-name>
+      <url-pattern>/nsheets/fileupload</url-pattern>
+    </servlet-mapping>
+    <!--1161110-->
 
 </web-app>
