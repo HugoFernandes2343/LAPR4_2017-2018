@@ -41,6 +41,7 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -90,6 +91,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     //1160777
     @UiField
     MaterialButton exportToCLSButton;
+
+    @UiField
+    MaterialButton exportToPdfButton;
 
     @UiField
     MaterialIcon styleButton;
@@ -157,8 +161,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
-            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-            {"1", "2", "3", "4", "5", "6", "7"}};
+                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+                {"1", "2", "3", "4", "5", "6", "7"}};
 
         Workbook wb = new Workbook("Workbook", "New Workbook", contents, "");
         Spreadsheet sh = wb.getSheet();
@@ -241,15 +245,21 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         /*Opens the prompt for the user to type the name of the CLS*/
         exportToCLSButton.addClickHandler(event -> {
-            new ExportToCLSView(/*send the current workbook*/this.activeCell.getSpreadsheet().getWorkbook());
+            new ExportToCLSView(/*send the current workbook*/this.getActiveCell().getSpreadsheet().getWorkbook());
         });
 
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
         });
 
+
         searchButton.addClickHandler(event -> {
-           SearchView searchView = new SearchView();
+            SearchView searchView = new SearchView();
+        });
+        
+        exportToPdfButton.addClickHandler(event -> {
+            ExportToPdfView ex = new ExportToPdfView();
+
         });
 
         formButton.addClickHandler(event -> {
@@ -265,12 +275,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         sortButton.addClickHandler(event -> {
             // Show Loader
             MaterialLoader.loading(true);
-            String sortingType=sortingTypeBox.getValue();
-            String dataType=dataTypeBox.getValue();
-            String lowerCell=lowerCellInfo.getText();
-            String upperCell=upperCellInfo.getText();
-            Spreadsheet sh=customTable.getRow(0).getData().sheet;
-            sh.sortCells(upperCell,lowerCell,dataType,sortingType); //Still needs work
+            String sortingType = sortingTypeBox.getValue();
+            String dataType = dataTypeBox.getValue();
+            String lowerCell = lowerCellInfo.getText();
+            String upperCell = upperCellInfo.getText();
+            Spreadsheet sh = customTable.getRow(0).getData().sheet;
+            sh.sortCells(upperCell, lowerCell, dataType, sortingType); //Still needs work
             List<SheetCell> rows = new ArrayList<>();
             for (int k = 0; k < sh.getRowCount(); k++) {
                 rows.add(new SheetCell(sh, k));
@@ -327,7 +337,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             });
 
         });
-
 
 
         exportToCSVButton.addClickHandler(event -> {
@@ -550,7 +559,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 
     @Override
-
     protected void onAttach() {
         super.onAttach();
 
