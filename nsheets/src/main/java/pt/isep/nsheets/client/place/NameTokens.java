@@ -51,6 +51,8 @@ public class NameTokens {
 
     public static final String xmlupload = "xmlupload";
 
+    public static final String exportToPdf = "exportToPdf";
+
     public static String getWorkbook() {
         return workbook;
     }
@@ -103,4 +105,6 @@ public class NameTokens {
 
     public static String getAgenda(){ return agenda;}
 
+
+    public static String getExportToPdf(){ return exportToPdf; }
 }

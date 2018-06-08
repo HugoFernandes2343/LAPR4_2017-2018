@@ -41,6 +41,7 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -90,6 +91,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     //1160777
     @UiField
     MaterialButton exportToCLSButton;
+
+    @UiField
+    MaterialButton exportToPdfButton;
 
     @UiField
     MaterialIcon styleButton;
@@ -243,6 +247,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
+        });
+
+        exportToPdfButton.addClickHandler(event -> {
+            ExportToPdfView ex = new ExportToPdfView();
         });
 
         formButton.addClickHandler(event -> {
@@ -540,6 +548,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         customTable.getTableTitle().setText("The Future Worksheet!");
     }
+
 
 
     @Override
