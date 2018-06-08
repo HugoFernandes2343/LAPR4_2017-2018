@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -40,13 +42,8 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         void addClickHandlerPrivate(ClickHandler ch);
 
+        void addEventChangeHandler(ValueChangeHandler<String> vc);
 
-        //        void renameClickHandler( ClickHandler ch);
-//
-//        void deleteClickHandler(ClickHandler ch);
-        MaterialCardTitle getWorkbookTitle();
-
-        MaterialLabel getWorkbookDescription();
     }
 
     @NameToken(NameTokens.home)
@@ -59,6 +56,16 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
+
+
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) ->{
+            if(event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")){
+                CurrentUser.setShowAll(true);
+            } else {
+                CurrentUser.setShowAll(false);
+            }
+            refreshView();
+        });
 
         this.view.addClickHandlerPublic((ClickEvent event) -> {
 
@@ -78,7 +85,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             Workbook wb = new Workbook("New Public Workbook " + nrWb++, "description of workbook", temp, "");
             wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
-
 
         });
 
@@ -146,5 +152,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();
+    }
+
+    @Override
+    public MyView getView() {
+        return view;
     }
 }
