@@ -28,15 +28,17 @@ public class DownloadCLSImpl extends HttpServlet {
 
         String fileName = request.getParameter("filename");//get the name
 
-        response.setContentType("text/cls");
+        response.setContentType("text/plain");
         response.setHeader("Content-Disposition", "attachment;fileName=\"" + fileName + "\".cls");//test cls
         response.setContentLength(Long.valueOf(getFile(fileName).length()).intValue());
         response.setBufferSize(BUFFER);
 
         //Your IO code goes here to create a file and set to outputStream//
-        /*
+
         ServletContext ctx = getServletContext();
-        //InputStream is = ctx.getResourceAsStream("/" + request.getParameter( "filename" ));
+        InputStream is = ctx.getResourceAsStream("/CLS.txt");
+
+        /*
         FileInputStream is = new FileInputStream(filePath + fileName);
 
         try{

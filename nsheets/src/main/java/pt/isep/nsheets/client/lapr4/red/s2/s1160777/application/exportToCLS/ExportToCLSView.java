@@ -62,6 +62,7 @@ public class ExportToCLSView extends Composite {
                 }
             });*/
             String url = GWT.getModuleBaseURL() + "downloadService?filename=" + textBox1.getText();
+            //String url = GWT.getHostPageBaseURL() + "downloadService?filename=" + textBox1.getText();
             Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
         });
         window.open();
