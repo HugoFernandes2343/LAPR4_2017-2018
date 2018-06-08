@@ -14,7 +14,7 @@ import pt.isep.nsheets.shared.services.TaskDTO;
 
 /**
  *
- * @author dftsf
+ * @author Daniel Fernandes 1150585
  */
 public class JpaTaskRepository extends NSheetsJpaRepositoryBase<Task, Long> implements TaskRepository {
 
@@ -35,6 +35,15 @@ public class JpaTaskRepository extends NSheetsJpaRepositoryBase<Task, Long> impl
     @Override
     public Iterable<Task> get_task_by_percentage(int percentage) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteTask(TaskDTO task) {
+        final Query q = entityManager().createQuery("DELETE FROM Task c WHERE c.title=:t", this.entityClass);
+        q.setParameter("t", task.getTitle());
+        entityManager().getTransaction().begin();
+        q.executeUpdate();
+        entityManager().getTransaction().commit();
     }
 
 }

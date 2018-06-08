@@ -7,8 +7,8 @@
     <m:MaterialPanel>      
      
         <m:MaterialNavBar ui:field="navBar" paddingLeft="20" width="100%" backgroundColor="GREY" activates="sideBar" textColor="WHITE">
-            <m:MaterialNavBrand ui:field="navBrand" text="Search" fontSize="1.2em"/>
-            <m:MaterialLink ui:field="btnSearch" iconType="SEARCH" iconColor="WHITE" float="RIGHT"/>
+            <m:MaterialNavBrand ui:field="navBrand" text="" fontSize="1.2em"/>
+            <m:MaterialLink ui:field="btnSearch" iconType="DONE" iconColor="WHITE" float="RIGHT"/>
         </m:MaterialNavBar>
     
         <m:MaterialNavBar ui:field="navBarSearch" width="100%" visible="false">

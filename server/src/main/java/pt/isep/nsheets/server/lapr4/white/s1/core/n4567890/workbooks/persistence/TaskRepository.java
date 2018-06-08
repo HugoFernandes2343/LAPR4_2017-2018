@@ -11,7 +11,7 @@ import pt.isep.nsheets.shared.services.TaskDTO;
 
 /**
  *
- * @author dftsf
+ * @author Daniel Fernandes 1150585
  */
 public interface TaskRepository extends Repository<Task, Long> {
 
@@ -21,5 +21,6 @@ public interface TaskRepository extends Repository<Task, Long> {
 
     public Iterable <Task> get_task_by_percentage(int percentage);
     
+    public void deleteTask (TaskDTO task);
 
 }

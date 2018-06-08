@@ -14,7 +14,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("tasksService")
 public interface TasksService extends RemoteService {
-
+    
+    void deleteTask(TaskDTO task);
+    
     Iterable<TaskDTO> get_all_tasks();
 
     TaskDTO get_task_by_title(String title);

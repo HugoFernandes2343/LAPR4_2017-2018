@@ -4,11 +4,13 @@
  */
 package pt.isep.nsheets.client.application.Tasks;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -30,13 +32,14 @@ import gwt.material.design.client.ui.MaterialToast;
 import java.util.ArrayList;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.TaskDTO;
+import pt.isep.nsheets.shared.services.TasksService;
+import pt.isep.nsheets.shared.services.TasksServiceAsync;
 
 /**
  *
  * @author dftsf
  */
 public class TasksView extends ViewImpl implements TasksPresenter.MyView {
-
 
     interface Binder extends UiBinder<Widget, TasksView> {
     }
@@ -94,8 +97,14 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         cardTitle.setIconType(IconType.INSERT_DRIVE_FILE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
-        MaterialLabel label = new MaterialLabel();
-        label.setText(task.getDescription());
+        MaterialLabel labelDescritpion = new MaterialLabel();
+        labelDescritpion.setText(task.getDescription());
+
+        MaterialLabel labelPriority = new MaterialLabel();
+        labelPriority.setText("Priority:" + task.getPriority());
+
+        MaterialLabel labelPercentage = new MaterialLabel();
+        labelPriority.setText("Percentage of completion: " + task.getPercentage() + "%");
 
         MaterialCardAction cardAction = new MaterialCardAction();
 
@@ -115,10 +124,31 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         deleteLink.setTextColor(Color.WHITE);
         deleteLink.addClickHandler(event -> {
             MaterialToast.fireToast("delete " + task.getTitle());
+            TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
+
+            AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error deleting Task ");
+                }
+
+                @Override
+                public void onSuccess(TaskDTO result) {
+                    
+                }
+            };
+          
+            tasksServiceAsync.deleteTask(task, callback);
+            this.card.setVisible(false);
+            
+        
+
         });
 
         cardContent.add(cardTitle);
-        cardContent.add(label);
+        cardContent.add(labelDescritpion);
+        cardContent.add(labelPriority);
+        cardContent.add(labelPercentage);
 
         cardAction.add(renameLink);
         cardAction.add(deleteLink);
@@ -159,9 +189,10 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         }
 
     }
+
     @Override
     public void addClickHandler(ClickHandler ch) {
-      newTaskButton.addClickHandler(ch);
+        newTaskButton.addClickHandler(ch);
     }
 
 }
