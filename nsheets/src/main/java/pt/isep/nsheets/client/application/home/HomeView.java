@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -17,18 +19,8 @@ import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 
-import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialCard;
-import gwt.material.design.client.ui.MaterialCardAction;
-import gwt.material.design.client.ui.MaterialCardContent;
-import gwt.material.design.client.ui.MaterialCardTitle;
-import gwt.material.design.client.ui.MaterialColumn;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialLink;
-import gwt.material.design.client.ui.MaterialRow;
-import gwt.material.design.client.ui.MaterialNavBar;
-import gwt.material.design.client.ui.MaterialSearch;
-import gwt.material.design.client.ui.MaterialToast;
+import gwt.material.design.client.ui.*;
+import gwt.material.design.client.ui.html.Option;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.*;
@@ -55,13 +47,10 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     MaterialButton newWorkbookButtonPrivate;
 
     @UiField
+    MaterialListBox showAllWb;
+
+    @UiField
     MaterialLink renameLink, deleteLink;
-
-    @UiField
-    MaterialCardTitle workbookTitle;
-
-    @UiField
-    MaterialLabel workbookDescription;
 
     @UiField
     MaterialCard card;
@@ -156,7 +145,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
 
         for (Workbook wb : contents) {
-            if (wb.getUserMail().equalsIgnoreCase("") || wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail())) {
+            if ((wb.getUserMail().equalsIgnoreCase("") && CurrentUser.isShowAll()) || wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail())) {
                 MaterialCard card = createCard(wb);
 
 
@@ -189,18 +178,16 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         newWorkbookButtonPrivate.addClickHandler(ch);
     }
 
+    @Override
+    public void addEventChangeHandler(ValueChangeHandler<String> vc) {
+        showAllWb.addValueChangeHandler(vc);
+    }
+
+
     @UiHandler("btnSearch")
     void onSearch(ClickEvent e) {
         txtSearch.open();
     }
 
-    @Override
-    public MaterialCardTitle getWorkbookTitle() {
-        return workbookTitle;
-    }
 
-    @Override
-    public MaterialLabel getWorkbookDescription() {
-        return workbookDescription;
-    }
 }
