@@ -155,6 +155,7 @@ governing permissions and limitations under the License. #L% -->
                 <m:MaterialButton ui:field="exportToCLSButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to CLS" tooltipPosition="LEFT"/>
                 <!--1160777-->
                 <m:MaterialButton ui:field="macrosButton" type="FLOATING" waves="LIGHT" iconType="CODE" tooltip="Create Macros" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="searchButton" type="FLOATING" waves="LIGHT" iconType="SEARCH" tooltip="Search" tooltipPosition="LEFT" />
             </m:MaterialFABList>
         </m:MaterialFAB>
     </g:HTMLPanel>

@@ -104,6 +104,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialIcon formButton;
 
     @UiField
+    MaterialButton searchButton;
+
+    @UiField
     MaterialButton sortButton;
 
     @UiField
@@ -243,6 +246,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
+        });
+
+        searchButton.addClickHandler(event -> {
+           SearchView searchView = new SearchView();
         });
 
         formButton.addClickHandler(event -> {
