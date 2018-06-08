@@ -238,7 +238,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         /*Opens the prompt for the user to type the name of the CLS*/
         exportToCLSButton.addClickHandler(event -> {
-            new ExportToCLSView(/*send the current workbook*/this.activeCell.getSpreadsheet().getWorkbook());
+            new ExportToCLSView(/*send the current workbook*/this.getActiveCell().getSpreadsheet().getWorkbook());
         });
 
         macrosButton.addClickHandler(event -> {

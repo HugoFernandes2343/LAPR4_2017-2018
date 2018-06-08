@@ -65,7 +65,7 @@
     <!--Download servlet, may be subject to changes-->
     <servlet>
         <servlet-name>downloadService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadImpl</servlet-class>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
