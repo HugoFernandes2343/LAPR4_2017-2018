@@ -1,62 +1,69 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:m="urn:import:gwt.material.design.client.ui"			 			 
+             xmlns:m="urn:import:gwt.material.design.client.ui"
              xmlns:ma="urn:import:gwt.material.design.addins.client"
              xmlns:m.html="urn:import:gwt.material.design.client.ui.html">
-    
+
     <ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources"/>
- 
-    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/> 
-        
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+
     <ui:style>
         @external .sidebar, .nav-wrapper;
         .sidebar {
-        padding: 10% !important;
-        font-size: 1em;
-        margin-left: -20px;
-        margin-right: -20px;
+            padding: 10% !important;
+            font-size: 1em;
+            margin-left: -20px;
+            margin-right: -20px;
         }
+
         .sidebar a {
-        padding: 0 !important;
+            padding: 0 !important;
         }
-        .sidebar a, .sidebar i{
-        line-height: 1 !important;
-        height: 0 !important;
+
+        .sidebar a, .sidebar i {
+            line-height: 1 !important;
+            height: 0 !important;
         }
+
         .sidebar i {
-        line-height: 0.5 !important;
+            line-height: 0.5 !important;
         }
 
         nav {
-        box-shadow: none;
+            box-shadow: none;
         }
-        .nav-wrapper{
-        margin: 0;
+
+        .nav-wrapper {
+            margin: 0;
         }
+
         .logo {
-        padding: 10px;
-        border-bottom: 1px solid #E9E9E9;
+            padding: 10px;
+            border-bottom: 1px solid #E9E9E9;
         }
+
         .btnGettingStarted {
-        font-size: 1em !important;
-        margin-top: 20px;
+            font-size: 1em !important;
+            margin-top: 20px;
         }
     </ui:style>
 
     <m:MaterialPanel>
         <m:MaterialHeader>
-            <m:MaterialNavBar ui:field="navBar" width="100%" backgroundColor="BLUE" activates="sideBar" textColor="WHITE">
+            <m:MaterialNavBar ui:field="navBar" width="100%" backgroundColor="BLUE" activates="sideBar"
+                              textColor="WHITE">
                 <!-- <m:MaterialNavBar backgroundColor="PURPLE"> -->
-                <m:MaterialNavBrand text="NSheets" paddingLeft="20" />
+                <m:MaterialNavBrand text="NSheets" paddingLeft="20"/>
                 <m:MaterialNavSection float="RIGHT">
-                    <m:MaterialLink targetHistoryToken="{tokens.getLogin}"  text="Login"/>		
-                    <m:MaterialLink text="Signup" href="#signup" />
-                    <m:MaterialLink  ui:field="btnLogout" text="Logout" />
+                    <m:MaterialLink targetHistoryToken="{tokens.getLogin}" text="Login"/>
+                    <m:MaterialLink text="Signup" href="#signup"/>
+                    <m:MaterialLink ui:field="btnLogout" text="Logout"/>
                 </m:MaterialNavSection>
             </m:MaterialNavBar>
         </m:MaterialHeader>
-        
+
         <m:MaterialSideNavPush ui:field="sideNav" m:id="sideBar" width="280" allowBodyScroll="true" showOnAttach="true">
             <m.html:ListItem waves="DEFAULT" paddingBottom="22">
                 <m:MaterialImage width="100%" resource="{res.nsheets_logo}" addStyleNames="{style.logo}"/>
@@ -65,47 +72,51 @@
                 <m:MaterialLink targetHistoryToken="{tokens.getHome}" iconPosition="LEFT" iconType="HOME" text="Home"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
-                <m:MaterialLink targetHistoryToken="{tokens.getWorkbook}" iconPosition="LEFT" iconType="INSERT_DRIVE_FILE" text="Workbook"/>
+                <m:MaterialLink targetHistoryToken="{tokens.getWorkbook}" iconPosition="LEFT"
+                                iconType="INSERT_DRIVE_FILE" text="Workbook"/>
             </m.html:ListItem>
             <m:MaterialCollapsible>
                 <m:MaterialCollapsibleItem>
                     <m:MaterialCollapsibleHeader waves="DEFAULT">
-                        <m:MaterialLink  text="Community" iconType="PUBLIC"/>
+                        <m:MaterialLink text="Community" iconType="PUBLIC"/>
                     </m:MaterialCollapsibleHeader>
                     <m:MaterialCollapsibleBody>
                         <m:html.UnorderedList>
                             <m.html:ListItem waves="DEFAULT">
-                                <m:MaterialLink  targetHistoryToken="{tokens.getContacts}" iconPosition="LEFT" iconType="PEOPLE" text="Contacts" />
+                                <m:MaterialLink targetHistoryToken="{tokens.getContacts}" iconPosition="LEFT"
+                                                iconType="PEOPLE" text="Contacts"/>
                             </m.html:ListItem>
                             <m.html:ListItem waves="DEFAULT">
-                                 <m:MaterialLink targetHistoryToken="{tokens.getRequests}"  iconPosition="LEFT" iconType="NOTIFICATIONS" text="Requests" >
-                                     <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
-                                 </m:MaterialLink>
+                                <m:MaterialLink targetHistoryToken="{tokens.getRequests}" iconPosition="LEFT"
+                                                iconType="NOTIFICATIONS" text="Requests">
+                                    <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
+                                </m:MaterialLink>
                             </m.html:ListItem>
                         </m:html.UnorderedList>
                     </m:MaterialCollapsibleBody>
                 </m:MaterialCollapsibleItem>
             </m:MaterialCollapsible>
-            <!--<m.html:ListItem waves="DEFAULT">
-                <m:MaterialLink targetHistoryToken="{tokens.getAgenda}" iconPosition="LEFT" iconType="VIEW_AGENDA" text="Agenda"/>
-            </m.html:ListItem>-->
             <m.html:ListItem waves="DEFAULT">
-                <m:MaterialLink targetHistoryToken="{tokens.getXmlupload}" iconPosition="LEFT" iconType="VERTICAL_ALIGN_TOP" text="Upload a file"/>
+                <m:MaterialLink targetHistoryToken="{tokens.getAgenda}" iconPosition="LEFT" iconType="VIEW_AGENDA"
+                                text="Agenda"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
-                <m:MaterialLink targetHistoryToken="{tokens.getSettings}" iconPosition="LEFT" iconType="SETTINGS" text="Settings"/>
+                <m:MaterialLink targetHistoryToken="{tokens.getXmlupload}" iconPosition="LEFT"
+                                iconType="VERTICAL_ALIGN_TOP" text="Upload a file"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
-                <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE" text="About"/>
+                <m:MaterialLink targetHistoryToken="{tokens.getSettings}" iconPosition="LEFT" iconType="SETTINGS"
+                                text="Settings"/>
             </m.html:ListItem>
-            
+            <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE"
+                                text="About"/>
+            </m.html:ListItem>
+
 
         </m:MaterialSideNavPush>
 
 
-
-
-
     </m:MaterialPanel>
-        
+
 </ui:UiBinder>

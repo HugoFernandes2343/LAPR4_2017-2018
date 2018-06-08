@@ -96,4 +96,5 @@ public class NameTokens {
     public static String getXmlupload() { return xmlupload; }
 
     public static String getAgenda(){ return agenda;}
+
 }
