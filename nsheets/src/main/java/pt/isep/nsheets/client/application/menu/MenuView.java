@@ -1,6 +1,7 @@
 package pt.isep.nsheets.client.application.menu;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
@@ -14,25 +15,25 @@ import gwt.material.design.client.ui.MaterialSideNavPush;
 
 class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
 
-	interface Binder extends UiBinder<Widget, MenuView> {
-	}
+    interface Binder extends UiBinder<Widget, MenuView> {
+    }
 
-	@UiField
-	MaterialNavBar navBar;
-	@UiField
-	MaterialSideNavPush sideNav;
-        @UiField
-        MaterialLink btnLogout; 
+    @UiField
+    MaterialNavBar navBar;
+    @UiField
+    MaterialSideNavPush sideNav;
+    @UiField
+    MaterialLink btnLogout;
 
-	@Inject
-	MenuView(Binder uiBinder) {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
+    @Inject
+    MenuView(Binder uiBinder) {
+        initWidget(uiBinder.createAndBindUi(this));
+    }
 
-       @Override
-        public void addClickHandler(ClickHandler ch) {
-            btnLogout.addClickHandler(ch);
-        }
-        
-        
+    @Override
+    public void addClickHandler(ClickHandler ch) {
+        btnLogout.addClickHandler(ch);
+    }
+
+
 }

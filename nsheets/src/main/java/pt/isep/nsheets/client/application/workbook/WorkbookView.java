@@ -22,21 +22,13 @@ package pt.isep.nsheets.client.application.workbook;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import com.google.gwt.user.client.ui.Widget;
-
-import com.gwtplatform.mvp.client.ViewImpl;
-
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
@@ -45,24 +37,23 @@ import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
+import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
-import gwt.material.design.client.ui.*;
-import gwt.material.design.client.ui.table.MaterialDataTable;
-import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
+import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
+import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import static gwt.material.design.jquery.client.api.JQuery.$;
-import java.util.HashMap;
-import java.util.Map;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
-import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
-import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
-import pt.isep.nsheets.shared.services.DownloadService;
-import pt.isep.nsheets.shared.services.DownloadServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+
+import static gwt.material.design.jquery.client.api.JQuery.$;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -102,6 +93,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToCLSButton;
 
     @UiField
+    MaterialButton exportToPdfButton;
+
+    @UiField
     MaterialIcon styleButton;
 
     @UiField
@@ -112,6 +106,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialIcon formButton;
+
+    @UiField
+    MaterialButton searchButton;
 
     @UiField
     MaterialButton sortButton;
@@ -164,8 +161,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
-            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-            {"1", "2", "3", "4", "5", "6", "7"}};
+                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+                {"1", "2", "3", "4", "5", "6", "7"}};
 
         Workbook wb = new Workbook("Workbook", "New Workbook", contents, "");
         Spreadsheet sh = wb.getSheet();
@@ -245,8 +242,24 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             new ExportToXMLView();
         });
 
+
+        /*Opens the prompt for the user to type the name of the CLS*/
+        exportToCLSButton.addClickHandler(event -> {
+            new ExportToCLSView(/*send the current workbook*/this.getActiveCell().getSpreadsheet().getWorkbook());
+        });
+
         macrosButton.addClickHandler(event -> {
             MacrosView macrosView = new MacrosView();
+        });
+
+
+        searchButton.addClickHandler(event -> {
+            SearchView searchView = new SearchView();
+        });
+        
+        exportToPdfButton.addClickHandler(event -> {
+            ExportToPdfView ex = new ExportToPdfView();
+
         });
 
         formButton.addClickHandler(event -> {
@@ -262,12 +275,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         sortButton.addClickHandler(event -> {
             // Show Loader
             MaterialLoader.loading(true);
-            String sortingType=sortingTypeBox.getValue();
-            String dataType=dataTypeBox.getValue();
-            String lowerCell=lowerCellInfo.getText();
-            String upperCell=upperCellInfo.getText();
-            Spreadsheet sh=customTable.getRow(0).getData().sheet;
-            sh.sortCells(upperCell,lowerCell,dataType,sortingType); //Still needs work
+            String sortingType = sortingTypeBox.getValue();
+            String dataType = dataTypeBox.getValue();
+            String lowerCell = lowerCellInfo.getText();
+            String upperCell = upperCellInfo.getText();
+            Spreadsheet sh = customTable.getRow(0).getData().sheet;
+            sh.sortCells(upperCell, lowerCell, dataType, sortingType); //Still needs work
             List<SheetCell> rows = new ArrayList<>();
             for (int k = 0; k < sh.getRowCount(); k++) {
                 rows.add(new SheetCell(sh, k));
@@ -324,7 +337,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             });
 
         });
-
 
 
         exportToCSVButton.addClickHandler(event -> {
@@ -534,26 +546,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            p6.add(exportCSV);
 //            window.add(p6);
 
-            exportToCLSButton.addClickHandler(event1 -> {
-                DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
-                // Set up the callback object.
-                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        MaterialToast.fireToast("Error! " + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Workbook result) {
-                        MaterialToast.fireToast("Exported successfully!", "rounded");
-
-                    }
-                };
-                String fileInfo1 = "CLSFile.cls";
-                String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1;
-                Window.open( url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
-            });
-
             window.open();
         });
 
@@ -567,7 +559,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 
     @Override
-
     protected void onAttach() {
         super.onAttach();
 

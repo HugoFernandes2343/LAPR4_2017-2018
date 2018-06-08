@@ -149,14 +149,14 @@ governing permissions and limitations under the License. #L% -->
         <m:MaterialFAB>
             <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
             <m:MaterialFABList>
+                <m:MaterialButton ui:field="exportToPdfButton" type="FLOATING" waves="LIGHT" iconType="IMPORT_EXPORT" tooltip="Export To PDF" tooltipPosition="LEFT"/>
                 <m:MaterialButton ui:field="exportToXMLButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To XML" tooltipPosition="LEFT"/>
-
-                <!--1160777-->
                 <m:MaterialButton ui:field="exportToCSVButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export To CSV" tooltipPosition="LEFT"/>
                 <!--1160777-->
-
-                <m:MaterialButton ui:field="exportToCLSButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export current workbook to CLS" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="exportToCLSButton" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to CLS" tooltipPosition="LEFT"/>
+                <!--1160777-->
                 <m:MaterialButton ui:field="macrosButton" type="FLOATING" waves="LIGHT" iconType="CODE" tooltip="Create Macros" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="searchButton" type="FLOATING" waves="LIGHT" iconType="SEARCH" tooltip="Search" tooltipPosition="LEFT" />
             </m:MaterialFABList>
         </m:MaterialFAB>
     </g:HTMLPanel>

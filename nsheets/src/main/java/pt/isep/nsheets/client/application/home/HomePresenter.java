@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -40,13 +44,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         void addClickHandlerPrivate(ClickHandler ch);
 
+        void addEventChangeHandler(ValueChangeHandler<String> vc);
 
-        //        void renameClickHandler( ClickHandler ch);
-//
-//        void deleteClickHandler(ClickHandler ch);
-        MaterialCardTitle getWorkbookTitle();
+        void addEventChangeSearch(ValueChangeHandler<String> vc);
 
-        MaterialLabel getWorkbookDescription();
+        void addSearchClose(CloseHandler<String> ch);
+
     }
 
     @NameToken(NameTokens.home)
@@ -59,6 +62,19 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
+
+
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) ->{
+            if(event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")){
+                CurrentUser.setShowAll(true);
+            } else {
+                CurrentUser.setShowAll(false);
+                if(!CurrentUser.isIsLoggedIn()) {
+                    MaterialToast.fireToast("Please login to view private workbooks");
+                }
+            }
+            refreshView();
+        });
 
         this.view.addClickHandlerPublic((ClickEvent event) -> {
 
@@ -79,7 +95,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
 
+        });
 
+        this.view.addEventChangeSearch((ValueChangeEvent<String> event)->{
+            refreshViewSearch(event.getValue());
+        });
+
+        this.view.addSearchClose((CloseEvent<String> event)->{
+            refreshView();
         });
 
         this.view.addClickHandlerPrivate((ClickEvent event) -> {
@@ -126,11 +149,35 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         workbooksSvc.getWorkbooks(callback);
     }
 
+    private void refreshViewSearch(String pattern) {
+        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+
+        // Set up the callback object.
+        AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
+            public void onFailure(Throwable caught) {
+                MaterialToast.fireToast("Error " + caught.getMessage());
+            }
+
+            public void onSuccess(ArrayList<Workbook> result) {
+                nrWb = result.size();
+                ArrayList<Workbook> filter = new ArrayList<>();
+
+                for(Workbook wb : result){
+                    if(/*wb.getName().matches(pattern) || wb.getDescription().matches(pattern) ||*/ wb.getDescription().contains(pattern) || wb.getName().contains(pattern)){
+                        filter.add(wb);
+                    }
+                }
+                view.setContents(filter);
+            }
+        };
+        workbooksSvc.getWorkbooks(callback);
+    }
+
     @Override
     protected void onReveal() {
         super.onReveal();
 
-//        --------------------------------------------------------
+//        ----------------------------------------------------------
 
         EmailDTO m = new EmailDTO("mail@isep.pt");
         PasswordDTO p = new PasswordDTO("pass");
@@ -146,5 +193,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();
+    }
+
+    @Override
+    public MyView getView() {
+        return view;
     }
 }
