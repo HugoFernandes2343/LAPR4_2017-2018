@@ -23,6 +23,8 @@ public class NameTokens {
 
     public static final String home = "home";
 
+    public static final String agenda = "agenda";
+
     public static final String about = "about";
 
     public static final String workbook = "workbook";
@@ -42,8 +44,12 @@ public class NameTokens {
     public static final String exportToCSVWindow = "exportToCSVWindow";
 
     public static final String login = "login";
+    
+    public static final String logout = "logout";
 
     public static final String extensionmanager = "extensionmanager";
+
+    public static final String xmlupload = "xmlupload";
 
     public static String getWorkbook() {
         return workbook;
@@ -74,6 +80,10 @@ public class NameTokens {
     public static String getLogin() {
         return login;
     }
+     public static String getLogout() {
+        return logout;
+    }
+    
 
     public static String getSettings() {
         return settings;
@@ -88,5 +98,9 @@ public class NameTokens {
     }
 
     public static String getExtensionManager() { return extensionmanager; }
+
+    public static String getXmlupload() { return xmlupload; }
+
+    public static String getAgenda(){ return agenda;}
 
 }

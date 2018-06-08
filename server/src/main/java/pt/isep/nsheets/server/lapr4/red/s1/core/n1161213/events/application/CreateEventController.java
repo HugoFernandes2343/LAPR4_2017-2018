@@ -22,7 +22,7 @@ public class CreateEventController implements Controller {
     }
 
     public void newEvent(String title, String description, User user, Date timestamp, Integer from, Integer to, boolean isAllDay){
-        Duration duration = new Duration(from, to, isAllDay);
+        Duration duration = new Duration(from, to);
         Event event = new Event(title, description, user, timestamp, duration); //Can't obtain the user that is logged in. Not implemented yet.
 
         try {

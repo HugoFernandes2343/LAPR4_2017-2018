@@ -49,6 +49,7 @@
     <servlet-name>usersServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/usersService</url-pattern>
+
   </servlet-mapping>  
   
     <servlet-mapping>
@@ -57,4 +58,20 @@
     <url-pattern>/nsheets/tasksService</url-pattern>
   </servlet-mapping>  
       
+
+  </servlet-mapping>
+
+    <!--1160777-->
+    <!--Download servlet, may be subject to changes-->
+    <servlet>
+        <servlet-name>downloadService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadService</servlet-name>
+        <url-pattern>/nsheets/downloadService</url-pattern>
+    </servlet-mapping>
+    <!--1160777-->
+
 </web-app>

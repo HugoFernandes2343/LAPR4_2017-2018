@@ -15,6 +15,7 @@ public class CurrentUser {
     
     static boolean isLoggedIn;
     static UserDTO currentUser;
+    static boolean showAll = true;
     
     public static boolean isIsLoggedIn() {
         return isLoggedIn;
@@ -31,7 +32,15 @@ public class CurrentUser {
     public static void setCurrentUser(UserDTO currentUser) {
         CurrentUser.currentUser = currentUser;
     }
-    
+
+    public static boolean isShowAll() {
+        return showAll;
+    }
+
+    public static void setShowAll(boolean showAll) {
+        CurrentUser.showAll = showAll;
+    }
+
     public static void logout() {
         CurrentUser.setCurrentUser(null);
         CurrentUser.setIsLoggedIn(false);
