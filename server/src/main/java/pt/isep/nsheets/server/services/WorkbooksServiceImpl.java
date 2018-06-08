@@ -70,12 +70,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
     }
 
 
-    public int getNrWorkbooks() {
-        PersistenceContext.setSettings(this.getPersistenceSettings());
-        ListWorkbookController ctrl = new ListWorkbookController();
-        return ctrl.getNrWorkbooks();
-    }
-
 
 //    @Override
 //    public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
@@ -114,7 +108,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 //        } 
 
     
-    @Override
+
     public void deleteWorkbook(Workbook wdto) throws DataException {
         // Setup the persistence settings
         PersistenceContext.setSettings(this.getPersistenceSettings());

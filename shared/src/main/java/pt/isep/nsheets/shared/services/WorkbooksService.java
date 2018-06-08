@@ -10,10 +10,9 @@ import pt.isep.nsheets.shared.core.Workbook;
 public interface WorkbooksService extends RemoteService {
 
     ArrayList<Workbook> getWorkbooks();
-//	WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
 
     Workbook addWorkbook(Workbook wd) throws DataException;
-    
-    void deleteWorkbook(Workbook wdto)throws DataException;;
+
+//    void deleteWorkbook(Workbook wdto)throws DataException;
 
 }
