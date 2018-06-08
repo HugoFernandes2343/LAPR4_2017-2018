@@ -32,6 +32,8 @@ public class NameTokens {
     public static final String settings = "settings";
 
     public static final String contacts = "contacts";
+ 
+    public static final String tasks = "tasks";
 
     public static final String requests = "requests";
 
@@ -59,6 +61,10 @@ public class NameTokens {
 
     public static String getContacts() {
         return contacts;
+    }
+    
+    public static String getTasks() {
+        return tasks;
     }
 
     public static String getRequests() { return requests; }
