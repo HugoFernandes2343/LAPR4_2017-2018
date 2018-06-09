@@ -18,6 +18,7 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentUser;
+import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -48,6 +49,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.user = currentUser;
+        
+        
 
         getView().addClickHandler((ClickEvent event) -> {
 
@@ -63,14 +66,22 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
                 @Override
                 public void onSuccess(UserDTO result) {
+                    
                     user.setCurrentUser(result);
                     user.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
-
+                    
+                    
+                     
                     PlaceRequest placeRequest = new PlaceRequest.Builder()
                             .nameToken(NameTokens.home)
                             .build();
                     placeManager.revealPlace(placeRequest);
+                    
+                    
+                    
+                    
+                    
                 }
             };
 

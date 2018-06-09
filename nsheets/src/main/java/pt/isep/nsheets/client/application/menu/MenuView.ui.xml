@@ -12,41 +12,41 @@
     <ui:style>
         @external .sidebar, .nav-wrapper;
         .sidebar {
-            padding: 10% !important;
-            font-size: 1em;
-            margin-left: -20px;
-            margin-right: -20px;
+        padding: 10% !important;
+        font-size: 1em;
+        margin-left: -20px;
+        margin-right: -20px;
         }
 
         .sidebar a {
-            padding: 0 !important;
+        padding: 0 !important;
         }
 
         .sidebar a, .sidebar i {
-            line-height: 1 !important;
-            height: 0 !important;
+        line-height: 1 !important;
+        height: 0 !important;
         }
 
         .sidebar i {
-            line-height: 0.5 !important;
+        line-height: 0.5 !important;
         }
 
         nav {
-            box-shadow: none;
+        box-shadow: none;
         }
 
         .nav-wrapper {
-            margin: 0;
+        margin: 0;
         }
 
         .logo {
-            padding: 10px;
-            border-bottom: 1px solid #E9E9E9;
+        padding: 10px;
+        border-bottom: 1px solid #E9E9E9;
         }
 
         .btnGettingStarted {
-            font-size: 1em !important;
-            margin-top: 20px;
+        font-size: 1em !important;
+        margin-top: 20px;
         }
     </ui:style>
 
@@ -57,9 +57,23 @@
                 <!-- <m:MaterialNavBar backgroundColor="PURPLE"> -->
                 <m:MaterialNavBrand text="NSheets" paddingLeft="20"/>
                 <m:MaterialNavSection float="RIGHT">
-                    <m:MaterialLink targetHistoryToken="{tokens.getLogin}" text="Login"/>
-                    <m:MaterialLink text="Signup" href="#signup"/>
+                    
+                    <m:MaterialRow marginBottom="0">
+                        <m:MaterialImage backgroundColor="BLUE_ACCENT_1" ui:field="userImage" marginRight="12" marginTop="8" float="LEFT" width="40px" height="40px" shadow="1" circle="true" url="https://mir-s3-cdn-cf.behance.net/project_modules/disp/70e0a922433737.5631e83fc9429.png"/>
+                        
+
+                    </m:MaterialRow>
+                    
+                    <m:MaterialLabel text="USERNAME" ui:field="userName" marginBottom="0" marginRight="10"/>
+                    
+                    
+                    <m:MaterialLink ui:field="btnLogin" targetHistoryToken="{tokens.getLogin}" text="Login"/>
+                    <m:MaterialLink text="Signup" targetHistoryToken="{tokens.getRegister}"/>
                     <m:MaterialLink ui:field="btnLogout" text="Logout"/>
+                    
+                    
+                    
+                    
                 </m:MaterialNavSection>
             </m:MaterialNavBar>
         </m:MaterialHeader>
@@ -88,12 +102,12 @@
                             </m.html:ListItem>
                             <m.html:ListItem waves="DEFAULT">
 
-                                 <m:MaterialLink  targetHistoryToken="{tokens.getTasks}" iconPosition="LEFT" iconType="ASSIGNMENT_TURNED_IN" text="Tasks" />
-                             </m.html:ListItem>
+                                <m:MaterialLink  targetHistoryToken="{tokens.getTasks}" iconPosition="LEFT" iconType="ASSIGNMENT_TURNED_IN" text="Tasks" />
+                            </m.html:ListItem>
                             <m.html:ListItem waves="DEFAULT">
-                                 <m:MaterialLink targetHistoryToken="{tokens.getRequests}"  iconPosition="LEFT" iconType="NOTIFICATIONS" text="Requests" >
-                                     <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
-                                 </m:MaterialLink>
+                                <m:MaterialLink targetHistoryToken="{tokens.getRequests}"  iconPosition="LEFT" iconType="NOTIFICATIONS" text="Requests" >
+                                    <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
+                                </m:MaterialLink>
 
                                 <m:MaterialLink targetHistoryToken="{tokens.getRequests}" iconPosition="LEFT"
                                                 iconType="NOTIFICATIONS" text="Requests">

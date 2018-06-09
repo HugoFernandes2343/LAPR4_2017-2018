@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
+import pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161109.register.application.RegisterController;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
@@ -70,6 +75,24 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
 
         return ctrl.getUser(new Email(email), new Password(password)).toDTO();
 
+    }
+
+    @Override
+    public UserDTO saveUser(UserDTO user) {
+        
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+
+        RegisterController ctrl = new RegisterController();
+        
+        try {
+            return ctrl.saveUser(user).toDTO();
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(UsersServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(UsersServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 
 }

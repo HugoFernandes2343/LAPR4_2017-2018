@@ -40,7 +40,7 @@
                         <m:MaterialImage url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbEAvzy1zZvYIGMhwV6iTxknZtnXXfhDMt2MpQ0iclCYl7Jg5N" type="CIRCLE" addStyleNames="{style.imgProfile} z-depth-1"/>
                         <m:MaterialTextBox ui:field="textEmail" type="EMAIL" placeholder="Email"/>
                         <m:MaterialTextBox ui:field="textPassword" type="PASSWORD" placeholder="Password" />
-                        <m:MaterialButton ui:field="btnLogin" waves="LIGHT" text="Log In" width="100%"/>
+                        <m:MaterialButton ui:field="btnLogin" waves="LIGHT" text="Log In"  width="100%"/>
                         <m:MaterialRow addStyleNames="{style.rowAction}">
                             <m:MaterialColumn grid="s12 m12 l6">
                                 <m:MaterialCheckBox text="Keep me logged in"/>

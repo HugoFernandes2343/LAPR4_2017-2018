@@ -15,10 +15,13 @@ import pt.isep.nsheets.shared.services.EmailDTO;
 /**
  * @author Paulo Jorge
  */
+
+
+
 @Embeddable
 public class Email implements ValueObject, Serializable {
     private static final long serialVersionUID = 1L;
-    Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}");
+    private static final Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}");
     private String email;
 
     protected Email() {
@@ -29,9 +32,9 @@ public class Email implements ValueObject, Serializable {
         
         Matcher m = pattern.matcher(email);
         
-        if (m.matches()) {
+        if (!m.matches()) {
             throw new IllegalArgumentException("Email not introduced correctly");
-        }
+        } 
 
         this.email = email;
     }

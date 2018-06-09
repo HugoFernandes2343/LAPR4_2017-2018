@@ -45,7 +45,12 @@ public class NameTokens {
 
     public static final String login = "login";
     
+    public static final String register = "register";
+    
     public static final String logout = "logout";
+    
+    public static final String menu = "menu";
+
 
     public static final String extensionmanager = "extensionmanager";
 
@@ -55,6 +60,10 @@ public class NameTokens {
 
     public static String getWorkbook() {
         return workbook;
+    }
+
+    public static String getRegister() {
+        return register;
     }
 
     public static String getMacros() { return macros; }
@@ -97,6 +106,9 @@ public class NameTokens {
     
     public static String getExportToCSVWindow() {
         return exportToCSVWindow;
+    }
+    public static String getMenu() {
+        return menu;
     }
 
     public static String getExtensionManager() { return extensionmanager; }
