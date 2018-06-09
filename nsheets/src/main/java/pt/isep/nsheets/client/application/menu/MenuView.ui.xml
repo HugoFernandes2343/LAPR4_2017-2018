@@ -87,10 +87,19 @@
                                                 iconType="PEOPLE" text="Contacts"/>
                             </m.html:ListItem>
                             <m.html:ListItem waves="DEFAULT">
+
+                                 <m:MaterialLink  targetHistoryToken="{tokens.getTasks}" iconPosition="LEFT" iconType="ASSIGNMENT_TURNED_IN" text="Tasks" />
+                             </m.html:ListItem>
+                            <m.html:ListItem waves="DEFAULT">
+                                 <m:MaterialLink targetHistoryToken="{tokens.getRequests}"  iconPosition="LEFT" iconType="NOTIFICATIONS" text="Requests" >
+                                     <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
+                                 </m:MaterialLink>
+
                                 <m:MaterialLink targetHistoryToken="{tokens.getRequests}" iconPosition="LEFT"
                                                 iconType="NOTIFICATIONS" text="Requests">
                                     <m:MaterialBadge text="{tokens.getRequestsNumbers}" backgroundColor="BLUE"/>
                                 </m:MaterialLink>
+
                             </m.html:ListItem>
                         </m:html.UnorderedList>
                     </m:MaterialCollapsibleBody>

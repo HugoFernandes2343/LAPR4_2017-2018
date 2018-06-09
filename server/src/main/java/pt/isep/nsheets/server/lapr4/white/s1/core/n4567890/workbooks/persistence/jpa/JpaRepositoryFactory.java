@@ -55,4 +55,9 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public RequestRepository requests() {
         return new JpaRequestRepository(this.settings);
     }
+
+    @Override
+    public TaskRepository task() {
+        return new JpaTaskRepository(this.settings);
+    }
 }

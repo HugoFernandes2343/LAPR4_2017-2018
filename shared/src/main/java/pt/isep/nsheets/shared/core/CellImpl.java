@@ -194,6 +194,7 @@ public class CellImpl implements Cell {
 		fireCellCleared();
 	}
 
+        @Override
 	public void setContent(String content) throws FormulaCompilationException {
 		if (!this.content.equals(content)) {
 			storeContent(content);
@@ -218,7 +219,6 @@ public class CellImpl implements Cell {
                  */
 		if (content.length() > 1)
 			formula = FormulaCompiler.getInstance().compile(this, content);
-
 		// Stores content and formula
 		this.content = content;
 		this.formula = formula;

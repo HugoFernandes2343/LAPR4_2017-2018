@@ -18,8 +18,8 @@ public class LanguageManager {
 	 */
 	private LanguageManager() {
 		// setup all languages
-
 		languages.add(new ExcelLanguage("excel"));
+                languages.add(new ExcelMonetaryLanguage("excelMonetary"));
 	}
 
 	/**

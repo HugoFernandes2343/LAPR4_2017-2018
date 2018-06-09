@@ -34,6 +34,8 @@ public class NameTokens {
     public static final String settings = "settings";
 
     public static final String contacts = "contacts";
+ 
+    public static final String tasks = "tasks";
 
     public static final String requests = "requests";
 
@@ -48,6 +50,8 @@ public class NameTokens {
     public static final String extensionmanager = "extensionmanager";
 
     public static final String xmlupload = "xmlupload";
+
+    public static final String exportToPdf = "exportToPdf";
 
     public static String getWorkbook() {
         return workbook;
@@ -65,6 +69,10 @@ public class NameTokens {
 
     public static String getContacts() {
         return contacts;
+    }
+    
+    public static String getTasks() {
+        return tasks;
     }
 
     public static String getRequests() { return requests; }
@@ -97,4 +105,6 @@ public class NameTokens {
 
     public static String getAgenda(){ return agenda;}
 
+
+    public static String getExportToPdf(){ return exportToPdf; }
 }
