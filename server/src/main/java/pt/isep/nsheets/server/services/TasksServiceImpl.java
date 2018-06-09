@@ -108,8 +108,8 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
     @Override
     public TaskDTO addTask(TaskDTO task) throws DataException {
         PersistenceContext.setSettings(this.getPersistenceSettings());
-        
-        TasksController ctr=new TasksController();
+
+        TasksController ctr = new TasksController();
         try {
             ctr.addTask(task);
         } catch (DataConcurrencyException ex) {
@@ -120,6 +120,31 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
         return task;
     }
 
+    @Override
+    public void deleteTask(TaskDTO taskDTO) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+        try {
+            ctr.deleteTask(taskDTO);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    @Override
+    public void editTask(TaskDTO task, String oldName) throws DataException {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+        
+        try {
+            ctr.editTask(task,oldName);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

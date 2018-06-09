@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public interface TasksServiceAsync {
 
+    void deleteTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+
     void get_all_tasks(AsyncCallback<ArrayList<TaskDTO>> callback);
 
     void get_task_by_title(String title, AsyncCallback<TaskDTO> callback);
@@ -21,6 +23,8 @@ public interface TasksServiceAsync {
     void get_task_by_priority(int priority, AsyncCallback<TaskDTO> callback);
 
     void get_task_by_percentage(int percentage, AsyncCallback<TaskDTO> callback);
-    
+
     void addTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+    
+    void editTask(TaskDTO task,String oldName, AsyncCallback<TaskDTO> async);
 }
