@@ -69,7 +69,7 @@ public class CellImpl implements Cell {
     /**
      * The content of the cell
      */
-    private String content = "";
+    public String content = "";
 
     /**
      * The cell's formula

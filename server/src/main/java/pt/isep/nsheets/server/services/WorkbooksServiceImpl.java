@@ -11,6 +11,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.*;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDTO;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -18,6 +20,10 @@ import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
+import pt.isep.nsheets.shared.core.CellImpl;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
+import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction.ConditionalFunctionController;
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
@@ -123,5 +129,18 @@ WorkbooksServiceImpl extends RemoteServiceServlet implements WorkbooksService {
         }
 
     } 
+    
+    @Override
+    public boolean activateConditional(CellImpl activeCell, String name, String operation, String value) {
+        ConditionalFunctionController cfc = new ConditionalFunctionController();
+        try {
+            return cfc.activateExtension(activeCell, name, operation, value);
+        } catch (FormulaCompilationException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalValueTypeException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
 
 }

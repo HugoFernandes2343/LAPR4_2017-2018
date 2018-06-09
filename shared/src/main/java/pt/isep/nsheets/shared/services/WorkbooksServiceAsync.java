@@ -3,6 +3,7 @@ package pt.isep.nsheets.shared.services;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Workbook;
 
 
@@ -15,4 +16,7 @@ public interface WorkbooksServiceAsync {
 	void getWorkbooks(AsyncCallback<ArrayList<Workbook>> async);
 
 //	void addWorkbookDescription(WorkbookDescriptionDTO wdDto, AsyncCallback<WorkbookDescriptionDTO> async);
+        
+        void activateConditional(CellImpl activeCell, String name, String operation, String value,AsyncCallback<Boolean> async);
+
 }
