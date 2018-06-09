@@ -5,13 +5,9 @@
  */
 package pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables;
 
-import java.util.SortedSet;
 import pt.isep.nsheets.shared.core.Cell;
-import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.Expression;
-import pt.isep.nsheets.shared.core.formula.Formula;
-import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
 
 /**
@@ -37,12 +33,20 @@ public class VariableReference implements Expression{
     public VariableReference(Cell cell, String name) {
         this.name = name;
         this.cell = cell;
-        this.v = ((CellImpl)cell).addVariable(name);
     }
+
+    public String getName (){
+        return name;
+    }    
 
     public void setVariableValue (Value value){
         v.setValue(value);
     }    
+
+    @Override
+    public String toString() {
+        return name;
+    }
 
     @Override
     public Value evaluate() {
