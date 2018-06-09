@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import com.google.gwt.dev.shell.log.SwingLoggerPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -48,12 +50,6 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
     @UiField
     MaterialListBox showAllWb;
-
-    @UiField
-    MaterialLink renameLink, deleteLink;
-
-    @UiField
-    MaterialCard card;
 
 
     @Inject
@@ -142,10 +138,9 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         htmlPanel.clear();
 
 
-
-
         for (Workbook wb : contents) {
-            if ((wb.getUserMail().equalsIgnoreCase("") && CurrentUser.isShowAll()) || wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail())) {
+
+            if (( wb.getUserMail().equals("") && CurrentUser.isShowAll() ) || ( CurrentUser.isIsLoggedIn() && wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail()) )) {
                 MaterialCard card = createCard(wb);
 
 
@@ -181,6 +176,16 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     @Override
     public void addEventChangeHandler(ValueChangeHandler<String> vc) {
         showAllWb.addValueChangeHandler(vc);
+    }
+
+    @Override
+    public void addEventChangeSearch(ValueChangeHandler<String> vc){
+        txtSearch.addValueChangeHandler(vc);
+    }
+
+    @Override
+    public void addSearchClose(CloseHandler<String> ch) {
+        txtSearch.addCloseHandler(ch);
     }
 
 

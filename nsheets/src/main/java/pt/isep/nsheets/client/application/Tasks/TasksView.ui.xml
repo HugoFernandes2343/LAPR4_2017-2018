@@ -1,0 +1,42 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+                     xmlns:g="urn:import:com.google.gwt.user.client.ui"
+                     xmlns:m="urn:import:gwt.material.design.client.ui"
+                     xmlns:ma="urn:import:gwt.material.design.addins.client"
+                     xmlns:m.html="urn:import:gwt.material.design.client.ui.html">
+             
+             
+    <m:MaterialPanel>              
+                    
+        <m:MaterialListBox ui:field="listBox" placeholder="Task Listing:">
+           <m.html:Option ui:field="allTasks" text="Show all Tasks"/>
+            <m.html:Option ui:field="completedTasks" text="Show Only Complete Tasks"/>
+            <m.html:Option ui:field="incompleteTasks" text="Show Only Incomplete Tasks"/>
+            
+            <m.html:Option ui:field="priority1" text="Show Only Tasks with priority 1"/>
+            <m.html:Option ui:field="priority2" text="Show Only Tasks with priority 2"/>
+            <m.html:Option ui:field="priority3" text="Show Only Tasks with priority 3"/>
+            <m.html:Option ui:field="priority4" text="Show Only Tasks with priority 4"/>
+            <m.html:Option ui:field="priority5" text="Show Only Tasks with priority 5"/>
+
+        </m:MaterialListBox>
+            
+        <g:HTMLPanel ui:field="htmlPanel">
+            <m:MaterialCard ui:field="card" backgroundColor="BLUE_DARKEN_1">
+                <m:MaterialCardAction>
+                    <m:MaterialLink ui:field="editTask" text="Edit" iconType="EDIT" iconColor="INDIGO" textColor="WHITE"/>                    
+                    <m:MaterialLink ui:field="deleteTask" text="Delete" iconType="DELETE" iconColor="GREY" textColor="WHITE"/>  
+                </m:MaterialCardAction>
+            </m:MaterialCard>
+         
+        </g:HTMLPanel>
+      
+        <m:MaterialFAB>
+            <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
+            <m:MaterialFABList>
+                <m:MaterialButton ui:field="newTaskButton" type="FLOATING" waves="LIGHT" iconType="DONE" tooltip="New Task" tooltipPosition="LEFT"/>
+            </m:MaterialFABList>
+        </m:MaterialFAB>   
+    </m:MaterialPanel> 
+ 	
+</ui:UiBinder>

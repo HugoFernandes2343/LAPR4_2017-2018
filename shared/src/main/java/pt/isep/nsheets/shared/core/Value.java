@@ -421,19 +421,19 @@ public class Value implements Comparable<Value>, Serializable {
 				}
 				break;
 
-			case DATE:
-				try {
-					return parseDateValue(value);
-				} catch (ParseException e) {
-				}
-				break;
-
-			case NUMERIC:
-				try {
-					return parseNumericValue(value);
-				} catch (ParseException e) {
-				}
-				break;
+//			case DATE:
+//				try {
+//					return parseDateValue(value);
+//				} catch (ParseException e) {
+//				}
+//				break;
+//
+//			case NUMERIC:
+//				try {
+//					return parseNumericValue(value);
+//				} catch (ParseException e) {
+//				}
+//				break;
 			}
 
 		// Uses the string as the value

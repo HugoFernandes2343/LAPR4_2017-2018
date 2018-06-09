@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -18,8 +21,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import gwt.material.design.client.ui.MaterialCardTitle;
-import gwt.material.design.client.ui.MaterialLabel;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -44,6 +45,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         void addEventChangeHandler(ValueChangeHandler<String> vc);
 
+        void addEventChangeSearch(ValueChangeHandler<String> vc);
+
+        void addSearchClose(CloseHandler<String> ch);
+
     }
 
     @NameToken(NameTokens.home)
@@ -58,11 +63,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         this.view = view;
 
 
-        this.view.addEventChangeHandler((ValueChangeEvent<String> event) ->{
-            if(event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")){
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
+            if (event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")) {
                 CurrentUser.setShowAll(true);
             } else {
                 CurrentUser.setShowAll(false);
+                if (!CurrentUser.isIsLoggedIn()) {
+                    MaterialToast.fireToast("Please login to view private workbooks");
+                }
             }
             refreshView();
         });
@@ -86,6 +94,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             wb.setNewWb(true);
             workbooksSvc.addWorkbook(wb, callback);
 
+        });
+
+        this.view.addEventChangeSearch((ValueChangeEvent<String> event) -> {
+            refreshViewSearch(event.getValue());
+        });
+
+        this.view.addSearchClose((CloseEvent<String> event) -> {
+            refreshView();
         });
 
         this.view.addClickHandlerPrivate((ClickEvent event) -> {
@@ -132,11 +148,37 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         workbooksSvc.getWorkbooks(callback);
     }
 
+    private void refreshViewSearch(String pattern) {
+        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+
+        // Set up the callback object.
+        AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
+            public void onFailure(Throwable caught) {
+                MaterialToast.fireToast("Error " + caught.getMessage());
+            }
+
+            public void onSuccess(ArrayList<Workbook> result) {
+                nrWb = result.size();
+                ArrayList<Workbook> filter = new ArrayList<>();
+
+                RegExp exp = RegExp.compile(pattern);
+
+                for (Workbook wb : result) {
+                    if ( exp.test(wb.getName())|| exp.test(wb.getDescription()) || wb.getDescription().contains(pattern) || wb.getName().contains(pattern)) {
+                        filter.add(wb);
+                    }
+                }
+                view.setContents(filter);
+            }
+        };
+        workbooksSvc.getWorkbooks(callback);
+    }
+
     @Override
     protected void onReveal() {
         super.onReveal();
 
-//        --------------------------------------------------------
+//        ----------------------------------------------------------
 
         EmailDTO m = new EmailDTO("mail@isep.pt");
         PasswordDTO p = new PasswordDTO("pass");

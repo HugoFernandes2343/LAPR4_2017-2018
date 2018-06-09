@@ -246,7 +246,7 @@ public class CellImpl implements Cell {
         this.formula = formula;
 
         /*
-                *Only at this stage will Formula contain actual Variables
+         *Only at this stage will Formula contain actual Variables
          */
         updateDependencies();
     }

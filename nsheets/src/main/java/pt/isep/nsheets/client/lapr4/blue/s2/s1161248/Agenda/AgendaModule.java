@@ -1,6 +1,6 @@
 package pt.isep.nsheets.client.lapr4.blue.s2.s1161248.Agenda;
 
-/**import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class AgendaModule extends AbstractPresenterModule {
     @Override
@@ -8,4 +8,3 @@ public class AgendaModule extends AbstractPresenterModule {
         bindPresenter(AgendaPresenter.class, AgendaPresenter.MyView.class, AgendaView.class, AgendaPresenter.MyProxy.class);
     }
 }
-*/

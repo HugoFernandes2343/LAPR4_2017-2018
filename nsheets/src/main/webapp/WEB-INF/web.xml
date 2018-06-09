@@ -34,22 +34,38 @@
     <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
   </servlet>
   
+    <servlet>
+    <servlet-name>TasksServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>workbooksServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/workbooksService</url-pattern>
   </servlet-mapping> 
+  
   <servlet-mapping>
     <servlet-name>usersServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/usersService</url-pattern>
-  </servlet-mapping>
+
+  </servlet-mapping>  
+  
+    <servlet-mapping>
+    <servlet-name>TasksServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/tasksService</url-pattern>
+  </servlet-mapping>  
+      
+
+ 
 
     <!--1160777-->
     <!--Download servlet, may be subject to changes-->
     <servlet>
         <servlet-name>downloadService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadImpl</servlet-class>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -57,5 +73,18 @@
         <url-pattern>/nsheets/downloadService</url-pattern>
     </servlet-mapping>
     <!--1160777-->
+
+    <!--1161110-->
+    <!--Upload Servlet-->
+    <servlet>
+      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
+    </servlet>
+   
+    <servlet-mapping>
+      <servlet-name>fileUploaderServlet</servlet-name>
+      <url-pattern>/nsheets/fileupload</url-pattern>
+    </servlet-mapping>
+    <!--1161110-->
 
 </web-app>

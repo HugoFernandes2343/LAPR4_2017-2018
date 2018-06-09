@@ -29,7 +29,6 @@ public class ExportToCLSView extends Composite {
     @UiField
     MaterialTextBox textBox1;
 
-
     private static ExportToCLSBinder uiBinder = GWT.create(ExportToCLSBinder.class);
 
     interface ExportToCLSBinder extends UiBinder<Widget, ExportToCLSView> {
@@ -41,30 +40,30 @@ public class ExportToCLSView extends Composite {
         window.setPadding(32);
         window.setHeight("400px");
         window.setTextAlign(TextAlign.LEFT);
-        window.setTitle("Export to CLS");
         MaterialWindow.setOverlay(true);
-        window.setWaves(WavesType.LIGHT);
+        btnExport.setWaves(WavesType.LIGHT);
         textBox1.setPlaceholder("Name Of The File");
 
         /*after having the filename in the prompt*/
         btnExport.addClickHandler(event -> {
-            String fileInfo1 = textBox1.getText();
-            DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
+            /*DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
             // Set up the callback object. WORKBOOK HERE DOESNT LET THE WINDOW OPEN. MUST SEND ANOTHER WAY
-            downAsync.exportToDownload(workbook,new AsyncCallback<Workbook>() {
+            downAsync.exportToDownload(workbook, new AsyncCallback<Workbook>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error! " + caught.getMessage());
+                    MaterialToast.fireToast("Error in Export to CLS! " + caught.getMessage());
                 }
 
                 @Override
                 public void onSuccess(Workbook result) {
+                    String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1 ;
+                    Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
                     MaterialToast.fireToast("Exported successfully!", "rounded");
                 }
-            });
-
-            String url = GWT.getModuleBaseURL() + fileInfo1;
-            Window.open(url,"Download CLS file","status=0,toolbar=0,menubar=0,location=0");
+            });*/
+            String url = GWT.getModuleBaseURL() + "downloadService?filename=" + textBox1.getText();
+            //String url = GWT.getHostPageBaseURL() + "downloadService?filename=" + textBox1.getText();
+            Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
         });
         window.open();
     }

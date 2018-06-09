@@ -2,7 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:m="urn:import:gwt.material.design.client.ui"
              xmlns:ma="urn:import:gwt.material.design.addins.client"
-             xmlns:cb="urn:import:gwt.material.design.addins.client.combobox"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
     <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
@@ -23,6 +22,7 @@
                     <m:MaterialButton ui:field="btnExport" text="Export" size="MEDIUM"/>
                 </m:MaterialPanel>
             </m:MaterialRow>
+
         </ma:window.MaterialWindow>
     </g:HTMLPanel>
 </ui:UiBinder>

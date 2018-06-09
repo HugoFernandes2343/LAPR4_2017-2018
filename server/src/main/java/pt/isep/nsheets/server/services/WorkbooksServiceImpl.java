@@ -21,7 +21,8 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
-public class WorkbooksServiceImpl extends RemoteServiceServlet implements WorkbooksService {
+public class
+WorkbooksServiceImpl extends RemoteServiceServlet implements WorkbooksService {
 
     private PersistenceSettings getPersistenceSettings() {
 
@@ -70,12 +71,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
     }
 
 
-    public int getNrWorkbooks() {
-        PersistenceContext.setSettings(this.getPersistenceSettings());
-        ListWorkbookController ctrl = new ListWorkbookController();
-        return ctrl.getNrWorkbooks();
-    }
-
 
 //    @Override
 //    public ArrayList<WorkbookDescriptionDTO> getWorkbooks() {
@@ -114,7 +109,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 //        } 
 
     
-    @Override
+
     public void deleteWorkbook(Workbook wdto) throws DataException {
         // Setup the persistence settings
         PersistenceContext.setSettings(this.getPersistenceSettings());
