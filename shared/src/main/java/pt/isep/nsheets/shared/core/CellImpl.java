@@ -39,7 +39,7 @@ import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
-//import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
 import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
@@ -83,6 +83,11 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
      */
     public String content = "";
 
+    /*
+    * List of Variables in this Cell
+     */
+    private VariableList variableList;
+    
     /**
      * The cell's formula
      */
@@ -116,7 +121,6 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
      * List of Variables in this Cell
      */
     //private VariableList variableList;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -527,19 +531,19 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
      * @param name
      * @return
      */
-//    public Variable addVariable(String name) {
-//        if (variableList == null) { //If this is the 1st Variable
-//            variableList = new VariableList();
-//        }
-//
-//        Variable v;
-//        if (!variableList.contains(name)) { //If the Variable is new
-//            v = new Variable(name, new Value(0.0));
-//            variableList.addVariable(v);
-//        } else {
-//            v = variableList.get(name);
-//        }
-//
-//        return v;
-//    }
+    public Variable addVariable(String name) {
+        if (variableList == null) { //If this is the 1st Variable
+            variableList = new VariableList();
+        }
+
+        Variable v;
+        if (!variableList.contains(name)) { //If the Variable is new
+            v = new Variable(name, new Value(0.0));
+            variableList.addVariable(v);
+        } else {
+            v = variableList.get(name);
+        }
+
+        return v;
+    }
 }
