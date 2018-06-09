@@ -26,6 +26,7 @@ import java.util.Map;
 import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.FormsEditorController;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 /**
  *
@@ -61,68 +62,68 @@ public class FormEditorView extends Composite {
     public FormEditorView() {
         initWidget(uiBinder.createAndBindUi(this));
 
-        Workbook wb = new Workbook("Teste1", "Teste2","");
+        WorkbookDescriptionDTO wb = new WorkbookDescriptionDTO("Teste1", "Teste2","");
         //Workbook wb = SelectedWorkbookController.getActualWorkbook();
         FormsEditorController editorController = new FormsEditorController(wb);
 
-        if (editorController.existsForm() == true) {
-            formMap = editorController.getExistentForm();
-            Iterator it_form = formMap.entrySet().iterator();
-            while (it_form.hasNext()) {
-                Map.Entry pair = (Map.Entry) it_form.next();
+//        if (editorController.existsForm() == true) {
+//            formMap = editorController.getExistentForm();
+//            Iterator it_form = formMap.entrySet().iterator();
+//            while (it_form.hasNext()) {
+//                Map.Entry pair = (Map.Entry) it_form.next();
+//
+//                MaterialLabel label = new MaterialLabel((String) pair.getKey());
+//                MaterialTextBox txt = new MaterialTextBox();
+//                txt.setValue((String) pair.getValue());
+//                MaterialCheckBox cb = new MaterialCheckBox();
+//
+//                checkBoxMap.put(rowCount, cb);
+//                textBoxMap.put(rowCount, txt);
+//                labelMap.put(rowCount, label);
+//
+//                label.setPaddingLeft(100);
+//                label.setPaddingRight(100);
+//                label.setPaddingTop(50);
+//
+//                txt.setPaddingLeft(100);
+//                txt.setPaddingRight(100);
+//                txt.setPaddingTop(25);
+//                txt.setPaddingBottom(25);
+//                txt.add(cb);
+//
+//                formEditorWindow.add(label);
+//                formEditorWindow.add(txt);
+//                rowCount++;
+//            }
+//            formEditorWindow.open();
+//        } else {
+//            formEditorWindow.open();
+//        }
+//
+//        addFormRowButton.addClickHandler(event -> {
+//            MaterialLabel label = new MaterialLabel("Row " + rowCount);
+//            MaterialTextBox txt = new MaterialTextBox();
+//            MaterialCheckBox checkBox = new MaterialCheckBox();
+//
+//            checkBoxMap.put(rowCount, checkBox);
+//            textBoxMap.put(rowCount, txt);
+//            labelMap.put(rowCount, label);
+//
+//            label.setPaddingLeft(100);
+//            label.setPaddingRight(100);
+//            label.setPaddingTop(50);
+//
+//            txt.setPaddingLeft(100);
+//            txt.setPaddingRight(100);
+//            txt.setPaddingTop(25);
+//            txt.setPaddingBottom(25);
+//            txt.add(checkBox);
+//
+//            formEditorWindow.add(label);
+//            formEditorWindow.add(txt);
+//            rowCount++;
 
-                MaterialLabel label = new MaterialLabel((String) pair.getKey());
-                MaterialTextBox txt = new MaterialTextBox();
-                txt.setValue((String) pair.getValue());
-                MaterialCheckBox cb = new MaterialCheckBox();
-
-                checkBoxMap.put(rowCount, cb);
-                textBoxMap.put(rowCount, txt);
-                labelMap.put(rowCount, label);
-
-                label.setPaddingLeft(100);
-                label.setPaddingRight(100);
-                label.setPaddingTop(50);
-
-                txt.setPaddingLeft(100);
-                txt.setPaddingRight(100);
-                txt.setPaddingTop(25);
-                txt.setPaddingBottom(25);
-                txt.add(cb);
-
-                formEditorWindow.add(label);
-                formEditorWindow.add(txt);
-                rowCount++;
-            }
-            formEditorWindow.open();
-        } else {
-            formEditorWindow.open();
-        }
-
-        addFormRowButton.addClickHandler(event -> {
-            MaterialLabel label = new MaterialLabel("Row " + rowCount);
-            MaterialTextBox txt = new MaterialTextBox();
-            MaterialCheckBox checkBox = new MaterialCheckBox();
-
-            checkBoxMap.put(rowCount, checkBox);
-            textBoxMap.put(rowCount, txt);
-            labelMap.put(rowCount, label);
-
-            label.setPaddingLeft(100);
-            label.setPaddingRight(100);
-            label.setPaddingTop(50);
-
-            txt.setPaddingLeft(100);
-            txt.setPaddingRight(100);
-            txt.setPaddingTop(25);
-            txt.setPaddingBottom(25);
-            txt.add(checkBox);
-
-            formEditorWindow.add(label);
-            formEditorWindow.add(txt);
-            rowCount++;
-
-        });
+//        });
 
         deleteFormRowButton.addClickHandler(new ClickHandler() {
             @Override
@@ -182,7 +183,7 @@ public class FormEditorView extends Composite {
 
                 formMap.put(label.getValue(), txt.getValue());
             }
-            editorController.addForm(formMap);
+//            editorController.addForm(formMap);
             Window.alert("Form Saved");
         });
 

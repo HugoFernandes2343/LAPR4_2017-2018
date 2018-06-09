@@ -74,7 +74,7 @@ public class ExportToPdfView extends Composite {
                 }
             }
         };
-        workbooksSvc.getWorkbooks(callback);
+        //workbooksSvc.getWorkbooks(callback);
         this.spreadsheet.setPlaceholder("Chose spreadsheet to export");
         this.spreadsheet.setGrid("s12");
 
@@ -110,9 +110,9 @@ public class ExportToPdfView extends Composite {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 Workbook w = workbook.getSelectedValue();
-                for (int i = 0; i < w.spreadsheets.size(); i++) {
-                    spreadsheet.addItem(w.spreadsheets.get(i));
-                }
+//                for (int i = 0; i < w.spreadsheets.size(); i++) {
+//                    spreadsheet.addItem(w.spreadsheets.get(i));
+//                }
             }
         });
 

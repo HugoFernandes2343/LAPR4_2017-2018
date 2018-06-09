@@ -101,15 +101,15 @@ public class ExportToCSV {
         FileWriter writer = new FileWriter(fileName + ".csv");
         
         
-        List<Workbook> wb = Arrays.asList(
-                new Workbook("oi","oi",""),
-                new Workbook("ola","ola",""),
-                new Workbook("xau","xau","")
+        List<WorkbookDescriptionDTO> wb = Arrays.asList(
+                new WorkbookDescriptionDTO("oi","oi",""),
+                new WorkbookDescriptionDTO("oi","oi",""),
+                new WorkbookDescriptionDTO("oi","oi","")
         );
         
         writeLine(writer, Arrays.asList("Name", "Description"));
         
-        for(Workbook w : wb){
+        for(WorkbookDescriptionDTO w : wb){
             
             List<String> list = new ArrayList<>();
             list.add(w.getName());

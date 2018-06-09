@@ -20,20 +20,26 @@
  */
 package pt.isep.nsheets.shared.core;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.io.IOException;
+import java.io.Serializable;
 //import java.io.ObjectInputStream;		// not supported in GWT
 //import java.io.ObjectOutputStream;		// not supported in GWT
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.eclipse.persistence.annotations.VariableOneToOne;
 
 import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
+import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
+//import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
 import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
@@ -44,8 +50,11 @@ import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
  *
  * @author Einar Pehrson
  */
-public class CellImpl implements Cell {
+@Entity
+public class CellImpl implements Cell, Serializable, IsSerializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     /**
      * The unique version identifier used for serialization
      */
@@ -54,16 +63,19 @@ public class CellImpl implements Cell {
     /**
      * The spreadsheet to which the cell belongs
      */
+    @VariableOneToOne
     private Spreadsheet spreadsheet;
 
     /**
      * The address of the cell
      */
+    @Embedded
     private Address address;
 
     /**
      * The value of the cell
      */
+    @Embedded
     private Value value = new Value();
 
     /**
@@ -74,17 +86,19 @@ public class CellImpl implements Cell {
     /**
      * The cell's formula
      */
-    private Formula formula;
+    public Formula formula;
 
     /**
      * The cell's precedents
      */
-    private SortedSet<Cell> precedents = new TreeSet<Cell>();
+    @ElementCollection
+    private Set<Cell> precedents = new TreeSet<Cell>();
 
     /**
      * The cell's dependents
      */
-    private SortedSet<Cell> dependents = new TreeSet<Cell>();
+    @ElementCollection
+    private Set<Cell> dependents = new TreeSet<Cell>();
 
     /**
      * The cell listeners that have been registered on the cell
@@ -97,6 +111,15 @@ public class CellImpl implements Cell {
      */
     private transient Map<String, CellExtension> extensions
             = new HashMap<String, CellExtension>();
+
+    /**
+     * List of Variables in this Cell
+     */
+    //private VariableList variableList;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * Creates a new cell at the given address in the given spreadsheet. (not
@@ -132,7 +155,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * LOCATION
+     * LOCATION
      */
     public Spreadsheet getSpreadsheet() {
         return spreadsheet;
@@ -143,7 +166,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * VALUE
+     * VALUE
      */
     public Value getValue() {
         return value;
@@ -196,7 +219,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * CONTENT
+     * CONTENT
      */
     public String getContent() {
         return content;
@@ -214,6 +237,7 @@ public class CellImpl implements Cell {
         fireCellCleared();
     }
 
+    @Override
     public void setContent(String content) throws FormulaCompilationException {
         if (!this.content.equals(content)) {
             storeContent(content);
@@ -240,7 +264,6 @@ public class CellImpl implements Cell {
         if (content.length() > 1) {
             formula = FormulaCompiler.getInstance().compile(this, content);
         }
-
         // Stores content and formula
         this.content = content;
         this.formula = formula;
@@ -248,6 +271,7 @@ public class CellImpl implements Cell {
         /*
          *Only at this stage will Formula contain actual Variables
          */
+        //this.formula.setTempVariableList(this.variableList);
         updateDependencies();
     }
 
@@ -299,7 +323,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * DEPENDENCIES
+     * DEPENDENCIES
      */
     public SortedSet<Cell> getPrecedents() {
         return new TreeSet<Cell>(precedents);
@@ -343,7 +367,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * CLIPBOARD
+     * CLIPBOARD
      */
     public void copyFrom(Cell source) {
         // Copies content
@@ -391,7 +415,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * EVENT HANDLING
+     * EVENT HANDLING
      */
     public void addCellListener(CellListener listener) {
         listeners.add(listener);
@@ -406,7 +430,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * EXTENSIONS
+     * EXTENSIONS
      */
     public Cell getExtension(String name) {
         // Looks for an existing cell extension
@@ -425,7 +449,7 @@ public class CellImpl implements Cell {
     }
 
     /*
- * GENERAL
+     * GENERAL
      */
     /**
      * Compares this cell with the specified cell for order, by comparing their
@@ -494,4 +518,28 @@ public class CellImpl implements Cell {
 //		for (CellExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
+    /**
+     * 1140420 Rodrigo, Sp1 Lang02.1. Created this method directly in the
+     * implementation (instead of the "Cell" interface) because I don't want to
+     * screw up anyone else's work this late This method determines if the
+     * Variable with the given "name" already exists or not, returning it if so.
+     *
+     * @param name
+     * @return
+     */
+//    public Variable addVariable(String name) {
+//        if (variableList == null) { //If this is the 1st Variable
+//            variableList = new VariableList();
+//        }
+//
+//        Variable v;
+//        if (!variableList.contains(name)) { //If the Variable is new
+//            v = new Variable(name, new Value(0.0));
+//            variableList.addVariable(v);
+//        } else {
+//            v = variableList.get(name);
+//        }
+//
+//        return v;
+//    }
 }

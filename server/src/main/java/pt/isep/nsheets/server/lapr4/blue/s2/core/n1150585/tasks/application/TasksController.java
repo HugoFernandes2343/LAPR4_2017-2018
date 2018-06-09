@@ -50,13 +50,13 @@ public class TasksController implements Controller {
 
     }
 
-    public void deleteTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
-        TaskRepository taskRepository = PersistenceContext.repositories().task();
-        taskRepository.deleteTask(taskDTO);
-    }
-
-    public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
-        TaskRepository taskRepository = PersistenceContext.repositories().task();
-        taskRepository.editTask(taskDTO,oldName);
-    }
+//    public void deleteTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
+//        TaskRepository taskRepository = PersistenceContext.repositories().task();
+//        taskRepository.deleteTask(taskDTO);
+//    }
+//
+//    public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
+//        TaskRepository taskRepository = PersistenceContext.repositories().task();
+//        taskRepository.editTask(taskDTO,oldName);
+//    }
 }

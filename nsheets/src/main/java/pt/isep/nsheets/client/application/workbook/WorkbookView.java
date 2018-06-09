@@ -38,22 +38,24 @@ import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
+//import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
-import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
+//import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.services.WorkbooksService;
-import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
+import pt.isep.nsheets.shared.services.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+
+import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -157,20 +159,23 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         }
     }
 
-    void initWorkbook() {
+    void initWorkbook() throws Exception {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
                 {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
                 {"1", "2", "3", "4", "5", "6", "7"}};
 
-        Workbook wb = new Workbook("Workbook", "New Workbook", contents, "");
-        Spreadsheet sh = wb.getSheet();
+        Workbook wb = new Workbook(contents);
+//        WorkbookDescriptionDTO desc = new WorkbookDescriptionDTO("Workbook", "New Workbook", wb.toDTO(), "");
+
+//        SpreadsheetDTO temp = desc.getWorkbook().getSpreadsheets().get(0);
+        Spreadsheet sh  = new SpreadsheetImpl(wb,"sheet", contents);
+
 
         int columnNumber = 0;
 
         // Add the columns...
-        customTable.addColumn(new SheetWidgetColumn(-1, this));
         customTable.addColumn(new SheetWidgetColumn(-1, this));
         for (int i = 0; i < sh.getColumnCount(); ++i) {
 
@@ -190,7 +195,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     }
 
     @Inject
-    WorkbookView(Binder uiBinder) {
+    WorkbookView(Binder uiBinder) throws Exception {
 
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -217,27 +222,27 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             // Window.alert("Hello");
         });
 
-        firstButton.addClickHandler(event -> {
-            if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
-                //Workbook wb = SelectedWorkbookController.getActualWorkbook();
-                Workbook wb = new Workbook("Teste1", "Teste2", "");
-                /*Map<String, String> teste = new HashMap<>();
-                teste.put("Isep0", "Linha0");
-                teste.put("Isep1", "Linha1");
-                teste.put("Isep2", "Linha2");
-                teste.put("Isep3", "Linha3");
-                teste.put("Isep4", "Linha4");
-                teste.put("Isep5", "Linha5");
-                Form form = new Form(teste);
-                wb.insertNewForm(form);*/
-
-                if (!wb.formExists()) {
-                    new FormView(wb.getForm().getRows());
-                } else {
-                    Window.alert("This workbook dont have a form");
-                }
-            }
-        });
+//        firstButton.addClickHandler(event -> {
+//            if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
+//                //Workbook wb = CurrentWorkbook.getActualWorkbook();
+//                Workbook wb = new Workbook("Teste1", "Teste2", "");
+//                /*Map<String, String> teste = new HashMap<>();
+//                teste.put("Isep0", "Linha0");
+//                teste.put("Isep1", "Linha1");
+//                teste.put("Isep2", "Linha2");
+//                teste.put("Isep3", "Linha3");
+//                teste.put("Isep4", "Linha4");
+//                teste.put("Isep5", "Linha5");
+//                Form form = new Form(teste);
+//                wb.insertNewForm(form);*/
+//
+//                if (!wb.formExists()) {
+//                    new FormView(wb.getForm().getRows());
+//                } else {
+//                    Window.alert("This workbook dont have a form");
+//                }
+//            }
+//        });
 
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
@@ -257,17 +262,17 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         searchButton.addClickHandler(event -> {
             SearchView searchView = new SearchView();
         });
-        
-        exportToPdfButton.addClickHandler(event -> {
-            ExportToPdfView ex = new ExportToPdfView();
 
-        });
+//        exportToPdfButton.addClickHandler(event -> {
+//            ExportToPdfView ex = new ExportToPdfView();
+//
+//        });
 
-        formButton.addClickHandler(event -> {
-            //Window.alert("Hello");
-            new FormEditorView();
-
-        });
+//        formButton.addClickHandler(event -> {
+//            //Window.alert("Hello");
+//            new FormEditorView();
+//
+//        });
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");
@@ -340,215 +345,215 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         });
 
 
-        exportToCSVButton.addClickHandler(event -> {
-            MaterialWindow window = new MaterialWindow();
-            window.setPadding(32);
-            window.setHeight("600px");
-            window.setTextAlign(TextAlign.LEFT);
-            window.setTitle("Export to CSV");
-            MaterialWindow.setOverlay(true);
-            MaterialLabel label1 = new MaterialLabel("Please select what you wish to export:");
-            MaterialRadioButton radioButtonWorkbook = new MaterialRadioButton("radioButtonWorkbook", "Export Workbook");
-            MaterialRadioButton radioButtonWorksheet = new MaterialRadioButton("radioButtonWorksheet", "Export Spreadsheet");
-            MaterialRadioButton radioButtonPartOfWorksheet = new MaterialRadioButton("radioButtonPartOfWorksheet", "Export Part Of A Spreadsheet");
-            radioButtonWorkbook.setName("Export");
-            radioButtonWorksheet.setName("Export");
-            radioButtonPartOfWorksheet.setName("Export");
-
-            window.add(label1);
-
-            MaterialPanel p0 = new MaterialPanel();
-            MaterialPanel p1 = new MaterialPanel();
-            MaterialPanel p2 = new MaterialPanel();
-            p0.setTextAlign(TextAlign.LEFT);
-            p1.setTextAlign(TextAlign.LEFT);
-            p2.setTextAlign(TextAlign.LEFT);
-            p0.add(radioButtonWorkbook);
-            p1.add(radioButtonWorksheet);
-            p2.add(radioButtonPartOfWorksheet);
-            window.add(p0);
-            window.add(p1);
-            window.add(p2);
-
-            MaterialComboBox<Workbook> cworkbook = new MaterialComboBox<>();
-            cworkbook.setPlaceholder("Choose the Workbook you want to export");
-            cworkbook.setAllowClear(true);
-            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
-
-            AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
-                @Override
-                public void onFailure(Throwable throwable) {
-                    MaterialToast.fireToast(throwable.getMessage());
-                }
-
-                @Override
-                public void onSuccess(ArrayList<Workbook> workbookDTOS) {
-                    for (Workbook w : workbookDTOS) {
-                        cworkbook.addItem(w);
-                    }
-                }
-            };
-            workbooksSvc.getWorkbooks(callback);
-
-//            window.add(cworkbook);
-            MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
-            cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
-            cspreadsheets.setAllowClear(true);
-            cworkbook.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    Workbook w = cworkbook.getSelectedValue().get(0);
-                    for (int i = 0; i < w.spreadsheets.size(); i++) {
-                        cspreadsheets.addItem(w.spreadsheets.get(i));
-                    }
-                }
-            });
-
-//            window.add(cspreadsheets);
-            MaterialTextBox cellVertical = new MaterialTextBox();
-            cellVertical.setPlaceholder("Vertical Address of the cell (A1)");
-
-            MaterialTextBox cellHorizontal = new MaterialTextBox();
-            cellHorizontal.setPlaceholder("Horizontal Address of the cell (A1)");
-
-            MaterialTextBox name = new MaterialTextBox();
-            name.setPlaceholder("Name of the file");
-
-            cellVertical.setEnabled(true);
-            cellHorizontal.setEnabled(true);
-            name.setEnabled(true);
-//            window.add(cellVertical);
-//            window.add(cellHorizontal);
-//            window.add(name);
-
-            MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
-//            window.add(label2);
-
-            MaterialRadioButton comma = new MaterialRadioButton();
-            comma.setName("Delimiter");
-            comma.setText(",");
-
-            MaterialRadioButton commaPoint = new MaterialRadioButton();
-            commaPoint.setName("Delimiter");
-            commaPoint.setText(";");
-
-            MaterialRadioButton point = new MaterialRadioButton();
-            point.setName("Delimiter");
-            point.setText(".");
-
-            MaterialRadioButton barra = new MaterialRadioButton();
-            barra.setName("Delimiter");
-            barra.setText("/");
-
-            MaterialRadioButton twoPoints = new MaterialRadioButton();
-            twoPoints.setName("Delimiter");
-            twoPoints.setText(":");
-
-            MaterialPanel p3 = new MaterialPanel();
-            MaterialPanel p4 = new MaterialPanel();
-            MaterialPanel p5 = new MaterialPanel();
-            MaterialPanel p7 = new MaterialPanel();
-
-            p3.setTextAlign(TextAlign.LEFT);
-            p4.setTextAlign(TextAlign.LEFT);
-            p5.setTextAlign(TextAlign.LEFT);
-            p7.setTextAlign(TextAlign.LEFT);
-
-            p3.add(comma);
-            p4.add(commaPoint);
-            p5.add(barra);
-            p7.add(twoPoints);
-
-//            window.add(p3);
-//            window.add(p4);
-//            window.add(p5);
-//            window.add(p7);
-            MaterialButton exportCSV = new MaterialButton("EXPORT");
-            exportCSV.addClickHandler(evnt -> {
-                WorkbooksServiceAsync wsvc = GWT.create(WorkbooksService.class);
-                // Set up the callback object.
-                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        MaterialToast.fireToast("Error! " + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Workbook result) {
-                        MaterialToast.fireToast("Exported successfully!", "rounded");
-
-                    }
-                };
-            });
-
-            exportCSV.setWaves(WavesType.LIGHT);
-            exportCSV.setSize(ButtonSize.MEDIUM);
-            MaterialPanel p6 = new MaterialPanel();
-            p6.setTextAlign(TextAlign.RIGHT);
-            p6.add(exportCSV);
-//            window.add(p6);
-//            window.open();
-
-            radioButtonWorkbook.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    window.add(cworkbook);
-                    window.remove(cspreadsheets);
-                    window.remove(cellVertical);
-                    window.remove(cellHorizontal);
-                    window.add(name);
-                    window.add(label2);
-                    window.add(p3);
-                    window.add(p4);
-                    window.add(p5);
-                    window.add(p7);
-                    window.add(p6);
-                }
-            });
-
-            radioButtonWorksheet.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    window.add(cworkbook);
-                    window.add(cspreadsheets);
-                    window.remove(cellVertical);
-                    window.remove(cellHorizontal);
-                    window.add(name);
-                    window.add(label2);
-                    window.add(p3);
-                    window.add(p4);
-                    window.add(p5);
-                    window.add(p7);
-                    window.add(p6);
-                }
-            });
-
-            radioButtonPartOfWorksheet.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    window.add(cworkbook);
-                    window.add(cspreadsheets);
-                    window.add(cellVertical);
-                    window.add(cellHorizontal);
-                    window.add(name);
-                    window.add(label2);
-                    window.add(p3);
-                    window.add(p4);
-                    window.add(p5);
-                    window.add(p7);
-                    window.add(p6);
-                }
-            });
-
+//        exportToCSVButton.addClickHandler(event -> {
+//            MaterialWindow window = new MaterialWindow();
+//            window.setPadding(32);
+//            window.setHeight("600px");
+//            window.setTextAlign(TextAlign.LEFT);
+//            window.setTitle("Export to CSV");
+//            MaterialWindow.setOverlay(true);
+//            MaterialLabel label1 = new MaterialLabel("Please select what you wish to export:");
+//            MaterialRadioButton radioButtonWorkbook = new MaterialRadioButton("radioButtonWorkbook", "Export Workbook");
+//            MaterialRadioButton radioButtonWorksheet = new MaterialRadioButton("radioButtonWorksheet", "Export Spreadsheet");
+//            MaterialRadioButton radioButtonPartOfWorksheet = new MaterialRadioButton("radioButtonPartOfWorksheet", "Export Part Of A Spreadsheet");
+//            radioButtonWorkbook.setName("Export");
+//            radioButtonWorksheet.setName("Export");
+//            radioButtonPartOfWorksheet.setName("Export");
+//
+//            window.add(label1);
+//
+//            MaterialPanel p0 = new MaterialPanel();
+//            MaterialPanel p1 = new MaterialPanel();
+//            MaterialPanel p2 = new MaterialPanel();
+//            p0.setTextAlign(TextAlign.LEFT);
+//            p1.setTextAlign(TextAlign.LEFT);
+//            p2.setTextAlign(TextAlign.LEFT);
+//            p0.add(radioButtonWorkbook);
+//            p1.add(radioButtonWorksheet);
+//            p2.add(radioButtonPartOfWorksheet);
+//            window.add(p0);
+//            window.add(p1);
+//            window.add(p2);
+//
+//            MaterialComboBox<Workbook> cworkbook = new MaterialComboBox<>();
+//            cworkbook.setPlaceholder("Choose the Workbook you want to export");
+//            cworkbook.setAllowClear(true);
+//            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+//
+//            AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
+//                @Override
+//                public void onFailure(Throwable throwable) {
+//                    MaterialToast.fireToast(throwable.getMessage());
+//                }
+//
+//                @Override
+//                public void onSuccess(ArrayList<Workbook> workbookDTOS) {
+//                    for (Workbook w : workbookDTOS) {
+//                        cworkbook.addItem(w);
+//                    }
+//                }
+//            };
+//            workbooksSvc.getWorkbooks(callback);
+//
+////            window.add(cworkbook);
+//            MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
+//            cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
+//            cspreadsheets.setAllowClear(true);
+//            cworkbook.addClickHandler(new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent clickEvent) {
+//                    Workbook w = cworkbook.getSelectedValue().get(0);
+//                    for (int i = 0; i < w.spreadsheets.size(); i++) {
+//                        cspreadsheets.addItem(w.spreadsheets.get(i));
+//                    }
+//                }
+//            });
+//
+////            window.add(cspreadsheets);
+//            MaterialTextBox cellVertical = new MaterialTextBox();
+//            cellVertical.setPlaceholder("Vertical Address of the cell (A1)");
+//
+//            MaterialTextBox cellHorizontal = new MaterialTextBox();
+//            cellHorizontal.setPlaceholder("Horizontal Address of the cell (A1)");
+//
+//            MaterialTextBox name = new MaterialTextBox();
+//            name.setPlaceholder("Name of the file");
+//
+//            cellVertical.setEnabled(true);
+//            cellHorizontal.setEnabled(true);
+//            name.setEnabled(true);
+////            window.add(cellVertical);
+////            window.add(cellHorizontal);
+////            window.add(name);
+//
+//            MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
+////            window.add(label2);
+//
+//            MaterialRadioButton comma = new MaterialRadioButton();
+//            comma.setName("Delimiter");
+//            comma.setText(",");
+//
+//            MaterialRadioButton commaPoint = new MaterialRadioButton();
+//            commaPoint.setName("Delimiter");
+//            commaPoint.setText(";");
+//
+//            MaterialRadioButton point = new MaterialRadioButton();
+//            point.setName("Delimiter");
+//            point.setText(".");
+//
+//            MaterialRadioButton barra = new MaterialRadioButton();
+//            barra.setName("Delimiter");
+//            barra.setText("/");
+//
+//            MaterialRadioButton twoPoints = new MaterialRadioButton();
+//            twoPoints.setName("Delimiter");
+//            twoPoints.setText(":");
+//
+//            MaterialPanel p3 = new MaterialPanel();
+//            MaterialPanel p4 = new MaterialPanel();
+//            MaterialPanel p5 = new MaterialPanel();
+//            MaterialPanel p7 = new MaterialPanel();
+//
+//            p3.setTextAlign(TextAlign.LEFT);
+//            p4.setTextAlign(TextAlign.LEFT);
+//            p5.setTextAlign(TextAlign.LEFT);
+//            p7.setTextAlign(TextAlign.LEFT);
+//
+//            p3.add(comma);
+//            p4.add(commaPoint);
+//            p5.add(barra);
+//            p7.add(twoPoints);
+//
+////            window.add(p3);
+////            window.add(p4);
+////            window.add(p5);
+////            window.add(p7);
+//            MaterialButton exportCSV = new MaterialButton("EXPORT");
+//            exportCSV.addClickHandler(evnt -> {
+//                WorkbooksServiceAsync wsvc = GWT.create(WorkbooksService.class);
+//                // Set up the callback object.
+//                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
+//                    @Override
+//                    public void onFailure(Throwable caught) {
+//                        MaterialToast.fireToast("Error! " + caught.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Workbook result) {
+//                        MaterialToast.fireToast("Exported successfully!", "rounded");
+//
+//                    }
+//                };
+//            });
+//
 //            exportCSV.setWaves(WavesType.LIGHT);
 //            exportCSV.setSize(ButtonSize.MEDIUM);
 //            MaterialPanel p6 = new MaterialPanel();
 //            p6.setTextAlign(TextAlign.RIGHT);
 //            p6.add(exportCSV);
-//            window.add(p6);
-
-            window.open();
-        });
+////            window.add(p6);
+////            window.open();
+//
+//            radioButtonWorkbook.addClickHandler(new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent clickEvent) {
+//                    window.add(cworkbook);
+//                    window.remove(cspreadsheets);
+//                    window.remove(cellVertical);
+//                    window.remove(cellHorizontal);
+//                    window.add(name);
+//                    window.add(label2);
+//                    window.add(p3);
+//                    window.add(p4);
+//                    window.add(p5);
+//                    window.add(p7);
+//                    window.add(p6);
+//                }
+//            });
+//
+//            radioButtonWorksheet.addClickHandler(new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent clickEvent) {
+//                    window.add(cworkbook);
+//                    window.add(cspreadsheets);
+//                    window.remove(cellVertical);
+//                    window.remove(cellHorizontal);
+//                    window.add(name);
+//                    window.add(label2);
+//                    window.add(p3);
+//                    window.add(p4);
+//                    window.add(p5);
+//                    window.add(p7);
+//                    window.add(p6);
+//                }
+//            });
+//
+//            radioButtonPartOfWorksheet.addClickHandler(new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent clickEvent) {
+//                    window.add(cworkbook);
+//                    window.add(cspreadsheets);
+//                    window.add(cellVertical);
+//                    window.add(cellHorizontal);
+//                    window.add(name);
+//                    window.add(label2);
+//                    window.add(p3);
+//                    window.add(p4);
+//                    window.add(p5);
+//                    window.add(p7);
+//                    window.add(p6);
+//                }
+//            });
+//
+////            exportCSV.setWaves(WavesType.LIGHT);
+////            exportCSV.setSize(ButtonSize.MEDIUM);
+////            MaterialPanel p6 = new MaterialPanel();
+////            p6.setTextAlign(TextAlign.RIGHT);
+////            p6.add(exportCSV);
+////            window.add(p6);
+//
+//            window.open();
+//        });
 
         // Added access to ToolPanel to add icon widget
         Panel panel = customTable.getScaffolding().getToolPanel();

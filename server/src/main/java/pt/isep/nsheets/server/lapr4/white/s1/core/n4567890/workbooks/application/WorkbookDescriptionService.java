@@ -18,10 +18,11 @@ public class WorkbookDescriptionService {
     public WorkbookDescription addWorkbookDescription(WorkbookDescriptionDTO dto) throws DataConcurrencyException, DataIntegrityViolationException {
 
         final WorkbookDescriptionRepository workbookDescriptionRepository = PersistenceContext.repositories().workbookDescriptions();
-        
-        WorkbookDescription wb=WorkbookDescription.fromDTO(dto);
+
+        WorkbookDescription wb = WorkbookDescription.fromDTO(dto);
+ 
         workbookDescriptionRepository.save(wb);
-        
+
         return wb;
     }
 }

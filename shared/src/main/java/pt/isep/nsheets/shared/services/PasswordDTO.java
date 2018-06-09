@@ -9,7 +9,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class PasswordDTO implements Serializable {
 
-    private String password;
+    private final String password;
 
     public PasswordDTO(String password) {
         this.password = password;

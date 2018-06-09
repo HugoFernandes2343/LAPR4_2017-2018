@@ -71,7 +71,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     }
 
 
-    private MaterialCard createCard(Workbook wb) {
+    private MaterialCard createCard(WorkbookDescriptionDTO wb) {
         MaterialCard card = new MaterialCard();
 
         MaterialCardContent cardContent = new MaterialCardContent();
@@ -130,7 +130,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     }
 
     @Override
-    public void setContents(ArrayList<Workbook> contents) {
+    public void setContents(ArrayList<WorkbookDescriptionDTO> contents) {
         int colCount = 1;
 
         MaterialRow row = null;
@@ -138,7 +138,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         htmlPanel.clear();
 
 
-        for (Workbook wb : contents) {
+        for (WorkbookDescriptionDTO wb : contents) {
 
             if (( wb.getUserMail().equals("") && CurrentUser.isShowAll() ) || ( CurrentUser.isIsLoggedIn() && wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail()) )) {
                 MaterialCard card = createCard(wb);

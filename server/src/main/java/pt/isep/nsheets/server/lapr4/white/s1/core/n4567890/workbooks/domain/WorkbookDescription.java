@@ -3,13 +3,14 @@ package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain;
 /**
  * @author alexandrebraganca
  */
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import eapli.framework.domain.AggregateRoot;
+import javax.persistence.OneToOne;
+import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 /**
@@ -24,17 +25,37 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
     // ORM primary key
     @Id
     @GeneratedValue
-    private Long pk = null;
+    private Long id;
 
     private String name;
     private String description;
 
-    public WorkbookDescription(String name, String description) throws IllegalArgumentException {
+    /**
+     * The user email of the user that created this workbook, empty if public workbook
+     */
+    private String userMail;
+
+    @OneToOne
+    private Workbook workbook;
+
+    public WorkbookDescription(String name, String description, Workbook workbook, String mail) throws IllegalArgumentException {
         if (name == null || description == null) {
             throw new IllegalArgumentException("name or description must be non-null");
         }
         this.name = name;
         this.description = description;
+        this.workbook = workbook;
+        this.userMail = mail;
+    }
+
+    public WorkbookDescription(String name, String description, String mail) throws IllegalArgumentException {
+        if (name == null || description == null) {
+            throw new IllegalArgumentException("name or description must be non-null");
+        }
+        this.name = name;
+        this.description = description;
+        this.workbook = new Workbook();
+        this.userMail = mail;
     }
 
     // It is mandatory to have a default constructor with no arguments to be
@@ -42,6 +63,8 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
     protected WorkbookDescription() {
         this.name = "";
         this.description = "";
+        this.workbook = new Workbook();
+        this.userMail="";
     }
 
     public String getName() {
@@ -52,13 +75,17 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
         return this.description;
     }
 
+    public String getUserMail() {
+        return userMail;
+    }
 
     @Override
     public String toString() {
-        if (this.name == null)
+        if (this.name == null) {
             return super.toString();
-        else
+        } else {
             return this.name + " " + this.description;
+        }
     }
 
     @Override
@@ -82,20 +109,34 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 
     @Override
     public boolean is(Long id) {
-        return (this.pk.compareTo(id) == 0);
+        return (this.id.compareTo(id) == 0);
     }
 
     @Override
     public Long id() {
-        return this.pk;
+        return this.id;
     }
 
     public WorkbookDescriptionDTO toDTO() {
-        return new WorkbookDescriptionDTO(this.name, this.description);
+        return new WorkbookDescriptionDTO(this.name, this.description, this.userMail);
     }
 
     public static WorkbookDescription fromDTO(WorkbookDescriptionDTO dto) throws IllegalArgumentException {
-        return new WorkbookDescription(dto.getName(), dto.getDescription());
+        return new WorkbookDescription(dto.getName(), dto.getDescription(), dto.getUserMail());
+    }
+
+    public boolean editName(String newName) {
+        this.name = newName;
+        return true;
+    }
+
+    public boolean editDescription(String newDescription) {
+        this.description = newDescription;
+        return true;
+    }
+    
+    public Workbook getWorkbook(){
+        return this.workbook;
     }
 
 }

@@ -5,9 +5,10 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application;
 
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
-import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookDescriptionRepository;
+import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 /**
  *
@@ -15,10 +16,25 @@ import pt.isep.nsheets.shared.core.Workbook;
  */
 public class DeleteWorkbookController {
 
-    public void deleteWorkbook(Workbook wb) throws DataConcurrencyException, DataIntegrityViolationException {
+    private WorkbookDescriptionRepository wdescriptionRepo;
 
-            WorkbookService service=new WorkbookService() ;
-            service.deleteWorkbook(wb);
+    public DeleteWorkbookController() {
+        wdescriptionRepo = PersistenceContext.repositories().workbookDescriptions();
     }
-    
+
+    /**
+     * Method that deletes a specific workbook by its description
+     *
+     * @param id
+     * @return
+     */
+    public boolean deleteWorkbook(WorkbookDescriptionDTO dto) {
+        WorkbookDescription wdescription = wdescriptionRepo.findWorkbookDescriptionByName(dto.getName());
+        if (wdescription != null) {
+            wdescriptionRepo.delete(wdescription);
+            return true;
+        }
+        return false;
+    }
+
 }

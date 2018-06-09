@@ -87,7 +87,7 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
             
 
 
-            usersSvc.saveUser(u, callback);
+            //usersSvc.saveUser(u, callback);
         });
 
     }

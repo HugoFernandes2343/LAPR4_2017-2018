@@ -5,7 +5,8 @@
  */
 package pt.isep.nsheets.server.lapr4.green.s1.ipc.s1150575.services;
 
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
+
 
 /**
  *

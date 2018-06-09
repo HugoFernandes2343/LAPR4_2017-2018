@@ -178,7 +178,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                 };
 
                 TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(listPriority.getValue()), Integer.parseInt(perceEditor.getValue()));
-                tasksServiceAsync.editTask(editedTask, oldName, callback);
+                //tasksServiceAsync.editTask(editedTask, oldName, callback);
 
                 cardTitle.setText(editedTask.getTitle());
                 labelDescritpion.setText(editedTask.getDescription());
@@ -210,7 +210,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                 }
             };
 
-            tasksServiceAsync.deleteTask(task, callback);
+            //tasksServiceAsync.deleteTask(task, callback);
         });
 
         cardContent.add(cardTitle);
