@@ -10,10 +10,12 @@ import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
+import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
@@ -28,6 +30,7 @@ import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialRow;
 import gwt.material.design.client.ui.MaterialSearch;
+import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import java.util.ArrayList;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -48,41 +51,15 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     HTMLPanel htmlPanel;
 
     @UiField
-    MaterialSearch txtSearch;
-
-    @UiField
-    MaterialNavBar navBar, navBarSearch;
-
-    @UiField
     MaterialButton newTaskButton;
 
     @UiField
-    MaterialLink renameLink, deleteLink;
-
-    @UiField
-    MaterialCardTitle taskTitle;
-
-    @UiField
-    MaterialLabel taskDescription;
-
-    @UiField
-    MaterialCard card;
+    MaterialLink editTask, deleteTask;
 
     @Inject
     TasksView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        // add open handler
-        txtSearch.addOpenHandler(openEvent -> {
-            navBar.setVisible(false);
-            navBarSearch.setVisible(true);
-        });
-
-        // Add Close Handler
-        txtSearch.addCloseHandler(event -> {
-            navBar.setVisible(true);
-            navBarSearch.setVisible(false);
-        });
     }
 
     private MaterialCard createCard(TaskDTO task) {
@@ -101,29 +78,69 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         labelDescritpion.setText(task.getDescription());
 
         MaterialLabel labelPriority = new MaterialLabel();
-        labelPriority.setText("Priority:" + task.getPriority());
+        labelPriority.setText("Priority: " + task.getPriority());
 
         MaterialLabel labelPercentage = new MaterialLabel();
-        labelPriority.setText("Percentage of completion: " + task.getPercentage() + "%");
+        labelPercentage.setText("Percentage of completion: " + task.getPercentage() + "%");
 
         MaterialCardAction cardAction = new MaterialCardAction();
 
-        MaterialLink renameLink = new MaterialLink();
-        renameLink.setText("Rename");
-        renameLink.setIconType(IconType.EDIT);
-        renameLink.setIconColor(Color.INDIGO);
-        renameLink.setTextColor(Color.WHITE);
-        renameLink.addClickHandler(event -> {
-            MaterialToast.fireToast("rename " + task.getTitle());
-        });
+        MaterialLink editLink = new MaterialLink();
+        editLink.setText("Edit");
+        editLink.setIconType(IconType.EDIT);
+        editLink.setIconColor(Color.INDIGO);
+        editLink.setTextColor(Color.WHITE);
+        editLink.addClickHandler(event -> {
+            MaterialWindow window = new MaterialWindow("Task Editor");
+            MaterialButton saveEditorButton = new MaterialButton("DONE");
+            MaterialTextBox titleEditor = new MaterialTextBox();
+            MaterialTextBox descEditor = new MaterialTextBox();
+            MaterialTextBox perceEditor = new MaterialTextBox();
+            MaterialTextBox priorityEditor = new MaterialTextBox();
+            String oldName = task.getTitle();
+            titleEditor.setText(task.getTitle());
+            descEditor.setText(task.getDescription());
+            perceEditor.setText(Integer.toString(task.getPercentage()));
+            priorityEditor.setText(Integer.toString(task.getPriority()));
 
+            window.add(saveEditorButton);
+            window.add(titleEditor);
+            window.add(descEditor);
+            window.add(perceEditor);
+            window.add(priorityEditor);
+            window.open();
+            saveEditorButton.addClickHandler(event2 -> {
+                TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
+
+                AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error Saving Task ");
+                    }
+
+                    @Override
+                    public void onSuccess(TaskDTO result) {
+                        MaterialToast.fireToast("Task Edited");
+
+                    }
+                };
+
+                TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(perceEditor.getValue()), Integer.parseInt(priorityEditor.getValue()));
+                tasksServiceAsync.editTask(editedTask, oldName, callback);
+                
+                cardTitle.setText(editedTask.getTitle());
+                labelDescritpion.setText(editedTask.getDescription());
+                labelPriority.setText("Priority:" + editedTask.getPriority());
+                labelPercentage.setText("Percentage of completion: " + editedTask.getPercentage() + "%");
+            });
+        });
         MaterialLink deleteLink = new MaterialLink();
         deleteLink.setText("Delete");
         deleteLink.setIconType(IconType.DELETE);
         deleteLink.setIconColor(Color.GREY);
         deleteLink.setTextColor(Color.WHITE);
         deleteLink.addClickHandler(event -> {
-            MaterialToast.fireToast("delete " + task.getTitle());
+
             TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
 
             AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
@@ -134,15 +151,12 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
                 @Override
                 public void onSuccess(TaskDTO result) {
-                    
+                    MaterialToast.fireToast(task.getTitle() + " deleted");
+                    card.setVisible(false);
                 }
             };
-          
-            tasksServiceAsync.deleteTask(task, callback);
-            this.card.setVisible(false);
-            
-        
 
+            tasksServiceAsync.deleteTask(task, callback);
         });
 
         cardContent.add(cardTitle);
@@ -150,7 +164,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         cardContent.add(labelPriority);
         cardContent.add(labelPercentage);
 
-        cardAction.add(renameLink);
+        cardAction.add(editLink);
         cardAction.add(deleteLink);
 
         card.add(cardContent);

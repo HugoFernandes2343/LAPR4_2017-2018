@@ -10,6 +10,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import pt.isep.nsheets.server.lapr4.blue.s2.core.n1150585.tasks.domain.Task;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.TaskRepository;
@@ -52,5 +53,10 @@ public class TasksController implements Controller {
     public void deleteTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
         TaskRepository taskRepository = PersistenceContext.repositories().task();
         taskRepository.deleteTask(taskDTO);
+    }
+
+    public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
+        TaskRepository taskRepository = PersistenceContext.repositories().task();
+        taskRepository.editTask(taskDTO,oldName);
     }
 }

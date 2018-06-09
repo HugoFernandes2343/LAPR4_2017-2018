@@ -30,9 +30,9 @@ import pt.isep.nsheets.shared.services.TasksServiceAsync;
  * @author dftsf
  */
 public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresenter.MyProxy> {
-
-    private int nrTask;
-
+    
+    private int nTask;
+        
     private MyView view;
 
     interface MyView extends View {
@@ -68,17 +68,17 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
 
                 @Override
                 public void onSuccess(TaskDTO result) {
+                    MaterialToast.fireToast("Task created");
                     refreshView();
                 }
             };
-            TaskDTO newTask = new TaskDTO("Task" + nrTask, "Description" + nrTask, 3, 8);
+            TaskDTO newTask = new TaskDTO("New Task "+nTask, "Insert a Description", 1, 0);
             tasksServiceAsync.addTask(newTask, callback);
-            nrTask++;
-
+            nTask++;
         });
     }
 
-    private void refreshView() {
+    public void refreshView() {
         TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
 
         // Set up the callback object.
@@ -90,7 +90,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
 
             @Override
             public void onSuccess(ArrayList<TaskDTO> result) {
-                nrTask = result.size();
+                nTask = result.size();
                 view.setContents(result);
             }
         };

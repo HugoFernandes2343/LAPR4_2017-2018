@@ -23,4 +23,5 @@ public interface TaskRepository extends Repository<Task, Long> {
     
     public void deleteTask (TaskDTO task);
 
+    public void editTask (TaskDTO task,String oldName);
 }

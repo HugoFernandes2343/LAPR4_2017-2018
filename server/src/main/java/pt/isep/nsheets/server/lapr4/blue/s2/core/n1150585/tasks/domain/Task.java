@@ -30,7 +30,6 @@ public class Task implements Serializable, AggregateRoot<Long> {
     /**
      * Title of the task.
      */
-    @Column(unique = true)
     private String title;
 
     /**

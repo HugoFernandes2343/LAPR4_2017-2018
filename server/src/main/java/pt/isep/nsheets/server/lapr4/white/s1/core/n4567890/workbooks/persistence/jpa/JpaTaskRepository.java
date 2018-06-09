@@ -46,4 +46,21 @@ public class JpaTaskRepository extends NSheetsJpaRepositoryBase<Task, Long> impl
         entityManager().getTransaction().commit();
     }
 
+    @Override
+    public void editTask(TaskDTO task, String oldName) {
+        Query q = entityManager().createQuery(
+                "UPDATE Task t "
+                + "SET t.title=:newTitle, t.description=:newDescription , t.priority=:newPriority , t.percentage=:newPercentage "
+                + "WHERE t.title =:oldName");
+
+        q.setParameter("newTitle", task.getTitle());
+        q.setParameter("newDescription", task.getDescription());
+        q.setParameter("newPriority", task.getPriority());
+        q.setParameter("newPercentage", task.getPercentage());
+        q.setParameter("oldName", oldName);
+
+        entityManager().getTransaction().begin();
+        q.executeUpdate();
+        entityManager().getTransaction().commit();
+    }
 }

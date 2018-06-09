@@ -133,4 +133,18 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
         }
     }
 
+    @Override
+    public void editTask(TaskDTO task, String oldName) throws DataException {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+        
+        try {
+            ctr.editTask(task,oldName);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

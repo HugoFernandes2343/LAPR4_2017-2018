@@ -25,4 +25,6 @@ public interface TasksServiceAsync {
     void get_task_by_percentage(int percentage, AsyncCallback<TaskDTO> callback);
 
     void addTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+    
+    void editTask(TaskDTO task,String oldName, AsyncCallback<TaskDTO> async);
 }
