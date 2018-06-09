@@ -6,6 +6,7 @@ package pt.isep.nsheets.client.application.Tasks;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import javax.inject.Inject;
 
 import com.google.gwt.uibinder.client.UiBinder;
@@ -27,6 +28,7 @@ import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialListBox;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialRow;
 import gwt.material.design.client.ui.MaterialSearch;
@@ -55,6 +57,9 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
     @UiField
     MaterialLink editTask, deleteTask;
+
+    @UiField
+    MaterialListBox listBox;
 
     @Inject
     TasksView(Binder uiBinder) {
@@ -127,7 +132,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
                 TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(perceEditor.getValue()), Integer.parseInt(priorityEditor.getValue()));
                 tasksServiceAsync.editTask(editedTask, oldName, callback);
-                
+
                 cardTitle.setText(editedTask.getTitle());
                 labelDescritpion.setText(editedTask.getDescription());
                 labelPriority.setText("Priority:" + editedTask.getPriority());
@@ -202,6 +207,11 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
             col.add(card);
         }
 
+    }
+
+    @Override
+    public void addEventChangeHandler(ValueChangeHandler<String> vc) {
+        listBox.addValueChangeHandler(vc);
     }
 
     @Override

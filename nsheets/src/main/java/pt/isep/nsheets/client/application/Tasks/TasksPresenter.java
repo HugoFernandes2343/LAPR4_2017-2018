@@ -7,6 +7,8 @@ package pt.isep.nsheets.client.application.Tasks;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -18,6 +20,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import gwt.material.design.client.ui.MaterialToast;
 import java.util.ArrayList;
+import java.util.List;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -30,9 +33,10 @@ import pt.isep.nsheets.shared.services.TasksServiceAsync;
  * @author dftsf
  */
 public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresenter.MyProxy> {
-    
+
     private int nTask;
-        
+    ArrayList<TaskDTO> allTasks;
+
     private MyView view;
 
     interface MyView extends View {
@@ -40,6 +44,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         void setContents(ArrayList<TaskDTO> contents);
 
         void addClickHandler(ClickHandler ch);
+
+        void addEventChangeHandler(ValueChangeHandler<String> vc);
 
     }
 
@@ -55,6 +61,32 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
+
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
+
+            if (event.getValue().equalsIgnoreCase("Show Only Complete Tasks")) {
+                ArrayList<TaskDTO> completedTasks = new ArrayList<>();
+
+                for (TaskDTO t : allTasks) {
+                    if (t.getPercentage() == 100) {
+                        completedTasks.add(t);
+                    }
+                }
+                view.setContents(completedTasks);
+
+            } else if (event.getValue().equalsIgnoreCase("Show Only Incomplete Tasks")) {
+                ArrayList<TaskDTO> incompletedTasks = new ArrayList<>();
+
+                for (TaskDTO t : allTasks) {
+                    if (t.getPercentage() != 100) {
+                        incompletedTasks.add(t);
+                    }
+                }
+                view.setContents(incompletedTasks);
+            } else {
+                refreshView();
+            }
+        });
 
         this.view.addClickHandler((ClickEvent event) -> {
 
@@ -72,9 +104,9 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                     refreshView();
                 }
             };
-            TaskDTO newTask = new TaskDTO("New Task "+nTask, "Insert a Description", 1, 0);
+            TaskDTO newTask = new TaskDTO("New Task " + nTask++, "Insert a Description", 1, 0);
             tasksServiceAsync.addTask(newTask, callback);
-            nTask++;
+
         });
     }
 
@@ -90,6 +122,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
 
             @Override
             public void onSuccess(ArrayList<TaskDTO> result) {
+                allTasks = result;
                 nTask = result.size();
                 view.setContents(result);
             }
