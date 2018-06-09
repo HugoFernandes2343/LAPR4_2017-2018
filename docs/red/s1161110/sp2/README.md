@@ -15,7 +15,15 @@ It should be possible to import (i.e., upload) data from an XML file (this opera
 
 # 3. Analysis
 
+For this feature increment, since it in the first sprint it wasn't developed a xml schema, and there is not any upload file system. I need to:
 
+* Create a XML Schema for workbook;
+
+* Create an upload file page and servlet;
+
+* Create a file reader system;
+
+* Understand how to change the value of the cells for the current workbook;
 
 
 ## 3.1 Analysis Diagrams
@@ -25,7 +33,7 @@ It should be possible to import (i.e., upload) data from an XML file (this opera
 
 ![Use Cases](us.jpg)
 
-- **Use Cases**.
+ **Use Case 1**.
 
 **Domain Model (for this feature increment)**
 
@@ -33,7 +41,7 @@ It should be possible to import (i.e., upload) data from an XML file (this opera
 
 **System Sequence Diagrams**
 
-![Analysis SD](ssd.jpg)
+![Analysis SD](SSD1.jpg)
 
 # 4. Design
 
@@ -123,6 +131,8 @@ Wednesday - June 6
 New Use case attributed, research on upload files and servlet builds started.
 
 Thrusday - June 7
+Documentation: Requirements and Analysis start.
+Implementation/ Research: UI Upload of files.
 
 Friday - June 8
 
@@ -136,7 +146,7 @@ Tuesday - June 12
 
 Commits:
 
-[Requirements IPC04.2]()
+[Requirements IPC04.2](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/aa568d2e52c9)
 
 [Analysis IPC04.2]()
 
