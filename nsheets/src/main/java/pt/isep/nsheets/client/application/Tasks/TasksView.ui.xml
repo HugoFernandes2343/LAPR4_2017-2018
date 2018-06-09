@@ -12,6 +12,13 @@
            <m.html:Option ui:field="allTasks" text="Show all Tasks"/>
             <m.html:Option ui:field="completedTasks" text="Show Only Complete Tasks"/>
             <m.html:Option ui:field="incompleteTasks" text="Show Only Incomplete Tasks"/>
+            
+            <m.html:Option ui:field="priority1" text="Show Only Tasks with priority 1"/>
+            <m.html:Option ui:field="priority2" text="Show Only Tasks with priority 2"/>
+            <m.html:Option ui:field="priority3" text="Show Only Tasks with priority 3"/>
+            <m.html:Option ui:field="priority4" text="Show Only Tasks with priority 4"/>
+            <m.html:Option ui:field="priority5" text="Show Only Tasks with priority 5"/>
+
         </m:MaterialListBox>
             
         <g:HTMLPanel ui:field="htmlPanel">

@@ -5,6 +5,7 @@
 package pt.isep.nsheets.client.application.Tasks;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import javax.inject.Inject;
@@ -76,7 +77,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
         MaterialCardTitle cardTitle = new MaterialCardTitle();
         cardTitle.setText(task.getTitle());
-        cardTitle.setIconType(IconType.INSERT_DRIVE_FILE);
+        cardTitle.setIconType(IconType.DONE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
         MaterialLabel labelDescritpion = new MaterialLabel();
@@ -97,22 +98,68 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         editLink.setTextColor(Color.WHITE);
         editLink.addClickHandler(event -> {
             MaterialWindow window = new MaterialWindow("Task Editor");
+            MaterialLabel lblTitle = new MaterialLabel("Title");
+            MaterialLabel lblDescription = new MaterialLabel("Description");
+            MaterialLabel lblPerce = new MaterialLabel("Percentage of Completion");
+            MaterialLabel lblPriority = new MaterialLabel("Priority");
             MaterialButton saveEditorButton = new MaterialButton("DONE");
             MaterialTextBox titleEditor = new MaterialTextBox();
             MaterialTextBox descEditor = new MaterialTextBox();
             MaterialTextBox perceEditor = new MaterialTextBox();
-            MaterialTextBox priorityEditor = new MaterialTextBox();
             String oldName = task.getTitle();
             titleEditor.setText(task.getTitle());
             descEditor.setText(task.getDescription());
             perceEditor.setText(Integer.toString(task.getPercentage()));
-            priorityEditor.setText(Integer.toString(task.getPriority()));
 
-            window.add(saveEditorButton);
+            MaterialListBox listPriority = new MaterialListBox();
+            listPriority.add("1");
+            listPriority.add("2");
+            listPriority.add("3");
+            listPriority.add("4");
+            listPriority.add("5");
+
+            lblTitle.setPaddingLeft(100);
+            lblTitle.setPaddingRight(100);
+            lblTitle.setPaddingTop(50);
+            titleEditor.setPaddingLeft(100);
+            titleEditor.setPaddingRight(100);
+            lblTitle.add(titleEditor);
+
+            lblDescription.setPaddingLeft(100);
+            lblDescription.setPaddingRight(100);
+            lblDescription.setPaddingTop(50);
+            descEditor.setPaddingLeft(100);
+            descEditor.setPaddingRight(100);
+            lblDescription.add(descEditor);
+
+            lblPriority.setPaddingLeft(100);
+            lblPriority.setPaddingRight(100);
+            lblPriority.setPaddingTop(50);
+            listPriority.setPaddingLeft(100);
+            listPriority.setPaddingRight(100);
+            lblPriority.add(listPriority);
+
+            lblPerce.setPaddingLeft(100);
+            lblPerce.setPaddingRight(100);
+            lblPerce.setPaddingTop(50);
+            perceEditor.setPaddingLeft(100);
+            perceEditor.setPaddingRight(100);
+            lblPerce.add(perceEditor);
+
+            saveEditorButton.setFloat(Style.Float.RIGHT);
+            saveEditorButton.setMarginRight(150);
+            saveEditorButton.setMarginBottom(50);
+            saveEditorButton.setMarginTop(20);
+
+            window.add(lblTitle);
             window.add(titleEditor);
+            window.add(lblDescription);
             window.add(descEditor);
+            window.add(lblPriority);
+            window.add(listPriority);
+            window.add(lblPerce);
             window.add(perceEditor);
-            window.add(priorityEditor);
+            window.add(saveEditorButton);
             window.open();
             saveEditorButton.addClickHandler(event2 -> {
                 TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
@@ -130,13 +177,15 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                     }
                 };
 
-                TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(perceEditor.getValue()), Integer.parseInt(priorityEditor.getValue()));
+                TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(listPriority.getValue()), Integer.parseInt(perceEditor.getValue()));
                 tasksServiceAsync.editTask(editedTask, oldName, callback);
 
                 cardTitle.setText(editedTask.getTitle());
                 labelDescritpion.setText(editedTask.getDescription());
                 labelPriority.setText("Priority:" + editedTask.getPriority());
                 labelPercentage.setText("Percentage of completion: " + editedTask.getPercentage() + "%");
+                MaterialToast.fireToast("Task Edited");
+                window.close();
             });
         });
         MaterialLink deleteLink = new MaterialLink();
