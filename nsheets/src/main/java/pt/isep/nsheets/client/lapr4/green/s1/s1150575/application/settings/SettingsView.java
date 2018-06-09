@@ -11,6 +11,7 @@ import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 
+
 class SettingsView extends ViewImpl implements SettingsPresenter.MyView {
 
     @UiField

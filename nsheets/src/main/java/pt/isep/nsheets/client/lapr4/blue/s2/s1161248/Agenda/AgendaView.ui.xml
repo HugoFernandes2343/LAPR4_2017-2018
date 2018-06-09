@@ -1,10 +1,7 @@
-
-
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-             xmlns:m="urn:import:gwt.material.design.client.ui"
-             xmlns:g="urn:import:com.google.gwt.user.client.ui"
-             xmlns:ma="urn:import:gwt.material.design.addins.client">
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <g:HTMLPanel>
+
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -21,7 +21,8 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
-public class WorkbooksServiceImpl extends RemoteServiceServlet implements WorkbooksService {
+public class
+WorkbooksServiceImpl extends RemoteServiceServlet implements WorkbooksService {
 
     private PersistenceSettings getPersistenceSettings() {
 
