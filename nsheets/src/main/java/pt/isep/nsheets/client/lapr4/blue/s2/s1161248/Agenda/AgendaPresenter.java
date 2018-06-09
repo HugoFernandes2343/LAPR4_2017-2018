@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -33,7 +34,6 @@ public class AgendaPresenter extends Presenter<AgendaPresenter.MyView, AgendaPre
     protected void onReveal() {
         super.onReveal();
         SetPageTitleEvent.fire("Agenda", "", "", "", this);
-
     }
 
 }

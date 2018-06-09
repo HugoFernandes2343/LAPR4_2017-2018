@@ -171,6 +171,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         // Add the columns...
         customTable.addColumn(new SheetWidgetColumn(-1, this));
+        customTable.addColumn(new SheetWidgetColumn(-1, this));
         for (int i = 0; i < sh.getColumnCount(); ++i) {
 
             // Add a column for the column :-)

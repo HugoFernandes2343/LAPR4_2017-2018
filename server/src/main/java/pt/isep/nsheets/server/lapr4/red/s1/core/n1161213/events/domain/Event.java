@@ -1,5 +1,6 @@
 package pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain;
 
+import com.google.inject.Inject;
 import eapli.framework.domain.AggregateRoot;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
