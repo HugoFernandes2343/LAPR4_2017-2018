@@ -118,6 +118,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
             };
             String name = Window.prompt("New Name of Workbook:", wb.getName());
             workbooksSvc.editWorkbookName(wb, name, callback);
+            wb.setName(name);
             cardTitle.setText(name);
         });
 
