@@ -6,7 +6,6 @@
 package pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables;
 
 import pt.isep.nsheets.shared.core.Cell;
-import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.util.ExpressionVisitor;
@@ -34,7 +33,6 @@ public class VariableReference implements Expression{
     public VariableReference(Cell cell, String name) {
         this.name = name;
         this.cell = cell;
-        this.v = ((CellImpl)cell).addVariable(name);
     }
 
     public String getName (){
