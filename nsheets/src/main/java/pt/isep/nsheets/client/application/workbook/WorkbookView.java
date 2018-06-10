@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;

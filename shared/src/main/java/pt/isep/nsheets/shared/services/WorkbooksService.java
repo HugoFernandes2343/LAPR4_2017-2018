@@ -23,6 +23,8 @@ public interface WorkbooksService extends RemoteService {
     
     Workbook addWorkbook(WorkbookDescriptionDTO wdDto) throws DataException;
     
+    boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO);
+
     boolean activateConditional(CellImpl activeCell, String name, String operation, String value);
 
 }
