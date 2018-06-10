@@ -115,6 +115,9 @@
                                 </m:MaterialLink>
 
                             </m.html:ListItem>
+                            <m.html:ListItem waves="DEFAULT">
+                                <m:MaterialLink targetHistoryToken="{tokens.getChat}" iconPosition="LEFT" iconType="TEXTSMS" text="Social Chat"/>
+                            </m.html:ListItem>
                         </m:html.UnorderedList>
                     </m:MaterialCollapsibleBody>
                 </m:MaterialCollapsibleItem>

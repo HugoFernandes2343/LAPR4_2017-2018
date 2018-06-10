@@ -47,4 +47,22 @@ public class SpreadsheetDTO implements Serializable {
         return content;
     }
 
+    public void setContent(String[][] content) {
+        this.content = content;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+    
+    
+
 }

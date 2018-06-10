@@ -34,6 +34,10 @@ public class WorkbookDescriptionDTO implements IsSerializable, Serializable {
         this.wbdto = new WorkbookDTO();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public WorkbookDTO getWorkbook() {
         return this.wbdto;
     }
@@ -48,5 +52,9 @@ public class WorkbookDescriptionDTO implements IsSerializable, Serializable {
 
     public String getUserMail() {
         return this.userMail;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

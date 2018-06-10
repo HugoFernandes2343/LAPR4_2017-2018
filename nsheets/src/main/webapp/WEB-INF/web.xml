@@ -33,6 +33,10 @@
     <servlet-name>usersServiceServlet</servlet-name>
     <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>chatServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.ChatServiceImpl</servlet-class>
+  </servlet>
   
     <servlet>
     <servlet-name>TasksServiceServlet</servlet-name>
@@ -43,8 +47,15 @@
     <servlet-name>workbooksServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/workbooksService</url-pattern>
+
   </servlet-mapping> 
-  
+
+  <servlet-mapping>
+    <servlet-name>chatServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/chatService</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>usersServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
