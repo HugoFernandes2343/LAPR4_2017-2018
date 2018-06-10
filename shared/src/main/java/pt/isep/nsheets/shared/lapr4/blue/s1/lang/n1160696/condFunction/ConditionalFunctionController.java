@@ -24,7 +24,7 @@ public class ConditionalFunctionController {
     public boolean activateExtension(CellImpl activeCell, String name, String operator, String value) throws FormulaCompilationException, IllegalValueTypeException{
         ConditionalFormatExt cfe = new ConditionalFormatExt(name);
         Cell c = activeCell;
-        c.setContent(activeCell.content);
+        c.setContent(activeCell.getContent());
         ConditionalFormatCellExtension e = cfe.extend(c);
         
         e.setConditionalOperator(operator);

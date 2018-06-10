@@ -17,7 +17,12 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.Work
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookRepository;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.CellImpl;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction.ConditionalFunctionController;
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 import pt.isep.nsheets.shared.services.WorkbooksService;
@@ -146,5 +151,19 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         return wb;
 
     }
+    
+    
+    @Override
+    public boolean activateConditional(CellImpl activeCell, String name, String operation, String value) {
+        ConditionalFunctionController cfc = new ConditionalFunctionController();
+        try {
+            return cfc.activateExtension(activeCell, name, operation, value);
+        } catch (FormulaCompilationException | IllegalValueTypeException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    
+    
 
 }
