@@ -12,6 +12,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -115,8 +116,9 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
                     MaterialToast.fireToast("test" + event.toString());
                 }
             };
-
-            workbooksSvc.deleteWorkbook(wb, callback);
+            String name = Window.prompt("New Name of Workbook:", wb.getName());
+            workbooksSvc.editWorkbookName(wb, name, callback);
+            cardTitle.setText(name);
         });
 
         deleteLink.setText("Delete");
