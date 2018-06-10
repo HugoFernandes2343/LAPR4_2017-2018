@@ -15,11 +15,8 @@ import pt.isep.nsheets.shared.services.TaskDTO;
  */
 public interface TaskRepository extends Repository<Task, Long> {
 
-    public Task get_task_by_title(String title);
+    public void deleteTask(TaskDTO task);
 
-    public Iterable <Task> get_task_by_priority(int priority);
-
-    public Iterable <Task> get_task_by_percentage(int percentage);
-    
+    public void editTask(TaskDTO task, String oldName);
 
 }
