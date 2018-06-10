@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dev.shell.log.SwingLoggerPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -13,6 +14,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -104,8 +106,22 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         renameLink.setIconColor(Color.INDIGO);
         renameLink.setTextColor(Color.WHITE);
         renameLink.addClickHandler(event -> {
-            MaterialToast.fireToast("rename " + wb.getName());
+//            MaterialToast.fireToast("rename " + wb.getName());
+            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+            AsyncCallback callback = new AsyncCallback(){
 
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error deleting "+ caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    MaterialToast.fireToast("test"+event.toString());
+                }
+            };
+
+            workbooksSvc.deleteWorkbook(wb, callback);
         });
 
         deleteLink.setText("Delete");

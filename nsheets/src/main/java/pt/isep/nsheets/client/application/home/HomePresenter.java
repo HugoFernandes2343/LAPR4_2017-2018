@@ -63,7 +63,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         this.view = view;
 
-
         this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
             if (event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")) {
                 CurrentUser.setShowAll(true);
@@ -95,12 +94,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 }
             };
 
-//            String name = Window.prompt("Name:", "Untitled");
-//            String description = Window.prompt("Description:", "No Description");
-//            Workbook w = new Workbook();
-//            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO(name, description, w.toDTO(), );
+            String name = Window.prompt("Name of new Workbook:", "New Public Workbook " + nrWb++);
+            String description = Window.prompt("Description of new Workbook:", "No Description");
+            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO(name, description,"" );
 
-            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO("New Private Workbook " + nrWb++, "Workbook description","" );
             workbooksSvc.addWorkbookDescription(wdDto, callback);
 
         });
@@ -129,8 +126,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             Spreadsheet temp = null;
             if (CurrentUser.isIsLoggedIn()) {
+                String name = Window.prompt("Name of new Private Workbook:", "New Private Workbook " + nrWb++);
+                String description = Window.prompt("Description of new Workbook:", "No Description");
 
-                WorkbookDescriptionDTO dDTO = new WorkbookDescriptionDTO("New Private Workbook " + nrWb++, "description of workbook", CurrentUser.getCurrentUser().getEmail().getEmail());
+                WorkbookDescriptionDTO dDTO = new WorkbookDescriptionDTO(name, description, CurrentUser.getCurrentUser().getEmail().getEmail());
                 workbooksSvc.addWorkbookDescription(dDTO, callback);
 
             } else {
