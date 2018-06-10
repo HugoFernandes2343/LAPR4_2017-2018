@@ -2,7 +2,7 @@
  * Date Created: 7/jun/2018
  *
  */
-package pt.isep.nsheets.client.application.Tasks;
+package pt.isep.nsheets.client.lapr4.blue.s2.s1150585.Tasks;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
