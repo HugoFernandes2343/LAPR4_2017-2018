@@ -33,6 +33,7 @@ import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.settings.Setti
 import pt.isep.nsheets.client.application.workbook.WorkbookModule;
 import pt.isep.nsheets.client.lapr4.red.s2.s1161109.application.register.RegisterModule;
 import pt.isep.nsheets.client.lapr4.red.s2.s1161110.application.xmlupload.XmlUploadModule;
+import pt.isep.nsheets.client.lapr4.red.s2.s1161569.ChatModule;
 import pt.isep.nsheets.shared.core.Workbook;
 
 public class ApplicationModule extends AbstractPresenterModule {
@@ -52,6 +53,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new LoginModule());
         install(new XmlUploadModule());
         install(new RegisterModule());
+        install(new ChatModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
     }

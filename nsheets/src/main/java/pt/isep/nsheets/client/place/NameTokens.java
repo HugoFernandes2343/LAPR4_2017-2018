@@ -58,6 +58,8 @@ public class NameTokens {
 
     public static final String exportToPdf = "exportToPdf";
 
+    public static final String chat = "chat";
+
     public static String getWorkbook() {
         return workbook;
     }
@@ -94,7 +96,9 @@ public class NameTokens {
      public static String getLogout() {
         return logout;
     }
-    
+    public static String getChat() {
+        return chat;
+    }
 
     public static String getSettings() {
         return settings;

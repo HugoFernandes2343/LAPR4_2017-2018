@@ -212,7 +212,6 @@ Controller **PublishPublicMessageController**
 
 ## 4.2. Requirements Realization
 
-
 Following the guidelines for JPA from EAPLI I envision a scenario like the following for realizing the use case for this feature increment.
 
 ![SD US](design.png)
@@ -229,10 +228,9 @@ For this functionality the most important classes are **Message** (Represents th
 
 ## 4.4. Design Patterns and Best Practices
 
-*Present and explain how you applied design patterns and best practices.*
-
-By memory we apply/use:  
-- Information Expert  
+By memory I apply/use:  
+- Information Expert 
+- Service/Controller 
 - Repository  
 - DTO  
 - MVP  
