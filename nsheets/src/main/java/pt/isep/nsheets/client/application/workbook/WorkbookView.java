@@ -224,7 +224,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 //        firstButton.addClickHandler(event -> {
 //            if (firstBox.getText().equals("form") || firstBox.getText().equals("FORM")) {
-//                //Workbook wb = CurrentWorkbook.getActualWorkbook();
+//                //Workbook wb = CurrentWorkbook.getCurrentWorkbook();
 //                Workbook wb = new Workbook("Teste1", "Teste2", "");
 //                /*Map<String, String> teste = new HashMap<>();
 //                teste.put("Isep0", "Linha0");

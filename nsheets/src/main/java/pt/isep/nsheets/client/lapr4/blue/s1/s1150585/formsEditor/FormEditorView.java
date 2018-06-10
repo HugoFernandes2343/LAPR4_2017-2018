@@ -14,7 +14,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialIcon;
@@ -23,9 +22,8 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import pt.isep.nsheets.client.application.workbook.SelectedWorkbookController;
+
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.FormsEditorController;
-import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 /**
@@ -63,7 +61,7 @@ public class FormEditorView extends Composite {
         initWidget(uiBinder.createAndBindUi(this));
 
         WorkbookDescriptionDTO wb = new WorkbookDescriptionDTO("Teste1", "Teste2","");
-        //Workbook wb = SelectedWorkbookController.getActualWorkbook();
+        //Workbook wb = CurrentWorkbook.getCurrentWorkbook();
         FormsEditorController editorController = new FormsEditorController(wb);
 
 //        if (editorController.existsForm() == true) {

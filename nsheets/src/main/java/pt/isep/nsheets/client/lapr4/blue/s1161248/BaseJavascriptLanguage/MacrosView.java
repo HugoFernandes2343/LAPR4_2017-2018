@@ -80,7 +80,7 @@ public class MacrosView extends Composite {
                 window.close();
             }else{
                 Macro macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getId());
-                //selectedWorkBook.getActualWorkbook()
+                //selectedWorkBook.getCurrentWorkbook()
                 //persiste this object
                 window.close();
             }
