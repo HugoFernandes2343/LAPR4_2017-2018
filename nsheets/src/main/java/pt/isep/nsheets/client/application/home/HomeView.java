@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.shell.log.SwingLoggerPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -24,13 +22,12 @@ import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 
 import gwt.material.design.client.ui.*;
-import gwt.material.design.client.ui.html.Option;
 import pt.isep.nsheets.client.application.CurrentUser;
-import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.DeleteWorkbookController;
+import pt.isep.nsheets.server.services.WorkbooksServiceImpl;
 import pt.isep.nsheets.shared.services.*;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
-
 
     interface Binder extends UiBinder<Widget, HomeView> {
     }
@@ -53,11 +50,9 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     @UiField
     MaterialListBox showAllWb;
 
-
     @Inject
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-
 
         // add open handler
         txtSearch.addOpenHandler(openEvent -> {
@@ -72,7 +67,6 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         });
     }
 
-
     private MaterialCard createCard(WorkbookDescriptionDTO wb) {
         MaterialCard card = new MaterialCard();
 
@@ -86,6 +80,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
         MaterialLink renameLink = new MaterialLink();
         MaterialLink deleteLink = new MaterialLink();
+        MaterialLink addSpreadsheetLink = new MaterialLink();
 
         if (wb.getUserMail().equalsIgnoreCase("")) {
             card.setBackgroundColor(Color.BLUE_DARKEN_1);
@@ -108,16 +103,16 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         renameLink.addClickHandler(event -> {
 //            MaterialToast.fireToast("rename " + wb.getName());
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
-            AsyncCallback callback = new AsyncCallback(){
+            AsyncCallback callback = new AsyncCallback() {
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error deleting "+ caught.getMessage());
+                    MaterialToast.fireToast("Error deleting " + caught.getMessage());
                 }
 
                 @Override
                 public void onSuccess(Object result) {
-                    MaterialToast.fireToast("test"+event.toString());
+                    MaterialToast.fireToast("test" + event.toString());
                 }
             };
 
@@ -129,7 +124,30 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         deleteLink.setIconColor(Color.GREY);
         deleteLink.setTextColor(Color.WHITE);
         deleteLink.addClickHandler(event -> {
-            MaterialToast.fireToast("delete " + wb.getName());
+            WorkbooksServiceAsync async = GWT.create(WorkbooksService.class);
+            AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error deleting workbook...");
+                }
+
+                @Override
+                public void onSuccess(Boolean result) {
+                    MaterialToast.fireToast("Success deleting workbook...");
+                    card.setVisible(false);
+                }
+            };
+            
+            async.deleteWorkbook(wb, callback);
+        });
+
+        addSpreadsheetLink.setText("Add Spreadsheet");
+        addSpreadsheetLink.setIconType(IconType.ADD);
+        addSpreadsheetLink.setIconColor(Color.GREEN);
+        addSpreadsheetLink.setTextColor(Color.WHITE);
+        addSpreadsheetLink.addClickHandler(event2 -> {
+
+            MaterialToast.fireToast("Spreadsheet Added to " + wb.getName());
         });
 
         cardContent.add(cardTitle);
@@ -137,6 +155,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
         cardAction.add(renameLink);
         cardAction.add(deleteLink);
+        cardAction.add(addSpreadsheetLink);
 
         card.add(cardContent);
         card.add(cardAction);
@@ -153,12 +172,10 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
 
         htmlPanel.clear();
 
-
         for (WorkbookDescriptionDTO wb : contents) {
 
-            if (( wb.getUserMail().equals("") && CurrentUser.isShowAll() ) || ( CurrentUser.isIsLoggedIn() && wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail()) )) {
+            if ((wb.getUserMail().equals("") && CurrentUser.isShowAll()) || (CurrentUser.isIsLoggedIn() && wb.getUserMail().equalsIgnoreCase(CurrentUser.getCurrentUser().getEmail().getEmail()))) {
                 MaterialCard card = createCard(wb);
-
 
                 if (colCount == 1) {
                     row = new MaterialRow();
@@ -195,7 +212,7 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
     }
 
     @Override
-    public void addEventChangeSearch(ValueChangeHandler<String> vc){
+    public void addEventChangeSearch(ValueChangeHandler<String> vc) {
         txtSearch.addValueChangeHandler(vc);
     }
 
@@ -204,11 +221,9 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         txtSearch.addCloseHandler(ch);
     }
 
-
     @UiHandler("btnSearch")
     void onSearch(ClickEvent e) {
         txtSearch.open();
     }
-
 
 }

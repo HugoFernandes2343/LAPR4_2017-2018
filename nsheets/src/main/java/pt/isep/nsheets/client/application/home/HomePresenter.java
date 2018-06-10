@@ -49,7 +49,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         void addEventChangeSearch(ValueChangeHandler<String> vc);
 
         void addSearchClose(CloseHandler<String> ch);
-
+        
     }
 
     @NameToken(NameTokens.home)
@@ -74,7 +74,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             }
             refreshView();
         });
-
+        
         this.view.addClickHandlerPublic((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
