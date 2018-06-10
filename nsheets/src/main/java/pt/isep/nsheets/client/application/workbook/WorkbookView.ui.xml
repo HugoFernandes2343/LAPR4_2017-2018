@@ -8,8 +8,8 @@ KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License. #L% -->
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m="urn:import:gwt.material.design.client.ui"
-            xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
- xmlns:ma="urn:import:gwt.material.design.addins.client">
+             xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
 
     <ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
 
@@ -47,10 +47,10 @@ governing permissions and limitations under the License. #L% -->
 
         <m:MaterialRow marginTop="60">
             <m:MaterialTextBox m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell"
-                active="true" grid="s11" iconType="FUNCTIONS" />
+                               active="true" grid="s11" iconType="FUNCTIONS" />
             <m:MaterialIcon ui:field="styleButton" iconType="MENU" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s11"/>
             <m:MaterialIcon ui:field="formButton" iconType="FORMAT_LIST_BULLETED" tooltip="New Form" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1" />
-            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>
+            <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" grid="s1"/>            
             <m:MaterialButton ui:field="sortButton" text="Sort" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
             <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
             <m:MaterialTextBox ui:field="lowerCellInfo" label="Lower right cell" grid="s2" />
@@ -58,6 +58,65 @@ governing permissions and limitations under the License. #L% -->
             <m:MaterialListValueBox ui:field="sortingTypeBox" placeholder="choose sorting type" grid="s2" />
         </m:MaterialRow>
 
+        
+        <m:MaterialRow>
+            <m:MaterialCollapsible ui:field = "colap" type="POPOUT">
+                
+                <m:MaterialCollapsibleItem>
+                    <m:MaterialCollapsibleHeader backgroundColor="BLACK" waves="DEFAULT">
+                        <m:MaterialLink ui:field="conditionalLink" text="Conditional Function" iconType="FUNCTIONS" textColor="WHITE"/>
+                    </m:MaterialCollapsibleHeader>
+                    <m:MaterialCollapsibleBody>
+                        <m:MaterialRow>
+                            <m:MaterialButton ui:field="formulaButton" text="Formula" iconType="ARROW_DROP_DOWN" backgroundColor="BLACK" activates="dp-2"/>
+                             
+                            <m:MaterialDropDown activator="dp-2" constrainWidth="true">
+                                <m:MaterialCollection ui:field="formulas"/>
+                            </m:MaterialDropDown>
+                            <m:MaterialTextBox ui:field="formulaValue" label="Insert a value" grid="s7"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="trueCase" label="True Formula" enabled="false" grid="s3"/>
+                            <m:MaterialRow>
+                            </m:MaterialRow>
+                            <m:MaterialButton ui:field="trueColorButton" text="Color" iconType="ARROW_DROP_DOWN" backgroundColor="BLACK" activates="TrueColors" grid="s4"/>
+                             
+                             
+                            <m:MaterialButton ui:field="trueFontButton" text="Font" iconType="ARROW_DROP_DOWN" backgroundColor="BLACK" activates="TrueFonts" grid="s4"/>
+                             
+                            
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="falseCase" label="False Formula" enabled="false" grid="s3"/>
+                            <m:MaterialRow>
+                            </m:MaterialRow>
+                            <m:MaterialButton ui:field="falseColorButton" text="Color" iconType="ARROW_DROP_DOWN" backgroundColor="BLACK" activates="FalseColors" grid="s4"/>
+                            
+                            <m:MaterialButton ui:field="falseFontButton" text="Font" iconType="ARROW_DROP_DOWN" backgroundColor="BLACK" activates="FalseFonts" grid="s4"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialButton ui:field="confirmCF" text="Confirm Conditional Function" iconType="DONE" backgroundColor="BLACK" iconPosition="LEFT"/>
+                        </m:MaterialRow>
+                        <m:MaterialDropDown activator="TrueColors" constrainWidth="true">
+                            <m:MaterialCollection ui:field="trueColor"/>
+                        </m:MaterialDropDown>
+                        <m:MaterialDropDown activator="TrueFonts" constrainWidth="true">
+                            <m:MaterialCollection ui:field="trueFont"/>
+                        </m:MaterialDropDown>
+                        
+                        <m:MaterialDropDown activator="FalseColors" constrainWidth="true">
+                            <m:MaterialCollection ui:field="falseColor"/>
+                        </m:MaterialDropDown>
+                        <m:MaterialDropDown activator="FalseFonts" constrainWidth="true">
+                            <m:MaterialCollection ui:field="falseFont"/>
+                        </m:MaterialDropDown>
+                        
+                    </m:MaterialCollapsibleBody>                     
+                </m:MaterialCollapsibleItem>
+            </m:MaterialCollapsible>
+        </m:MaterialRow>
 
 
         <m:MaterialRow>
