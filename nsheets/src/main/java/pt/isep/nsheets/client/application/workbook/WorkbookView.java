@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 
@@ -77,6 +78,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
+    
+    //1091234
+    @UiField
+    MaterialButton newSpreadsheetButton;
 
     @UiField
     MaterialWindow windowconditional;
@@ -246,6 +251,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
+        });
+        
+        newSpreadsheetButton.addClickHandler((ClickEvent event) -> {
+            new addSpreadsheetView();
         });
 
 

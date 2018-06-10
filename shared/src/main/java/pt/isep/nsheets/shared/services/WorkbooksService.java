@@ -20,5 +20,7 @@ public interface WorkbooksService extends RemoteService {
     boolean deleteWorkbook(WorkbookDescriptionDTO dto);
     
     Workbook addWorkbook(WorkbookDescriptionDTO wdDto) throws DataException;
+    
+    boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO);
 
 }

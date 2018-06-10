@@ -19,6 +19,8 @@ public interface WorkbooksServiceAsync {
     void deleteWorkbook(WorkbookDescriptionDTO dto, AsyncCallback callback);
 
     void addWorkbook(WorkbookDescriptionDTO wdDto, AsyncCallback<Workbook> async);
+    
+    void addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO, AsyncCallback<Boolean> callback);
 
 //    void addWorkbook(WorkbookDescriptionDTO wdDto, AsyncCallback<WorkbookDTO> async);
 

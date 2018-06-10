@@ -97,29 +97,46 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
         label.setText(wb.getDescription());
-        renameLink.setText("Rename");
+        renameLink.setText("Edit Workbook Info");
         renameLink.setIconType(IconType.EDIT);
         renameLink.setIconColor(Color.INDIGO);
         renameLink.setTextColor(Color.WHITE);
         renameLink.addClickHandler(event -> {
-//            MaterialToast.fireToast("rename " + wb.getName());
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
             AsyncCallback callback = new AsyncCallback() {
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error deleting " + caught.getMessage());
+                    MaterialToast.fireToast("Error editing workbook " + caught.getMessage());
                 }
 
                 @Override
                 public void onSuccess(Object result) {
-                    MaterialToast.fireToast("test" + event.toString());
+                    MaterialToast.fireToast("Success editing workbook");
                 }
             };
             String name = Window.prompt("New Name of Workbook:", wb.getName());
             workbooksSvc.editWorkbookName(wb, name, callback);
             wb.setName(name);
             cardTitle.setText(name);
+            
+            WorkbooksServiceAsync workbooksSvc2 = GWT.create(WorkbooksService.class);
+            AsyncCallback callback2 = new AsyncCallback() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error editing workbook " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    MaterialToast.fireToast("Success editing workbook");
+                }
+            };
+            String description = Window.prompt("New Workbook Description:", wb.getName());
+            workbooksSvc2.editWorkbookDescription(wb, name, callback2);
+            wb.setDescription(description);
+            label.setText(description);
         });
 
         deleteLink.setText("Delete");

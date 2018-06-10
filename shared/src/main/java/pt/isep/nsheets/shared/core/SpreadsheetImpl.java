@@ -403,7 +403,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
         return extension;
     }
-
+    
     /*
  * GENERAL
      */

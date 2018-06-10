@@ -17,8 +17,11 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.Work
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookRepository;
+import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.DataException;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 
@@ -145,6 +148,21 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 
         return wb;
 
+    }
+
+    @Override
+    public boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO) {
+        final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
+        wbDTO.spreadsheets.add(ssDTO);
+        Workbook wd = new Workbook(wbDTO);
+        try {
+            workbookRepository.save(wd);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
 }
