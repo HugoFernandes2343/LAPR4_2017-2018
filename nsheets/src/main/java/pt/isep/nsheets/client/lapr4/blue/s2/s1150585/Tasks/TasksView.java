@@ -43,13 +43,14 @@ import pt.isep.nsheets.shared.services.TasksServiceAsync;
 
 /**
  *
- * @author dftsf
+ * @author Daniel Fernandes 1150585
  */
 public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
     interface Binder extends UiBinder<Widget, TasksView> {
     }
 
+    
     @UiField
     HTMLPanel htmlPanel;
 
@@ -65,13 +66,12 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     @Inject
     TasksView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-
+        
     }
 
     private MaterialCard createCard(TaskDTO task) {
         MaterialCard card = new MaterialCard();
         card.setBackgroundColor(Color.BLUE_DARKEN_1);
-
         MaterialCardContent cardContent = new MaterialCardContent();
         cardContent.setTextColor(Color.WHITE);
 
@@ -207,7 +207,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                 labelDescritpion.setText(editedTask.getDescription());
                 labelPriority.setText("Priority:" + editedTask.getPriority());
                 labelPercentage.setText("Percentage of completion: " + editedTask.getPercentage() + "%");
-                MaterialToast.fireToast("Task Edited");
                 window.close();
             });
         });
@@ -262,8 +261,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         for (TaskDTO task : contents) {
             MaterialCard card = createCard(task);
 
-//            workbookTitle.setText(wb.getName());
-//            workbookDescription.setText(wb.getDescription());
+            
             if (colCount == 1) {
                 row = new MaterialRow();
                 htmlPanel.add(row);
@@ -279,8 +277,13 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
             col.add(card);
         }
-
     }
+
+    @Override
+    public void clearView() {
+        htmlPanel.clear();
+    }
+    
 
     @Override
     public void addEventChangeHandler(ValueChangeHandler<String> vc) {
@@ -290,6 +293,5 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     @Override
     public void addClickHandler(ClickHandler ch) {
         newTaskButton.addClickHandler(ch);
-    }
-
+    }  
 }
