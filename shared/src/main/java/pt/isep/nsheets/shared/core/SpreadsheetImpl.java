@@ -219,7 +219,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
     }
 
-    private Address findAddress(String reference) {
+    public Address findAddress(String reference) {
         for (Address add : cells.keySet()) {
             if (add.toString().equalsIgnoreCase(reference)) {
                 return add;
