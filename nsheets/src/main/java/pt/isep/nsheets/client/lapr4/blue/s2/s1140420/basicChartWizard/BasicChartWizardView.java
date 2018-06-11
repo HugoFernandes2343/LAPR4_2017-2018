@@ -31,6 +31,9 @@ public class BasicChartWizardView extends Composite{
     @UiField
     MaterialBarChart chart;
 
+    @UiField
+    MaterialPanel  wizardStep2Panel1;
+
     private static BasicChartWizardBinder uiBinder = GWT.create(BasicChartWizardBinder.class);
 
     interface BasicChartWizardBinder extends UiBinder<Widget, BasicChartWizardView> {
@@ -48,10 +51,18 @@ public class BasicChartWizardView extends Composite{
             wizardWindowStep1.close();
 
             String linesOrColumnsValue = linesOrColumnsBox.getValue();
-            String lowerCellString = lowerCellInfo.getText();
-            String upperCellString = upperCellInfo.getText();
+            String lowerCell = lowerCellInfo.getText();
+            String upperCell = upperCellInfo.getText();
 
-            Address upperCellAddress = spreadsheet.f
+
+            boolean linesOriented = false;
+            if (linesOrColumnsValue.equals(LINES)){
+                linesOriented = true;
+            }
+
+
+            MaterialBarChart chart = new MaterialBarChart(spreadsheet, upperCell, lowerCell, linesOriented);
+            wizardStep2Panel1.add(chart);
 
             wizardWindowStep2.open();
 
