@@ -35,18 +35,18 @@ class ChatView extends ViewImpl implements ChatPresenter.MyView {
     @UiField
     MaterialTextArea textField;
 
+    @UiField
+    HTMLPanel chatPanel;
+
     @Override
     public void setContents(ArrayList<MessageDTO> contents) {
-        /*this.chat.clear();
-        this.chat.setHeader("Public Chat");*/
+        chatPanel.clear();
         for(MessageDTO dto:contents){
-            MaterialToast.fireToast(dto.getUser()+" at "+dto.getDate().toString()+" said:"+dto.getText());
-
-           /* MaterialCollectionItem mat=new MaterialCollectionItem();
+            MaterialCard mat=new MaterialCard();
             MaterialLabel user=new MaterialLabel();
             MaterialLabel date=new MaterialLabel();
             MaterialLabel text=new MaterialLabel();
-            user.setFontSize("1.2em");
+            text.setFontSize("1.2em");
             date.setFontSize("0.5em");
             user.setText(dto.getUser());
             date.setText(dto.getDate().toString());
@@ -54,7 +54,7 @@ class ChatView extends ViewImpl implements ChatPresenter.MyView {
             mat.add(user);
             mat.add(date);
             mat.add(text);
-            chat.add(mat);*/
+            chatPanel.add(mat);
         }
 
 

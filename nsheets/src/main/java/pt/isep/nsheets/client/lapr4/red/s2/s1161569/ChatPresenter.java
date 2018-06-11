@@ -12,6 +12,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
+import com.ibm.icu.impl.IllegalIcuArgumentException;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialTextArea;
 import gwt.material.design.client.ui.MaterialTextBox;
@@ -69,7 +70,9 @@ public class ChatPresenter extends Presenter<ChatPresenter.MyView, ChatPresenter
                     refreshView();
                 }
             };
-
+            if(this.view.getFirstBox().getText().isEmpty()){
+                throw new IllegalArgumentException();
+            }
             MessageDTO mDto = new MessageDTO("god_should_be_here",this.view.getFirstBox().getText(),new Date());
             chatSvc.addMessage(mDto, callback);
         });
