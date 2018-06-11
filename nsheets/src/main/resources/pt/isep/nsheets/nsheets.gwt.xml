@@ -49,7 +49,7 @@
     <inherits name="gwt.material.design.GwtMaterialTableDebug"/>
     
     <inherits name="pt.isep.nsheets.client.Resources"/>
-
+    <inherits name="com.googlecode.gwt.charts.Charts"/>
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
