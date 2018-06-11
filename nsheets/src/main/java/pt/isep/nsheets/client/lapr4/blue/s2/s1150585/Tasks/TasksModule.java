@@ -8,7 +8,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 /**
  *
- * @author dftsf
+ * @author Daniel Fernandes 1150585
  */
 public class TasksModule extends AbstractPresenterModule {
 
