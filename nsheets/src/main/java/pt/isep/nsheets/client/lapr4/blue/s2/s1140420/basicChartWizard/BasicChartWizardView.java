@@ -8,30 +8,25 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.addins.client.window.MaterialWindow;
 
+import pt.isep.nsheets.shared.core.Address;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 
 public class BasicChartWizardView extends Composite{
 
-    @UiField
-    MaterialWindow wizardWindowStep1;
+    private final String LINES = "Lines";
+    private final String COLUMNS = "Columns";
 
     @UiField
-    MaterialWindow wizardWindowStep2;
+    MaterialWindow wizardWindowStep1, wizardWindowStep2;
 
     @UiField
-    MaterialTextBox chartName;
-
-    @UiField
-    MaterialTextBox upperCellInfo;
-
-    @UiField
-    MaterialTextBox lowerCellInfo;
+    MaterialTextBox chartName, upperCellInfo, lowerCellInfo;
 
     @UiField
     MaterialListValueBox<String> linesOrColumnsBox;
 
     @UiField
-    MaterialButton previewChartButton;
+    MaterialButton previewChartButton, backToStep1Button;
 
     @UiField
     MaterialBarChart chart;
@@ -44,8 +39,8 @@ public class BasicChartWizardView extends Composite{
     public BasicChartWizardView(Spreadsheet spreadsheet) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        linesOrColumnsBox.add("Lines");
-        linesOrColumnsBox.add("Columns");
+        linesOrColumnsBox.add(LINES);
+        linesOrColumnsBox.add(COLUMNS);
 
         wizardWindowStep1.open();
 
@@ -53,10 +48,22 @@ public class BasicChartWizardView extends Composite{
             wizardWindowStep1.close();
 
             String linesOrColumnsValue = linesOrColumnsBox.getValue();
-            String lowerCell = lowerCellInfo.getText();
-            String upperCell = upperCellInfo.getText();
+            String lowerCellString = lowerCellInfo.getText();
+            String upperCellString = upperCellInfo.getText();
+
+            Address upperCellAddress = spreadsheet.f
 
             wizardWindowStep2.open();
+
+
+        });
+
+        backToStep1Button.addClickHandler(event -> {
+            wizardWindowStep2.close();
+
+            wizardWindowStep1.open();
+
+
         });
     }
 

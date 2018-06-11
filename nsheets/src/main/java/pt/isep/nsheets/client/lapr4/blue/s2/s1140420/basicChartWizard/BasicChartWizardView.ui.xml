@@ -12,24 +12,23 @@ Uncomment this for XHTML entities
     </ui:style>
     <g:HTMLPanel>
         <ma:window.MaterialWindow ui:field="wizardWindowStep1" width="70%" height="70%" title="Create Bar Chart">
-            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
+            <m:MaterialPanel textAlign="CENTER">
                 <m:MaterialTextBox ui:field="chartName" label="Chart Name" grid="s2"/>
-            </m:MaterialPanel>
-            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
                 <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
                 <m:MaterialTextBox ui:field="lowerCellInfo" label="Lower right cell" grid="s2" />
-            </m:MaterialPanel>
-            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
                 <m:MaterialListValueBox ui:field="linesOrColumnsBox" placeholder="Lines or Columns?" grid="s2" />
-            </m:MaterialPanel>
-            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
                 <m:MaterialButton ui:field="previewChartButton" text="Preview Chart" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
             </m:MaterialPanel>
         </ma:window.MaterialWindow>
         <ma:window.MaterialWindow ui:field="wizardWindowStep2" width="70%" height="70%" title="Create Bar Chart">
-            <m:MaterialPanel padding="5" textAlign="CENTER" height="50px">
+            <m:MaterialPanel textAlign="CENTER" height="50px">
                 <m:MaterialRow>
                     <c:MaterialBarChart ui:field="chart"/>
+                </m:MaterialRow>
+            </m:MaterialPanel>
+            <m:MaterialPanel textAlign="CENTER" height="50px">
+                <m:MaterialRow>
+                    <m:MaterialButton ui:field="backToStep1Button" text="BACK" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
                 </m:MaterialRow>
             </m:MaterialPanel>
         </ma:window.MaterialWindow>
