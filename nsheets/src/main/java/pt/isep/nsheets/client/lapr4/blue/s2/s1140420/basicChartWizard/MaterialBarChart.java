@@ -25,7 +25,6 @@ package pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -45,6 +44,10 @@ import com.googlecode.gwt.charts.client.options.LegendPosition;
 import com.googlecode.gwt.charts.client.options.TextPosition;
 import com.googlecode.gwt.charts.client.options.VAxis;
 import gwt.material.design.client.ui.MaterialCardContent;
+import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
+import pt.isep.nsheets.shared.core.Spreadsheet;
 
 public class MaterialBarChart extends Composite {
 
@@ -58,17 +61,69 @@ public class MaterialBarChart extends Composite {
 
     private boolean isLoop;
     private BarChart chart;
-    private String[] countries = new String[] { "Austria", "Bulgaria", "Denmark", "Greece" };
-    private int[] years = new int[] { 2003, 2004, 2005 };
-    private int[][] values = new int[][] { { 1336060, 1538156, 1576579 }, { 400361, 366849, 440514 }, { 1001582, 1119450, 993360 }, { 997974, 941795, 930593 } };
-    private int[][] valuesInitial = new int[][] { { 1538156, 1336060, 1576579 }, { 366849, 400361, 440514}, { 1001582, 993360, 1119450 }, { 941795, 997974, 930593 } };
+    private int[][] values;
+    Address lowerCellAddress;
+    Address upperCellAddress;
+    boolean linesOriented;
+    Spreadsheet spreadsheet;
 
     public MaterialBarChart() {
         initWidget(uiBinder.createAndBindUi(this));
-        initialize();
     }
 
-    private void initialize() {
+    public void setSpreadsheet(Spreadsheet spreadsheet) {
+        this.spreadsheet = spreadsheet;
+    }
+
+    public void setLowerCellAddress(String lowerCell) {
+        lowerCellAddress = spreadsheet.findAddress(lowerCell);
+    }
+
+    public void setUpperCellAddress(String upperCell) {
+        this.upperCellAddress = spreadsheet.findAddress(upperCell);
+    }
+
+    public void setLinesOriented(boolean linesOriented) {
+        this.linesOriented = linesOriented;
+    }
+
+    public void setValues(){
+        Cell[][] cells = spreadsheet.getCellRangeMatrix(upperCellAddress, lowerCellAddress);
+
+        if (!linesOriented){
+            cells = transpose (cells);
+        }
+
+        try {
+            values = cellsToValueMatrix (cells);
+        } catch (IllegalValueTypeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Cell[][] transpose (Cell[][] cells){
+        Cell[][] transposed = new Cell[cells[0].length][cells.length];
+
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[0].length; j++) {
+                transposed[j][i] = transposed[i][j];
+            }
+        }
+        return transposed;
+    }
+
+    private int[][] cellsToValueMatrix (Cell[][] cells) throws IllegalValueTypeException {
+        int[][] result = new int[cells.length][cells[0].length];
+
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[0].length; j++) {
+                result[i][j] = cells[i][j].getValue().toNumber().intValue();
+            }
+        }
+        return result;
+    }
+
+    public void initialize() {
         ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
         chartLoader.loadApi(new Runnable() {
 
@@ -79,41 +134,22 @@ public class MaterialBarChart extends Composite {
                 cardContent.add(chart);
 
                 // Prepare the data with loop inside to populate the initial data
-                setLoop();
+                drawChart(values);
             }
         });
-    }
-
-    private void setLoop() {
-
-        Timer timer = new Timer() {
-
-            public void run() {
-                if (isLoop) {
-                    drawChart(values);
-                    isLoop = false;
-                }
-                else {
-                    drawChart(valuesInitial);
-                    isLoop = true;
-                }
-
-            }
-        };
-        timer.scheduleRepeating(1000);
     }
 
     private void drawChart(int[][] values) {
 
         // Prepare the data
         DataTable dataTable = DataTable.create();
-        dataTable.addColumn(ColumnType.STRING, "Year");
-        for (int i = 0; i < countries.length; i++) {
-            dataTable.addColumn(ColumnType.NUMBER, countries[i]);
+        //dataTable.addColumn(ColumnType.STRING, "Column");
+        for (int i = 0; i < values[0].length; i++) {
+            dataTable.addColumn(ColumnType.STRING, "Column Label");
         }
-        dataTable.addRows(years.length);
-        for (int i = 0; i < years.length; i++) {
-            dataTable.setValue(i, 0, String.valueOf(years[i]));
+        dataTable.addRows(values.length);
+        for (int i = 0; i < values.length; i++) {
+            dataTable.setValue(i, 0, "Line Label "+i);
         }
         for (int col = 0; col < values.length; col++) {
             for (int row = 0; row < values[col].length; row++) {
@@ -122,7 +158,7 @@ public class MaterialBarChart extends Composite {
         }
 
         // Draw the chart
-        chart.draw(dataTable, getOptions());
+        chart.draw(dataTable);
     }
 
     private BarChartOptions getOptions() {
