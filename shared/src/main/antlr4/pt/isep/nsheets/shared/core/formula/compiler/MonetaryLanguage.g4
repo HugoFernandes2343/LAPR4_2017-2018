@@ -4,20 +4,13 @@ grammar MonetaryLanguage;
 }
 
 expressionMonetary
-	: START (euroExpression|poundExpression|dollarExpression) /* EOF */
+	: START (expression) /* EOF */
 	;
 
-euroExpression
-    : EURO_FUN LCBRA (euroExpression|poundExpression|dollarExpression|concatenation) RCBRA
+expression
+    : (EURO_FUN|POUND_FUN|DOLLAR_FUN) LCBRA (concatenation) RCBRA
     ;
 
-poundExpression
-    : POUND_FUN LCBRA (euroExpression|poundExpression|dollarExpression|concatenation) RCBRA
-    ;
-
-dollarExpression
-    : DOLLAR_FUN LCBRA (euroExpression|poundExpression|dollarExpression|concatenation) RCBRA
-    ;
 
 concatenation
      : atom
@@ -25,9 +18,9 @@ concatenation
      | concatenation ( PLUS | MINUS ) concatenation
      ;
 
-atom
-	:	literalMonetary
-    |   (euroExpression|poundExpression|dollarExpression)
+atom    
+    :	literalMonetary
+    | LPAR expression RPAR
     ;
 
 literalMonetary
@@ -37,9 +30,9 @@ literalMonetary
 NUMBER: ( DIGIT )+ ( COMMA ( DIGIT )+ )? ;
 DIGIT : '0'..'9' ;
 
-EURO_FUN    :'EURO'|'euro';
-POUND_FUN   :'POUND'|'pound';
-DOLLAR_FUN  :'DOLLAR'|'dollar';
+EURO_FUN    :'euro';
+POUND_FUN   :'pound';
+DOLLAR_FUN  :'dollar';
 
 EURO_SIG    :'e';
 POUND_SIG   :'£';
@@ -59,3 +52,5 @@ LCBRA   : '{' ;
 RCBRA   : '}' ;
 COMMA	: ',' ;
 START   : '#';
+LPAR	: '(' ;
+RPAR	: ')' ;

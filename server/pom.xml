@@ -42,8 +42,13 @@
            	<groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.191</version>
-        </dependency>        
-                
+        </dependency>
+        <dependency>
+            <groupId>org.zenframework.z8.dependencies.commons</groupId>
+            <artifactId>commons-fileupload-1.3.1</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
 	<name>NSheets Server</name>

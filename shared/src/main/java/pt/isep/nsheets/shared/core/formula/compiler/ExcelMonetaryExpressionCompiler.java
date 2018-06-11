@@ -60,7 +60,7 @@ public class ExcelMonetaryExpressionCompiler implements ExpressionCompiler {
         }
 
         // Visit the expression and returns it
-        MonetaryEvalCompiler eval = new MonetaryEvalCompiler(cell, language);
+        MonetaryEvalVisitor eval = new MonetaryEvalVisitor(cell, language);
         Expression result = eval.visit(tree);
         if (eval.getNumberOfErrors() > 0) {
             throw new FormulaCompilationException(eval.getErrorsMessage());
