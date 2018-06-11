@@ -75,13 +75,13 @@
     <!--1160777-->
     <!--Download servlet, may be subject to changes-->
     <servlet>
-        <servlet-name>downloadService</servlet-name>
+        <servlet-name>downloadToCLSService</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>downloadService</servlet-name>
-        <url-pattern>/nsheets/downloadService</url-pattern>
+        <servlet-name>downloadToCLSService</servlet-name>
+        <url-pattern>/nsheets/downloadToCLSService</url-pattern>
     </servlet-mapping>
     <!--1160777-->
 
