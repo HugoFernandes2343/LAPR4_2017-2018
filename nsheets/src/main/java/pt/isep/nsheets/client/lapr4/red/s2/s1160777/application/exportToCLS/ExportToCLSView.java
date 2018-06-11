@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.addins.client.window.MaterialWindow;
@@ -11,9 +12,12 @@ import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.server.services.DownloadCLSImpl;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.DataException;
+import pt.isep.nsheets.shared.services.DownloadToCLSService;
+import pt.isep.nsheets.shared.services.DownloadToCLSServiceAsync;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 public class ExportToCLSView extends Composite {
@@ -46,8 +50,8 @@ public class ExportToCLSView extends Composite {
 
             WorkbookDTO dto = workbook.toDTO();
 
-            //DownloadToCLSServiceAsync downAsync = GWT.create(DownloadToCLSService.class);
-            /*
+            DownloadToCLSServiceAsync downAsync = GWT.create(DownloadToCLSService.class);
+
             downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>() {
                 @Override
                 public void onFailure(Throwable caught) {
@@ -59,9 +63,9 @@ public class ExportToCLSView extends Composite {
                     String url = GWT.getModuleBaseURL() + "downloadToCLSService?filename=" + textBox1.getText();
                     Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
                 }
-            });*/
-            String url = GWT.getModuleBaseURL() + "downloadToCLSService?filename=" + textBox1.getText() /*+ ".cls"*/;
-            Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0,target=_blank");
+            });
+            //String url = GWT.getModuleBaseURL() + "downloadToCLSService?filename=" + textBox1.getText() /*+ ".cls"*/;
+            //Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0,target=_blank");
 
         });
         window.open();
