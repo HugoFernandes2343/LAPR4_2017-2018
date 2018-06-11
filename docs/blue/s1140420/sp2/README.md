@@ -3,11 +3,7 @@
 
 # 1. General Notes
 
-The first 2 days (Tuesday and Wednesday) were dedicated to making sure everyone on Team BLUE was properly setup (sucks to be the Scrum Master :P). Barbara and Pietro in particular required a bit of extra care since they are not familiar with Java development at all - installing and configuring the IDE, giving them some pointers on Java, and promoting their integration into the group, as they were a bit left out during the skills module of LAPR4.
-
-TL;DR: No time for myself until Friday.
-
-Started exploring the app on Friday, stumbling around like a drunken sailor.
+Pedro Tedim and Norberto Sousa detected the need to rework some core classes (mostly related to Workbooks)
 
 
 # 2. Requirements
@@ -17,88 +13,66 @@ Core04.1 - Basic Chart Wizard
 Quoting the Product Owner:
 	"The application should have a new menu option to launch a wizard to help the user create a bar chart. The wizard should have 2 steps. In the first step, the user should input the name of the chart and the range of cells that contains the data for the plot of the chart. The user should also select if the data is in the rows or columns of the range and if the first row or the first column are to be considered labels. In the second step the wizard should display a preview of the chart. The wizard should allow the user to move between steps 1 and 2. If the wizard is confirmed the cell in the left upper corner of the range should have a mark (e.g., icon) that indicates that the cell has a chart associated with it. A popup menu option in the cell should provide access to the chart.""
 
-Instead of the previous example, which uses artefacts that will supposedly only be implemented in Sprints 2 or 3 (like "WhileDo" and "Eval", Lang01.3), let's use a simpler one:
+## 2.1 What does the Client want, exactly?
 
-  *"= {\_Counter:=1; \_Counter:=\_Counter+1 }*
+ After a quick 5 minute exchange with the Client on 07-06-2018, I showed him the following demos in Excel:
 
-If that block goes into a Cell, and in conjunction with the specs for Lang01.1, the result must be "2" because a "Counter" variable is set to "1" and then incremented by "1".
+ ![Lines example](Example_lines.png)
 
-This behavior therefore seems to be a very basic acceptance criteria. Note, however, that the requirements state VARIABLES (plural), which means a given Formula can include declarations for multiple ones.
+ ![Columns example](Example_columns.png)
 
-Also, semantically speaking a Variable can be of any of the pre-defined "NUMERIC", "LITERAL" or "DATE" types. I must confess, however, that I will be looking at it as a "NUMERIC" type, as that seems to be the more realistic goal given my limited grasp of LPROG. In other words, I will try to ensure proper behavior as a "NUMERIC" and functional tests will assume as much, and if enough time remains I will try to make it work as "LITERAL" and/or "DATE"
+ He said they were "pretty cool", so they will serve as a common ground for the end goal.
 
 Dependencies:
 
-Lang01.1 is a critical dependency, because if NSheets is not capable of processing Blocks of Instructions as a Formula, then there is really no User-side way to check if the Variables are actually storing their value.
+The major dependency will be detecting the current Workbook and its Spreadsheet.
 
-US - As a User of the Application I want to be able to use Variables in my Blocks of Instructions
+User Story - As a User of the Application I want to be able to generate bar charts based on a range of Cells, to get a visual representation of data
 
 # 3. Analysis
 
-Things that concern this Sprint:
+## 3.0 Is there anything online to make my life easier?
 
-- Understand how a Cell content is passed from the Client side over to the Core part of the app. This is already being done, so I just need to make sure I know where to capture the input String (I'm guessing it's a String) and then use parse it accordingly
+ No sense in reinventing the wheel when I'm way out of my depth, and I'm betting someone already had a crack at this. Lurking online, I came across some WONDERFUL examples of bar charts implementations, with source code included:
 
-Things that do NOT concern this Sprint:
+  http://gwt-charts.appspot.com/#bar
 
-- Understand how GWT works. The app is already capable of accepting input values and passing them to the Core section, so I probably won't have to dabble in the UI itself (based on GWT).  
+	https://github.com/GwtMaterialDesign/gwt-material-demo/blob/master/src/main/java/gwt/material/design/demo/client/ui/charts/MaterialBarChart.ui.xml
 
-- Understand how persistence is done. "Temporary Variables", as stated, only exist in the scope of a Formula, so they will not need to be Saved with the Workbook, which means I should ignore database/persistence concerns (Lang02.2 and/or Lang02.3 might have to, though)
+	https://github.com/GwtMaterialDesign/gwt-material-demo/blob/master/src/main/java/gwt/material/design/demo/client/ui/charts/MaterialBarChart.java
+
+All I need is to download "GWT Charts 0.9.10", an unofficial API for all kinds of charts. It's on Maven, here:
+	https://mvnrepository.com/artifact/com.googlecode.gwt-charts/gwt-charts/0.9.10
+
+Just have to alter the POM.xml to include this Dependency:
+
+<!-- https://mvnrepository.com/artifact/com.googlecode.gwt-charts/gwt-charts -->
+<dependency>
+    <groupId>com.googlecode.gwt-charts</groupId>
+    <artifactId>gwt-charts</artifactId>
+    <version>0.9.10</version>
+</dependency>
+
 
 ## 3.1 Which classes/packages am I gonna interact with (mainly)?
 
-I've determined that I am probably going to spend my time in the "shared" Module of NSheets - that's where the "core", "formula" and "lang" packages are, after all.
+ Going to create a new package for my stuff: "pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard"
 
-After some mind-numbing debugging, here's the notes I came up with:
+## 3.1.0. Is there anything from previous Sprints I can reuse?
 
-- "pt.isep.nsheets.shared.core.CellImpl.storeContent()" is triggered whenever I press "ENTER" after typing something in a Cell. More importantly, the "Content" parameter IS the String to be parsed, which confirms my suspicion that the UI part is done.
-- Still on "storeContent()":
+- Hugo Carvalho did some interesting work in Sprint 1 in "Core03.1 - Sort Cells" related to selecting a range of Cells. As stated in his docs, "shared.core.SpreadsheetImpl" contains the methods "findReference()" (which finds a Cell's Address), so I'll use that. He also did some widgets to allow the user to select a range of cells, so I'll use that too.
 
-private void storeContent(String content) throws FormulaCompilationException {
-		// Parses formula
-		Formula formula = null;
-		if (content.length() > 1)
-			formula = FormulaCompiler.getInstance().compile(this, content);
+## 3.1.1. Shared
 
-		// Stores content and formula
-		this.content = content;
-		this.formula = formula;
-		updateDependencies();
-	}
+-
 
-It starts by creating a "null" Formula and THEN, by calling "FormulaCompiler.getInstance().compile(this, content);". Judging by the already existing comment of "//Parses formula", this is the stuff right here. I'm going to have to go into the "compile()" method, because that's all it takes for Formula to have all its attributes properly set.
+## 3.1.2 Client
 
--Analysing the "compile()" method, it seems like it goes through a list of "compilers" that might be able to parse the formula if it makes sense to them. The only one added to that list is an "ExcelExpressionCompiler" (careful with that trademark), so let's dig into that.
+- Majority of the work will be developed here, in terms of creating a new Window to act as the Wizard.
 
-- Digging into "ExcelExpressionCompiler", I see that it's already taking care of defining and instantiating a basic Excel language.
+## 3.1.3 Server and RPC
 
-## 3.2 Grammar and Language  
-
-- Managed to find the Grammar "formula" for this "Excel Language" in "Other Sources", specifically "pt.isep.nsheets.shared.core.formula.compiler". Several definitions for "expression", "assignment", "comparison", but nothing for variables. I'll have to add rules for them here.
-
-- Almost everything in this Grammar has a 1-to-1 match with "core" Java classes, so I'm probably gonna have to create one for "Variable", and maybe one for "VariableList" to ensure cases where someone inputs more than 1 Variable (I could do it as "List<Variable>", but I presume this will be crucial for further Sprints, so promoting it to Class)
-
-- With Pedro Tedim's help (1091234), I've been able to see in IntelliJ ANTLR plugin (I use NetBeans, FML) that ANTLR only recognizes a Variable IF it is made part of the "REFERENCE" rule in the Grammar. We thought it could be an Atom, but not so. It makes sense, given that a VARIABLE should behave just like a CELL_REF (e.g. "A1" or "B2"): they're both references.
-
-- There is indeed a "CellReference" class in "pt.isep.nsheets.shared.core.formula.lang", which implements "Reference". I'm probably gonna have to create a "VariableReference" in similar manner.
-
-- Here are the proposed changes to "Formula.g4":
-
-reference
-	:	CELL_REF
-		( ( COLON ) CELL_REF )?
-                | VARIABLE
-	;
-
-  VARIABLE
-          : UND LETTER ( NUMBER | LETTER) *
-          ;
-
-UND             : '\_';
-
-## 3.3 Server and RPC
-
-. No changes here, this only affects the "core" in "NShared"
+. No changes here, I am not going to concern myself with persistence for now.
 
 ## 3.4 Analysis Diagrams
 
