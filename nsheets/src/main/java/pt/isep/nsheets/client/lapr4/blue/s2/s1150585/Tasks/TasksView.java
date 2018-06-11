@@ -80,6 +80,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         cardTitle.setIconType(IconType.DONE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
+
         MaterialLabel labelDescritpion = new MaterialLabel();
         labelDescritpion.setText(task.getDescription());
 
@@ -90,6 +91,28 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         labelPercentage.setText("Percentage of completion: " + task.getPercentage() + "%");
 
         MaterialCardAction cardAction = new MaterialCardAction();
+        
+        cardTitle.addClickHandler(event -> {
+
+            TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
+
+            AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error ");
+                }
+
+                @Override
+                public void onSuccess(TaskDTO result) {
+                    MaterialToast.fireToast("Task Completed");
+
+                }
+            };
+
+            tasksServiceAsync.updatePercentage(task.getTitle(), callback);
+            labelPercentage.setText("Percentage of completion: 100 %" );
+
+        });
 
         MaterialLink editLink = new MaterialLink();
         editLink.setText("Edit");
@@ -223,6 +246,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
         card.add(cardContent);
         card.add(cardAction);
+        
 
         return card;
     }

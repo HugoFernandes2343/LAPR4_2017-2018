@@ -73,8 +73,6 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
 //
 //        return check;
 //    }
-
-
     @Override
     public Iterable<TaskDTO> get_all_tasks() {
         TasksController controller = new TasksController();
@@ -95,8 +93,8 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
     @Override
     public TaskDTO addTask(TaskDTO task) throws DataException {
         PersistenceContext.setSettings(this.getPersistenceSettings());
-        
-        TasksController ctr=new TasksController();
+
+        TasksController ctr = new TasksController();
         try {
             ctr.addTask(task);
         } catch (DataConcurrencyException ex) {
@@ -124,14 +122,23 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
     public void editTask(TaskDTO task, String oldName) throws DataException {
         PersistenceContext.setSettings(this.getPersistenceSettings());
         TasksController ctr = new TasksController();
-        
+
         try {
-            ctr.editTask(task,oldName);
+            ctr.editTask(task, oldName);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
             Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void updatePercentage(String title) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+
+        ctr.updatePercentage(title);
+
     }
 
 }

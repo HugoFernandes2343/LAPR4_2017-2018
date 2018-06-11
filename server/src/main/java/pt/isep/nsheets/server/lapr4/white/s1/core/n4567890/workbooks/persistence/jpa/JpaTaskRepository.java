@@ -49,4 +49,19 @@ public class JpaTaskRepository extends NSheetsJpaRepositoryBase<Task, Long> impl
         entityManager().getTransaction().commit();
     }
 
+    @Override
+    public void updatePercentage(String title) {
+        Query q = entityManager().createQuery(
+                "UPDATE Task t "
+                + "SET t.percentage=:newPercentage "
+                + "WHERE t.title =:oldName");
+
+        q.setParameter("oldName", title);
+        q.setParameter("newPercentage", 100);
+
+        entityManager().getTransaction().begin();
+        q.executeUpdate();
+        entityManager().getTransaction().commit();
+    }
+
 }

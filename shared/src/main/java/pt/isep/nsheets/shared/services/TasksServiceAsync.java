@@ -21,4 +21,6 @@ public interface TasksServiceAsync {
     void editTask(TaskDTO task, String oldName, AsyncCallback<TaskDTO> async);
 
     void deleteTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+
+    void updatePercentage(String title, AsyncCallback<TaskDTO> async);
 }
