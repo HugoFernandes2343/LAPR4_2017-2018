@@ -335,7 +335,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         String[][] content = new String[getRowCount()][getColumnCount()];
         for (int i = 0; i < getRowCount(); i++) {
             Cell[] vecCells = getRow(i);
-            for (int j = 0; i < vecCells.length; j++) {
+            for (int j = 0; j < vecCells.length; j++) {
                 content[i][j] = vecCells[j].getContent();
             }
         }
@@ -403,7 +403,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
         return extension;
     }
-
+    
     /*
  * GENERAL
      */

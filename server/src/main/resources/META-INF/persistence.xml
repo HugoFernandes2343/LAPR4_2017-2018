@@ -14,13 +14,14 @@
     <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Event</class>
     <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Duration</class>
     <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1150585.tasks.domain.Task</class>
+    <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.domain.Message</class>
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\nsheets;MV_STORE=FALSE"/>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
       <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <!--<property name="eclipselink.logging.level" value="FINE"/>-->
     </properties>
   </persistence-unit>

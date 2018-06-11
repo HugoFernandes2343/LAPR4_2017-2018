@@ -2,7 +2,7 @@
  * Date Created: 7/jun/2018
  *
  */
-package pt.isep.nsheets.client.application.Tasks;
+package pt.isep.nsheets.client.lapr4.blue.s2.s1150585.Tasks;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,7 +30,7 @@ import pt.isep.nsheets.shared.services.TasksServiceAsync;
 
 /**
  *
- * @author dftsf
+ * @author Daniel Fernandes 1150585
  */
 public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresenter.MyProxy> {
 
@@ -63,8 +63,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         this.view = view;
 
         this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
+            refresh();
             if (event.getValue().equalsIgnoreCase("Show Only Complete Tasks")) {
-                refresh();
                 ArrayList<TaskDTO> completedTasks = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -75,7 +75,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(completedTasks);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Incomplete Tasks")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> incompletedTasks = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -86,7 +86,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(incompletedTasks);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 1")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> priority1 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -96,7 +96,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority1);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 2")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> priority2 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -107,7 +107,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(priority2);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 3")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> priority3 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -117,7 +117,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority3);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 4")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> priority4 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -127,7 +127,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority4);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 5")) {
-                refresh();
+                //refresh();
                 ArrayList<TaskDTO> priority5 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -177,7 +177,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
             @Override
             public void onSuccess(ArrayList<TaskDTO> result) {
                 allTasks = result;
-                nTask = result.size();
+                nTask = result.size() + 1;
                 view.setContents(result);
             }
         };

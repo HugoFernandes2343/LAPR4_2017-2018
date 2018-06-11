@@ -17,11 +17,11 @@ public interface TasksService extends RemoteService {
 
     Iterable<TaskDTO> get_all_tasks();
 
-    TaskDTO get_task_by_title(String title);
-
-    Iterable<TaskDTO> get_task_by_priority(int priority);
-
-    Iterable<TaskDTO> get_task_by_percentage(int percentage);
-
     TaskDTO addTask(TaskDTO task) throws DataException;
+
+    void editTask(TaskDTO task, String oldName) throws DataException;
+
+    void deleteTask(TaskDTO task);
+    
+    void updatePercentage(String title);
 }

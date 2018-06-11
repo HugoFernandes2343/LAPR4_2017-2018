@@ -16,11 +16,11 @@ public interface TasksServiceAsync {
 
     void get_all_tasks(AsyncCallback<ArrayList<TaskDTO>> callback);
 
-    void get_task_by_title(String title, AsyncCallback<TaskDTO> callback);
-
-    void get_task_by_priority(int priority, AsyncCallback<TaskDTO> callback);
-
-    void get_task_by_percentage(int percentage, AsyncCallback<TaskDTO> callback);
-    
     void addTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+
+    void editTask(TaskDTO task, String oldName, AsyncCallback<TaskDTO> async);
+
+    void deleteTask(TaskDTO task, AsyncCallback<TaskDTO> async);
+
+    void updatePercentage(String title, AsyncCallback<TaskDTO> async);
 }

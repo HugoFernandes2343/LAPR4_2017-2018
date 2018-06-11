@@ -28,35 +28,24 @@ public class TasksController implements Controller {
         return taskRepository.findAll();
     }
 
-    public Task get_task_by_title(String title) {
-        TaskRepository taskRepository = PersistenceContext.repositories().task();
-        return taskRepository.get_task_by_title(title);
-    }
-
-    public Iterable<Task> get_task_by_priority(int priority) {
-        TaskRepository taskRepository = PersistenceContext.repositories().task();
-        return taskRepository.get_task_by_priority(priority);
-    }
-
-    public Iterable<Task> get_task_by_percentage(int percentage) {
-        TaskRepository taskRepository = PersistenceContext.repositories().task();
-        return taskRepository.get_task_by_percentage(percentage);
-    }
-
     public TaskDTO addTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
         TaskRepository taskRepository = PersistenceContext.repositories().task();
         taskRepository.save(Task.fromDTO(taskDTO));
         return taskDTO;
-
     }
 
-//    public void deleteTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
-//        TaskRepository taskRepository = PersistenceContext.repositories().task();
-//        taskRepository.deleteTask(taskDTO);
-//    }
-//
-//    public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
-//        TaskRepository taskRepository = PersistenceContext.repositories().task();
-//        taskRepository.editTask(taskDTO,oldName);
-//    }
+    public void deleteTask(TaskDTO taskDTO) throws DataConcurrencyException, DataIntegrityViolationException {
+        TaskRepository taskRepository = PersistenceContext.repositories().task();
+        taskRepository.deleteTask(taskDTO);
+    }
+
+    public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
+        TaskRepository taskRepository = PersistenceContext.repositories().task();
+        taskRepository.editTask(taskDTO, oldName);
+    }
+
+    public void updatePercentage(String title) {
+        TaskRepository taskRepository = PersistenceContext.repositories().task();
+        taskRepository.updatePercentage(title);
+    }
 }

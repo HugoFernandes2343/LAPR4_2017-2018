@@ -74,21 +74,6 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
 //        return check;
 //    }
     @Override
-    public TaskDTO get_task_by_title(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Iterable<TaskDTO> get_task_by_priority(int priority) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Iterable<TaskDTO> get_task_by_percentage(int percentage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Iterable<TaskDTO> get_all_tasks() {
         TasksController controller = new TasksController();
         Iterable<Task> listTask = controller.get_all_tasks();
@@ -108,8 +93,8 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
     @Override
     public TaskDTO addTask(TaskDTO task) throws DataException {
         PersistenceContext.setSettings(this.getPersistenceSettings());
-        
-        TasksController ctr=new TasksController();
+
+        TasksController ctr = new TasksController();
         try {
             ctr.addTask(task);
         } catch (DataConcurrencyException ex) {
@@ -120,6 +105,40 @@ public class TasksServiceImpl extends RemoteServiceServlet implements TasksServi
         return task;
     }
 
+    @Override
+    public void deleteTask(TaskDTO taskDTO) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+        try {
+            ctr.deleteTask(taskDTO);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    @Override
+    public void editTask(TaskDTO task, String oldName) throws DataException {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+
+        try {
+            ctr.editTask(task, oldName);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(TasksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void updatePercentage(String title) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        TasksController ctr = new TasksController();
+
+        ctr.updatePercentage(title);
+
+    }
 
 }

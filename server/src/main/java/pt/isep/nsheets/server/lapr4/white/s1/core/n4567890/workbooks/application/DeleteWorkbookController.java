@@ -25,7 +25,7 @@ public class DeleteWorkbookController {
     /**
      * Method that deletes a specific workbook by its description
      *
-     * @param id
+     * @param dto
      * @return
      */
     public boolean deleteWorkbook(WorkbookDescriptionDTO dto) {

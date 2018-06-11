@@ -2,7 +2,7 @@
  * Date Created: 7/jun/2018
  *
  */
-package pt.isep.nsheets.client.application.Tasks;
+package pt.isep.nsheets.client.lapr4.blue.s2.s1150585.Tasks;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
@@ -80,6 +80,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         cardTitle.setIconType(IconType.DONE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
+
         MaterialLabel labelDescritpion = new MaterialLabel();
         labelDescritpion.setText(task.getDescription());
 
@@ -90,6 +91,28 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         labelPercentage.setText("Percentage of completion: " + task.getPercentage() + "%");
 
         MaterialCardAction cardAction = new MaterialCardAction();
+        
+        cardTitle.addClickHandler(event -> {
+
+            TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
+
+            AsyncCallback<TaskDTO> callback = new AsyncCallback<TaskDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error ");
+                }
+
+                @Override
+                public void onSuccess(TaskDTO result) {
+                    MaterialToast.fireToast("Task Completed");
+
+                }
+            };
+
+            tasksServiceAsync.updatePercentage(task.getTitle(), callback);
+            labelPercentage.setText("Percentage of completion: 100 %" );
+
+        });
 
         MaterialLink editLink = new MaterialLink();
         editLink.setText("Edit");
@@ -178,7 +201,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                 };
 
                 TaskDTO editedTask = new TaskDTO(titleEditor.getValue(), descEditor.getValue(), Integer.parseInt(listPriority.getValue()), Integer.parseInt(perceEditor.getValue()));
-                //tasksServiceAsync.editTask(editedTask, oldName, callback);
+                tasksServiceAsync.editTask(editedTask, oldName, callback);
 
                 cardTitle.setText(editedTask.getTitle());
                 labelDescritpion.setText(editedTask.getDescription());
@@ -210,7 +233,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
                 }
             };
 
-            //tasksServiceAsync.deleteTask(task, callback);
+            tasksServiceAsync.deleteTask(task, callback);
         });
 
         cardContent.add(cardTitle);
@@ -223,6 +246,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
         card.add(cardContent);
         card.add(cardAction);
+        
 
         return card;
     }
