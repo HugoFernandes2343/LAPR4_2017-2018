@@ -93,7 +93,7 @@ public class DownloadCLSImpl extends HttpServlet implements DownloadToCLSService
 
         String fileName = request.getParameter("filename");
 
-        response.setContentType("text/plain");
+        response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;fileName=\"" + fileName + "\".cls");//test cls
         //response.setContentLength(Long.valueOf(getFile(fileName).length()).intValue());
         response.setBufferSize(BUFFER);
