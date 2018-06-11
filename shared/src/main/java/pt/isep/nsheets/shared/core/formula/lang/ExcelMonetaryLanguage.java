@@ -5,6 +5,7 @@
  */
 package pt.isep.nsheets.shared.core.formula.lang;
 
+
 /**
  *
  * @author Paulo Jorge
@@ -12,24 +13,20 @@ package pt.isep.nsheets.shared.core.formula.lang;
 public class ExcelMonetaryLanguage extends Language {
 
     @Override
-    protected void initFunctions() {
-       
-
-    }
-
-    @Override
     protected void initBinaryOperators() {
         binaryOperators.add(new Adder());
         binaryOperators.add(new Subtracter());
         binaryOperators.add(new Divider());
         binaryOperators.add(new Multiplier());
-        
-        
+
     }
 
     @Override
     protected void initUnaryOperators() {
-       
+        unaryOperators.add(new Formatter("e"));
+        unaryOperators.add(new Formatter("$"));
+        unaryOperators.add(new Formatter("£"));
+        
     }
 
     public ExcelMonetaryLanguage(String name) {

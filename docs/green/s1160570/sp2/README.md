@@ -13,24 +13,20 @@ Add a new formulas language (currently the application only has Excel formulas t
 
 Proposal:
 
-**US1** - Update grammar Formula.g4 to include new rules and operators:
-
-
-Update RULES:
-**atom**
+**US1** - Create grammar MonetaryLanguage.g4 to create new rules and operators:
 
 Create RULES:
 * **expressionMonetary**
-* **euroExpression**
-* **poundExpression**
-* **dollarExpression**
+* **expression**
+* **concatenation**
+* **atom**
 * **literalMonetary**
 
 Create OPERATORS:
 * **START** ('#')
-* **EURO_FUN** ('EURO or euro')
-* **POUND_FUN** ('POUND or pound')
-* **DOLLAR_FUN** ('DOLLAR or dolar')
+* **EURO_FUN** ('euro')
+* **POUND_FUN** ('pound')
+* **DOLLAR_FUN** ('dollar')
 * **EURO_SIGN** ('e')
 * **DOLLAR_SIGN** ('$')
 * **POUND_SIGN** ('£')
@@ -38,147 +34,43 @@ Create OPERATORS:
 # 3. Analysis
 ## 3.1 GRAMMAR ANALYSIS
 
-### ExpressionMonetary
-1 - The expressionMonetary must start with the token Start ('#'), later it can call one of the following three rules poundExpression, dollarExpression, euroExpression.
+### expressionMonetary
+1 - The expression Monetary must start with the token Start ('#'), later it can call the rule expression.
 
-### EuroExpression
+### expression
 
-2 - The euroExpression must start whit the token EURO_FUN (EURO or euro), then you must present '{' so that you can call one of the rules again if you want poundExpression, dollarExpression, euroExpression, Comparison e finalmente finalizar com '}.
+2 - The expression should start with one of the following tokens: EURO_FUN (euro), DOLLAR_FUN (dollar), POUND_FUN (pound), then '{' so you can call concatenation and finally end with '}.
 
-  * 2.1 - "#euro{20e+50e}"
+### concatenation
 
-  ![loopfor_analysis](loopfor_analysis.PNG)
+3- The concatenation can go to the atom rule, or it can do a concatenation of (PLUS | MINUS) or (MULTI | DIV).
 
-3 - Add the assign operator (its symbol is ":="). This operator assigns to its left the result of the right expression. At the moment the left of the assign operator can only be a cell reference.
+### atom
 
-  * 3.1 - "=A2:=sum(A1;A4)"
+4- The atom can go the literalMonetary rule or can go the expression '('expression')'.
 
-  ![assignment_analysis](assignment_analysis.PNG)
+### literalMonetary
+5- The literal Monetary has one number more EURO_SIGN,POUND_SIGN or DOLLAR_SIGN.
 
-## 3.2 Analysis Diagrams
+##### Example
+* #euro{80£+60$+3e}
+![Example1](example1.png)
 
-1 - Interpreting the already existing Classes and application flow I realized that to  travel between ParserTree nodes new methods were needed to visit new grammar rule nodes in class ExpressionEvalVisitor.
+* #euro{80£+60$+(pound{30e})}
+![Example2](example2.png)
 
-![ExpressionEvalVisitor_analysis](CD-FormulaEvalVisitor.png)
+* #euro{60$/30e+(pound{30e*2e})}
+![Example3](example3.png)
 
-**CD-FormulaEvalVisitor-** methods in red are the ones created to visitLoopFor node and visitAssignment node of the ParserTree.
-
-
-2 - After creating the methods mentioned in point 1 of 3.2 section new Classes were needed to process the terminal nodes visited in the visitLoopFor(LoopForContext ctx) and visitAssignment(AssignmentContext ctx) visits.
-
-**Assignment()**
-Because an Assignment had binary characteristics (left and right operands), implementing the already existing BinaryOperator interface in Class Assignment was the solution I implemented.
-
-Since Assignment implements BinaryOperator, it's class should have the following methods available:
-
-![AssignmentClass_analysis](AssignmentClass.png)
-
-**CD-Assignment-** Method applyTo(Expression leftOperand, Expression rightOperand), is one the two methods refered in point 2 that are responsible for the processing of  the terminalNodes at the end of the visit and to return the result of the Expression.
-
-
-**For()**
-For this specific class I realized that it's behaviour would be that of a function. Since the for cicle should visit more than one rule, an array of Expressions should be created in order to process the for cicle and its result.
-Because the Fuction interface had an existing method to process the applyTo(Expressions[]arguments), the class For should implement said interface.
-
-![loopFor_analysis](loopFor.png)
-
-**CD-For-** Method applyTo(Expression[] arguments), is the one responsible for the processing of the BinaryOperators received in the arguments array. The binaryOperators for the expression **=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}** would be related to the following grammar rules:
-
-  * arguments[0]-->Assignment
-  * arguments[1]-->Comparison
-  * arguments[2]-->Assignment
-  * arguments[3]-->Assignment
-
-
-# 4. Design
-
-1 - Interpreting the application flow, in this section I will show some Sequence Diagrams to explain how a formula will be processed and interpreted in Java.
-
-![FormulaCompiler_analysis](FormulaCompilerSD.png)
-
-2 - After the creation of the ParserTree, there's a need to visit each context of the formula and process the terminal nodes of each rule using the abstract method applyTo(). On section #5. Implementation, there's some implementations of the vist methods as well as the implementations of the applyTo() methods for classes For, Assignment and Block.
-
-
-
-## 4.1. Tests
-
-Because it was the first Use Case implemented in this edition of LAPR4, a lot of time was focused on interpreting, understanding and designing the solution for these new feature. Because the deadline was near I was unable to implement tests for the classes and methods created.
-
-The test methods for these classes and methods would be around these lines:
-
-  **For**
-
-  * testGetIdentifier()
-  * testApplyTo()
-  * testIsVarArg()
-  * testGetParameters()
-
-  **Block**
-
-  * testGetIdentifier()
-  * testApplyTo()
-  * testIsVarArg()
-  * testGetParameters()
-
-  **Assignment**
-
-  * testGetIdentifier()
-  * testApplyTo()
-  * testIsVarArg()
-  * testGetParameters()
-
-  **FormulaEvalVisitor**
-
-  * testvisitBlock()
-  * visitAssignment()
-  * visitLoopfor()
-
-## 4.2. Design Patterns and Best Practices
-
-By memory we apply/use:  
-- Visitor  
-
-**TODO:** Exemplify the realization of these patterns using class diagrams and/or SD with roles marked as stereotypes.
-
-# 5. Implementation
-
-To travel through the nodes of the parse tree, new visit methods were created for the new grammar rules contexts:
-
-  * visitBlock(BlockContext)
-
-![visitBlock](visitBlock.PNG)
-
-  * visitAssignment(AssignmentContext)
-
-![FormulaCompiler_analysis](visitassignment.PNG)
-
-  * visitLoopfor(LoopForContext)
-
-![FormulaCompiler_analysis](visitloopFor.PNG)
-
-To process result of the formulas these applyTo() methods were implemented:
-
-  * For
-
-![applytofor](applytofor.PNG)
-
-  * Assignment
-
-![FormulaCompiler_analysis](applytoassignment.PNG)
-
-  * Block
-
-![FormulaCompiler_analysis](applytoblock.PNG)
-
-# 6. Integration/Demonstration
+# 4. Integration/Demonstration
 
 During the implementation of my UC I tried to be aware of what was going on with my colleagues work. I think I tried to be as helpful as possible while organizing my time and work.
 
-# 7. Final Remarks
+# 5. Final Remarks
 
 This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on LPROG course. I was also able to overcome my difficulties on the understanding of how antlr4 works and how we can use it to develop new languages that we can use in any case in the future.
 
-# 8. Work Log
+# 6. Work Log
 
 Important Commits:
 
