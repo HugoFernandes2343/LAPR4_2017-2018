@@ -32,6 +32,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 import org.eclipse.persistence.annotations.VariableOneToOne;
 
 import pt.isep.nsheets.shared.core.formula.Formula;
@@ -44,6 +45,7 @@ import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 
 /**
  * The implementation of the <code>Cell</code> interface.
@@ -78,6 +80,9 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
     @Embedded
     private Value value = new Value();
 
+    @Version
+    private Long version;
+
     /**
      * The content of the cell
      */
@@ -87,7 +92,7 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
     * List of Variables in this Cell
      */
     private VariableList variableList;
-    
+
     /**
      * The cell's formula
      */
@@ -156,6 +161,25 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
     }
 
     public CellImpl() {
+    }
+
+    ;
+    /**
+     * for DTO
+     * @param id
+     * @param version
+     * @param address
+     * @param content
+     * @param precedents
+     * @param dependents 
+     */
+    private CellImpl(Long id, Long version, Address address, String content, SortedSet<Cell> precedents, SortedSet<Cell> dependents) {
+        this.id = id;
+        this.version = version;
+        this.address = address;
+        this.content = content;
+        this.precedents = precedents;
+        this.dependents = dependents;
     }
 
     /*
@@ -546,4 +570,32 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
 
         return v;
     }
+
+    public static CellImpl fromDTO(CellImplDTO dto) {
+        SortedSet<Cell> cellPrecedents = new TreeSet<>();
+        SortedSet<Cell> cellDependents = new TreeSet<>();
+
+        for (CellImplDTO cellDTO : dto.precedents) {
+            cellPrecedents.add(CellImpl.fromDTO(cellDTO));
+        }
+
+        for (CellImplDTO cellDTO : dto.dependents) {
+            cellDependents.add(CellImpl.fromDTO(cellDTO));
+        }
+
+        return new CellImpl(dto.id, dto.version, Address.fromDTO(dto.address), dto.content, cellPrecedents, cellDependents);
+    }
+    
+    public CellImplDTO toDTO(){
+            SortedSet<CellImplDTO> precendentDTOs = new TreeSet<>();
+            SortedSet<CellImplDTO> dependentDTOs = new TreeSet<>();
+           
+            for (Cell precedent : precedents)
+                precendentDTOs.add(precedent.toDTO());
+           
+            for (Cell dependent : dependents)
+                precendentDTOs.add(dependent.toDTO());
+           
+            return new CellImplDTO(id, version, address.toDTO(), content, precendentDTOs, dependentDTOs);
+        }
 }
