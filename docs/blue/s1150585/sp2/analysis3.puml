@@ -1,0 +1,29 @@
+@startuml  analysis.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : navigate to page
+Browser ->> Server : getAllTasks()
+Browser ->> Browser : Select Task
+Browser ->> Server : editTask(TaskDTO)
+
+
+database Database
+
+Server -> Database : set title
+Server -> Database : set description
+Server -> Database : set priority
+Server -> Database : set percentage
+Server -> Database : set contacts
+
+
+Server -->> Browser : return
+
+Browser -> Browser : display success
+
+@enduml
