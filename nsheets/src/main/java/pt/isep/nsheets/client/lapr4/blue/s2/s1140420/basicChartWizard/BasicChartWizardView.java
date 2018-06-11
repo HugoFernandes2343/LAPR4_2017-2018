@@ -51,8 +51,8 @@ public class BasicChartWizardView extends Composite{
             wizardWindowStep1.close();
 
             String linesOrColumnsValue = linesOrColumnsBox.getValue();
-            String lowerCell = lowerCellInfo.getText();
             String upperCell = upperCellInfo.getText();
+            String lowerCell = lowerCellInfo.getText();
 
 
             boolean linesOriented = false;
@@ -61,12 +61,15 @@ public class BasicChartWizardView extends Composite{
             }
 
 
-            MaterialBarChart chart = new MaterialBarChart(spreadsheet, upperCell, lowerCell, linesOriented);
-            wizardStep2Panel1.add(chart);
+            chart.setSpreadsheet(spreadsheet);
+            chart.setUpperCellAddress(upperCell);
+            chart.setLowerCellAddress(lowerCell);
+            chart.setLinesOriented(linesOriented);
+            chart.setValues();
+
+            chart.initialize();
 
             wizardWindowStep2.open();
-
-
         });
 
         backToStep1Button.addClickHandler(event -> {

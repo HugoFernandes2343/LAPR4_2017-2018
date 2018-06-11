@@ -204,7 +204,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     private pt.isep.nsheets.shared.core.Cell activeCell = null;
 
     public void setActiveCell(pt.isep.nsheets.shared.core.Cell cell) {
-        this.activeCell = cell;
+        this.activeCell = cell;customTable.getRow(1).setEnabled();
 
         this.customTable.getTableTitle().setText(cell.toString() + ": " + cell.getContent().toString());
         this.firstBox.setText(cell.getContent().toString());

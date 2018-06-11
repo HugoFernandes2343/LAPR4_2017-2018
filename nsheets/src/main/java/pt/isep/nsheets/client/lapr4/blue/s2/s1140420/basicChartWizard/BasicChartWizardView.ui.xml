@@ -22,7 +22,7 @@ Uncomment this for XHTML entities
         </ma:window.MaterialWindow>
         <ma:window.MaterialWindow ui:field="wizardWindowStep2" width="70%" height="70%" title="Create Bar Chart">
             <m:MaterialPanel  ui:field="wizardStep2Panel1" textAlign="CENTER" height="50px">
-                <!--This space reserved for "chart", but in Java code-->
+                <c:MaterialBarChart ui:field="chart"/>
             </m:MaterialPanel>
             <m:MaterialPanel textAlign="CENTER" height="50px">
                 <m:MaterialRow>
