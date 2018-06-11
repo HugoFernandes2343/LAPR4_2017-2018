@@ -40,6 +40,7 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 //import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
@@ -142,7 +143,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
-    
+
+    //1140420
+    @UiField
+    MaterialButton chartWizardButton;
+
     //1091234
     @UiField
     MaterialButton newSpreadsheetButton;
@@ -439,9 +444,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         );
 
         //FIM 1160696
-        
-        
-        
 
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
@@ -521,6 +523,13 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            new FormEditorView();
 //
 //        });
+
+        //1140420
+        chartWizardButton.addClickHandler(event -> {
+            new BasicChartWizardView(customTable.getRow(0).getData().sheet);
+        });
+
+
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");
