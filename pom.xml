@@ -309,6 +309,12 @@
 			<version>1.2.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.googlecode.gwt-charts/gwt-charts -->
+		<dependency>
+			<groupId>com.googlecode.gwt-charts</groupId>
+			<artifactId>gwt-charts</artifactId>
+			<version>0.9.10</version>
+		</dependency>
 
 	</dependencies>
 </project>
