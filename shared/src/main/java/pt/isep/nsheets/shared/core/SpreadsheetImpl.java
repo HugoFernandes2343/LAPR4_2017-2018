@@ -295,6 +295,28 @@ public class SpreadsheetImpl implements Spreadsheet {
         return cells;
     }
 
+    public Cell[][] getCellRangeMatrix(Address address1, Address address2) {
+        // Sorts addresses
+        if (address1.compareTo(address2) > 0) {
+            Address tempAddress = address1;
+            address1 = address2;
+            address2 = tempAddress;
+        }
+
+        // Builds the set
+        int rows = address2.getRow() - address1.getRow() + 1;
+        int columns = address2.getColumn() - address1.getColumn() + 1;
+
+        Cell[][] cells = new Cell[rows][columns];
+        for (int column = 0; column < columns; column++) {
+            for (int row = 0; row < rows; row++) {
+                cells[row][column] = getCell(new Address(column, row));
+            }
+        }
+
+        return cells;
+    }
+
     public Cell[] getColumn(int index) {
         Cell[] column = new Cell[rows];
         for (int row = 0; row < row; row++) {
