@@ -25,6 +25,7 @@ package pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -67,6 +68,7 @@ public class MaterialBarChart extends Composite {
     boolean linesOriented;
     Spreadsheet spreadsheet;
 
+
     public MaterialBarChart() {
         initWidget(uiBinder.createAndBindUi(this));
     }
@@ -101,7 +103,7 @@ public class MaterialBarChart extends Composite {
         }
     }
 
-    private Cell[][] transpose (Cell[][] cells){
+    public static Cell[][] transpose (Cell[][] cells){
         Cell[][] transposed = new Cell[cells[0].length][cells.length];
 
         for (int i = 0; i < cells.length; i++) {
@@ -112,7 +114,7 @@ public class MaterialBarChart extends Composite {
         return transposed;
     }
 
-    private int[][] cellsToValueMatrix (Cell[][] cells) throws IllegalValueTypeException {
+    public static int[][] cellsToValueMatrix (Cell[][] cells) throws IllegalValueTypeException {
         int[][] result = new int[cells.length][cells[0].length];
 
         for (int i = 0; i < cells.length; i++) {
@@ -134,7 +136,7 @@ public class MaterialBarChart extends Composite {
                 cardContent.add(chart);
 
                 // Prepare the data with loop inside to populate the initial data
-                drawChart(values);
+                setLoop();
             }
         });
     }
@@ -143,13 +145,15 @@ public class MaterialBarChart extends Composite {
 
         // Prepare the data
         DataTable dataTable = DataTable.create();
-        //dataTable.addColumn(ColumnType.STRING, "Column");
+        dataTable.addColumn(ColumnType.STRING, "");
         for (int i = 0; i < values[0].length; i++) {
-            dataTable.addColumn(ColumnType.STRING, "Column Label");
+            String label = "Label " + i;
+            dataTable.addColumn(ColumnType.NUMBER, label);
         }
         dataTable.addRows(values.length);
         for (int i = 0; i < values.length; i++) {
-            dataTable.setValue(i, 0, "Line Label "+i);
+            String label = "Label " + i;
+            dataTable.setValue(i, 0, label);
         }
         for (int col = 0; col < values.length; col++) {
             for (int row = 0; row < values[col].length; row++) {
@@ -158,7 +162,26 @@ public class MaterialBarChart extends Composite {
         }
 
         // Draw the chart
-        chart.draw(dataTable);
+        chart.draw(dataTable, getOptions());
+    }
+
+    private void setLoop() {
+
+        Timer timer = new Timer() {
+
+            public void run() {
+                if (isLoop) {
+                    drawChart(values);
+                    isLoop = false;
+                }
+                else {
+                    drawChart(values);
+                    isLoop = true;
+                }
+
+            }
+        };
+        timer.scheduleRepeating(1000);
     }
 
     private BarChartOptions getOptions() {
