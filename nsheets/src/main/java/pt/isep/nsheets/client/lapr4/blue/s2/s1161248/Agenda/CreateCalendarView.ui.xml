@@ -1,0 +1,31 @@
+<!--
+Uncomment this for XHTML entities
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+-->
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client"
+             xmlns:cb="urn:import:gwt.material.design.addins.client.combobox">
+    <ui:style>
+
+    </ui:style>
+    <ma:window.MaterialWindow ui:field="formWindow" width="70%" title="Create Calendar" textAlign="LEFT" padding="32"
+                              height="600px">
+        <m:MaterialPanel title="Insert Calendar's name">
+            <m:MaterialTextBox ui:field="name"></m:MaterialTextBox>
+        </m:MaterialPanel>
+        <m:MaterialPanel>
+            <m:MaterialPanel title="Insert Calendar's Description">
+                <m:MaterialTextArea ui:field="description">
+                </m:MaterialTextArea>
+            </m:MaterialPanel>
+        <m:MaterialPanel title="Choose Calendar Color">
+            <cb:MaterialComboBox ui:field="color"></cb:MaterialComboBox>
+        </m:MaterialPanel>
+        </m:MaterialPanel>
+        <m:MaterialPanel>
+            <m:MaterialButton ui:field="saveButton" text="Save"></m:MaterialButton>
+            <m:MaterialButton ui:field="cancelButton" text="Cancel"></m:MaterialButton>
+        </m:MaterialPanel>
+    </ma:window.MaterialWindow>
+</ui:UiBinder>
