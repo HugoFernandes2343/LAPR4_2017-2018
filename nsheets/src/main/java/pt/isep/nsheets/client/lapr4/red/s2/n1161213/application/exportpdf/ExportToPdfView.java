@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -16,6 +17,7 @@ import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 
@@ -44,7 +46,7 @@ public class ExportToPdfView extends Composite {
     }
 
     @Inject
-    public ExportToPdfView() {
+    public ExportToPdfView(Workbook wb) {
         initWidget(uiBinder.createAndBindUi(this));
         window = new MaterialWindow();
         this.window.setWidth("70");
@@ -110,12 +112,18 @@ public class ExportToPdfView extends Composite {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 Workbook w = workbook.getSelectedValue();
-//                for (int i = 0; i < w.spreadsheets.size(); i++) {
-//                    spreadsheet.addItem(w.spreadsheets.get(i));
-//                }
+                for (int i = 0; i < w.getSpreadsheets().size(); i++) {
+                    spreadsheet.addItem(w.getSpreadsheets().get(i));
+                }
             }
         });
 
+        this.exportButton.addClickHandler(e -> {
+            WorkbookDTO dto = wb.toDTO();
+
+            String url = GWT.getModuleBaseURL() + "downloadToPDFService?filename=" + "example" + ".pdf";
+            Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0,target=_blank");
+        });
         this.window.open();
     }
 
@@ -175,7 +183,4 @@ public class ExportToPdfView extends Composite {
         this.partSpreadsheetPanel.add(button);
     }
 
-    private void fillSpreadsheets(){
-
-    }
 }
