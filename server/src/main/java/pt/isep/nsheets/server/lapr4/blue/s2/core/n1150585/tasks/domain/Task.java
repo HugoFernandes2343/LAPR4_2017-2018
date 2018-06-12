@@ -57,7 +57,7 @@ public class Task implements Serializable, AggregateRoot<Long> {
      * Complete constructor
      */
     public Task(String title, String description, int priority, int percentage) {
-       /* if (title == null || description == null) {
+        /* if (title == null || description == null) {
             throw new IllegalArgumentException("Error in the input data");
         }*/
         this.title = title;
@@ -73,7 +73,24 @@ public class Task implements Serializable, AggregateRoot<Long> {
             return false;
         }
 
-        Task e = (Task) other;
+        final Task that = (Task) other;
+        if (this == that) {
+            return true;
+        }
+        if (!this.title.equals(that.title)) {
+            return false;
+        }
+        if (!this.description.equals(that.description)) {
+            return false;
+        }
+
+        if (this.priority != that.priority) {
+            return false;
+        }
+        if (this.percentage != that.percentage) {
+            return false;
+        }
+
         return true;
     }
 

@@ -40,6 +40,7 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 //import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
@@ -55,6 +56,7 @@ import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
@@ -72,9 +74,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     public MaterialIcon getFirstButton() {
         return firstButton;
     }
-    
-    
-    
+
     public MaterialButton getformulaButton() {
         return formulaButton;
     }
@@ -142,6 +142,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
+
+    //1140420
+    @UiField
+    MaterialButton chartWizardButton;
+    
+    //1171715
+    @UiField
+    MaterialButton filterCellRange;
     
     //1091234
     @UiField
@@ -385,14 +393,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                         
                         
                         if (!value.isEmpty()) {
-//                            String fml = "Formula: " + formula + "; Value: '" + value + "'";
-//                            MaterialToast.fireToast(fml, "rounded");
                             
                             
                             
                             if (resultado) {
 
-//                            CellImpl activeCell = ac;
+                            CellImplDTO activeCellDTO = activeCell.toDTO();
 
 
 
@@ -417,7 +423,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                                     }
                                 };
 
-                                workbookServiceAsync.activateConditional((CellImpl) activeCell, "test", formula, value, callback);
+                                workbookServiceAsync.activateConditional(activeCellDTO, "test", formula, value, callback);
                             } else {
                                 MaterialToast.fireToast("Did you forget to apply a style?", "rounded");
                             }
@@ -439,9 +445,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         );
 
         //FIM 1160696
-        
-        
-        
 
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
@@ -521,6 +524,17 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            new FormEditorView();
 //
 //        });
+
+        //1140420
+        chartWizardButton.addClickHandler(event -> {
+            new BasicChartWizardView(customTable.getRow(0).getData().sheet);
+        });
+
+        //1171715
+        filterCellRange.addClickHandler(event -> {
+            new FilterCellRangeView(customTable.getRow(0).getData().sheet);
+        });
+        
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");

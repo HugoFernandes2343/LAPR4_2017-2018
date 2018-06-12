@@ -15,6 +15,7 @@
     <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Duration</class>
     <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1150585.tasks.domain.Task</class>
     <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.domain.Message</class>
+    <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.domain.Calendar</class>
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\nsheets;MV_STORE=FALSE"/>

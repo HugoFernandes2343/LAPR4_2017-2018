@@ -23,7 +23,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:ma="urn:import:gwt.material.design.addins.client">
     <g:HTMLPanel>
-        <ma:fileuploader.MaterialFileUploader ui:field="uploader" url="/uploadServlet" maxFileSize="20" shadow="1">
+        <ma:fileuploader.MaterialFileUploader ui:field="uploader" url="/nsheets/fileupload" maxFileSize="20" shadow="1">
             <ma:fileuploader.MaterialUploadLabel title="Drag Files to Upload" description="Only XML for now" />
         </ma:fileuploader.MaterialFileUploader>
     </g:HTMLPanel>

@@ -15,11 +15,29 @@
         </m:MaterialColumn>
         <m:MaterialColumn m:id="tab1" grid="s12">
             <g:HTMLPanel>
-                <m:table.MaterialDataTable shadow="1"
-                                           m:id="table" ui:field="table" title="Upcoming Events" height="calc(100vh - 131px)"
-                                           useLoadOverlay="false" useStickyHeader="true" useCategories="true"
-                                           useRowExpansion="false" selectionType="NONE"/>
+                <m:table.MaterialInfiniteDataTable shadow="1" ui:field="table"
+                                                   height="calc(100vh - 131px)"
+                                                   useLoadOverlay="false"
+                                                   useStickyHeader="true"
+                                                   useCategories="false"
+                                                   selectionType="MULTIPLE"/>
             </g:HTMLPanel>
+        </m:MaterialColumn>
+        <m:MaterialColumn m:id="tab2" grid="s12">
+                <g:HTMLPanel>
+                    <m:MaterialRow paddingTop="20">
+                    <m:MaterialButton ui:field="create" text="Create Calendar"/>
+                    <m:MaterialButton ui:field="edit" text="Edit Calendar"/>
+                    <m:MaterialButton ui:field="remove" text="Remove Calendar"/>
+                    </m:MaterialRow>
+                    <m:table.MaterialInfiniteDataTable shadow="1" ui:field="calendarTable"
+                                                       height="calc(100vh - 131px)"
+                                                       paddingTop="20"
+                                                       useLoadOverlay="false"
+                                                       useStickyHeader="true"
+                                                       useCategories="false"
+                                                       selectionType="MULTIPLE"/>
+                </g:HTMLPanel>
         </m:MaterialColumn>
     </g:HTMLPanel>
 </ui:UiBinder>

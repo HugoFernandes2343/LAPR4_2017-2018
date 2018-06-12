@@ -25,7 +25,6 @@ Uncomment this for XHTML entities
             </m:MaterialPanel>
             <m:MaterialPanel>
                 <m:MaterialButton ui:field="runButton" text="Run"></m:MaterialButton>
-                <m:MaterialButton ui:field="saveButton" text="Save"></m:MaterialButton>
                 <m:MaterialButton ui:field="cancelButton" text="Cancel"></m:MaterialButton>
             </m:MaterialPanel>
             <m:MaterialIcon ui:field="executeForm" iconType="FORWARD" tooltip="Execute Form" iconColor="BLUE"

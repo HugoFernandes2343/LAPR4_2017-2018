@@ -38,7 +38,10 @@ import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.SpreadsheetExtension;
+import pt.isep.nsheets.shared.services.AddressDTO;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
@@ -114,6 +117,40 @@ public class SpreadsheetImpl implements Spreadsheet {
     public SpreadsheetImpl() {
     }
 
+    /**
+     * to DTO
+     * @param id
+     * @param workbookId
+     * @param title
+     * @param cells 
+     */
+    private SpreadsheetImpl(Long id, String title, Map<Address, Cell> cells) {
+        this.id = id;
+        this.title = title;
+        this.cells = cells;
+
+        if (cells.isEmpty()) {
+            columns = 0;
+            rows = 0;
+        } else {
+            int maxRow = 0;
+            int maxCol = 0;
+
+            for (Map.Entry<Address, Cell> entry : cells.entrySet()) {
+                Address address = entry.getKey();
+                if (address.getColumn() > maxCol) {
+                    maxCol = address.getColumn();
+                }
+                if (address.getRow() > maxRow) {
+                    maxRow = address.getRow();
+                }
+            }
+
+            columns = maxCol + 1;
+            rows = maxRow + 1;
+        }
+    }
+    
     /**
      * Creates a new spreadsheet.
      *
@@ -219,7 +256,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
     }
 
-    private Address findAddress(String reference) {
+    public Address findAddress(String reference) {
         for (Address add : cells.keySet()) {
             if (add.toString().equalsIgnoreCase(reference)) {
                 return add;
@@ -289,6 +326,28 @@ public class SpreadsheetImpl implements Spreadsheet {
         for (int column = address1.getColumn(); column <= address2.getColumn(); column++) {
             for (int row = address1.getRow(); row <= address2.getRow(); row++) {
                 cells.add(getCell(new Address(column, row)));
+            }
+        }
+
+        return cells;
+    }
+
+    public Cell[][] getCellRangeMatrix(Address address1, Address address2) {
+        // Sorts addresses
+        if (address1.compareTo(address2) > 0) {
+            Address tempAddress = address1;
+            address1 = address2;
+            address2 = tempAddress;
+        }
+
+        // Builds the set
+        int rows = address2.getRow() - address1.getRow() + 1;
+        int columns = address2.getColumn() - address1.getColumn() + 1;
+
+        Cell[][] cells = new Cell[rows][columns];
+        for (int column = 0; column < columns; column++) {
+            for (int row = 0; row < rows; row++) {
+                cells[row][column] = getCell(new Address(column, row));
             }
         }
 
@@ -456,4 +515,32 @@ public class SpreadsheetImpl implements Spreadsheet {
 //		for (SpreadsheetExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
+    
+    
+    
+    public static Spreadsheet fromDTO(SpreadsheetImplDTO dto) {
+        Map<Address, Cell> ssCells = new LinkedHashMap<>();
+
+        for (Map.Entry<AddressDTO, CellImplDTO> entry : dto.cells.entrySet()) {
+            AddressDTO addressDTO = entry.getKey();
+            CellImplDTO cellDTO = entry.getValue();
+
+            ssCells.put(Address.fromDTO(addressDTO), CellImpl.fromDTO(cellDTO));
+        }
+        return new SpreadsheetImpl(dto.id, dto.title, ssCells);
+    }
+
+    
+    @Override
+    public SpreadsheetImplDTO toDTO1() {
+        Map<AddressDTO, CellImplDTO> cellDTOs = new LinkedHashMap<>();
+
+        for (Map.Entry<Address, Cell> entry : cells.entrySet()) {
+            Address address = entry.getKey();
+            Cell cell = entry.getValue();
+
+            cellDTOs.put(address.toDTO(), cell.toDTO());
+        }
+        return new SpreadsheetImplDTO(id, cellDTOs, title, columns, rows);
+    }
 }

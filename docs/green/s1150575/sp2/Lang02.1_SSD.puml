@@ -1,0 +1,7 @@
+@startuml
+actor User 
+participant "System" as Sys
+User -> Sys : User inputs a Block of Instructions with Variables
+activate Sys
+Sys -> User : The system parses the input, assigns a value to the Variable(s) and shows the Block's result.
+@enduml

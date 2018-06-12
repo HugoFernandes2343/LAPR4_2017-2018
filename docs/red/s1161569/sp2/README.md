@@ -143,10 +143,20 @@ For the Domain classes I will have a class that represents the entity **Message*
 **Test:** I should ensure that a Message can be created only when all the attributes are set.  
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowedOnMessage() {
+		public void ensureNullIsNotAllowedOnMessageUsername() {
 		System.out.println("ensureNullIsNotAllowedOnMessage");
-		Message instance = new Message(null, null);
+		Message instance = new Message(null, null, null);
 	}
+	@Test(expected = IllegalArgumentException.class)
+    		public void ensureNullIsNotAllowedOnMessageText() {
+    		System.out.println("ensureNullIsNotAllowedOnMessage");
+    		Message instance = new Message(null, null, null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    		public void ensureNullIsNotAllowedOnMessageDate() {
+    		System.out.println("ensureNullIsNotAllowedOnMessage");
+    		Message instance = new Message(null, null, null);
+    }
 
 **Services/Controllers**
 
@@ -175,8 +185,8 @@ Controller **PublishPublicMessageController**
 		final Date date = new Date();
 		final User user = new user();
 		final MessageDTO expected = new MessageDTO(user.toDTO(), text, date);
-		PublishPublicMessageController ctrl = new PublishPublicMessageController();
-		MessageDTO result = ctrl.addMessage(dto);
+		PublishMessageController ctrl = new PublishMessageController();
+		MessageDTO result = ctrl.addMessage(expected);
 		assertTrue("the added Message does not have the same data as input", Message.fromDTO(expected).sameAs(Message.fromDTO(result)));
 	}
 
@@ -185,7 +195,7 @@ Controller **PublishPublicMessageController**
 	   @Test 
 	   public void testEnsureGetMessagesEmpty() {
 		   System.out.println("testEnsureGetMessagesEmpty");
-		   PublishPublicMessageController ctrl=new PublishPublicMessageController();
+		   PublishMessageController ctrl=new PublishMessageController();
 		   Iterable<Messages> messageList=ctrl.getMessages();
 		   assertTrue("the list of Messages is not empty", !messageList.iterator().hasNext());
 	   } 
@@ -234,3 +244,70 @@ By memory I apply/use:
 - Repository  
 - DTO  
 - MVP  
+
+# 5. Implementation
+
+
+**UI: View/page to support the chat**
+
+For this concern i decided to create a new module called **ChatModule** to suport the page that contains the public chat.
+
+**UI: Text area for writing the message**
+
+For this concern i decided to use a Material Widget called MaterialTextArea. It  has a similar structure to the MaterialTextBox but supports a larger area for text writing. 
+
+I updated the ChatView.ui.xml accordingly and declare the element with the tags **ui:field="textField" label="Text Area" allowBlank='false'**. In the corresponding class View (i.e., ChatView) i bind this text area to the corresponding widget class: 	
+
+      @UiField
+      MaterialTextArea textField;
+
+
+
+**UI: Buttons for sending a message and refresh the chat**
+
+For this concern i decided to use a Material Widget called MaterialButton. These are the two buttons in which the user will either send a message(send button) which also refreshes the chat or just refresh the chat(refresh button).  
+
+I updated the ChatView.ui.xml accordingly and declare the elements with the tags **ui:field="publishButton" text="Send" waves="LIGHT" textColor="WHITE" iconType="POLYMER" iconPosition="RIGHT"** and **ui:field="refreshButton" text="Refresh" waves="LIGHT" textColor="WHITE" iconType="POLYMER" size="LARGE"**. In the corresponding class View (i.e., ChatView) i bind these buttons to the corresponding widget class: 	
+
+      @UiField
+      MaterialButton publishButton;
+
+      @UiField
+      MaterialButton refreshButton;
+
+**Code Organization**  
+
+I followed the recommended organization for packages:  
+- Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
+- In this case since i do not have to add new packages since i use existing classes and files;
+
+The code for this sprint:  
+Project **server**    
+- pt.isep.nsheets.server.**lapr4.red.s2.ipc.n1161569.application**: contains the PublishMessageController  
+- pt.isep.nsheets.server.**lapr4.red.s2.ipc.n1161569.domain**: Message class 
+- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890.workbooks.persistence**: contains the persistence/JPA class for the Messages  
+- Created the service class: **pt.isep.nsheets.server.services.ChatServiceImpl**
+
+Project **shared**  
+- Added the interface: **pt.isep.nsheets.shared.services.ChatService**: Interface to be applied to the respective class(ChatServiceImpl). Comply with rpc   
+- Added the interface: **pt.isep.nsheets.shared.services.ChatServiceAsync**: Interface that defines the async calls regarding messages fetch and commit.
+- Added the Class: **pt.isep.nsheets.shared.services.MessageDTO**: UI representation of the Message entity.  
+
+Project **NShests** 
+- Created the classes: **pt.isep.nsheets.client.lapr4.red.s2.n1161569.ChatModule**, **pt.isep.nsheets.client.lapr4.red.s2.n1161569.ChatPresenter** and **pt.isep.nsheets.client.lapr4.red.s2.n1161569.ChatView**
+- Created the file: **pt.isep.nsheets.client.lapr4.red.s2.n1161569.ChatView.ui.xml**: File that orders the UI elements on the page
+- Updated the class: **pt.isep.nsheets.client.application.ApplicationModule**: Adde the instruction to initialize the **ChatModule**
+
+
+# 6. Integration/Demonstration
+
+Since the use case involved a new page and new domain concepts there was not much need to conciliate with the team the realization of this use case. The only thing that was needed to conciliate was the structure of the user login and how the actual user was saved since I needed the username for the message so this issue was coordinated with colleague **s1161109**.
+
+# 7. Final Remarks
+
+I have encountered some issues regarding gwt UI elements namely on the capability to show the chat messages. With the help of **s1120608** it was possible to develop a MaterialCard capable of containing the chat message, the username who created said message and the exact time at which the message was created. 
+
+
+# 8. Work Log
+
+Commits:

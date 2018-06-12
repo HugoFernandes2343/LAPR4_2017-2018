@@ -3,21 +3,31 @@ package pt.isep.nsheets.server.services;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
+import pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161110.workbooks.application.XmlReadingService;
+import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.services.UploadService;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 
-public class FileUploadServlet extends HttpServlet {
+public class FileUploadServlet extends HttpServlet implements UploadService {
 
     private static final long serialVersionUID = 843739498430L;
 
+    private static final String TEST_PATH = "C:\\Users\\David\\Documents\\Repositorios\\lapr4\\lapr4-18-2dl\\uploaded\\file.xml";
+
+    private String path;
+
     @Override
     protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+                          HttpServletResponse response) throws IOException {
 
         if (! ServletFileUpload.isMultipartContent(request)) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
@@ -38,7 +48,8 @@ public class FileUploadServlet extends HttpServlet {
 
                 InputStream in = fileItem.openStream();
                 // The destination of your uploaded files.
-                File file = new File("C:\\Users\\David\\Documents\\Repositorios\\lapr4\\lapr4-18-2dl\\uploaded" + fileItem.getName());
+                path = "C:\\Users\\David\\Documents\\Repositorios\\lapr4\\lapr4-18-2dl\\uploaded\\" + fileItem.getName();
+                File file = new File(path);
                 OutputStream outputStream = new FileOutputStream(file);
 
                 int length = 0;
@@ -61,4 +72,28 @@ public class FileUploadServlet extends HttpServlet {
             throw new RuntimeException(caught);
         }
     }
+
+    @Override
+    public Workbook importToWorkbook(Workbook wb) throws IOException, NumberFormatException, DOMException, FormulaCompilationException {
+
+        if (wb != null) {
+            try {
+                return XmlReadingService.loadXml(path);
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try{
+                return XmlReadingService.loadXml(TEST_PATH);
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 }

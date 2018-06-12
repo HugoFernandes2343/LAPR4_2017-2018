@@ -1,0 +1,30 @@
+@startuml
+actor Actor
+  participant "WorkbookView" as WV
+  participant "Cell" as Cell
+  participant "RelationalOperator" as RO
+  participant "Language" as Language
+  participant "WorkbooksServiceImpl" as WS
+  participant "ConditionalFunctionController" as CFC
+  participant "ConditionalFormatExtension" as CFE
+  participant "BinaryOperationExtension" as BOE
+
+  Actor -> WV : press the Conditional Function button
+  WV ->Language : list=getBinaryOperators()
+  WV ->RO : getIdentifier()
+  WV -> Actor : asks to choose a formula(operator), a value, and style changes
+  Actor -> WV: select values and confirms the conditional format
+  WV -> WV : activecell= getActiveCell()
+  WV -> Cell :  content= getContent()
+ WV -> WS : activateConditional(activeCellDTO, name, formula, value)
+ WS -> CFC : activateExtension(activeCellDTO, name, formula, value)
+ CFC -> CFE : new (name);
+ CFC -> CFE : extend(Cell);
+ CFC -> CFE : valueChanged(c);
+ CFE -> BOE : new (value, conOperator, condValue) 
+ 
+ 
+  WV -> Cell :  setStyle()
+
+WV -> Actor : shows the conditional format applied in the cell selected
+@enduml
