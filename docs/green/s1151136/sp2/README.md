@@ -24,7 +24,7 @@ US2 - Run macro
 
 - Understand all of the association of the formulas and expressions to the antlr4 files
 
--  Implement a grammar that accepts invocations comments and expressions
+-  Implement a grammar that accepts invocations of comments and expressions
 
 ## 3.1 Grammar Analysis
 
@@ -42,11 +42,11 @@ US2 - Run macro
 
 **For US1**
 
-![Analysis SD](analysis.png)
+![Analysis SD](sequenceDiagramUS1_SP2.jpg)
 
 **For US2**
 
-![Analysis SD](analysis2.png)
+![Analysis SD](sequenceDiagramUS2_SP2.jpg)
 
 # 4. Design
 
@@ -56,24 +56,6 @@ US2 - Run macro
 
 - Result:
 	![MacroMainResult](resultMain.png)
-
-## 4.2. Requirements Realization
-
-Following the guidelines for JPA from EAPLI we envision a scenario like the following for realizing the use cases for this feature increment.
-
-**For US1**
-
-![SD US1](design1.png)
-
-Notes:  
-- ...
-
-**For US2**
-
-![SD US2](design2.png)
-
-Notes:
-- ...
 
 ## 4.3. Classes
 
@@ -94,49 +76,29 @@ By memory we apply/use:
 
 **For US1**
 
-The UI for this US was already implemented. We simply implemented the server as described previously.
+- The UI for this US was already implemented, i just had to change some options, like buttons and add a new type of macro.
 
 **For US2**
 
-**UI: Button for adding a new Workbook Description**
+- For this use case it was necessary to change the grammar, so you could also accept comments. Initially i chose to import the existing grammar project, formulas. During all the changes in grammar, made in IntelIJ, apparently was working, but moving to JAVA, the import didn't work. So I opted to make changes to the Macros grammar, completed and test successfully passed to java and dealt with the classes responsible for visiting the tree.
 
-For this concern we decided to use a Material Widget called Material FAB (Floating Action Button). This is a kind of button that usually appears at the left bottom part of the screen and contains actions available for the elements of the page.  
 
-We updated the HomeView.ui.xml accordingly and declare the element with a tag *ui:field="newWorkbookButton"*. In the corresponding class View (i.e., HomeView) we bind that button to the corresponding widget class: 	
+# 6. Integration/Demonstration
 
-	@UiField
-	MaterialButton newWorkbookButton;
+- Button to create macro:
 
-We must now add the code that invokes the server to add a new workbook description when the user clicks in the button. This is an event. To implement this behavior we could use GWT Events such as the SetPageTitleEvent already used in the application. These are special type of events that GWT manages and are available to all pages in the application.
+	![CreateMacro](createMacro.png)
 
-We chose to provide our click event globally but to simple use the click event handler of the button and connect it to a method in the HomePresenter.
+- Macro View window:
 
-Since Presenters should only depend on a View interface we added a new method to the HomePresenter.MyView:
+	![MacroView](macroView.png)
 
-	interface MyView extends View {
-		void setContents(ArrayList<WorkbookDescriptionDTO> contents);
-		void addClickHandler(ClickHandler ch);
-	}
+- Executing:
 
-Then, we implemented the *addClickHandler* in the HomeView class and call this method in the constructor of the HomePresenter. In the constructor our handler class the server method that adds a new workbook description.   
+	![MacroCompiling](macroCompiling.png)
 
-**Code Organization**  
+- Grammar:
 
-We followed the recommended organization for packages:  
-- Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
-- For instance, we used **lapr4.white.s1.core.n4567890**
+	![GrammarPt1](grammar1.png)
 
-The code for this sprint:  
-Project **server**    
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.application: contains the controllers  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.domain: contains the domain classes  
-- pt.isep.nsheets.server.**lapr4.white.s1.core.n4567890**.workbooks.persistence: contains the persistence/JPA classes
-- Updated the existing class: **pt.isep.nsheets.server.WorkbookServiceImpl**
-
-Project **shared**  
-- Added the class: **pt.isep.nsheets.shared.services.DataException**: This class is new and is used to return database exceptions from the server  
-- Updated the classes: **pt.isep.nsheets.shared.services.WorkbookService** and **pt.isep.nsheets.shared.services.WorkbookServiceAsync**  
-
-Project **NShests**
-- Updated the classes: **pt.isep.nsheets.client.aaplication.home.HomeView** and **pt.isep.nsheets.client.aaplication.home.HomePresenter**  
-- Updated the file: **pt.isep.nsheets.client.aaplication.home.HomeView.ui.xml**  
+	![GrammarPt2](grammar2.png)
