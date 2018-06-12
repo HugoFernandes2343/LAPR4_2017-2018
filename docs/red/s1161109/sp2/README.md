@@ -217,10 +217,3 @@ During the implementation of my UC I helped and been helped by my team several t
 
  For lack of time i didn't implemented password encryptation.
  After several tries and after asking the teacher Bragança for help for doing image upload it was not possible.
-
-
-# 9. Work Log
-
-*Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
-
-Commits:
