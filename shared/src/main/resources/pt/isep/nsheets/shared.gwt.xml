@@ -2,6 +2,8 @@
 <module rename-to='shared'>
     <inherits name="com.google.gwt.user.User"/>
     <inherits name="org.antlr.v4.antlr4-runtime"/>
+    <inherits name="gwt.material.design.GwtMaterialTable"/>
+    <inherits name="gwt.material.design.GwtMaterialTable"/>
 
     <source path="client"/>
     <source path="shared"/>

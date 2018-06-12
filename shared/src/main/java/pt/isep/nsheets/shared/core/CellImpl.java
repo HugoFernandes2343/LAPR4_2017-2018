@@ -1,3 +1,5 @@
+package pt.isep.nsheets.shared.core;
+
 /*
  * Copyright (c) 2005 Einar Pehrson <einar@pehrson.nu>.
  *
@@ -18,9 +20,10 @@
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package pt.isep.nsheets.shared.core;
+
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import gwt.material.design.client.ui.table.MaterialDataTable;
 import java.io.IOException;
 import java.io.Serializable;
 //import java.io.ObjectInputStream;		// not supported in GWT
@@ -42,6 +45,7 @@ import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompiler;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableList;
 import pt.isep.nsheets.shared.core.formula.util.ReferenceTransposer;
+import pt.isep.nsheets.shared.lapr4.blue.s1150371.ext.CellDecoratorExt;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
@@ -599,4 +603,20 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
            
             return new CellImplDTO(id, version, address.toDTO(), content, precendentDTOs, dependentDTOs);
         }
+
+   
+    @Override
+    public void addColorExtension(String name, String c1, String c2, MaterialDataTable<?> table) {
+        CellDecoratorExt cd = new CellDecoratorExt(this, name, c1, c2, table);
+
+        extensions.put(name, cd);
+        cd.valueChanged(this);
+    }
+
+  
+     
+    @Override
+    public Collection<CellExtension> getListExtension() {
+        return extensions.values();
+    }
 }

@@ -122,6 +122,12 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
                 }
             };
             String name = Window.prompt("New Name of Workbook:", wb.getName());
+            while(name.isEmpty()){
+                name = Window.prompt("Name can't be empty!\nName of Workbook:", wb.getName());
+            }
+            if(name.isEmpty() || name == "null" || name ==null){
+                name = wb.getName();
+            }
             workbooksSvc.editWorkbookName(wb, name, callback);
             wb.setName(name);
             cardTitle.setText(name);
@@ -140,6 +146,9 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
                 }
             };
             String description = Window.prompt("New Workbook Description:", wb.getName());
+            if(description.isEmpty() || description == "null" || description ==null){
+                name = wb.getDescription();
+            }
             workbooksSvc2.editWorkbookDescription(wb, name, callback2);
             wb.setDescription(description);
             label.setText(description);

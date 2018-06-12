@@ -30,6 +30,13 @@
             <m:MaterialSwitch ui:field="styleExtension" value="true" grid="l0"/>
             <m:MaterialLabel text="Style Format (Format different aspects of your workbook cells!)" grid="l0"/>
             <m:MaterialIcon ui:field="styleExtensionDef" iconType="MORE_VERT" iconColor="GREY" waves="DEFAULT" circle="true" grid="l0" offset="l6"/>
+           
+            <m:MaterialListValueBox ui:field="lstColors1"
+                                        placeholder="Choose the Color for the positive values" grid="s12"/>
+            <m:MaterialListValueBox ui:field="lstColors2"
+                                        placeholder="Choose the Color for the negative values" grid="s12"/>
+        
+            
         </m:MaterialRow>
 
         <!--Apply Row-->

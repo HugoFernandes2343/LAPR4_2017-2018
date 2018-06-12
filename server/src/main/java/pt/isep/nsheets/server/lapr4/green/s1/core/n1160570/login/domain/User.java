@@ -31,7 +31,6 @@ public class User implements AggregateRoot<Email>, Serializable {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-
     public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
             throw new IllegalArgumentException("email or password or nickname or name must be non-null");
@@ -106,6 +105,9 @@ public class User implements AggregateRoot<Email>, Serializable {
         return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
     }
 
+    public UserType getUserType() {
+        return userType;
+    }
 
     public Nickname getNickname() {
         return nickname;

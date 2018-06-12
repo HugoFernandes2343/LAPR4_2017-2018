@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-abstract class NSheetsJpaRepositoryBase<T, K extends Serializable> extends JpaTxRepository<T, K> {
+public abstract class NSheetsJpaRepositoryBase<T, K extends Serializable> extends JpaTxRepository<T, K> {
 
     private PersistenceSettings settings=null;
     
@@ -26,7 +26,7 @@ abstract class NSheetsJpaRepositoryBase<T, K extends Serializable> extends JpaTx
         super(persistenceUnitName);
     }
 
-    NSheetsJpaRepositoryBase(PersistenceSettings settings) {
+    public NSheetsJpaRepositoryBase(PersistenceSettings settings) {
         super(settings.getPersistenceUnitName());
         this.settings=settings;
     }

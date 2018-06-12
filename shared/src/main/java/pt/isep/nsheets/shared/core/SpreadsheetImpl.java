@@ -22,6 +22,7 @@ package pt.isep.nsheets.shared.core;
 
 // import java.io.ObjectInputStream;		// not supported in GWT
 // import java.io.ObjectOutputStream;	// not supported in GWT
+import gwt.material.design.client.ui.table.MaterialDataTable;
 import java.util.*;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.SpreadsheetExtension;
@@ -399,6 +401,16 @@ public class SpreadsheetImpl implements Spreadsheet {
             }
         }
         return new SpreadsheetDTO(title, columns, rows, content);
+    }
+
+    @Override
+    public void addColorExtension(String name, String c1, String c2, MaterialDataTable<?> table) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<CellExtension> getListExtension() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

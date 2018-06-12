@@ -18,8 +18,18 @@ import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import gwt.material.design.addins.client.fileuploader.MaterialFileUploader;
+import gwt.material.design.addins.client.fileuploader.base.UploadFile;
+import gwt.material.design.addins.client.fileuploader.events.ErrorEvent;
+import gwt.material.design.addins.client.fileuploader.events.SuccessEvent;
+import gwt.material.design.addins.client.fileuploader.events.TotalUploadProgressEvent;
+import gwt.material.design.client.events.DragOverEvent;
+import gwt.material.design.client.ui.MaterialImage;
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialProgress;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
+import gwt.material.design.client.ui.animate.Transition;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.place.NameTokens;
@@ -44,9 +54,24 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
         MaterialTextBox getTextEmail();
 
         MaterialTextBox getTextPassword();
+
         MaterialTextBox getTextFirst();
+
         MaterialTextBox getTextLast();
-         MaterialTextBox getTextUserName();
+
+        MaterialTextBox getTextUserName();
+
+
+        MaterialFileUploader getCardUploader();
+
+        MaterialImage getImgPreview();
+
+        MaterialProgress getProgress();
+
+        MaterialLabel getLblName();
+
+        MaterialLabel getLblSize();
+        
 
     }
 
@@ -81,13 +106,62 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
                 @Override
                 public void onSuccess(UserDTO result) {
                     MaterialToast.fireToast("You Have Registered With Sucess");
-                    
+
                 }
             };
+
+            usersSvc.saveUser(u, callback);
+        });
+
+        getView().getCardUploader().addTotalUploadProgressHandler(new TotalUploadProgressEvent.TotalUploadProgressHandler() {
+            @Override
+
+            public void onTotalUploadProgress(TotalUploadProgressEvent event) {
+                
+                getView().getProgress().setPercent(event.getProgress());
+                 
+            }
+        });
+
+        getView().getCardUploader().addSuccessHandler(new SuccessEvent.SuccessHandler<UploadFile>() {
+            @Override
+
+            public void onSuccess(SuccessEvent<UploadFile> event) {
+                
+                getView().getLblName().setText(event.getTarget().getName());
+                
+                getView().getLblSize().setText(event.getTarget().getType());
+                MaterialToast.fireToast("Photo Uploaded With sucess");
+                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName());     
+            }
             
+        });
+        
+        
+        getView().getCardUploader().addErrorHandler(new ErrorEvent.ErrorHandler<UploadFile>() {
 
 
-            //usersSvc.saveUser(u, callback);
+            @Override
+            public void onError(ErrorEvent<UploadFile> event) {
+                MaterialToast.fireToast("ERROR");
+                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName()); 
+            }
+            
+        });
+        
+        
+        
+        
+        
+
+         getView().getCardUploader().addDragOverHandler(new DragOverEvent.DragOverHandler() {
+            @Override
+
+            public void onDragOver(DragOverEvent event) {
+                
+               //getView().MaterialAnimator.animate(Transition.RUBBERBAND, getView().getCardUploader(), 0);
+                
+            }
         });
 
     }

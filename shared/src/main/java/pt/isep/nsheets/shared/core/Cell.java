@@ -1,3 +1,5 @@
+package pt.isep.nsheets.shared.core;
+
 /*
  * Copyright (c) 2005 Einar Pehrson <einar@pehrson.nu>.
  *
@@ -18,10 +20,12 @@
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package pt.isep.nsheets.shared.core;
+
+
 
 import java.io.Serializable;
 import java.util.SortedSet;
+
 
 import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
@@ -154,4 +158,6 @@ public interface Cell extends Comparable<Cell>, Extensible<Cell>, Serializable {
 	public CellListener[] getCellListeners();
         
         public CellImplDTO toDTO();
+
+  
 }

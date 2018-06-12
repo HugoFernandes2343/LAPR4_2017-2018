@@ -6,6 +6,8 @@
 package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction;
 
 import gwt.material.design.client.ui.MaterialToast;
+import gwt.material.design.client.ui.table.MaterialDataTable;
+import java.util.Collection;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Spreadsheet;
@@ -100,6 +102,16 @@ public class ConditionalFormatExt extends Extension {
 
         @Override
         public CellImplDTO toDTO() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void addColorExtension(String name, String c1, String c2, MaterialDataTable<?> table) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Collection<CellExtension> getListExtension() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }

@@ -89,13 +89,24 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 @Override
                 public void onSuccess(WorkbookDescriptionDTO result) {
                     MaterialToast.fireToast("New Workbook Created...", "rounded");
-                    
+
                     refreshView();
                 }
             };
 
             String name = Window.prompt("Name of new Workbook:", "New Public Workbook " + nrWb++);
+            while(name.isEmpty()){
+                name = Window.prompt("Name can't be empty!\nName of new Workbook:", "New public Workbook " + nrWb);
+            }
+
             String description = Window.prompt("Description of new Workbook:", "No Description");
+
+            if(name.isEmpty() || name == "null" || name ==null){
+                name = "New Public Workbook " + nrWb++;
+            }
+            if(description.isEmpty() || description == "null" || description ==null){
+                name = "New Workbook Description";
+            }
             WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO(name, description,"" );
 
             workbooksSvc.addWorkbookDescription(wdDto, callback);
@@ -126,9 +137,19 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             Spreadsheet temp = null;
             if (CurrentUser.isIsLoggedIn()) {
+
                 String name = Window.prompt("Name of new Private Workbook:", "New Private Workbook " + nrWb++);
+                while(name.isEmpty()){
+                    name = Window.prompt("Name can't be empty!\nName of new Workbook:", "New Private Workbook " + nrWb);
+                }
                 String description = Window.prompt("Description of new Workbook:", "No Description");
 
+                if(name.isEmpty() || name == "null" || name ==null){
+                    name = "New private Workbook " + nrWb++;
+                }
+                if(description.isEmpty() || description == "null" || description ==null){
+                    name = "New Workbook Description";
+                }
                 WorkbookDescriptionDTO dDTO = new WorkbookDescriptionDTO(name, description, CurrentUser.getCurrentUser().getEmail().getEmail());
                 workbooksSvc.addWorkbookDescription(dDTO, callback);
 
@@ -189,14 +210,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
 //        ----------------------------------------------------------
 
-        EmailDTO m = new EmailDTO("mail@isep.pt");
-        PasswordDTO p = new PasswordDTO("pass");
-        NicknameDTO nn = new NicknameDTO("user");
-        NameDTO n = new NameDTO("fn", "ln");
-        UserDTO temp = new UserDTO(m, p, n, nn);
-
-        CurrentUser.setCurrentUser(temp);
-        CurrentUser.setIsLoggedIn(true);
+//        EmailDTO m = new EmailDTO("mail@isep.pt");
+//        PasswordDTO p = new PasswordDTO("pass");
+//        NicknameDTO nn = new NicknameDTO("user");
+//        NameDTO n = new NameDTO("fn", "ln");
+//        UserDTO temp = new UserDTO(m, p, n, nn);
+//
+//        CurrentUser.setCurrentUser(temp);
+//        CurrentUser.setIsLoggedIn(true);
 
 //        ----------------------------------------------------------
 

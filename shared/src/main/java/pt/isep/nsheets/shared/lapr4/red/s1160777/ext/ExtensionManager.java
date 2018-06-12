@@ -59,7 +59,7 @@ public class ExtensionManager {
      */
     private ExtensionManager() {
         //Loads the pre-coded extensions
-        loadExtensions();
+        //loadExtensions();
     }
 
     /**
@@ -69,11 +69,11 @@ public class ExtensionManager {
     private void loadExtensions() {
 
         //Load All premade extensions
-        Extension exampleColor = new PositiveNegativeExtension("PositiveNegativeExtension", true);
+       // Extension exampleColor = new PositiveNegativeExtension("PositiveNegativeExtension", true);
         //Add Maia's
 
         //Add them to the treemap
-        this.extensionMap.put(exampleColor.getName(),exampleColor);
+       // this.extensionMap.put(exampleColor.getName(),exampleColor);
         //extensionMap.put(ACTIVE_EXTENSION, exampleColor);
         //add maia's
 
