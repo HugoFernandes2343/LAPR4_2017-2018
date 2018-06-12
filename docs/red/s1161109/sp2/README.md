@@ -58,6 +58,10 @@ For this feature increment i needed to:
 -Learn how to encrypt passwords;
 
 
+
+
+
+
 ## 3.1 GWT and Project Structure
 
 **Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
@@ -98,6 +102,15 @@ For this feature increment i needed to:
 ### 3.1.2 Web
 
 * **CurrentMenur** - This class has the CurrentMenu that is beeing shown;
+
+
+## 3.2 Analysis
+
+  Special Case of Email Verification:
+
+  Email is verified by the next pattern:
+
+  [a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}_
 
 ## 3.4 Analysis Diagrams
 
@@ -189,13 +202,24 @@ Created the classes:
 
 During the implementation of my UC I helped and been helped by my team several times.
 
-# 7. Final Remarks
+
+# 6. Test Class's
+
+  The only class that deserved a test class because of the complexity of its code was the email class:
+
+  The tests are the next:
+
+
+  ![SD US1](teste.jpg)
+
+
+# 8. Final Remarks
 
  For lack of time i didn't implemented password encryptation.
  After several tries and after asking the teacher Bragança for help for doing image upload it was not possible.
 
 
-# 8. Work Log
+# 9. Work Log
 
 *Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
 
