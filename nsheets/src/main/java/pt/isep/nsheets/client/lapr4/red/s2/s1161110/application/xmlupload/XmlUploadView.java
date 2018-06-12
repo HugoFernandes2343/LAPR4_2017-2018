@@ -20,17 +20,23 @@ package pt.isep.nsheets.client.lapr4.red.s2.s1161110.application.xmlupload;
  */
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.fileuploader.MaterialFileUploader;
 import gwt.material.design.addins.client.fileuploader.base.UploadFile;
 import gwt.material.design.addins.client.fileuploader.events.*;
 import gwt.material.design.client.ui.MaterialToast;
+import pt.isep.nsheets.client.application.workbook.CurrentWorkbook;
+import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.UploadService;
+import pt.isep.nsheets.shared.services.UploadServiceAsync;
 
 import javax.inject.Inject;
 
@@ -79,6 +85,20 @@ public class XmlUploadView extends ViewImpl implements XmlUploadPresenter.MyView
             @Override
             public void onSuccess(SuccessEvent<UploadFile> event) {
                 MaterialToast.fireToast("Event : Success (" + event.getTarget().getName() + ")");
+                UploadServiceAsync uploadASync = GWT.create(UploadService.class);
+                Workbook wb = new Workbook();
+                uploadASync.importToWorkbook(wb, new AsyncCallback<Workbook>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error in Import to XML! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Workbook result) {
+                        MaterialToast.fireToast("Success in Import to XML! ");
+                    }
+                });
+                CurrentWorkbook.setCurrentWorkbook(wb);
             }
         });
 

@@ -55,7 +55,6 @@ There are not many tests possible for this use case other than the functional us
 
 This classes were not changed so there is no need to test anything.
 
-
 **Services/Controllers**
 
 **Test 1**
@@ -71,10 +70,10 @@ This classes were not changed so there is no need to test anything.
 
 **For US1**
 
-![SD US1](sd.jpg)
+![SD US1](SD.jpg)
 
 Notes:  
--
+- 
 
 
 
@@ -106,13 +105,22 @@ I followed the recommended organization for packages:
 
 The code for this sprint:  
 
+Project **server**
+
+-XmlReadingService
 
 Project **shared**  
 
+-UploadService
+
+-UploadServiceAsync
 
 Project **NSheets**
+
 -XmlUploadView
+
 -XmlUploadModule
+
 -XmlUploadPresenter
 
 # 6. Integration/Demonstration
@@ -124,34 +132,42 @@ Project **NSheets**
 
 
 # 8. Work Log
-Tuesday - June 5
-Previous Sprint review
+**Tuesday - June 5**
+* Previous Sprint review
 
-Wednesday - June 6
-New Use case attributed, research on upload files and servlet builds started.
+**Wednesday - June 6**
+* New Use case attributed, research on upload files and servlet builds started.
 
-Thrusday - June 7
-Documentation: Requirements and Analysis start.
-Implementation/ Research: UI Upload of files.
+**Thrusday - June 7**
+* Documentation: Requirements and Analysis start.
+* Implementation/ Research: UI Upload of files.
 
-Friday - June 8
+**Friday - June 8**
+* Documentation: Analysis completed, short sequence diagram and user story diagram created.
+* Implementation: UploadServlet creation, web.xml and pom updated.
 
-Saturday - June 9
+**Saturday - June 9**
+* Documentation: Design started
+* Implementation: UploadServlet, UploadService and UploadServiceAsync updated
 
-Sunday - June 10
+**Monday- June 11**
+* Documentation: Design updated
+* Implementation:Solving problems, finishing Implementation
 
-Monday- June 11
-
-Tuesday - June 12
+**Tuesday - June 12**
+* Documentation: Finishing Documentation
+* Implementation: Attempting to solve issues
 
 Commits:
 
 [Requirements IPC04.2](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/aa568d2e52c9)
 
-[Analysis IPC04.2]()
+[Analysis IPC04.2](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/23b5d30ff1fc)
 
 [Design IPC04.2]()
 
 [Tests (documentation) IPC04.2]()
+
+[Code Implementation IPC04.2 UI and UploadServlet](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/841e9fdefcd4)
 
 [Code Implementation IPC04.2]()
