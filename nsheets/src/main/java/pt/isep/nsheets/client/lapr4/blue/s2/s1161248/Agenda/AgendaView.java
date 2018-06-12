@@ -84,6 +84,11 @@ public class AgendaView extends ViewImpl implements AgendaPresenter.MyView {
 
         });
 
+        remove.addClickHandler(clickEvent -> {
+            RemoveCalendarView calendarView = new RemoveCalendarView();
+
+        });
+
     }
 
     @Override

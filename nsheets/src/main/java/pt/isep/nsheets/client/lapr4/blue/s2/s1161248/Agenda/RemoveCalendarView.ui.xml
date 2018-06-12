@@ -9,13 +9,13 @@ Uncomment this for XHTML entities
     <ui:style>
 
     </ui:style>
-    <ma:window.MaterialWindow ui:field="formWindow" width="70%" title="Remove Calendar" textAlign="LEFT" padding="32"
+    <ma:window.MaterialWindow ui:field="window" width="70%" title="Remove Calendar" textAlign="LEFT" padding="32"
                               height="600px">
-        <m:MaterialPanel title="Chosse one Calendar">
-            <m:MaterialDropDown ui:field="name" activator="dp-2" constrainWidth="true"></m:MaterialDropDown>
+        <m:MaterialPanel height="30%">
+            <cb:MaterialComboBox ui:field="calendar"></cb:MaterialComboBox>
         </m:MaterialPanel>
         <m:MaterialPanel>
-            <m:MaterialButton ui:field="delectButton" text="Delect"></m:MaterialButton>
+            <m:MaterialButton ui:field="deleteButton" text="Delect"></m:MaterialButton>
             <m:MaterialButton ui:field="cancelButton" text="Cancel"></m:MaterialButton>
         </m:MaterialPanel>
     </ma:window.MaterialWindow>

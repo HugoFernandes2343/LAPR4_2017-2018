@@ -25,4 +25,6 @@ public class CalendarService {
         final CalendarRepository calendarRepository = PersistenceContext.repositories().calendares();
         return calendarRepository.findAll();
     }
+
+    
 }
