@@ -112,6 +112,7 @@ Regarding tests we try to follow an approach inspired by test driven development
 **Domain Classes**
 
 **Task**
+  - id (long)
   - title (string)
   - description (string)
   - priority (int)
@@ -426,7 +427,7 @@ Task Editor - Final
 
 To improve later: Associate Contacts with Tasks.
 
-I had some difficulties in associating the contacts with each task. Although the contacts are saved in the database, I had big trouble in connecting my colleagues code to mine. In the database, the contacts are saved in a two users relationship. Therefore, it would be difficult to visually present the contacts association to each task. To make this use case functional, I chose to focus in creating and eliminating tasks, as well as editing them.
+I had some difficulties in associating the contacts with each task. Although the contacts are saved in the database, I had big trouble in connecting my colleagues code to mine. In the database the contacts are being saved in a table with two columns (Strings), each one represents a user. That's why it becomes difficult to create tasks views accordingly with the contact list of each task. Therefore, it would be difficult to visually present the contacts association to each task. I tried to fix the problem but due to the lack of time and the work load i was unable to do it. To make this use case functional, I chose to focus in creating and eliminating tasks, as well as editing them.
 
 Working with my teammates was productive. Even though we're just a few elements and all the difficulties concerning the Erasmus colleagues, I tried to help as often as I could and to be an active element of the team. As the two sprints I’ve made so far included graphics, I consider that I was useful to my team in implementing GWT tools.
 
@@ -460,3 +461,5 @@ Working with my teammates was productive. Even though we're just a few elements 
 [Core 05.2 - Tasks - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/73a576fc084c5d9e6e32c932fd4827d90dae1c8c)
 
 [Core 05.2 - Tasks - Domain and controller tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ab5a91d305c14c7f9142b550b4180fbccccc5e0e)
+
+[Core 05.2 - Tasks - Techinal Documentation Updated](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/9036b15459158bf4b1f8701508ad70cce815c44d)
