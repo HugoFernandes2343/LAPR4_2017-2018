@@ -88,12 +88,12 @@
     <!--1161110-->
     <!--Upload Servlet-->
     <servlet>
-      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-name>uploadService</servlet-name>
       <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
     </servlet>
    
     <servlet-mapping>
-      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-name>uploadService</servlet-name>
       <url-pattern>/nsheets/fileupload</url-pattern>
     </servlet-mapping>
     <!--1161110-->
