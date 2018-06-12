@@ -7,7 +7,7 @@
 
 # 2. Requirements
 
-Core05.1 - Tasks
+Core05.2 - Tasks
 
 It should be possible to create, edit and remove tasks. A task has a name, a description, and a list of contacts. A task also has a priority level (1 to 5) and a percentage of completion. The application should have a window to display and edit tasks. It should be possible to sort and filter the tasks using expressions based on its fields. For instance, it should be possible to only display tasks which are not completed. Tasks should be visible to all the contacts related to the task.
 
@@ -427,7 +427,7 @@ Task Editor - Final
 
 To improve later: Associate Contacts with Tasks.
 
-I had some difficulties in associating the contacts with each task. Although the contacts are saved in the database, I had big trouble in connecting my colleagues code to mine. In the database the contacts are being saved in a table with two columns (Strings), each one represents a user. That's why it becomes difficult to create tasks views accordingly with the contact list of each task. Therefore, it would be difficult to visually present the contacts association to each task. I tried to fix the problem but due to the lack of time and the work load i was unable to do it. To make this use case functional, I chose to focus in creating and eliminating tasks, as well as editing them.
+I had some difficulties in associating the contacts with each task. Although the contacts are saved in the database, i had big trouble in connecting my colleagues code to mine. In the database the contacts are being saved in a table with two columns (Strings), each one represents a user. That's why it becomes difficult to create tasks views accordingly with the contact list of each task. Therefore, it would be difficult to visually present the contacts association to each task. I tried to fix the problem but due to the lack of time and the work load i was unable to do it. To make this use case functional, I chose to focus in creating and eliminating tasks, as well as editing them.
 
 Working with my teammates was productive. Even though we're just a few elements and all the difficulties concerning the Erasmus colleagues, I tried to help as often as I could and to be an active element of the team. As the two sprints I’ve made so far included graphics, I consider that I was useful to my team in implementing GWT tools.
 
