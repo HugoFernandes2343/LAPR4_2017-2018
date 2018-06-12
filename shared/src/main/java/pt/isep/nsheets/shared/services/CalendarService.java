@@ -9,4 +9,5 @@ package pt.isep.nsheets.shared.services;
 public interface CalendarService extends RemoteService {
     CalendarDTO addCalendar(CalendarDTO cDto) throws DataException;
     ArrayList<CalendarDTO> getCalendares();
+    void deleteCalendar(String calendar);
 }

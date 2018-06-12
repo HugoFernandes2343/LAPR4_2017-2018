@@ -41,11 +41,15 @@ public class AgendaView extends ViewImpl implements AgendaPresenter.MyView {
         initWidget(uiBinder.createAndBindUi(this));
 
         List<EventDTO> list = new ArrayList<>();
-        EventDTO event = new EventDTO("teste", "teste", "teste", "teste", "teste");
+        EventDTO event = new EventDTO("teste1", "teste1", "teste", "teste", "teste");
+        EventDTO event1 = new EventDTO("teste2", "teste2", "teste", "teste", "teste");
+        EventDTO event2 = new EventDTO("teste3", "teste3", "teste", "teste", "teste");
+        EventDTO event3 = new EventDTO("teste4", "teste4", "teste", "teste", "teste");
+
         list.add(event);
-        list.add(event);
-        list.add(event);
-        list.add(event);
+        list.add(event1);
+        list.add(event2);
+        list.add(event3);
 
         table.setRowHeight(4);
         table.setRowData(0, list);
