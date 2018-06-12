@@ -17,15 +17,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 
 import gwt.material.design.client.ui.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.isep.nsheets.client.application.CurrentUser;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddSpreadsheetToWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.DeleteWorkbookController;
 import pt.isep.nsheets.server.services.WorkbooksServiceImpl;
+import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.*;
 
 class HomeView extends ViewImpl implements HomePresenter.MyView {
@@ -97,29 +103,46 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
         label.setText(wb.getDescription());
-        renameLink.setText("Rename");
+        renameLink.setText("Edit Workbook Info");
         renameLink.setIconType(IconType.EDIT);
         renameLink.setIconColor(Color.INDIGO);
         renameLink.setTextColor(Color.WHITE);
         renameLink.addClickHandler(event -> {
-//            MaterialToast.fireToast("rename " + wb.getName());
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
             AsyncCallback callback = new AsyncCallback() {
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error deleting " + caught.getMessage());
+                    MaterialToast.fireToast("Error editing workbook " + caught.getMessage());
                 }
 
                 @Override
                 public void onSuccess(Object result) {
-                    MaterialToast.fireToast("test" + event.toString());
+                    MaterialToast.fireToast("Success editing workbook");
                 }
             };
             String name = Window.prompt("New Name of Workbook:", wb.getName());
             workbooksSvc.editWorkbookName(wb, name, callback);
             wb.setName(name);
             cardTitle.setText(name);
+            
+            WorkbooksServiceAsync workbooksSvc2 = GWT.create(WorkbooksService.class);
+            AsyncCallback callback2 = new AsyncCallback() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error editing workbook " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    MaterialToast.fireToast("Success editing workbook");
+                }
+            };
+            String description = Window.prompt("New Workbook Description:", wb.getName());
+            workbooksSvc2.editWorkbookDescription(wb, name, callback2);
+            wb.setDescription(description);
+            label.setText(description);
         });
 
         deleteLink.setText("Delete");
@@ -149,8 +172,30 @@ class HomeView extends ViewImpl implements HomePresenter.MyView {
         addSpreadsheetLink.setIconColor(Color.GREEN);
         addSpreadsheetLink.setTextColor(Color.WHITE);
         addSpreadsheetLink.addClickHandler(event2 -> {
+            WorkbooksServiceAsync async = GWT.create(WorkbooksService.class);
+            AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error adding spreadsheet to " + wb.getName());
+                }
 
-            MaterialToast.fireToast("Spreadsheet Added to " + wb.getName());
+                @Override
+                public void onSuccess(Boolean result) {
+                    MaterialToast.fireToast("Spreadsheet Added to " + wb.getName());
+                }
+            };
+            
+           String newTitle = Window.prompt("Insert new Spreadsheet Title", "Spreadsheet Title");
+           String rows = Window.prompt("Insert number of rows", "Row Number");
+           int nrRows = Integer.parseInt(rows);
+           String columns = Window.prompt("Insert number of columns", "Column Number");
+           int nrColumns = Integer.parseInt(columns);
+           String[][]content = new String[nrRows][nrColumns];
+           SpreadsheetDTO ssDTO = new SpreadsheetDTO(newTitle, nrColumns, nrRows, content);
+           WorkbookDTO wbDTO = wb.getWorkbook();
+           
+           async.addSpreadsheetToWorkbook(wbDTO, ssDTO, callback);
+            
         });
 
         cardContent.add(cardTitle);

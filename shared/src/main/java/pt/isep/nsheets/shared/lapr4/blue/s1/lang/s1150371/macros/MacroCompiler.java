@@ -8,11 +8,14 @@ package pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import pt.isep.nsheets.shared.core.formula.compiler.MacrosLexer;
+import pt.isep.nsheets.shared.core.formula.compiler.MacrosParser;
 
 /**
  *
  * @author josea
  */
+
 public class MacroCompiler {
     private Macro m;
     
@@ -25,7 +28,7 @@ public class MacroCompiler {
         MacrosLexer lexer = new MacrosLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MacrosParser parser = new MacrosParser(tokens);
-        ParseTree tree = parser.input();
+        ParseTree tree = parser.macro();
        
         MacrosBaseVisitorImp calcVisitor = new  MacrosBaseVisitorImp();
         Double result = calcVisitor.visit(tree);

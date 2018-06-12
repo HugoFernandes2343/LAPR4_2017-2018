@@ -11,12 +11,14 @@ import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
+import pt.isep.nsheets.server.services.DownloadCLSImpl;
 import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.services.DownloadService;
-import pt.isep.nsheets.shared.services.DownloadServiceAsync;
+import pt.isep.nsheets.shared.services.DataException;
+import pt.isep.nsheets.shared.services.DownloadToCLSService;
+import pt.isep.nsheets.shared.services.DownloadToCLSServiceAsync;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 public class ExportToCLSView extends Composite {
 
@@ -37,33 +39,34 @@ public class ExportToCLSView extends Composite {
     public ExportToCLSView(Workbook workbook) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        window.setPadding(32);
-        window.setHeight("400px");
+        //window.setPadding(32);
+        //window.setHeight("400px");
         window.setTextAlign(TextAlign.LEFT);
         MaterialWindow.setOverlay(true);
         btnExport.setWaves(WavesType.LIGHT);
         textBox1.setPlaceholder("Name Of The File");
 
-        /*after having the filename in the prompt*/
         btnExport.addClickHandler(event -> {
-            /*DownloadServiceAsync downAsync = GWT.create(DownloadService.class);
-            // Set up the callback object. WORKBOOK HERE DOESNT LET THE WINDOW OPEN. MUST SEND ANOTHER WAY
-            downAsync.exportToDownload(workbook, new AsyncCallback<Workbook>() {
+
+            WorkbookDTO dto = workbook.toDTO();
+
+            DownloadToCLSServiceAsync downAsync = GWT.create(DownloadToCLSService.class);
+
+            downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     MaterialToast.fireToast("Error in Export to CLS! " + caught.getMessage());
                 }
 
                 @Override
-                public void onSuccess(Workbook result) {
-                    String url = GWT.getModuleBaseURL() + "downloadService?filename=" + fileInfo1 ;
+                public void onSuccess(WorkbookDTO result) {
+                    String url = GWT.getModuleBaseURL() + "downloadToCLSService?filename=" + textBox1.getText();
                     Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
-                    MaterialToast.fireToast("Exported successfully!", "rounded");
                 }
-            });*/
-            String url = GWT.getModuleBaseURL() + "downloadService?filename=" + textBox1.getText();
-            //String url = GWT.getHostPageBaseURL() + "downloadService?filename=" + textBox1.getText();
-            Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0");
+            });
+            //String url = GWT.getModuleBaseURL() + "downloadToCLSService?filename=" + textBox1.getText() /*+ ".cls"*/;
+            //Window.open(url, "Download CLS file", "status=0,toolbar=0,menubar=0,location=0,target=_blank");
+
         });
         window.open();
     }

@@ -22,4 +22,6 @@ public interface TasksService extends RemoteService {
     void editTask(TaskDTO task, String oldName) throws DataException;
 
     void deleteTask(TaskDTO task);
+    
+    void updatePercentage(String title);
 }

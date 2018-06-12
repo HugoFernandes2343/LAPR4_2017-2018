@@ -8,6 +8,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddSpreadsheetToWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookDescriptionController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.DeleteWorkbookController;
@@ -17,8 +18,16 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.Work
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.WorkbookRepository;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.CellImpl;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction.ConditionalFunctionController;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 import pt.isep.nsheets.shared.services.DataException;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 import pt.isep.nsheets.shared.services.WorkbooksService;
 
@@ -145,6 +154,32 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
 
         return wb;
 
+    }
+
+    @Override
+    public boolean activateConditional(CellImplDTO activeCell, String name, String operation, String value) {
+        ConditionalFunctionController cfc = new ConditionalFunctionController();
+        try {
+            return cfc.activateExtension(activeCell, name, operation, value);
+        } catch (FormulaCompilationException | IllegalValueTypeException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO) {
+        final WorkbookRepository workbookRepository = PersistenceContext.repositories().workbooks();
+        wbDTO.spreadsheets.add(ssDTO);
+        Workbook wd = new Workbook(wbDTO);
+        try {
+            workbookRepository.save(wd);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

@@ -1,0 +1,62 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary TaskView
+control TaskPresenter
+control TaskServices
+control TaskController
+entity TaskRepository
+entity ContactsRepository
+database Database
+
+box "NSheets Client"
+participant TaskView
+participant TaskPresenter
+end box
+
+box "Server"
+participant TaskServices
+participant TaskController
+participant TaskRepository
+participant ContactsRepository
+
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> TaskPresenter : onReveal() / navigate to page
+TaskPresenter -> TaskServices : getAllTasks()
+TaskServices -> TaskController : getAllTasks()
+TaskController -> TaskRepository : findaAll()
+TaskRepository -> Database : fetch
+User -> TaskPresenter : Open Editor
+TaskPresenter -> TaskServices : getAllContacts()
+TaskServices -> TaskController : getAllContacts()
+TaskController -> ContactsRepository : findAll()
+ContactsRepository -> Database : fetch
+User -> TaskPresenter : Insert new Data
+TaskPresenter ->> TaskServices : editTask(TaskDTO)
+TaskServices -> TaskController :  editTask(TaskDTO)
+TaskController -> TaskController : Long id = getPrimaryKey()
+
+TaskController -> TaskRepository : edit(id,title)
+TaskController -> TaskRepository : edit(id,description)
+TaskController -> TaskRepository : edit(id,priority)
+TaskController -> TaskRepository : edit(id,percentage)
+TaskController -> TaskRepository : edit(id,contacts)
+
+
+
+TaskRepository -> Database : setModifications()
+
+TaskServices ->> TaskPresenter : onSuccess()
+TaskPresenter -> TaskView : setContents()
+
+@enduml

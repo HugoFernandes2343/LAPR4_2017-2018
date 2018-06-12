@@ -179,6 +179,10 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
         return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
     }
 
+    public List<Spreadsheet> getSpreadsheets(){
+        return this.spreadsheets;
+    }
+
     /**
      * Adds a new blank spreadsheet to the workbook.
      *

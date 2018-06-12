@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import pt.isep.nsheets.client.application.Contacts.ContactsModule;
 import pt.isep.nsheets.client.application.Requests.RequestsModule;
-import pt.isep.nsheets.client.application.Tasks.TasksModule;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1150585.Tasks.TasksModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1161248.Agenda.AgendaModule;

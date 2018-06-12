@@ -7,6 +7,7 @@ package pt.isep.nsheets.shared.services;
 
 import java.io.Serializable;
 import java.util.List;
+import pt.isep.nsheets.shared.core.Workbook;
 
 /**
  *
@@ -38,6 +39,12 @@ public class WorkbookDTO implements Serializable {
 
     public int getCreatedSpreadsheets() {
         return createdSpreadsheets;
+    }
+    
+    public Workbook fromDTO(Workbook wb){
+        
+        return new Workbook(this);
+        
     }
 
        

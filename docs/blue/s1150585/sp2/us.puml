@@ -1,0 +1,13 @@
+@startuml  us.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+User -> (US4: Filter Tasks)
+User -> (US3: Edit Task)
+User -> (US2: Delete Task)
+User -> (US1: Create Task)
+
+@enduml

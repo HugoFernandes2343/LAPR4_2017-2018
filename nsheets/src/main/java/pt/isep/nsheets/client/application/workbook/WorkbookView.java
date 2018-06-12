@@ -40,6 +40,7 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 //import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
@@ -54,8 +55,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
+import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
+import pt.isep.nsheets.shared.core.formula.lang.Language;
+import pt.isep.nsheets.shared.core.formula.lang.RelationalOperator;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -69,6 +75,65 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         return firstButton;
     }
 
+    public MaterialButton getformulaButton() {
+        return formulaButton;
+    }
+
+    public MaterialLink getConditionalLink() {
+        return conditionalLink;
+    }
+
+    List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
+    List<MaterialRadioButton> falseFontButtons = new ArrayList<>();
+    List<MaterialRadioButton> formulasButtons = new ArrayList<>();
+    List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
+    List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
+    
+    @UiField
+    MaterialCollapsible colap;
+
+    @UiField
+    MaterialLink conditionalLink;
+
+    @UiField
+    MaterialButton formulaButton;
+
+    @UiField
+    MaterialButton trueColorButton;
+
+    @UiField
+    MaterialButton trueFontButton;
+
+    @UiField
+    MaterialButton falseColorButton;
+
+    @UiField
+    MaterialButton falseFontButton;
+
+    @UiField
+    MaterialCollection formulas;
+
+    @UiField
+    MaterialCollection trueColor;
+
+    @UiField
+    MaterialCollection falseColor;
+
+    @UiField
+    MaterialCollection trueFont;
+
+    @UiField
+    MaterialCollection falseFont;
+
+    @UiField
+    MaterialTextBox formulaValue;
+
+    @UiField
+    MaterialTextBox trueCase;
+
+    @UiField
+    MaterialButton confirmCF;
+
     @UiField
     MaterialTextBox firstBox;
     @UiField
@@ -77,6 +142,18 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton exportToXMLButton;
     @UiField
     MaterialButton macrosButton;
+
+    //1140420
+    @UiField
+    MaterialButton chartWizardButton;
+    
+    //1171715
+    @UiField
+    MaterialButton filterCellRange;
+    
+    //1091234
+    @UiField
+    MaterialButton newSpreadsheetButton;
 
     @UiField
     MaterialWindow windowconditional;
@@ -198,6 +275,176 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     WorkbookView(Binder uiBinder) throws Exception {
 
         initWidget(uiBinder.createAndBindUi(this));
+        
+        
+        //INICIO 1160696
+        MaterialCollection c = new MaterialCollection();
+        Language l = new Language("teste");
+        List<RelationalOperator> list = l.relationalOperators();
+        for (RelationalOperator o : list) {
+            MaterialRadioButton b = new MaterialRadioButton("condition");
+            b.setText(o.toString());
+            c.add(b);
+            formulasButtons.add(b);
+        }
+        formulas.add(c);
+
+        //preenchimento de radioButtons com cores / estilos de fonte a serem aplicados
+        MaterialCollection trueC = new MaterialCollection();
+        MaterialCollection falseC = new MaterialCollection();
+
+//        List<Color> listColor = l.relationalOperators();
+        List<String> lc = new ArrayList<String>();
+
+        lc.add("Green");
+        lc.add("Purple");
+        lc.add("Red");
+        lc.add("Black");
+        lc.add("Blue");
+        lc.add("Yellow");
+
+        for (String string : lc) {
+            MaterialRadioButton colorF = new MaterialRadioButton("ColorsF");
+            MaterialRadioButton colorT = new MaterialRadioButton("ColorsT");
+
+            colorF.setText(string);
+            colorT.setText(string);
+            trueC.add(colorF);
+            falseC.add(colorT);
+            trueColorButtons.add(colorF);
+            falseColorButtons.add(colorT);
+        }
+        trueColor.add(trueC);
+        falseColor.add(falseC);
+
+        MaterialCollection trueF = new MaterialCollection();
+        MaterialCollection falseF = new MaterialCollection();
+
+//        List<Font> listFont = l.relationalOperators();
+        List<String> lf = new ArrayList<String>();
+        
+        
+        lf.add("Times New Roman");
+        lf.add("Arial");
+        lf.add("Calisto MT");
+        lf.add("Charter BT");
+        lf.add("Comic Sans");
+        lf.add("LucidaSans");
+
+        for (String string : lf) {
+
+            MaterialRadioButton fontF = new MaterialRadioButton("FontsF");
+            MaterialRadioButton fontT = new MaterialRadioButton("FontsT");
+
+            fontT.setText(string);
+            fontF.setText(string);
+            trueF.add(fontT);
+            falseF.add(fontF);
+            trueFontButtons.add(fontT);
+            falseFontButtons.add(fontF);
+        }
+        trueFont.add(trueF);
+        falseFont.add(falseF);
+
+        confirmCF.addClickHandler(event -> {
+            if (activeCell != null) {
+                if (activeCell.getContent().compareTo("\u200B") != 0) {
+                    String formula = "";
+                    for (MaterialRadioButton rb : formulasButtons) {
+                        if (rb.getValue()) {
+                            formula = rb.getText();
+                        }
+                    }
+                    if (!formula.equalsIgnoreCase("")) {
+                        String value = formulaValue.getText();
+                        String trueColor = "";
+                        String falseColor = "";
+                        String trueFont = "";
+                        String falseFont = "";
+                        for (MaterialRadioButton tcb : trueColorButtons) {
+                            if (tcb.getValue()) {
+                                trueColor = tcb.getText();
+                            }
+                        }
+                        for (MaterialRadioButton fcb : falseColorButtons) {
+                            if (fcb.getValue()) {
+                                falseColor = fcb.getText();
+                            }
+                        }
+                        for (MaterialRadioButton tfb : trueFontButtons) {
+                            if (tfb.getValue()) {
+                                trueFont = tfb.getText();
+                            }
+                        }
+                        for (MaterialRadioButton ffb : falseFontButtons) {
+                            if (ffb.getValue()) {
+                                falseFont = ffb.getText();
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        boolean resultado = false;
+                        if (!trueColor.equalsIgnoreCase("") || !falseColor.equalsIgnoreCase("") || !trueFont.equalsIgnoreCase("") || !falseFont.equalsIgnoreCase("")) {
+                            resultado = true;
+                        }
+                        
+                        
+                        
+                        if (!value.isEmpty()) {
+                            
+                            
+                            
+                            if (resultado) {
+
+                            CellImplDTO activeCellDTO = activeCell.toDTO();
+
+
+
+
+                                WorkbooksServiceAsync workbookServiceAsync = GWT.create(WorkbooksService.class);
+                                AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        MaterialToast.fireToast(caught.getMessage());
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Boolean result) {
+                                        if (result) {
+
+                                            MaterialToast.fireToast("Conditional Format applied with success!", "rounded");
+                                            ;
+                                        } else {
+                                            MaterialToast.fireToast("Conditional Format not applied...", "rounded");
+                                        }
+
+                                    }
+                                };
+
+                                workbookServiceAsync.activateConditional(activeCellDTO, "test", formula, value, callback);
+                            } else {
+                                MaterialToast.fireToast("Did you forget to apply a style?", "rounded");
+                            }
+
+                        } else {
+                            MaterialToast.fireToast("Did you forget to insert a value?", "rounded");
+                        }
+                    } else {
+                        MaterialToast.fireToast("Did you forget to insert a formula?", "rounded");
+                    }
+                } else {
+                    MaterialToast.fireToast("The Conditional Function was not applied beacuse the cell is empty!");
+                }
+            } else {
+                MaterialToast.fireToast("No Cell Selected", "rounded");
+
+            }
+        }
+        );
+
+        //FIM 1160696
 
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
@@ -247,6 +494,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
         });
+        
+        newSpreadsheetButton.addClickHandler((ClickEvent event) -> {
+            new addSpreadsheetView();
+        });
 
 
         /*Opens the prompt for the user to type the name of the CLS*/
@@ -273,6 +524,17 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            new FormEditorView();
 //
 //        });
+
+        //1140420
+        chartWizardButton.addClickHandler(event -> {
+            new BasicChartWizardView(customTable.getRow(0).getData().sheet);
+        });
+
+        //1171715
+        filterCellRange.addClickHandler(event -> {
+            new FilterCellRangeView(customTable.getRow(0).getData().sheet);
+        });
+        
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");

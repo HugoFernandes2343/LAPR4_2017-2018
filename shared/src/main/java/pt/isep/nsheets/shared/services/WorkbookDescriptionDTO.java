@@ -53,4 +53,8 @@ public class WorkbookDescriptionDTO implements IsSerializable, Serializable {
     public String getUserMail() {
         return this.userMail;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

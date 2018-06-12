@@ -1,0 +1,23 @@
+<!--
+Uncomment this for XHTML entities
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+-->
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:c="urn:import:pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
+    <ui:style>
+
+    </ui:style>
+    <g:HTMLPanel>
+        <ma:window.MaterialWindow ui:field="filterCellRangeWindow" width="70%" height="70%" title="Filter Cell Range">
+            <m:MaterialPanel textAlign="CENTER">
+                <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
+                <m:MaterialTextBox ui:field="lowerCellInfo" label="Lower right cell" grid="s2" />
+                <m:MaterialTextBox ui:field="formulaBox" label="Type in your formula" grid="s2"/>
+                <m:MaterialButton ui:field="filterCellsButton" text="Filter Cells" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+    </g:HTMLPanel>
+</ui:UiBinder>

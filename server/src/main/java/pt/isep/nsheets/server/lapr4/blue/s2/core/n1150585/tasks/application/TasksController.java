@@ -41,6 +41,11 @@ public class TasksController implements Controller {
 
     public void editTask(TaskDTO taskDTO, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
         TaskRepository taskRepository = PersistenceContext.repositories().task();
-        taskRepository.editTask(taskDTO,oldName);
+        taskRepository.editTask(taskDTO, oldName);
+    }
+
+    public void updatePercentage(String title) {
+        TaskRepository taskRepository = PersistenceContext.repositories().task();
+        taskRepository.updatePercentage(title);
     }
 }

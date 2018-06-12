@@ -1,0 +1,22 @@
+@startuml  analysis.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : navigate to page
+Browser ->> Server : getAllTasks()
+Browser ->> Server : deleteTask(TaskDTO)
+
+database Database
+
+Server -> Database : delete
+
+Server -->> Browser : return
+
+Browser -> Browser : display success
+
+@enduml
