@@ -93,29 +93,29 @@ It starts by creating a "null" Formula and then, by calling "FormulaCompiler.get
 
 - Here are the proposed changes to "Formula.g4":
 
-reference
-	:	CELL_REF
-		( ( COLON ) CELL_REF )?
-                | VARIABLE
-	;
+      reference
+      	:	CELL_REF
+      		( ( COLON ) CELL_REF )?
+                      | VARIABLE
+      	;
 
-  VARIABLE
-          : UND LETTER ( NUMBER | LETTER) *
-          ;
+        VARIABLE
+                : UND LETTER ( NUMBER | LETTER) *
+                ;
 
-UND             : '\_';
+      UND             : '\_';
 
 ## 3.3 GRAMMAR ANALYSIS
 
 1 - Analysis for the case that we are using (referred above):
 
-  * 1.1 - *"= {\_Counter:=1; A1:=A1+B1+C3+\_Counter}*
+  * 1.1 - *"= {\_Counter:=1; A1:=A1+B1+C3+\_Counter}"*
 
   ![parseTree_Analysis](parseTree.PNG)
 
 ## 3.4 Server and RPC
 
-. No changes here, this only affects the "core" in "NShared"
+- No changes here, this only affects the "core" in "NShared"
 
 ## 3.5 Analysis Diagrams
 
@@ -135,13 +135,13 @@ The main idea for the "workflow" of this feature increment.
 
 # 4. Design
 
-. "CellImpl" reaches the "ExcelExpressionCompiler" after going through the more general "FormulaCompiler". This class goes through all available compilers ("Excel" being the only one available by default, additional ones will need to be added for the JavaScript and VisualBasic "inspired" languages).
+- "CellImpl" reaches the "ExcelExpressionCompiler" after going through the more general "FormulaCompiler". This class goes through all available compilers ("Excel" being the only one available by default, additional ones will need to be added for the JavaScript and VisualBasic "inspired" languages).
 
-. I have opted to create a new method "visitVariableReference()".
+- I have opted to create a new method "visitVariableReference()".
 
-. Created "VariableReference", which is to "Variable" the same as "CellReference" is to "Cell": a kind-of "pointer" that includes a "Variable" in it.
+- Created "VariableReference", which is to "Variable" the same as "CellReference" is to "Cell": a kind-of "pointer" that includes a "Variable" in it.
 
-. Altered "CellImpl.storeContent()" to copy Variable data to the FormulaCompiler.
+- Altered "CellImpl.storeContent()" to copy Variable data to the FormulaCompiler.
 
 ## 4.1. Tests
 
@@ -149,7 +149,7 @@ The main idea for the "workflow" of this feature increment.
 
 **Domain classes**
 
-      - public class Variable
+**public class Variable**
 
 
 **Test1:** I should ensure that the getName() method returns the correct name.
@@ -220,7 +220,8 @@ The main idea for the "workflow" of this feature increment.
         assertEquals(expResult, result);
     }
 
-      - public class VariableReference
+
+**public class VariableReference**
 
 
 **Test1:** I should ensure that the getName() method returns the correct name.
@@ -272,7 +273,7 @@ The main idea for the "workflow" of this feature increment.
         assertEquals(expResult, result);
     }
 
-      - public class VariableList
+**public class VariableList**
 
 
 **Test1:** I should ensure that the contains() method returns the correct value.
@@ -400,3 +401,7 @@ Commits:
 [Lang02.1: Tests added to the classes.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a7b437b2269f3277de68498f4cfd06fc79dcb0af)
 
 [Lang02.1: Merge branch 'master' of https://bitbucket.org/lei-isep/lapr4-18-2dl](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a9e161eab6630963e7ab16d007de5a56d329db03)
+
+[Lang02.1: Final overview to the implementation of my uc. Added a sort of a tag to mention what I edited and created.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/250d909f5e3aa88d6f3525acc519d811d7e64ceb)
+
+[Lang02.1: Merge branch 'master' of https://bitbucket.org/lei-isep/lapr4-18-2dl](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c9cfef2ceb75f1df78711a8acfaf58031f2b5f88)
