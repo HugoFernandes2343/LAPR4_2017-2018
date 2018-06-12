@@ -347,8 +347,8 @@ public class SpreadsheetImpl implements Spreadsheet {
         int columns = address2.getColumn() - address1.getColumn() + 1;
 
         Cell[][] cells = new Cell[rows][columns];
-        for (int column = 0; column < columns; column++) {
-            for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
                 cells[row][column] = getCell(new Address(column, row));
             }
         }
