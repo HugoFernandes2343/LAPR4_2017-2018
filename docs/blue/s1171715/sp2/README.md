@@ -33,6 +33,7 @@ system sequence diagram: https://imgur.com/a/GlYS5jg
 
 The sequence diagram clearly shows how my part is working at the moment. 
 
+The user can click on the button, which indicates a popup window to show up, where a new Spreadsheet can be created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell, as it was explained in chapter 3), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
 
 sequence diagram: https://imgur.com/a/eKfhqgx
    
