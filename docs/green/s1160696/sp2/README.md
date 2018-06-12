@@ -60,7 +60,10 @@ I first start implement in 06/06/2018 and I was trying to understand how I could
 
 First we have to click in the Conditional Function button. The user will see various buttons to apply the pretended formula and the styles he want.
 
-![OC](opencolap.png)
+![OC](colap.PNG)
+
+
+![OC](opencolap.PNG)
 
 Various messages will appear if the user doesn´t apply the required requisits.
 One example is, when the user tries to apply a conditional function without selecting any cell to apply it, there will be thrown a message in the right upper side saying what he should do. Various messages will appear if the user doesn´t apply the required requisits.
@@ -69,15 +72,15 @@ One example is, when the user tries to apply a conditional function without sele
 
 If the user click the Formula button will appear some operators that he can use.
 
-![OF](openformula.png)
+![OF](openformula.PNG)
 
 If the user click the Color button will appear some colors that he can use.(Not in use because Core08.1 is not implemented).
 
-![OCO](opencolor.png)
+![OCO](opencolor.PNG)
 
 If the user click the Font button will appear some colors that he can use.(Not in use because Core08.1 is not implemented).
 
-![OF](openfont.png)
+![OF](openfont.PNG)
 
 When the user wants to confirm the conditional format to apply he clicks in the Confirm Conditional Function and it will appear a message of success.
 
