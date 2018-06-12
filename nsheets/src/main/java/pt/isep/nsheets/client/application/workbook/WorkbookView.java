@@ -57,6 +57,7 @@ import java.util.List;
 import static gwt.material.design.jquery.client.api.JQuery.$;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
+import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.LocalExtension;
 import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
@@ -464,6 +465,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                     // refresh the active cell
                     this.setActiveCell(activeCell);
+                    this.negativeColors();
                 }
             }
             // Window.alert("Hello");
@@ -838,5 +840,32 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                 {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
                 {"1", "2", "3", "4", "5", "6", "7"}};
         return contents;
+    }
+    
+     public boolean isNumeric(String s) {
+        return s.matches("[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)");
+    }
+
+    private int negativeColors() {
+        int rows = this.customTable.getRowCount();
+        int columns = this.customTable.getRow(0).getWidget().getWidgetCount();
+        for (int a = 0; a < rows; a++) {
+            for (int b = 1; b < columns; b++) {
+                if (isNumeric(customTable.getRow(a).getWidget().getColumn(b).getElement().getInnerText())) {
+
+                    Double content = Double.parseDouble(customTable.getRow(a).getWidget().getColumn(b).getElement().getInnerText());
+                    if (content > 0) {
+                        customTable.getRow(a).getWidget().getColumn(b).getElement().getStyle().setBackgroundColor(LocalExtension.getInstance().getColor1());
+                    } else {
+                        customTable.getRow(a).getWidget().getColumn(b).getElement().getStyle().setBackgroundColor(LocalExtension.getInstance().getColor2());
+                    }
+                }
+            }
+
+        }
+        customTable.getRow(0).getWidget().getColumn(1).getBackgroundColor().getCssName();
+
+        return 0;
+
     }
 }
