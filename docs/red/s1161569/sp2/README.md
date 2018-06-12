@@ -311,3 +311,23 @@ I have encountered some issues regarding gwt UI elements namely on the capabilit
 # 8. Work Log
 
 Commits:
+
+[IPC08.1: Starting development of IPC08.1. Analysis of user story and necessary components for realization of this use case](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/209ebbb10e11)
+
+[IPC08.1: Updated documentation. Initial development of analysis. Identification of necessary MVP classes, domain classes and service classes. Missing only diagrams in the analysis](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b0f302aa3183)
+
+[IPC08.1: Analysis completed. Added domain model image and ssd image](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/e4c685dc636d)
+
+[IPC08.1: Started design. Planification of the necessary domain and services tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/af5e41d7de27)
+
+[IPC08.1: Design almost completed. Identification of necessary classes and used patterns. Missing only sequence diagram](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/28e7fb84e0a0)
+
+[IPC08.1: Updated documentation. Implementation of use case almost completed missing only a viable mechanism on UI to keep the chat messages. Missing tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/05e3ecc79059)
+
+[IPC08.1: Updated documentation. Sequence diagram added. UI materials added in order to retain chat messages. Missing only tests and the ability to use the actual user of the app instead of a default](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/da807ac755f1)
+
+[IPC08.1: Updated documentation. Missing only tests and user connection to the message instead of the actual placeholder](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/5d2eb6e0e87b)
+
+[IPC08.1: Update documentation. Added domain tests. Use case almost completed](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/568ec7e87f6c)
+
+[IPC08.1: Reserved for final commit]
