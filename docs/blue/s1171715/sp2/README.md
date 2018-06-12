@@ -61,6 +61,8 @@ FILTERCELLRANGEVIEW.JAVA
 
         filterCellRangeWindow.open();
 
+		//azutan mukodik hogy a user kitoltotte a dolgokat, begyujti az osszes parametert amit a user kitoltott
+		
         filterCellsButton.addClickHandler(event -> {
 
             String formula = formulaBox.getValue();
