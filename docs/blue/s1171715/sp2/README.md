@@ -19,19 +19,30 @@ In the light of the official document, my task was the following:
 
 In order to draw up a proper solution for this task, I had to study and understand the task itself in depth, moreover, I had to get familiar with the working process of a boolean variable. As I mentioned before, I havent had any previous studies with GWT and Java either, and even though I tried my best to be better in this fields, I still have a long way to go, mainly because of the lack of time, and the problems I had to face and solve in the past days. 
 
-ssd should be here
+In addition, because of the lack of time, I only managed to solve the following:
 
+- It is possible for the user to select a range of cells, e.g: B2:C4 in a table which has columns from A-F, and cells from 1-6.
+	- In this case, in B2, B will be the indicator column, and C4 will stand for the row that needs to be checked. 
+	- This means, that all the values in column B will be checked according to the previously given formula, and according to that, the row (C4) is going to stay visible, or change to invisible.
+	
+Of course, if I would have more time, I would try to solve the task like how it would be expected from the side of the user/customer.
 
+system sequence diagram: https://imgur.com/a/GlYS5jg
 
 # 4. Design
 
-sd should be here
+The sequence diagram clearly shows how my part is working at the moment. 
+
+
+sequence diagram: https://imgur.com/a/eKfhqgx
    
 
 # 5. Implementation
 
 
 
+
+
 # 6. Final Remarks
 
-
+It was an interesting task to be solved, I enjoyed working on it, because it needed creativity and it was challenging to find a way to solve it somehow. 
