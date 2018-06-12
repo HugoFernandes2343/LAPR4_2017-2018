@@ -251,6 +251,7 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
     }
 
     /**
+     * João Vieira - 1150575
      * Updates the cell's content, and registers dependencies.
      *
      * @param content the content to store

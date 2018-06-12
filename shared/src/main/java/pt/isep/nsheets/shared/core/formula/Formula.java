@@ -61,6 +61,7 @@ public class Formula implements Expression {
     private SortedSet<Reference> references;
 
     /**
+     * João Vieira - 1150575
      * Temporary Variables created for this Formula. Key - Variable name (unique
      * in the Formula, but NOT the Cell)
      */

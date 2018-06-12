@@ -101,6 +101,7 @@ public class ExpressionBuilder implements ExpressionVisitor {
 //            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //        }
 
+    /* João Vieira - 1150575 */
     @Override
     public Object visitVariableReference(VariableReference varReference) {
         return varReference;

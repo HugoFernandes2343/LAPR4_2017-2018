@@ -70,6 +70,7 @@ public interface ExpressionVisitor {
 	public Object visitReference(Reference reference);
 
         /**
+         * João Vieira - 1150575
          * Visits the given Variable Reference.
          * @param varReference the VariableReference to visit
          * @return 
