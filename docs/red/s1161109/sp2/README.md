@@ -58,11 +58,36 @@ For this feature increment i needed to:
 -Learn how to encrypt passwords;
 
 
+-Create a view/page that will be used for the register
+
+-Add a button to the menu to sing up
+
+-Add a button to logout
+
+-Add a image of user on the top
+
+-Add the nickname of user on the top
+
+-Persist the user data on the server
+
+
+
+  Special Case of Email Verification:
+
+  Email is verified by the next pattern:
+
+  [a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}_
+
+
+
 
 
 
 
 ## 3.1 GWT and Project Structure
+
+
+
 
 **Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
 - **server**. It is the "server part" of the web application.  
@@ -104,13 +129,6 @@ For this feature increment i needed to:
 * **CurrentMenur** - This class has the CurrentMenu that is beeing shown;
 
 
-## 3.2 Analysis
-
-  Special Case of Email Verification:
-
-  Email is verified by the next pattern:
-
-  [a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}_
 
 ## 3.4 Analysis Diagrams
 
