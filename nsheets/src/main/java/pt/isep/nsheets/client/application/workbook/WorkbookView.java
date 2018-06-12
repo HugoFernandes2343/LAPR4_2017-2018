@@ -145,7 +145,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     //1140420
     @UiField
     MaterialButton chartWizardButton;
-
+    
+    //1171715
+    @UiField
+    MaterialButton filterCellRange;
+    
     //1091234
     @UiField
     MaterialButton newSpreadsheetButton;
@@ -525,6 +529,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             new BasicChartWizardView(customTable.getRow(0).getData().sheet);
         });
 
+        //1171715
+        filterCellRange.addClickHandler(event -> {
+            new FilterCellRangeView(customTable.getRow(0).getData().sheet);
+        });
+        
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");
