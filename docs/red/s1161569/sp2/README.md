@@ -330,4 +330,4 @@ Commits:
 
 [IPC08.1: Update documentation. Added domain tests. Use case almost completed](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/568ec7e87f6c)
 
-[IPC08.1: Reserved for final commit]
+[IPC08.1: Updated documentation. Chat now uses actual user of the app](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/54ee153d7979)
