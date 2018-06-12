@@ -7,5 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface UsersService extends RemoteService {
 
     UserDTO getUser(String email, String password);
+    UserDTO saveUser(UserDTO user);
 
 }
+

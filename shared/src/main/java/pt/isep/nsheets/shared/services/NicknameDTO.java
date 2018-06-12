@@ -10,7 +10,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class NicknameDTO implements Serializable{
 
-    private final String nickName;
+    private String nickName;
 
     public NicknameDTO(String nickName) {
         this.nickName = nickName;
