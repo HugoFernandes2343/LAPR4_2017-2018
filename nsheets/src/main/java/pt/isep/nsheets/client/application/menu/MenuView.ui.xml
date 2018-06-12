@@ -68,7 +68,7 @@
                     
                     
                     <m:MaterialLink ui:field="btnLogin" targetHistoryToken="{tokens.getLogin}" text="Login"/>
-                    <m:MaterialLink text="Signup" targetHistoryToken="{tokens.getRegister}"/>
+                    <m:MaterialLink text="Signup" ui:field="btnSingUp" targetHistoryToken="{tokens.getRegister}"/>
                     <m:MaterialLink ui:field="btnLogout" text="Logout"/>
                     
                     

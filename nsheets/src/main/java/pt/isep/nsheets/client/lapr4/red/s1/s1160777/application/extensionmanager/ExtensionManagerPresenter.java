@@ -11,7 +11,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialListValueBox;
 import gwt.material.design.client.ui.MaterialSwitch;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
@@ -23,10 +25,14 @@ import pt.isep.nsheets.shared.services.ExtensionsServiceAsync;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import pt.isep.nsheets.client.application.workbook.WorkbookPresenter;
+
 
 public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresenter.MyView, ExtensionManagerPresenter.MyProxy> {
 
     private ExtensionManagerPresenter.MyView view;
+
+
 
     interface MyView extends View {
 
@@ -41,6 +47,10 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
         MaterialSwitch getColorExtensionSwitch();
 
         MaterialSwitch getStyleExtensionSwitch();
+
+        MaterialListValueBox<Color> getMaterialListValueBox1();
+
+        MaterialListValueBox<Color> getMaterialListValueBox2();
 
     }
 
@@ -62,26 +72,11 @@ public class ExtensionManagerPresenter extends Presenter<ExtensionManagerPresent
         SetPageTitleEvent.fire("Extensions Manager", "Manage your extensions", "", "", this);
 
         this.view.addClickHandlerApplyButton(event -> {
-            //Add behaviour to persist the changes and apply the effects
-            //of the extensions in use
-            ExtensionsServiceAsync extSvc = GWT.create(ExtensionsService.class);
+            LocalExtension.getInstance().setColor1(this.view.getMaterialListValueBox1().getSelectedItemText().toLowerCase());
+            LocalExtension.getInstance().setColor2(this.view.getMaterialListValueBox2().getSelectedItemText().toLowerCase());
+            MaterialToast.fireToast("Colors will be updated on next fomurla insert!");
 
-            AsyncCallback<ArrayList<Extension>> callback = new AsyncCallback<ArrayList<Extension>>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Failure");
-                }
-
-                @Override
-                public void onSuccess(ArrayList<Extension> result) {
-                    MaterialToast.fireToast("Sucess");
-                }
-            };
-            extSvc.getExtensions(callback);
-
-            //iniciar controller que instancia o manager
         });
-
 
         this.view.addColorSwitchHandler(vc -> {
             MaterialToast.fireToast("Color Value " + vc.getValue());//diplays the actual value

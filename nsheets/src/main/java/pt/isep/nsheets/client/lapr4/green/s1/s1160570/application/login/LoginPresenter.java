@@ -17,6 +17,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentMenu;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -78,6 +79,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                             .build();
                     placeManager.revealPlace(placeRequest);
                     
+                    
+                    CurrentMenu.MenuReload();
                     
                     
                     

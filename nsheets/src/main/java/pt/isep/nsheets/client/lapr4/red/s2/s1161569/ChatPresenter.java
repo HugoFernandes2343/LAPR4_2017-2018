@@ -73,7 +73,7 @@ public class ChatPresenter extends Presenter<ChatPresenter.MyView, ChatPresenter
             if(this.view.getFirstBox().getText().isEmpty()){
                 throw new IllegalArgumentException();
             }
-            MessageDTO mDto = new MessageDTO("god_should_be_here",this.view.getFirstBox().getText(),new Date());
+            MessageDTO mDto = new MessageDTO(CurrentUser.getCurrentUser().getNickname().getNickName(),this.view.getFirstBox().getText(),new Date());
             chatSvc.addMessage(mDto, callback);
         });
         this.view.addClickHandlerReload(event -> {

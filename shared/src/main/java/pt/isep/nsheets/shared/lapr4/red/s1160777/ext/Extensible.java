@@ -20,16 +20,41 @@
  */
 package pt.isep.nsheets.shared.lapr4.red.s1160777.ext;
 
+import gwt.material.design.client.ui.table.MaterialDataTable;
+import java.util.Collection;
+
+
 /**
  * An interface for extensible classes.
+ *
  * @author Einar Pehrson
  */
 public interface Extensible<T> {
 
-	/**
-	 * Returns the extension with the given key.
-	 * @param name the name of the extension (case-insensitive)
-	 * @return the appropriate extension, or null if no extension with the given name was found
-	 */
-	public T getExtension(String name);
+    /**
+     * Returns the extension with the given key.
+     *
+     * @param name the name of the extension (case-insensitive)
+     * @return the appropriate extension, or null if no extension with the given
+     * name was found
+     */
+    public T getExtension(String name);
+
+    /**
+     * Adds a color extension to the actual cell.
+     *
+     * @param name for the extension
+     * @param c1 color for negative value
+     * @param c2 color for positive value
+     * @param table MaterialDataTable from workbook tab
+     */
+    public void addColorExtension(String name, String c1, String c2, MaterialDataTable<?> table);
+
+    /**
+     * returns alls the cell extensions in a given cell
+     *
+     * @return all cell extensions
+     */
+    public Collection<CellExtension> getListExtension();
 }
+

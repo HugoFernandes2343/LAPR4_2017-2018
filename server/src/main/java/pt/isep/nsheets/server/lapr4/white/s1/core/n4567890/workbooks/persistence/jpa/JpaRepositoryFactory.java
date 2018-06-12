@@ -5,8 +5,8 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.jpa;
 
-import javax.persistence.EntityManager;
-
+import pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.persistenc.CalendarRepository;
+import pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.persistence.jpa.JPACalendarRepository;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.*;
 
 /**
@@ -57,6 +57,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaMessageRepository(this.settings);
     }
 
+
     public RequestRepository requests() {
         return new JpaRequestRepository(this.settings);
     }
@@ -65,4 +66,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public TaskRepository task() {
         return new JpaTaskRepository(this.settings);
     }
+
+    @Override
+    public CalendarRepository calendares(){ return new JPACalendarRepository(this.settings);}
+
 }

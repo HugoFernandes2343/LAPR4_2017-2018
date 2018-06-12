@@ -2,6 +2,7 @@ package pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain;
 
 import com.google.inject.Inject;
 import eapli.framework.domain.AggregateRoot;
+import gwt.material.design.client.data.HasDataCategory;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Event implements AggregateRoot<Long>, Serializable {
+public class Event implements AggregateRoot<Long>, Serializable, HasDataCategory {
 
     // ORM primary key
     @Id
@@ -144,5 +145,10 @@ public class Event implements AggregateRoot<Long>, Serializable {
 
     public static Event fromEvent(Event event) throws IllegalArgumentException {
         return new Event(event.getTitle(), event.getDescription(), event.getMadeBy(), event.getDate(), event.getDuration());
+    }
+
+    @Override
+    public String getDataCategory() {
+        return null;
     }
 }

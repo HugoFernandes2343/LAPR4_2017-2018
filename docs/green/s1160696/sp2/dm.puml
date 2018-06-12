@@ -1,0 +1,46 @@
+@startuml
+class ConditionalFunctionController {
+	+Boolean activateExtension(activeCellDTO, name, formula, value)
+}
+
+class ConditionalFormatExtension {
+	+CellExtension new(name)
+	+ConditionalFormatExtension extend(Cell)
+	+void valueChenged(Cell)
+}
+
+class BinaryOperationExtension {
+	+BinaryOperationExtension new(cellValue, operator, insertedValue)
+}
+
+class WorkbookView {
+	+Cell getActiveCell()
+}
+
+interface Cell {
+	+String getContent()
+}
+
+abstract class RelationalOperator {
+	+String getIdentifier()
+}
+
+class Language {
+	+List<BinaryOperator> getBinaryOperators()
+}
+
+class WorkbooksServiceImpl {
+	+Boolean activateConditional(activeCellDTO, name, formula, value)
+}
+
+WorkbookView --> Language : getBinaryOperators()
+WorkbookView --> RelationalOperator : getIdentifier()
+WorkbookView --> WorkbookView : getActiveCell()
+WorkbookView --> Cell : getContent()
+WorkbookView --> WorkbooksServiceImpl : activateConditional(activeCellDTO, name, formula, value)
+WorkbooksServiceImpl --> ConditionalFunctionController : activateExtension(activeCell, name, formula, value)
+ConditionalFunctionController --> ConditionalFormatExtension : new(name)
+ConditionalFunctionController --> ConditionalFormatExtension : extend(Cell)
+ConditionalFunctionController--> ConditionalFormatExtension : valueChanged(Cell)
+ConditionalFormatExtension --> BinaryOperationExtension : new(cellValue, operator, insertedValue)
+@enduml
