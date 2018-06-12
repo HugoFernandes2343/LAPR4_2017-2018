@@ -12,6 +12,8 @@ import java.util.Map;
 /**
  *
  * @author Rodrigo
+ * 
+ * VariableList is now Serializable - João Vieira - 1150575
  */
 public class VariableList implements Serializable {
     public Map<String, Variable> variableList;

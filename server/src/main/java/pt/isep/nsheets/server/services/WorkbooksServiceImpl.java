@@ -8,6 +8,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddSpreadsheetToWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookDescriptionController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.DeleteWorkbookController;
@@ -23,6 +24,7 @@ import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction.ConditionalFunctionController;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
@@ -153,10 +155,9 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         return wb;
 
     }
-    
-    
+
     @Override
-    public boolean activateConditional(CellImpl activeCell, String name, String operation, String value) {
+    public boolean activateConditional(CellImplDTO activeCell, String name, String operation, String value) {
         ConditionalFunctionController cfc = new ConditionalFunctionController();
         try {
             return cfc.activateExtension(activeCell, name, operation, value);
@@ -165,8 +166,6 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         }
         return true;
     }
-    
-    
 
     @Override
     public boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO) {
@@ -180,9 +179,7 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
         } catch (DataIntegrityViolationException ex) {
             Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
+        return false;
     }
-
-    
 
 }

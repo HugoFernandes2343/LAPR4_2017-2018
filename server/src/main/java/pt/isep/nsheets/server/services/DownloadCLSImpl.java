@@ -1,14 +1,17 @@
 package pt.isep.nsheets.server.services;
 
-import javax.servlet.ServletContext;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.DataException;
+import pt.isep.nsheets.shared.services.DownloadToCLSService;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-
-import static org.apache.commons.io.FileUtils.getFile;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -16,45 +19,41 @@ import static org.apache.commons.io.FileUtils.getFile;
  * <p>
  * Servlet that allows the user to download files from the server
  */
-public class DownloadCLSImpl extends HttpServlet {
+public class DownloadCLSImpl extends RemoteServiceServlet implements DownloadToCLSService{
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doGet(request, response);
-        //Cant tell if it needs to be implemented yet
-    }
+    private WorkbookDTO toExport;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int BUFFER = 1024 * 100;
+    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        super.doPost(request, response);
+    }*/
 
-        String fileName = request.getParameter("filename");//get the name
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        int BUFFER = 1024 * 100;//set a reasonable size
 
-        response.setContentType("text/plain");
+        String fileName = request.getParameter("filename");
+
+        response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;fileName=\"" + fileName + "\".cls");//test cls
-        response.setContentLength(Long.valueOf(getFile(fileName).length()).intValue());
         response.setBufferSize(BUFFER);
 
-        //Your IO code goes here to create a file and set to outputStream//
-
-        ServletContext ctx = getServletContext();
-        InputStream is = ctx.getResourceAsStream("/CLS.txt");
-
-        /*
-        FileInputStream is = new FileInputStream(filePath + fileName);
-
-        try{
-            //ObjectOutputStream oos = new ObjectOutputStream(stream);
-            //oos.writeObject(workbook);
-            //oos.flush();
+        try {
             ServletOutputStream outputStream = response.getOutputStream();
-            int bytes;
-            while ((bytes = is.read()) != -1) {
-                outputStream.write(bytes);
-            }
+            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+            Workbook wb = new Workbook();
+            //Workbook temp = this.toExport.fromDTO(wb);
+            oos.writeObject(this.toExport);//How to put the workbook here, maybe through the Service and the response object
+            oos.flush();
             outputStream.close();
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Inside Try/catch");
         }
-        */
+
+    }
+
+    @Override
+    public WorkbookDTO exportToDownload(WorkbookDTO toExport) {
+        this.toExport = toExport;
+        return toExport;
     }
 }

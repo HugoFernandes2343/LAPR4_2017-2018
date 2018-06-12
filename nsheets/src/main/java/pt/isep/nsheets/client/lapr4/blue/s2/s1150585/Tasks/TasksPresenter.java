@@ -43,6 +43,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
 
         void setContents(ArrayList<TaskDTO> contents);
 
+        void clearView();
+
         void addClickHandler(ClickHandler ch);
 
         void addEventChangeHandler(ValueChangeHandler<String> vc);
@@ -65,6 +67,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
             refresh();
             if (event.getValue().equalsIgnoreCase("Show Only Complete Tasks")) {
+                
                 ArrayList<TaskDTO> completedTasks = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -75,7 +78,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(completedTasks);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Incomplete Tasks")) {
-                //refresh();
+               refresh();
                 ArrayList<TaskDTO> incompletedTasks = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -86,7 +89,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(incompletedTasks);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 1")) {
-                //refresh();
+                refresh();
                 ArrayList<TaskDTO> priority1 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -96,7 +99,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority1);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 2")) {
-                //refresh();
+                refresh();
                 ArrayList<TaskDTO> priority2 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -107,7 +110,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 view.setContents(priority2);
 
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 3")) {
-                //refresh();
+                refresh();
                 ArrayList<TaskDTO> priority3 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -117,7 +120,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority3);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 4")) {
-                //refresh();
+                refresh();
                 ArrayList<TaskDTO> priority4 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -127,7 +130,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
                 }
                 view.setContents(priority4);
             } else if (event.getValue().equalsIgnoreCase("Show Only Tasks with priority 5")) {
-                //refresh();
+                refresh();
                 ArrayList<TaskDTO> priority5 = new ArrayList<>();
 
                 for (TaskDTO t : allTasks) {
@@ -171,13 +174,13 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         AsyncCallback<ArrayList<TaskDTO>> callback = new AsyncCallback<ArrayList<TaskDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                // MaterialToast.fireToast("Error " + caught.getMessage());
+             //  MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
             @Override
             public void onSuccess(ArrayList<TaskDTO> result) {
                 allTasks = result;
-                nTask = result.size() + 1;
+                nTask = result.size();
                 view.setContents(result);
             }
         };
@@ -192,7 +195,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         AsyncCallback<ArrayList<TaskDTO>> callback = new AsyncCallback<ArrayList<TaskDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                // MaterialToast.fireToast("Error " + caught.getMessage());
+          //    MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
             @Override

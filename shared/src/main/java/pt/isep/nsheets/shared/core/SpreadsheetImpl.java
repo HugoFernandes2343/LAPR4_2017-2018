@@ -38,7 +38,10 @@ import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.SpreadsheetExtension;
+import pt.isep.nsheets.shared.services.AddressDTO;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
@@ -114,6 +117,40 @@ public class SpreadsheetImpl implements Spreadsheet {
     public SpreadsheetImpl() {
     }
 
+    /**
+     * to DTO
+     * @param id
+     * @param workbookId
+     * @param title
+     * @param cells 
+     */
+    private SpreadsheetImpl(Long id, String title, Map<Address, Cell> cells) {
+        this.id = id;
+        this.title = title;
+        this.cells = cells;
+
+        if (cells.isEmpty()) {
+            columns = 0;
+            rows = 0;
+        } else {
+            int maxRow = 0;
+            int maxCol = 0;
+
+            for (Map.Entry<Address, Cell> entry : cells.entrySet()) {
+                Address address = entry.getKey();
+                if (address.getColumn() > maxCol) {
+                    maxCol = address.getColumn();
+                }
+                if (address.getRow() > maxRow) {
+                    maxRow = address.getRow();
+                }
+            }
+
+            columns = maxCol + 1;
+            rows = maxRow + 1;
+        }
+    }
+    
     /**
      * Creates a new spreadsheet.
      *
@@ -357,7 +394,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         String[][] content = new String[getRowCount()][getColumnCount()];
         for (int i = 0; i < getRowCount(); i++) {
             Cell[] vecCells = getRow(i);
-            for (int j = 0; i < vecCells.length; j++) {
+            for (int j = 0; j < vecCells.length; j++) {
                 content[i][j] = vecCells[j].getContent();
             }
         }
@@ -478,4 +515,32 @@ public class SpreadsheetImpl implements Spreadsheet {
 //		for (SpreadsheetExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
+    
+    
+    
+    public static Spreadsheet fromDTO(SpreadsheetImplDTO dto) {
+        Map<Address, Cell> ssCells = new LinkedHashMap<>();
+
+        for (Map.Entry<AddressDTO, CellImplDTO> entry : dto.cells.entrySet()) {
+            AddressDTO addressDTO = entry.getKey();
+            CellImplDTO cellDTO = entry.getValue();
+
+            ssCells.put(Address.fromDTO(addressDTO), CellImpl.fromDTO(cellDTO));
+        }
+        return new SpreadsheetImpl(dto.id, dto.title, ssCells);
+    }
+
+    
+    @Override
+    public SpreadsheetImplDTO toDTO1() {
+        Map<AddressDTO, CellImplDTO> cellDTOs = new LinkedHashMap<>();
+
+        for (Map.Entry<Address, Cell> entry : cells.entrySet()) {
+            Address address = entry.getKey();
+            Cell cell = entry.getValue();
+
+            cellDTOs.put(address.toDTO(), cell.toDTO());
+        }
+        return new SpreadsheetImplDTO(id, cellDTOs, title, columns, rows);
+    }
 }
