@@ -43,6 +43,7 @@ import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosV
 import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 //import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
+import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
@@ -516,10 +517,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             SearchView searchView = new SearchView();
         });
 
-//        exportToPdfButton.addClickHandler(event -> {
-//            ExportToPdfView ex = new ExportToPdfView();
-//
-//        });
+    exportToPdfButton.addClickHandler(event -> {
+          new ExportToPdfView(this.getActiveCell().getSpreadsheet().getWorkbook());
+
+       });
 
 //        formButton.addClickHandler(event -> {
 //            //Window.alert("Hello");
