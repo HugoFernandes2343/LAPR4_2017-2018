@@ -21,6 +21,7 @@ import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pt.isep.nsheets.client.application.CurrentMenu;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
@@ -46,6 +47,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
         void addClickHandler(ClickHandler ch);
 
         MaterialLink getBtnLogout();
+        
+        MaterialLink getSingUp();
 
         MaterialLink getBtnLogin();
 
@@ -60,28 +63,42 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
         super(eventBus, view);
 
         getView().setUiHandlers(this);
+        
+        CurrentMenu.setMps(this);
+        
+        CurrentMenu.MenuReload();
 
-        if (!CurrentUser.isIsLoggedIn()) {
-
-            getView().getBtnLogout().setVisible(false);
-            getView().getUserImage().setVisible(false);
-            getView().getUserName().setVisible(false);
-
-        } else {
-            getView().getBtnLogin().setVisible(false);
-            getView().getBtnLogout().setVisible(true);
-            getView().getUserImage().setVisible(true);
-            getView().getUserName().setVisible(true);
-        }
+        
 
         getView().addClickHandler((event) -> {
             
-          getView().getBtnLogout().setVisible(false);
+          
           CurrentUser.logout();
-          getView().getBtnLogin().setVisible(true);
-            
+          reloadUser();
+          
 
         });
+
+    }
+    
+    @Override
+    public void reloadUser() {
+
+        if (CurrentUser.isIsLoggedIn()) {
+            this.getView().getUserName().setText(CurrentUser.getCurrentUser().getNickname().getNickName());
+            this.getView().getUserName().setVisible(true);
+            this.getView().getUserImage().setVisible(true);
+            this.getView().getBtnLogin().setVisible(false);
+            this.getView().getBtnLogout().setVisible(true);
+            this.getView().getSingUp().setVisible(false);
+        } else{
+            this.getView().getUserName().setText("");
+            this.getView().getUserName().setVisible(false);
+            this.getView().getUserImage().setVisible(false);
+            this.getView().getBtnLogin().setVisible(true);
+            this.getView().getBtnLogout().setVisible(false);
+            this.getView().getSingUp().setVisible(true);
+        }
 
     }
 
