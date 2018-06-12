@@ -81,4 +81,25 @@ public class TaskDTO implements Serializable {
         return percentage;
     }
 
+    public boolean sameAs(Object other) {
+
+        final TaskDTO that = (TaskDTO) other;
+
+        if (!this.title.equals(that.title)) {
+            return false;
+        }
+        if (!this.description.equals(that.description)) {
+            return false;
+        }
+
+        if (this.priority != that.priority) {
+            return false;
+        }
+        if (this.percentage != that.percentage) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

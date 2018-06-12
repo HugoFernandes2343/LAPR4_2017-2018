@@ -28,5 +28,5 @@ public interface WorkbooksServiceAsync {
 
 //	void addWorkbookDescription(WorkbookDescriptionDTO wdDto, AsyncCallback<WorkbookDescriptionDTO> async);
     
-    void activateConditional(CellImpl activeCell, String name, String operation, String value,AsyncCallback<Boolean> async);
+    void activateConditional(CellImplDTO activeCell, String name, String operation, String value,AsyncCallback<Boolean> async);
 }
