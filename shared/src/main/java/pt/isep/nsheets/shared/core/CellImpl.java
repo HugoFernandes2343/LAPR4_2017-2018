@@ -158,7 +158,7 @@ public class CellImpl implements Cell, Serializable, IsSerializable {
      * @throws FormulaCompilationException if an incorrectly formatted formula
      * was entered
      */
-    public CellImpl(Spreadsheet spreadsheet, Address address, String content) throws FormulaCompilationException {
+    private CellImpl(Spreadsheet spreadsheet, Address address, String content) throws FormulaCompilationException {
         this(spreadsheet, address);
         storeContent(content);
         reevaluate();
