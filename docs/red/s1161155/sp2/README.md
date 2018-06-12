@@ -107,7 +107,57 @@ By memory we apply/use:
 
 
 # 5. Implementation
+
+**UI: Pop up menu window:**
+This was created through a view created in the workbook view, and opened by the search menu.
+
+**UI: Search bar:**
+The search bar is based in the search bar used in the home view to search for workbooks.
+It calls a method that searches for the parameter inputted and creates cards if there are matches, both the content and value are searched.
+
+**UI: Result card:**
+The card has as a title the content of  the cell, and then shows teh address of the cell in a lower label as well as the value if the content for some reason differs from said value.
+
+**Search for the parameter:**
+Since the current workbook is not currently able to be set for testing the method was created for the default spreadsheet only it could however be easily changed to encompass any current workbook.
+
+**Code Organization:**
+Since I only created UI classes I placed them in the workbook package inside the nsheets UI package.
+
+
 # 6. Integration/Demonstration
+The UC is fully implemented and functional for the default spreadsheet.
+Inside the workbook tab you must press the optional button in the lower right corner, and after this press the search icon and a pop up window is opened.
+This pop-up is structured as required, in the top there is a search bar, and the bottom will be used to show the results.
+Open the seach bar and type in for example "8", you can then se it finds 3 results one of which is an example of the content not having the parameter but the value does so it still shows. After this you can press enter with the bar blank to show all the cells, content and value.
+
+
 # 7. Final Remarks
+During this sprint I cooperated with Norberto Sousa, 1120608, in order to implement my search functionality, helped fix a few errors in my old use case in the beginning of the sprint, and proceeded to fully implement this UC.
+The comprehension of the subjects at hand was easier in this sprint since I have grown accustomed to the material  design and the whole, program structure.
+As such there were no really big issues this time around, the whole process went smoothly.
+
+
 # 8. Work Log
+
+- In the first day of the sprint I helped Daniel Fernandes fix errors left over from my previous use case.
+
+- In the second day of the sprint after we assigned use cases in our team, I started the analysis process and completed it.
+
+- In the third day I started creating the basic UI structure (button on the workbook view, pop-up window, search bar), and started the design of teh funcionality.
+
+- In the fourth day I finished my design and began implementing.
+
+- In the weekend I implemented most of the use case, however there were some things that were not done optimally.
+
+- In the seventh day I corrected some of the issues remaining in the code, and started the correct form of implementation of the search method.
+
+- In the eighth day I finished correcting the code, and as such ended the functionality, and proceeded to write the end parts of the documentation.
+  
 ##Commits:
+
+- [IPC 2.1 Starting analysis and design.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/81cffdf63f625b988e647bbde6876a5ac3bb96cb)
+
+- [IPC 2.1 Inicial UI, popup and search bar.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/becdd5d5658c1263b21f887c05efce60d4ab29cf)
+
+- [IPC 2.1 Code completed, analysis only missing the last touches.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/10bbc6e4030495961ed880b67ca8ed38ad3dda02)

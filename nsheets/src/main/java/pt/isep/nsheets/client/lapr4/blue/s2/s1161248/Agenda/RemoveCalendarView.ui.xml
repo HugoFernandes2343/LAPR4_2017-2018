@@ -15,7 +15,7 @@ Uncomment this for XHTML entities
             <cb:MaterialComboBox ui:field="calendar"></cb:MaterialComboBox>
         </m:MaterialPanel>
         <m:MaterialPanel>
-            <m:MaterialButton ui:field="deleteButton" text="Delect"></m:MaterialButton>
+            <m:MaterialButton ui:field="deleteButton" text="Delete"></m:MaterialButton>
             <m:MaterialButton ui:field="cancelButton" text="Cancel"></m:MaterialButton>
         </m:MaterialPanel>
     </ma:window.MaterialWindow>
