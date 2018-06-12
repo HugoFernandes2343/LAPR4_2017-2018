@@ -39,6 +39,15 @@ public class Message implements AggregateRoot<Long>, Serializable {
     @Override
     public boolean sameAs(Object other) {
         Message message=(Message) other;
+        if(!((Message) other).date.equals(this.date)){
+            return false;
+        }
+        if(!((Message) other).text.equals(this.text)){
+            return false;
+        }
+        if(!((Message) other).user.equals(this.user)){
+            return false;
+        }
         return is(message.pk);
     }
 

@@ -47,9 +47,21 @@
                         <m:MaterialTextBox ui:field="textPassword" type="PASSWORD" placeholder="Password" />
                         
                         
-                        <ma:fileuploader.MaterialFileUploader ui:field="uploader" enabled="true" url="/uploadServlet" maxFileSize="20" shadow="1">
-                            <ma:fileuploader.MaterialUploadLabel title="Drag Your photo here to Upload" description="Profile Photo" />
-                        </ma:fileuploader.MaterialFileUploader>
+                        <m:MaterialRow>
+                            <ma:fileuploader.MaterialFileUploader ui:field="cardUploader" acceptedFiles="*" grid="l4" url="/fileUploaderServlet" preview="false" maxFileSize="20" shadow="0" clickable="cardUpload">
+                                <m:MaterialCard>
+                                    <m:MaterialCardImage>
+                                        <m:MaterialImage ui:field="imgPreview" url="http://demo.geekslabs.com/materialize/v3.1/images/gallary/33.jpg" />
+                                    </m:MaterialCardImage>
+                                    <m:MaterialCardContent layoutPosition="RELATIVE">
+                                        <m:MaterialLabel ui:field="lblName" text="Sample.png" fontSize="1.5em"/>
+                                        <m:MaterialLabel ui:field="lblSize" text="13 mb" fontSize="0.8em"/>
+                                        <m:MaterialProgress ui:field="progress" layoutPosition="ABSOLUTE" bottom="0" left="0" type="DETERMINATE" percent="0" />
+                                        <m:MaterialButton m:id="cardUpload" layoutPosition="ABSOLUTE" top="-25" right="25" type="FLOATING" backgroundColor="PINK" size="LARGE" iconType="CLOUD_UPLOAD" iconColor="WHITE"/>
+                                    </m:MaterialCardContent>
+                                </m:MaterialCard>
+                            </ma:fileuploader.MaterialFileUploader>
+                        </m:MaterialRow>
 
                         
                         
