@@ -23,7 +23,8 @@ import pt.isep.nsheets.shared.services.WorkbooksServiceAsync;
 import javax.inject.Inject;
 import java.util.ArrayList;
 
-public class ContactsPresenter extends Presenter<ContactsPresenter.MyView,ContactsPresenter.MyProxy> {
+public class ContactsPresenter extends Presenter<ContactsPresenter.MyView, ContactsPresenter.MyProxy> {
+
     private MyView view;
 
     interface MyView extends View {
@@ -34,13 +35,14 @@ public class ContactsPresenter extends Presenter<ContactsPresenter.MyView,Contac
     }
 
     @NameToken(NameTokens.contacts)
+
     @ProxyStandard
     @NoGatekeeper
     interface MyProxy extends ProxyPlace<ContactsPresenter> {
     }
 
     @Inject
-    ContactsPresenter(EventBus eventBus,MyView view,MyProxy proxy) {
+    ContactsPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.view = view;
@@ -50,6 +52,7 @@ public class ContactsPresenter extends Presenter<ContactsPresenter.MyView,Contac
         });
 
     }
+
     /*private void refreshView() {
 
 

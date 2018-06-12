@@ -23,6 +23,8 @@ public class NameTokens {
 
     public static final String home = "home";
 
+    public static final String agenda = "agenda";
+
     public static final String about = "about";
 
     public static final String workbook = "workbook";
@@ -32,6 +34,8 @@ public class NameTokens {
     public static final String settings = "settings";
 
     public static final String contacts = "contacts";
+ 
+    public static final String tasks = "tasks";
 
     public static final String requests = "requests";
 
@@ -41,14 +45,27 @@ public class NameTokens {
 
     public static final String login = "login";
     
+    public static final String register = "register";
+    
     public static final String logout = "logout";
+    
+    public static final String menu = "menu";
+
 
     public static final String extensionmanager = "extensionmanager";
 
     public static final String xmlupload = "xmlupload";
 
+    public static final String exportToPdf = "exportToPdf";
+
+    public static final String chat = "chat";
+
     public static String getWorkbook() {
         return workbook;
+    }
+
+    public static String getRegister() {
+        return register;
     }
 
     public static String getMacros() { return macros; }
@@ -64,6 +81,10 @@ public class NameTokens {
     public static String getContacts() {
         return contacts;
     }
+    
+    public static String getTasks() {
+        return tasks;
+    }
 
     public static String getRequests() { return requests; }
 
@@ -75,7 +96,9 @@ public class NameTokens {
      public static String getLogout() {
         return logout;
     }
-    
+    public static String getChat() {
+        return chat;
+    }
 
     public static String getSettings() {
         return settings;
@@ -88,8 +111,16 @@ public class NameTokens {
     public static String getExportToCSVWindow() {
         return exportToCSVWindow;
     }
+    public static String getMenu() {
+        return menu;
+    }
 
     public static String getExtensionManager() { return extensionmanager; }
 
     public static String getXmlupload() { return xmlupload; }
+
+    public static String getAgenda(){ return agenda;}
+
+
+    public static String getExportToPdf(){ return exportToPdf; }
 }

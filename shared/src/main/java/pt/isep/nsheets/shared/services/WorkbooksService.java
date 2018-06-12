@@ -4,16 +4,27 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Workbook;
 
 @RemoteServiceRelativePath("workbooksService")
 public interface WorkbooksService extends RemoteService {
 
-    ArrayList<Workbook> getWorkbooks();
-//	WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
+    ArrayList<WorkbookDescriptionDTO> getWorkbooks();
 
-    Workbook addWorkbook(Workbook wd) throws DataException;
+    WorkbookDescriptionDTO addWorkbookDescription(WorkbookDescriptionDTO wdDto) throws DataException;
+
+    boolean editWorkbookDescription(WorkbookDescriptionDTO dto, String description);
+
+    boolean editWorkbookName(WorkbookDescriptionDTO dto, String name);
+
+    boolean deleteWorkbook(WorkbookDescriptionDTO dto);
     
-    void deleteWorkbook(Workbook wdto)throws DataException;;
+    Workbook addWorkbook(WorkbookDescriptionDTO wdDto) throws DataException;
+    
+    boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO);
+
+    boolean activateConditional(CellImplDTO activeCell, String name, String operation, String value);
 
 }

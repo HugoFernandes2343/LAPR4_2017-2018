@@ -5,15 +5,17 @@
  */
 package pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  *
  * @author Rodrigo
+ * 
+ * VariableList is now Serializable - João Vieira - 1150575
  */
-public class VariableList {
+public class VariableList implements Serializable {
     public Map<String, Variable> variableList;
 
     public VariableList() {

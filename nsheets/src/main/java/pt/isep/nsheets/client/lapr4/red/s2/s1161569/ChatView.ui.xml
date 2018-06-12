@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+
+    <!--<ui:import field="pt.isep.nsheets.client.place.NameTokens.chat"/>-->
+    <!--<ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>-->
+
+    <m:MaterialPanel>
+
+        <g:HTMLPanel ui:field="chatPanel">
+
+        </g:HTMLPanel>
+
+        <g:HTMLPanel>
+            <m:MaterialRow>
+                <m:MaterialTextArea ui:field="textField" label="Text Area" allowBlank='false'/>
+                <m:MaterialButton ui:field="publishButton" text="Send" waves="LIGHT" textColor="WHITE"
+                                  iconType="POLYMER" iconPosition="RIGHT"/>
+            </m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialButton ui:field="refreshButton" text="Refresh" waves="LIGHT" textColor="WHITE"
+                                  iconType="POLYMER" size="LARGE"/>
+            </m:MaterialRow>
+        </g:HTMLPanel>
+    </m:MaterialPanel>
+</ui:UiBinder>

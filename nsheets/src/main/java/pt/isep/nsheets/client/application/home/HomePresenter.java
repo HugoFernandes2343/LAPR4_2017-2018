@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -16,8 +22,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import gwt.material.design.client.ui.MaterialCardTitle;
-import gwt.material.design.client.ui.MaterialLabel;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -34,19 +38,18 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     interface MyView extends View {
 
-        void setContents(ArrayList<Workbook> contents);
+        void setContents(ArrayList<WorkbookDescriptionDTO> contents);
 
         void addClickHandlerPublic(ClickHandler ch);
 
         void addClickHandlerPrivate(ClickHandler ch);
 
+        void addEventChangeHandler(ValueChangeHandler<String> vc);
 
-        //        void renameClickHandler( ClickHandler ch);
-//
-//        void deleteClickHandler(ClickHandler ch);
-        MaterialCardTitle getWorkbookTitle();
+        void addEventChangeSearch(ValueChangeHandler<String> vc);
 
-        MaterialLabel getWorkbookDescription();
+        void addSearchClose(CloseHandler<String> ch);
+        
     }
 
     @NameToken(NameTokens.home)
@@ -60,47 +63,75 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
         this.view = view;
 
+        this.view.addEventChangeHandler((ValueChangeEvent<String> event) -> {
+            if (event.getValue().equalsIgnoreCase("Show Private and Public Workbooks")) {
+                CurrentUser.setShowAll(true);
+            } else {
+                CurrentUser.setShowAll(false);
+                if (!CurrentUser.isIsLoggedIn()) {
+                    MaterialToast.fireToast("Please login to view private workbooks");
+                }
+            }
+            refreshView();
+        });
+        
         this.view.addClickHandlerPublic((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
-            AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
+            // Set up the callback object.
+            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
+                @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error creating Workbook " + caught.getMessage());
+                    MaterialToast.fireToast("Error! " + caught.getMessage());
                 }
 
-                public void onSuccess(Workbook result) {
+                @Override
+                public void onSuccess(WorkbookDescriptionDTO result) {
+                    MaterialToast.fireToast("New Workbook Created...", "rounded");
+                    
                     refreshView();
                 }
             };
 
-            Spreadsheet temp = null;
-            Workbook wb = new Workbook("New Public Workbook " + nrWb++, "description of workbook", temp, "");
-            wb.setNewWb(true);
-            workbooksSvc.addWorkbook(wb, callback);
+            String name = Window.prompt("Name of new Workbook:", "New Public Workbook " + nrWb++);
+            String description = Window.prompt("Description of new Workbook:", "No Description");
+            WorkbookDescriptionDTO wdDto = new WorkbookDescriptionDTO(name, description,"" );
 
+            workbooksSvc.addWorkbookDescription(wdDto, callback);
 
+        });
+
+        this.view.addEventChangeSearch((ValueChangeEvent<String> event) -> {
+            refreshViewSearch(event.getValue());
+        });
+
+        this.view.addSearchClose((CloseEvent<String> event) -> {
+            refreshView();
         });
 
         this.view.addClickHandlerPrivate((ClickEvent event) -> {
 
             WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
-            AsyncCallback<Workbook> callback = new AsyncCallback<Workbook>() {
+            AsyncCallback<WorkbookDescriptionDTO> callback = new AsyncCallback<WorkbookDescriptionDTO>() {
                 public void onFailure(Throwable caught) {
                     MaterialToast.fireToast("Error creating Workbook " + caught.getMessage());
                 }
 
-                public void onSuccess(Workbook result) {
+                public void onSuccess(WorkbookDescriptionDTO result) {
                     refreshView();
                 }
             };
 
             Spreadsheet temp = null;
             if (CurrentUser.isIsLoggedIn()) {
-                Workbook wb = new Workbook("New Private Workbook " + nrWb++, "description of workbook", temp, CurrentUser.getCurrentUser().getEmail().getEmail());
-                wb.setNewWb(true);
-                workbooksSvc.addWorkbook(wb, callback);
+                String name = Window.prompt("Name of new Private Workbook:", "New Private Workbook " + nrWb++);
+                String description = Window.prompt("Description of new Workbook:", "No Description");
+
+                WorkbookDescriptionDTO dDTO = new WorkbookDescriptionDTO(name, description, CurrentUser.getCurrentUser().getEmail().getEmail());
+                workbooksSvc.addWorkbookDescription(dDTO, callback);
+
             } else {
                 MaterialToast.fireToast("Please login First!");
             }
@@ -112,12 +143,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
 
         // Set up the callback object.
-        AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
+        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
             public void onFailure(Throwable caught) {
                 MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
-            public void onSuccess(ArrayList<Workbook> result) {
+            public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
                 nrWb = result.size();
                 view.setContents(result);
             }
@@ -126,11 +157,37 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         workbooksSvc.getWorkbooks(callback);
     }
 
+    private void refreshViewSearch(String pattern) {
+        WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
+
+        // Set up the callback object.
+        AsyncCallback<ArrayList<WorkbookDescriptionDTO>> callback = new AsyncCallback<ArrayList<WorkbookDescriptionDTO>>() {
+            public void onFailure(Throwable caught) {
+                MaterialToast.fireToast("Error " + caught.getMessage());
+            }
+
+            public void onSuccess(ArrayList<WorkbookDescriptionDTO> result) {
+                nrWb = result.size();
+                ArrayList<WorkbookDescriptionDTO> filter = new ArrayList<>();
+
+                RegExp exp = RegExp.compile(pattern);
+
+                for (WorkbookDescriptionDTO wb : result) {
+                    if ( exp.test(wb.getName())|| exp.test(wb.getDescription()) || wb.getDescription().contains(pattern) || wb.getName().contains(pattern)) {
+                        filter.add(wb);
+                    }
+                }
+                view.setContents(filter);
+            }
+        };
+        workbooksSvc.getWorkbooks(callback);
+    }
+
     @Override
     protected void onReveal() {
         super.onReveal();
 
-//        --------------------------------------------------------
+//        ----------------------------------------------------------
 
         EmailDTO m = new EmailDTO("mail@isep.pt");
         PasswordDTO p = new PasswordDTO("pass");
@@ -146,5 +203,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();
+    }
+
+    @Override
+    public MyView getView() {
+        return view;
     }
 }

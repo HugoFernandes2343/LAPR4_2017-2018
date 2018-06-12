@@ -78,7 +78,7 @@ This is a table that should display the overall planning of the team. This is si
 | Green |[Zoran Protic](green/s1171815/) 		 | 							|								 |		|
 | Blue |[João Oliveira](blue/s1161248/)    | [Lang08.1](blue/s1161248/sp1)							|	[Core06.2](blue/s1161248/sp2)							 |		|
 | Blue |[Ana Jesus](blue/s1130443/) 		   | MIA							|	MIA							 |		|
-| Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|	[Core08.2](blue/s1150371/sp2)							 |		|
+| Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|	[Core02.1](blue/s1150371/sp2)							 |		|
 | Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|	[Core01.2](blue/s1091234/sp2)							 |		|
 | Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 |		|
 | Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|	[Core05.2](blue/s1150585/sp2)							 |		|

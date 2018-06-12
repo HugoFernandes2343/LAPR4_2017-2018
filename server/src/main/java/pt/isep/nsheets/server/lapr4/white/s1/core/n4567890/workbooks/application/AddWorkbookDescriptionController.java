@@ -9,7 +9,7 @@ import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 public class AddWorkbookDescriptionController implements Controller {
 
     public WorkbookDescription addWorkbookDescription(WorkbookDescriptionDTO dto) throws DataConcurrencyException, DataIntegrityViolationException {
-        
-    	return new WorkbookDescriptionService().addWorkbookDescription(dto);
+
+        return new WorkbookDescriptionService().addWorkbookDescription(dto);
     }
 }

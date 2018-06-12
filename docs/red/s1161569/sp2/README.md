@@ -211,3 +211,26 @@ Controller **PublishPublicMessageController**
  
 
 ## 4.2. Requirements Realization
+
+Following the guidelines for JPA from EAPLI I envision a scenario like the following for realizing the use case for this feature increment.
+
+![SD US](design.png)
+
+Notes:  
+- The diagram only depicts the less technical details of the scenario;  
+- For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
+- **ChatServices** realizes the GWT RPC mechanism;  
+- **PublishPublicMessageController** is the *use case controller*;  
+
+## 4.3. Classes
+
+For this functionality the most important classes are **Message** (Represents the message entity on server side), **MessageDTO** (Represents message entity on the client side), **PublishPublicMessageController** (establishes a connection between the client and the server) and the **MessageRepository** (Persistence mechanism) 
+
+## 4.4. Design Patterns and Best Practices
+
+By memory I apply/use:  
+- Information Expert 
+- Service/Controller 
+- Repository  
+- DTO  
+- MVP  

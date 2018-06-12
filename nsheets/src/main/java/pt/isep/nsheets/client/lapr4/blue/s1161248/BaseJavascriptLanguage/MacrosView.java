@@ -66,22 +66,20 @@ public class MacrosView extends Composite {
         p3.add(this.cancelButton);  
         window.add(p3);        
         window.open(); 
-                
+                     
         cancelButton.addClickHandler(clickEvent -> {
             window.close();
         } );
-
         
         runButton.addClickHandler(clickEvent -> {
-            macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getSelectedValue().toString());
-//            MaterialToast.fireToast(macroType.getSelectedValue().toString());
-//            MaterialToast.fireToast(macroName.getText());
-//            MaterialToast.fireToast("input: " + macroCode.getText());
-            MaterialToast.fireToast("resultado: " + macro.runMacro());
-            
-            MaterialToast.fireToast("Macro name: " + macro.getName());
-            MaterialToast.fireToast("input: " + macro.getInput());
-            
+            if((macroType.getSelectedValue().toString()).compareTo("[Simple macro]") == 0) {
+                macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getSelectedValue().toString());
+                MaterialToast.fireToast("Macro name: " + macro.getName());
+                MaterialToast.fireToast("input: " + macro.getInput());
+                MaterialToast.fireToast("Result: " + macro.runMacro());
+            } else {
+                MaterialToast.fireToast("Error, not implemented"); 
+            }
         });
     }
 

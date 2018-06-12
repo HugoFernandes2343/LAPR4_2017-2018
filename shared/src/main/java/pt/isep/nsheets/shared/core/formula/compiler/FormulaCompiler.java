@@ -20,11 +20,8 @@
  */
 package pt.isep.nsheets.shared.core.formula.compiler;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 //import pt.isep.nsheets.shared.CleanSheets;
 import pt.isep.nsheets.shared.core.Cell;
@@ -33,30 +30,37 @@ import pt.isep.nsheets.shared.core.formula.Formula;
 
 /**
  * A compiler that generates formulas from strings.
+ *
  * @author Einar Pehrson
  */
 public class FormulaCompiler {
 
-	/** The singleton instance */
-	private static final FormulaCompiler instance = new FormulaCompiler();
+    /**
+     * The singleton instance
+     */
+    private static final FormulaCompiler instance = new FormulaCompiler();
 
-	/** The name of the file in which compiler properties are stored */
+    /**
+     * The name of the file in which compiler properties are stored
+     */
 //	private static final String PROPERTIES_FILENAME = "res/compilers.props";
+    /**
+     * The expression compilers used to compile formulas
+     */
+    private List<ExpressionCompiler> compilers = new ArrayList<ExpressionCompiler>();
 
-	/** The expression compilers used to compile formulas */
-	private List<ExpressionCompiler> compilers = new ArrayList<ExpressionCompiler>();
-	
-	private void initCompilers() {
-		compilers.add(new ExcelExpressionCompiler());
-	}
-	
-	/**
-	 * Creates the formula compiler.
-	 */
-	private FormulaCompiler() {
-		initCompilers();
-	}
-	
+    private void initCompilers() {
+        compilers.add(new ExcelExpressionCompiler());
+        compilers.add(new ExcelMonetaryExpressionCompiler());
+    }
+
+    /**
+     * Creates the formula compiler.
+     */
+    private FormulaCompiler() {
+        initCompilers();
+    }
+
 //	private FormulaCompiler() {
 //		// Loads properties
 //		Properties compilerProps = new Properties();
@@ -100,28 +104,30 @@ public class FormulaCompiler {
 //			System.err.println("Could not find compiler properties file ("
 //				+ PROPERTIES_FILENAME + ").");
 //	}
+    /**
+     * Returns the singleton instance.
+     *
+     * @return the singleton instance
+     */
+    public static FormulaCompiler getInstance() {
+        return instance;
+    }
 
-	/**
-	 * Returns the singleton instance.
-	 * @return the singleton instance
-	 */
-	public static FormulaCompiler getInstance() {
-		return instance;
-	}
-
-	/**
-	 * Compiles a formula for the given cell from the given string.
-	 * @param cell the cell for which a formula is to be generated
-	 * @param source a string representing the formula to be compiled
-	 * @return a list of lexical tokens
-	 * @throws FormulaCompilationException if the formula could not be compiled
-	 */
-	public Formula compile(Cell cell, String source) throws FormulaCompilationException {
-		for (ExpressionCompiler compiler : compilers)
-			if (source.charAt(0) == compiler.getStarter()) {
-				Expression expression = compiler.compile(cell, source);
-				return new Formula(cell, expression);
-			}
-		return null;
-	}
+    /**
+     * Compiles a formula for the given cell from the given string.
+     *
+     * @param cell the cell for which a formula is to be generated
+     * @param source a string representing the formula to be compiled
+     * @return a list of lexical tokens
+     * @throws FormulaCompilationException if the formula could not be compiled
+     */
+    public Formula compile(Cell cell, String source) throws FormulaCompilationException {
+        for (ExpressionCompiler compiler : compilers) {
+            if (source.charAt(0) == compiler.getStarter()) {
+                Expression expression = compiler.compile(cell, source);
+                return new Formula(cell, expression);
+            }
+        }
+        return null;
+    }
 }

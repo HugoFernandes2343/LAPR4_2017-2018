@@ -23,119 +23,99 @@ package pt.isep.nsheets.shared.core;
 //import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
+import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
 
 /**
  * A workbook which can contain several spreadsheets.
  *
  * @author Einar Pehrson
  */
-public class Workbook implements Serializable {
+@Entity
+public class Workbook implements Iterable<Spreadsheet>, Serializable {
 
-    private static final long serialVersionUID = -632422462576447242L;
-    private Form form = new Form();
-    private String name;
-    private String description;
-    private Macro macro;
-    private String userMail;
-
-    private boolean newWb;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    /**
+     * The unique version identifier used for serialization
+     */
+    private static final long serialVersionUID = -6324252462576447242L;
     /**
      * The spreadsheets of which the workbook consists
      */
-    public List<Spreadsheet> spreadsheets = new ArrayList<Spreadsheet>();
+    @OneToMany(targetEntity = SpreadsheetImpl.class)
+    private List<Spreadsheet> spreadsheets = new ArrayList<>();
 
-    private Spreadsheet sheet;
+    @ElementCollection
+    private List<Macro> macros = new ArrayList<>();
+
+    private Form form;
 
     /**
      * The cell listeners that have been registered on the cell
      */
-    private transient List<WorkbookListener> listeners
-            = new ArrayList<WorkbookListener>();
+    private transient List<WorkbookListener> listeners = new ArrayList<>();
 
     /**
      * The number of spreadsheets that have been created in the workbook
      */
-    public int createdSpreadsheets;
+    private int createdSpreadsheets;
+
 
     /**
      * Creates a new empty workbook.
      */
     public Workbook() {
+        this.spreadsheets = new ArrayList<>();
     }
 
     /**
-     * Creates a new workbook with one spreadsheet
+     * Creates a new workbook, which initially contains the given number of
+     * blank spreadsheets.
      *
-     * @param name
-     * @param desc
+     * @param sheets the number of sheets to create initially
      */
-    public Workbook(String name, String desc, String email) {
-        this.name = name;
-        this.description = desc;
-        this.sheet = new SpreadsheetImpl(this, "New Sheet");
-        this.newWb = false;
-        this.userMail = email;
+    public Workbook(int sheets) {
+        for (int i = 0; i < sheets; i++) {
+            spreadsheets.add(new SpreadsheetImpl(this, getNextSpreadsheetTitle()));
+        }
+    }
+
+     /**
+     * Creates a new workbook, which initially contains the given number of
+     * blank spreadsheets.
+     *
+     * @param sheets the number of sheets to create initially
+     * @param workbookDescription
+     */
+    public Workbook(int sheets, WorkbookDescriptionDTO workbookDescription) {
+        for (int i = 0; i < sheets; i++) {
+            spreadsheets.add(new SpreadsheetImpl(this, getNextSpreadsheetTitle()));
+        }
     }
 
     /**
-     * creates a new book from existing spreadsheet
+     * Transforms a WorkbookDTO into a Workbook entity class
      *
-     * @param name
-     * @param description
-     * @param sheet
      */
-    public Workbook(String name, String description, Spreadsheet sheet, String email) {
-        this.name = name;
-        this.description = description;
-        this.sheet = sheet;
-        this.newWb = false;
-        this.userMail = email;
-    }
+    public Workbook(final WorkbookDTO dto) {
+        this.createdSpreadsheets = dto.createdSpreadsheets;
+        for (SpreadsheetDTO s : dto.spreadsheets) {
+            spreadsheets.add(new SpreadsheetImpl(this, getNextSpreadsheetTitle(), s.content));
+        }
 
-    public Workbook(String name, String description, List<Spreadsheet> spreadsheets, String email) {
-
-        this.name = name;
-        this.description = description;
-        this.spreadsheets = spreadsheets;
-        this.createdSpreadsheets = spreadsheets.size();
-        this.newWb = false;
-        this.userMail = email;
-    }
-
-    public Workbook(String name, String description, int createdSpreadsheets, String email) {
-        this.name = name;
-        this.description = description;
-        this.createdSpreadsheets = createdSpreadsheets;
-        this.newWb = false;
-        this.userMail = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Spreadsheet getSheet() {
-        return sheet;
-    }
-
-    public String getUserMail() {
-        return userMail;
-    }
-
-    public boolean isNewWb() {
-        return newWb;
-    }
-
-    public void setNewWb(boolean newWb) {
-        this.newWb = newWb;
     }
 
     /**
@@ -144,16 +124,42 @@ public class Workbook implements Serializable {
      *
      * @param contents the content matrices to use when creating spreadsheets
      */
-    public Workbook(String name, String desc, String[][] contents, String email) {
-        this.name = name;
-        this.description = desc;
-        this.sheet = new SpreadsheetImpl(this, "New Sheet", contents);
-        this.userMail = email;
+    public Workbook(String[][]... contents) {
+        spreadsheets = new ArrayList<>();
+        for (String[][] spreadsheetcontent : contents) {
+            spreadsheets.add(new SpreadsheetImpl(this, getNextSpreadsheetTitle(), spreadsheetcontent));
+        }
+        this.macros = new ArrayList<>();
     }
 
-    public boolean insertNewForm(Form form) {
-        this.form = form;
+    /**
+     * Adds a blank spreadsheet to the end of the workbook.
+     */
+    public void addSpreadsheet() throws Exception {
+        Spreadsheet spreadsheet = new SpreadsheetImpl(this,
+                getNextSpreadsheetTitle());
+        spreadsheets.add(spreadsheet);
+        fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
+    }
+
+    /**
+     * Adds a new spreadsheet to the workbook, in which cells are initialized
+     * with data from the given content matrix.
+     *
+     * @param content the contents of the cells in the spreadsheet
+     */
+    public void addSpreadsheet(String[][] content) throws Exception {
+//        throw new Exception("Can only have on spreadsheet");
+        Spreadsheet spreadsheet = new SpreadsheetImpl(this,
+                getNextSpreadsheetTitle(), content);
+        spreadsheets.add(spreadsheet);
+        fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
+    }
+
+    public boolean insertNewForm(Form newForm) {
+        this.form = newForm;
         return true;
+
     }
 
     public boolean formExists() {
@@ -161,88 +167,64 @@ public class Workbook implements Serializable {
     }
 
     public Form getForm() {
-        return form;
+        return this.form;
     }
 
-    //	/**
-//	 * Creates a new workbook, which initially contains the given number
-//	 * of blank spreadsheets.
-//	 * @param sheets the number of sheets to create initially
-//	 */
-//	public Workbook(int sheets) {
-//		for (int i = 0; i < sheets; i++)
-//			spreadsheets.add(new SpreadsheetImpl(this,
-//				getNextSpreadsheetTitle()));
-//	}
-//	/**
-//	 * Creates a new workbook, using the given content matrix to create
-//	 * spreadsheets initially.
-//	 * @param contents the content matrices to use when creating spreadsheets
-//	 */
-//	public Workbook(String[][]... contents) {
-//		for (String[][] content : contents)
-//			spreadsheets.add(new SpreadsheetImpl(this,
-//				getNextSpreadsheetTitle(), content));
-//	}
-//	/**
-//	 * Adds a blank spreadsheet to the end of the workbook.
-//	 */
-//	public void addSpreadsheet() {
-//		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
-//			getNextSpreadsheetTitle());
-//		spreadsheets.add(spreadsheet);
-//		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
-//	}
-//	/**
-//	 * Adds a new spreadsheet to the workbook, in which cells are initialized
-//	 * with data from the given content matrix.
-//	 * @param content the contents of the cells in the spreadsheet
-//	 */
-//	public void addSpreadsheet(String[][] content) {
-//		Spreadsheet spreadsheet = new SpreadsheetImpl(this,
-//			getNextSpreadsheetTitle(), content);
-//		spreadsheets.add(spreadsheet);
-//		fireSpreadsheetInserted(spreadsheet, spreadsheets.size() - 1);
-//	}
-//	/**
-//	 * Returns the title to be used for the next spreadsheet added.
-//	 * @return the title to be used for the next spreadsheet added
-//	 */
-//	private String getNextSpreadsheetTitle() {
-//		return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
-//	}
-//	/**
-//	 * Adds a new blank spreadsheet to the workbook.
-//         * @param spreadsheet spreadsheet
-//	 */
-//	public void removeSpreadsheet(Spreadsheet spreadsheet) {
-//		spreadsheets.remove(spreadsheet);
-//		// Remove references to the spreadsheet in remaining spreadsheets!
-//		fireSpreadsheetRemoved(spreadsheet);
-//	}
-//	/**
-//	 * Returns the spreadsheet at the given index.
-//	 * @param index the index of the spreadsheet in the workbook
-//	 * @return the spreadsheet at the given index
-//	 * @throws IndexOutOfBoundsException if the index is out of range (index less than 0 or index greater or equal |spreadsheets|)
-//	 */
-//	public Spreadsheet getSpreadsheet(int index) throws IndexOutOfBoundsException {
-//		return spreadsheets.get(index);
-//	}
-//	/**
-//	 * Returns the number of spreadsheets in the the workbook.
-//	 * @return the number of spreadsheets in the the workbook
-//	 */
-//	public int getSpreadsheetCount() {
-//		return spreadsheets.size();
-//	}
-//	/**
-//	 * Returns an iterator over the spreadsheets in the workbook. (needs to implement Iterable<Spreadsheet>)
-//	 * @return an iterator over the spreadsheets in the workbook
-//	 */
-//	public Iterator<Spreadsheet> iterator() {
-//		return spreadsheets.iterator();
-//	}
+    /**
+     * Returns the title to be used for the next spreadsheet added.
+     *
+     * @return the title to be used for the next spreadsheet added
+     */
+    private String getNextSpreadsheetTitle() {
+        return SpreadsheetImpl.BASE_TITLE + " " + (createdSpreadsheets++ + 1);
+    }
+
+    public List<Spreadsheet> getSpreadsheets(){
+        return this.spreadsheets;
+    }
+
+    /**
+     * Adds a new blank spreadsheet to the workbook.
+     *
+     * @param spreadsheet spreadsheet
+     */
+    public void removeSpreadsheet(Spreadsheet spreadsheet) throws Exception {
+//        throw new Exception("Cannot remove only spreadsheet in workbook!");
+        spreadsheets.remove(spreadsheet);
+        // Remove references to the spreadsheet in remaining spreadsheets!
+        fireSpreadsheetRemoved(spreadsheet);
+    }
+
+    /**
+     * Returns the spreadsheet at the given index.
+     *
+     * @param index the index of the spreadsheet in the workbook
+     * @return the spreadsheet at the given index
+     * @throws IndexOutOfBoundsException if the index is out of range (index
+     * less than 0 or index greater or equal |spreadsheets|)
+     */
+    public Spreadsheet getSpreadsheet(int index) throws IndexOutOfBoundsException {
+        return spreadsheets.get(index);
+    }
+
+    /**
+     * Returns the number of spreadsheets in the the workbook.
+     *
+     * @return the number of spreadsheets in the the workbook
+     */
+    public int getSpreadsheetCount() {
+        return spreadsheets.size();
+    }
+
+    /**
+     * Returns an iterator over the spreadsheets in the workbook.
+     *
+     * @return an iterator over the spreadsheets in the workbook
+     */
+    @Override
+    public Iterator<Spreadsheet> iterator() {
+        return spreadsheets.iterator();
+    }
 
     /*
      * EVENT HANDLING
@@ -284,7 +266,6 @@ public class Workbook implements Serializable {
         for (WorkbookListener listener : listeners) {
             listener.spreadsheetInserted(spreadsheet, index);
         }
-
     }
 
     /**
@@ -310,42 +291,34 @@ public class Workbook implements Serializable {
         }
     }
 
-//        public static Workbook fromDTOCreateSpreadsheets(WorkbookDTO dto)
-//        {
-//            return new Workbook(dto.name, dto.description, dto.existingSpreadsheets);
-//        }
-//        
-//        public WorkbookDTO toDTO()
-//        {
-//            List<SpreadsheetDTO> dtoList = new ArrayList<>();
-//            
-//            for (Spreadsheet spreadsheet : spreadsheets)
-//            {
-//                dtoList.add(spreadsheet.toDTO());            
-//            }
-//            
-//            return new WorkbookDTO(id, version, name, description, dtoList);
-//        }
+    public WorkbookDTO toDTO() {
+        List<SpreadsheetDTO> list = new ArrayList<>();
+        for (Spreadsheet s : spreadsheets) {
+            SpreadsheetDTO dto = s.toDTO();
+            list.add(dto);
+        }
+        return new WorkbookDTO(list, createdSpreadsheets);
+    }
 
-    /*
- * GENERAL
-//     */
-//    /**
-//     * Customizes deserialization by recreating the listener list.
-//     *
-//     * @param stream the object input stream from which the object is to be read
-//     * @throws IOException If any of the usual Input/Output related exceptions
-//     * occur
-//     * @throws ClassNotFoundException If the class of a serialized object cannot
-//     * be found.
-//     */
+    /**
+     * Customizes deserialization by recreating the listener list.
+     *
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions
+     * occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot
+     * be found.
+     */
     // java.io.ObjectInputStream not supportted in GWT !
 //	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 //		stream.defaultReadObject();
 //		listeners = new ArrayList<WorkbookListener>();
 //	}
+    public List<Macro> macros() {
+        return this.macros;
+    }
 
-    public void insertMacro(Macro macro){
-        this.macro=macro;
+    public boolean addMacro(Macro macro) {
+        return this.macros.add(macro);
     }
 }

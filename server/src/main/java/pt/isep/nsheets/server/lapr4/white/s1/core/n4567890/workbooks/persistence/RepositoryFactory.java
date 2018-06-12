@@ -27,4 +27,8 @@ public interface RepositoryFactory {
     RequestRepository requests();
 
     ContactRepository contacts();
+
+    TaskRepository task();
+
+    MessageRepository messages();
 }

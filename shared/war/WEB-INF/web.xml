@@ -3,4 +3,31 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+
+    <!--1160777 Add CLS MIMEType-->
+    <mime-mapping>
+        <extension>cls</extension>
+        <mime-type>text/cls</mime-type>
+    </mime-mapping>
+    <!--1160777-->
+
+
+    <servlet>
+        <servlet-name>pt.isep.nsheets.shared ChatService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ChatServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pt.isep.nsheets.shared DownloadToCLSService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.shared ChatService</servlet-name>
+        <url-pattern>/shared/chatService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.shared DownloadToCLSService</servlet-name>
+        <url-pattern>/shared/downloadToCLSService</url-pattern>
+    </servlet-mapping>
+
 </web-app>

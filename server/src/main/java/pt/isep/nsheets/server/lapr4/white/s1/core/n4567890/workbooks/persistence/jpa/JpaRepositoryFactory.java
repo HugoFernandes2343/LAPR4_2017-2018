@@ -52,7 +52,17 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaContactRepository(this.settings);
     }
 
+    @Override
+    public MessageRepository messages() {
+        return new JpaMessageRepository(this.settings);
+    }
+
     public RequestRepository requests() {
         return new JpaRequestRepository(this.settings);
+    }
+
+    @Override
+    public TaskRepository task() {
+        return new JpaTaskRepository(this.settings);
     }
 }
