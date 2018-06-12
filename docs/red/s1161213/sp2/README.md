@@ -126,4 +126,4 @@ For the final remark I believe this feature needs a lot of future work regarding
 # 8. Work Log
 [IPC03.1 UI Implementation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/0ae419151fc62704b7a6bced9c8c3bc9ccd6732f)
 [IPC03.1 Services and Servlet Implementation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b3fd2d583f819086acd3e622dde95d3c1a851da7)
-[IPC03.1 Documentation final commit]()
+[IPC03.1 Documentation final commit](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/5e5741166ccdf96bd9dbe4ea86975e88f12b539b)
