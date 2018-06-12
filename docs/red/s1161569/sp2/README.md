@@ -143,10 +143,20 @@ For the Domain classes I will have a class that represents the entity **Message*
 **Test:** I should ensure that a Message can be created only when all the attributes are set.  
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowedOnMessage() {
+		public void ensureNullIsNotAllowedOnMessageUsername() {
 		System.out.println("ensureNullIsNotAllowedOnMessage");
-		Message instance = new Message(null, null);
+		Message instance = new Message(null, null, null);
 	}
+	@Test(expected = IllegalArgumentException.class)
+    		public void ensureNullIsNotAllowedOnMessageText() {
+    		System.out.println("ensureNullIsNotAllowedOnMessage");
+    		Message instance = new Message(null, null, null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    		public void ensureNullIsNotAllowedOnMessageDate() {
+    		System.out.println("ensureNullIsNotAllowedOnMessage");
+    		Message instance = new Message(null, null, null);
+    }
 
 **Services/Controllers**
 
@@ -175,8 +185,8 @@ Controller **PublishPublicMessageController**
 		final Date date = new Date();
 		final User user = new user();
 		final MessageDTO expected = new MessageDTO(user.toDTO(), text, date);
-		PublishPublicMessageController ctrl = new PublishPublicMessageController();
-		MessageDTO result = ctrl.addMessage(dto);
+		PublishMessageController ctrl = new PublishMessageController();
+		MessageDTO result = ctrl.addMessage(expected);
 		assertTrue("the added Message does not have the same data as input", Message.fromDTO(expected).sameAs(Message.fromDTO(result)));
 	}
 
@@ -185,7 +195,7 @@ Controller **PublishPublicMessageController**
 	   @Test 
 	   public void testEnsureGetMessagesEmpty() {
 		   System.out.println("testEnsureGetMessagesEmpty");
-		   PublishPublicMessageController ctrl=new PublishPublicMessageController();
+		   PublishMessageController ctrl=new PublishMessageController();
 		   Iterable<Messages> messageList=ctrl.getMessages();
 		   assertTrue("the list of Messages is not empty", !messageList.iterator().hasNext());
 	   } 
