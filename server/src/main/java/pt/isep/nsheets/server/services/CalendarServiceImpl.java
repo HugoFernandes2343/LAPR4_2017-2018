@@ -45,6 +45,20 @@ public class CalendarServiceImpl extends RemoteServiceServlet implements Calenda
     }
 
     @Override
+    public void deleteCalendar(String calendar) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        CalendarDTO calender = new CalendarDTO();
+        AddCalendarController ctrl = new AddCalendarController();
+        try {
+            ctrl.deleteCalendar(calendar);
+        } catch (DataConcurrencyException e) {
+            e.printStackTrace();
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public CalendarDTO addCalendar(CalendarDTO c) throws DataException {
         // Setup the persistence settings
         PersistenceContext.setSettings(this.getPersistenceSettings());

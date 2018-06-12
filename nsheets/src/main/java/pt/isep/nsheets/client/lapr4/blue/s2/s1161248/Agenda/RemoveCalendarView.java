@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class RemoveCalendarView extends Composite {
 
     @UiField
-    MaterialComboBox calendar = new MaterialComboBox();
+    MaterialComboBox<String> calendar = new MaterialComboBox<>();
     @UiField
     MaterialButton deleteButton = new MaterialButton("Delete");
     @UiField
@@ -83,6 +83,28 @@ public class RemoveCalendarView extends Composite {
             window.close();
         });
 
+        deleteButton.addClickHandler(clickEvent -> {
+            CalendarServiceAsync calendarSvc1 = GWT.create(CalendarService.class);
+
+            // Set up the callback object.
+            AsyncCallback<CalendarDTO> callback1 = new AsyncCallback<CalendarDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error! " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(CalendarDTO result) {
+                    MaterialToast.fireToast("Calendar Removed...", "rounded");
+                }
+
+
+            };
+
+
+            calendarSvc1.deleteCalendar(calendar.getSingleValue(), callback1);
+            window.close();
+        });
 
     }
 }

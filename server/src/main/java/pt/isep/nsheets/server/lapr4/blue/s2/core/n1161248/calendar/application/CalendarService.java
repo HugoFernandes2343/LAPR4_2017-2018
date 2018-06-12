@@ -26,5 +26,10 @@ public class CalendarService {
         return calendarRepository.findAll();
     }
 
+    public Calendar findCalendarByName(String name){
+        final CalendarRepository calendarRepository = PersistenceContext.repositories().calendares();
+        return calendarRepository.findCalendarByName(name);
+    }
+
     
 }
