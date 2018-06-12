@@ -26,6 +26,7 @@ import java.util.SortedSet;
 import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extensible;
+import pt.isep.nsheets.shared.services.CellImplDTO;
 
 /**
  * A cell in a spreadsheet.
@@ -151,4 +152,6 @@ public interface Cell extends Comparable<Cell>, Extensible<Cell>, Serializable {
 	 * @return the listeners that have been registered on the cell
 	 */
 	public CellListener[] getCellListeners();
+        
+        public CellImplDTO toDTO();
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class EmailDTO implements Serializable {
 
-    private final String email;
+    private String email;
 
     public EmailDTO(String email) {
         this.email = email;

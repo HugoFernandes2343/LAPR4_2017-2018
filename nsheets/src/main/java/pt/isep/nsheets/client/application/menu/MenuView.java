@@ -18,6 +18,8 @@ import gwt.material.design.client.ui.MaterialSideNavPush;
 class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
 
 
+
+
    
 
 
@@ -31,6 +33,8 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     MaterialSideNavPush sideNav;
     @UiField
     MaterialLink btnLogout;
+    @UiField
+    MaterialLink btnSingUp;
     @UiField
     MaterialLink btnLogin;
     @UiField
@@ -67,6 +71,11 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     @Override
     public MaterialLink getBtnLogout() {
         return btnLogout;
+    }
+    
+        @Override
+    public MaterialLink getSingUp() {
+        return btnSingUp;
     }
 
 

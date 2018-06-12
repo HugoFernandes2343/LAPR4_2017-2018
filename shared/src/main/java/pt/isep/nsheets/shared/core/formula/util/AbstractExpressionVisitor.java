@@ -59,6 +59,7 @@ public abstract class AbstractExpressionVisitor implements ExpressionVisitor {
 		return reference;
 	}
 
+        /* João Vieira - 1150575 */
         public Object visitVariableReference(VariableReference varReference) {
 		return varReference;
 	}

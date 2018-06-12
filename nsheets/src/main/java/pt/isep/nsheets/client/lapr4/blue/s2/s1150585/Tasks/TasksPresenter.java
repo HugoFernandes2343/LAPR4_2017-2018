@@ -174,7 +174,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         AsyncCallback<ArrayList<TaskDTO>> callback = new AsyncCallback<ArrayList<TaskDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-               MaterialToast.fireToast("Error " + caught.getMessage());
+             //  MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
             @Override
@@ -195,7 +195,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.MyView, TasksPresen
         AsyncCallback<ArrayList<TaskDTO>> callback = new AsyncCallback<ArrayList<TaskDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-              MaterialToast.fireToast("Error " + caught.getMessage());
+          //    MaterialToast.fireToast("Error " + caught.getMessage());
             }
 
             @Override

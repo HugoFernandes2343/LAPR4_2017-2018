@@ -17,6 +17,8 @@ import gwt.material.design.addins.client.fileuploader.base.UploadFile;
 import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialImage;
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialProgress;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import javax.inject.Inject;
@@ -34,8 +36,8 @@ public class RegisterView extends ViewImpl implements RegisterPresenter.MyView {
     interface Binder extends UiBinder<Widget, RegisterView> {
     }
 
-    @UiField
-    MaterialFileUploader uploader;
+//    @UiField
+//    MaterialFileUploader uploader;
 
     @UiField
     MaterialImage image;
@@ -46,18 +48,27 @@ public class RegisterView extends ViewImpl implements RegisterPresenter.MyView {
     @UiField
     MaterialButton btnRegister;
 
+   
+    
+    
+    
+    
+    
+    @UiField MaterialFileUploader cardUploader;
+    @UiField MaterialImage imgPreview;
+    @UiField MaterialProgress progress;
+    @UiField MaterialLabel lblName, lblSize;
+
+    
+    
+    
+    
+
     @Inject
     RegisterView(RegisterView.Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        uploader.addAddedFileHandler(new AddedFileEvent.AddedFileHandler<UploadFile>() {
-            @Override
-            public void onAddedFile(AddedFileEvent<UploadFile> event) {
-                MaterialToast.fireToast("Event : Added File (" + event.getTarget().getName() + ")");
-                MaterialToast.fireToast(GWT.getHostPageBaseURL());
-                image.setUrl(GWT.getHostPageBaseURL() + "uploadServlet/" + event.getTarget().getName());
-            }
-        });
+        
 
         
 
@@ -68,9 +79,7 @@ public class RegisterView extends ViewImpl implements RegisterPresenter.MyView {
         btnRegister.addClickHandler(ch);
     }
 
-    public MaterialFileUploader getUploader() {
-        return uploader;
-    }
+    
 
     @Override
     public MaterialTextBox getTextEmail() {
@@ -95,5 +104,35 @@ public class RegisterView extends ViewImpl implements RegisterPresenter.MyView {
     public MaterialTextBox getTextPassword() {
         return textPassword;
     }
+    
+    
+     public MaterialImage getImage() {
+        return image;
+    }
+
+
+    public MaterialFileUploader getCardUploader() {
+        return cardUploader;
+    }
+
+    public MaterialImage getImgPreview() {
+        return imgPreview;
+    }
+
+    public MaterialProgress getProgress() {
+        return progress;
+    }
+
+    public MaterialLabel getLblName() {
+        return lblName;
+    }
+
+    public MaterialLabel getLblSize() {
+        return lblSize;
+    }
+    
+    
+    
+    
 
 }

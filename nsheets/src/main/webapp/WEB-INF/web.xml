@@ -88,18 +88,24 @@
     <!--1161110-->
     <!--Upload Servlet-->
     <servlet>
-      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-name>uploadService</servlet-name>
       <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
     </servlet>
    
     <servlet-mapping>
-      <servlet-name>fileUploaderServlet</servlet-name>
+      <servlet-name>uploadService</servlet-name>
       <url-pattern>/nsheets/fileupload</url-pattern>
     </servlet-mapping>
     <!--1161110-->
-    
-    
-    
-    
+
+  <servlet>
+    <servlet-name>calendarServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.CalendarServiceImpl</servlet-class>
+  </servlet>
+   
+  <servlet-mapping>
+    <servlet-name>calendarServiceServlet</servlet-name>
+    <url-pattern>/nsheets/calendarService</url-pattern>
+  </servlet-mapping>
 
 </web-app>

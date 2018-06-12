@@ -25,6 +25,7 @@ import java.util.SortedSet;
 
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extensible;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
 
 /**
  * A spreadsheet which provides cell data and dependencies.
@@ -105,6 +106,15 @@ public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
     public SortedSet<Cell> getCells(Address address1, Address address2);
 
     /**
+     * Returns the cells in the range between the given addresses.
+     *
+     * @param address1 the address of the cell in one end of the range
+     * @param address2 the address of the cell in the other end of the range
+     * @return matrix of Cells in the range
+     */
+    public Cell[][] getCellRangeMatrix(Address address1, Address address2);
+
+    /**
      * Returns the cells in the given column.
      *
      * @param index the index of the column
@@ -146,7 +156,11 @@ public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
      */
     public CellListener[] getCellListeners();
 
+    public Address findAddress(String reference);
+
     public void sortCells(String address1, String address2, String dataType, String sortType);
 
     public SpreadsheetDTO toDTO();
+    
+    public SpreadsheetImplDTO toDTO1();
 }
