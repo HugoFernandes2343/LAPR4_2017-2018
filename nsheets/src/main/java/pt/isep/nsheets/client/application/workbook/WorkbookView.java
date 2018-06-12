@@ -73,9 +73,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     public MaterialIcon getFirstButton() {
         return firstButton;
     }
-    
-    
-    
+
     public MaterialButton getformulaButton() {
         return formulaButton;
     }
@@ -204,7 +202,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     private pt.isep.nsheets.shared.core.Cell activeCell = null;
 
     public void setActiveCell(pt.isep.nsheets.shared.core.Cell cell) {
-        this.activeCell = cell;customTable.getRow(1).setEnabled();
+        this.activeCell = cell;
 
         this.customTable.getTableTitle().setText(cell.toString() + ": " + cell.getContent().toString());
         this.firstBox.setText(cell.getContent().toString());
@@ -528,7 +526,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         chartWizardButton.addClickHandler(event -> {
             new BasicChartWizardView(customTable.getRow(0).getData().sheet);
         });
-
 
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
