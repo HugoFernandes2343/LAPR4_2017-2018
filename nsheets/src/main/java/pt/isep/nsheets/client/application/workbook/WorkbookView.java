@@ -385,14 +385,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                         
                         
                         if (!value.isEmpty()) {
-//                            String fml = "Formula: " + formula + "; Value: '" + value + "'";
-//                            MaterialToast.fireToast(fml, "rounded");
                             
                             
                             
                             if (resultado) {
 
-//                            CellImpl activeCell = ac;
+                            CellImplDTO activeCellDTO = activeCell.toDTO();
 
 
 
@@ -417,7 +415,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                                     }
                                 };
 
-                                workbookServiceAsync.activateConditional((CellImpl) activeCell, "test", formula, value, callback);
+                                workbookServiceAsync.activateConditional(activeCellDTO, "test", formula, value, callback);
                             } else {
                                 MaterialToast.fireToast("Did you forget to apply a style?", "rounded");
                             }

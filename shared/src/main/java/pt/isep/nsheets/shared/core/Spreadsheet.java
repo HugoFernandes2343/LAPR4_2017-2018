@@ -25,6 +25,7 @@ import java.util.SortedSet;
 
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extensible;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
 
 /**
  * A spreadsheet which provides cell data and dependencies.
@@ -149,4 +150,6 @@ public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
     public void sortCells(String address1, String address2, String dataType, String sortType);
 
     public SpreadsheetDTO toDTO();
+    
+    public SpreadsheetImplDTO toDTO1();
 }

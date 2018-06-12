@@ -25,6 +25,6 @@ public interface WorkbooksService extends RemoteService {
     
     boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO);
 
-    boolean activateConditional(CellImpl activeCell, String name, String operation, String value);
+    boolean activateConditional(CellImplDTO activeCell, String name, String operation, String value);
 
 }
