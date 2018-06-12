@@ -70,10 +70,10 @@ This classes were not changed so there is no need to test anything.
 
 **For US1**
 
-![SD US1](sd.jpg)
+![SD US1](SD.jpg)
 
 Notes:  
--
+- 
 
 
 
@@ -107,12 +107,13 @@ The code for this sprint:
 
 Project **server**
 
--XmlUploadController
-
 -XmlReadingService
 
 Project **shared**  
 
+-UploadService
+
+-UploadServiceAsync
 
 Project **NSheets**
 
@@ -151,9 +152,11 @@ Project **NSheets**
 
 **Monday- June 11**
 * Documentation: Design updated
-* Implementation:
+* Implementation:Solving problems, finishing Implementation
 
 **Tuesday - June 12**
+* Documentation: Finishing Documentation
+* Implementation: Attempting to solve issues
 
 Commits:
 
