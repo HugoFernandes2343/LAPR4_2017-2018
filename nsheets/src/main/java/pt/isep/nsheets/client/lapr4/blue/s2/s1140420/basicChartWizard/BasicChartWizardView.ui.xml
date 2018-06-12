@@ -11,7 +11,7 @@ Uncomment this for XHTML entities
 
     </ui:style>
     <g:HTMLPanel>
-        <ma:window.MaterialWindow ui:field="wizardWindowStep1" width="70%" height="70%" title="Create Bar Chart">
+        <ma:window.MaterialWindow ui:field="wizardWindowStep1" width="70%" height="90%" title="Create Bar Chart">
             <m:MaterialPanel textAlign="CENTER">
                 <m:MaterialTextBox ui:field="chartName" label="Chart Name" grid="s2"/>
                 <m:MaterialTextBox ui:field="upperCellInfo" label="Upper left cell" grid="s2" />
@@ -20,7 +20,7 @@ Uncomment this for XHTML entities
                 <m:MaterialButton ui:field="previewChartButton" text="Preview Chart" waves="LIGHT" textColor="WHITE" iconType="POLYMER" grid="s2"/>
             </m:MaterialPanel>
         </ma:window.MaterialWindow>
-        <ma:window.MaterialWindow ui:field="wizardWindowStep2" width="70%" height="70%" title="Create Bar Chart">
+        <ma:window.MaterialWindow ui:field="wizardWindowStep2" width="70%" height="90%" title="Create Bar Chart">
             <m:MaterialPanel  ui:field="wizardStep2Panel1" textAlign="CENTER" height="50px">
                 <c:MaterialBarChart ui:field="chart"/>
             </m:MaterialPanel>
