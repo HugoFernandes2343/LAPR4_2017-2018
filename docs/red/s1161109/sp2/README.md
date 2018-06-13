@@ -311,9 +311,6 @@ If the login is sucessefully than it changes the top menu and open a logged in r
 
 # 7. Work Log
 
-
-# 8. Work Log
-
 Commits:
 
 [IPC01.2: Starting development of IPC01.2. Analysis of user story and necessary components for realization of this use case](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/209ebbb10e11)
