@@ -70,7 +70,9 @@ public class CurrentUserTest {
     @Test
     public void testGetCurrentUser() {
         System.out.println("getCurrentUser");
-        UserDTO currentUser = new UserDTO(new EmailDTO("email@email.com"), new PasswordDTO("pass"), new NameDTO("Paulo", "Magalhaes"), new NicknameDTO("paulo"));
+        UserDTO currentUser = new UserDTO(new EmailDTO("email@email.com"), 
+        new PasswordDTO("pass"), new NameDTO("Paulo", "Magalhaes"), new NicknameDTO("paulo"));
+        
         CurrentUser.setCurrentUser(currentUser);
         UserDTO result = CurrentUser.getCurrentUser();
         assertEquals(currentUser, result);
@@ -82,7 +84,8 @@ public class CurrentUserTest {
     @Test
     public void testSetCurrentUser() {
         System.out.println("setCurrentUser");
-        UserDTO currentUser = new UserDTO(new EmailDTO("email@email.com"), new PasswordDTO("pass"), new NameDTO("Paulo", "Magalhaes"), new NicknameDTO("paulo"));
+        UserDTO currentUser = new UserDTO(new EmailDTO("email@email.com"), 
+        new PasswordDTO("pass"), new NameDTO("Paulo", "Magalhaes"), new NicknameDTO("paulo"));
         CurrentUser.setCurrentUser(currentUser);
         assertEquals(currentUser, CurrentUser.getCurrentUser());
     }
