@@ -309,6 +309,34 @@ If the login is sucessefully than it changes the top menu and open a logged in r
   ![SD US1](teste.jpg)
 
 
+# 7. Work Log
+
+
+# 8. Work Log
+
+Commits:
+
+[IPC01.2: Starting development of IPC01.2. Analysis of user story and necessary components for realization of this use case](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/209ebbb10e11)
+
+
+
+
+[IPC01.2: Started design. Planification of the necessary domain and services tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7beb2ebd5a8a667b6b71822167370e0f5375d678)
+
+[IPC01.2: User is now beigin Persisted](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7beb2ebd5a8a667b6b71822167370e0f5375d678)
+
+
+[IPC01.2: Updated documentation. Sequence diagram added. UI materials added in order to retain chat messages. Missing only tests and the ability to use the actual user of the app instead of a default](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2bcee7a4021730a74d39550aeb83807b51b9cb73)
+
+[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+
+[IPC01.2: Analysis completed. Added domain model image and ssd image](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+
+[IPC01.2: Update documentation. Added domain tests. Use case almost completed](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+
+[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+
+
 
 
 # 8. Final Remarks
