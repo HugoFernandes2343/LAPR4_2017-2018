@@ -38,66 +38,27 @@ public class EmailTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of toString method, of class Email.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Email instance = new Email("email@email.com");
-        String expResult = "Email: email@email.com";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of hashCode method, of class Email.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Email instance = new Email();
-        int expResult = 115;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-    }
-
+ 
     /**
      * Test of equals method, of class Email.
      */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Email instance = new Email("email@email.com");
-        Object obj = (Object) instance;
-        boolean result = instance.equals(obj);
-        assertTrue(result);
-
+   @Test(expected = IllegalArgumentException.class) 
+    public void testEmail() {
+        Email e = new Email("dasdsadsa");
     }
-
-    /**
-     * Test of toDTO method, of class Email.
-     */
-    @Test
-    public void testToDTO() {
-        System.out.println("toDTO");
-        Email instance = new Email("email@email.com");
-        EmailDTO expResult = new EmailDTO("email@email.com");
-        EmailDTO result = instance.toDTO();
-        assertNotEquals(expResult, result);
-
+    
+    @Test(expected = IllegalArgumentException.class) 
+    public void testEmail2() {
+        Email e = new Email("dasdsadsa@dsadsaasd");
     }
-
-    /**
-     * Test of fromDTO method, of class Email.
-     */
-    @Test
-    public void testFromDTO() {
-        System.out.println("fromDTO");
-        EmailDTO dto = new EmailDTO("email@email.com");
-        Email expResult = new Email("email@email.com");
-        Email result = Email.fromDTO(dto);
-        assertEquals(expResult, result);
+    
+    @Test(expected = IllegalArgumentException.class) 
+    public void testEmail3() {
+        Email e = new Email("dasdsadsa@dasdas.sadsadsasaddsa");
     }
-
+    
+    public void testEmail4() {
+        Email e = new Email("david@david.com");
+        assertEquals("david@david.com",e.toDTO().getEmail());
+    }
 }

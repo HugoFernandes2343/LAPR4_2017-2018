@@ -41,63 +41,30 @@ public class NameTest {
     /**
      * Test of equals method, of class Name.
      */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Name instance = new Name("Paulo", "Magalhaes");
-        Object obj = instance;
-        boolean result = instance.equals(obj);
-        assertTrue(result);
+ 
+
+    public void testName() {
+        Name e = new Name("David","Santiago");
+        assertEquals("David",e.toDTO().getFirstName());
+    }
+    
+    public void testName2() {
+        Name e = new Name("David","Santiago");
+        assertEquals("Santiago",e.toDTO().getLastName());
+    }
+    
+    
+    @Test(expected = IllegalArgumentException.class) 
+    public void testName3() {
+        Name e = new Name("David","");
 
     }
+    
+    
+    @Test(expected = IllegalArgumentException.class) 
+    public void testName4() {
+        Name e = new Name("","Santiago");
 
-    /**
-     * Test of hashCode method, of class Name.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Name instance = new Name("Paulo","Magalhaes");
-        int expResult = 2000905438;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-       
-    }
-
-    /**
-     * Test of toString method, of class Name.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Name instance = new Name("Paulo", "Magalhaes");
-        String expResult = "Paulo Magalhaes";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of toDTO method, of class Name.
-     */
-    @Test
-    public void testToDTO() {
-        System.out.println("toDTO");
-        Name instance = new Name("Paulo", "Magalhaes");
-        NameDTO expResult = new NameDTO("Paulo", "Magalhaes");
-        NameDTO result = instance.toDTO();
-        assertNotEquals(expResult, result);
-    }
-
-    /**
-     * Test of fromDTO method, of class Name.
-     */
-    @Test
-    public void testFromDTO() {
-        System.out.println("fromDTO");
-        NameDTO dto = new NameDTO("Paulo", "Magalhaes");
-        Name expResult = new Name("Paulo", "Magalhaes");
-        Name result = Name.fromDTO(dto);
-        assertEquals(expResult, result);
     }
 
 }

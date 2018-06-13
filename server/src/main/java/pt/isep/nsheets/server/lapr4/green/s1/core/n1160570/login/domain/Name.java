@@ -18,21 +18,11 @@ public class Name implements ValueObject, Serializable {
     private String firstName;
     private String lastName;
 
-    public Name(final String firstName, final String lastName) {
+    public Name(String firstName,String lastName) {
         if (Strings.isNullOrEmpty(firstName) || Strings.isNullOrEmpty(lastName)) {
-            throw new IllegalArgumentException(
-                    "First name and last name should neither be null nor empty");
+            throw new IllegalArgumentException("First name and last name should neither be null nor empty");
         }
 
-//        Matcher matcher = VALID_NAME_REGEX.matcher(firstName);
-//        if (!matcher.find()) {
-//            throw new IllegalArgumentException("Invalid First Name: " + firstName);
-//        }
-//
-//        matcher = VALID_NAME_REGEX.matcher(lastName);
-//        if (!matcher.find()) {
-//            throw new IllegalArgumentException("Invalid Last Name: " + lastName);
-//        }
 
         this.firstName = firstName;
         this.lastName = lastName;

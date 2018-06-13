@@ -41,62 +41,9 @@ public class NicknameTest {
     /**
      * Test of equals method, of class Nickname.
      */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Nickname instance = new Nickname("Paulo");
-        Object o = instance;
-        boolean expResult = false;
-        boolean result = instance.equals(o);
-        assertTrue(result);
-    }
-
-    /**
-     * Test of toString method, of class Nickname.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Nickname instance = new Nickname("Paulo");
-        String expResult = "Paulo";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of hashCode method, of class Nickname.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Nickname instance = new Nickname("Paulo");
-        int expResult = 76887303;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of toDTO method, of class Nickname.
-     */
-    @Test
-    public void testToDTO() {
-        System.out.println("toDTO");
-        Nickname instance = new Nickname("Paulo");
-        NicknameDTO expResult = new NicknameDTO("Paulo");
-        NicknameDTO result = instance.toDTO();
-        assertNotEquals(expResult, result);
-    }
-
-    /**
-     * Test of fromDTO method, of class Nickname.
-     */
-    @Test
-    public void testFromDTO() {
-        System.out.println("fromDTO");
-        NicknameDTO dto = new NicknameDTO("Paulo");
-        Nickname expResult = new Nickname("Paulo");
-        Nickname result = Nickname.fromDTO(dto);
-        assertEquals(expResult, result);
+    @Test(expected = IllegalArgumentException.class)
+    public void testName3() {
+        Nickname e= new Nickname("");
     }
 
 }

@@ -17,7 +17,7 @@ public class Nickname implements ValueObject, Serializable {
 
     public Nickname(String username) {
         if (Strings.isNullOrEmpty(username)) {
-//            throw new IllegalArgumentException("username should neither be null nor empty");
+            throw new IllegalArgumentException("username should neither be null nor empty");
         }
         // TODO validate other invariants, e.g., regular expression
         this.nickname = username;
