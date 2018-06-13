@@ -272,26 +272,21 @@ During the implementation of my UC I helped and been helped by my team several t
 ##6.1 Demonstration
 
 
-        Register Page:
+Register Page:
 
-        ![Analysis SD](register.jpg)
-
-
+![Analysis SD](register.jpg)
 
 
+After Registering we have to do the login:
 
-
-        After Registering we have to do the login:
-
-
-        ![Analysis SD](login.jpg)
+[Analysis SD](login.jpg)
 
 
 
-        If the login is sucessefully than it changes the top menu and open a logged in restrict page:
+If the login is sucessefully than it changes the top menu and open a logged in restrict page:
 
 
-        ![Analysis SD](afterlogin.jpg)
+![Analysis SD](afterlogin.jpg)
 
 
 
