@@ -194,7 +194,7 @@ Since this service is an servlet the web.xml file of the project must know about
 
 **For US1**
 
-![Analysis SD](coiso.jpg)
+
 
 
 # 4. Design
@@ -268,6 +268,39 @@ Created the classes:
 During the implementation of my UC I helped and been helped by my team several times.
 
 
+
+##6.1 Demonstration
+
+
+        Register Page:
+
+        ![Analysis SD](register.jpg)
+
+
+
+
+        After Registering we have to do the login:
+
+
+        ![Analysis SD](login.jpg)
+
+
+
+        If the login is sucessefully than it changes the top menu and open a logged in restrict page:
+
+
+        ![Analysis SD](afterlogin.jpg)
+
+
+
+
+
+
+
+
+
+
+
 # 6. Test Class's
 
   The only class that deserved a test class because of the complexity of its code was the email class:
@@ -278,7 +311,12 @@ During the implementation of my UC I helped and been helped by my team several t
   ![SD US1](teste.jpg)
 
 
+
+
 # 8. Final Remarks
 
  For lack of time i didn't implemented password encryptation.
- After several tries and after asking the teacher Bragança for help for doing image upload it was not possible.
+
+ After several tries and after asking the teacher Bragança for help for doing image upload it was not possible to do it.
+
+ User doesn't login after register for compatibility pruposes regarding next UC.
