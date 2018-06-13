@@ -279,14 +279,14 @@ Register Page:
 
 After Registering we have to do the login:
 
-[Analysis SD](login.jpg)
+[AnalysiD](login.jpg)
 
 
 
 If the login is sucessefully than it changes the top menu and open a logged in restrict page:
 
 
-![Analysis SD](afterlogin.jpg)
+![AnalysiD](afterlogin.jpg)
 
 
 
