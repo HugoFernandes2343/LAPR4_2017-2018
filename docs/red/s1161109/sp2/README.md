@@ -285,7 +285,9 @@ After Registering we have to do the login:
 
 If the login is sucessefully than it changes the top menu and open a logged in restrict page:
 
-  ![SD US1](Asogin.jpg)
+
+
+  ![S1](Asogin.jpg)
 
 
 
