@@ -87,8 +87,6 @@ For this feature increment i needed to:
 ## 3.1 GWT and Project Structure
 
 
-
-
 **Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
 - **server**. It is the "server part" of the web application.  
 - **shared**. It contains code that is shared between the client (i.e., web application) and the server.   
@@ -102,7 +100,7 @@ For this feature increment i needed to:
 
  * **Email** - It is a class that presents a string ('email') that refers to the User's email.
  * **Password** - Is a class that has a string ('password') that refers to the User's password.
- * **Name** - This is a class that has two string ('firstName', 'seconName') that refers to the User name.
+ * **Name** - This is a class that has two string ('firstName', 'secondName') that refers to the User name.
  * **Nickname** -This is a class that has a string ('nickname') that refers to the nickname of the User.
  * **UserType** - Is an enumeration that displays the type of User ('USER', 'ADMIN').
 
@@ -127,6 +125,55 @@ For this feature increment i needed to:
 ### 3.1.2 Web
 
 * **CurrentMenur** - This class has the CurrentMenu that is beeing shown;
+
+## 3.2 Applciation Startup
+
+  The ApplicationModule must install a new model for the registering page:
+
+  ![Use Cases](module.jpg)
+
+  This module will represent an sing up Page.
+
+
+  When Module is presented, the next method is called so it can manage ( in the CurrentMenu ) the login,logout,register buttons and the userName and userImage :
+
+  ![Use Cases](reloadUser.jpg)
+
+
+## 3.2 Server and RepositoryFactory
+
+
+The Register page displays several fields that,if corrected verified will persist on server.
+
+In the method onReveal the Register presenter invokes a RegisterService asynchronously.
+
+For this purpose I will require an interface for the service. In this case:
+
+  ![Use Cases](service.jpg)
+
+
+When the RPC is invoked since it will always execute asynchronously  I have to prove that i received a callback:
+
+![Use Cases](callback.jpg)
+
+
+
+Since the interface has methods that must be accessed by both server and client classes it must be implemented on the shared package.
+
+The interface must be implemented in the server since it will be the one responsible for communicating with the data base. The RegisterController will be the assign controller for this task of implementing the interface
+
+
+![Use Cases](dto.jpg)
+
+
+Since this service is an servlet the web.xml file of the project must know about its existence (see file nsheets/src/main/webapp/WEB-INF/web.xml).
+
+![Use Cases](servlet1.jpg)
+
+
+
+
+
 
 
 
