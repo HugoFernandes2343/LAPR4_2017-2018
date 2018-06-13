@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.Token;
 import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.ConvertCurrencie;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.BinaryOperation;
@@ -26,9 +27,6 @@ import pt.isep.nsheets.shared.core.formula.lang.UnknownElementException;
  */
 public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression> {
 
-    private static double exchangeEuro_Dollar = 1.178;
-    private static double exchangePound_Euro = 1.133;
-    private static double exchangePound_Dollar = 0.746;
     private Cell cell = null;
     int numberOfErros;
     private final StringBuilder errorBuffer;
@@ -121,7 +119,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "£":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value * exchangePound_Euro;
+                            value = value * ConvertCurrencie.getPound_euro();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());
@@ -130,7 +128,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "$":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value / exchangeEuro_Dollar;
+                            value = value / ConvertCurrencie.getEuro_dollar();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());
@@ -141,7 +139,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "e":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value * exchangeEuro_Dollar;
+                            value = value * ConvertCurrencie.getEuro_dollar();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());
@@ -149,7 +147,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "£":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value / exchangePound_Euro;
+                            value = value * ConvertCurrencie.getPound_dollar();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());
@@ -164,7 +162,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "e":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value / exchangePound_Euro;
+                            value = value / ConvertCurrencie.getPound_euro();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());
@@ -175,7 +173,7 @@ public class MonetaryEvalVisitor extends MonetaryLanguageBaseVisitor<Expression>
                     case "$":
                         try {
                             Double value = Value.parseValue(ctx.getChild(0).getText()).toDouble();
-                            value = value / exchangePound_Dollar;
+                            value = value / ConvertCurrencie.getPound_dollar();
                             return new Literal(Value.parseValue(Double.toString(value)));
                         } catch (IllegalValueTypeException ex) {
                             addVisitError(ex.getMessage());

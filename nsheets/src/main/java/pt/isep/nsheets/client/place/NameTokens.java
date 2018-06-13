@@ -34,23 +34,24 @@ public class NameTokens {
     public static final String settings = "settings";
 
     public static final String contacts = "contacts";
- 
+
     public static final String tasks = "tasks";
 
     public static final String requests = "requests";
 
     public static final String exportToXMLWindow = "exportToXMLWindow";
-    
+
     public static final String exportToCSVWindow = "exportToCSVWindow";
 
     public static final String login = "login";
-    
+
     public static final String register = "register";
-    
+
     public static final String logout = "logout";
-    
+
     public static final String menu = "menu";
 
+    public static final String notes = "notes";
 
     public static final String extensionmanager = "extensionmanager";
 
@@ -60,6 +61,12 @@ public class NameTokens {
 
     public static final String chat = "chat";
 
+    public static final String exchange = "exchange";
+
+    public static String getExchange() {
+        return exchange;
+    }
+
     public static String getWorkbook() {
         return workbook;
     }
@@ -68,7 +75,9 @@ public class NameTokens {
         return register;
     }
 
-    public static String getMacros() { return macros; }
+    public static String getMacros() {
+        return macros;
+    }
 
     public static String getAbout() {
         return about;
@@ -81,21 +90,31 @@ public class NameTokens {
     public static String getContacts() {
         return contacts;
     }
-    
+
     public static String getTasks() {
         return tasks;
     }
 
-    public static String getRequests() { return requests; }
+    public static String getNotes() {
+        return notes;
+    }
 
-    public static String getRequestsNumbers(){return "2";}
+    public static String getRequests() {
+        return requests;
+    }
+
+    public static String getRequestsNumbers() {
+        return "2";
+    }
 
     public static String getLogin() {
         return login;
     }
-     public static String getLogout() {
+
+    public static String getLogout() {
         return logout;
     }
+
     public static String getChat() {
         return chat;
     }
@@ -107,20 +126,28 @@ public class NameTokens {
     public static String getExportToXMLWindow() {
         return exportToXMLWindow;
     }
-    
+
     public static String getExportToCSVWindow() {
         return exportToCSVWindow;
     }
+
     public static String getMenu() {
         return menu;
     }
 
-    public static String getExtensionManager() { return extensionmanager; }
+    public static String getExtensionManager() {
+        return extensionmanager;
+    }
 
-    public static String getXmlupload() { return xmlupload; }
+    public static String getXmlupload() {
+        return xmlupload;
+    }
 
-    public static String getAgenda(){ return agenda;}
+    public static String getAgenda() {
+        return agenda;
+    }
 
-
-    public static String getExportToPdf(){ return exportToPdf; }
+    public static String getExportToPdf() {
+        return exportToPdf;
+    }
 }

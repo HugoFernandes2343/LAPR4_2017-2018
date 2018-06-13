@@ -164,7 +164,7 @@ During the implementation of my UC I tried to be aware of what was going on with
 
 # 7. Final Remarks
 
-*In this section present your views regarding alternatives, extra work and future work on the issue.*
+This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on RCOMP course.
 
 
 # 8. Work Log
@@ -172,3 +172,8 @@ During the implementation of my UC I tried to be aware of what was going on with
 *Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
 
 Commits:
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/47ddf73504756b40033195c97418e6c50b7964cc
+
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2d61ce3e3ca1b699939be7ebfaf6c9c5089ff191
+
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/68b2d3b30b24672e20a453e2dad3ddc187f74391
