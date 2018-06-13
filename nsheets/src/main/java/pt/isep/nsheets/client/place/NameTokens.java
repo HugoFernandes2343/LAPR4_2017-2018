@@ -51,8 +51,6 @@ public class NameTokens {
 
     public static final String menu = "menu";
 
-    public static final String notes = "notes";
-
     public static final String extensionmanager = "extensionmanager";
 
     public static final String xmlupload = "xmlupload";
@@ -63,8 +61,14 @@ public class NameTokens {
 
     public static final String exchange = "exchange";
 
+    public static final String notess = "notess";
+
     public static String getExchange() {
         return exchange;
+    }
+
+    public static String getNotess() {
+        return notess;
     }
 
     public static String getWorkbook() {
@@ -93,10 +97,6 @@ public class NameTokens {
 
     public static String getTasks() {
         return tasks;
-    }
-
-    public static String getNotes() {
-        return notes;
     }
 
     public static String getRequests() {
