@@ -301,12 +301,21 @@ If the login is sucessefully than it changes the top menu and open a logged in r
 
 # 6. Test Class's
 
-  The only class that deserved a test class because of the complexity of its code was the email class:
 
-  The tests are the next:
+  The tests are running and obtaining the expected results:
 
+  Email Class tests:
 
   ![SD US1](teste.jpg)
+
+  Name Class tests:
+
+  ![SD US1](teste2.jpg)  
+
+  NickName tests:
+
+  ![SD US1](test2.jpg)
+
 
 
 # 7. Work Log
@@ -325,13 +334,13 @@ Commits:
 
 [IPC01.2: Updated documentation. Sequence diagram added. UI materials added in order to retain chat messages. Missing only tests and the ability to use the actual user of the app instead of a default](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2bcee7a4021730a74d39550aeb83807b51b9cb73)
 
-[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/72fc36911b325870c7ea2dd6da79a4d328c9ad84)
 
-[IPC01.2: Analysis completed. Added domain model image and ssd image](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+[IPC01.2: Analysis completed. Added domain model image and ssd image](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/72fc36911b325870c7ea2dd6da79a4d328c9ad84)
 
 [IPC01.2: Update documentation. Added domain tests. Use case almost completed](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
 
-[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ffb7ba5ab8fc7a8957da5579a37c30bd3408668e)
+[IPC01.2: Updated documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7beb2ebd5a8a667b6b71822167370e0f5375d678)
 
 
 
