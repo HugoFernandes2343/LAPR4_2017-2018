@@ -57,7 +57,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaMessageRepository(this.settings);
     }
 
-
     public RequestRepository requests() {
         return new JpaRequestRepository(this.settings);
     }
@@ -68,6 +67,13 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public CalendarRepository calendares(){ return new JPACalendarRepository(this.settings);}
+    public NoteRepository note() {
+        return new JpaNoteRepository(this.settings);
+    }
+
+    @Override
+    public CalendarRepository calendares() {
+        return new JPACalendarRepository(this.settings);
+    }
 
 }

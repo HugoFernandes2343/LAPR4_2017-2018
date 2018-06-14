@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.server.lapr4.green.s2.core.n1160570.notes.domain;
+package pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
