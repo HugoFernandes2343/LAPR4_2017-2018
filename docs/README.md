@@ -61,7 +61,7 @@ This is a table that should display the overall planning of the team. This is si
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1) | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
-| Red  |[Hugo Carvalho](red/s1161569/)   | [Core 03.1](red/s1161569/sp1) |[IPC 08.1](red/s1161569/sp2) 	 |	  |
+| Red  |[Hugo Carvalho](red/s1161569/)   | [Core 03.1](red/s1161569/sp1) |[IPC 08.1](red/s1161569/sp2) 	 | [Lang 04.1](red/s1161569/sp3)	  |
 | Red  |[Hugo Fernandes](red/s1161155/)	 | [Core 05.1](red/s1161155/sp1) |[IPC 02.1](red/s1161155/sp2)	 |		|
 | Red  |[Marco Carneiro](red/s1160777/)  | [Core 02.1](red/s1160777/sp1) |[IPC 05.2](red/s1160777/sp2)	 |		|
 | Red  |[David Santiago](red/s1161109/)  | [Core 07.1](red/s1161109/sp1) |[IPC 01.2](red/s1161109/sp2)   |	[Lang 02.2](red/s1161109/sp2) 	|
