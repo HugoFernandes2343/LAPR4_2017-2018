@@ -7,10 +7,7 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
-
-import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
