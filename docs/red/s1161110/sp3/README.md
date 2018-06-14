@@ -6,7 +6,9 @@
 
 # 2. Requirements
 
+LANG 02.2
 
+Add support for global variables. Global variables are variables that exist in the context of the workbook and are persisted with the workbook. The name of global variables must start with the "@" sign. When a variable is referred in a formula for the first time it is created. To set the value of a variable it must be used on the left of the assign operator (":="). Attention should be given to synchronization problems. For an example of the use of global variables see Lang01.3.
 
 # 3. Analysis
 
@@ -93,6 +95,7 @@ Project **NSheets**
 
 # 6. Integration/Demonstration
 
+
 # 7. Final Remarks
 
 
@@ -106,6 +109,8 @@ Project **NSheets**
 
 
 Commits:
+
+[Documentation Start](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1514ceb2a44e)
 
 [Requirements]()
 
