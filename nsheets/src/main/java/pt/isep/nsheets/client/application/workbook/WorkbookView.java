@@ -20,6 +20,7 @@
 package pt.isep.nsheets.client.application.workbook;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -68,6 +69,7 @@ import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
 import pt.isep.nsheets.shared.core.formula.lang.RelationalOperator;
+import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellController;
 import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellExt;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
@@ -89,12 +91,37 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     public MaterialLink getConditionalLink() {
         return conditionalLink;
     }
+    
+    public MaterialLink getConditionalLinkStyle() {
+        return conditionalLinkStyle;
+    }
+    
+    public MaterialButton getBoldButton() {
+         return boldButton;
+     }
+ 
+     public MaterialButton getItalicButton() {
+         return italicButton;
+     }
 
+    //1160696
     List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
     List<MaterialRadioButton> falseFontButtons = new ArrayList<>();
     List<MaterialRadioButton> formulasButtons = new ArrayList<>();
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
+    
+    @UiField
+    MaterialCollapsible colapStyle;
+
+    @UiField
+    MaterialLink conditionalLinkStyle;
+    
+    @UiField
+    MaterialButton boldButton;
+
+    @UiField
+    MaterialButton italicButton;
 
     @UiField
     MaterialCollapsible colap;
@@ -447,6 +474,39 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         );
 
         //FIM 1160696
+        
+        //Core08.1 - 1160696
+        boldButton.addClickHandler(event -> {
+            
+            
+            StylesCellController scc = new StylesCellController();
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = extCells.get(activeCell);
+            scc.setChosenExtension(extension);
+            extension.setFontWeight(Style.FontWeight.BOLD);
+            doStyleExt(BOLD);
+
+        });
+
+        italicButton.addClickHandler(event -> {
+            
+            
+            StylesCellController scc = new StylesCellController();
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setFontStyle(Style.FontStyle.ITALIC);
+            doStyleExt(ITALIC);
+
+        });
+        
+        
+        
+        
+        
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
                 String result = "";
@@ -656,5 +716,18 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         return 0;
 
+    }
+    
+    
+    private void doStyleExt(int type) {
+        if (type == BOLD) {
+            for (Cell cell : extCells.keySet()) {
+                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+            }
+        } else if (type == ITALIC) {
+            for (Cell cell : extCells.keySet()) {
+                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+            }
+        }
     }
 }
