@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction;
+package pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.condFunction;
 
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.BinaryOperation;

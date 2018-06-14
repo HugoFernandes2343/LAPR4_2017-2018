@@ -57,15 +57,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import java.util.HashMap;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1150585.ExportToCSV.ExportCsvView;
 import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.LocalExtension;
+import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
 import pt.isep.nsheets.shared.core.formula.lang.RelationalOperator;
+import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellExt;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -204,6 +207,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialTextBox upperCellInfo;
     @UiField
     MaterialTextBox lowerCellInfo;
+    
+    //1160696
+    HashMap<Cell, StylesCellExt> extCells = new HashMap<>();
+    private static final int ITALIC = 1;
+    private static final int BOLD = 2;
+    //1160696
+    
+    
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }

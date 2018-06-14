@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction;
+package pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.condFunction;
 
 import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.client.ui.table.MaterialDataTable;
