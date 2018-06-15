@@ -8,6 +8,7 @@ import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +43,19 @@ public class DownloadPDFImplRod {
         }
 
         return pdfTable;
+    }
+
+    public static void generatePDFFromWorkbook (WorkbookDTO workbookDTO) throws FileNotFoundException, DocumentException {
+        List<PdfPTable> result = workbookToPDF(workbookDTO);
+
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("./exportedWorkbook.pdf"));
+
+        document.open();
+        for (PdfPTable table : result) {
+            document.add(table);
+        }
+        document.close();
     }
 
     public static List<PdfPTable> workbookToPDF(WorkbookDTO workbookDTO){
