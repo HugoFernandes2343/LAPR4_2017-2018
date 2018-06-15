@@ -60,8 +60,14 @@ public class NameTokens {
     public static final String chat = "chat";
 
     public static final String exchange = "exchange";
+    
+    public static final String extension = "extension";
 
     public static final String notess = "notess";
+    
+    public static String getExtension() {
+        return extension;
+    }
 
     public static String getExchange() {
         return exchange;

@@ -1,0 +1,60 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:cb="urn:import:gwt.material.design.addins.client.combobox">
+             
+             
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+     
+    <g:HTMLPanel>
+        <m:MaterialCollapsible>
+            <m:MaterialCollapsibleItem>
+                <m:MaterialCollapsibleHeader>
+                    <m:MaterialLink text="Popup menus in cells" iconType="EXTENSION" iconColor="GREY_DARKEN_2" textColor="BLACK"/>
+                </m:MaterialCollapsibleHeader>
+                <m:MaterialCollapsibleBody>                    
+                    <m:MaterialTextBox ui:field="txtPopup" label="Popup Name"/>
+                    <m:MaterialButton ui:field="btnPopup" text="Apply" textColor="WHITE" type="FLAT" waves="DEFAULT" backgroundColor="BLUE"/> 
+                </m:MaterialCollapsibleBody>
+            </m:MaterialCollapsibleItem>
+            <m:MaterialCollapsibleItem>
+                <m:MaterialCollapsibleHeader>
+                    <m:MaterialLink text="Menu Options" iconType="EXTENSION" iconColor="GREY_DARKEN_2" textColor="BLACK"/>
+                </m:MaterialCollapsibleHeader>
+                <m:MaterialCollapsibleBody>                    
+                    <m:MaterialTextBox ui:field="txtMenu" label="Menu Name"/>
+                    <m:MaterialButton ui:field="btnMenu" text="Apply" textColor="WHITE" type="FLAT" waves="DEFAULT" backgroundColor="BLUE"/> 
+                </m:MaterialCollapsibleBody>
+            </m:MaterialCollapsibleItem>
+            <m:MaterialCollapsibleItem>
+                <m:MaterialCollapsibleHeader>
+                    <m:MaterialLink text="Side bar" iconType="EXTENSION" iconColor="GREY_DARKEN_2" textColor="BLACK"/>
+                </m:MaterialCollapsibleHeader>
+                <m:MaterialCollapsibleBody>
+                    <m:MaterialRow>
+                        <m:MaterialColumn grid="s6">
+                            <m:MaterialLabel text="Comments" fontSize="1em"/>
+                        </m:MaterialColumn>
+                        <m:MaterialColumn grid="s6">
+                            <m:MaterialLabel text="Images" fontSize="1em"/>
+                        </m:MaterialColumn>
+                    </m:MaterialRow>
+                    <m:MaterialRow>
+                        <m:MaterialColumn grid="s6">
+                            <m:MaterialButton text="Activate"/>
+                            <m:MaterialButton text="Disactivate"/>
+                        </m:MaterialColumn>
+                        <m:MaterialColumn grid="s6">
+                            <m:MaterialButton text="Activate"/>
+                            <m:MaterialButton text="Disactivate"/>
+                        </m:MaterialColumn>
+                    </m:MaterialRow>
+                </m:MaterialCollapsibleBody>
+            </m:MaterialCollapsibleItem>
+        </m:MaterialCollapsible>
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

@@ -1,4 +1,4 @@
-**Carlos Rodrigues** (s1151136) - Sprint 1 - IPC06.1
+**Carlos Rodrigues** (s1151136) - Sprint 3 - Core02.2
 ===============================
 
 # 1. General Notes
@@ -7,13 +7,9 @@
 
 # 2. Requirements
 
-*In this section you should describe the requirements for this sprint.*
+- **Core02.2 - Full Extension Mechanism**
 
-*This is simply an example of documentation*
-
-IPC06.1 - Workbooks should be considered public. A public workbook is a workbook that can be accessed by all users. The "Home" page should display all the workbooks. It should be possible to apply filters to this view/page to display only workbooks with specific names or descriptions (the application should accepted regular expressions to filter the workbooks). It should be possible to open, rename or delete a selected workbook in this page/view.
-
-We can further specify this textual requirements as user stories.
+The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
 
 Proposal:
 

@@ -143,6 +143,10 @@
                                 text="Exchange"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getExtension}" iconPosition="LEFT" iconType="EXTENSION"
+                                text="Extension"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE"
                                 text="About"/>
             </m.html:ListItem>
