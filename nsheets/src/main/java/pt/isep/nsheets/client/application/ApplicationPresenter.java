@@ -56,6 +56,7 @@ public class ApplicationPresenter
         super(eventBus, view, proxy, RevealType.Root);
         
         this.menuPresenter = menuPresenter;
+        
          
     }
     

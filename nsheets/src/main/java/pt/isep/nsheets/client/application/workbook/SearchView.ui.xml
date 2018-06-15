@@ -22,10 +22,10 @@ Uncomment this for XHTML entities
             <m:MaterialNavBar ui:field="navBarSearch" width="100%" visible="false">
                 <m:MaterialSearch ui:field="txtSearch" placeholder="Parameter" backgroundColor="WHITE" iconColor="BLACK"  active="true" grid="l3" shadow="1"/>
             </m:MaterialNavBar>
+            <g:HTMLPanel ui:field="htmlPanel">
+
+            </g:HTMLPanel>
         </m:MaterialPanel>
-        <g:HTMLPanel ui:field="htmlPanel">
-            <m:MaterialCard ui:field="card" backgroundColor="BLUE_DARKEN_1">
-            </m:MaterialCard>
-        </g:HTMLPanel>
+
     </ma:window.MaterialWindow>
 </ui:UiBinder>

@@ -9,14 +9,10 @@ package pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros;
 
 
 import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import pt.isep.nsheets.shared.core.IllegalValueTypeException;
-import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.core.formula.Expression;
-import pt.isep.nsheets.shared.core.formula.lang.Language;
-import pt.isep.nsheets.shared.core.formula.lang.LanguageManager;
+import pt.isep.nsheets.shared.core.formula.compiler.*;
+
 
 /**
  *
@@ -28,18 +24,18 @@ public class Antlr4Macros {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ANTLRInputStream input = new ANTLRInputStream("a=6+2+2 b=a+2 c=b+3");
+        ANTLRInputStream input = new ANTLRInputStream("a=2+3 b=a^2+2 c=a-1+b");
         MacrosLexer lexer = new MacrosLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MacrosParser parser = new MacrosParser(tokens);
-        ParseTree tree = parser.input();
+        ParseTree tree = parser.macro();
        
         MacrosBaseVisitorImp calcVisitor = new  MacrosBaseVisitorImp();
         Double result = calcVisitor.visit(tree);
         System.out.println("Result: " + result);
         
        
-         
+        
          
     }
     

@@ -34,7 +34,7 @@ public class Email implements ValueObject, Serializable {
         
         if (!m.matches()) {
             throw new IllegalArgumentException("Email not introduced correctly");
-        } 
+        }
 
         this.email = email;
     }

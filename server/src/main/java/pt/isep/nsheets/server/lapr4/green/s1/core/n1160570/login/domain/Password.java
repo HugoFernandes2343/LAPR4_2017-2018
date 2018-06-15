@@ -21,7 +21,7 @@ public class Password implements ValueObject, Serializable {
 
     public Password(String password) {
         if (Strings.isNullOrEmpty(password)) {
-            throw new IllegalArgumentException();
+           throw new IllegalArgumentException();
         }
         this.password = password;
     }

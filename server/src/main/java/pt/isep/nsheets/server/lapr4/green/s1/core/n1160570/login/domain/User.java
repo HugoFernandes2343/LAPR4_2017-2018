@@ -7,10 +7,7 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
-
-import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
@@ -30,7 +27,6 @@ public class User implements AggregateRoot<Email>, Serializable {
     private boolean activate;
     @Enumerated(EnumType.STRING)
     private UserType userType;
-
 
     public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
@@ -106,6 +102,9 @@ public class User implements AggregateRoot<Email>, Serializable {
         return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
     }
 
+    public UserType getUserType() {
+        return userType;
+    }
 
     public Nickname getNickname() {
         return nickname;

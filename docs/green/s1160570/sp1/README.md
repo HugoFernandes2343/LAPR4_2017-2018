@@ -51,6 +51,10 @@ For this feature increment, since it is the first one to be developed in a new p
 
 - Understand how the gatekeeper works to put dysfunctional buttons before login
 
+- Create a view/page that will be used for the login
+
+- Add a button to the menu to login
+
 ## 3.1 GWT and Project Structure
 
 **Modules**. From the pom.xml file we can see that the application is composed of 5 modules:  
@@ -92,6 +96,37 @@ For this feature increment, since it is the first one to be developed in a new p
 
 * **CurrentUser** - This class has a userDto and a boolean both static to check which user logged in.
 
+
+## 3.2 Applciation Startup
+
+  The ApplicationModule must install a new model for the registering page:
+
+  This module will represent an login Page.
+
+![Use Cases](Capturar.PNG)
+
+## 3.3 Server and RepositoryFactory
+
+
+  The Login page displays several fields that,if corrected verified will persist on server.
+
+  In the method onReveal the Login presenter invokes a UserService asynchronously.
+
+  For this purpose I will require an interface for the service. In this case:
+
+  ![Use Cases](Capturar1.PNG)
+
+
+  When the RPC is invoked since it will always execute asynchronously  I have to prove that i received a callback:
+
+  ![Use Cases](Capturar2.PNG)
+
+  Since the interface has methods that must be accessed by both server and client classes it must be implemented on the shared package.
+
+  The interface must be implemented in the server since it will be the one responsible for communicating with the data base. The LoginController will be the assign controller for this task of implementing the interface
+
+  Since this service is an servlet the web.xml file of the project must know about its existence (see file nsheets/src/main/webapp/WEB-INF/web.xml).
+
 ## 3.4 Analysis Diagrams
 
 **Use Cases**
@@ -105,10 +140,6 @@ For this feature increment, since it is the first one to be developed in a new p
 ![Domain Model](Classe_diagram.jpg)
 
 - **Domain Model**. Since we found no specific requirements for the structure of User we follow the Structure of the existing DTO (UserDTO).
-
-**System Sequence Diagrams**
-
-**For US1**
 
 ![Analysis SD](Sequence_Diagram.jpg)
 
@@ -160,11 +191,57 @@ Project **NShests**
 
 # 6. Integration/Demonstration
 
-During the implementation of my UC I tried to be aware of what was going on with my colleagues work. I think I tried to be as helpful as possible while organizing my time and work.
+During the implementation of my UC I helped and been helped by my team several times.
+
+##6.1 Demonstration
+
+Since you are implementing the gatekeeper, you can not access any page other than about.
+
+Login Page:
+
+![Analysis SD](Capturar4.PNG)
+
+# 6. Test Class's
+
+
+  The tests are running and obtaining the expected results:
+
+### User Class test:
+  - testSetUserType()
+  - testToString()
+  - testSameAs()
+  - testIs()
+  - testGetEmail()
+  - testId()
+  - testToDTO()
+  - testGetNickname()
+  - testGetName()
+  - testFromDTO()
+  - testGetUserType()
+
+### Password Class test:
+  - testHashCode()
+  - testEquals()
+  - testToString()
+  - testToDTO()
+  - testFromDTO
+
+### UserType Class test:
+  - testValues()
+  - testValueOf()
+
+### CurrentUser Class test:
+  - testIsIsLoggedIn()
+  - testSetIsLoggedIn()
+  - testGetCurrentUser()
+  - testSetCurrentUser()
+  - testIsShowAll()
+  - testSetShowAll()
+  - testLogout()  
 
 # 7. Final Remarks
 
-*In this section present your views regarding alternatives, extra work and future work on the issue.*
+This was an extremely interesting Use Case to Design and implement, I applied a lot of the knowledge obtained through the semester on RCOMP course.
 
 
 # 8. Work Log
@@ -172,3 +249,8 @@ During the implementation of my UC I tried to be aware of what was going on with
 *Insert here a log of you daily work. This is in essence the log of your daily work. It should reference your commits as much as possible.*
 
 Commits:
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/47ddf73504756b40033195c97418e6c50b7964cc
+
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2d61ce3e3ca1b699939be7ebfaf6c9c5089ff191
+
+https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/68b2d3b30b24672e20a453e2dad3ddc187f74391

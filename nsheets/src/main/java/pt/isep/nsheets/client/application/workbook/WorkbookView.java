@@ -20,6 +20,7 @@
 package pt.isep.nsheets.client.application.workbook;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -41,8 +42,10 @@ import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 //import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
+import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
@@ -55,12 +58,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
+import java.util.HashMap;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
+import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
+import pt.isep.nsheets.client.lapr4.blue.s3.s1150585.ExportToCSV.ExportCsvView;
+import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.LocalExtension;
+import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
 import pt.isep.nsheets.shared.core.formula.lang.RelationalOperator;
+import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellController;
+import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellExt;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -81,13 +91,38 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     public MaterialLink getConditionalLink() {
         return conditionalLink;
     }
+    
+    public MaterialLink getConditionalLinkStyle() {
+        return conditionalLinkStyle;
+    }
+    
+    public MaterialButton getBoldButton() {
+         return boldButton;
+     }
+ 
+     public MaterialButton getItalicButton() {
+         return italicButton;
+     }
 
+    //1160696
     List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
     List<MaterialRadioButton> falseFontButtons = new ArrayList<>();
     List<MaterialRadioButton> formulasButtons = new ArrayList<>();
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
     
+    @UiField
+    MaterialCollapsible colapStyle;
+
+    @UiField
+    MaterialLink conditionalLinkStyle;
+    
+    @UiField
+    MaterialButton boldButton;
+
+    @UiField
+    MaterialButton italicButton;
+
     @UiField
     MaterialCollapsible colap;
 
@@ -145,11 +180,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     //1140420
     @UiField
     MaterialButton chartWizardButton;
-    
+
     //1171715
     @UiField
     MaterialButton filterCellRange;
-    
+
     //1091234
     @UiField
     MaterialButton newSpreadsheetButton;
@@ -199,6 +234,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialTextBox upperCellInfo;
     @UiField
     MaterialTextBox lowerCellInfo;
+    
+    //1160696
+    HashMap<Cell, StylesCellExt> extCells = new HashMap<>();
+    private static final int ITALIC = 1;
+    private static final int BOLD = 2;
+    //1160696
+    
+    
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }
@@ -239,15 +282,16 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         // Test the initialization of an Workbook
 
         String contents[][] = { // first spreadsheet
-                {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
-                {"1", "2", "3", "4", "5", "6", "7"}};
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
 
         Workbook wb = new Workbook(contents);
 //        WorkbookDescriptionDTO desc = new WorkbookDescriptionDTO("Workbook", "New Workbook", wb.toDTO(), "");
 
 //        SpreadsheetDTO temp = desc.getWorkbook().getSpreadsheets().get(0);
-        Spreadsheet sh  = new SpreadsheetImpl(wb,"sheet", contents);
+        Spreadsheet sh = new SpreadsheetImpl(wb, "sheet", contents);
 
+        CurrentWorkbook.setCurrentWorkbook(wb);
 
         int columnNumber = 0;
 
@@ -274,8 +318,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     WorkbookView(Binder uiBinder) throws Exception {
 
         initWidget(uiBinder.createAndBindUi(this));
-        
-        
+
         //INICIO 1160696
         MaterialCollection c = new MaterialCollection();
         Language l = new Language("teste");
@@ -321,8 +364,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
 //        List<Font> listFont = l.relationalOperators();
         List<String> lf = new ArrayList<String>();
-        
-        
+
         lf.add("Times New Roman");
         lf.add("Arial");
         lf.add("Calisto MT");
@@ -380,27 +422,17 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
                                 falseFont = ffb.getText();
                             }
                         }
-                        
-                        
-                        
-                        
+
                         boolean resultado = false;
                         if (!trueColor.equalsIgnoreCase("") || !falseColor.equalsIgnoreCase("") || !trueFont.equalsIgnoreCase("") || !falseFont.equalsIgnoreCase("")) {
                             resultado = true;
                         }
-                        
-                        
-                        
+
                         if (!value.isEmpty()) {
-                            
-                            
-                            
+
                             if (resultado) {
 
-                            CellImplDTO activeCellDTO = activeCell.toDTO();
-
-
-
+                                CellImplDTO activeCellDTO = activeCell.toDTO();
 
                                 WorkbooksServiceAsync workbookServiceAsync = GWT.create(WorkbooksService.class);
                                 AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
@@ -444,7 +476,39 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         );
 
         //FIM 1160696
+        
+        //Core08.1 - 1160696
+        boldButton.addClickHandler(event -> {
+            
+            
+            StylesCellController scc = new StylesCellController();
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = extCells.get(activeCell);
+            scc.setChosenExtension(extension);
+            extension.setFontWeight(Style.FontWeight.BOLD);
+            doStyleExt(BOLD);
 
+        });
+
+        italicButton.addClickHandler(event -> {
+            
+            
+            StylesCellController scc = new StylesCellController();
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setFontStyle(Style.FontStyle.ITALIC);
+            doStyleExt(ITALIC);
+
+        });
+        
+        
+        
+        
+        
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
                 String result = "";
@@ -463,6 +527,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                     // refresh the active cell
                     this.setActiveCell(activeCell);
+                    this.negativeColors();
                 }
             }
             // Window.alert("Hello");
@@ -489,11 +554,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //                }
 //            }
 //        });
-
         exportToXMLButton.addClickHandler(event -> {
             new ExportToXMLView();
         });
-        
+
         newSpreadsheetButton.addClickHandler((ClickEvent event) -> {
             new addSpreadsheetView();
         });
@@ -508,22 +572,20 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             MacrosView macrosView = new MacrosView();
         });
 
-
         searchButton.addClickHandler(event -> {
             SearchView searchView = new SearchView();
         });
 
-//        exportToPdfButton.addClickHandler(event -> {
-//            ExportToPdfView ex = new ExportToPdfView();
-//
-//        });
+        exportToPdfButton.addClickHandler(event -> {
+            new ExportToPdfView(this.getActiveCell().getSpreadsheet().getWorkbook());
+
+        });
 
 //        formButton.addClickHandler(event -> {
 //            //Window.alert("Hello");
 //            new FormEditorView();
 //
 //        });
-
         //1140420
         chartWizardButton.addClickHandler(event -> {
             new BasicChartWizardView(customTable.getRow(0).getData().sheet);
@@ -533,7 +595,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         filterCellRange.addClickHandler(event -> {
             new FilterCellRangeView(customTable.getRow(0).getData().sheet);
         });
-        
+
         dataTypeBox.add("Number");
         dataTypeBox.add("Text");
         dataTypeBox.add("Date");
@@ -605,216 +667,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         });
 
-
-//        exportToCSVButton.addClickHandler(event -> {
-//            MaterialWindow window = new MaterialWindow();
-//            window.setPadding(32);
-//            window.setHeight("600px");
-//            window.setTextAlign(TextAlign.LEFT);
-//            window.setTitle("Export to CSV");
-//            MaterialWindow.setOverlay(true);
-//            MaterialLabel label1 = new MaterialLabel("Please select what you wish to export:");
-//            MaterialRadioButton radioButtonWorkbook = new MaterialRadioButton("radioButtonWorkbook", "Export Workbook");
-//            MaterialRadioButton radioButtonWorksheet = new MaterialRadioButton("radioButtonWorksheet", "Export Spreadsheet");
-//            MaterialRadioButton radioButtonPartOfWorksheet = new MaterialRadioButton("radioButtonPartOfWorksheet", "Export Part Of A Spreadsheet");
-//            radioButtonWorkbook.setName("Export");
-//            radioButtonWorksheet.setName("Export");
-//            radioButtonPartOfWorksheet.setName("Export");
-//
-//            window.add(label1);
-//
-//            MaterialPanel p0 = new MaterialPanel();
-//            MaterialPanel p1 = new MaterialPanel();
-//            MaterialPanel p2 = new MaterialPanel();
-//            p0.setTextAlign(TextAlign.LEFT);
-//            p1.setTextAlign(TextAlign.LEFT);
-//            p2.setTextAlign(TextAlign.LEFT);
-//            p0.add(radioButtonWorkbook);
-//            p1.add(radioButtonWorksheet);
-//            p2.add(radioButtonPartOfWorksheet);
-//            window.add(p0);
-//            window.add(p1);
-//            window.add(p2);
-//
-//            MaterialComboBox<Workbook> cworkbook = new MaterialComboBox<>();
-//            cworkbook.setPlaceholder("Choose the Workbook you want to export");
-//            cworkbook.setAllowClear(true);
-//            WorkbooksServiceAsync workbooksSvc = GWT.create(WorkbooksService.class);
-//
-//            AsyncCallback<ArrayList<Workbook>> callback = new AsyncCallback<ArrayList<Workbook>>() {
-//                @Override
-//                public void onFailure(Throwable throwable) {
-//                    MaterialToast.fireToast(throwable.getMessage());
-//                }
-//
-//                @Override
-//                public void onSuccess(ArrayList<Workbook> workbookDTOS) {
-//                    for (Workbook w : workbookDTOS) {
-//                        cworkbook.addItem(w);
-//                    }
-//                }
-//            };
-//            workbooksSvc.getWorkbooks(callback);
-//
-////            window.add(cworkbook);
-//            MaterialComboBox<Spreadsheet> cspreadsheets = new MaterialComboBox();
-//            cspreadsheets.setPlaceholder("Choose the Spreadsheet you want to export");
-//            cspreadsheets.setAllowClear(true);
-//            cworkbook.addClickHandler(new ClickHandler() {
-//                @Override
-//                public void onClick(ClickEvent clickEvent) {
-//                    Workbook w = cworkbook.getSelectedValue().get(0);
-//                    for (int i = 0; i < w.spreadsheets.size(); i++) {
-//                        cspreadsheets.addItem(w.spreadsheets.get(i));
-//                    }
-//                }
-//            });
-//
-////            window.add(cspreadsheets);
-//            MaterialTextBox cellVertical = new MaterialTextBox();
-//            cellVertical.setPlaceholder("Vertical Address of the cell (A1)");
-//
-//            MaterialTextBox cellHorizontal = new MaterialTextBox();
-//            cellHorizontal.setPlaceholder("Horizontal Address of the cell (A1)");
-//
-//            MaterialTextBox name = new MaterialTextBox();
-//            name.setPlaceholder("Name of the file");
-//
-//            cellVertical.setEnabled(true);
-//            cellHorizontal.setEnabled(true);
-//            name.setEnabled(true);
-////            window.add(cellVertical);
-////            window.add(cellHorizontal);
-////            window.add(name);
-//
-//            MaterialLabel label2 = new MaterialLabel("Now select the delimiter of the CSV file:");
-////            window.add(label2);
-//
-//            MaterialRadioButton comma = new MaterialRadioButton();
-//            comma.setName("Delimiter");
-//            comma.setText(",");
-//
-//            MaterialRadioButton commaPoint = new MaterialRadioButton();
-//            commaPoint.setName("Delimiter");
-//            commaPoint.setText(";");
-//
-//            MaterialRadioButton point = new MaterialRadioButton();
-//            point.setName("Delimiter");
-//            point.setText(".");
-//
-//            MaterialRadioButton barra = new MaterialRadioButton();
-//            barra.setName("Delimiter");
-//            barra.setText("/");
-//
-//            MaterialRadioButton twoPoints = new MaterialRadioButton();
-//            twoPoints.setName("Delimiter");
-//            twoPoints.setText(":");
-//
-//            MaterialPanel p3 = new MaterialPanel();
-//            MaterialPanel p4 = new MaterialPanel();
-//            MaterialPanel p5 = new MaterialPanel();
-//            MaterialPanel p7 = new MaterialPanel();
-//
-//            p3.setTextAlign(TextAlign.LEFT);
-//            p4.setTextAlign(TextAlign.LEFT);
-//            p5.setTextAlign(TextAlign.LEFT);
-//            p7.setTextAlign(TextAlign.LEFT);
-//
-//            p3.add(comma);
-//            p4.add(commaPoint);
-//            p5.add(barra);
-//            p7.add(twoPoints);
-//
-////            window.add(p3);
-////            window.add(p4);
-////            window.add(p5);
-////            window.add(p7);
-//            MaterialButton exportCSV = new MaterialButton("EXPORT");
-//            exportCSV.addClickHandler(evnt -> {
-//                WorkbooksServiceAsync wsvc = GWT.create(WorkbooksService.class);
-//                // Set up the callback object.
-//                AsyncCallback<Workbook> cb = new AsyncCallback<Workbook>() {
-//                    @Override
-//                    public void onFailure(Throwable caught) {
-//                        MaterialToast.fireToast("Error! " + caught.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Workbook result) {
-//                        MaterialToast.fireToast("Exported successfully!", "rounded");
-//
-//                    }
-//                };
-//            });
-//
-//            exportCSV.setWaves(WavesType.LIGHT);
-//            exportCSV.setSize(ButtonSize.MEDIUM);
-//            MaterialPanel p6 = new MaterialPanel();
-//            p6.setTextAlign(TextAlign.RIGHT);
-//            p6.add(exportCSV);
-////            window.add(p6);
-////            window.open();
-//
-//            radioButtonWorkbook.addClickHandler(new ClickHandler() {
-//                @Override
-//                public void onClick(ClickEvent clickEvent) {
-//                    window.add(cworkbook);
-//                    window.remove(cspreadsheets);
-//                    window.remove(cellVertical);
-//                    window.remove(cellHorizontal);
-//                    window.add(name);
-//                    window.add(label2);
-//                    window.add(p3);
-//                    window.add(p4);
-//                    window.add(p5);
-//                    window.add(p7);
-//                    window.add(p6);
-//                }
-//            });
-//
-//            radioButtonWorksheet.addClickHandler(new ClickHandler() {
-//                @Override
-//                public void onClick(ClickEvent clickEvent) {
-//                    window.add(cworkbook);
-//                    window.add(cspreadsheets);
-//                    window.remove(cellVertical);
-//                    window.remove(cellHorizontal);
-//                    window.add(name);
-//                    window.add(label2);
-//                    window.add(p3);
-//                    window.add(p4);
-//                    window.add(p5);
-//                    window.add(p7);
-//                    window.add(p6);
-//                }
-//            });
-//
-//            radioButtonPartOfWorksheet.addClickHandler(new ClickHandler() {
-//                @Override
-//                public void onClick(ClickEvent clickEvent) {
-//                    window.add(cworkbook);
-//                    window.add(cspreadsheets);
-//                    window.add(cellVertical);
-//                    window.add(cellHorizontal);
-//                    window.add(name);
-//                    window.add(label2);
-//                    window.add(p3);
-//                    window.add(p4);
-//                    window.add(p5);
-//                    window.add(p7);
-//                    window.add(p6);
-//                }
-//            });
-//
-////            exportCSV.setWaves(WavesType.LIGHT);
-////            exportCSV.setSize(ButtonSize.MEDIUM);
-////            MaterialPanel p6 = new MaterialPanel();
-////            p6.setTextAlign(TextAlign.RIGHT);
-////            p6.add(exportCSV);
-////            window.add(p6);
-//
-//            window.open();
-//        });
+        exportToCSVButton.addClickHandler(event -> {
+            new ExportCsvView(this.getActiveCell().getSpreadsheet().getWorkbook());
+        });
 
         // Added access to ToolPanel to add icon widget
         Panel panel = customTable.getScaffolding().getToolPanel();
@@ -824,11 +679,57 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         customTable.getTableTitle().setText("The Future Worksheet!");
     }
 
-
     @Override
     protected void onAttach() {
         super.onAttach();
 
         // table.getTableTitle().setText("The Future Worksheet!");
+    }
+
+    protected static String[][] getDefaultContent() {
+        String contents[][] = { // first spreadsheet
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
+        return contents;
+    }
+
+    public boolean isNumeric(String s) {
+        return s.matches("[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)");
+    }
+
+    private int negativeColors() {
+        int rows = this.customTable.getRowCount();
+        int columns = this.customTable.getRow(0).getWidget().getWidgetCount();
+        for (int a = 0; a < rows; a++) {
+            for (int b = 1; b < columns; b++) {
+                if (isNumeric(customTable.getRow(a).getWidget().getColumn(b).getElement().getInnerText())) {
+
+                    Double content = Double.parseDouble(customTable.getRow(a).getWidget().getColumn(b).getElement().getInnerText());
+                    if (content > 0) {
+                        customTable.getRow(a).getWidget().getColumn(b).getElement().getStyle().setBackgroundColor(LocalExtension.getInstance().getColor1());
+                    } else {
+                        customTable.getRow(a).getWidget().getColumn(b).getElement().getStyle().setBackgroundColor(LocalExtension.getInstance().getColor2());
+                    }
+                }
+            }
+
+        }
+        customTable.getRow(0).getWidget().getColumn(1).getBackgroundColor().getCssName();
+
+        return 0;
+
+    }
+    
+    
+    private void doStyleExt(int type) {
+        if (type == BOLD) {
+            for (Cell cell : extCells.keySet()) {
+                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+            }
+        } else if (type == ITALIC) {
+            for (Cell cell : extCells.keySet()) {
+                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+            }
+        }
     }
 }

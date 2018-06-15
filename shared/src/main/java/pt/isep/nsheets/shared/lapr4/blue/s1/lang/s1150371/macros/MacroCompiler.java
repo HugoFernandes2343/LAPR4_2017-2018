@@ -8,24 +8,32 @@ package pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import pt.isep.nsheets.shared.core.formula.compiler.MacrosLexer;
+import pt.isep.nsheets.shared.core.formula.compiler.MacrosParser;
+
+import java.io.Serializable;
 
 /**
  *
  * @author josea
  */
-public class MacroCompiler {
+
+public class MacroCompiler implements Serializable {
     private Macro m;
     
     public MacroCompiler(Macro m){
         this.m=m;
     }
-    
+
+    public MacroCompiler() {
+    }
+
     public Double compile(){
         ANTLRInputStream input = new ANTLRInputStream(this.m.getInput());
         MacrosLexer lexer = new MacrosLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MacrosParser parser = new MacrosParser(tokens);
-        ParseTree tree = parser.input();
+        ParseTree tree = parser.macro();
        
         MacrosBaseVisitorImp calcVisitor = new  MacrosBaseVisitorImp();
         Double result = calcVisitor.visit(tree);

@@ -68,7 +68,7 @@
                     
                     
                     <m:MaterialLink ui:field="btnLogin" targetHistoryToken="{tokens.getLogin}" text="Login"/>
-                    <m:MaterialLink text="Signup" targetHistoryToken="{tokens.getRegister}"/>
+                    <m:MaterialLink text="Signup" ui:field="btnSingUp" targetHistoryToken="{tokens.getRegister}"/>
                     <m:MaterialLink ui:field="btnLogout" text="Logout"/>
                     
                     
@@ -131,13 +131,26 @@
                                 iconType="VERTICAL_ALIGN_TOP" text="Upload a file"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getNotess}" iconPosition="LEFT" iconType="REORDER"
+                                text="Notes"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getSettings}" iconPosition="LEFT" iconType="SETTINGS"
                                 text="Settings"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getExchange}" iconPosition="LEFT" iconType="CACHED"
+                                text="Exchange"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getExtension}" iconPosition="LEFT" iconType="EXTENSION"
+                                text="Extension"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE"
                                 text="About"/>
             </m.html:ListItem>
+          
 
 
         </m:MaterialSideNavPush>

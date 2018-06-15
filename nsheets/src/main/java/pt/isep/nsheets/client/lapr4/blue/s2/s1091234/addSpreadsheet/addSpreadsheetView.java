@@ -73,6 +73,7 @@ public class addSpreadsheetView extends ViewImpl {
             WorkbookDTO newWbDTO = new WorkbookDTO(wb.getSpreadsheets(), wb.createdSpreadsheets);
 
             async.addSpreadsheetToWorkbook(newWbDTO, ssDTO, callback);
+            windowSpreadsheet.close();
 
         });
     }

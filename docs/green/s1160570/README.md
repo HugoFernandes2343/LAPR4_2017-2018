@@ -7,5 +7,5 @@
 |Sprint  | Area | Documentation for the Sprint |
 |--------|------|------------------------------|
 | **1**  | IPC  | [IPC01.1](sp1)          |
-| **2**  | Lang | [Lang01.0](sp2)         |																				
-| **3**  | Core | [Core00.0](sp3)         |																			
+| **2**  | Lang | [Lang01.2](sp2)         |																				
+| **3**  | Core | [Core07.1](sp3)         |																			

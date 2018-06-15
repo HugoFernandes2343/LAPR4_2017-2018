@@ -58,13 +58,15 @@ Just have to alter the POM.xml to include this Dependency:
 
  Going to create a new package for my stuff: "pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard"
 
+
+
 ## 3.1.0. Is there anything from previous Sprints I can reuse?
 
-- Hugo Carvalho did some interesting work in Sprint 1 in "Core03.1 - Sort Cells" related to selecting a range of Cells. As stated in his docs, "shared.core.SpreadsheetImpl" contains the methods "findReference()" (which finds a Cell's Address), so I'll use that. He also did some widgets to allow the user to select a range of cells, so I'll use that too.
+- Hugo Carvalho did some interesting work in Sprint 1 in "Core03.1 - Sort Cells" related to selecting a range of Cells. As stated in his docs, "shared.core.SpreadsheetImpl" contains the methods "findReference()" (which finds a Cell's Address), so I'll use that. He also did some widgets to allow the user to select a range of cells, so I'll base mine on that too.
 
 ## 3.1.1. Shared
 
--
+- "MaterialBarChart" should have been created here, but due to time constraints it stayed in the "Client" module, while I was still figuring out this whole "GWT" thing.
 
 ## 3.1.2 Client
 
@@ -80,69 +82,30 @@ The main idea for the "workflow" of this feature increment.
 
 **Use Cases**
 
-- **Use Cases**. There is only one Use-Case, and that is typing in a Formula with Variables
+- **Use Cases**. There is only one Use-Case, and that is generating a chart
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](Lang02.1_CD.png)
+The major change for the domain model is "MaterialBarChart".
 
 **System Sequence Diagrams**
 
-![SSD](Lang02.1_SSD.svg)
+![SSD](SSD.png)
 
 # 4. Design
 
-. "CellImpl" reaches the "ExcelExpressionCompiler" after going through the more general "FormulaCompiler". This class goes through all available compilers ("Excel" being the only one available by default, additional ones will need to be added for the JavaScript and VisualBasic "inspired" languages).
+To simulate a "wizard" like interaction, 2 MaterialWindows have been declared in the "BasicChartWizardView.ui.xml", one for each step of the Wizard: "wizardWindowStep1" and "wizardWindowStep2". The mentioned XML dictates which UI fields each Window contains.
 
-. I have opted to create a new method "visitVariableReference()".
+It is possible to go back and forth between these windows, but the biggest flaw in my Design is that these Windows "persist" in the View when moving between them, which causes side-effects of them not "refreshing" each time they are re-opened (e.g. Chart Previews will stack up in Step 2)
 
-. Created "VariableReference", which is to "Variable" the same as "CellReference" is to "Cell": a kind-of "pointer" that includes a "Variable" in it.
+![SD](SD.png)
 
-. Altered "CellImpl.storeContent()" to copy Variable data to the FormulaCompiler
-
-![SD](Lang02.1_SD_long.png)
-
-## 4.1. Tests
-
-I have used the built-in "Console.java" class in "NShared" to test functionality as I developed it.
-
-The lack of unit-testing is the biggest flaw of my work this week and the one I am the least proud of, because my less-than-standard aptitude at LPROG means I am not really sure how to test my methods (took me a LONG time to even discern what the logical flow would be)
-
-## 4.4. Design Patterns and Best Practices
+## 4.1. Design Patterns and Best Practices
 
 
-In my opinion, the application has a potential Design issue:
+Patterns I SHOULD have used but did not:
 
-public class Formula{
-
-    //The Cell this Formula belongs to
-    private Cell cell;
-
-}
-
-public class Cell{
-
-    //The Formula in this Cell
-    private Formula formula;
-
-}
-
-This reflexive association does not seem like a good practice, as most associations should be single-way whenever possible. However, I am not Mr. Einar Pehrson, so I can't imagine the issues he faced 13 years ago when building this from scratch, and this might be the best solution.
-It amuses me to no end, however, to write "Cell.getFormula().getCell().getFormula().getCell()(...)" until the heat death of the Universe.
-
-One Design flaw that I DO know is a bad practice that was introduced by me is the use of side-effects in "CellImpl.storeContent()":
-
-private void storeContent(String content) throws FormulaCompilationException {
-		// Parses formula
-		Formula formula = null;
-
-		if (content.length() > 1)
-			formula = FormulaCompiler.getInstance().compile(this, content);
-}
-
-When the "compile()" method executes, it internally sets the "VariableList" in "this" Cell, and I wish I found a way to make that more transparent. The problem is that as you dig deeper into the call-stack, most methods keep a hold of that "Cell" reference, so that is the best place to store variables.
-
-Other than the obivous "Visitor" pattern, I cannot think of any specific Patterns I might have used - no DTO for UI/UX, no Repository for persistence.
+ . MVP - all of the new code for this UC is contained almost exclusively in a View (BasicChartWizardView) instead of the logic being mostly delegated to a Presenter, and the View just having simple declarations.
 
 
 # 5. Implementation
@@ -153,22 +116,85 @@ As stated previously, all development was done only on the "NShared" module - Us
 
 I followed the recommended organization for packages:  
 - Code should be added (when possible) inside packages that identify the group, sprint, functional area and author;
-- I used **pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables** for NEW classes, and left a comment with my student number "1140420" in other classes I have made modifications to.
+- I used **pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard** for NEW classes, and left a comment with my student number "1140420" in other classes I have made modifications to.
 
 Here are the NEW classes:
-. Variable;
-. VariableReference - container for "Variable", works similarly to "CellReference";
-. VariableList - contains a HashMap that maps a Variable's "name" to the actual "Variable", so you can know if a Variable already exists or not;
+. BasicChartWizardView - the View for this UC. Contains 2 MaterialWindows, for the 2 steps described in the Requirements. Includes the accompanying XML file, where all the UI element declarations are present
+. MaterialBarChart - Chart behaviour. Right now present only in the Client side, as I did not have time to contemplate persistence.
 
 Here is a brief summary of changed classes:
 
-. AbstractVisitor - created "visitVariableReference()";
-. FormulaEvalVisitor.visitReference() - condition to detect "VARIABLE" tokens included;
-. ExpressionVisitor - created "visitVariableReference()"";
-. ExpressionBuilder - implements "visitVariableReference()";
-. CellImpl.storeContent()
-. CellImpl.addVariable() - adds a Variable if new, BUT returns it without adding if not.
-. Formula - added a field of "VariableList"
+. WorkbookView (and accompanying XML) - integrated "BasicChartWizardView" into them by use of the MaterialButton "chartWizardButton";
+
+
+## 5.1 testing
+
+### MaterialBarChart
+
+Here are proposed tests that should be implemented for my specific methods in that class (ones that I did not reuse from the GWT Tutorials). Unfortunately I am not able to run them successfully because creating a Cell means using GWT transpiler from somewhere other than Client code, which throws an exception. If I follow a suggestion so that the Test class extends "GWTTestCase", it's obviously not picked up by JUnit, "No tests found".
+
+@Test
+	public void transpose()  throws FormulaCompilationException {
+			Cell[][] cellMatrix = new Cell[5][4];
+
+			for (int i = 0; i < cellMatrix.length; i++){
+					for (int j = 0; j < cellMatrix[0].length; i++){
+							cellMatrix[i][j] = new CellImpl(null, null, "i+j");
+					}
+			}
+
+			Cell expected[][] = new Cell[4][5];
+			for (int i = 0; i < cellMatrix.length; i++){
+					for (int j = 0; j < cellMatrix[0].length; i++){
+							expected[j][i] = new CellImpl(null, null, "i+j");
+					}
+			}
+
+			Cell result[][] = MaterialBarChart.transpose (cellMatrix);
+
+			for (int i = 0; i < result.length; i++) {
+					for (int j = 0; j < result[0].length; j++) {
+							org.junit.Assert.assertTrue(result[i][j].getContent().equals(expected[i][j]));
+					}
+			}
+
+	}
+
+	@Test
+	public void cellsToValueMatrix() throws IllegalValueTypeException, FormulaCompilationException {
+			Cell[][] cellMatrix = new Cell[5][4];
+
+			for (int i = 0; i < cellMatrix.length; i++){
+					for (int j = 0; j < cellMatrix[0].length; i++){
+							cellMatrix[i][j] = new CellImpl(null, null, "i+j");
+					}
+			}
+
+			int expected[][] = new int[5][4];
+			for (int i = 0; i < expected.length; i++){
+					for (int j = 0; j < expected[0].length; i++){
+							expected[i][j] = i+j;
+					}
+			}
+
+			int result[][] = MaterialBarChart.cellsToValueMatrix (cellMatrix);
+
+			org.junit.Assert.assertTrue(result.equals(expected));
+	}
+
+## 5.2 Known issues and bugs
+
+- I cannot capture labels or identifiers for the Columns yet, only generate predefined ones;
+
+- Row/column transposition fails to generate a chart. "MaterialBarChart.transpose()" is most likely the root cause;
+
+- Charts are not associated or stored with a given Cell, only a visual artifact for now. Consider moving "MaterialBarChart" to the "shared" module to be able to create an instance of it inside a "CellImpl";
+
+- Charts only work for square ranges (i.e. 3x3, 4x4). I suspect the issue lies with "MaterialBarChart.setValues()", which calls "spreadsheet.getCellRangeMatrix(upperCellAddress, lowerCellAddress);" I should have tested this method.
+
+- There is a hard limit of "3" rows/columns for the chart, and I don't know why. I have double-checked for any hard-coded limits in "MaterialBarChart", nothing. If this limit is surpassed, no chart is visible. It has nothing to do with window size because the charts are sized according to the available space;
+
+- Going back and forth in the wizard does NOT delete existing charts: they keep being accumulating on the page, so either the Design needs to change, OR find out how to "erase" previously drawn charts.
 
 # 6. Integration/Demonstration
 
@@ -176,44 +202,4 @@ Here is a brief summary of changed classes:
 
 # 7. Final Remarks and Tips for the next guy
 
-. Big shoutout to Pedro Tedim (1091234) for helping me out with the Grammar. I came up with my rules, but having his input was a big confidence booster.
-
-. I am positive the Grammar "Formula.g4" is correct, but an alternative I would explore would be to create a new rule for "variablereference" instead of including "VARIABLE" in "reference".
-
-. "pt.isep.nsheets.shared.core.formula.util.ReferenceFetcher" is a class I looked at pretty late in development. I don't think there's anything to change there, but trying out an implementation of the "visitVariableReference()" method here would be my next course of action.
-
-# 8. Work Log
-
-I never drank an ounce of alcohol in my life, but I must have been drunk when I mentioned "[Lang03.1]" in my commits INSTEAD OF "[Lang02.1]".
-
-I also forgot, up until the last 24h or so, to include "[fixing issue #52]" to link them to my Bitbucket Issue. A mistake that I will not be making for Sprint 2...
-
-Important Commits:
-
-[Updated UC distribution for Team BLUE and created default "sp1" folders and markdown files for my team Lang02.1.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d504dffbca27ea4db63fefb89c1243d5da39735b)
-
-[Wrote Requirements and Analysis Lang02.1](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b039d15a5a03c8556949bc6ff30a8d03788af3fd)
-
-[Lang02.1 SSD](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7d1385db958d5c294d401374297dc787f171ff55)
-
-[Lang02.1 Introducing Variable](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1803d0d0c1cf554a3bed2f2ee5b5fa90b7c4e6af)
-
-[Lang02.1 - Created Variable and VariableList](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/371695642805c1349f365c088325416fec1e94cd)
-
-[Lang02.1 - Some further insight into CellReference allows me to conclude "VariableReference" will be necessary](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8fe729d63868259c089f6e3d2c7eff2a62c683f6)
-
-[Lang02.1 - Added VariableList to Formula ](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b3e1dcfef05625af98a0ff5529e5d8fa2118e041)
-
-[Lang02.1 - Added VariableReference, which will behave similarly as a CellReference](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ab661ec45fd478dc63b2187d8abfb27c5f34e7ed)
-
-[Lang02.1 - Added "visitVariableReference()" to Visitor classes. I was thinking of using the existing "visitReference()", but it seems to me like it's best to split this](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/238957cc7ab43510b1aab6ee7714152346cd5d82)
-
-[Lang02.1 - Changed VariableReference to Expression, to avoid implementing some methods that seem unnecessary for now. Also want to avoid the "visits" to use those methods (like "getCells()") because if they do, they'd throw exceptions](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ae1d1a03a75235cbcd44aea8669bd12c8486bedc)
-
-[Lang02.1 - Changed Assignment operator class. Pedro Tedim suspects an "instance of" is necessary to recognize a "VariableReference". The man is clearly more comfortable with this grammar mumbo-jumbo than I am. Plus, his Lang01.1 UC seems to be working.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8f0cabad541517a47ae55011b7d1a642033ede08)
-
-[Lang02.1 - Editing FormulaEvalVisitor, "visitReference()". I've put "VARIABLE" in the "reference" rule in the Grammar, and this class seems to have "visits" for every single rule, so this is my best shot. Using the "Token" bullshit that I found in the "visitLiteral()" method](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c820ce9aad519ee86116b130d58e53b0356440e5)
-
-[Lang02.1 - Reworked VariableReference to have a Cell instead of a Formula: the processing steps have several references to "Cell", so it's basically saving VariableReferences in Cell 1st, and only AFTER the "compile()" method is done is it possible to assign Variables to a Formula](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f7deab7db4fd65b6651fe62f1e6b731112658507)
-
-[Lang02.1 - Reworked README.md, SSD, SD and CD to better reflect my work](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2536ea335f40ebb29aca837ad0663e5cdf7d2657)
+. Find a way to test the transposition. It's something so simple, but I should have tested earlier to figure out a way. Test the algorithm

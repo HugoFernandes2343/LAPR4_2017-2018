@@ -17,14 +17,16 @@ public class Macro implements Serializable {
     private String name;
     private String macroType;
     
-    public Macro(String name,String input,String macroType) {
-        this.input = input;
+    MacroCompiler compiler;
+    
+    public Macro(String name,String input,String macroType) {        
         this.name=name;
+        this.input = input;
         this.macroType=macroType;
+        this.compiler= new MacroCompiler(this);
     }
 
     public Macro() {
-
     }
 
     /**
@@ -42,7 +44,7 @@ public class Macro implements Serializable {
     }
     
     public Double runMacro(){
-    return null;
+        return compiler.compile();
     }
 
     /**

@@ -1,4 +1,4 @@
-grammar JavaSriptMacros;
+grammar JavaScriptMacros;
 
 @header {
     package pt.isep.nsheets.lapr4.blue.s1.lang.s1161248.JavaScriptMacros;

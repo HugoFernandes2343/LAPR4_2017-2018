@@ -17,6 +17,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentMenu;
 import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
@@ -65,23 +66,18 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 @Override
-                public void onSuccess(UserDTO result) {
-                    
+                public void onSuccess(UserDTO result) {  
                     user.setCurrentUser(result);
                     user.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
-                    
-                    
                      
                     PlaceRequest placeRequest = new PlaceRequest.Builder()
                             .nameToken(NameTokens.home)
                             .build();
                     placeManager.revealPlace(placeRequest);
-                    
-                    
-                    
-                    
-                    
+                                     
+                    CurrentMenu.MenuReload();
+              
                 }
             };
 
