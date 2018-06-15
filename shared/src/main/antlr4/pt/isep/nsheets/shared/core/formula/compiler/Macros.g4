@@ -4,6 +4,8 @@ grammar Macros;
 //    package pt.isep.nsheets.shared.core.formula.compiler;
 }
 
+
+
 macro
     : ((setVar NL?)+  | CCOMMENT)+
     ;
@@ -40,18 +42,27 @@ atom
     | DOUBLE        # Double
     | INT           # Int
     | ID            # Variable
+    | CELL_REF      # Ref
     | LPAR plusOrMinus RPAR     # Braces
     ;
+
+CELL_REF:
+     		( ABS )? LETTER ( LETTER )?
+     		( ABS )? ( INT )+
+     	;
 
 
 INT    : [0-9]+;
 DOUBLE : [0-9]+'.'[0-9]+;
+LETTER : [A-Z];
 PI     : 'pi';
 E      : 'e';
 POW    : '^';
 NL     : '\n';
 WS     : [ \t\r]+ -> skip;
 ID     : [a-zA-Z_][a-zA-Z_0-9]*;
+
+fragment ABS : '$' ;
 
 PLUS  : '+';
 EQUAL : '=';

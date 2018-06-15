@@ -23,7 +23,7 @@ import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
-import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1160696.condFunction.ConditionalFunctionController;
+import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.condFunction.ConditionalFunctionController;
 import pt.isep.nsheets.shared.services.CellImplDTO;
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;

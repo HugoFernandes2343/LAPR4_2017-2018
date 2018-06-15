@@ -42,6 +42,7 @@ reference
 		( ( COLON ) CELL_REF )?
                 | VARIABLE
                 | spreadsheet_reference
+                | GLOBAL
 	;
 
 spreadsheet_reference
@@ -59,6 +60,9 @@ literal
 
 VARIABLE
         : UND LETTER ( NUMBER | LETTER) *
+        ;
+GLOBAL
+        : ARR LETTER ( NUMBER | LETTER) *
         ;
 
 assignment
@@ -119,6 +123,7 @@ PT      : '.';
 /* Text operators */
 AMP		: '&' ;
 UND     : '_' ;
+ARR     : '@' ;
 
 /* Arithmetic operators */
 PLUS	: '+' ;

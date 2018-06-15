@@ -26,6 +26,9 @@ public class Macro implements Serializable {
         this.compiler= new MacroCompiler(this);
     }
 
+    public Macro() {
+    }
+
     /**
      * @return the input
      */
