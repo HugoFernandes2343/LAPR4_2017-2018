@@ -105,7 +105,7 @@ Project **NSheets**
 
 **Thursday - June 14**
 * Research and Requirements started.
-
+* Analysis started.
 
 
 Commits:
