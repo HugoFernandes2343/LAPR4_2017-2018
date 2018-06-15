@@ -50,7 +50,7 @@ sequence diagram: https://imgur.com/a/eKfhqgx
    
 
 # 5. Implementation
-
+ 
 The biggest self-critique I have in regards to my design is the fact that I have not been able to apply the Model-View-Presenter pattern: instead, my entire logic is contained in a View, when in fact I should have delegated most of it to a Presenter. However, I really wanted to get something done, so I emulated what I saw most of my colleagues doing, so that I could ask them for minimal advice if I ran into a roadblock.
 
 
