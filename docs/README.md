@@ -80,7 +80,7 @@ This is a table that should display the overall planning of the team. This is si
 | Blue |[Ana Jesus](blue/s1130443/) 		   | MIA							|	MIA							 | MIA		|
 | Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|	[Core02.1](blue/s1150371/sp2)							 | [IPC02.2](blue/s1150371/sp3)		|
 | Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|	[Core01.2](blue/s1091234/sp2)							 | [IPC01.3](blue/s1091234/sp3)		|
-| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 | [IPC03.2](blue/s1140420/sp3)			|
+| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 | [IPC03.1](blue/s1140420/sp3)			|
 | Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|	[Core05.2](blue/s1150585/sp2)							 | [IPC05.1](blue/s1150585/sp3)		|
 | Blue |[Pietro Falco](blue/s1171786/)	 	 | [Lang04.1](blue/s1171786/sp1)							|	Withdrawn							 | Withdrawn		|
 | Blue |[Barbara Csonka](blue/s1171715/)   | [Lang03.1](blue/s1171715/sp1)             | [Core03.2](blue/s1171715/sp2)               | [IPC04.1](blue/s1171715/sp3)   |
