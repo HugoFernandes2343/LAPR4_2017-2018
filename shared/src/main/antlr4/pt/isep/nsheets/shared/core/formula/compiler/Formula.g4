@@ -5,6 +5,7 @@ grammar Formula;
 
 expression
 	: EQ comparison /* EOF */
+	| EX assignment
 	;
 
 comparison
@@ -40,7 +41,16 @@ reference
 	:	CELL_REF
 		( ( COLON ) CELL_REF )?
                 | VARIABLE
+                | spreadsheet_reference
 	;
+
+spreadsheet_reference
+        :       spreadsheet_name PT reference
+        ;
+
+spreadsheet_name
+                  : STRING
+                  ;
 
 literal
 	:	NUMBER
@@ -53,6 +63,7 @@ VARIABLE
 
 assignment
         :       reference ASSIGN comparison
+        |       spreadsheet_reference ASSIGN comparison
         ;
 
 block
@@ -102,6 +113,8 @@ LTEQ    : '<=' ;
 GTEQ    : '>=' ;
 GT		: '>' ;
 LT		: '<' ;
+EX      : '!';
+PT      : '.';
 
 /* Text operators */
 AMP		: '&' ;
@@ -114,6 +127,7 @@ MULTI	: '*' ;
 DIV	: '/' ;
 POWER	: '^' ;
 PERCENT : '%' ;
+
 
 /* Reference operators */
 fragment ABS : '$' ;
