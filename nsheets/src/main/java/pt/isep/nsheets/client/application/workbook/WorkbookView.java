@@ -291,6 +291,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //        SpreadsheetDTO temp = desc.getWorkbook().getSpreadsheets().get(0);
         Spreadsheet sh = new SpreadsheetImpl(wb, "sheet", contents);
 
+        CurrentWorkbook.setCurrentWorkbook(wb);
+
         int columnNumber = 0;
 
         // Add the columns...
