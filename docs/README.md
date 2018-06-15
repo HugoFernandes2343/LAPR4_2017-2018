@@ -65,7 +65,7 @@ This is a table that should display the overall planning of the team. This is si
 | Red  |[Hugo Fernandes](red/s1161155/)	 | [Core 05.1](red/s1161155/sp1) |[IPC 02.1](red/s1161155/sp2)	 |		|
 | Red  |[Marco Carneiro](red/s1160777/)  | [Core 02.1](red/s1160777/sp1) |[IPC 05.2](red/s1160777/sp2)	 | [Lang03.2](red/s1160777/sp3)		|
 | Red  |[David Santiago](red/s1161109/)  | [Core 07.1](red/s1161109/sp1) |[IPC 01.2](red/s1161109/sp2)   |	[Lang 02.2](red/s1161109/sp3) 	|
-| Red  |[David Maia](red/s1161110/)      | [Core 08.1](red/s1161110/sp1) |[IPC 04.2](red/s1161110/sp2)   |		|
+| Red  |[David Maia](red/s1161110/)      | [Core 08.1](red/s1161110/sp1) |[IPC 04.2](red/s1161110/sp2)   |	[Lang 02.2](red/s1161110/sp3)	|
 | Red  |[Filipe Simão](red/s1161213/) 	 | [Core 06.1](red/s1161213/sp1) |[IPC 03.1](red/s1161213/sp2)	 |		|
 | Red  |[Norberto Sousa](red/s1120608/)  | [Core 01.1](red/s1120608/sp1) |[IPC 06.2](red/s1120608/sp2)	 |		|
 | Red  |[Ricardo Correia](red/s1151231/) |        MIA       |           MIA      |  MIA  |
