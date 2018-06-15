@@ -11,18 +11,23 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import pt.isep.nsheets.shared.core.formula.compiler.MacrosLexer;
 import pt.isep.nsheets.shared.core.formula.compiler.MacrosParser;
 
+import java.io.Serializable;
+
 /**
  *
  * @author josea
  */
 
-public class MacroCompiler {
+public class MacroCompiler implements Serializable {
     private Macro m;
     
     public MacroCompiler(Macro m){
         this.m=m;
     }
-    
+
+    public MacroCompiler() {
+    }
+
     public Double compile(){
         ANTLRInputStream input = new ANTLRInputStream(this.m.getInput());
         MacrosLexer lexer = new MacrosLexer(input);

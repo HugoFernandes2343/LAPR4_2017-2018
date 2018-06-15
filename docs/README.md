@@ -61,11 +61,11 @@ This is a table that should display the overall planning of the team. This is si
 | Group | Student                      | Sprint1                                        | Sprint2                                      | Sprint3 							          |
 |------|------------------------------|------------------------------------------------|----------------------------------------------|----------------------------------------------|
 | White  | [John Doe](white/s4567890/) | [Core00.0](white/s4567890/sp1) | [IPC00.0](white/s45678901/sp2)           | [Lang00.0](white/s4567890/sp3) |
-| Red  |[Hugo Carvalho](red/s1161569/)   | [Core 03.1](red/s1161569/sp1) |[IPC 08.1](red/s1161569/sp2) 	 |	  |
+| Red  |[Hugo Carvalho](red/s1161569/)   | [Core 03.1](red/s1161569/sp1) |[IPC 08.1](red/s1161569/sp2) 	 | [Lang 04.1](red/s1161569/sp3)	  |
 | Red  |[Hugo Fernandes](red/s1161155/)	 | [Core 05.1](red/s1161155/sp1) |[IPC 02.1](red/s1161155/sp2)	 |		|
-| Red  |[Marco Carneiro](red/s1160777/)  | [Core 02.1](red/s1160777/sp1) |[IPC 05.2](red/s1160777/sp2)	 |		|
-| Red  |[David Santiago](red/s1161109/)  | [Core 07.1](red/s1161109/sp1) |[IPC 01.2](red/s1161109/sp2)   |	[Lang 02.2](red/s1161109/sp2) 	|
-| Red  |[David Maia](red/s1161110/)      | [Core 08.1](red/s1161110/sp1) |[IPC 04.2](red/s1161110/sp2)   |		|
+| Red  |[Marco Carneiro](red/s1160777/)  | [Core 02.1](red/s1160777/sp1) |[IPC 05.2](red/s1160777/sp2)	 | [Lang03.2](red/s1160777/sp3)		|
+| Red  |[David Santiago](red/s1161109/)  | [Core 07.1](red/s1161109/sp1) |[IPC 01.2](red/s1161109/sp2)   |	[Lang 02.2](red/s1161109/sp3) 	|
+| Red  |[David Maia](red/s1161110/)      | [Core 08.1](red/s1161110/sp1) |[IPC 04.2](red/s1161110/sp2)   |	[Lang 02.2](red/s1161110/sp3)	|
 | Red  |[Filipe Simão](red/s1161213/) 	 | [Core 06.1](red/s1161213/sp1) |[IPC 03.1](red/s1161213/sp2)	 |		|
 | Red  |[Norberto Sousa](red/s1120608/)  | [Core 01.1](red/s1120608/sp1) |[IPC 06.2](red/s1120608/sp2)	 |		|
 | Red  |[Ricardo Correia](red/s1151231/) |        MIA       |           MIA      |  MIA  |
@@ -80,7 +80,7 @@ This is a table that should display the overall planning of the team. This is si
 | Blue |[Ana Jesus](blue/s1130443/) 		   | MIA							|	MIA							 | MIA		|
 | Blue |[José Silva](blue/s1150371/) 		   | [Lang06.1](blue/s1150371/sp1)							|	[Core02.1](blue/s1150371/sp2)							 | [IPC02.2](blue/s1150371/sp3)		|
 | Blue |[Pedro Tedim](blue/s1091234/) 	   | [Lang01.1](blue/s1091234/sp1)							|	[Core01.2](blue/s1091234/sp2)							 | [IPC01.3](blue/s1091234/sp3)		|
-| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 | [IPC03.2](blue/s1140420/sp3)			|
+| Blue |[Rodrigo Soares](blue/s1140420/)   | [Lang02.1](blue/s1140420/sp1)				|	[Core04.2](blue/s1140420/sp2)							 | [IPC03.1](blue/s1140420/sp3)			|
 | Blue |[Daniel Fernandes](blue/s1150585/) | [Lang05.1](blue/s1150585/sp1)						|	[Core05.2](blue/s1150585/sp2)							 | [IPC05.1](blue/s1150585/sp3)		|
 | Blue |[Pietro Falco](blue/s1171786/)	 	 | [Lang04.1](blue/s1171786/sp1)							|	Withdrawn							 | Withdrawn		|
 | Blue |[Barbara Csonka](blue/s1171715/)   | [Lang03.1](blue/s1171715/sp1)             | [Core03.2](blue/s1171715/sp2)               | [IPC04.1](blue/s1171715/sp3)   |
