@@ -25,6 +25,8 @@ public class NameTokens {
 
     public static final String agenda = "agenda";
 
+    public static final String privateChat = "privateChat";
+
     public static final String about = "about";
 
     public static final String workbook = "workbook";
@@ -146,6 +148,8 @@ public class NameTokens {
     public static String getAgenda() {
         return agenda;
     }
+
+    public static String getPrivateChat() { return privateChat;};
 
     public static String getExportToPdf() {
         return exportToPdf;

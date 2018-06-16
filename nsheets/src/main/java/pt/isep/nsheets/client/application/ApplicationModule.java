@@ -25,6 +25,7 @@ import pt.isep.nsheets.client.application.Contacts.ContactsModule;
 import pt.isep.nsheets.client.application.Requests.RequestsModule;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1150585.Tasks.TasksModule;
 import pt.isep.nsheets.client.application.about.AboutModule;
+import pt.isep.nsheets.client.lapr4.blue.s3.s1161248.PrivateChat.PrivateChatModule;
 import pt.isep.nsheets.client.lapr4.green.s2.s1160570.application.exchange.ExchangeModule;
 import pt.isep.nsheets.client.application.home.HomeModule;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1161248.Agenda.AgendaModule;
@@ -56,6 +57,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new RegisterModule());
         install(new ChatModule());
         install(new ExchangeModule());
+        install(new PrivateChatModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
     }

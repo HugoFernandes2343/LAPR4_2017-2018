@@ -6,17 +6,21 @@ import java.util.Properties;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161109.register.application.RegisterController;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
 
+import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 import pt.isep.nsheets.shared.services.UsersService;
@@ -43,7 +47,20 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         return new PersistenceSettings(props);
     }
 
-//    @Override
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+
+        LoginController ctrl = new LoginController();
+
+        User user = null;
+
+        user = ctrl.getUserByEmail(email);
+
+        return user.toDTO();
+    }
+
+    //    @Override
 //    public boolean checkUser(String email, String password) {
 //        // Setup the persistence settings
 //        PersistenceContext.setSettings(this.getPersistenceSettings());
@@ -79,11 +96,11 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
 
     @Override
     public UserDTO saveUser(UserDTO user) {
-        
+
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
         RegisterController ctrl = new RegisterController();
-        
+
         try {
             return ctrl.saveUser(user).toDTO();
         } catch (DataConcurrencyException ex) {
@@ -91,8 +108,9 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         } catch (DataIntegrityViolationException ex) {
             Logger.getLogger(UsersServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
+
 
 }

@@ -28,4 +28,8 @@ public class LoginController implements Controller {
         return userRepository.getUser_Email(email, password);
     }
 
+    public User getUserByEmail(String email){
+        UserRepository userRepository = PersistenceContext.repositories().user();
+        return userRepository.getUserByEmail(email);
+    }
 }

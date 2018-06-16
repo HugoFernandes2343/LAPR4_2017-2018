@@ -1,0 +1,34 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:m.html="urn:import:gwt.material.design.client.ui.html">
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+    <m:MaterialPanel>
+        <g:HTMLPanel ui:field="chatPanel">
+
+        </g:HTMLPanel>
+        <g:HTMLPanel>
+            <m:MaterialLabel ui:field="chatName" text="Current Chat"></m:MaterialLabel>
+            <m:MaterialRow>
+                <m:MaterialTextArea ui:field="textField" label="Text Area" allowBlank='false'/>
+                <m:MaterialButton ui:field="sendButton" text="Send" waves="LIGHT" textColor="WHITE"
+                                  iconType="POLYMER" iconPosition="RIGHT"/>
+            </m:MaterialRow>
+            <m:MaterialFAB>
+                <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
+                <m:MaterialFABList>
+                    <m:MaterialButton ui:field="changeChat" type="FLOATING" waves="LIGHT" iconType="COMPARE_ARROWS"
+                                      tooltip="Change Chat" tooltipPosition="LEFT"/>
+                    <m:MaterialButton ui:field="newChat" type="FLOATING" waves="LIGHT" iconType="ADD"
+                                      tooltip="Create new Chat" tooltipPosition="LEFT"/>
+                    <m:MaterialButton ui:field="invites" type="FLOATING" waves="LIGHT" iconType="ANNOUNCEMENT"
+                                      tooltip="Pending Invites" tooltipPosition="LEFT"/>
+                    <m:MaterialButton ui:field="addFriends" type="FLOATING" waves="LIGHT" iconType="ASSIGNMENT_IND"
+                                      tooltip="Add Friends" tooltipPosition="LEFT"/>
+                </m:MaterialFABList>
+            </m:MaterialFAB>
+        </g:HTMLPanel>
+    </m:MaterialPanel>
+</ui:UiBinder>

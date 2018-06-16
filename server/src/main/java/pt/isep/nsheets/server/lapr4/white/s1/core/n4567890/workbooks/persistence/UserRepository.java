@@ -21,4 +21,5 @@ public interface UserRepository extends Repository<User, Long> {
     public User getUser_Email(Email email, Password password);
 
     public User getUserByEmail(String email);
+
 }

@@ -28,8 +28,7 @@ public class RegisterController implements Controller {
      public User saveUser(UserDTO user) throws DataConcurrencyException, DataIntegrityViolationException {
          
          return rs.saveUser(user);
-         
-       
     }
-    
+
+
 }

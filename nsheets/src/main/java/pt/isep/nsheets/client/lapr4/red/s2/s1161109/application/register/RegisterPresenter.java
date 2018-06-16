@@ -42,7 +42,6 @@ import pt.isep.nsheets.shared.services.UsersService;
 import pt.isep.nsheets.shared.services.UsersServiceAsync;
 
 /**
- *
  * @author David Santiago <1161109@isep.ipp.pt>
  */
 public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, RegisterPresenter.MyProxy> {
@@ -71,7 +70,7 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
         MaterialLabel getLblName();
 
         MaterialLabel getLblSize();
-        
+
 
     }
 
@@ -117,9 +116,9 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
             @Override
 
             public void onTotalUploadProgress(TotalUploadProgressEvent event) {
-                
+
                 getView().getProgress().setPercent(event.getProgress());
-                 
+
             }
         });
 
@@ -127,40 +126,36 @@ public class RegisterPresenter extends Presenter<RegisterPresenter.MyView, Regis
             @Override
 
             public void onSuccess(SuccessEvent<UploadFile> event) {
-                
+
                 getView().getLblName().setText(event.getTarget().getName());
-                
+
                 getView().getLblSize().setText(event.getTarget().getType());
                 MaterialToast.fireToast("Photo Uploaded With sucess");
-                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName());     
+                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName());
             }
-            
+
         });
-        
-        
+
+
         getView().getCardUploader().addErrorHandler(new ErrorEvent.ErrorHandler<UploadFile>() {
 
 
             @Override
             public void onError(ErrorEvent<UploadFile> event) {
                 MaterialToast.fireToast("ERROR");
-                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName()); 
+                getView().getImgPreview().setUrl(GWT.getHostPageBaseURL() + "uploadedFiles/" + event.getTarget().getName());
             }
-            
-        });
-        
-        
-        
-        
-        
 
-         getView().getCardUploader().addDragOverHandler(new DragOverEvent.DragOverHandler() {
+        });
+
+
+        getView().getCardUploader().addDragOverHandler(new DragOverEvent.DragOverHandler() {
             @Override
 
             public void onDragOver(DragOverEvent event) {
-                
-               //getView().MaterialAnimator.animate(Transition.RUBBERBAND, getView().getCardUploader(), 0);
-                
+
+                //getView().MaterialAnimator.animate(Transition.RUBBERBAND, getView().getCardUploader(), 0);
+
             }
         });
 
