@@ -103,6 +103,48 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
      public MaterialButton getItalicButton() {
          return italicButton;
      }
+     
+     /**
+     * @return the alignLeftBtn
+     */
+    public MaterialButton getAlignLeftBtn() {
+        return alignLeftBtn;
+    }
+
+    /**
+     * @return the alignRightBtn
+     */
+    public MaterialButton getAlignRightBtn() {
+        return alignRightBtn;
+    }
+
+    /**
+     * @return the alignCenterBtn
+     */
+    public MaterialButton getAlignCenterBtn() {
+        return alignCenterBtn;
+    }
+
+    /**
+     * @return the underlineBtn
+     */
+    public MaterialButton getUnderlineBtn() {
+        return underlineBtn;
+    }
+
+    /**
+     * @return the cFillBtn
+     */
+    public MaterialButton getcFillBtn() {
+        return cFillBtn;
+    }
+
+    /**
+     * @return the cTextBtn
+     */
+    public MaterialButton getcTextBtn() {
+        return cTextBtn;
+    }
 
     //1160696
     List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
@@ -110,6 +152,24 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     List<MaterialRadioButton> formulasButtons = new ArrayList<>();
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
+    
+    @UiField
+    MaterialButton alignLeftBtn;
+    
+    @UiField
+    MaterialButton alignRightBtn;
+    
+    @UiField
+    MaterialButton alignCenterBtn;
+    
+    @UiField
+    MaterialButton underlineBtn;
+    
+    @UiField
+    MaterialButton cFillBtn;
+    
+    @UiField
+    MaterialButton cTextBtn;
     
     @UiField
     MaterialCollapsible colapStyle;
@@ -239,6 +299,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     HashMap<Cell, StylesCellExt> extCells = new HashMap<>();
     private static final int ITALIC = 1;
     private static final int BOLD = 2;
+    private static final int ALIGN_CENTER = 3;
+    private static final int ALIGN_LEFT = 4;
+    private static final int ALIGN_RIGHT = 5;
+    private static final int UNDERLINE = 6;
     //1160696
     
     
@@ -478,10 +542,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         //FIM 1160696
         
         //Core08.1 - 1160696
+        
+        StylesCellController scc = new StylesCellController();
+        
         boldButton.addClickHandler(event -> {
             
-            
-            StylesCellController scc = new StylesCellController();
+                        
             if (!extCells.containsKey(activeCell)) {
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
@@ -495,14 +561,72 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         italicButton.addClickHandler(event -> {
             
-            
-            StylesCellController scc = new StylesCellController();
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
             StylesCellExt extension = new StylesCellExt();
             extCells.put(activeCell, extension);
             scc.setChosenExtension(extension);
             extension.setFontStyle(Style.FontStyle.ITALIC);
             doStyleExt(ITALIC);
 
+        });
+        
+        alignLeftBtn.addClickHandler(event -> {
+           
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setTextAlign(TextAlign.LEFT);
+            doStyleExt(ALIGN_LEFT);
+            
+        });
+        
+        alignRightBtn.addClickHandler(event -> {
+           
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setTextAlign(TextAlign.RIGHT);
+            doStyleExt(ALIGN_RIGHT);
+            
+        });
+        
+        alignCenterBtn.addClickHandler(event -> {
+           
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setTextAlign(TextAlign.CENTER);
+            doStyleExt(ALIGN_CENTER);
+            
+        });
+        
+        underlineBtn.addClickHandler(event -> {
+           
+            if (!extCells.containsKey(activeCell)) {
+                StylesCellExt extension = new StylesCellExt();
+                extCells.put(activeCell, extension);
+            }
+            StylesCellExt extension = new StylesCellExt();
+            extCells.put(activeCell, extension);
+            scc.setChosenExtension(extension);
+            extension.setUnderline(Style.TextDecoration.UNDERLINE);
+            doStyleExt(UNDERLINE);
+            
         });
         
         
@@ -722,14 +846,33 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     
     
     private void doStyleExt(int type) {
-        if (type == BOLD) {
-            for (Cell cell : extCells.keySet()) {
-                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
-            }
-        } else if (type == ITALIC) {
-            for (Cell cell : extCells.keySet()) {
-                customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
-            }
+        switch (type) {
+            case BOLD:
+                for (Cell cell : extCells.keySet()) {
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+                }   break;
+            case ITALIC:
+                for (Cell cell : extCells.keySet()) {
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+                }   break;
+            case ALIGN_LEFT:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.LEFT);
+                }   break;
+            case ALIGN_RIGHT:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.RIGHT);
+                } break;
+            case ALIGN_CENTER:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.CENTER);
+                } break;
+            case UNDERLINE:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).getElement().getStyle().setTextDecoration(extCells.get(cell).getUnderline());
+                } break;
+            default:
+                break;
         }
     }
 }
