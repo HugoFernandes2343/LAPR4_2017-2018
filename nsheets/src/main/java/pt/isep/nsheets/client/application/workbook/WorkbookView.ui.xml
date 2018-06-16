@@ -140,6 +140,31 @@ governing permissions and limitations under the License. #L% -->
                 </m:MaterialCollapsibleItem>
             </m:MaterialCollapsible>
         </m:MaterialRow>
+        
+        <m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Background Color" iconType="FORMAT_COLOR_FILL" ui:field="colorFillButton"  activates="BackgroundColors"/>
+                            
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Confirm" ui:field="confirmBG" />
+            </m:MaterialRow>
+                
+            <m:MaterialDropDown activator="BackgroundColors" constrainWidth="true">
+                <m:MaterialCollection ui:field="backgroundColor"/>
+            </m:MaterialDropDown>
+                
+            <m:MaterialRow>
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Text Color" iconType="FORMAT_COLOR_FILL" ui:field="colorTextButton"  activates="TextColors"/>
+                            
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Confirm" ui:field="confirmTXT" />
+            </m:MaterialRow>
+            <m:MaterialDropDown activator="TextColors" constrainWidth="true">
+                <m:MaterialCollection ui:field="textColor"/>
+            </m:MaterialDropDown>
+                
+                
+        </m:MaterialRow>
+
+
 
         <m:MaterialRow>
             <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->

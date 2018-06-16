@@ -34,6 +34,7 @@ import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
+import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
@@ -152,6 +153,30 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     List<MaterialRadioButton> formulasButtons = new ArrayList<>();
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
+    
+    @UiField
+    MaterialButton confirmBG;
+
+//    @UiField
+//    MaterialCollapsible backgroundColorColaps;
+
+    @UiField
+     MaterialButton colorTextButton;
+ 
+    @UiField
+    MaterialButton confirmTXT;
+
+//    @UiField
+//    MaterialCollapsible textColorColaps;
+    
+    @UiField
+    MaterialCollection backgroundColor;
+
+    @UiField
+    MaterialCollection textColor;
+    
+    List<MaterialRadioButton> backgroundColorButtons = new ArrayList<>();
+    List<MaterialRadioButton> textColorButtons = new ArrayList<>();
     
     @UiField
     MaterialButton alignLeftBtn;
@@ -303,6 +328,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     private static final int ALIGN_LEFT = 4;
     private static final int ALIGN_RIGHT = 5;
     private static final int UNDERLINE = 6;
+    private static final int BG_COLOR = 7;
+    private static final int TXT_COLOR = 8;
     //1160696
     
     
@@ -632,7 +659,125 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         });
         
         
+        MaterialCollection bgColors = new MaterialCollection();
         
+        
+        for (Color color : Color.values()) {
+            MaterialRadioButton bg = new MaterialRadioButton("bg");
+            
+            
+            bg.setText(color.name());
+//            mb.setBackgroundColor(x);
+            backgroundColorButtons.add(bg);
+            bgColors.add(bg);
+        }
+
+        backgroundColor.add(bgColors);
+
+        MaterialCollection tColors = new MaterialCollection();
+        for (Color color : Color.values()) {
+            MaterialRadioButton bg = new MaterialRadioButton("bg");
+            
+            
+            bg.setText(color.name());
+//            mb.setBackgroundColor(x);
+            textColorButtons.add(bg);
+            textColor.add(bg);
+        }
+
+        textColor.add(tColors);
+        
+        confirmBG.addClickHandler(event -> {
+            
+            
+            if (activeCell != null) {
+                
+                if (!extCells.containsKey(activeCell)) {
+                    
+                    
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                    
+               }
+                
+                
+                StylesCellExt extension = extCells.get(activeCell);
+                scc.setChosenExtension(extension);
+                String colorA = "";
+                
+                
+                for (MaterialRadioButton bgcb : backgroundColorButtons) {
+                    if (bgcb.getValue()) {
+                        colorA = bgcb.getText();
+                        break;
+                    }
+                }
+                
+                
+                Color set = extension.DEFAULT_BACKGROUND_COLOR;
+                
+                
+                for (Color colorB : Color.values()) {
+                    if (colorB.name().compareToIgnoreCase(colorA) == 0) {
+                        set = colorB;
+                        break;
+                    }
+                }
+
+                extension.setBackgroundColor(set);
+                doStyleExt(BG_COLOR);
+//                backgroundColorColaps.closeAll();
+            }
+        
+        });
+        
+        
+        confirmTXT.addClickHandler(event -> {
+            
+            
+            if (activeCell != null) {
+                
+                if (!extCells.containsKey(activeCell)) {
+                    
+                    
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                    
+               }
+                
+                
+                StylesCellExt extension = extCells.get(activeCell);
+                scc.setChosenExtension(extension);
+                String colorA = "";
+                
+                
+                for (MaterialRadioButton tcb : textColorButtons) {
+                    if (tcb.getValue()) {
+                        colorA = tcb.getText();
+                        break;
+                    }
+                }
+                
+                
+                Color set = extension.DEFAULT_BACKGROUND_COLOR;
+                
+                
+                for (Color colorB : Color.values()) {
+                    if (colorB.name().compareToIgnoreCase(colorA) == 0) {
+                        set = colorB;
+                        break;
+                    }
+                }
+
+                extension.setTextColor(set);
+                doStyleExt(TXT_COLOR);
+//                backgroundColorColaps.closeAll();
+            }
+        
+        });
+        
+        
+       //Core08.1 - 1160696
         
         
         firstButton.addClickHandler(event -> {
@@ -847,15 +992,15 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     }
     
     
-    private void doStyleExt(int type) {
-        switch (type) {
+    private void doStyleExt(int t) {
+        switch (t) {
             case BOLD:
                 for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
                 }   break;
             case ITALIC:
                 for (Cell cell : extCells.keySet()) {
-                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).getElement().getStyle().setFontStyle(extCells.get(cell).getFontStyle());
                 }   break;
             case ALIGN_LEFT:
                 for(Cell cell : extCells.keySet()){
@@ -872,6 +1017,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             case UNDERLINE:
                 for(Cell cell : extCells.keySet()){
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).getElement().getStyle().setTextDecoration(extCells.get(cell).getUnderline());
+                } break;
+            case BG_COLOR:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setBackgroundColor(extCells.get(cell).getBackgroundColor());
+                } break;
+            case TXT_COLOR:
+                for(Cell cell : extCells.keySet()){
+                    customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextColor(extCells.get(cell).getTextColor());
                 } break;
             default:
                 break;
