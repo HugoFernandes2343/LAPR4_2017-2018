@@ -54,6 +54,12 @@ public class FilterCellRangeView extends Composite{
         });
     }
 
+    /**
+     * Evaluates a Formula in a specified Cell range.
+     * Dummy method for now, as it returns rows "1" and "3", always
+     * @return the indexes (ints) of the Rows that are to be
+     * disabled
+     */
     public List<Integer> evaluate (){
         List<Integer> result = new ArrayList<>();
 

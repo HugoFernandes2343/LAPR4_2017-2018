@@ -14,6 +14,7 @@ import javax.persistence.*;
 import pt.isep.nsheets.server.lapr4.blue.s3.ipc.s1161248.PrivateChat.domain.Chat;
 import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request;
 import pt.isep.nsheets.shared.services.ChatDTO;
+import javax.persistence.*;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 /**

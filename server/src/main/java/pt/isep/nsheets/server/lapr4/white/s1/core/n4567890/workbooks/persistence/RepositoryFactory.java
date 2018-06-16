@@ -5,7 +5,6 @@
  */
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence;
 
-
 import pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.persistenc.CalendarRepository;
 
 /**
@@ -15,15 +14,15 @@ import pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.persistenc.Ca
 public interface RepositoryFactory {
 
     PersistenceSettings setSettings(PersistenceSettings settings);
-    
+
     WorkbookDescriptionRepository workbookDescriptions();
 
     WorkbookRepository workbooks();
-    
+
     UserRepository user();
 
     EventRepository events();
-    
+
     TagsRepository tags();
 
     RequestRepository requests();
@@ -35,4 +34,6 @@ public interface RepositoryFactory {
     MessageRepository messages();
 
     CalendarRepository calendares();
+
+    NoteRepository note();
 }

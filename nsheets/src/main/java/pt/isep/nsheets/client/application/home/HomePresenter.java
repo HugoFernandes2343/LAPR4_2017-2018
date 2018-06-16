@@ -208,7 +208,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     protected void onReveal() {
         super.onReveal();
 
-
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();

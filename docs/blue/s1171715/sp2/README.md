@@ -9,11 +9,12 @@ taken to service, and plus the fact that I had to leave the city for days becaus
 
 # 2. Requirements
 
-In the light of the official document, my task was the following: 
+My task was the following: 
 
 - The user should be able to define a range of cells, doing things on the active spreadsheet
-- The user should be able to define a certain column, where the formula - defined by the user - will be perfomred on
+- The user should be able to define a certain column, where the formula - defined by the user - will be performed on
 - In the light of the previous requirement, the rows what are in the ranged should be filtered, based on the previously defined boolean formula
+
 
 # 3. Analysis
 
@@ -22,8 +23,9 @@ In order to draw up a proper solution for this task, I had to study and understa
 In addition, because of the lack of time, I only managed to solve the following:
 
 - It is possible for the user to select a range of cells, e.g: B2:C4 in a table which has columns from A-F, and cells from 1-6.
-	- In this case, in B2, B will be the indicator column, and C4 will stand for the row that needs to be checked. 
-	- This means, that all the values in column B will be checked according to the previously given formula, and according to that, the row (C4) is going to stay visible, or change to invisible.
+
+	- In this case, in B2, B will be the indicator column, and the range of rows "2-4" will be subjected to either being set to invisible (if the formula evaluates to "false") or staz visible otherwise
+	- This means, that all the values in column B (up to the row range limit, in this case row 4) will be checked according to the previously given formula, and according to that, the row (C4) is going to stay visible, or change to invisible.
 	
 Of course, if I would have more time, I would try to solve the task like how it would be expected from the side of the user/customer.
 
@@ -31,17 +33,64 @@ system sequence diagram: https://imgur.com/a/GlYS5jg
 
 # 4. Design
 
-The sequence diagram clearly shows how my part is working at the moment. 
+The sequence diagram shows how my part is working at the moment. 
 
-The user can click on the button, which indicates a popup window to show up, where a new Spreadsheet can be created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell, as it was explained in chapter 3), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
+The user can click on the button, which indicates a popup window to show up, where a new View is created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell, as it was explained in chapter 3), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
+
+## 4.1 New classes and packages
+
+I created a new package for my new classes "pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange". This package contains the classes FilterCellRangeView.java and FilterCellRangeView.ui.xml, which work together, since the interface FilterCellRangeView.ui.xml is binded to FilterCellRangeView.java
+
+## 4.2 Modifications to existing classes
+
+WorkbookView.java
+It is now extended with filterCellRange button and the belonging codeblock. Just search for "filterCellRange" to see all the modifications
 
 sequence diagram: https://imgur.com/a/eKfhqgx
    
 
 # 5. Implementation
+ 
+The biggest self-critique I have in regards to my design is the fact that I have not been able to apply the Model-View-Presenter pattern: instead, my entire logic is contained in a View, when in fact I should have delegated most of it to a Presenter. However, I really wanted to get something done, so I emulated what I saw most of my colleagues doing, so that I could ask them for minimal advice if I ran into a roadblock.
 
 
+FILTERCELLRANGEVIEW.JAVA
 
+	 public FilterCellRangeView(Spreadsheet spreadsheet) {
+        initWidget(uiBinder.createAndBindUi(this));
+
+        filterCellRangeWindow.open();
+
+		//azutan mukodik hogy a user kitoltotte a dolgokat, begyujti az osszes parametert amit a user kitoltott
+		
+        filterCellsButton.addClickHandler(event -> {
+
+            String formula = formulaBox.getValue();
+            String upperCell = upperCellInfo.getText();
+            String lowerCell = lowerCellInfo.getText();
+
+            Address upperAdd = spreadsheet.findAddress(upperCell);
+            Address lowerAdd = spreadsheet.findAddress(lowerCell);
+
+            range = spreadsheet.getCellRangeMatrix(upperAdd, lowerAdd);
+            column = upperAdd.getColumn();
+        });
+    }
+	
+	This is the part of the popup window, where the start and end cell, and also the formula can be defined by the user. 
+	
+	
+	
+	public List<Integer> evaluate (){
+			List<Integer> result = new ArrayList<>();
+
+			result.add(1);
+			result.add(3);
+
+			return result;
+    }
+	
+	This part evaluates a formula, in a specified cell range. It is not working properly now, since it always returns same values (returns indexes of the rows that has to be disabled according to the formula). 
 
 
 # 6. Final Remarks

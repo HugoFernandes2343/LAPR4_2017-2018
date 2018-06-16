@@ -3,7 +3,7 @@
 
 # 1. General Notes
 
-In this section I would like to state my opinion on the current structure of LAPR4 course. We have been in these two first sprints working with a team of 3 people instead of 7, two of our team mates are from Erasmus, which proved to be specially difficult to work with. This state of things only makes it harder for the hardworking students to be able to support so much responsibility and to be able to deliver well designed and implemented use cases.
+In this section I would like to state my opinion on the current structure of LAPR4 course. Two of our team mates are from Erasmus, which proved to be specially difficult to work with. This state of things only makes it harder for the hardworking students to be able to support so much responsibility and to be able to deliver well designed and implemented use cases.
 
 # 2. Requirements
 

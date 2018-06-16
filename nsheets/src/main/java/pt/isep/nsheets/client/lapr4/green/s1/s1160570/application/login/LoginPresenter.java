@@ -66,25 +66,18 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 @Override
-                public void onSuccess(UserDTO result) {
-                    
+                public void onSuccess(UserDTO result) {  
                     user.setCurrentUser(result);
                     user.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
-                    
-                    
                      
                     PlaceRequest placeRequest = new PlaceRequest.Builder()
                             .nameToken(NameTokens.home)
                             .build();
                     placeManager.revealPlace(placeRequest);
-                    
-                    
+                                     
                     CurrentMenu.MenuReload();
-                    
-                    
-                    
-                    
+              
                 }
             };
 
