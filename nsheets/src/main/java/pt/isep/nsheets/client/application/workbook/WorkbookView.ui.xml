@@ -135,6 +135,12 @@ governing permissions and limitations under the License. #L% -->
                         <m:MaterialButton ui:field="underlineBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_UNDERLINED"/>
                         <m:MaterialButton ui:field="cFillBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_COLOR_FILL"/>
                         <m:MaterialButton ui:field="cTextBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_COLOR_TEXT"/>
+
+                        <!--1160777-->
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="firstCell" placeholder="First Cell" grid="s2" />
+                            <m:MaterialTextBox ui:field="lastCell" placeholder="Last Cell" grid="s2"  />
+                        </m:MaterialRow>
                         
                     </m:MaterialCollapsibleBody>                     
                 </m:MaterialCollapsibleItem>
