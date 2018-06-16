@@ -293,6 +293,8 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         CurrentWorkbook.setCurrentWorkbook(wb);
 
+        CurrentWorkbook.setCurrentSpreadsheet(sh);
+
         int columnNumber = 0;
 
         // Add the columns...

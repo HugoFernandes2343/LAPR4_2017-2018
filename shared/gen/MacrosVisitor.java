@@ -19,12 +19,11 @@ public interface MacrosVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMacro(MacrosParser.MacroContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SetVariable}
-	 * labeled alternative in {@link MacrosParser#setVar}.
+	 * Visit a parse tree produced by {@link MacrosParser#setVar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSetVariable(MacrosParser.SetVariableContext ctx);
+	T visitSetVar(MacrosParser.SetVarContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ToMultOrDiv}
 	 * labeled alternative in {@link MacrosParser#plusOrMinus}.
@@ -117,19 +116,19 @@ public interface MacrosVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInt(MacrosParser.IntContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Variable}
+	 * Visit a parse tree produced by the {@code Cell}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(MacrosParser.VariableContext ctx);
+	T visitCell(MacrosParser.CellContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Ref}
+	 * Visit a parse tree produced by the {@code Mac}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRef(MacrosParser.RefContext ctx);
+	T visitMac(MacrosParser.MacContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Braces}
 	 * labeled alternative in {@link MacrosParser#atom}.
