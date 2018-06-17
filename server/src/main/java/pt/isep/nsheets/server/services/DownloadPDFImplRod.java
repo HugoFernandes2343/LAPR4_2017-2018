@@ -1,38 +1,85 @@
 package pt.isep.nsheets.server.services;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import pt.isep.nsheets.shared.core.Cell;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.element.Table;
+import pt.isep.nsheets.shared.services.DownloadToPDFService;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class DownloadPDFImplRod {
+public class DownloadPDFImplRod extends RemoteServiceServlet implements DownloadToPDFService {
+    private WorkbookDTO toExport;
 
-    public static PdfPCell cellToPDFCell (Cell cell){
-        return new PdfPCell(new Phrase(cell.getContent()));
-    }
+    /*@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        this.doGet(request, response);
+    }*/
 
-    public static PdfPCell[][] cellRangeToPDFCellRange (Cell[][] cellRange){
-        PdfPCell[][] result = new PdfPCell[cellRange.length][cellRange[0].length];
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        String fileName = "generatedPDF.pdf";//request.getParameter("filename");
 
-        for (int i = 0; i < cellRange.length; i++) {
-            for (int j = 0; j < cellRange[0].length; j++) {
-                result[i][j] = cellToPDFCell(cellRange[i][j]);
-            }
+        try {
+            //1st, generate a local PDF file
+            generatePDFFromWorkbook (toExport, fileName);
+            //2nd, send it through
+            sendPDFfile(response, fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return result;
     }
 
-    public static PdfPTable spreadsheetToPDFTable(SpreadsheetDTO spreadsheet){
-        PdfPTable pdfTable = new PdfPTable(spreadsheet.getColumnCount());
+    /**
+     * Sends a PDF file through a HttpServletResponse as a byte array
+     * @param response
+     * @param fileName
+     * @throws IOException
+     */
+    private void sendPDFfile(HttpServletResponse response, String fileName) throws IOException {
+        int BUFFER = 1024 * 100;//set a reasonable size
+        response.setContentType( "application/octet-stream" );
+        response.setHeader( "Content-Disposition:", "attachment;filename=" + fileName);
+        ServletOutputStream outputStream = response.getOutputStream();
+        byte[] bytes = getFile(fileName);
+        response.setContentLength( Long.valueOf( bytes.length ).intValue() );
+        response.setBufferSize( BUFFER );
+        outputStream.write(bytes);
+        outputStream.close();
+    }
+
+    public byte[] getFile(String filename) {
+
+        byte[] bytes = null;
+
+        try {
+            java.io.File file = new java.io.File(filename);
+            if (file.exists()){
+                FileInputStream fis = new FileInputStream(file);
+                bytes = new byte[(int) file.length()];
+                fis.read(bytes);
+            }
+            else{
+                System.out.println ("File does not exist");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bytes;
+    }
+
+    public Table spreadsheetToPDFTable(SpreadsheetDTO spreadsheet){
+        Table pdfTable = new Table(spreadsheet.getColumnCount());
 
         String[][] content = spreadsheet.getContent();
 
@@ -45,41 +92,59 @@ public class DownloadPDFImplRod {
         return pdfTable;
     }
 
-    public static void generatePDFFromWorkbook (WorkbookDTO workbookDTO) throws FileNotFoundException, DocumentException {
-        List<PdfPTable> result = workbookToPDF(workbookDTO);
+    public PdfDocument generatePDFFromWorkbook (WorkbookDTO workbookDTO, String filename) throws FileNotFoundException {
+        List<Table> result = workbookToPDF(workbookDTO);
 
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("./exportedWorkbook.pdf"));
 
-        document.open();
-        for (PdfPTable table : result) {
+        PdfDocument lowLevelDoc = new PdfDocument(new PdfWriter(filename));
+        Document document = new Document(lowLevelDoc);
+
+        for (Table table : result) {
             document.add(table);
         }
         document.close();
+
+        return lowLevelDoc;
     }
 
-    public static List<PdfPTable> workbookToPDF(WorkbookDTO workbookDTO){
-        List<PdfPTable> result = new ArrayList<PdfPTable>();
+    public List<Table> workbookToPDF(WorkbookDTO workbookDTO){
+        List<Table> result = new ArrayList<Table>();
         for (SpreadsheetDTO spreadsheet : workbookDTO.getSpreadsheets()) {
             result.add(spreadsheetToPDFTable(spreadsheet));
         }
         return result;
     }
 
-    // iText allows to add metadata to the PDF which can be viewed in your Adobe
-    // Reader
-    // under File -> Properties
-    private static void addMetaData(Document document) {
-        document.addTitle("My first PDF");
-        document.addSubject("Using iText");
-        document.addKeywords("Java, PDF, iText");
-        document.addAuthor("Lars Vogel");
-        document.addCreator("Lars Vogel");
+    public WorkbookDTO dummyWorkbook(){
+        //Instance data
+        int columns = 3, rows = 4;
+        String[][] content1 = {{"4","3","2"},
+                {"s123","--","s"},
+                {"+sad","+io","-12..12"},
+                {"bssd","asd","ads"}};
+
+        SpreadsheetDTO spreadsheet1 = new SpreadsheetDTO("Spreadsheet1", columns, rows, content1);
+
+        columns = 3; rows = 5;
+        String[][] content2 = {{"4","3","2"},
+                {"s123","--","s"},
+                {"+sad","+io","-12..12"},
+                {"bssd","asd","ads"},
+                {"bssd","asd","ads"}};
+
+        SpreadsheetDTO spreadsheet2 = new SpreadsheetDTO("Spreadsheet2", columns, rows, content2);
+
+        List<SpreadsheetDTO> spreadsheets = new ArrayList<SpreadsheetDTO>();
+        spreadsheets.add(spreadsheet1);
+        spreadsheets.add(spreadsheet2);
+        WorkbookDTO workbook = new WorkbookDTO(spreadsheets, spreadsheets.size());
+
+        return workbook;
     }
 
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
+    @Override
+    public WorkbookDTO exportToDownload(WorkbookDTO toExport) {
+        this.toExport = toExport;
+        return toExport;
     }
 }

@@ -39,11 +39,44 @@ limitations under the License.
     </servlet>
   
     <servlet>
+    <servlet-name>TasksServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ExportCsvServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.ExportCsvImpl</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+    <servlet-name>workbooksServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/workbooksService</url-pattern>
+
+  </servlet-mapping> 
+
+  <servlet-mapping>
+    <servlet-name>chatServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/chatService</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>usersServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/usersService</url-pattern>
+
+  </servlet-mapping>  
         <servlet-name>TasksServiceServlet</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
     </servlet>
   
     <servlet-mapping>
+    <servlet-name>TasksServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/tasksService</url-pattern>
+  </servlet-mapping>
         <servlet-name>workbooksServiceServlet</servlet-name>
         <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
         <url-pattern>/nsheets/workbooksService</url-pattern>
@@ -70,7 +103,21 @@ limitations under the License.
     </servlet-mapping>  
       
 
- 
+
+
+
+    <!--1140420-->
+    <!--PDF Download servlet-->
+    <servlet>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadPDFImplRod</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <url-pattern>/nsheets/downloadToPDFService</url-pattern>
+    </servlet-mapping>
+    <!--1140420-->
 
     <!--1160777-->
     <!--Download servlet, may be subject to changes-->
@@ -118,6 +165,24 @@ limitations under the License.
         <servlet-class>pt.isep.nsheets.server.services.PrivateChatServiceImpl</servlet-class>
     </servlet>
    
+  <servlet-mapping>
+    <servlet-name>privateChatServiceServlet</servlet-name>
+    <url-pattern>/nsheets/privateChatService</url-pattern>
+  </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>ExportCsvServiceServlet</servlet-name>
+    <url-pattern>/nsheets/exportCsvService</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+        <servlet-name>downloadCSVService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadCSVService</servlet-name>
+        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
     <servlet-mapping>
         <servlet-name>privateChatServiceServlet</servlet-name>
         <url-pattern>/nsheets/privateChatService</url-pattern>
