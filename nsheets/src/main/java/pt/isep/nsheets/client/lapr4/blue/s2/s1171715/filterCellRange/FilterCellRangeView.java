@@ -43,14 +43,13 @@ public class FilterCellRangeView extends Composite{
 
         filterCellsButton.addClickHandler(event -> {
 
-            MaterialToast.fireToast("Filtering");
             String formula = formulaBox.getValue();
             String upperCell = upperCellInfo.getText();
             String lowerCell = lowerCellInfo.getText();
 
             Address upperAdd = spreadsheet.findAddress(upperCell);
             Address lowerAdd = spreadsheet.findAddress(lowerCell);
-
+            MaterialToast.fireToast("Filtering from " + upperCell + " to " + lowerCell);
             range = spreadsheet.getCellRangeMatrix(upperAdd, lowerAdd);
             column = upperAdd.getColumn();
         });
