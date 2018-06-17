@@ -30,13 +30,13 @@ public class MacrosBaseListener implements MacrosListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSetVariable(MacrosParser.SetVariableContext ctx) { }
+	@Override public void enterSetVar(MacrosParser.SetVarContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSetVariable(MacrosParser.SetVariableContext ctx) { }
+	@Override public void exitSetVar(MacrosParser.SetVarContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -198,25 +198,25 @@ public class MacrosBaseListener implements MacrosListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(MacrosParser.VariableContext ctx) { }
+	@Override public void enterCell(MacrosParser.CellContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(MacrosParser.VariableContext ctx) { }
+	@Override public void exitCell(MacrosParser.CellContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRef(MacrosParser.RefContext ctx) { }
+	@Override public void enterMac(MacrosParser.MacContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRef(MacrosParser.RefContext ctx) { }
+	@Override public void exitMac(MacrosParser.MacContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

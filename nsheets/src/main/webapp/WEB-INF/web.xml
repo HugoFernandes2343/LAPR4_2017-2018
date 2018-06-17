@@ -73,10 +73,23 @@
     <servlet-name>TasksServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
     <url-pattern>/nsheets/tasksService</url-pattern>
-  </servlet-mapping>  
-      
+  </servlet-mapping>
 
- 
+
+
+
+    <!--1140420-->
+    <!--PDF Download servlet-->
+    <servlet>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadPDFImplRod</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <url-pattern>/nsheets/downloadToPDFService</url-pattern>
+    </servlet-mapping>
+    <!--1140420-->
 
     <!--1160777-->
     <!--Download servlet, may be subject to changes-->

@@ -21,6 +21,9 @@ public class FilterCellRangeView extends Composite{
     MaterialWindow filterCellRangeWindow;
 
     @UiField
+    MaterialLabel label;
+
+    @UiField
     MaterialTextBox formulaBox, upperCellInfo, lowerCellInfo;
 
     @UiField
@@ -38,10 +41,9 @@ public class FilterCellRangeView extends Composite{
     public FilterCellRangeView(Spreadsheet spreadsheet) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        filterCellRangeWindow.open();
-
         filterCellsButton.addClickHandler(event -> {
 
+            MaterialToast.fireToast("Filtering");
             String formula = formulaBox.getValue();
             String upperCell = upperCellInfo.getText();
             String lowerCell = lowerCellInfo.getText();
@@ -52,6 +54,9 @@ public class FilterCellRangeView extends Composite{
             range = spreadsheet.getCellRangeMatrix(upperAdd, lowerAdd);
             column = upperAdd.getColumn();
         });
+        MaterialWindow.setOverlay(true);
+        filterCellRangeWindow.open();
+
     }
 
     /**
