@@ -71,8 +71,8 @@ import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
 import pt.isep.nsheets.shared.core.formula.lang.RelationalOperator;
-import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellController;
-import pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell.StylesCellExt;
+import pt.isep.nsheets.shared.lapr4.green.s1.core.n1160696.StylesCell.StylesCellController;
+import pt.isep.nsheets.shared.lapr4.green.s1.core.n1160696.StylesCell.StylesCellExt;
 
 // public class HomeView extends ViewImpl implements HomePresenter.MyView {
 // public class WorkbookView extends NavigatedView implements WorkbookPresenter.MyView {
@@ -158,17 +158,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialButton confirmBG;
 
-//    @UiField
-//    MaterialCollapsible backgroundColorColaps;
-
     @UiField
      MaterialButton colorTextButton;
  
     @UiField
     MaterialButton confirmTXT;
-
-//    @UiField
-//    MaterialCollapsible textColorColaps;
     
     @UiField
     MaterialCollection backgroundColor;
@@ -571,104 +565,112 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         //FIM 1160696
         
-        //Core08.1 - 1160696
+       //Core08.1 - 1160696
         
         StylesCellController scc = new StylesCellController();
-        
-        boldButton.addClickHandler(event -> {
-            
-                        
-            if (!extCells.containsKey(activeCell)) {
-                StylesCellExt extension = new StylesCellExt();
-                extCells.put(activeCell, extension);
-            }
-            StylesCellExt extension = extCells.get(activeCell);
-            scc.setChosenExtension(extension);
-            extension.setFontWeight(Style.FontWeight.BOLD);
-            doStyleExt(BOLD);
 
+        boldButton.addClickHandler(event -> {
+
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
+                StylesCellExt extension = extCells.get(activeCell);
+                scc.setChosenExtension(extension);
+                extension.setFontWeight(Style.FontWeight.BOLD);
+                doStyleExt(BOLD);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
+            }
         });
 
         italicButton.addClickHandler(event -> {
-            
-            if (!extCells.containsKey(activeCell)) {
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
+                scc.setChosenExtension(extension);
+                extension.setFontStyle(Style.FontStyle.ITALIC);
+                doStyleExt(ITALIC);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-            StylesCellExt extension = new StylesCellExt();
-            extCells.put(activeCell, extension);
-            scc.setChosenExtension(extension);
-            extension.setFontStyle(Style.FontStyle.ITALIC);
-            doStyleExt(ITALIC);
+        });
 
-        });
-        
         alignLeftBtn.addClickHandler(event -> {
-           
-            if (!extCells.containsKey(activeCell)) {
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
+                scc.setChosenExtension(extension);
+                extension.setTextAlign(TextAlign.LEFT);
+                doStyleExt(ALIGN_LEFT);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-            StylesCellExt extension = new StylesCellExt();
-            extCells.put(activeCell, extension);
-            scc.setChosenExtension(extension);
-            extension.setTextAlign(TextAlign.LEFT);
-            doStyleExt(ALIGN_LEFT);
-            
         });
-        
+
         alignRightBtn.addClickHandler(event -> {
-           
-            if (!extCells.containsKey(activeCell)) {
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
+                scc.setChosenExtension(extension);
+                extension.setTextAlign(TextAlign.RIGHT);
+                doStyleExt(ALIGN_RIGHT);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-            StylesCellExt extension = new StylesCellExt();
-            extCells.put(activeCell, extension);
-            scc.setChosenExtension(extension);
-            extension.setTextAlign(TextAlign.RIGHT);
-            doStyleExt(ALIGN_RIGHT);
-            
         });
-        
+
         alignCenterBtn.addClickHandler(event -> {
-           
-            if (!extCells.containsKey(activeCell)) {
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
+                scc.setChosenExtension(extension);
+                extension.setTextAlign(TextAlign.CENTER);
+                doStyleExt(ALIGN_CENTER);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-            StylesCellExt extension = new StylesCellExt();
-            extCells.put(activeCell, extension);
-            scc.setChosenExtension(extension);
-            extension.setTextAlign(TextAlign.CENTER);
-            doStyleExt(ALIGN_CENTER);
-            
         });
-        
+
         underlineBtn.addClickHandler(event -> {
-           
-            if (!extCells.containsKey(activeCell)) {
+            if (activeCell != null) {
+                if (!extCells.containsKey(activeCell)) {
+                    StylesCellExt extension = new StylesCellExt();
+                    extCells.put(activeCell, extension);
+                }
                 StylesCellExt extension = new StylesCellExt();
                 extCells.put(activeCell, extension);
+                scc.setChosenExtension(extension);
+                extension.setUnderline(Style.TextDecoration.UNDERLINE);
+                doStyleExt(UNDERLINE);
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-            StylesCellExt extension = new StylesCellExt();
-            extCells.put(activeCell, extension);
-            scc.setChosenExtension(extension);
-            extension.setUnderline(Style.TextDecoration.UNDERLINE);
-            doStyleExt(UNDERLINE);
-            
         });
-        
-        
+
         MaterialCollection bgColors = new MaterialCollection();
-        
-        
+
         for (Color color : Color.values()) {
             MaterialRadioButton bg = new MaterialRadioButton("bg");
-            
-            
+
             bg.setText(color.name());
-//            mb.setBackgroundColor(x);
             backgroundColorButtons.add(bg);
             bgColors.add(bg);
         }
@@ -678,46 +680,38 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         MaterialCollection tColors = new MaterialCollection();
         for (Color color : Color.values()) {
             MaterialRadioButton bg = new MaterialRadioButton("bg");
-            
-            
+
             bg.setText(color.name());
-//            mb.setBackgroundColor(x);
             textColorButtons.add(bg);
             textColor.add(bg);
         }
 
         textColor.add(tColors);
-        
+
         confirmBG.addClickHandler(event -> {
-            
-            
+
             if (activeCell != null) {
-                
+
                 if (!extCells.containsKey(activeCell)) {
-                    
-                    
+
                     StylesCellExt extension = new StylesCellExt();
                     extCells.put(activeCell, extension);
-                    
-               }
-                
-                
+
+                }
+
                 StylesCellExt extension = extCells.get(activeCell);
                 scc.setChosenExtension(extension);
                 String colorA = "";
-                
-                
+
                 for (MaterialRadioButton bgcb : backgroundColorButtons) {
                     if (bgcb.getValue()) {
                         colorA = bgcb.getText();
                         break;
                     }
                 }
-                
-                
+
                 Color set = extension.DEFAULT_BACKGROUND_COLOR;
-                
-                
+
                 for (Color colorB : Color.values()) {
                     if (colorB.name().compareToIgnoreCase(colorA) == 0) {
                         set = colorB;
@@ -727,42 +721,36 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                 extension.setBackgroundColor(set);
                 doStyleExt(BG_COLOR);
-//                backgroundColorColaps.closeAll();
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-        
+
         });
-        
-        
+
         confirmTXT.addClickHandler(event -> {
-            
-            
+
             if (activeCell != null) {
-                
+
                 if (!extCells.containsKey(activeCell)) {
-                    
-                    
+
                     StylesCellExt extension = new StylesCellExt();
                     extCells.put(activeCell, extension);
-                    
-               }
-                
-                
+
+                }
+
                 StylesCellExt extension = extCells.get(activeCell);
                 scc.setChosenExtension(extension);
                 String colorA = "";
-                
-                
+
                 for (MaterialRadioButton tcb : textColorButtons) {
                     if (tcb.getValue()) {
                         colorA = tcb.getText();
                         break;
                     }
                 }
-                
-                
+
                 Color set = extension.DEFAULT_BACKGROUND_COLOR;
-                
-                
+
                 for (Color colorB : Color.values()) {
                     if (colorB.name().compareToIgnoreCase(colorA) == 0) {
                         set = colorB;
@@ -772,13 +760,13 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
                 extension.setTextColor(set);
                 doStyleExt(TXT_COLOR);
-//                backgroundColorColaps.closeAll();
+            } else {
+                MaterialToast.fireToast("Did you forget to select a cell?");
             }
-        
+
         });
-        
-        
-       //Core08.1 - 1160696
+
+        //Core08.1 - 1160696
         
         
         firstButton.addClickHandler(event -> {
