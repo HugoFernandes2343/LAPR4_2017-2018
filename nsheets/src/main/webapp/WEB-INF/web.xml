@@ -11,63 +11,63 @@
   
        http://www.apache.org/licenses/LICENSE-2.0
   
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  #L%
-  -->
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+#L%
+-->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
   
   
-  <!-- Servlets for the workbooks -->
-  <servlet>
-    <servlet-name>workbooksServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>chatServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.ChatServiceImpl</servlet-class>
-  </servlet>
+    <!-- Servlets for the workbooks -->
+    <servlet>
+        <servlet-name>workbooksServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>usersServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>chatServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ChatServiceImpl</servlet-class>
+    </servlet>
   
     <servlet>
-    <servlet-name>TasksServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>workbooksServiceServlet</servlet-name>
-    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-    <url-pattern>/nsheets/workbooksService</url-pattern>
-
-  </servlet-mapping> 
-
-  <servlet-mapping>
-    <servlet-name>chatServiceServlet</servlet-name>
-    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-    <url-pattern>/nsheets/chatService</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>usersServiceServlet</servlet-name>
-    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-    <url-pattern>/nsheets/usersService</url-pattern>
-
-  </servlet-mapping>  
+        <servlet-name>TasksServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
+    </servlet>
   
     <servlet-mapping>
-    <servlet-name>TasksServiceServlet</servlet-name>
-    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
-    <url-pattern>/nsheets/tasksService</url-pattern>
-  </servlet-mapping>  
+        <servlet-name>workbooksServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/workbooksService</url-pattern>
+
+    </servlet-mapping> 
+
+    <servlet-mapping>
+        <servlet-name>chatServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/chatService</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>usersServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/usersService</url-pattern>
+
+    </servlet-mapping>  
+  
+    <servlet-mapping>
+        <servlet-name>TasksServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/tasksService</url-pattern>
+    </servlet-mapping>  
       
 
  
@@ -77,6 +77,11 @@
     <servlet>
         <servlet-name>downloadToCLSService</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>noteServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.NoteServiceImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -88,34 +93,39 @@
     <!--1161110-->
     <!--Upload Servlet-->
     <servlet>
-      <servlet-name>uploadService</servlet-name>
-      <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
+        <servlet-name>uploadService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.FileUploadServlet</servlet-class>
     </servlet>
    
     <servlet-mapping>
-      <servlet-name>uploadService</servlet-name>
-      <url-pattern>/nsheets/fileupload</url-pattern>
+        <servlet-name>uploadService</servlet-name>
+        <url-pattern>/nsheets/fileupload</url-pattern>
     </servlet-mapping>
     <!--1161110-->
 
-  <servlet>
-    <servlet-name>calendarServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.CalendarServiceImpl</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>calendarServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.CalendarServiceImpl</servlet-class>
+    </servlet>
    
-  <servlet-mapping>
-    <servlet-name>calendarServiceServlet</servlet-name>
-    <url-pattern>/nsheets/calendarService</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>calendarServiceServlet</servlet-name>
+        <url-pattern>/nsheets/calendarService</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>privateChatServiceServlet</servlet-name>
-    <servlet-class>pt.isep.nsheets.server.services.PrivateChatServiceImpl</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>privateChatServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.PrivateChatServiceImpl</servlet-class>
+    </servlet>
    
-  <servlet-mapping>
-    <servlet-name>privateChatServiceServlet</servlet-name>
-    <url-pattern>/nsheets/privateChatService</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>privateChatServiceServlet</servlet-name>
+        <url-pattern>/nsheets/privateChatService</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+        <servlet-name>noteServiceServlet</servlet-name>
+        <url-pattern>/nsheets/noteService</url-pattern>
+    </servlet-mapping>
 
 </web-app>
