@@ -6,23 +6,17 @@
 package pt.isep.nsheets.server.services;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Table;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.ExportCsvService;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetService;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 
@@ -30,9 +24,9 @@ import pt.isep.nsheets.shared.services.WorkbookDTO;
  *
  * @author Daniel Fernandes 1150585
  */
-public class ExportCsvImpl extends RemoteServiceServlet implements ExportCsvService {
+public class ExportCsvSpreadsheetImpl extends RemoteServiceServlet implements ExportCsvSpreadsheetService {
 
-    WorkbookDTO toExport;
+    SpreadsheetDTO toExport;
 
     /*@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -55,7 +49,7 @@ public class ExportCsvImpl extends RemoteServiceServlet implements ExportCsvServ
     }
 
     /**
-     * Sends a CSV file through a HttpServletResponse as a byte array
+     * Sends a PDF file through a HttpServletResponse as a byte array
      *
      * @param response
      * @param fileName
@@ -93,27 +87,22 @@ public class ExportCsvImpl extends RemoteServiceServlet implements ExportCsvServ
         return bytes;
     }
 
-    public FileWriter generateCSVFromWorkbook(WorkbookDTO workbookDTO, String filename) throws FileNotFoundException, IOException {
+    public FileWriter generateCSVFromWorkbook(SpreadsheetDTO spreadsheet, String filename) throws FileNotFoundException, IOException {
         File file = new File(filename);
         FileWriter fileWriter = null;
         try {
 
             fileWriter = new FileWriter(file);
-             fileWriter.append("SEP=" + "," + "\n");
+            fileWriter.append("SEP=" + "," + "\n");
 
-            for (SpreadsheetDTO spreadsheet : workbookDTO.getSpreadsheets()) {
+            String[][] content = spreadsheet.getContent();
 
-               // fileWriter.append("Spreadsheet:");
-
-                String[][] content = spreadsheet.getContent();
-
-                for (int i = 0; i < content.length; i++) {
-                    for (int j = 0; j < content[0].length; j++) {
-                        fileWriter.append(content[i][j]);
-                        fileWriter.append(",");
-                    }
-                    fileWriter.append("\n");
+            for (int i = 0; i < content.length; i++) {
+                for (int j = 0; j < content[0].length; j++) {
+                    fileWriter.append(content[i][j]);
+                    fileWriter.append(",");
                 }
+                fileWriter.append("\n");
             }
 
         } catch (Exception e) {
@@ -135,8 +124,10 @@ public class ExportCsvImpl extends RemoteServiceServlet implements ExportCsvServ
     }
 
     @Override
-    public WorkbookDTO exportToDownload(WorkbookDTO toExport) {
+    public SpreadsheetDTO exportToDownload(SpreadsheetDTO toExport) throws DataException {
         this.toExport = toExport;
         return toExport;
+
     }
+
 }

@@ -28,6 +28,9 @@ import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.shared.core.Workbook;
 import pt.isep.nsheets.shared.services.ExportCsvService;
 import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetService;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetServiceAsync;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 /**
@@ -129,7 +132,30 @@ public class ExportCsvView extends Composite {
                     }
                 });
             } else if (radioButtonWorksheet.getValue()) {
-                MaterialToast.fireToast("Worksheet selected");
+
+                String nSpreadsheet = Window.prompt("Insert spreadsheet number", "");
+                int nSpreadsheetInt = Integer.parseInt(nSpreadsheet);
+
+                SpreadsheetDTO dto = wb.getSpreadsheet(nSpreadsheetInt).toDTO();
+
+                if (dto.content == null) {
+                    MaterialToast.fireToast("This spreadsheet doesn't exist ");
+                } else {
+                    ExportCsvSpreadsheetServiceAsync downAsync = GWT.create(ExportCsvSpreadsheetService.class);
+                    downAsync.exportToDownload(dto, new AsyncCallback<SpreadsheetDTO>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(SpreadsheetDTO result) {
+                            String url = GWT.getModuleBaseURL() + "exportCsvSpreadsheetService?filename=" + titleBox.getText() + ".csv";;
+                            Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
+                        }
+
+                    });
+                }
             } else {
                 MaterialToast.fireToast("Please select an option!");
             }

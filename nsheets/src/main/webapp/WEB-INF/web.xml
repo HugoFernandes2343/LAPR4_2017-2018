@@ -141,6 +141,17 @@ limitations under the License.
         <servlet-name>noteServiceServlet</servlet-name>
         <url-pattern>/nsheets/noteService</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportCsvSpreadsheetImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportCsvSpreadsheetService</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>
