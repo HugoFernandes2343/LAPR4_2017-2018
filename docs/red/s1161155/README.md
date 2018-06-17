@@ -6,6 +6,6 @@
 
 |Sprint  | Area | Documentation for the Sprint |
 |--------|------|------------------------------|
-| **1**  | Core | [Core05.1](sp1)         |
-| **2**  | IPC  | [IPC02.1](sp2)         |																				
-| **3**  | Lang | [Lang00.0](sp3)         |																			
+| **1**  | Core | [Core 05.1](sp1)         |
+| **2**  | IPC  | [IPC 02.1](sp2)         |																				
+| **3**  | Lang | [Lang 01.3](sp3)         |																			
