@@ -30,6 +30,7 @@ import pt.isep.nsheets.shared.core.formula.compiler.IllegalFunctionCallException
 import pt.isep.nsheets.shared.core.formula.lang.CellReference;
 import pt.isep.nsheets.shared.core.formula.lang.ReferenceOperation;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableReference;
 //import lapr4.gray.s1.lang.n3456789.formula.NaryOperation;
 
 /**
@@ -106,4 +107,10 @@ public class ExpressionBuilder implements ExpressionVisitor {
     public Object visitVariableReference(VariableReference varReference) {
         return varReference;
     }
+
+    /* DAVID MAIA - 1161110*/
+	@Override
+	public Object visitGlobalVariableReference(GlobalVariableReference varReference) {
+    	return varReference;
+	}
 }

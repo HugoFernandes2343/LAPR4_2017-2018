@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.isep.nsheets.shared.lapr4.green.s1.lang.n1160696.StylesCell;
+package pt.isep.nsheets.shared.lapr4.green.s1.core.n1160696.StylesCell;
 
 import gwt.material.design.client.ui.MaterialListValueBox;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;

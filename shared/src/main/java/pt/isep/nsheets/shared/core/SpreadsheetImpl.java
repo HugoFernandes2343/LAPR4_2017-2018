@@ -31,11 +31,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
+import pt.isep.nsheets.shared.lapr4.green.s1.core.n1160696.StylesCell.StylesCellInterfaceImp;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.CellExtension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.Extension;
 import pt.isep.nsheets.shared.lapr4.red.s1160777.ext.ExtensionManager;
@@ -82,6 +86,12 @@ public class SpreadsheetImpl implements Spreadsheet {
     @MapKeyColumn(name = "Column_Adresses")
     @Column(name = "Cell_Columns")
     private Map<Address, Cell> cells = new HashMap<Address, Cell>();
+    
+    @OneToMany(targetEntity = StylesCellInterfaceImp.class)
+    @JoinTable(name = "spreadsheet_cellSyleExtension", joinColumns = @JoinColumn(name = "spreadsheet"), inverseJoinColumns = @JoinColumn(name = "cellStyleExtension"))
+    @MapKeyJoinColumn(name = "cell")
+
+    private Map<Cell, StylesCellInterfaceImp> extCells = new HashMap<>();
 
     /**
      * The title of the spreadsheet
