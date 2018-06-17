@@ -13,10 +13,11 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.UserRepository;
 
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
- *
  * @author Paulo Jorge
  */
 public class JpaLoginRepository extends NSheetsJpaRepositoryBase<User, Long> implements UserRepository {
@@ -36,6 +37,13 @@ public class JpaLoginRepository extends NSheetsJpaRepositoryBase<User, Long> imp
         Email mail = new Email(email);
         User u = matchOne("e.email=:email ", "email", mail);
         return u;
+    }
+
+
+    @Override
+    public Iterable<User> getAllUsers() {
+        List<User> result = new ArrayList<>();
+        return findAll();
     }
 
 

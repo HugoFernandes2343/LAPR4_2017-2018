@@ -15,5 +15,6 @@ import pt.isep.nsheets.shared.core.Workbook;
  */
 @RemoteServiceRelativePath("exportCsvService")
 public interface ExportCsvService extends RemoteService {
-    boolean exportWorkbookToCSV(Workbook workbook, String delimiter, String pathToSaveFile);
+
+    WorkbookDTO exportToDownload(WorkbookDTO toExport) throws DataException;
 }

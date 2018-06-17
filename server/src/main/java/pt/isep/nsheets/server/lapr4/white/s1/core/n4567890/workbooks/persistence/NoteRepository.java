@@ -15,7 +15,7 @@ import pt.isep.nsheets.shared.services.UserDTO;
  *
  * @author Paulo Jorge
  */
-public interface NoteRepository extends Repository<Note, Long>{
-    
-    List<NoteDTO> getListNoteUser(UserDTO userDTO);
+public interface NoteRepository extends Repository<Note, Long> {
+
+    Iterable<NoteDTO> getListNoteUser(UserDTO userDTO);
 }

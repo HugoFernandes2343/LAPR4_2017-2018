@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface NoteServiceAsync {
 
-    void getListNoteUser(UserDTO userDTO, AsyncCallback<ArrayList<NoteDTO>> callback);
+    void getNotes(UserDTO userDTO,AsyncCallback<ArrayList<NoteDTO>> callback);
 
     void addNote(NoteDTO noteDTO, AsyncCallback<NoteDTO> async);
 }

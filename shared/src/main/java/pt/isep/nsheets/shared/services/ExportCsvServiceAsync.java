@@ -14,6 +14,5 @@ import pt.isep.nsheets.shared.core.Workbook;
  */
 public interface ExportCsvServiceAsync {
 
-    void exportWorkbookToCSV(Workbook workbook, String delimiter, String pathToSaveFile, AsyncCallback<Boolean> exported);
-
+    void exportToDownload(WorkbookDTO toExport, AsyncCallback<WorkbookDTO> async);
 }
