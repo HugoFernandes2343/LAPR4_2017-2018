@@ -46,8 +46,6 @@ import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChart
 import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF.ExportToPDFView;
 import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
-//import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
-import pt.isep.nsheets.client.lapr4.red.s2.n1161213.application.exportpdf.ExportToPdfView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
@@ -848,6 +846,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             SearchView searchView = new SearchView();
         });
 
+        //1140420 Rodrigo
         exportToPdfButton.addClickHandler(event -> {
             new ExportToPDFView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });

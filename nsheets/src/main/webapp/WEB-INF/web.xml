@@ -138,7 +138,17 @@ limitations under the License.
         <servlet-name>downloadCSVService</servlet-name>
         <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadPDFImplRod</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <url-pattern>/nsheets/downloadToPDFService</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>noteServiceServlet</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.NoteServiceImpl</servlet-class>
