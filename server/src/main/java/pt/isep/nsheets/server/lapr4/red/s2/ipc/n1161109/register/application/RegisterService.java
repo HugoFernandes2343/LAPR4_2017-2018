@@ -24,5 +24,5 @@ public class RegisterService {
         User usN = User.fromDTO(us);
         return userRepository.save(usN);
     }
-    
+
 }

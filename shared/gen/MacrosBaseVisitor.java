@@ -26,7 +26,7 @@ public class MacrosBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSetVariable(MacrosParser.SetVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSetVar(MacrosParser.SetVarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -124,14 +124,14 @@ public class MacrosBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariable(MacrosParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCell(MacrosParser.CellContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRef(MacrosParser.RefContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMac(MacrosParser.MacContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
