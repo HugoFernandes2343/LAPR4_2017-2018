@@ -25,7 +25,7 @@ public class DownloadPDFImplRod extends RemoteServiceServlet implements Download
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        String fileName = "generatedPDF.pdf";//request.getParameter("filename");
+        String fileName = request.getParameter("filename");
 
         try {
             //1st, generate a local PDF file
