@@ -10,6 +10,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.addins.client.window.MaterialWindow;
@@ -23,7 +25,11 @@ import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
+import pt.isep.nsheets.server.lapr4.blue.s3.ipc.n1150585.ExportCSV.domain.ExportCsv;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.ExportCsvService;
+import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
+
 
 /**
  *
@@ -88,6 +94,7 @@ public class ExportCsvView extends Composite {
         p4.setTextAlign(TextAlign.RIGHT);
         p4.add(btnExport);
         window.add(p4);
+        window.open();
 
         radioButtonPartOfWorksheet.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
@@ -106,13 +113,40 @@ public class ExportCsvView extends Composite {
                 MaterialToast.fireToast("Starting cell: " + textBox1.getText() + "Ending cell: " + textBox2.getText());
 
             } else if (radioButtonWorkbook.getValue()) {
-                MaterialToast.fireToast("Workbook selected");
+                String PATH = "../lapr4-18-2dl\\";
+
+                ExportCsvServiceAsync async = GWT.create(ExportCsvService.class);
+
+                AsyncCallback<Boolean> exportedCSV = new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Failed");
+                        GWT.log("", caught);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        MaterialToast.fireToast("Success");
+                    }
+                };
+                String contentsCSV[][][] = {{ // first spreadsheet
+                    {"10", "9", "8", "7", "a", "b", "c"}, {"8", "9", "6", "5", "4", "3", "2"},
+                    {"1", "2", "3", "4", "5", "6", "7"}}};
+
+                Workbook exportWb = new Workbook(contentsCSV);
+                String nameFile = titleBox.getText();
+                String delimiter = ",";
+
+                nameFile = nameFile + ".csv";
+                String url = GWT.getModuleBaseURL() + "downloadCSVImpl?filename=" + nameFile;
+                Window.open(url, "_blank", "status=0,toolbar=0,menubar=0,location=0");
+                async.exportWorkbookToCSV(wb, delimiter, PATH + nameFile, exportedCSV);
+
             } else if (radioButtonWorksheet.getValue()) {
                 MaterialToast.fireToast("Worksheet selected");
             } else {
                 MaterialToast.fireToast("Please select an option!");
             }
         });
-        window.open();
     }
 }

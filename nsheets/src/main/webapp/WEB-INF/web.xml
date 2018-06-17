@@ -43,6 +43,12 @@
     <servlet-class>pt.isep.nsheets.server.services.TasksServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>ExportCsvServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.ExportCsvImpl</servlet-class>
+  </servlet>
+  
+  
   <servlet-mapping>
     <servlet-name>workbooksServiceServlet</servlet-name>
     <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
@@ -117,5 +123,20 @@
     <servlet-name>privateChatServiceServlet</servlet-name>
     <url-pattern>/nsheets/privateChatService</url-pattern>
   </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>ExportCsvServiceServlet</servlet-name>
+    <url-pattern>/nsheets/exportCsvService</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+        <servlet-name>downloadCSVService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadCSVService</servlet-name>
+        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
+    </servlet-mapping>
 
 </web-app>
