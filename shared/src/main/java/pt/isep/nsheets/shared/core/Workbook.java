@@ -31,6 +31,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariable;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableList;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1150585.forms.Form;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros.Macro;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
@@ -60,6 +63,8 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 
     @ElementCollection
     private List<Macro> macros = new ArrayList<>();
+
+    private GlobalVariableList gVariableList;// David Maia 1161110
 
     private Form form;
 
@@ -132,6 +137,21 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
         this.macros = new ArrayList<>();
     }
 
+    public GlobalVariable addVariable(String name) {
+        if (gVariableList == null) { //If this is the 1st Variable
+            gVariableList = new GlobalVariableList();
+        }
+
+        GlobalVariable v;
+        if (!gVariableList.contains(name)) { //If the Variable is new
+            v = new GlobalVariable(name, new Value(0.0));
+            gVariableList.addVariable(v);
+        } else {
+            v = gVariableList.get(name);
+        }
+
+        return v;
+    }
     /**
      * Adds a blank spreadsheet to the end of the workbook.
      */

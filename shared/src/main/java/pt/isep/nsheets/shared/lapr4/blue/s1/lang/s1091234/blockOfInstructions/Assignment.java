@@ -15,6 +15,8 @@ import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.core.formula.lang.CellReference;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.Variable;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariable;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableReference;
 
 /**
  *
@@ -31,7 +33,7 @@ public class Assignment implements BinaryOperator {
             try { 
                 // Need to handle all possible types because the set of a cell only accepts "text" or "formula"!!!
                 switch (value.getType()) {
-                    case NUMERIC: 
+                    case NUMERIC:
                         content=value.toNumber().toString();
                         break;
                     case TEXT:
@@ -56,7 +58,7 @@ public class Assignment implements BinaryOperator {
         } else if (leftOperand instanceof VariableReference) {
             Variable temp = new Variable(((VariableReference) leftOperand).getName(), rightOperand.evaluate());
             switch (temp.getValue().getType()) {
-                case NUMERIC:                    
+                case NUMERIC:
                     ((VariableReference) leftOperand).setVariableValue(new Value(temp.getValue().toDouble()));
                     return new Value(temp.getValue().toDouble());
 
@@ -72,6 +74,26 @@ public class Assignment implements BinaryOperator {
                 default:
                     throw new IllegalValueTypeException(temp.getValue(), Value.Type.NUMERIC);
             }
+        // David Maia 1161110
+        } else if (leftOperand instanceof GlobalVariableReference) {
+         GlobalVariable temp = new GlobalVariable(((GlobalVariableReference) leftOperand).getName(), rightOperand.evaluate());
+         switch (temp.getValue().getType()) {
+             case NUMERIC:
+                 ((GlobalVariableReference) leftOperand).setVariableValue(new Value(temp.getValue().toDouble()));
+                 return new Value(temp.getValue().toDouble());
+
+             case BOOLEAN:
+                 ((GlobalVariableReference) leftOperand).setVariableValue(new Value(temp.getValue().toBoolean()));
+                 return new Value(temp.getValue().toBoolean());
+             case DATE:
+                 ((GlobalVariableReference) leftOperand).setVariableValue(new Value(temp.getValue().toDate()));
+                 return new Value(temp.getValue().toDate());
+             case TEXT:
+                 ((GlobalVariableReference) leftOperand).setVariableValue(new Value(temp.getValue().toText()));
+                 return new Value(temp.getValue().toText());
+             default:
+                 throw new IllegalValueTypeException(temp.getValue(), Value.Type.NUMERIC);
+         }
         }
      
         else {

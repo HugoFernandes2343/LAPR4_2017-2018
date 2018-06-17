@@ -10,6 +10,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.addins.client.window.MaterialWindow;
@@ -24,6 +26,9 @@ import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.ExportCsvService;
+import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 /**
  *
@@ -88,6 +93,7 @@ public class ExportCsvView extends Composite {
         p4.setTextAlign(TextAlign.RIGHT);
         p4.add(btnExport);
         window.add(p4);
+        window.open();
 
         radioButtonPartOfWorksheet.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
@@ -106,13 +112,27 @@ public class ExportCsvView extends Composite {
                 MaterialToast.fireToast("Starting cell: " + textBox1.getText() + "Ending cell: " + textBox2.getText());
 
             } else if (radioButtonWorkbook.getValue()) {
-                MaterialToast.fireToast("Workbook selected");
+                WorkbookDTO dto = wb.toDTO();
+
+                ExportCsvServiceAsync downAsync = GWT.create(ExportCsvService.class);
+
+                downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(WorkbookDTO result) {
+                        String url = GWT.getModuleBaseURL() + "exportCsvService?filename=" + titleBox.getText() + ".csv";;
+                        Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
+                    }
+                });
             } else if (radioButtonWorksheet.getValue()) {
                 MaterialToast.fireToast("Worksheet selected");
             } else {
                 MaterialToast.fireToast("Please select an option!");
             }
         });
-        window.open();
     }
 }

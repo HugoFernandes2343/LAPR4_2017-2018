@@ -10,7 +10,7 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 
-;
+;import java.util.List;
 
 /**
  *
@@ -21,4 +21,7 @@ public interface UserRepository extends Repository<User, Long> {
     public User getUser_Email(Email email, Password password);
 
     public User getUserByEmail(String email);
+
+    public Iterable<User> getAllUsers();
+
 }

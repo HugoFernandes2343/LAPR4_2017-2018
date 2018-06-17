@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
-  <persistence-unit name="lapr4.NSheetsPU">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription</class>
-    <class>pt.isep.nsheets.shared.core.Workbook</class>
-    <class>pt.isep.nsheets.shared.core.CellImpl</class>
-    <class>pt.isep.nsheets.shared.core.SpreadsheetImpl</class>
-    <!--<class>pt.isep.nsheets.shared.core.Value</class>-->
-    <!--<class>pt.isep.nsheets.shared.core.Address</class>-->
-    <class>pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User</class>
-    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request</class>
-    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Contact</class>
-    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Event</class>
-    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Duration</class>
-    <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1150585.tasks.domain.Task</class>
-    <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.domain.Message</class>
-    <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.domain.Calendar</class>
-    <class>pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain.Note</class>
-    <properties>
-      <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\nsheets;MV_STORE=FALSE"/>
-      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-      <property name="javax.persistence.jdbc.user" value=""/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <!--<property name="eclipselink.logging.level" value="FINE"/>-->
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="lapr4.NSheetsPU">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription</class>
+        <class>pt.isep.nsheets.shared.core.Workbook</class>
+        <class>pt.isep.nsheets.shared.core.CellImpl</class>
+        <class>pt.isep.nsheets.shared.core.SpreadsheetImpl</class>
+        <!--<class>pt.isep.nsheets.shared.core.Value</class>-->
+        <!--<class>pt.isep.nsheets.shared.core.Address</class>-->
+        <class>pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User</class>
+        <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request</class>
+        <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Contact</class>
+        <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Event</class>
+        <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161213.events.domain.Duration</class>
+        <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1150585.tasks.domain.Task</class>
+        <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.s1161569.domain.Message</class>
+        <class>pt.isep.nsheets.server.lapr4.blue.s2.core.n1161248.calendar.domain.Calendar</class>
+        <class>pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain.Note</class>
+        
+        <properties>
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\nsheets;MV_STORE=FALSE"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value=""/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <!--<property name="eclipselink.logging.level" value="FINE"/>-->
+        </properties>
+    </persistence-unit>
 </persistence>

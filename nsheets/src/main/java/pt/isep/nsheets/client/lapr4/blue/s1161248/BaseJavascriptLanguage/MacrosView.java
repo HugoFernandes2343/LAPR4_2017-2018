@@ -88,16 +88,29 @@ public class MacrosView extends Composite {
 
         runButton.addClickHandler(clickEvent -> {
             if ((macroType.getSelectedValue().toString()).compareTo("[Simple macro]") == 0) {
-                macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getSelectedValue().toString());
-                MaterialToast.fireToast("Macro name: " + macro.getName());
-                MaterialToast.fireToast("input: " + macro.getInput());
-                MaterialToast.fireToast("Result: " + macro.runMacro());
-                CurrentWorkbook.getCurrentWorkbook().addMacro(macro);
-                setContents(CurrentWorkbook.getCurrentWorkbook().macros());
+                if(checkName(macroName.getText())) {
+                    macro = new Macro(macroName.getText(), macroCode.getText(), macroType.getSelectedValue().toString());
+                    MaterialToast.fireToast("Macro name: " + macro.getName());
+                    MaterialToast.fireToast("input: " + macro.getInput());
+                    MaterialToast.fireToast("Result: " + macro.runMacro());
+                    CurrentWorkbook.getCurrentWorkbook().addMacro(macro);
+                    setContents(CurrentWorkbook.getCurrentWorkbook().macros());
+                } else {
+                    MaterialToast.fireToast("Name of macro already in use!");
+                }
             } else {
                 MaterialToast.fireToast("Error, not implemented");
             }
         });
+    }
+
+    public boolean checkName(String nm){
+        for(Macro m : CurrentWorkbook.getCurrentWorkbook().macros()){
+            if(m.getName().equals(nm)){
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -153,10 +166,10 @@ public class MacrosView extends Composite {
         openLink.setIconColor(Color.INDIGO);
         openLink.setTextColor(Color.WHITE);
         openLink.addClickHandler(event -> {
-            String text = m.getInput();
-            String temp[] = text.split("=");
-            text = temp[temp.length-1].replace(" ", "");
-            macroCode.setValue(macroCode.getValue() + "(" + text + ")");
+//            String text = m.getInput();
+//            String temp[] = text.split("=");
+//            text = temp[temp.length-1].replace(" ", "");
+            macroCode.setValue(macroCode.getValue() + "@" + m.getName());
             macroCode.setFocus(true);
         });
 

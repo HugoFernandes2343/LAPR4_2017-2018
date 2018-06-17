@@ -18,12 +18,6 @@ import gwt.material.design.client.ui.MaterialSideNavPush;
 class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
 
 
-
-
-   
-
-
-
     interface Binder extends UiBinder<Widget, MenuView> {
     }
 
@@ -56,24 +50,24 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     MenuView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
-    
-     @Override
+
+    @Override
     public MaterialLink getBtnLogin() {
         return btnLogin;
     }
-    
+
 
     @Override
     public void addClickHandler(ClickHandler ch) {
         btnLogout.addClickHandler(ch);
     }
-    
+
     @Override
     public MaterialLink getBtnLogout() {
         return btnLogout;
     }
-    
-        @Override
+
+    @Override
     public MaterialLink getSingUp() {
         return btnSingUp;
     }
