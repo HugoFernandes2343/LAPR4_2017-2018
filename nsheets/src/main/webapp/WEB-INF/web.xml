@@ -129,15 +129,8 @@ limitations under the License.
         <url-pattern>/nsheets/exportCsvService</url-pattern>
     </servlet-mapping>
   
-    <servlet>
-        <servlet-name>downloadCSVService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>downloadCSVService</servlet-name>
-        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
-    </servlet-mapping>
+
     
     <servlet>
         <servlet-name>noteServiceServlet</servlet-name>
@@ -147,6 +140,17 @@ limitations under the License.
     <servlet-mapping>
         <servlet-name>noteServiceServlet</servlet-name>
         <url-pattern>/nsheets/noteService</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportCsvSpreadsheetImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportCsvSpreadsheetService</url-pattern>
     </servlet-mapping>
 
 

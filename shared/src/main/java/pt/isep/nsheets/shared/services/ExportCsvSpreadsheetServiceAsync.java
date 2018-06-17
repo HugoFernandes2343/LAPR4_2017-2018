@@ -6,13 +6,12 @@
 package pt.isep.nsheets.shared.services;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import pt.isep.nsheets.shared.core.Workbook;
 
 /**
  *
- * @author Daniel Fernandes 1150585
+ * @author dftsf
  */
-public interface ExportCsvServiceAsync {
-
-    void exportToDownload(WorkbookDTO toExport, AsyncCallback<WorkbookDTO> async);
+public interface ExportCsvSpreadsheetServiceAsync {
+    
+     void exportToDownload(SpreadsheetDTO toExport, AsyncCallback<SpreadsheetDTO> async);
 }

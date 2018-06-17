@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import org.antlr.v4.runtime.Token;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableReference;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.For;
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Block;
 
@@ -162,6 +163,8 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
         try {
              if (t.getType() == FormulaParser.VARIABLE){
                 return new VariableReference(cell, t.getText());
+            } else if(t.getType() == FormulaParser.GLOBAL){//1161110
+                 return new GlobalVariableReference(this.cell.getSpreadsheet().getWorkbook(),cell, t.getText());
             }
             else if (ctx.getChildCount() == 3) {
                 //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());

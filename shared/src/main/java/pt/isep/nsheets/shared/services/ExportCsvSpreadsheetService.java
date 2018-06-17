@@ -7,14 +7,13 @@ package pt.isep.nsheets.shared.services;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import pt.isep.nsheets.shared.core.Workbook;
 
 /**
  *
  * @author Daniel Fernandes 1150585
  */
-@RemoteServiceRelativePath("exportCsvService")
-public interface ExportCsvService extends RemoteService {
-
-    WorkbookDTO exportToDownload(WorkbookDTO toExport) throws DataException;
+@RemoteServiceRelativePath("exportCsvSpreadsheetService")
+public interface ExportCsvSpreadsheetService  extends RemoteService {
+    
+     SpreadsheetDTO exportToDownload(SpreadsheetDTO toExport) throws DataException;
 }

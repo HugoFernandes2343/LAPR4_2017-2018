@@ -26,6 +26,7 @@ import pt.isep.nsheets.shared.core.formula.Literal;
 import pt.isep.nsheets.shared.core.formula.Reference;
 import pt.isep.nsheets.shared.core.formula.UnaryOperation;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableReference;
 //import lapr4.gray.s1.lang.n3456789.formula.NaryOperation;
 
 /**
@@ -76,7 +77,16 @@ public interface ExpressionVisitor {
          * @return 
          */
         public Object visitVariableReference(VariableReference varReference);
-	/**
+
+    /**
+     * David Maia - 1161110
+     * Visits the given Global Variable Reference.
+     * @param varReference the VariableReference to visit
+     * @return
+     */
+    public Object visitGlobalVariableReference(GlobalVariableReference varReference);
+
+    /**
 	 * Visits the given function call.
 	 * @param call the function call to visit
 	 * @return an arbitrary object

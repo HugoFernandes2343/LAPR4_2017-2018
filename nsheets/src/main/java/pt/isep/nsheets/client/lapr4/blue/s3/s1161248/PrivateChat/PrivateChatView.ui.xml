@@ -6,29 +6,31 @@
 
     <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
     <m:MaterialPanel>
-        <g:HTMLPanel ui:field="chatPanel">
+        <g:HTMLPanel ui:field="htmlPanel">
+            <m:MaterialCard ui:field="card" backgroundColor="BLUE_DARKEN_1">
+                <m:MaterialCardAction>
+                    <m:MaterialLink ui:field="openChat" text="Open" iconType="OPEN_IN_NEW" iconColor="INDIGO"
+                                    textColor="WHITE"/>
+                    <m:MaterialLink ui:field="deleteChat" text="Delete" iconType="DELETE" iconColor="GREY"
+                                    textColor="WHITE"/>
+                </m:MaterialCardAction>
+            </m:MaterialCard>
 
         </g:HTMLPanel>
-        <g:HTMLPanel>
-            <m:MaterialLabel ui:field="chatName" text="Current Chat"></m:MaterialLabel>
-            <m:MaterialRow>
-                <m:MaterialTextArea ui:field="textField" label="Text Area" allowBlank='false'/>
-                <m:MaterialButton ui:field="sendButton" text="Send" waves="LIGHT" textColor="WHITE"
-                                  iconType="POLYMER" iconPosition="RIGHT"/>
-            </m:MaterialRow>
-            <m:MaterialFAB>
-                <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
-                <m:MaterialFABList>
-                    <m:MaterialButton ui:field="changeChat" type="FLOATING" waves="LIGHT" iconType="COMPARE_ARROWS"
-                                      tooltip="Change Chat" tooltipPosition="LEFT"/>
-                    <m:MaterialButton ui:field="newChat" type="FLOATING" waves="LIGHT" iconType="ADD"
-                                      tooltip="Create new Chat" tooltipPosition="LEFT"/>
-                    <m:MaterialButton ui:field="invites" type="FLOATING" waves="LIGHT" iconType="ANNOUNCEMENT"
-                                      tooltip="Pending Invites" tooltipPosition="LEFT"/>
-                    <m:MaterialButton ui:field="addFriends" type="FLOATING" waves="LIGHT" iconType="ASSIGNMENT_IND"
-                                      tooltip="Add Friends" tooltipPosition="LEFT"/>
-                </m:MaterialFABList>
-            </m:MaterialFAB>
-        </g:HTMLPanel>
+
+
+        <m:MaterialFAB>
+            <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
+            <m:MaterialFABList>
+                <m:MaterialButton ui:field="changeChat" type="FLOATING" waves="LIGHT" iconType="COMPARE_ARROWS"
+                                  tooltip="Change Chat" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="newChat" type="FLOATING" waves="LIGHT" iconType="ADD"
+                                  tooltip="Create new Chat" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="invites" type="FLOATING" waves="LIGHT" iconType="ANNOUNCEMENT"
+                                  tooltip="Pending Invites" tooltipPosition="LEFT"/>
+                <m:MaterialButton ui:field="addFriends" type="FLOATING" waves="LIGHT" iconType="ASSIGNMENT_IND"
+                                  tooltip="Add Friends" tooltipPosition="LEFT"/>
+            </m:MaterialFABList>
+        </m:MaterialFAB>
     </m:MaterialPanel>
 </ui:UiBinder>
