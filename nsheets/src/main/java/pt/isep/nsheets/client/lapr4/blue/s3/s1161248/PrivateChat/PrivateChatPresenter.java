@@ -12,20 +12,22 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
+import pt.isep.nsheets.client.application.CurrentUser;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
-import pt.isep.nsheets.shared.services.MessageDTO;
-import pt.isep.nsheets.shared.services.PrivateChatService;
-import pt.isep.nsheets.shared.services.PrivateChatServiceAsync;
+import pt.isep.nsheets.shared.services.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PrivateChatPresenter extends Presenter<PrivateChatPresenter.MyView, PrivateChatPresenter.MyProxy> {
 
     private MyView view;
 
     interface MyView extends View {
-        void setContents(ArrayList<MessageDTO> contents);
+        void setContents(List<ChatDTO> contents);
+
+        void clearView();
     }
 
     @NameToken(NameTokens.privateChat)
@@ -38,6 +40,9 @@ public class PrivateChatPresenter extends Presenter<PrivateChatPresenter.MyView,
     @Inject
     PrivateChatPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+        this.view = view;
+        view.setContents(CurrentUser.getCurrentUser().getChatList());
+
     }
 
     @Override
@@ -46,21 +51,5 @@ public class PrivateChatPresenter extends Presenter<PrivateChatPresenter.MyView,
         SetPageTitleEvent.fire("Private Chat", "", "", "", this);
     }
 
-    private void refreshView() {
-        PrivateChatServiceAsync chatSvc = GWT.create(PrivateChatService.class);
-
-        // Set up the callback object.
-        AsyncCallback<ArrayList<MessageDTO>> callback = new AsyncCallback<ArrayList<MessageDTO>>() {
-            public void onFailure(Throwable caught) {
-                MaterialToast.fireToast("Error! " + caught.getMessage());
-            }
-
-            public void onSuccess(ArrayList<MessageDTO> result) {
-                view.setContents(result);
-            }
-        };
-
-       // chatSvc.getMessages(callback);
-    }
 
 }

@@ -53,7 +53,7 @@ public class DownloadPDFImplRodTest {
 //        assertEquals(instance, expected);
 //    }
 
-    @Test
+    /*@Test
     public void generatePDF() throws FileNotFoundException {
         String fileName = "./"+"generatedPDFTest"+".pdf";
 
@@ -64,7 +64,7 @@ public class DownloadPDFImplRodTest {
         byte[] bytes = servlet.getFile(fileName);
 
         assertTrue( bytes != null );
-    }
+    }*/
 
     @Test
     public void spreadsheetToPDFTable() throws FileNotFoundException {
@@ -94,14 +94,14 @@ public class DownloadPDFImplRodTest {
         expected.addCell("ads");
 
         //Generate test results
-        PdfDocument doc = new PdfDocument(new PdfWriter("spreadsheetToPDFTableTest.pdf"));
+        /*PdfDocument doc = new PdfDocument(new PdfWriter("spreadsheetToPDFTableTest.pdf"));
         Document testResult = new Document(doc);
 
         testResult.add(new Paragraph("Expected Table:"));
         testResult.add(expected);
         testResult.add(new Paragraph("Generated Table:"));
         testResult.add(instance);
-        testResult.close();
+        testResult.close();*/
 
         //Compare every single Cell
         for (int i = 0; i < expected.getNumberOfRows(); i++) {
@@ -182,7 +182,7 @@ public class DownloadPDFImplRodTest {
         List<Table> instance = new DownloadPDFImplRod().workbookToPDF(workbook);
 
         //Generate test results
-        PdfDocument doc = new PdfDocument(new PdfWriter("workbookToPDFTest.pdf"));
+        /*PdfDocument doc = new PdfDocument(new PdfWriter("workbookToPDFTest.pdf"));
         Document testResult = new Document(doc);
 
         testResult.add(new Paragraph("Expected Table 1:"));
@@ -195,7 +195,9 @@ public class DownloadPDFImplRodTest {
         testResult.add(new Paragraph("Generated Table 2:"));
         testResult.add(instance.get(1));
 
-        testResult.close();
+        testResult.close();*/
+
+
         //Compare every single Cell in Table 1
         for (int i = 0; i < table1.getNumberOfRows(); i++) {
             for (int j = 0; j < table1.getNumberOfColumns(); j++) {
