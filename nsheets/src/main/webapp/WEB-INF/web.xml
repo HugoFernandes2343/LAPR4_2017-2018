@@ -142,14 +142,4 @@
     <url-pattern>/nsheets/exportCsvService</url-pattern>
   </servlet-mapping>
   
-      <servlet>
-        <servlet-name>downloadCSVService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>downloadCSVService</servlet-name>
-        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
-    </servlet-mapping>
-
 </web-app>
