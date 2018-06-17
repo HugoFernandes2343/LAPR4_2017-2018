@@ -1,6 +1,8 @@
 package pt.isep.nsheets.server.services;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -25,7 +27,7 @@ import pt.isep.nsheets.shared.services.UserDTO;
 
 import pt.isep.nsheets.shared.services.UsersService;
 
-public class UsersServiceImpl extends RemoteServiceServlet implements UsersService {
+public class UsersServiceImpl extends RemoteServiceServlet implements UsersService, Serializable {
 
     private PersistenceSettings getPersistenceSettings() {
 
@@ -60,6 +62,19 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         return user.toDTO();
     }
 
+    @Override
+    public List<UserDTO> getAllUser(){
+        List<UserDTO> result = new ArrayList<>();
+
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        LoginController ctrl = new LoginController();
+        Iterable<User> list = ctrl.allUsers();
+        Iterator<User> it = list.iterator();
+        while(it.hasNext()){
+            result.add(it.next().toDTO());
+        }
+        return result;
+    }
     //    @Override
 //    public boolean checkUser(String email, String password) {
 //        // Setup the persistence settings
@@ -111,6 +126,5 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
 
         return null;
     }
-
 
 }

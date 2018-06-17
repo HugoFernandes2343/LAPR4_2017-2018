@@ -140,7 +140,7 @@ public class User implements AggregateRoot<Email>, Serializable {
         return name;
     }
 
-    public List<Chat> getChats(){return chatList;}
+    public List<Chat> getChatList(){return chatList;}
 
     public void addChat(Chat chat){ this.chatList.add(chat);}
 

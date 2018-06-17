@@ -20,7 +20,7 @@ public class LoginController implements Controller {
 
     public Iterable<User> allUsers() {
         UserRepository userRepository = PersistenceContext.repositories().user();
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 
     public User getUser(Email email, Password password) {

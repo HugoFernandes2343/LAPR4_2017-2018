@@ -2,13 +2,14 @@ package pt.isep.nsheets.shared.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ChatDTO implements Serializable {
 
     private String name;
 
-    private ArrayList<MessageDTO> messages;
+    private List<MessageDTO> messages;
 
     private boolean accepted;
 
@@ -17,7 +18,7 @@ public class ChatDTO implements Serializable {
         this.setName("<Sem Nome>");
     }
 
-    public ChatDTO(String name, ArrayList<MessageDTO> messages, boolean accepted) {
+    public ChatDTO(String name, List<MessageDTO> messages, boolean accepted) {
         this.setName(name);
         this.setMessages(messages);
         this.setAccepted(accepted);
@@ -32,11 +33,11 @@ public class ChatDTO implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<MessageDTO> getMessages() {
+    public List<MessageDTO> getMessages() {
         return messages;
     }
 
-    public void setMessages(ArrayList<MessageDTO> messages) {
+    public void setMessages(List<MessageDTO> messages) {
         this.messages = messages;
     }
 
@@ -46,5 +47,17 @@ public class ChatDTO implements Serializable {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(!this.getClass().equals(o.getClass())){
+            return false;
+        }
+        ChatDTO outro = (ChatDTO) o;
+        if(this.getName().equals(outro.getName())){
+            return true;
+        }
+        return false;
     }
 }
