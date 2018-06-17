@@ -28,7 +28,7 @@ public class Note implements AggregateRoot<Long>, Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     private User user;
     private String title;
 
