@@ -8,7 +8,6 @@ package pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.application;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.List;
 import pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain.Note;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.NoteRepository;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
@@ -21,9 +20,9 @@ import pt.isep.nsheets.shared.services.UserDTO;
  */
 public class NoteController implements Controller {
 
-    private  NoteRepository noteRepository = PersistenceContext.repositories().note();
+    private final NoteRepository noteRepository = PersistenceContext.repositories().note();
 
-    public List<NoteDTO> allnoteUser(UserDTO userDTO) {
+    public Iterable<NoteDTO> getNotes(UserDTO userDTO) {
         return noteRepository.getListNoteUser(userDTO);
     }
 
