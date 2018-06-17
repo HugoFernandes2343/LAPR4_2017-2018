@@ -17,6 +17,8 @@ import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.UserRepository;
 import pt.isep.nsheets.shared.services.UserDTO;
 
+import java.util.List;
+
 /**
  *
  * @author David Santiago <1161109@isep.ipp.pt>
@@ -30,5 +32,8 @@ public class RegisterController implements Controller {
          return rs.saveUser(user);
     }
 
+    public Iterable<User> getAllUser(){
+         return rs.getAllUsers();
+    }
 
 }

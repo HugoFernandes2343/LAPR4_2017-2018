@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 public class Chat implements AggregateRoot<Long>, Serializable {
 
-
     // ORM primary key
     @Id
     @GeneratedValue
@@ -34,7 +33,7 @@ public class Chat implements AggregateRoot<Long>, Serializable {
 
     }
 
-    public Chat(String name, ArrayList<Message> messages, boolean accepted) {
+    public Chat(String name, List<Message> messages, boolean accepted) {
         this.setName(name);
         this.setMessages(messages);
         this.setAccepted(accepted);
@@ -42,7 +41,7 @@ public class Chat implements AggregateRoot<Long>, Serializable {
 
 
     public ChatDTO toDTO() {
-        ArrayList<MessageDTO> mList = new ArrayList<>();
+        List<MessageDTO> mList = new ArrayList<>();
         for (Message m : this.getMessages()){
             mList.add(m.toDTO());
         }
@@ -50,7 +49,7 @@ public class Chat implements AggregateRoot<Long>, Serializable {
     }
 
     public static Chat fromDTO(ChatDTO dto) throws IllegalArgumentException {
-        ArrayList<Message> mList = new ArrayList<>();
+        List<Message> mList = new ArrayList<>();
         for (MessageDTO mDTO : dto.getMessages()){
             mList.add(Message.fromDTO(mDTO));
         }
@@ -69,7 +68,7 @@ public class Chat implements AggregateRoot<Long>, Serializable {
         return messages;
     }
 
-    public void setMessages(ArrayList<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 

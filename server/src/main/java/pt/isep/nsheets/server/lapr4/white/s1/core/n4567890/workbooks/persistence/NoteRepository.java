@@ -6,7 +6,10 @@
 package pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence;
 
 import eapli.framework.persistence.repositories.Repository;
+import java.util.List;
 import pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain.Note;
+import pt.isep.nsheets.shared.services.NoteDTO;
+import pt.isep.nsheets.shared.services.UserDTO;
 
 /**
  *
@@ -14,4 +17,5 @@ import pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain.Note;
  */
 public interface NoteRepository extends Repository<Note, Long>{
     
+    List<NoteDTO> getListNoteUser(UserDTO userDTO);
 }
