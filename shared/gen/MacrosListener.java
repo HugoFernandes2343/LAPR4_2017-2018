@@ -20,17 +20,15 @@ public interface MacrosListener extends ParseTreeListener {
 	 */
 	void exitMacro(MacrosParser.MacroContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SetVariable}
-	 * labeled alternative in {@link MacrosParser#setVar}.
+	 * Enter a parse tree produced by {@link MacrosParser#setVar}.
 	 * @param ctx the parse tree
 	 */
-	void enterSetVariable(MacrosParser.SetVariableContext ctx);
+	void enterSetVar(MacrosParser.SetVarContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SetVariable}
-	 * labeled alternative in {@link MacrosParser#setVar}.
+	 * Exit a parse tree produced by {@link MacrosParser#setVar}.
 	 * @param ctx the parse tree
 	 */
-	void exitSetVariable(MacrosParser.SetVariableContext ctx);
+	void exitSetVar(MacrosParser.SetVarContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ToMultOrDiv}
 	 * labeled alternative in {@link MacrosParser#plusOrMinus}.
@@ -188,29 +186,29 @@ public interface MacrosListener extends ParseTreeListener {
 	 */
 	void exitInt(MacrosParser.IntContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Variable}
+	 * Enter a parse tree produced by the {@code Cell}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(MacrosParser.VariableContext ctx);
+	void enterCell(MacrosParser.CellContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Variable}
+	 * Exit a parse tree produced by the {@code Cell}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable(MacrosParser.VariableContext ctx);
+	void exitCell(MacrosParser.CellContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Ref}
+	 * Enter a parse tree produced by the {@code Mac}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterRef(MacrosParser.RefContext ctx);
+	void enterMac(MacrosParser.MacContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Ref}
+	 * Exit a parse tree produced by the {@code Mac}
 	 * labeled alternative in {@link MacrosParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitRef(MacrosParser.RefContext ctx);
+	void exitMac(MacrosParser.MacContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Braces}
 	 * labeled alternative in {@link MacrosParser#atom}.

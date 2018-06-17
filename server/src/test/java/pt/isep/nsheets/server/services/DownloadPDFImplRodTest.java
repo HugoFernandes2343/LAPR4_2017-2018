@@ -1,18 +1,15 @@
 package pt.isep.nsheets.server.services;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPRow;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import org.junit.Test;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,16 +54,29 @@ public class DownloadPDFImplRodTest {
 //    }
 
     @Test
-    public void spreadsheetToPDFTable() throws FileNotFoundException, DocumentException {
+    public void generatePDF() throws FileNotFoundException {
+        String fileName = "./"+"generatedPDFTest"+".pdf";
+
+        DownloadPDFImplRod servlet = new DownloadPDFImplRod();
+
+        PdfDocument generatedPDF = servlet.generatePDFFromWorkbook (servlet.dummyWorkbook(), fileName);
+
+        byte[] bytes = servlet.getFile(fileName);
+
+        assertTrue( bytes != null );
+    }
+
+    @Test
+    public void spreadsheetToPDFTable() throws FileNotFoundException {
         System.out.println("spreadsheetToPDFTable");
 
         int columns = 3, rows = 4;
         String[][] content = {{"4","3","2"}, {"s123","--","s"}, {"+sad","+io","-12..12"}, {"bssd","asd","ads"}};
         SpreadsheetDTO spreadsheet = new SpreadsheetDTO("Test Spreadsheet", columns, rows, content);
 
-        PdfPTable instance = DownloadPDFImplRod.spreadsheetToPDFTable(spreadsheet);
+        Table instance = new DownloadPDFImplRod().spreadsheetToPDFTable(spreadsheet);
 
-        PdfPTable expected = new PdfPTable(columns);
+        Table expected = new Table(columns);
         expected.addCell("4");
         expected.addCell("3");
         expected.addCell("2");
@@ -83,33 +93,26 @@ public class DownloadPDFImplRodTest {
         expected.addCell("asd");
         expected.addCell("ads");
 
+        //Generate test results
+        PdfDocument doc = new PdfDocument(new PdfWriter("spreadsheetToPDFTableTest.pdf"));
+        Document testResult = new Document(doc);
 
-
-        //Compare every single Cell
-        List<PdfPRow> expectedRows = expected.getRows();
-        List<PdfPRow> instanceRows = instance.getRows();
-
-        for (int i = 0; i < expectedRows.size(); i++) {
-            PdfPCell[] expectedRow = expectedRows.get(i).getCells();
-            PdfPCell[] instanceRow = instanceRows.get(i).getCells();
-            for (int j = 0; j < expectedRow.length; j++) {
-                assertEquals(expectedRow[j].getPhrase().getContent(), instanceRow[j].getPhrase().getContent());
-            }
-        }
-
-        Document testResult = new Document();
-        PdfWriter.getInstance(testResult, new FileOutputStream("./spreadsheetToPDFTable.pdf"));
-
-        testResult.open();
         testResult.add(new Paragraph("Expected Table:"));
         testResult.add(expected);
         testResult.add(new Paragraph("Generated Table:"));
         testResult.add(instance);
         testResult.close();
+
+        //Compare every single Cell
+        for (int i = 0; i < expected.getNumberOfRows(); i++) {
+            for (int j = 0; j < expected.getNumberOfColumns(); j++) {
+                assertEquals(expected.getCell(i, j).toString(), instance.getCell(i, j).toString());
+            }
+        }
     }
 
     @Test
-    public void workbookToPDF() throws DocumentException, FileNotFoundException {
+    public void workbookToPDF() throws FileNotFoundException {
         System.out.println("workbookToPDF");
 
         //Instance data
@@ -137,7 +140,7 @@ public class DownloadPDFImplRodTest {
 
 
         //Expected data
-        PdfPTable table1 = new PdfPTable(columns);
+        Table table1 = new Table(columns);
         table1.addCell("4");
         table1.addCell("3");
         table1.addCell("2");
@@ -155,7 +158,7 @@ public class DownloadPDFImplRodTest {
         table1.addCell("ads");
 
 
-        PdfPTable table2 = new PdfPTable(columns);
+        Table table2 = new Table(columns);
         table2.addCell("4");
         table2.addCell("3");
         table2.addCell("2");
@@ -176,36 +179,11 @@ public class DownloadPDFImplRodTest {
         table2.addCell("asd");
         table2.addCell("ads");
 
-        List<PdfPTable> instance = DownloadPDFImplRod.workbookToPDF(workbook);
-
-        //Compare every single Cell in Table 1
-        List<PdfPRow> expectedRows = table1.getRows();
-        List<PdfPRow> instanceRows = instance.get(0).getRows();
-        for (int i = 0; i < expectedRows.size(); i++) {
-            PdfPCell[] expectedRow = expectedRows.get(i).getCells();
-            PdfPCell[] instanceRow = instanceRows.get(i).getCells();
-            for (int j = 0; j < expectedRow.length; j++) {
-                assertEquals(expectedRow[j].getPhrase().getContent(), instanceRow[j].getPhrase().getContent());
-            }
-        }
-
-        //Compare every single Cell in Table 2
-        expectedRows = table2.getRows();
-        instanceRows = instance.get(1).getRows();
-        for (int i = 0; i < expectedRows.size(); i++) {
-            PdfPCell[] expectedRow = expectedRows.get(i).getCells();
-            PdfPCell[] instanceRow = instanceRows.get(i).getCells();
-            for (int j = 0; j < expectedRow.length; j++) {
-                assertEquals(expectedRow[j].getPhrase().getContent(), instanceRow[j].getPhrase().getContent());
-            }
-        }
-
-        Document testResult = new Document();
-        PdfWriter.getInstance(testResult, new FileOutputStream("./workbookToPDF.pdf"));
-
+        List<Table> instance = new DownloadPDFImplRod().workbookToPDF(workbook);
 
         //Generate test results
-        testResult.open();
+        PdfDocument doc = new PdfDocument(new PdfWriter("workbookToPDFTest.pdf"));
+        Document testResult = new Document(doc);
 
         testResult.add(new Paragraph("Expected Table 1:"));
         testResult.add(table1);
@@ -218,5 +196,18 @@ public class DownloadPDFImplRodTest {
         testResult.add(instance.get(1));
 
         testResult.close();
+        //Compare every single Cell in Table 1
+        for (int i = 0; i < table1.getNumberOfRows(); i++) {
+            for (int j = 0; j < table1.getNumberOfColumns(); j++) {
+                assertEquals(table1.getCell(i, j).toString(), instance.get(0).getCell(i, j).toString());
+            }
+        }
+
+        //Compare every single Cell in Table 2
+        for (int i = 0; i < table2.getNumberOfRows(); i++) {
+            for (int j = 0; j < table2.getNumberOfColumns(); j++) {
+                assertEquals(table2.getCell(i, j).toString(), instance.get(1).getCell(i, j).toString());
+            }
+        }
     }
 }

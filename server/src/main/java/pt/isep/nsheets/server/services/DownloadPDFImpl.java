@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class DownloadPDFImpl extends HttpServlet implements DownloadToPDFService {
-
+public class DownloadPDFImpl /*extends HttpServlet implements DownloadToPDFService*/ {
+/*
     private WorkbookDTO toExport;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,5 +50,5 @@ public class DownloadPDFImpl extends HttpServlet implements DownloadToPDFService
     public WorkbookDTO exportToDownload(WorkbookDTO toExport) throws DataException {
         this.toExport = toExport;
         return toExport;
-    }
+    }*/
 }

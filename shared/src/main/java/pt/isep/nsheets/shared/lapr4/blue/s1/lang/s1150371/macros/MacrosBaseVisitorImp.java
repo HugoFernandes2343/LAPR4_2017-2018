@@ -8,8 +8,12 @@ package pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1150371.macros;
 
 
 import java.util.HashMap;
+import java.util.List;
+
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.formula.compiler.MacrosBaseVisitor;
 import pt.isep.nsheets.shared.core.formula.compiler.MacrosParser;
+import pt.isep.nsheets.shared.services.CurrentWorkbookDTO;
 
 /**
  *
@@ -28,12 +32,12 @@ public class MacrosBaseVisitorImp extends MacrosBaseVisitor<Double> {
     
     private HashMap<String, Double> variables = new HashMap<String, Double>();
 
-    @Override
-    public Double visitSetVariable(MacrosParser.SetVariableContext ctx) {
-        Double value = visit(ctx.plusOrMinus());
-        variables.put(ctx.ID().getText(), value);
-        return value;
-    }
+//    @Override
+//    public Double visitSetVariable(MacrosParser.SetVariableContext ctx) {
+//        Double value = visit(ctx.plusOrMinus());
+//        variables.put(ctx.ID().getText(), value);
+//        return value;
+//    }
     
     @Override
     public Double visitToMultOrDiv(MacrosParser.ToMultOrDivContext ctx) {
@@ -104,13 +108,33 @@ public class MacrosBaseVisitorImp extends MacrosBaseVisitor<Double> {
     }
     
     @Override
-    public Double visitVariable(MacrosParser.VariableContext ctx) {
-        return variables.get(ctx.ID().getText());
-    }
-    
-    @Override
     public Double visitBraces(MacrosParser.BracesContext ctx) {
         return visit(ctx.plusOrMinus());
     }
-        
+
+    @Override
+    public Double visitMac(MacrosParser.MacContext ctx) {
+        List<Macro> list = CurrentWorkbookDTO.getCurrentWorkbook().macros();
+        Macro temp = null;
+        for(Macro m : list){
+            if(m.getName().equals(ctx.MACRO_REF().toString().replace("@",""))){
+                temp = m;
+            }
+        }
+
+        if(temp == null){
+            return -1.0;
+        } else {
+            return temp.runMacro();
+        }
+    }
+
+    @Override
+    public Double visitCell(MacrosParser.CellContext ctx) {
+        try {
+            return CurrentWorkbookDTO.getCurrentSpreadsheet().getCell(CurrentWorkbookDTO.getCurrentSpreadsheet().findAddress(ctx.CELL_REF().getText())).getValue().toDouble();
+        } catch (IllegalValueTypeException e) {
+            return 0.0;
+        }
+    }
 }
