@@ -312,6 +312,15 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialTextBox upperCellInfo;
     @UiField
     MaterialTextBox lowerCellInfo;
+
+    @UiField
+    MaterialButton applyToSetOfCells;
+
+    @UiField
+    MaterialTextBox firstCell;
+
+    @UiField
+    MaterialTextBox lastCell;
     
     //1160696
     HashMap<Cell, StylesCellExt> extCells = new HashMap<>();

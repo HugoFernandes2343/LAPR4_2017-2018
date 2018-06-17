@@ -140,6 +140,7 @@ governing permissions and limitations under the License. #L% -->
                         <m:MaterialRow>
                             <m:MaterialTextBox ui:field="firstCell" placeholder="First Cell" grid="s2" />
                             <m:MaterialTextBox ui:field="lastCell" placeholder="Last Cell" grid="s2"  />
+                            <m:MaterialButton ui:field="applyToSetOfCells" text="Apply" grid="s2"/>
                         </m:MaterialRow>
                         
                     </m:MaterialCollapsibleBody>                     
