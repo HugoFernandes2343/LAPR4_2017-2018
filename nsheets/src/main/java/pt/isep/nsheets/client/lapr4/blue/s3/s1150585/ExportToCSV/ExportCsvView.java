@@ -25,7 +25,14 @@ import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
+import java.util.ArrayList;
+import java.util.Set;
+import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.ExportCsvRangeService;
+import pt.isep.nsheets.shared.services.ExportCsvRangeServiceAsync;
 import pt.isep.nsheets.shared.services.ExportCsvService;
 import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
 import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetService;
@@ -112,7 +119,36 @@ public class ExportCsvView extends Composite {
                 MaterialToast.fireToast("Part Of a Worksheet selected");
                 MaterialToast.fireToast("Please indicate a range");
             } else if (radioButtonPartOfWorksheet.getValue() && !textBox1.getText().equals("") && !textBox2.getText().equals("")) {
-                MaterialToast.fireToast("Starting cell: " + textBox1.getText() + "Ending cell: " + textBox2.getText());
+
+                String upperCell = textBox1.getText();
+                String lowerCell = textBox2.getText();
+
+                Address addLower = wb.getSpreadsheet(0).findAddress(lowerCell);
+                Address addUpper = wb.getSpreadsheet(0).findAddress(upperCell);
+
+                Set<Cell> listCell = wb.getSpreadsheet(0).getCells(addLower, addUpper);
+
+                ArrayList<String> list = new ArrayList<>();
+
+                for (Cell c : listCell) {
+                    list.add(c.getContent());
+                }
+
+                ExportCsvRangeServiceAsync downAsync = GWT.create(ExportCsvRangeService.class);
+
+                downAsync.exportToDownload(list, new AsyncCallback<ArrayList<String>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<String> result) {
+                        String url = GWT.getModuleBaseURL() + "exportCsvRangeService?filename=" + titleBox.getText() + ".csv";;
+                        Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
+
+                    }
+                });
 
             } else if (radioButtonWorkbook.getValue()) {
                 WorkbookDTO dto = wb.toDTO();

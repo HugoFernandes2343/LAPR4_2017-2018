@@ -152,6 +152,18 @@ limitations under the License.
         <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
         <url-pattern>/nsheets/exportCsvSpreadsheetService</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ExportCsvRangeServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportCsvRangeServiceImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExportCsvRangeServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportCsvRangeService</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
