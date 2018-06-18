@@ -10,6 +10,24 @@ LANG 02.2
 
 Add support for global variables. Global variables are variables that exist in the context of the workbook and are persisted with the workbook. The name of global variables must start with the "@" sign. When a variable is referred in a formula for the first time it is created. To set the value of a variable it must be used on the left of the assign operator (":="). Attention should be given to synchronization problems. For an example of the use of global variables see Lang01.3.
 
+US - As a User of the Application I want to be able to use Global Variables in my Blocks of Instructions, so that the values stored in those variables can be used in the whole workbook.
+
+**Proposal**
+
+**US1**- Update grammar Formula.g4 to include new rules and operators:
+
+RULES:
+* assignment (reference ASSIGN comparison)
+* block
+* loopfor
+* atom (added loopfor, block and assignment)
+* global variable
+
+OPERATORS:
+* ARR ('@')
+
+**US2**-Alter code so that the application, when inserting a new formula on the worksheet, saves the global variable data and updates the cell displayed data.
+
 # 3. Analysis
 
 
