@@ -1,4 +1,4 @@
-**Daniel Fernandes** (s1150585) - Sprint 2 - Core05.2 - Tasks
+**Daniel Fernandes** (s1150585) - Sprint 3 - IPC05.1 - Export To CSV
 ===============================
 
 # 1. General Notes
@@ -197,7 +197,7 @@ Although this is the Sprint 3, this UC should have been implemented in Sprint 1.
 
 As I said before, my initial thoughts were to make the IPC05.3. I could have implemented only the CLS file import implemented in IPC05.3. However, the CLS file that was being exported didn't have a regular structure. As I didn't know if this export would be valid I didn't take a change only importing to CLS.
 
-When I finally initiated the IPC04.1 I was hoping to at least implement some IPC05.3 (import CSV), however, due to lack of time, it wasn't possible. I’ve lost most of my time analysing what my colleagues had done in IPC05.1 and IPC04.2, therefore I didn't have any time left to do that implementation. On the other hand, now considering the workload in IPC05.1, I realized that implementing more than one UC by iteration was unrealistic.
+When I finally initiated the IPC05.1 I was hoping to at least implement some IPC05.3 (import CSV), however, due to lack of time, it wasn't possible. I’ve lost most of my time analysing what my colleagues had done in IPC05.1 and IPC05.2, therefore I didn't have any time left to do that implementation. On the other hand, now considering the workload in IPC05.1, I realized that implementing more than one UC by iteration was unrealistic.
 
 I would also highlight that during this sprint I’ve helped my Erasmus colleague Barbara making the technical documentation through attempting to share my knowledge regarding design and problem analysis that I’ve learned in my degree so far.
 
