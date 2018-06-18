@@ -30,13 +30,16 @@ To develop this feature I will need to:
 To generate CSV files I will to use the Java FileWriter native class, which will allow me to write carácteres in files. The CSV file organisation consists in writing in rows and columns as shown in the workbook. The cells delimiter can be a string or a field separator.
 
 **Search:**
+
 - Creating CSV files - [Java Code Geeks](https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/)
 
 ## 3.2 File Download
 To be able to download the file I will need to create a Servlet. The Servlet is a class that's going to allow the file download. In this class, the file’s name will be attributed (the UI sends the parameter) and the download. To make the download I will need to use the Java OutputStream native class. An output stream accepts output bytes and sends them to some sink. The download should be made to a directory chosen by the user and to the project's root folder.
 
 **Search:**
+
 - Servlets - [Code Java](http://www.codejava.net/java-ee/servlet/java-servlet-download-file-example)
+
 - Class OutputStream - [Docs Oracle](https://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html)
 
 ## 3.3 Analysis Diagrams
@@ -81,24 +84,35 @@ Notes:
 
 ## 4.3. Classes
 **IMPL**
+
  - **ExportCSVImpl** -Is the class that will contain a CSV workbook. It will also be responsible for making the download;
+
  - **ExportCSVSpreadsheetImpl** - Is the class that will convert a spreadsheet in CSV and it's also responsible to make the download;
+
  - **ExportCSVRangeServiceImpl** -Is the class that will convert a range of cells in CSV. It's also responsible to make the download.
 
   **NOTE** - To simplify I’ve only represented the class ExportCSVImpl in SD.
 
 **Service Interface**
+
 - **ExportCsvService** - Interface that will implement the ExportCSVlmpl;
+
 - **ExportCsvService** - Interface that will implement the ExportCSVSpreadsheetlmpl;
+
 - **ExportCsvService** - Interface that will implement the ExportCSVRangeServicelmpl
 
 **Async Interface**
+
 - **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVlmpl;
+
 - **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVSpreadsheetlmpl;
+
 - **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVRangeServicelmpl.
 
 **View**
+
 - **ExportCSVView** - Class that declares every object in the view.
+
 - **ExportCSVView.ui.XML** - Declaration of some material objects in XML
 
 ## 4.4. Design Patterns and Best Practices
@@ -121,6 +135,8 @@ Code that triggers the Export To CSV View:
         });
 
 Code that allows to generate the CSV file of a workbook:
+
+    public FileWriter generateCSVFromWorkbook(WorkbookDTO workbookDTO, String filename) throws FileNotFoundException, IOException {
 
         File file = new File(filename);
         FileWriter fileWriter = null;
@@ -160,7 +176,7 @@ Code that allows to generate the CSV file of a workbook:
             }
             return fileWriter;
         }
-
+    }
 
 **Code Organization**  
 
@@ -207,3 +223,5 @@ Lastly, I also highlight the support Rodrigo Soares has shown. Besides being a s
 [IPC 05.1 - Export To CSV - Spreadsheet chooser added](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/542172113899)
 
 [IPC 05.1 - Export To CSV - Some improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/573167d84d23)
+
+[IPC 05.1 - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/29a3b73a9f5f)
