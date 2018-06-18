@@ -290,7 +290,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialDataTable<SheetCell> customTable;
 
     @UiField
-    MaterialPopupMenu popupMenu;
+    static MaterialPopupMenu popupMenu;
 
     @UiField
     MaterialIcon formButton;
@@ -337,6 +337,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     }
 
     private pt.isep.nsheets.shared.core.Cell activeCell = null;
+    
+    public static MaterialPopupMenu getPopupMenu() {
+        return popupMenu;
+    }
 
     public void setActiveCell(pt.isep.nsheets.shared.core.Cell cell) {
         this.activeCell = cell;

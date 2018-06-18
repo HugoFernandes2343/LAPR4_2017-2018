@@ -12,10 +12,10 @@ import gwt.material.design.client.ui.MaterialTextBox;
 class ExtensionView extends ViewImpl implements ExtensionPresenter.MyView {
 
     @UiField
-    MaterialTextBox txtPopup;
+    MaterialTextBox txtPopup, txtMenu;
 
     @UiField
-    MaterialButton btnPopup;
+    MaterialButton btnPopup, btnMenu, btnCommentsAct, btnCommentsDis, btnImagesAct, btnImagesDis;
 
     interface Binder extends UiBinder<Widget, ExtensionView> {
     }
@@ -29,9 +29,39 @@ class ExtensionView extends ViewImpl implements ExtensionPresenter.MyView {
     public MaterialTextBox getTxtPopup() {
         return txtPopup;
     }
+    
+    @Override
+    public MaterialTextBox getTxtMenu() {
+        return txtMenu;
+    }
 
     @Override
-    public void addClickHandler(ClickHandler ch) {
+    public void popupClickHandler(ClickHandler ch) {
         btnPopup.addClickHandler(ch);
+    }
+    
+    @Override
+    public void menuClickHandler(ClickHandler ch) {
+        btnMenu.addClickHandler(ch);
+    }
+    
+    @Override
+    public void actCommentsClickHandler(ClickHandler ch) {
+        btnCommentsAct.addClickHandler(ch);
+    }
+    
+    @Override
+    public void disCommentsClickHandler(ClickHandler ch) {
+        btnCommentsDis.addClickHandler(ch);
+    }
+    
+    @Override
+    public void actImagesClickHandler(ClickHandler ch) {
+        btnImagesAct.addClickHandler(ch);
+    }
+    
+    @Override
+    public void disImagesClickHandler(ClickHandler ch) {
+        btnImagesDis.addClickHandler(ch);
     }
 }
