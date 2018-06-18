@@ -122,7 +122,7 @@ Sequence diagram:
 
 ![sd](sd.png)
 
-## 4.2 Classes
+## 4.3 Classes
 
 ##New classes and packages
 
