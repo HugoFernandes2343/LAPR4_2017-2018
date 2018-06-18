@@ -21,7 +21,7 @@ public class PendingInvitesView {
 
     private MaterialPanel invitesPanel;
 
-    public PendingInvitesView(UserDTO currentUser) {
+    public PendingInvitesView(UserDTO currentUser, PrivateChatView mainPage) {
 
         MaterialWindow window = new MaterialWindow();
         window.setPadding(32);
@@ -45,6 +45,32 @@ public class PendingInvitesView {
         window.add(p2);
         window.open();
 
+        refuse.addClickHandler(clickEvent -> {
+
+            UsersServiceAsync userSvc = GWT.create(UsersService.class);
+            // Set up the callback object.
+            AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error! " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(UserDTO user) {
+
+                }
+            };
+
+            for (MaterialCheckBox box : checkList) {
+                if (box.getValue()) {
+                    currentUser.getChatList().remove(currentUser.getChatByName(box.getText()));
+                    userSvc.saveUser(currentUser, callback);
+                }
+            }
+            window.close();
+
+        });
+
         accept.addClickHandler(clickEvent -> {
 
             UsersServiceAsync userSvc = GWT.create(UsersService.class);
@@ -57,7 +83,6 @@ public class PendingInvitesView {
 
                 @Override
                 public void onSuccess(UserDTO user) {
-                    MaterialToast.fireToast(".I.", "rounded");
 
                 }
             };
@@ -68,12 +93,8 @@ public class PendingInvitesView {
                     userSvc.saveUser(currentUser, callback);
                 }
             }
-
+            mainPage.setContents(currentUser.getChatList());
             window.close();
-        });
-
-        refuse.addClickHandler(clickEvent -> {
-
         });
     }
 
