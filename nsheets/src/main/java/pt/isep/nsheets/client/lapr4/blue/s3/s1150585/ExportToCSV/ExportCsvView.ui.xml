@@ -22,10 +22,6 @@ Uncomment this for XHTML entities
                 <m:MaterialTextBox ui:field="textBox2" label="Please insert the cell you'd like to finish importing"/>
                 <m:MaterialPanel>
                         <m:MaterialTextBox ui:field = "titleBox" label="Title" length="10"/>
-                        <m:MaterialListBox ui:field="format" placeholder="CSV Format:">
-                            <m.html:Option ui:field="fieldSeparator" text="Field Separator"/>
-                            <m.html:Option ui:field="stringDelimiter" text="String Delimiter"/>
-                        </m:MaterialListBox>
                     <m:MaterialButton ui:field="btnExport" text="Export"></m:MaterialButton>
                 </m:MaterialPanel>
             </m:MaterialPanel>

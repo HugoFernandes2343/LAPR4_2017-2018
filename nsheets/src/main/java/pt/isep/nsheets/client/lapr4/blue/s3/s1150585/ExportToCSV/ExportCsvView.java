@@ -50,9 +50,6 @@ public class ExportCsvView extends Composite {
     MaterialWindow window;
 
     @UiField
-    MaterialListBox format;
-
-    @UiField
     MaterialRadioButton radioButtonWorkbook, radioButtonWorksheet, radioButtonPartOfWorksheet;
 
     @UiField
@@ -126,27 +123,22 @@ public class ExportCsvView extends Composite {
                 Address addLower = wb.getSpreadsheet(0).findAddress(lowerCell);
                 Address addUpper = wb.getSpreadsheet(0).findAddress(upperCell);
 
-                Set<Cell> listCell = wb.getSpreadsheet(0).getCells(addLower, addUpper);
+                SpreadsheetDTO sh= wb.getSpreadsheet(0).toDTO();
 
-                ArrayList<String> list = new ArrayList<>();
-
-                for (Cell c : listCell) {
-                    list.add(c.getContent());
-                }
-
+                String[][] range = sh.getCellRange(addUpper.getRow(), addUpper.getColumn(), addLower.getRow(), addLower.getColumn());
+                
                 ExportCsvRangeServiceAsync downAsync = GWT.create(ExportCsvRangeService.class);
 
-                downAsync.exportToDownload(list, new AsyncCallback<ArrayList<String>>() {
+                downAsync.exportToDownload(range, new AsyncCallback<String[][]>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
                     }
 
                     @Override
-                    public void onSuccess(ArrayList<String> result) {
+                    public void onSuccess(String[][] result) {
                         String url = GWT.getModuleBaseURL() + "exportCsvRangeService?filename=" + titleBox.getText() + ".csv";;
                         Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
-
                     }
                 });
 
