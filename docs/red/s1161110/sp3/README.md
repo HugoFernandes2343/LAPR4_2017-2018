@@ -86,15 +86,179 @@ There were no changes in this part
 ![Analysis SD](SSD.jpg)
 
 # 4. Design
-
+Followed the same approach as in the previous sprint LANG02.1. The major change is that the Variable List, in this case GlobalVariableList, is stored in the workbook.
 
 ## 4.1. Tests
 
-
-There are not many tests possible for this use case other than the functional use of this feature.
+Regarding tests I try to follow an approach inspired by test driven development. All of the tests are very simillar to the ones used in temporary variables. Here are the tests made:
 
 **Domain classes**
 
+**public class GlobalVariable**
+
+
+**Test1:** I should ensure that the getName() method returns the correct name.
+
+    @Test
+    public void ensureGetNameReturnsRightName() {
+        String expResult = "Name";
+        String result = this.instance.getName();
+
+        assertEquals(expResult, result);
+    }
+
+**Test2:** I should ensure that the getValue() method returns the correct value.
+
+    @Test
+    public void ensureGetValueReturnsRightValue() {
+        Value expResult = new Value(0);
+        Value result = this.instance.getValue();
+
+        assertEquals(expResult, result);
+    }
+
+**Test3:** I should ensure that are the the setValue() method sets the correct value.
+
+    @Test
+    public void ensureSetValueReturnsRightValue() {
+        Value expResult = new Value(10);
+        this.instance.setValue(new Value(10));
+
+        Value result = this.instance.getValue();
+
+        assertEquals(expResult, result);
+    }
+
+**Test4:** I should ensure that the equals() method returns the correct answer.
+
+    @Test
+    public void ensureEqualsReturnsTrueWithEqualObjects() {
+        GlobalVariable newVariable = new GlobalVariable("Name",new Value(0));
+
+        boolean expResult = true;
+        boolean result = this.instance.equals(newVariable);
+
+        assertEquals(expResult, result);
+    }
+
+**Test5:** I should ensure that the equals() method returns the correct answer.
+
+    @Test
+    public void ensureEqualsReturnsFalseWithNullObjects() {
+        GlobalVariable newVariable = null;
+
+        boolean expResult = false;
+        boolean result = this.instance.equals(newVariable);
+
+        assertEquals(expResult, result);
+    }
+
+**Test6:** I should ensure that the equals() method returns the correct answer.
+
+    @Test
+    public void ensureEqualsReturnsFalseWithDifferentClassObjects() {
+        Value newVariable = new Value(0);
+
+        boolean expResult = false;
+        boolean result = this.instance.equals(newVariable);
+
+        assertEquals(expResult, result);
+    }
+
+
+**public class GlobalVariableReference**
+
+
+**Test1:** I should ensure that the getName() method returns the correct name.
+
+    @Test
+    public void ensureGetNameReturnsCorrectName(){
+        String name = "Name";
+
+        String expResult = name;
+        String result = instance.getName();
+
+        assertEquals(expResult, result);
+    }
+
+**Test2:** I should ensure that the evaluate() method returns the correct value.
+
+    @Test
+    public void ensureEvaluateReturnsTheCorrectValue(){
+        Value value = new Value(10);
+        instance.setVariableValue(value);
+
+        Value expResult = instance.evaluate();
+        Value result = value;
+
+        assertEquals(expResult, result);
+      }
+
+**Test3:** I should ensure that are the the setValue() method sets the correct value.
+
+    @Test
+    public void ensureSetVariableValueSetsTheCorrectValue(){
+        Value value = new Value(10);
+        instance.setVariableValue(value);
+
+        Value expResult = instance.evaluate();
+        Value result = value;
+
+        assertEquals(expResult, result);
+    }
+
+**Test4:** I should ensure that the toString() method returns the correct answer.
+
+    @Test
+    public void ensureToStringReturnsTheCorrectString(){
+
+        String expResult = "Name";
+        String result = instance.toString();
+
+        assertEquals(expResult, result);
+    }
+
+**public class GlobalVariableList**
+
+
+**Test1:** I should ensure that the contains() method returns the correct value.
+
+    @Test
+    public void ensureContainsReturnsCorrectVariable(){
+        instance.addVariable(new GlobalVariable("Name", new Value(0)));
+        String variableName = "Name";
+
+        boolean expResult = true;
+        boolean result = instance.contains(variableName);
+
+        assertEquals(expResult, result);
+    }
+
+**Test2:** I should ensure that the addVariable() method adds the correct variable.
+
+    @Test
+    public void ensureAddVariableAddsVariable(){
+        String variableName = "Name";
+        instance.addVariable(new GlobalVariable(variableName, new Value(0)));
+
+        boolean expResult = true;
+        boolean result = instance.contains(variableName);
+
+        assertEquals(expResult, result);
+    }
+
+**Test3:** I should ensure that are the the get() method returns the correct variable.
+
+    @Test
+    public void ensureGetReturnsVariable(){
+        String variableName = "Name";
+        instance.addVariable(new GlobalVariable(variableName, new Value(0)));
+
+        GlobalVariable expResult = new GlobalVariable(variableName, new Value(0));
+        GlobalVariable result = instance.get(variableName);
+
+        assertEquals(expResult, result);
+    }
 
 
 **Services/Controllers**
@@ -118,7 +282,7 @@ Notes:
 ## 4.4. Design Patterns and Best Practices
 
 In this sprint I used:  
-- Singleton
+- Information Expert
 - MVP  
 
 
@@ -141,6 +305,7 @@ Project **shared**
 
 
 # 7. Final Remarks
+For this sprint I have to thanks to João Vieira from team Green, he had the previous Use Case and helped a lot understanding how the program compiles formulas and how I could add my features.
 
 
 # 8. Work Log
