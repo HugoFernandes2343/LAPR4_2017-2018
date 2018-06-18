@@ -170,6 +170,34 @@ limitations under the License.
         <url-pattern>/nsheets/exportCsvRangeService</url-pattern>
     </servlet-mapping>
 
+    <!--Barbara Csonka 1171715-->
+    <servlet>
+        <servlet-name>ExportXMLWorkbookService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLWorkbookImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLWorkbookService</servlet-name>
+        <url-pattern>/nsheets/exportXMLWorkbookService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExportXMLSpreadhseetService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLSpreadsheetImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLSpreadhseetService</servlet-name>
+        <url-pattern>/nsheets/exportXMLSpreadhseetService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExportXMLCellRangeService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLCellRangeImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLCellRangeService</servlet-name>
+        <url-pattern>/nsheets/exportXMLCellRangeService</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

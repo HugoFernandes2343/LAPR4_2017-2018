@@ -15,5 +15,5 @@ import pt.isep.nsheets.shared.core.Cell;
  * @author Daniel Fernandes 1150585
  */
 public interface ExportCsvRangeServiceAsync {
-      void exportToDownload( ArrayList <String> toExport, AsyncCallback<ArrayList<String>>  async);
+      void exportToDownload( String[][] toExport, AsyncCallback<String[][]>  async);
 }
