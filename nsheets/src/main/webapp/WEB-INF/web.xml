@@ -128,15 +128,37 @@ limitations under the License.
         <url-pattern>/nsheets/exportCsvService</url-pattern>
     </servlet-mapping>
 
+    <!--Rodrigo Soares 1140420-->
     <servlet>
-        <servlet-name>downloadToPDFService</servlet-name>
+        <servlet-name>exportPDFWorkbookService</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.ExportPDFWorkbookImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>downloadToPDFService</servlet-name>
-        <url-pattern>/nsheets/downloadToPDFService</url-pattern>
+        <servlet-name>exportPDFWorkbookService</servlet-name>
+        <url-pattern>/nsheets/exportPDFWorkbookService</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exportPDFSpreadsheetService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFSpreadsheetImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>exportPDFSpreadsheetService</servlet-name>
+        <url-pattern>/nsheets/exportPDFSpreadsheetService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exportPDFCellRangeService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFCellRangeImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>exportPDFCellRangeService</servlet-name>
+        <url-pattern>/nsheets/exportPDFCellRangeService</url-pattern>
+    </servlet-mapping>
+    <!--Rodrigo Soares 1140420-->
 
     <servlet>
         <servlet-name>noteServiceServlet</servlet-name>
