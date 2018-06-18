@@ -278,6 +278,11 @@ Notes:
 
 
 ## 4.3. Classes
+For this Use Case I created 3 classes:
+* GlobalVariable
+* GlobalVariableReference
+* GlobalVariableList
+and Updated others to add or change methods.
 
 ## 4.4. Design Patterns and Best Practices
 
@@ -288,7 +293,7 @@ In this sprint I used:
 
 # 5. Implementation
 
-**For US1**
+**For US**
 
 
 
@@ -298,8 +303,10 @@ I followed the recommended organization for packages:
 
 The code for this sprint:  
 
-Project **shared**  
-
+Project **shared**
+ * GlobalVariable
+ * GlobalVariableReference
+ * GlobalVariableList
 
 # 6. Integration/Demonstration
 
