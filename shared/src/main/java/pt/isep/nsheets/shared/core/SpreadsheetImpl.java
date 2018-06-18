@@ -87,11 +87,11 @@ public class SpreadsheetImpl implements Spreadsheet {
     @Column(name = "Cell_Columns")
     private Map<Address, Cell> cells = new HashMap<Address, Cell>();
     
-    @OneToMany(targetEntity = StylesCellInterfaceImp.class)
+  /*  @OneToMany(targetEntity = StylesCellInterfaceImp.class)
     @JoinTable(name = "spreadsheet_cellSyleExtension", joinColumns = @JoinColumn(name = "spreadsheet"), inverseJoinColumns = @JoinColumn(name = "cellStyleExtension"))
     @MapKeyJoinColumn(name = "cell")
 
-    private Map<Cell, StylesCellInterfaceImp> extCells = new HashMap<>();
+    private Map<Cell, StylesCellInterfaceImp> extCells = new HashMap<>();*/
 
     /**
      * The title of the spreadsheet
