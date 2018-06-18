@@ -97,17 +97,17 @@ Notes:
 
 - **ExportCsvService** - Interface that will implement the ExportCSVlmpl;
 
-- **ExportCsvService** - Interface that will implement the ExportCSVSpreadsheetlmpl;
+- **ExportCsvSpreadsheetService** - Interface that will implement the ExportCSVSpreadsheetlmpl;
 
-- **ExportCsvService** - Interface that will implement the ExportCSVRangeServicelmpl
+- **ExportCsvRangeService** - Interface that will implement the ExportCSVRangeServicelmpl
 
 **Async Interface**
 
 - **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVlmpl;
 
-- **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVSpreadsheetlmpl;
+- **ExportCsvSpreadsheetServiceAsync** - Interface that will allow to connect the view to the ExportCSVSpreadsheetlmpl;
 
-- **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVRangeServicelmpl.
+- **ExportCsvRangeServiceAsync** - Interface that will allow to connect the view to the ExportCSVRangeServicelmpl.
 
 **View**
 
@@ -224,4 +224,8 @@ Lastly, I also highlight the support Rodrigo Soares has shown. Besides being a s
 
 [IPC 05.1 - Export To CSV - Some improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/573167d84d23)
 
-[IPC 05.1 - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/29a3b73a9f5f)
+[IPC 05.1 - Export To CSV - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/29a3b73a9f5f)
+
+[IPC 05.1 - Export To CSV - Documentation Improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/98370ff7a4b3)
+
+[IPC 05.1 - Export To CSV - Technical Documentation Correction](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/55d5b1272be3)
