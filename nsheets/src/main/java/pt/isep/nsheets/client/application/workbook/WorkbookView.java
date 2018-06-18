@@ -39,7 +39,7 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
-import pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF.ExportToPDFView;
+import pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF.ExportPDFView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -853,7 +853,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         //1140420 Rodrigo
         exportToPdfButton.addClickHandler(event -> {
-            new ExportToPDFView(this.getActiveCell().getSpreadsheet().getWorkbook());
+            new ExportPDFView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });
 
 //        formButton.addClickHandler(event -> {
