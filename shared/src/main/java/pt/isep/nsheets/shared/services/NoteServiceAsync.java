@@ -14,7 +14,11 @@ import java.util.ArrayList;
  */
 public interface NoteServiceAsync {
 
-    void getNotes(UserDTO userDTO,AsyncCallback<ArrayList<NoteDTO>> callback);
+    void getNotes(UserDTO userDTO, AsyncCallback<ArrayList<NoteDTO>> callback);
 
     void addNote(NoteDTO noteDTO, AsyncCallback<NoteDTO> async);
+
+    void deleteNote(NoteDTO noteDTO, AsyncCallback<NoteDTO> async);
+
+    void editNote(String title, String text, String oldName, AsyncCallback<NoteDTO> async);
 }

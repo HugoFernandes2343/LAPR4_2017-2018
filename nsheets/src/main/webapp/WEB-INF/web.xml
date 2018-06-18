@@ -53,9 +53,8 @@ limitations under the License.
         <servlet-name>workbooksServiceServlet</servlet-name>
         <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
         <url-pattern>/nsheets/workbooksService</url-pattern>
-
     </servlet-mapping> 
-
+    
     <servlet-mapping>
         <servlet-name>chatServiceServlet</servlet-name>
         <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->

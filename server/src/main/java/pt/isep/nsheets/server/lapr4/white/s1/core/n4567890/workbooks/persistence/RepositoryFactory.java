@@ -36,4 +36,5 @@ public interface RepositoryFactory {
     CalendarRepository calendares();
 
     NoteRepository note();
+
 }

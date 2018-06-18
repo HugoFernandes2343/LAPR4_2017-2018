@@ -54,7 +54,6 @@ import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
  *
  * @author Einar Pehrson
  */
-@Entity
 public class SpreadsheetImpl implements Spreadsheet {
 
     @Id
@@ -86,7 +85,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     @MapKeyColumn(name = "Column_Adresses")
     @Column(name = "Cell_Columns")
     private Map<Address, Cell> cells = new HashMap<Address, Cell>();
-    
+
     @OneToMany(targetEntity = StylesCellInterfaceImp.class)
     @JoinTable(name = "spreadsheet_cellSyleExtension", joinColumns = @JoinColumn(name = "spreadsheet"), inverseJoinColumns = @JoinColumn(name = "cellStyleExtension"))
     @MapKeyJoinColumn(name = "cell")
@@ -125,16 +124,16 @@ public class SpreadsheetImpl implements Spreadsheet {
     private transient Map<String, SpreadsheetExtension> extensions
             = new HashMap<String, SpreadsheetExtension>();
 
-    
     public SpreadsheetImpl() {
     }
 
     /**
      * to DTO
+     *
      * @param id
      * @param workbookId
      * @param title
-     * @param cells 
+     * @param cells
      */
     private SpreadsheetImpl(Long id, String title, Map<Address, Cell> cells) {
         this.id = id;
@@ -162,7 +161,7 @@ public class SpreadsheetImpl implements Spreadsheet {
             rows = maxRow + 1;
         }
     }
-    
+
     /**
      * Creates a new spreadsheet.
      *
@@ -201,6 +200,7 @@ public class SpreadsheetImpl implements Spreadsheet {
             }
         }
     }
+
     /*
  * LOCATION
      */
@@ -484,7 +484,7 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
         return extension;
     }
-    
+
     /*
  * GENERAL
      */
@@ -537,9 +537,6 @@ public class SpreadsheetImpl implements Spreadsheet {
 //		for (SpreadsheetExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
-    
-    
-    
     public static Spreadsheet fromDTO(SpreadsheetImplDTO dto) {
         Map<Address, Cell> ssCells = new LinkedHashMap<>();
 
@@ -552,7 +549,6 @@ public class SpreadsheetImpl implements Spreadsheet {
         return new SpreadsheetImpl(dto.id, dto.title, ssCells);
     }
 
-    
     @Override
     public SpreadsheetImplDTO toDTO1() {
         Map<AddressDTO, CellImplDTO> cellDTOs = new LinkedHashMap<>();
