@@ -97,6 +97,7 @@ public class Language {
         functions.add(new True());
         functions.add(new For());
         functions.add(new Block());
+     //   functions.add(new Eval());
     }
 
     protected void initBinaryOperators() {

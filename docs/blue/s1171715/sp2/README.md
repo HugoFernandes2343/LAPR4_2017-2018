@@ -57,19 +57,19 @@
 
 	I made mockups to show how this task should work properly, in the best case. 
 
-	! [1_FelugroMenu] (1_FelugroMenu.png)
+	![1_FelugroMenu](1_FelugroMenu.png)
 
 
-	! [2_FilterCellRangeEmpty] (2_FilterCellRangeEmpty.png)
+	![2_FilterCellRangeEmpty](2_FilterCellRangeEmpty.png)
 
 
-	! [3_FilterCellRangeFilled] (3_FilterCellRangeFilled.png)
+	![3_FilterCellRangeFilled](3_FilterCellRangeFilled.png)
 
 
-	! [4_ApplyingFormula] (4_ApplyingFormula.png)
+	![4_ApplyingFormula](4_ApplyingFormula.png)
 
 
-	! [5_Hidden] (5_Hidden.png)
+	![5_Hidden](5_Hidden.png)
 
 
 

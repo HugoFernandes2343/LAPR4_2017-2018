@@ -30,4 +30,13 @@ public class NoteController implements Controller {
         noteRepository.save(Note.fromDTO(noteDTO));
         return noteDTO;
     }
+
+    public void deleteNote(NoteDTO noteDTO) throws DataConcurrencyException, DataIntegrityViolationException {
+        noteRepository.deleteNote(noteDTO);
+    }
+
+    public void editNote(String title, String text, String oldName) throws DataConcurrencyException, DataIntegrityViolationException {
+        noteRepository.editNote(title, text, oldName);
+    }
+
 }

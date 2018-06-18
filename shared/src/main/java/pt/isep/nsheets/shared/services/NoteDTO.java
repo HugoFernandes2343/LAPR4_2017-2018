@@ -6,6 +6,7 @@
 package pt.isep.nsheets.shared.services;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -16,10 +17,14 @@ public class NoteDTO implements Serializable {
 
     private UserDTO user;
     private String title;
+    private String text;
+    private Date date;
 
-    public NoteDTO(UserDTO user, String title) {
+    public NoteDTO(UserDTO user, String title, String text) {
         this.user = user;
         this.title = title;
+        this.text = text;
+        date = new Date();
     }
 
     public NoteDTO() {
@@ -31,6 +36,14 @@ public class NoteDTO implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
 }
