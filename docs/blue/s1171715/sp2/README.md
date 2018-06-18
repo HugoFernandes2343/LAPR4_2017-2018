@@ -24,12 +24,6 @@ In order to draw up a proper solution for this task, I had to study and understa
 
 ## 3.1 Analysis diagrams
 
-I made the following diagrams, to make it easier the understanding.
-
-Sequence diagram:
-
-![sd](sd.png)
-
 The most important classes are the following:
 
 WorkbookView
@@ -68,18 +62,7 @@ I made mockups to show how this task should work properly, in the best case.
 
 # 4. Design
 
-## 4.1 New classes and packages
-
-"pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange"
-
-This is the newly created package for my classes, which contains the classes FilterCellRangeView.java and FilterCellRangeView.ui.xml. They work together, since the interface FilterCellRangeView.ui.xml is binded to FilterCellRangeView.java
-
-## 4.2 Modifications to existing classes
-
-WorkbookView.java
-It is now extended with filterCellRange button and the belonging codeblock. 
-
-## 4.3 Tests
+## 4.1 Tests
 
 In terms of tests, I have to make sure that the correct cell address is found for a given input:
 
@@ -95,7 +78,26 @@ public void getCellRange() {
 		
 }
 
-   
+
+# 4.2 Requirements Realization
+
+Sequence diagram:
+
+![sd](sd.png)
+
+## 4.2 Classes
+
+##New classes and packages
+
+"pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange"
+
+This is the newly created package for my classes, which contains the classes FilterCellRangeView.java and FilterCellRangeView.ui.xml. They work together, since the interface FilterCellRangeView.ui.xml is binded to FilterCellRangeView.java
+
+##Modifications to existing classes
+
+WorkbookView.java
+It is now extended with filterCellRange button and the belonging codeblock. 
+
 
 # 5. Implementation
  
