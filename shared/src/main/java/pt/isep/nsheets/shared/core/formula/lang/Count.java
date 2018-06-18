@@ -67,4 +67,19 @@ public class Count implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return null;
+	}
+
+	@Override
+	public String funcName() {
+		return null;
+	}
+
+	@Override
+	public String funcSyntax() {
+		return null;
+	}
 }

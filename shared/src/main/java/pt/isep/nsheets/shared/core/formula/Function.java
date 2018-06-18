@@ -55,4 +55,10 @@ public interface Function {
 	 * @return true if the function accepts a variable number of arguments
 	 */
 	public boolean isVarArg();
+
+	public String funcDescription();
+
+	public String funcName();
+
+	public String funcSyntax();
 }
