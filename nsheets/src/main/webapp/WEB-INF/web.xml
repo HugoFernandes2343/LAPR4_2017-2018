@@ -128,20 +128,10 @@ limitations under the License.
         <servlet-name>ExportCsvServiceServlet</servlet-name>
         <url-pattern>/nsheets/exportCsvService</url-pattern>
     </servlet-mapping>
-  
-    <servlet>
-        <servlet-name>downloadCSVService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>downloadCSVService</servlet-name>
-        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>downloadToPDFService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadPDFImplRod</servlet-class>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFWorkbookImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
