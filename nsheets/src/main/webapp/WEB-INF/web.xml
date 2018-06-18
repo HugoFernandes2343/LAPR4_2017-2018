@@ -53,9 +53,8 @@ limitations under the License.
         <servlet-name>workbooksServiceServlet</servlet-name>
         <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
         <url-pattern>/nsheets/workbooksService</url-pattern>
-
     </servlet-mapping> 
-
+    
     <servlet-mapping>
         <servlet-name>chatServiceServlet</servlet-name>
         <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
@@ -128,17 +127,17 @@ limitations under the License.
         <servlet-name>ExportCsvServiceServlet</servlet-name>
         <url-pattern>/nsheets/exportCsvService</url-pattern>
     </servlet-mapping>
-  
+
     <servlet>
-        <servlet-name>downloadCSVService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadCSVImpl</servlet-class>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFWorkbookImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>downloadCSVService</servlet-name>
-        <url-pattern>/nsheets/downloadCSVImpl</url-pattern>
+        <servlet-name>downloadToPDFService</servlet-name>
+        <url-pattern>/nsheets/downloadToPDFService</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>noteServiceServlet</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.NoteServiceImpl</servlet-class>
@@ -148,6 +147,57 @@ limitations under the License.
         <servlet-name>noteServiceServlet</servlet-name>
         <url-pattern>/nsheets/noteService</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportCsvSpreadsheetImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExportCsvSpreadsheetServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportCsvSpreadsheetService</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ExportCsvRangeServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportCsvRangeServiceImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExportCsvRangeServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportCsvRangeService</url-pattern>
+    </servlet-mapping>
+
+    <!--Barbara Csonka 1171715-->
+    <servlet>
+        <servlet-name>ExportXMLWorkbookService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLWorkbookImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLWorkbookService</servlet-name>
+        <url-pattern>/nsheets/exportXMLWorkbookService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExportXMLSpreadhseetService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLSpreadsheetImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLSpreadhseetService</servlet-name>
+        <url-pattern>/nsheets/exportXMLSpreadhseetService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExportXMLCellRangeService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportXMLCellRangeImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExportXMLCellRangeService</servlet-name>
+        <url-pattern>/nsheets/exportXMLCellRangeService</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

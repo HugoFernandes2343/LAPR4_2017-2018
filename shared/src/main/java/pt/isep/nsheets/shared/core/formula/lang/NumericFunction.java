@@ -86,4 +86,19 @@ public class NumericFunction implements Function {
 	public boolean isVarArg() {
 		return method.isVarArgs();
 	}
+
+	@Override
+	public String funcDescription() {
+		return null;
+	}
+
+	@Override
+	public String funcName() {
+		return null;
+	}
+
+	@Override
+	public String funcSyntax() {
+		return null;
+	}
 }

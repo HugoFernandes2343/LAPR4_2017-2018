@@ -50,4 +50,19 @@ public class Block implements Function {
         return value.isOfType(Value.Type.UNDEFINED);
     }
 
+    @Override
+    public String funcDescription() {
+        return "BLOCK DESC";
+    }
+
+    @Override
+    public String funcName() {
+        return "BLOCK";
+    }
+
+    @Override
+    public String funcSyntax() {
+        return "BLOCK()";
+    }
+
 }

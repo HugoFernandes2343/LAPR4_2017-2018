@@ -7,7 +7,6 @@ package pt.isep.nsheets.shared.services;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.List;
 
 /**
  *
@@ -18,5 +17,9 @@ public interface NoteService extends RemoteService {
 
     NoteDTO addNote(NoteDTO noteDTO) throws DataException;
 
-    List<NoteDTO> getListNoteUser(UserDTO userDTO);
+    Iterable<NoteDTO> getNotes(UserDTO userDTO);
+
+    void deleteNote(NoteDTO noteDTO);
+
+    void editNote(String title, String text, String oldName) throws DataException;
 }

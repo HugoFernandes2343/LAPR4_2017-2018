@@ -47,6 +47,20 @@ public class SpreadsheetDTO implements Serializable {
         return content;
     }
 
+    public String[][] getCellRange(int upperLeftRow, int upperLeftColumn, int lowerRightRow, int lowerRightColumn) {
+        int horizontalLength = lowerRightColumn - upperLeftColumn + 1;
+        int verticalLength = lowerRightRow - upperLeftRow + 1;
+        String[][] result = new String[verticalLength][horizontalLength];
+
+        for (int i = upperLeftRow; i <= lowerRightRow; i++) {
+            for (int j = upperLeftColumn; j <= lowerRightColumn; j++) {
+                result[i-upperLeftRow][j-upperLeftColumn] = content[i][j];
+            }
+        }
+
+        return result;
+    }
+
     public void setContent(String[][] content) {
         this.content = content;
     }

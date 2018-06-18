@@ -73,6 +73,21 @@ public class For implements Function {
     }
 
     @Override
+    public String funcDescription() {
+        return "FOR DESC";
+    }
+
+    @Override
+    public String funcName() {
+        return "FOR";
+    }
+
+    @Override
+    public String funcSyntax() {
+        return "FOR()";
+    }
+
+    @Override
     public FunctionParameter[] getParameters() {
         return parameters;
     }

@@ -61,4 +61,19 @@ public class Or implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "OR DESC";
+	}
+
+	@Override
+	public String funcName() {
+		return "Or";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "OR()";
+	}
 }

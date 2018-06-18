@@ -55,4 +55,19 @@ public class True implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "TRUE DESC";
+	}
+
+	@Override
+	public String funcName() {
+		return "True";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "TRUE()";
+	}
 }

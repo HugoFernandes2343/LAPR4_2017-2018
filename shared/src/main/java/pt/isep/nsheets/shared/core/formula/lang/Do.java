@@ -106,4 +106,19 @@ public class Do implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "Do desc";
+	}
+
+	@Override
+	public String funcName() {
+		return "Do";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "Do()";
+	}
 }

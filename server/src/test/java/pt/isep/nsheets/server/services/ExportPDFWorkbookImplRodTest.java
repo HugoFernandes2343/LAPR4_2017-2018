@@ -1,9 +1,5 @@
 package pt.isep.nsheets.server.services;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import org.junit.Test;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
@@ -15,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class DownloadPDFImplRodTest {
+public class ExportPDFWorkbookImplRodTest {
 /*    @Test
     public void ensureSimpleCellToPDFCellConversion() throws FormulaCompilationException {
         System.out.println("ensureSimpleCellToPDFCellConversion");
@@ -23,7 +19,7 @@ public class DownloadPDFImplRodTest {
         Cell testCell = new CellImpl();
         testCell.setContent("42");
 
-        PdfPCell instance = DownloadPDFImplRod.cellToPDFCell(testCell);
+        PdfPCell instance = ExportPDFWorkbookImpl.cellToPDFCell(testCell);
         PdfPCell expected = new PdfPCell(new Phrase("42"));
         assertEquals(instance, expected);
     }*/
@@ -41,7 +37,7 @@ public class DownloadPDFImplRodTest {
 //        testCellRange[1][2].setContent("0.234");
 //
 //
-//        PdfPCell[][] instance = DownloadPDFImplRod.cellRangeToPDFCellRange(testCellRange);
+//        PdfPCell[][] instance = ExportPDFWorkbookImpl.cellRangeToPDFCellRange(testCellRange);
 //        PdfPCell[][] expected = new PdfPCell[2][3];
 //        expected[0][0].setPhrase(new Phrase("34"));
 //        expected[0][1].setPhrase(new Phrase("123"));
@@ -57,7 +53,7 @@ public class DownloadPDFImplRodTest {
     public void generatePDF() throws FileNotFoundException {
         String fileName = "./"+"generatedPDFTest"+".pdf";
 
-        DownloadPDFImplRod servlet = new DownloadPDFImplRod();
+        ExportPDFWorkbookImpl servlet = new ExportPDFWorkbookImpl();
 
         PdfDocument generatedPDF = servlet.generatePDFFromWorkbook (servlet.dummyWorkbook(), fileName);
 
@@ -74,7 +70,7 @@ public class DownloadPDFImplRodTest {
         String[][] content = {{"4","3","2"}, {"s123","--","s"}, {"+sad","+io","-12..12"}, {"bssd","asd","ads"}};
         SpreadsheetDTO spreadsheet = new SpreadsheetDTO("Test Spreadsheet", columns, rows, content);
 
-        Table instance = new DownloadPDFImplRod().spreadsheetToPDFTable(spreadsheet);
+        Table instance = new ExportPDFWorkbookImpl().spreadsheetToPDFTable(spreadsheet);
 
         Table expected = new Table(columns);
         expected.addCell("4");
@@ -179,7 +175,7 @@ public class DownloadPDFImplRodTest {
         table2.addCell("asd");
         table2.addCell("ads");
 
-        List<Table> instance = new DownloadPDFImplRod().workbookToPDF(workbook);
+        List<Table> instance = new ExportPDFWorkbookImpl().workbookToPDF(workbook);
 
         //Generate test results
         /*PdfDocument doc = new PdfDocument(new PdfWriter("workbookToPDFTest.pdf"));

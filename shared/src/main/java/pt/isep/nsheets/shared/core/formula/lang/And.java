@@ -61,4 +61,19 @@ public class And implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "This calculates the and";
+	}
+
+	@Override
+	public String funcName() {
+		return "And";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "AND()";
+	}
 }

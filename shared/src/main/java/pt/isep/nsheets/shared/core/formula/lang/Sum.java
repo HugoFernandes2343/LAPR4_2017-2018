@@ -73,4 +73,19 @@ public class Sum implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "SUM DESC";
+	}
+
+	@Override
+	public String funcName() {
+		return "Addiction";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "SUM()";
+	}
 }

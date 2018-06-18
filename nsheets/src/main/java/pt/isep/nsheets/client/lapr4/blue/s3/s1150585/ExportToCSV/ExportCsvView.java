@@ -25,11 +25,20 @@ import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialRadioButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
-import pt.isep.nsheets.server.lapr4.blue.s3.ipc.n1150585.ExportCSV.domain.ExportCsv;
+import java.util.ArrayList;
+import java.util.Set;
+import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.services.ExportCsvRangeService;
+import pt.isep.nsheets.shared.services.ExportCsvRangeServiceAsync;
 import pt.isep.nsheets.shared.services.ExportCsvService;
 import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
-
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetService;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetServiceAsync;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 
 /**
  *
@@ -39,9 +48,6 @@ public class ExportCsvView extends Composite {
 
     @UiField
     MaterialWindow window;
-
-    @UiField
-    MaterialListBox format;
 
     @UiField
     MaterialRadioButton radioButtonWorkbook, radioButtonWorksheet, radioButtonPartOfWorksheet;
@@ -110,40 +116,76 @@ public class ExportCsvView extends Composite {
                 MaterialToast.fireToast("Part Of a Worksheet selected");
                 MaterialToast.fireToast("Please indicate a range");
             } else if (radioButtonPartOfWorksheet.getValue() && !textBox1.getText().equals("") && !textBox2.getText().equals("")) {
-                MaterialToast.fireToast("Starting cell: " + textBox1.getText() + "Ending cell: " + textBox2.getText());
 
-            } else if (radioButtonWorkbook.getValue()) {
-                String PATH = "../lapr4-18-2dl\\";
+                String upperCell = textBox1.getText();
+                String lowerCell = textBox2.getText();
 
-                ExportCsvServiceAsync async = GWT.create(ExportCsvService.class);
+                Address addLower = wb.getSpreadsheet(0).findAddress(lowerCell);
+                Address addUpper = wb.getSpreadsheet(0).findAddress(upperCell);
 
-                AsyncCallback<Boolean> exportedCSV = new AsyncCallback<Boolean>() {
+                String nSpreadsheet = Window.prompt("Insert spreadsheet number", "");
+                int nSpreadsheetInt = Integer.parseInt(nSpreadsheet);
+                SpreadsheetDTO sh = wb.getSpreadsheet(nSpreadsheetInt).toDTO();
+
+                String[][] range = sh.getCellRange(addUpper.getRow(), addUpper.getColumn(), addLower.getRow(), addLower.getColumn());
+
+                ExportCsvRangeServiceAsync downAsync = GWT.create(ExportCsvRangeService.class);
+
+                downAsync.exportToDownload(range, new AsyncCallback<String[][]>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        MaterialToast.fireToast("Failed");
-                        GWT.log("", caught);
+                        MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
                     }
 
                     @Override
-                    public void onSuccess(Boolean result) {
-                        MaterialToast.fireToast("Success");
+                    public void onSuccess(String[][] result) {
+                        String url = GWT.getModuleBaseURL() + "exportCsvRangeService?filename=" + titleBox.getText() + ".csv";;
+                        Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
                     }
-                };
-                String contentsCSV[][][] = {{ // first spreadsheet
-                    {"10", "9", "8", "7", "a", "b", "c"}, {"8", "9", "6", "5", "4", "3", "2"},
-                    {"1", "2", "3", "4", "5", "6", "7"}}};
+                });
 
-                Workbook exportWb = new Workbook(contentsCSV);
-                String nameFile = titleBox.getText();
-                String delimiter = ",";
+            } else if (radioButtonWorkbook.getValue()) {
+                WorkbookDTO dto = wb.toDTO();
 
-                nameFile = nameFile + ".csv";
-                String url = GWT.getModuleBaseURL() + "downloadCSVImpl?filename=" + nameFile;
-                Window.open(url, "_blank", "status=0,toolbar=0,menubar=0,location=0");
-                async.exportWorkbookToCSV(wb, delimiter, PATH + nameFile, exportedCSV);
+                ExportCsvServiceAsync downAsync = GWT.create(ExportCsvService.class);
 
+                downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(WorkbookDTO result) {
+                        String url = GWT.getModuleBaseURL() + "exportCsvService?filename=" + titleBox.getText() + ".csv";;
+                        Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
+                    }
+                });
             } else if (radioButtonWorksheet.getValue()) {
-                MaterialToast.fireToast("Worksheet selected");
+
+                String nSpreadsheet = Window.prompt("Insert spreadsheet number", "");
+                int nSpreadsheetInt = Integer.parseInt(nSpreadsheet);
+
+                SpreadsheetDTO dto = wb.getSpreadsheet(nSpreadsheetInt).toDTO();
+
+                if (dto.content == null) {
+                    MaterialToast.fireToast("This spreadsheet doesn't exist ");
+                } else {
+                    ExportCsvSpreadsheetServiceAsync downAsync = GWT.create(ExportCsvSpreadsheetService.class);
+                    downAsync.exportToDownload(dto, new AsyncCallback<SpreadsheetDTO>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            MaterialToast.fireToast("Error in Export to CSV! " + caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(SpreadsheetDTO result) {
+                            String url = GWT.getModuleBaseURL() + "exportCsvSpreadsheetService?filename=" + titleBox.getText() + ".csv";;
+                            Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
+                        }
+
+                    });
+                }
             } else {
                 MaterialToast.fireToast("Please select an option!");
             }

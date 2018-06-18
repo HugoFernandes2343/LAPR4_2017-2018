@@ -55,4 +55,19 @@ public class False implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "dETERMINATES FALSE";
+	}
+
+	@Override
+	public String funcName() {
+		return "False";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "FALSE()";
+	}
 }
