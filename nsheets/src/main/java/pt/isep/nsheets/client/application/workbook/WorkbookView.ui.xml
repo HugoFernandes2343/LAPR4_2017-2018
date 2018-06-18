@@ -192,8 +192,12 @@ governing permissions and limitations under the License. #L% -->
                             
                 <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Confirm" ui:field="confirmTXT" />
             </m:MaterialRow>
+            <m:MaterialButton ui:field="btnOpenSearchReplace" text="Search and Replace" size="MEDIUM"
+                               iconType="SEARCH" waves="LIGHT" backgroundColor="BLUE" textColor="WHITE" 
+                               iconPosition="RIGHT"/>
             <m:MaterialDropDown activator="TextColors" constrainWidth="true">
                 <m:MaterialCollection ui:field="textColor"/>
+                
             </m:MaterialDropDown>
                 
                 
@@ -242,7 +246,29 @@ governing permissions and limitations under the License. #L% -->
                 <m:MaterialButton ui:field="confirm" text="ok"  backgroundColor="BLACK" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
 
             </ma:window.MaterialWindow>
-
+            <ma:window.MaterialWindow ui:field="windowSearchAndReplace" backgroundColor="WHITE"
+                                      toolbarColor="BLUE"
+                                      width="50%" title="Search and Replace on SpreadSheet">
+                <m:MaterialPanel padding="32" textAlign="CENTER" height="200px">
+                    <m:MaterialTextBox ui:field="textBoxSearchFor" placeholder="Search in all worksheets"
+                                       label="Search in all worksheets" grid="s9" active="true"/>
+                    <m:MaterialTextBox ui:field="textBoxReplacementText" placeholder="Replacement text"
+                                       label="Replacement text" grid="s9" active="true"/>
+                    <m:MaterialIcon ui:field="btnSearchReplace" iconType="SEARCH" iconColor="BLUE"
+                                    waves="DEFAULT"
+                                    circle="true" grid="s1"/>
+                </m:MaterialPanel>
+                <m:MaterialPanel margin="60" padding="32" textAlign="CENTER" height="150px">
+                    <m:MaterialRow margin="60">
+                        <m:MaterialTextArea ui:field="resultsSearchAndReplace" label="Search Results:"
+                                            resizeRule="AUTO"
+                                            readOnly="true"/>
+                        <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "replace" ui:field="replaceButton" />                        
+                        <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "next" ui:field="nextButton" />  
+                        <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Replace All" ui:field="replaceAllButton" />                  
+                    </m:MaterialRow>
+                </m:MaterialPanel>
+            </ma:window.MaterialWindow>
 
 
             <ma:popupmenu.MaterialPopupMenu

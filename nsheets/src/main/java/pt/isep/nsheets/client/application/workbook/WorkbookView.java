@@ -85,20 +85,20 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     public MaterialLink getConditionalLink() {
         return conditionalLink;
     }
-    
+
     public MaterialLink getConditionalLinkStyle() {
         return conditionalLinkStyle;
     }
-    
+
     public MaterialButton getBoldButton() {
-         return boldButton;
-     }
- 
-     public MaterialButton getItalicButton() {
-         return italicButton;
-     }
-     
-     /**
+        return boldButton;
+    }
+
+    public MaterialButton getItalicButton() {
+        return italicButton;
+    }
+
+    /**
      * @return the alignLeftBtn
      */
     public MaterialButton getAlignLeftBtn() {
@@ -126,7 +126,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         return underlineBtn;
     }
 
-
     //1160696
     List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
     List<MaterialRadioButton> falseFontButtons = new ArrayList<>();
@@ -134,38 +133,37 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
     Function functionList[];
-    
+
     @UiField
     MaterialButton confirmBG;
 
     @UiField
-     MaterialButton colorTextButton;
- 
+    MaterialButton colorTextButton;
+
     @UiField
     MaterialButton confirmTXT;
-    
+
     @UiField
     MaterialCollection backgroundColor;
 
     @UiField
     MaterialCollection textColor;
-    
+
     List<MaterialRadioButton> backgroundColorButtons = new ArrayList<>();
     List<MaterialRadioButton> textColorButtons = new ArrayList<>();
-    
+
     @UiField
     MaterialButton alignLeftBtn;
-    
+
     @UiField
     MaterialButton alignRightBtn;
-    
+
     @UiField
     MaterialButton alignCenterBtn;
-    
+
     @UiField
     MaterialButton underlineBtn;
-    
-    
+
     @UiField
     MaterialCollapsible colapStyle;
 
@@ -177,7 +175,12 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialListValueBox funcName;
-    @UiHandler("funcName") void onChangeListBox(ValueChangeEvent<String> e) { funcDescription.setText(functionList[funcName.getSelectedIndex()].funcDescription()); funcSyntax.setText(functionList[funcName.getSelectedIndex()].funcSyntax());}
+
+    @UiHandler("funcName")
+    void onChangeListBox(ValueChangeEvent<String> e) {
+        funcDescription.setText(functionList[funcName.getSelectedIndex()].funcDescription());
+        funcSyntax.setText(functionList[funcName.getSelectedIndex()].funcSyntax());
+    }
 
     @UiField
     MaterialTextArea funcDescription;
@@ -188,10 +191,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialButton applyFuncWizard;
 
-
     @UiField
     MaterialLink conditionalLinkStyle;
-    
+
     @UiField
     MaterialButton boldButton;
 
@@ -265,7 +267,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     MaterialButton newSpreadsheetButton;
 
     @UiField
-    MaterialWindow windowconditional;
+    MaterialWindow windowconditional, windowSearchAndReplace;
 
     @UiField
     MaterialLink editformat;
@@ -293,10 +295,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     static MaterialPopupMenu popupMenu;
 
     @UiField
-    MaterialIcon formButton;
+    MaterialIcon formButton, btnSearchReplace;
+    ;
 
     @UiField
-    MaterialButton searchButton;
+    MaterialButton searchButton, btnOpenSearchReplace;
 
     @UiField
     MaterialButton sortButton;
@@ -319,6 +322,14 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialTextBox lastCell;
 
+    @UiField
+    MaterialTextBox textBoxSearchFor, textBoxReplacementText;
+
+    @UiField
+    MaterialTextArea resultsSearchAndReplace;
+
+    @UiField
+    MaterialButton replaceButton, nextButton, replaceAllButton;
     //1160696
     HashMap<Cell, StylesCellExt> extCells = new HashMap<>();
     private static final int ITALIC = 1;
@@ -330,14 +341,32 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     private static final int BG_COLOR = 7;
     private static final int TXT_COLOR = 8;
     //1160696
-    
-    
+
+    @Override
+    public MaterialTextBox getTextBoxSearchFor() {
+        return textBoxSearchFor;
+    }
+
+    @Override
+    public MaterialTextBox getTextBoxReplacementText() {
+        return textBoxReplacementText;
+    }
+
+    @Override
+    public MaterialIcon getBtnSearchReplace() {
+        return btnSearchReplace;
+    }
+
+    @Override
+    public MaterialTextArea getTextAreaResultsSearchAndReplace() {
+        return resultsSearchAndReplace;
+    }
 
     interface Binder extends UiBinder<Widget, WorkbookView> {
     }
 
     private pt.isep.nsheets.shared.core.Cell activeCell = null;
-    
+
     public static MaterialPopupMenu getPopupMenu() {
         return popupMenu;
     }
@@ -482,6 +511,9 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         }
         trueFont.add(trueF);
         falseFont.add(falseF);
+        btnOpenSearchReplace.addClickHandler(event -> {
+            windowSearchAndReplace.open();
+        });
 
         confirmCF.addClickHandler(event -> {
             if (activeCell != null) {
@@ -572,9 +604,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         );
 
         //FIM 1160696
-        
-       //Core08.1 - 1160696
-        
+        //Core08.1 - 1160696
         StylesCellController scc = new StylesCellController();
 
         boldButton.addClickHandler(event -> {
@@ -778,10 +808,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             }
 
         });
-        Language lg=new Language("Formulas");
-        functionList=lg.getFunctions();
+        Language lg = new Language("Formulas");
+        functionList = lg.getFunctions();
 
-        for(int i=0;i<functionList.length;i++){
+        for (int i = 0; i < functionList.length; i++) {
             funcName.add(functionList[i].funcName());
         }
         applyFuncWizard.addClickHandler(event -> {
@@ -790,7 +820,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         });
         //Core08.1 - 1160696
 
-        
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {
                 String result = "";
@@ -839,8 +868,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         exportToXMLButton.addClickHandler(event -> {
             new ExportXMLView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });
-        
-        
 
         newSpreadsheetButton.addClickHandler((ClickEvent event) -> {
             new addSpreadsheetView();
@@ -1003,42 +1030,49 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         return 0;
 
     }
-    
-    
+
     private void doStyleExt(int t) {
         switch (t) {
             case BOLD:
                 for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setFontWeight(extCells.get(cell).getFontWeight());
-                }   break;
+                }
+                break;
             case ITALIC:
                 for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).getElement().getStyle().setFontStyle(extCells.get(cell).getFontStyle());
-                }   break;
+                }
+                break;
             case ALIGN_LEFT:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.LEFT);
-                }   break;
+                }
+                break;
             case ALIGN_RIGHT:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.RIGHT);
-                } break;
+                }
+                break;
             case ALIGN_CENTER:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextAlign(TextAlign.CENTER);
-                } break;
+                }
+                break;
             case UNDERLINE:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).getElement().getStyle().setTextDecoration(extCells.get(cell).getUnderline());
-                } break;
+                }
+                break;
             case BG_COLOR:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setBackgroundColor(extCells.get(cell).getBackgroundColor());
-                } break;
+                }
+                break;
             case TXT_COLOR:
-                for(Cell cell : extCells.keySet()){
+                for (Cell cell : extCells.keySet()) {
                     customTable.getRow(cell.getAddress().getRow()).getWidget().getColumn(cell.getAddress().getColumn() + 1).setTextColor(extCells.get(cell).getTextColor());
-                } break;
+                }
+                break;
             default:
                 break;
         }
