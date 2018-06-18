@@ -123,10 +123,12 @@ public class ExportCsvView extends Composite {
                 Address addLower = wb.getSpreadsheet(0).findAddress(lowerCell);
                 Address addUpper = wb.getSpreadsheet(0).findAddress(upperCell);
 
-                SpreadsheetDTO sh= wb.getSpreadsheet(0).toDTO();
+                String nSpreadsheet = Window.prompt("Insert spreadsheet number", "");
+                int nSpreadsheetInt = Integer.parseInt(nSpreadsheet);
+                SpreadsheetDTO sh = wb.getSpreadsheet(nSpreadsheetInt).toDTO();
 
                 String[][] range = sh.getCellRange(addUpper.getRow(), addUpper.getColumn(), addLower.getRow(), addLower.getColumn());
-                
+
                 ExportCsvRangeServiceAsync downAsync = GWT.create(ExportCsvRangeService.class);
 
                 downAsync.exportToDownload(range, new AsyncCallback<String[][]>() {

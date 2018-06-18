@@ -133,8 +133,6 @@ governing permissions and limitations under the License. #L% -->
                         <m:MaterialButton ui:field="alignRightBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ALIGN_RIGHT"/>
                         <m:MaterialButton ui:field="alignCenterBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ALIGN_CENTER"/>
                         <m:MaterialButton ui:field="underlineBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_UNDERLINED"/>
-                        <m:MaterialButton ui:field="cFillBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_COLOR_FILL"/>
-                        <m:MaterialButton ui:field="cTextBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_COLOR_TEXT"/>
 
                         <!--1160777-->
                         <m:MaterialRow>

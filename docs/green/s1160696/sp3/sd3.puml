@@ -1,0 +1,16 @@
+@startuml
+actor Actor
+  participant "WorkbookView" as WV
+participant "Color" as C
+  
+
+  Actor -> WV : starts pressing the colapsible bar and pressing the background color button
+  WV -> C : l = Color.getValues()
+  WV -> C : getName()
+  Actor -> WV : selects the color he wants and confirms pressing the confirm button
+  WV -> WV : activecell= getActiveCell()
+  WV -> CellStyleExtension : new()
+  WV -> CellStyleExtension : setBackgroundColor(bgBolor)
+  WV -> WV : doStyleExt(BG_COLOR)
+  WV -> Actor : Background Color style applied to the cell
+@enduml

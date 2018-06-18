@@ -4,11 +4,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.TextAlign;
-import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialRow;
-import gwt.material.design.client.ui.MaterialToast;
-import pt.isep.nsheets.shared.services.ChatDTO;
+import gwt.material.design.client.ui.*;
 import pt.isep.nsheets.shared.services.UserDTO;
 
 public class ChatView extends ViewImpl {
@@ -23,10 +19,7 @@ public class ChatView extends ViewImpl {
         window.setHeight("300px");
         window.setWidth("300px");
         window.setTextAlign(TextAlign.LEFT);
-        MaterialToast.fireToast("aquele boas");
-        MaterialToast.fireToast("FDP do nome ");//+currentChat.getName());
         window.setTitle(currentChat);
-        MaterialToast.fireToast("boas 1");
 
         MaterialWindow.setOverlay(true);
 
@@ -37,9 +30,12 @@ public class ChatView extends ViewImpl {
         MaterialLabel label = new MaterialLabel("Text Area");
         row.add(label);
         MaterialButton sendButton = new MaterialButton("Send");
-        row.add(sendButton);
+        MaterialColumn col = new MaterialColumn();
+        col.add(sendButton);
+        MaterialRow rowButton = new MaterialRow();
+        rowButton.add(col);
+        col.setPaddingLeft(10);
         window.add(row);
-        MaterialToast.fireToast("boas");
         window.open();
     }
 }
