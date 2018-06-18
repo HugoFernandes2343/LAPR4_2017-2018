@@ -68,6 +68,8 @@ public class PrivateChatView extends ViewImpl implements PrivateChatPresenter.My
         invites.addClickHandler(clickEvent ->
         {
             PendingInvitesView pendingInvites = new PendingInvitesView(user, this);
+            invites.setBackgroundColor(Color.BLUE_DARKEN_1);
+
         });
         refresh.addClickHandler(clickEvent -> {
 
