@@ -269,8 +269,8 @@ Following the guidelines for JPA from EAPLI I envision a scenario like the follo
 Notes:  
 - The diagram only depicts the less technical details of the scenario;  
 - For clarity reasons details such as the PersistenceContext or the RepositoryFactory are not depicted in this diagram.   
-- **ChatServices** realizes the GWT RPC mechanism;  
-- **PublishPublicMessageController** is the *use case controller*;  
+- **PrivateChatServices** realizes the GWT RPC mechanism;  
+- ***PrivateChatController** is the *use case controller*;  
 
 ## 4.3. Classes
 
