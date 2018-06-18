@@ -58,16 +58,16 @@ public class False implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "dETERMINATES FALSE";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "False";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "FALSE()";
 	}
 }

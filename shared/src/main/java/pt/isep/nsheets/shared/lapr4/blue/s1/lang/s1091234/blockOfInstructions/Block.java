@@ -52,17 +52,17 @@ public class Block implements Function {
 
     @Override
     public String funcDescription() {
-        return null;
+        return "BLOCK DESC";
     }
 
     @Override
     public String funcName() {
-        return null;
+        return "BLOCK";
     }
 
     @Override
     public String funcSyntax() {
-        return null;
+        return "BLOCK()";
     }
 
 }

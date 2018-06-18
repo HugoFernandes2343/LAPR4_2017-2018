@@ -76,16 +76,16 @@ public class Sum implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "SUM DESC";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Addiction";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "SUM()";
 	}
 }

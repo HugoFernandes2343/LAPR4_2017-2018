@@ -64,16 +64,16 @@ public class Or implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "OR DESC";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Or";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "OR()";
 	}
 }

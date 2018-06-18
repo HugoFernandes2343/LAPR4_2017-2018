@@ -79,16 +79,16 @@ public class Average implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "This calculates the average among a set of numbers";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Average";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "AVG(1+1)";
 	}
 }

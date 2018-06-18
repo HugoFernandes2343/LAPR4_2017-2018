@@ -109,16 +109,16 @@ public class Do implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "Do desc";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Do";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "Do()";
 	}
 }

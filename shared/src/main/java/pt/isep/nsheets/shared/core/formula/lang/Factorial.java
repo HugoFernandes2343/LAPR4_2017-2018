@@ -68,16 +68,16 @@ public class Factorial implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "Calculates the factorial";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Factorial";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "FACTORIAL()";
 	}
 }

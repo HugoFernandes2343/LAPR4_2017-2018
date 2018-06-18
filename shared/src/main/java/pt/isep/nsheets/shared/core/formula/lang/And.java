@@ -64,16 +64,16 @@ public class And implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "This calculates the and";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "And";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "AND()";
 	}
 }

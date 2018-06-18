@@ -23,8 +23,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
@@ -50,6 +52,8 @@ import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.Expo
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
+import pt.isep.nsheets.shared.core.formula.Formula;
+import pt.isep.nsheets.shared.core.formula.Function;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.services.*;
 
@@ -152,6 +156,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     List<MaterialRadioButton> formulasButtons = new ArrayList<>();
     List<MaterialRadioButton> trueColorButtons = new ArrayList<>();
     List<MaterialRadioButton> trueFontButtons = new ArrayList<>();
+    Function functionList[];
     
     @UiField
     MaterialButton confirmBG;
@@ -191,6 +196,26 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     
     @UiField
     MaterialCollapsible colapStyle;
+
+    @UiField
+    MaterialCollapsible colapFuncWizard;
+
+    @UiField
+    MaterialLink funcWizardStyle;
+
+    @UiField
+    MaterialListValueBox funcName;
+    @UiHandler("funcName") void onChangeListBox(ValueChangeEvent<String> e) { funcDescription.setText(functionList[funcName.getSelectedIndex()].funcDescription()); funcSyntax.setText(functionList[funcName.getSelectedIndex()].funcSyntax());}
+
+    @UiField
+    MaterialTextArea funcDescription;
+
+    @UiField
+    MaterialTextBox funcSyntax;
+
+    @UiField
+    MaterialButton applyFuncWizard;
+
 
     @UiField
     MaterialLink conditionalLinkStyle;
@@ -772,9 +797,18 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             }
 
         });
+        Language lg=new Language("Formulas");
+        functionList=lg.getFunctions();
 
+        for(int i=0;i<functionList.length;i++){
+            funcName.add(functionList[i].funcName());
+        }
+        applyFuncWizard.addClickHandler(event -> {
+            this.getFirstBox().setText(funcSyntax.getText());
+            this.colapFuncWizard.closeAll();
+        });
         //Core08.1 - 1160696
-        
+
         
         firstButton.addClickHandler(event -> {
             if (activeCell != null) {

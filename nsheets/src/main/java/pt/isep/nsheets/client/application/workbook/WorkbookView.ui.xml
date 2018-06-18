@@ -147,6 +147,32 @@ governing permissions and limitations under the License. #L% -->
                 </m:MaterialCollapsibleItem>
             </m:MaterialCollapsible>
         </m:MaterialRow>
+        <m:MaterialRow>
+            <m:MaterialCollapsible ui:field = "colapFuncWizard" type="POPOUT">
+
+                <m:MaterialCollapsibleItem>
+                    <m:MaterialCollapsibleHeader backgroundColor="BLACK" waves="DEFAULT">
+                        <m:MaterialLink ui:field="funcWizardStyle" text="Function Wizard" iconType="POLYMER" textColor="WHITE"/>
+                    </m:MaterialCollapsibleHeader>
+                    <m:MaterialCollapsibleBody>
+
+                        <m:MaterialRow>
+                            <m:MaterialListValueBox ui:field="funcName" placeholder="Choose function"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextArea ui:field="funcDescription" readOnly="true" label="Description"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="funcSyntax" placeholder="Function preview" />
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialButton ui:field="applyFuncWizard" text="Apply"/>
+                        </m:MaterialRow>
+
+                    </m:MaterialCollapsibleBody>
+                </m:MaterialCollapsibleItem>
+            </m:MaterialCollapsible>
+        </m:MaterialRow>
         
         <m:MaterialRow>
             <m:MaterialRow>

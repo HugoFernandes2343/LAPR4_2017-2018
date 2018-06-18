@@ -58,16 +58,16 @@ public class True implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "TRUE DESC";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "True";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "TRUE()";
 	}
 }

@@ -70,16 +70,16 @@ public class Count implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "Count desc";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "Count";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "COUNT()";
 	}
 }

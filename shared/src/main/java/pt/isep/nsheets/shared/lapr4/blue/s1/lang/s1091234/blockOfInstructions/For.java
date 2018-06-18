@@ -74,17 +74,17 @@ public class For implements Function {
 
     @Override
     public String funcDescription() {
-        return null;
+        return "FOR DESC";
     }
 
     @Override
     public String funcName() {
-        return null;
+        return "FOR";
     }
 
     @Override
     public String funcSyntax() {
-        return null;
+        return "FOR()";
     }
 
     @Override

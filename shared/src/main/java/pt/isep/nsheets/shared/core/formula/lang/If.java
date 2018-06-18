@@ -70,16 +70,16 @@ public class If implements Function {
 
 	@Override
 	public String funcDescription() {
-		return null;
+		return "iF DESC";
 	}
 
 	@Override
 	public String funcName() {
-		return null;
+		return "If";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return null;
+		return "IF()";
 	}
 }
