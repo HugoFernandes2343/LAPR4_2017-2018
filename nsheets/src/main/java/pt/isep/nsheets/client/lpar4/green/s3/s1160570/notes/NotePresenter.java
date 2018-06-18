@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -11,11 +12,18 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.window.MaterialWindow;
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialCard;
+import gwt.material.design.client.ui.MaterialCardAction;
+import gwt.material.design.client.ui.MaterialCardContent;
+import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialRow;
 import gwt.material.design.client.ui.MaterialTextArea;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
@@ -36,9 +44,7 @@ public class NotePresenter extends Presenter<NotePresenter.MyView, NotePresenter
 
     interface MyView extends View {
 
-        MaterialComboBox getComboBox();
-
-        MaterialColumn getCards();
+        HTMLPanel getHtmlPanel();
 
         void addClickHandler(ClickHandler ch);
     }
@@ -60,31 +66,28 @@ public class NotePresenter extends Presenter<NotePresenter.MyView, NotePresenter
                 AsyncCallback<NoteDTO> callback = new AsyncCallback<NoteDTO>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        MaterialToast.fireToast("Error ");
+                        MaterialToast.fireToast("Error Note");
                     }
 
                     @Override
                     public void onSuccess(NoteDTO result) {
-                        MaterialToast.fireToast("Create Sucess");
-
-                        refreshComboBox();
+                        refresh();
                     }
                 };
-                NoteDTO noteDTO = new NoteDTO(CurrentUser.getCurrentUser(), title.getText());
+                NoteDTO noteDTO = new NoteDTO(CurrentUser.getCurrentUser(), title.getText(), text.getText());
                 noteServiceAsync.addNote(noteDTO, callback);
-
                 window.close();
             });
         });
     }
 
-    public void refreshComboBox() {
+    public void refresh() {
         NoteServiceAsync noteServiceAsync = GWT.create(NoteService.class);
 
         AsyncCallback<ArrayList<NoteDTO>> callback1 = new AsyncCallback<ArrayList<NoteDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                MaterialToast.fireToast("Error+1 ");
+                MaterialToast.fireToast("Error list note");
             }
 
             @Override
@@ -100,7 +103,7 @@ public class NotePresenter extends Presenter<NotePresenter.MyView, NotePresenter
         MaterialWindow window = new MaterialWindow("Task Editor");
         MaterialLabel lblTitle = new MaterialLabel("Title");
         MaterialLabel lblText = new MaterialLabel("Text");
-        saveButton = new MaterialButton("Create");
+        saveButton = new MaterialButton("Create Note");
         title = new MaterialTextBox();
         text = new MaterialTextArea();
         window.add(lblTitle);
@@ -129,20 +132,124 @@ public class NotePresenter extends Presenter<NotePresenter.MyView, NotePresenter
         return window;
     }
 
-    public void setContents(ArrayList<NoteDTO> contents) {
+    private void setContents(ArrayList<NoteDTO> contents) {
+        int colCount = 1;
 
-        getView().getComboBox().clear();
+        MaterialRow row = null;
 
-        for (NoteDTO noteDTO : contents) {
-            getView().getComboBox().addItem(noteDTO.getTitle());
+        getView().getHtmlPanel().clear();
+
+        for (NoteDTO note : contents) {
+            MaterialCard card = createCard(note);
+
+            if (colCount == 1) {
+                row = new MaterialRow();
+                getView().getHtmlPanel().add(row);
+                ++colCount;
+                if (colCount >= 4) {
+                    colCount = 1;
+                }
+            }
+
+            MaterialColumn col = new MaterialColumn();
+            col.setGrid("l4");
+            row.add(col);
+
+            col.add(card);
         }
+    }
+
+    public MaterialCard createCard(NoteDTO note) {
+        MaterialCard card = new MaterialCard();
+        card.setBackgroundColor(Color.BLUE_DARKEN_1);
+
+        MaterialCardContent cardContent = new MaterialCardContent();
+        cardContent.setTextColor(Color.WHITE);
+
+        MaterialCardAction cardAction = new MaterialCardAction();
+
+        MaterialCardTitle cardTitle = new MaterialCardTitle();
+        cardTitle.setText(note.getTitle());
+
+        MaterialLabel date = new MaterialLabel();
+        date.setText("Date:" + note.getDate().toString());
+
+        MaterialLink editLink = new MaterialLink();
+        editLink.setText("Edit");
+        editLink.setIconType(IconType.EDIT);
+        editLink.setIconColor(Color.INDIGO);
+        editLink.setTextColor(Color.WHITE);
+        String oldTitle = note.getTitle();
+        editLink.addClickHandler((event) -> {
+            MaterialWindow window = createWindow();
+            window.open();
+
+            title.setText(note.getTitle());
+            text.setText(note.getText());
+            saveButton.setText("Edit Note");
+            saveButton.addClickHandler((event1) -> {
+
+                NoteServiceAsync noteServiceAsync = GWT.create(NoteService.class);
+
+                AsyncCallback<NoteDTO> callback1 = new AsyncCallback<NoteDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error Edit Note");
+                    }
+
+                    @Override
+                    public void onSuccess(NoteDTO result) {
+                        refresh();
+                    }
+                };
+
+                noteServiceAsync.editNote(title.getText(), text.getText(), oldTitle, callback1);
+                window.close();
+            });
+        });
+
+        MaterialLink deleteLink = new MaterialLink();
+        deleteLink.setText("Delete");
+        deleteLink.setIconType(IconType.DELETE);
+        deleteLink.setIconColor(Color.GREY);
+        deleteLink.setTextColor(Color.WHITE);
+        deleteLink.addClickHandler(event -> {
+            NoteServiceAsync noteServiceAsync = GWT.create(NoteService.class);
+
+            AsyncCallback<NoteDTO> callback = new AsyncCallback<NoteDTO>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MaterialToast.fireToast("Error deleting Task ");
+                }
+
+                @Override
+                public void onSuccess(NoteDTO result) {
+                    MaterialToast.fireToast(note.getTitle() + " deleted");
+                    card.setVisible(false);
+                }
+
+            };
+
+            noteServiceAsync.deleteNote(note, callback);
+        });
+
+        cardContent.add(cardTitle);
+        cardContent.add(date);
+
+        cardAction.add(editLink);
+        cardAction.add(deleteLink);
+
+        card.add(cardContent);
+        card.add(cardAction);
+
+        return card;
 
     }
 
     @Override
     protected void onReveal() {
         super.onReveal();
-        SetPageTitleEvent.fire("Social Chat", "Trade ideas with the chat", "", "", this);
-        refreshComboBox();
+        SetPageTitleEvent.fire("Notes", "User Notes", "", "", this);
+        refresh();
     }
 }

@@ -18,4 +18,8 @@ public interface NoteService extends RemoteService {
     NoteDTO addNote(NoteDTO noteDTO) throws DataException;
 
     Iterable<NoteDTO> getNotes(UserDTO userDTO);
+
+    void deleteNote(NoteDTO noteDTO);
+
+    void editNote(String title, String text, String oldName) throws DataException;
 }

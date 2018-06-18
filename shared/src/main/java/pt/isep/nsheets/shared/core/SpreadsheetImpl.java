@@ -22,7 +22,9 @@ package pt.isep.nsheets.shared.core;
 
 // import java.io.ObjectInputStream;		// not supported in GWT
 // import java.io.ObjectOutputStream;	// not supported in GWT
+
 import gwt.material.design.client.ui.table.MaterialDataTable;
+
 import java.util.*;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -54,7 +56,6 @@ import pt.isep.nsheets.shared.services.SpreadsheetImplDTO;
  *
  * @author Einar Pehrson
  */
-@Entity
 public class SpreadsheetImpl implements Spreadsheet {
 
     @Id
@@ -125,16 +126,16 @@ public class SpreadsheetImpl implements Spreadsheet {
     private transient Map<String, SpreadsheetExtension> extensions
             = new HashMap<String, SpreadsheetExtension>();
 
-    
     public SpreadsheetImpl() {
     }
 
     /**
      * to DTO
+     *
      * @param id
      * @param workbookId
      * @param title
-     * @param cells 
+     * @param cells
      */
     private SpreadsheetImpl(Long id, String title, Map<Address, Cell> cells) {
         this.id = id;
@@ -162,12 +163,12 @@ public class SpreadsheetImpl implements Spreadsheet {
             rows = maxRow + 1;
         }
     }
-    
+
     /**
      * Creates a new spreadsheet.
      *
      * @param workbook the workbook to which the spreadsheet belongs
-     * @param title the title of the spreadsheet
+     * @param title    the title of the spreadsheet
      */
     public SpreadsheetImpl(Workbook workbook, String title) {
         this.workbook = workbook;
@@ -179,8 +180,8 @@ public class SpreadsheetImpl implements Spreadsheet {
      * the given content matrix.
      *
      * @param workbook the workbook to which the spreadsheet belongs
-     * @param title the title of the spreadsheet
-     * @param content the contents of the cells in the spreadsheet
+     * @param title    the title of the spreadsheet
+     * @param content  the contents of the cells in the spreadsheet
      */
     public SpreadsheetImpl(Workbook workbook, String title, String[][] content) {
         this(workbook, title);
@@ -201,8 +202,9 @@ public class SpreadsheetImpl implements Spreadsheet {
             }
         }
     }
+
     /*
- * LOCATION
+     * LOCATION
      */
     public Workbook getWorkbook() {
         return workbook;
@@ -218,7 +220,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     }
 
     /*
- * DIMENSIONS
+     * DIMENSIONS
      */
     public int getColumnCount() {
         return columns;
@@ -229,7 +231,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     }
 
     /*
- * CELLS
+     * CELLS
      */
     public Cell getCell(Address address) {
         // Updates spreadsheet dimensions
@@ -387,7 +389,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     }
 
     /*
- * EVENT HANDLING
+     * EVENT HANDLING
      */
     public void addCellListener(CellListener listener) {
         cellListeners.add(listener);
@@ -467,7 +469,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     }
 
     /*
- * EXTENSIONS
+     * EXTENSIONS
      */
     public Spreadsheet getExtension(String name) {
         // Looks for an existing spreadsheet extension
@@ -484,9 +486,9 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
         return extension;
     }
-    
+
     /*
- * GENERAL
+     * GENERAL
      */
     /**
      * Customizes deserialization by catching exceptions when extensions are not
@@ -520,13 +522,14 @@ public class SpreadsheetImpl implements Spreadsheet {
 //			}
 //		}
 //	}
+
     /**
      * Customizes serialization, by writing extensions separately.
      *
      * @param stream the object output stream to which the object is to be
-     * written
+     *               written
      * @throws IOException If any of the usual Input/Output related exceptions
-     * occur
+     *                     occur
      */
     // not supported in GWT
 //	private void writeObject(ObjectOutputStream stream) throws IOException {
@@ -537,9 +540,6 @@ public class SpreadsheetImpl implements Spreadsheet {
 //		for (SpreadsheetExtension extension : extensions.values())
 //			stream.writeObject(extension);
 //	}
-    
-    
-    
     public static Spreadsheet fromDTO(SpreadsheetImplDTO dto) {
         Map<Address, Cell> ssCells = new LinkedHashMap<>();
 
@@ -552,7 +552,6 @@ public class SpreadsheetImpl implements Spreadsheet {
         return new SpreadsheetImpl(dto.id, dto.title, ssCells);
     }
 
-    
     @Override
     public SpreadsheetImplDTO toDTO1() {
         Map<AddressDTO, CellImplDTO> cellDTOs = new LinkedHashMap<>();
