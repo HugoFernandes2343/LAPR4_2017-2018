@@ -113,19 +113,21 @@ The main idea for the "workflow" of this feature increment.
 **Use Cases**
 
 
-![Use case Model](UseCaseDiagram.png)
+![Use case Model](UseCaseDiagram.jpg)
 
 **Domain Model (for this feature increment)**
 
-![Domain Model](Domain Class.png)
+![Domain Model](Domain Class.jpg)
 
 - **Domain Model**. The entities represented in this domain model will be represented by the classes in server side and when transitioning to the client side will be represented by the respective DTO classes. The reverse process also occurs. In therms of already existing entities this use case requires the use of the **User** entity developed by Paulo Magalhães (s1160570)  
 
 **System Sequence Diagrams**
 
-![Creat new chat UC](UC_CreateChat_Analysis.png)
-![Pending Invites UC](UC_PendingInvites_Analysis.png)
-![New message UC](UC_NewMessage_Analysis.png)
+![Creat new chat UC](UC_CreateChat_Analysis.jpg)
+
+![Pending Invites UC](UC_PendingInvites_Analysis.jpg)
+
+![New message UC](UC_NewMessage_Analysis.jpg)
 
 # 4. Design
 
@@ -258,9 +260,11 @@ Controller **Controller**
 
 Following the guidelines for JPA from EAPLI I envision a scenario like the following for realizing the use case for this feature increment.
 
-![SD US_NewChat](CreatChat_Design.png)
-![SD US_PendingInvites](AceptChatSD_Design.png)
-![SD US_NewMessage](NewMessage_Design.png)
+![SD US_NewChat](CreatChat_Design.jpg)
+
+![SD US_PendingInvites](AceptChatSD_Design.jpg)
+
+![SD US_NewMessage](NewMessage_Design.jpg)
 
 Notes:  
 - The diagram only depicts the less technical details of the scenario;  
@@ -357,5 +361,5 @@ Commits:
 
 [IPC08.2: Use Case are implemented](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/3a02968)
 
-[IPC08.2: Upload the Use Case Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/)
+[IPC08.2: Upload the Use Case Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8780c75)
 
