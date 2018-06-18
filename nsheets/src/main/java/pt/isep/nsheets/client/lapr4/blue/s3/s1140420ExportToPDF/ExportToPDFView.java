@@ -46,7 +46,7 @@ public class ExportToPDFView extends Composite {
 
             WorkbookDTO dto = workbook.toDTO();
 
-            DownloadToPDFServiceAsync downAsync = GWT.create(DownloadToPDFService.class);
+            ExportPDFWorkbookServiceAsync downAsync = GWT.create(ExportPDFWorkbookService.class);
 
             downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>() {
                 @Override
@@ -56,7 +56,7 @@ public class ExportToPDFView extends Composite {
 
                 @Override
                 public void onSuccess(WorkbookDTO result) {
-                    String url = GWT.getModuleBaseURL() + "downloadToPDFService?filename=" + textBox1.getText() + ".pdf";
+                    String url = GWT.getModuleBaseURL() + "exportPDFWorkbookService?filename=" + textBox1.getText() + ".pdf";
                     Window.open(url, "Download PDF file", "status=0,toolbar=0,menubar=0,location=0");
                 }
             });

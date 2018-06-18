@@ -5,7 +5,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.layout.element.Table;
-import pt.isep.nsheets.shared.services.DownloadToPDFService;
+import pt.isep.nsheets.shared.services.ExportPDFWorkbookService;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
 import pt.isep.nsheets.shared.services.WorkbookDTO;
 import javax.servlet.ServletOutputStream;
@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DownloadPDFImplRod extends RemoteServiceServlet implements DownloadToPDFService {
+public class ExportPDFWorkbookImpl extends RemoteServiceServlet implements ExportPDFWorkbookService {
     private WorkbookDTO toExport;
 
     /*@Override

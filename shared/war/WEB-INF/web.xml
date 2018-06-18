@@ -34,12 +34,12 @@
         <url-pattern>/shared/downloadToCLSService</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>pt.isep.nsheets.shared DownloadToPDFService</servlet-name>
-        <servlet-class>pt.isep.nsheets.server.services.DownloadPDFImplRod</servlet-class>
+        <servlet-name>pt.isep.nsheets.shared ExportPDFWorkbookService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFWorkbookImpl</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>pt.isep.nsheets.shared DownloadToPDFService</servlet-name>
-        <url-pattern>/shared/downloadToPDFService</url-pattern>
+        <servlet-name>pt.isep.nsheets.shared ExportPDFWorkbookService</servlet-name>
+        <url-pattern>/shared/exportPDFWorkbookService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>pt.isep.nsheets.shared UsersService</servlet-name>
