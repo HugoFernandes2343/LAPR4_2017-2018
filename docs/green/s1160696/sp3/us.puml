@@ -1,0 +1,15 @@
+@startuml
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+
+User -> (US4: Format Cell Text Color)
+User -> (US3: Format Cell Background Color)
+User -> (US2: Format Cell Text Alignment)
+User -> (US1.3: Format Cell Text Style.TextDecoration.Underline)
+User -> (US1.2: Format Cell Text Style.FontStyle)
+User -> (US1.1: Format Cell Text Style.FontWeight)
+@enduml

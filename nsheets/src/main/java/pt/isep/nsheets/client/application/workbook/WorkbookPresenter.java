@@ -34,6 +34,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import gwt.material.design.client.ui.MaterialIcon;
+import gwt.material.design.client.ui.MaterialTextArea;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, WorkbookPresenter.MyProxy> {
@@ -43,6 +44,14 @@ public class WorkbookPresenter extends Presenter<WorkbookPresenter.MyView, Workb
         public MaterialTextBox getFirstBox();
 
         public MaterialIcon getFirstButton();
+
+        public MaterialIcon getBtnSearchReplace();
+
+        public MaterialTextBox getTextBoxSearchFor();
+
+        public MaterialTextBox getTextBoxReplacementText();
+
+        public MaterialTextArea getTextAreaResultsSearchAndReplace();
 
     }
 

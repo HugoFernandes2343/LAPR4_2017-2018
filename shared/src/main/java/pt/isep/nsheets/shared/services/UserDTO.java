@@ -33,6 +33,15 @@ public class UserDTO implements Serializable {
         this.chatList = new ArrayList<>();
     }
 
+    public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname, UserTypeDTO usertype) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserTypeDTO.ADMIN;
+    }
+
     public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname, List<ChatDTO> chatListDTO) {
         this.email = email;
         this.password = password;
@@ -58,6 +67,11 @@ public class UserDTO implements Serializable {
         return this.email;
     }
 
+    @Override
+    public String toString() {
+        return nickname.getNickName();
+    }
+
     public PasswordDTO getPassword() {
         return this.password;
     }
@@ -72,6 +86,27 @@ public class UserDTO implements Serializable {
 
     public boolean isActivate() {
         return activate;
+    }
+
+    public void setName(String fistname, String lastname) {
+        this.name.setFirstName(fistname);
+        this.name.setLastName(lastname);
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname.setNickName(nickname);
+    }
+
+    public void setUserType(UserTypeDTO userType) {
+        this.userType = userType;
+    }
+    
+    public void deactivateUser(){
+        this.activate = false;
+    }
+    
+    public void activateUser(){
+        this.activate=true;
     }
 
     public List<ChatDTO> getChatList() {

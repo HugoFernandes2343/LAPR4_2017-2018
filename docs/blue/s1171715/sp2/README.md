@@ -3,8 +3,7 @@
 
 # 1. General Notes
 
-At the start of Sprint 2, I had unexpected personal issues, which made me even more difficult to perform my best during this week. Since my own laptop had to be
-taken to service, and plus the fact that I had to leave the city for days because of personal reasons, it took me serious amount of time to solve this temporary and unfortunate situation. Again, just like in SP1, I could always rely on my team, which was huge easement for me.
+At the start of Sprint 2, I had unexpected personal issues, which made me even more difficult to perform my best during this week. Since my own laptop had to be taken to service, and plus the fact that I had to leave the city for days because of personal reasons, it took me serious amount of time to solve this temporary and unfortunate situation. Again, just like in SP1, I could always rely on my team, which was huge easement for me.
 
 
 # 2. Requirements
@@ -24,13 +23,21 @@ In order to draw up a proper solution for this task, I had to study and understa
 
 ## 3.1 Analysis diagrams
 
+Use case
+
+![uc](uc.jpg)
+
+Domain model
+
+![dm](dm.jpg)
+
 The most important classes are the following:
 
 WorkbookView
 FilterCellRangeView
 Spreadsheet
 
-The user can click on the button, which indicates a popup window to show up, where a new View is created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell, as it was explained in chapter 3), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
+The user can click on the button, which indicates a popup window to show up, where a new View is created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
 
 System sequence diagram:
 
@@ -39,7 +46,9 @@ System sequence diagram:
 In addition, because of the lack of time, I only managed to solve the following:
 
 It is possible for the user to select a range of cells, e.g: B2:C4 in a table which has columns from A-F, and cells from 1-6.
-In this case, in B2, B will be the indicator column, and the range of rows "2-4" will be subjected to either being set to invisible (if the formula evaluates to "false") or staz visible otherwise
+
+In this case, in B2, B will be the indicator column, and the range of rows "2-4" will be subjected to either being set to invisible (if the formula evaluates to "false") or stay visible otherwise.
+
 This means, that all the values in column B (up to the row range limit, in this case row 4) will be checked according to the previously given formula, and according to that, the row (C4) is going to stay visible, or change to invisible.
 		
 Of course, if I would have more time, I would try to solve the task like how it would be expected from the side of the user/customer.
@@ -64,19 +73,56 @@ I made mockups to show how this task should work properly, in the best case.
 
 ## 4.1 Tests
 
+
+Tests were created, however, GWT does not allow us to instantiate core classes like "SpreadSheet", "Cell", because they use GWT constructors, that are not available in the test packages. As such, these tests will never be able to run, but I believe, that without this technical issue, they would pass (as most of my colleagues are reporting this issue as well)
+
 In terms of tests, I have to make sure that the correct cell address is found for a given input:
 
-@Test
-public void findAddress() {
 
-}
+    /**
+     * Test of findAddress method, of class SpreadsheetImpl.
+     */
+    @Test
+    public void testFindAddress() {
+        System.out.println("findAddress");
 
-Or that the correct range is returned, when supplying two cell addresses.
+        String contents[][] = { // first spreadsheet
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
 
-@Test
-public void getCellRange() {
-		
-}
+        String reference = "A1";
+        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "test", contents);
+        Address expResult = new Address(0,0);
+        Address result = instance.findAddress(reference);
+        assertEquals(expResult, result);
+    }
+
+    
+    /**
+     * Test of getColumn method, of class SpreadsheetImpl.
+     */
+    @Test
+    public void testGetColumn() {
+        System.out.println("getColumn");
+        String contents[][] = { // first spreadsheet
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
+
+        SpreadsheetImpl sheet = new SpreadsheetImpl(new Workbook(), "test",contents);
+
+	String reference = “D1”;
+	Address address = sheet.findAddress(reference);
+
+    //expected to find the address of D1, the column itself
+
+        int expResult = 3;
+
+
+    //since getColumn() in SD belongs to address class
+        int result = address.getColumn();
+
+        assertArrayEquals(expResult, result);
+    }
 
 
 # 4.2 Requirements Realization
@@ -85,7 +131,7 @@ Sequence diagram:
 
 ![sd](sd.png)
 
-## 4.2 Classes
+## 4.3 Classes
 
 ##New classes and packages
 
@@ -103,16 +149,16 @@ It is now extended with filterCellRange button and the belonging codeblock.
  
 The biggest self-critique I have in regards to my design is the fact that I have not been able to apply the Model-View-Presenter pattern: instead, my entire logic is contained in a View, when in fact I should have delegated most of it to a Presenter. However, I really wanted to get something done, so I emulated what I saw most of my colleagues doing, so that I could ask them for minimal advice if I ran into a roadblock.
 
-FilterCellRange.java class
+#FilterCellRange.java class
 
-public FilterCellRangeView(Spreadsheet spreadsheet) {
+	public FilterCellRangeView(Spreadsheet spreadsheet) {
 	 initWidget(uiBinder.createAndBindUi(this));
 	        filterCellRangeWindow.open();
 
 It works once the user filled in the fields. It collects all the parameters that were given.
-		//azutan mukodik hogy a user kitoltotte a dolgokat, begyujti az osszes parametert amit a user kitoltott
+	
 			
-filterCellsButton.addClickHandler(event -> {
+	filterCellsButton.addClickHandler(event -> {
         		String formula = formulaBox.getValue();
 	            String upperCell = upperCellInfo.getText();
 	            String lowerCell = lowerCellInfo.getText();

@@ -52,17 +52,19 @@ public class Block implements Function {
 
     @Override
     public String funcDescription() {
-        return "BLOCK DESC";
+        return "Executes a block or sequences of instructions." +
+                " A block must be delimited by curly braces and its instructions must be separated by \";\". " +
+                " The instructions of a block are executed sequentially and the block \"result\" is the result of the last statement of the block.";
     }
 
     @Override
     public String funcName() {
-        return "BLOCK";
+        return "Blocks of instructions";
     }
 
     @Override
     public String funcSyntax() {
-        return "BLOCK()";
+        return "={1+2;sum(A1:A3);B3+4}";
     }
 
 }
