@@ -318,7 +318,7 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
     @UiField
     MaterialTextBox lastCell;
-    
+
     //1160696
     HashMap<Cell, StylesCellExt> extCells = new HashMap<>();
     private static final int ITALIC = 1;
@@ -667,6 +667,11 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
             } else {
                 MaterialToast.fireToast("Did you forget to select a cell?");
             }
+        });
+
+        applyToSetOfCells.addClickHandler(event -> {
+            MaterialToast.fireToast("Formatting from Cell " + firstCell.getText() + " to " + lastCell.getText());
+            /*Add a verification if needed*/
         });
 
         MaterialCollection bgColors = new MaterialCollection();
