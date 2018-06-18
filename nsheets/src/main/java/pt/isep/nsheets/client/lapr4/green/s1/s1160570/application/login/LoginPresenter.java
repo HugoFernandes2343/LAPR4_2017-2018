@@ -19,7 +19,6 @@ import gwt.material.design.client.ui.MaterialToast;
 import pt.isep.nsheets.client.application.ApplicationPresenter;
 import pt.isep.nsheets.client.application.CurrentMenu;
 import pt.isep.nsheets.client.application.CurrentUser;
-import pt.isep.nsheets.client.application.menu.MenuModule;
 import pt.isep.nsheets.client.event.SetPageTitleEvent;
 import pt.isep.nsheets.client.place.NameTokens;
 import pt.isep.nsheets.shared.services.UserDTO;
@@ -28,7 +27,7 @@ import pt.isep.nsheets.shared.services.UsersServiceAsync;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
-    CurrentUser user;
+//    CurrentUser user;
 
     interface MyView extends View {
 
@@ -49,7 +48,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, CurrentUser currentUser) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-        this.user = currentUser;
+//        this.user = currentUser;
         
         
 
@@ -67,15 +66,17 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
                 @Override
                 public void onSuccess(UserDTO result) {  
-                    user.setCurrentUser(result);
-                    user.setIsLoggedIn(true);
+//                    user.setCurrentUser(result);
+//                    user.setIsLoggedIn(true);
+                    CurrentUser.setCurrentUser(result);
+                    CurrentUser.setIsLoggedIn(true);
                     MaterialToast.fireToast("Sucess");
                      
                     PlaceRequest placeRequest = new PlaceRequest.Builder()
                             .nameToken(NameTokens.home)
                             .build();
                     placeManager.revealPlace(placeRequest);
-                                     
+                   
                     CurrentMenu.MenuReload();
               
                 }
@@ -85,10 +86,10 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         });
 
     }
-
-    public CurrentUser getUser() {
-        return user;
-    }
+//
+//    public CurrentUser getUser() {
+//        return user;
+//    }
 
     @Override
     protected void onReveal() {

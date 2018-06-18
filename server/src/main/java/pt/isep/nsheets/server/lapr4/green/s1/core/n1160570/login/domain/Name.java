@@ -1,4 +1,3 @@
-
 package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.ValueObject;
@@ -18,11 +17,10 @@ public class Name implements ValueObject, Serializable {
     private String firstName;
     private String lastName;
 
-    public Name(String firstName,String lastName) {
+    public Name(String firstName, String lastName) {
         if (Strings.isNullOrEmpty(firstName) || Strings.isNullOrEmpty(lastName)) {
             throw new IllegalArgumentException("First name and last name should neither be null nor empty");
         }
-
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,4 +68,3 @@ public class Name implements ValueObject, Serializable {
         return new Name(dto.getFirstName(), dto.getLastName());
     }
 }
-

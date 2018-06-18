@@ -9,6 +9,7 @@ import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.*;
 import pt.isep.nsheets.shared.services.UserDTO;
+import pt.isep.nsheets.shared.services.UserTypeDTO;
 
 /**
  *
@@ -38,6 +39,19 @@ public class User implements AggregateRoot<Email>, Serializable {
         this.nickname = nickname;
         this.activate = true;
         this.userType = UserType.USER;
+
+    }
+    
+    public User(Email email, Password password, Nickname nickname, Name name, String admin) throws IllegalArgumentException {
+        if (email == null || password == null || nickname == null || name == null) {
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
+        }
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserType.ADMIN;
 
     }
 
@@ -101,7 +115,11 @@ public class User implements AggregateRoot<Email>, Serializable {
     public UserDTO toDTO() {
         return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
     }
-
+    
+    public UserDTO toDTOAdmin(UserTypeDTO usertype){
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO(), usertype);
+    }
+    
     public UserType getUserType() {
         return userType;
     }
@@ -116,6 +134,18 @@ public class User implements AggregateRoot<Email>, Serializable {
 
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
         return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
+    }
+    
+    public static User fromDTOAdmin(UserDTO dto, String admin) throws IllegalArgumentException {
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()), admin);
+    }
+    
+    public void deactivate(){
+        this.activate=false;
+    }
+    
+    public void activate(){
+        this.activate=true;
     }
 
 }

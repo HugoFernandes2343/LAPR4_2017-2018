@@ -30,6 +30,15 @@ public class UserDTO implements Serializable {
         this.userType = UserTypeDTO.USER;
     }
 
+    public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname, UserTypeDTO usertype) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserTypeDTO.ADMIN;
+    }
+
     // It is mandatory to have a default constructor with no arguments to be serializable!
     public UserDTO() {
         this.activate = true;
@@ -42,6 +51,11 @@ public class UserDTO implements Serializable {
 
     public EmailDTO getEmail() {
         return this.email;
+    }
+
+    @Override
+    public String toString() {
+        return nickname.getNickName();
     }
 
     public PasswordDTO getPassword() {
@@ -58,6 +72,27 @@ public class UserDTO implements Serializable {
 
     public boolean isActivate() {
         return activate;
+    }
+
+    public void setName(String fistname, String lastname) {
+        this.name.setFirstName(fistname);
+        this.name.setLastName(lastname);
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname.setNickName(nickname);
+    }
+
+    public void setUserType(UserTypeDTO userType) {
+        this.userType = userType;
+    }
+    
+    public void deactivateUser(){
+        this.activate = false;
+    }
+    
+    public void activateUser(){
+        this.activate=true;
     }
 
 }
