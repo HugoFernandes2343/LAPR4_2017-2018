@@ -39,7 +39,7 @@ public class NewChatView extends Composite {
     interface NewChatViewUiBinder extends UiBinder<Widget, NewChatView> {
     }
 
-    public NewChatView(UserDTO currentUser) {
+    public NewChatView(UserDTO currentUser, PrivateChatView mainPage) {
 
         List<String> emails = new ArrayList<>();
         initWidget(uiBinder.createAndBindUi(this));
@@ -61,9 +61,12 @@ public class NewChatView extends Composite {
         p2.add(addMember);
         window.add(p2);
         MaterialPanel p3 = new MaterialPanel();
-        p3.add(this.createButton);
-        p3.add(this.cancelButton);
-        window.add(p3);
+        MaterialRow buttonRow = new MaterialRow();
+        cancelButton.setBorderLeft("10px");
+        buttonRow.add(createButton);
+        buttonRow.add(cancelButton);
+        buttonRow.setPaddingTop(20);
+        window.add(buttonRow);
         window.open();
 
         cancelButton.addClickHandler(clickEvent -> {
@@ -77,7 +80,6 @@ public class NewChatView extends Composite {
                 MaterialToast.fireToast("Email added");
                 emails.add(email.getText());
                 email.clear();
-                MaterialToast.fireToast(emails.get(0));
             }
         }));
 
@@ -118,7 +120,7 @@ public class NewChatView extends Composite {
 
                 @Override
                 public void onSuccess(UserDTO user) {
-                    MaterialToast.fireToast("User: "+user.getName().getFirstName(), "rounded");
+                    MaterialToast.fireToast("User: " + user.getName().getFirstName(), "rounded");
                     user.addChat(newChat1);
 
                     AsyncCallback<UserDTO> callback3 = new AsyncCallback<UserDTO>() {
@@ -129,7 +131,6 @@ public class NewChatView extends Composite {
 
                         @Override
                         public void onSuccess(UserDTO user1) {
-                            MaterialToast.fireToast("Enviado para amigo", "rounded");
 
                         }
                     };
@@ -141,13 +142,9 @@ public class NewChatView extends Composite {
             for (String email : emails) {
                 userSvc.getUserByEmail(email, callback1);
             }
-            //guardar o user
 
-
-            //criar uma tabela com pending invites
-            //criar chat e a medida que os users vão aceitando os invites seram inseridos no chat
-
-
+            mainPage.setContents(currentUser.getChatList());
+            window.close();
         });
     }
 }

@@ -1,0 +1,34 @@
+@startuml
+class WorkbookView {
+	+Cell getActiveCell()
+	+void doStyleExt(t)
+}
+class Color {
+	+List<Color> getValues()
+	+String getName()
+}
+
+class CellStyleExtension {
+
+	+new()
+	+void setfWeight(FontWeight)
+	+void setfStyle(FontStyle)
+	+void setUnderline(ud)
+	+void setTextAlign(TextAlign)
+        +void setBackgroundColor(Color)
+	+void setTextColor(Color)
+}
+
+
+WorkbookView --> WorkbookView : getActiveCell()
+WorkbookView --> CellStyleExtension: new()
+WorkbookView --> CellStyleExtension: setBgColor(Color)
+WorkbookView --> CellStyleExtension: setTxtColor(Color)
+WorkbookView --> CellStyleExtension: setfWeight(FontWeight)
+WorkbookView --> CellStyleExtension: setfStyle(FontStyle)
+WorkbookView --> CellStyleExtension: setUnderline(ud)
+WorkbookView --> CellStyleExtension: setTxtAlign(TextAlign)
+WorkbookView --> WorkbookView : doStyleExt(t)
+WorkbookView --> Color : getValues()
+WorkbookView --> Color : getName()
+@enduml

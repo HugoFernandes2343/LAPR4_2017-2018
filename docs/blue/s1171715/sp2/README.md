@@ -3,8 +3,7 @@
 
 # 1. General Notes
 
-At the start of Sprint 2, I had unexpected personal issues, which made me even more difficult to perform my best during this week. Since my own laptop had to be
-taken to service, and plus the fact that I had to leave the city for days because of personal reasons, it took me serious amount of time to solve this temporary and unfortunate situation. Again, just like in SP1, I could always rely on my team, which was huge easement for me.
+At the start of Sprint 2, I had unexpected personal issues, which made me even more difficult to perform my best during this week. Since my own laptop had to be taken to service, and plus the fact that I had to leave the city for days because of personal reasons, it took me serious amount of time to solve this temporary and unfortunate situation. Again, just like in SP1, I could always rely on my team, which was huge easement for me.
 
 
 # 2. Requirements
@@ -23,6 +22,14 @@ US - As a user, I would like to be able to select a range of cells in the table,
 In order to draw up a proper solution for this task, I had to study and understand the task itself in depth, moreover, I had to get familiar with the working process of a boolean variable. As I mentioned before, I havent had any previous studies with GWT and Java either, and even though I tried my best to be better in this fields, I still have a long way to go, mainly because of the lack of time, and the problems I had to face and solve in the past days. 
 
 ## 3.1 Analysis diagrams
+
+Use case
+
+![uc](uc.jpg)
+
+Domain model
+
+![dm](dm.jpg)
 
 The most important classes are the following:
 
@@ -58,6 +65,8 @@ I made mockups to show how this task should work properly, in the best case.
 
     
 ![5_Hidden](5_Hidden.png)
+
+
 
 
 # 4. Design
@@ -103,16 +112,16 @@ It is now extended with filterCellRange button and the belonging codeblock.
  
 The biggest self-critique I have in regards to my design is the fact that I have not been able to apply the Model-View-Presenter pattern: instead, my entire logic is contained in a View, when in fact I should have delegated most of it to a Presenter. However, I really wanted to get something done, so I emulated what I saw most of my colleagues doing, so that I could ask them for minimal advice if I ran into a roadblock.
 
-FilterCellRange.java class
+#FilterCellRange.java class
 
-public FilterCellRangeView(Spreadsheet spreadsheet) {
+	public FilterCellRangeView(Spreadsheet spreadsheet) {
 	 initWidget(uiBinder.createAndBindUi(this));
 	        filterCellRangeWindow.open();
 
 It works once the user filled in the fields. It collects all the parameters that were given.
-		//azutan mukodik hogy a user kitoltotte a dolgokat, begyujti az osszes parametert amit a user kitoltott
+	
 			
-filterCellsButton.addClickHandler(event -> {
+	filterCellsButton.addClickHandler(event -> {
         		String formula = formulaBox.getValue();
 	            String upperCell = upperCellInfo.getText();
 	            String lowerCell = lowerCellInfo.getText();
