@@ -90,13 +90,14 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        String reference = "10";
-        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
+        String reference = "A1";
+        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "test", contents);
         Address expResult = new Address(0,0);
         Address result = instance.findAddress(reference);
         assertEquals(expResult, result);
     }
 
+    
     /**
      * Test of getColumn method, of class SpreadsheetImpl.
      */
@@ -107,11 +108,19 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        
-        int index = 0;
-        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
-        Cell[] expResult = new Cell[index];
-        Cell[] result = instance.getColumn(index);
+        SpreadsheetImpl sheet = new SpreadsheetImpl(new Workbook(), "test",contents);
+
+	String reference = “D1”;
+	Address address = sheet.findAddress(reference);
+
+    //expected to find the address of D1, the column itself
+
+        int expResult = 3;
+
+
+    //since getColumn() in SD belongs to address class
+        int result = address.getColumn();
+
         assertArrayEquals(expResult, result);
     }
 
