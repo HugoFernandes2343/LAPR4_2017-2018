@@ -37,7 +37,7 @@ WorkbookView
 FilterCellRangeView
 Spreadsheet
 
-The user can click on the button, which indicates a popup window to show up, where a new View is created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell, as it was explained in chapter 3), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
+The user can click on the button, which indicates a popup window to show up, where a new View is created. On the sheet, the user can select the range of cells in the table (which are stored in a matrix with the start and end cell), and after given a formula, the chosen row will stay visible or may change to invisible, depending on the boolean formula. 
 
 System sequence diagram:
 
@@ -46,7 +46,9 @@ System sequence diagram:
 In addition, because of the lack of time, I only managed to solve the following:
 
 It is possible for the user to select a range of cells, e.g: B2:C4 in a table which has columns from A-F, and cells from 1-6.
-In this case, in B2, B will be the indicator column, and the range of rows "2-4" will be subjected to either being set to invisible (if the formula evaluates to "false") or staz visible otherwise
+
+In this case, in B2, B will be the indicator column, and the range of rows "2-4" will be subjected to either being set to invisible (if the formula evaluates to "false") or stay visible otherwise.
+
 This means, that all the values in column B (up to the row range limit, in this case row 4) will be checked according to the previously given formula, and according to that, the row (C4) is going to stay visible, or change to invisible.
 		
 Of course, if I would have more time, I would try to solve the task like how it would be expected from the side of the user/customer.
@@ -67,8 +69,6 @@ I made mockups to show how this task should work properly, in the best case.
 ![5_Hidden](5_Hidden.png)
 
 
-
-
 # 4. Design
 
 ## 4.1 Tests
@@ -79,7 +79,7 @@ Tests were created, however, GWT does not allow us to instantiate core classes l
 In terms of tests, I have to make sure that the correct cell address is found for a given input:
 
 
-        /**
+    /**
      * Test of findAddress method, of class SpreadsheetImpl.
      */
     @Test
@@ -90,7 +90,7 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        String reference = “A1”;
+        String reference = "10";
         SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
         Address expResult = new Address(0,0);
         Address result = instance.findAddress(reference);
@@ -107,16 +107,11 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        SpreadsheetImpl sheet = new SpreadsheetImpl(new Workbook(), "test",contents);
-
-	String reference = “D1”;
-	Address address = sheet.findAddress(reference);
-
-
-        int expResult = 3;
-
-        int result = address.getColumn();
-
+        
+        int index = 0;
+        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
+        Cell[] expResult = new Cell[index];
+        Cell[] result = instance.getColumn(index);
         assertArrayEquals(expResult, result);
     }
 
