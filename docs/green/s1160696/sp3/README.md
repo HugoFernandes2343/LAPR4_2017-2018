@@ -86,7 +86,7 @@ For UI Implementation we used the GWT Material Documentation
 
 # 5. Implementation
 
-I first start implement in 13/06/2018 and I was trying to understand how I could do the best solution to this problem.
+I first start implement in 13/06/2018 and I was trying to understand how I could do the best solution to this problem. First I I put the Bold, italic and underline styles working, and then it was the harder part but I could implement the background and text colors to the content in the cell and the cell itself. Finally I tested the UI and it worked pretty well.
 
 
 # 6. Integration/Demonstration
@@ -118,3 +118,17 @@ If the user forgets to select the cell he pretends to edit, a message will appea
 Is important to say that all students helped each other in order to provide a good work flow and to make a good final project.
 
 # 8. Work Log
+
+[[Core08.1][ref #22] Start implementation, added classes for styles.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/dc91ae4e9563)
+
+[[Core08.1][ref #22] Bold style already working.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8a06e513852c)
+
+[[Core08.1][ref #22] Underline and Text Align already working. Needs some improvement.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a2f862a95df9)
+
+[[Core08.1][ref #22] Background colors and text colors working. Cells Styles done. Just need to improve the messages of exceptions.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1a326d3a9e2a)
+
+[[Core08.1][ref #22] Trying to persist the styles in database. Messages of exceptions already created in Styles Extension.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/4fbefb5be302)
+
+[[Core08.1][ref #22] Documentation almost finished.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a2b09b850718)
+
+[[Core08.1][ref #22] Minor changes. Removed unused buttons.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/55dddb1abea8)
