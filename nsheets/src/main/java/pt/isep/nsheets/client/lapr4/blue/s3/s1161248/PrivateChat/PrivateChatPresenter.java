@@ -26,8 +26,6 @@ public class PrivateChatPresenter extends Presenter<PrivateChatPresenter.MyView,
 
     interface MyView extends View {
         void setContents(List<ChatDTO> contents);
-
-        void clearView();
     }
 
     @NameToken(NameTokens.privateChat)

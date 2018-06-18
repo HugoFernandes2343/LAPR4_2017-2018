@@ -76,16 +76,16 @@ public class Sum implements Function {
 
 	@Override
 	public String funcDescription() {
-		return "SUM DESC";
+		return "Sum between two or more arguments";
 	}
 
 	@Override
 	public String funcName() {
-		return "Addiction";
+		return "Sum";
 	}
 
 	@Override
 	public String funcSyntax() {
-		return "SUM()";
+		return "=sum(A1+B2+B3)";
 	}
 }

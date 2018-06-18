@@ -25,51 +25,12 @@ public class ExportXMLCellRangeImpl extends RemoteServiceServlet implements Expo
             //1st, generate a local XML file
             generateXMLFromCellRange(toExport, fileName);
             //2nd, send it through
-            sendXMLfile(response, fileName);
+            DownloadUtility.sendFileAsByteStream(response, fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Sends a XML file through a HttpServletResponse as a byte array
-     *
-     * @param response
-     * @param fileName
-     * @throws IOException
-     */
-    private void sendXMLfile(HttpServletResponse response, String fileName) throws IOException {
-        int BUFFER = 1024 * 100;//set a reasonable size
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition:", "attachment;filename=" + fileName);
-        ServletOutputStream outputStream = response.getOutputStream();
-        byte[] bytes = getFile(fileName);
-        response.setContentLength(Long.valueOf(bytes.length).intValue());
-        response.setBufferSize(BUFFER);
-        outputStream.write(bytes);
-        outputStream.close();
-    }
-
-    public byte[] getFile(String filename) {
-
-        byte[] bytes = null;
-
-        try {
-            File file = new File(filename);
-            if (file.exists()) {
-                FileInputStream fis = new FileInputStream(file);
-                bytes = new byte[(int) file.length()];
-                fis.read(bytes);
-            } else {
-                System.out.println("File does not exist");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return bytes;
     }
 
     public void generateXMLFromCellRange(String[][] cellRange, String filename) {

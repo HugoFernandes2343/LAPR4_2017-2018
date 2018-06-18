@@ -46,51 +46,12 @@ public class ExportCsvImpl extends RemoteServiceServlet implements ExportCsvServ
             //1st, generate a local PDF file
             generateCSVFromWorkbook(toExport, fileName);
             //2nd, send it through
-            sendCSVfile(response, fileName);
+            DownloadUtility.sendFileAsByteStream(response, fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Sends a CSV file through a HttpServletResponse as a byte array
-     *
-     * @param response
-     * @param fileName
-     * @throws IOException
-     */
-    private void sendCSVfile(HttpServletResponse response, String fileName) throws IOException {
-        int BUFFER = 1024 * 100;//set a reasonable size
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition:", "attachment;filename=" + fileName);
-        ServletOutputStream outputStream = response.getOutputStream();
-        byte[] bytes = getFile(fileName);
-        response.setContentLength(Long.valueOf(bytes.length).intValue());
-        response.setBufferSize(BUFFER);
-        outputStream.write(bytes);
-        outputStream.close();
-    }
-
-    public byte[] getFile(String filename) {
-
-        byte[] bytes = null;
-
-        try {
-            java.io.File file = new java.io.File(filename);
-            if (file.exists()) {
-                FileInputStream fis = new FileInputStream(file);
-                bytes = new byte[(int) file.length()];
-                fis.read(bytes);
-            } else {
-                System.out.println("File does not exist");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return bytes;
     }
 
     public FileWriter generateCSVFromWorkbook(WorkbookDTO workbookDTO, String filename) throws FileNotFoundException, IOException {

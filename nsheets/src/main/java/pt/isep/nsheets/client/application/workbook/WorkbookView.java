@@ -126,19 +126,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         return underlineBtn;
     }
 
-    /**
-     * @return the cFillBtn
-     */
-    public MaterialButton getcFillBtn() {
-        return cFillBtn;
-    }
-
-    /**
-     * @return the cTextBtn
-     */
-    public MaterialButton getcTextBtn() {
-        return cTextBtn;
-    }
 
     //1160696
     List<MaterialRadioButton> falseColorButtons = new ArrayList<>();
@@ -178,11 +165,6 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
     @UiField
     MaterialButton underlineBtn;
     
-    @UiField
-    MaterialButton cFillBtn;
-    
-    @UiField
-    MaterialButton cTextBtn;
     
     @UiField
     MaterialCollapsible colapStyle;
