@@ -5,7 +5,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("exportPDFWorkbookService")
 public interface ExportPDFWorkbookService extends RemoteService {
-
     WorkbookDTO exportToDownload(WorkbookDTO toExport) throws DataException;
-
 }

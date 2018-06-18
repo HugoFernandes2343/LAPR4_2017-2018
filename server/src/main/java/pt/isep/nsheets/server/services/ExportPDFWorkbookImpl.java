@@ -38,20 +38,6 @@ public class ExportPDFWorkbookImpl extends RemoteServiceServlet implements Expor
         }
     }
 
-    public Table spreadsheetToPDFTable(SpreadsheetDTO spreadsheet){
-        Table pdfTable = new Table(spreadsheet.getColumnCount());
-
-        String[][] content = spreadsheet.getContent();
-
-        for (int i = 0; i < content.length; i++) {
-            for (int j = 0; j < content[0].length; j++) {
-                pdfTable.addCell(content[i][j]);
-            }
-        }
-
-        return pdfTable;
-    }
-
     public PdfDocument generatePDFFromWorkbook (WorkbookDTO workbookDTO, String filename) throws FileNotFoundException {
         List<Table> result = workbookToPDF(workbookDTO);
 
@@ -70,36 +56,9 @@ public class ExportPDFWorkbookImpl extends RemoteServiceServlet implements Expor
     public List<Table> workbookToPDF(WorkbookDTO workbookDTO){
         List<Table> result = new ArrayList<Table>();
         for (SpreadsheetDTO spreadsheet : workbookDTO.getSpreadsheets()) {
-            result.add(spreadsheetToPDFTable(spreadsheet));
+            result.add(ExportPDFSpreadsheetImpl.spreadsheetToPDFTable(spreadsheet));
         }
         return result;
-    }
-
-    public WorkbookDTO dummyWorkbook(){
-        //Instance data
-        int columns = 3, rows = 4;
-        String[][] content1 = {{"4","3","2"},
-                {"s123","--","s"},
-                {"+sad","+io","-12..12"},
-                {"bssd","asd","ads"}};
-
-        SpreadsheetDTO spreadsheet1 = new SpreadsheetDTO("Spreadsheet1", columns, rows, content1);
-
-        columns = 3; rows = 5;
-        String[][] content2 = {{"4","3","2"},
-                {"s123","--","s"},
-                {"+sad","+io","-12..12"},
-                {"bssd","asd","ads"},
-                {"bssd","asd","ads"}};
-
-        SpreadsheetDTO spreadsheet2 = new SpreadsheetDTO("Spreadsheet2", columns, rows, content2);
-
-        List<SpreadsheetDTO> spreadsheets = new ArrayList<SpreadsheetDTO>();
-        spreadsheets.add(spreadsheet1);
-        spreadsheets.add(spreadsheet2);
-        WorkbookDTO workbook = new WorkbookDTO(spreadsheets, spreadsheets.size());
-
-        return workbook;
     }
 
     @Override

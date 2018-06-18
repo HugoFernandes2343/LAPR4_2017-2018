@@ -70,7 +70,7 @@ public class ExportPDFWorkbookImplRodTest {
         String[][] content = {{"4","3","2"}, {"s123","--","s"}, {"+sad","+io","-12..12"}, {"bssd","asd","ads"}};
         SpreadsheetDTO spreadsheet = new SpreadsheetDTO("Test Spreadsheet", columns, rows, content);
 
-        Table instance = new ExportPDFWorkbookImpl().spreadsheetToPDFTable(spreadsheet);
+        Table instance = ExportPDFSpreadsheetImpl.spreadsheetToPDFTable(spreadsheet);
 
         Table expected = new Table(columns);
         expected.addCell("4");
