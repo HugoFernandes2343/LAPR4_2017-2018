@@ -1,19 +1,24 @@
 package pt.isep.nsheets.server.services;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.LoginController;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import static pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.UserType.ADMIN;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161109.register.application.RegisterController;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
@@ -23,12 +28,13 @@ import pt.isep.nsheets.shared.services.NameDTO;
 import pt.isep.nsheets.shared.services.NicknameDTO;
 import pt.isep.nsheets.shared.services.PasswordDTO;
 
+import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.UserDTO;
 import pt.isep.nsheets.shared.services.UserTypeDTO;
 
 import pt.isep.nsheets.shared.services.UsersService;
 
-public class UsersServiceImpl extends RemoteServiceServlet implements UsersService {
+public class UsersServiceImpl extends RemoteServiceServlet implements UsersService, Serializable {
 
     private PersistenceSettings getPersistenceSettings() {
 
@@ -50,7 +56,33 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         return new PersistenceSettings(props);
     }
 
-//    @Override
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+
+        LoginController ctrl = new LoginController();
+
+        User user = null;
+
+        user = ctrl.getUserByEmail(email);
+
+        return user.toDTO();
+    }
+
+    @Override
+    public List<UserDTO> getAllUser(){
+        List<UserDTO> result = new ArrayList<>();
+
+        PersistenceContext.setSettings(this.getPersistenceSettings());
+        LoginController ctrl = new LoginController();
+        Iterable<User> list = ctrl.allUsers();
+        Iterator<User> it = list.iterator();
+        while(it.hasNext()){
+            result.add(it.next().toDTO());
+        }
+        return result;
+    }
+    //    @Override
 //    public boolean checkUser(String email, String password) {
 //        // Setup the persistence settings
 //        PersistenceContext.setSettings(this.getPersistenceSettings());

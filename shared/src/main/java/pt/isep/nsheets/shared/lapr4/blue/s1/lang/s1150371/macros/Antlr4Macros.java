@@ -24,18 +24,18 @@ public class Antlr4Macros {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ANTLRInputStream input = new ANTLRInputStream("a=2+3 b=a^2+2 c=a-1+b");
-        MacrosLexer lexer = new MacrosLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MacrosParser parser = new MacrosParser(tokens);
-        ParseTree tree = parser.macro();
-       
-        MacrosBaseVisitorImp calcVisitor = new  MacrosBaseVisitorImp();
-        Double result = calcVisitor.visit(tree);
-        System.out.println("Result: " + result);
-        
-       
-        
+//        ANTLRInputStream input = new ANTLRInputStream("a=2+3 b=a^2+2 c=a-1+b");
+//        MacrosLexer lexer = new MacrosLexer(input);
+//        CommonTokenStream tokens = new CommonTokenStream(lexer);
+//        MacrosParser parser = new MacrosParser(tokens);
+//        ParseTree tree = parser.macro();
+//       
+//        MacrosBaseVisitorImp calcVisitor = new  MacrosBaseVisitorImp();
+//        Double result = calcVisitor.visit(tree);
+//        System.out.println("Result: " + result);
+//        
+//       
+//        
          
     }
     

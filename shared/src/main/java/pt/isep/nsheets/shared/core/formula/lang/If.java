@@ -67,4 +67,19 @@ public class If implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "iF DESC";
+	}
+
+	@Override
+	public String funcName() {
+		return "If";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "IF()";
+	}
 }

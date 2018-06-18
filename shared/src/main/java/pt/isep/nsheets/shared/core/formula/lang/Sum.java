@@ -73,4 +73,19 @@ public class Sum implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "Sum between two or more arguments";
+	}
+
+	@Override
+	public String funcName() {
+		return "Sum";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "=sum(A1+B2+B3)";
+	}
 }

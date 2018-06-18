@@ -73,6 +73,25 @@ public class For implements Function {
     }
 
     @Override
+    public String funcDescription() {
+        return "FOR cycle for multiple iterations over the same code." +
+                " Requires the syntax FOR{Assignment;Comparison;Assignment;Assignment}" +
+                " where the first Assignment is the value given to the incremental variable." +
+                " The comparison is the condition to stop the iteration." +
+                " The second and third Assignment are the operation and incrementation of the first Assignment respectively.";
+    }
+
+    @Override
+    public String funcName() {
+        return "FOR cycle";
+    }
+
+    @Override
+    public String funcSyntax() {
+        return "=FOR{A1:=1;A1<10;A2:=A2+A1;A1:=A1+1}";
+    }
+
+    @Override
     public FunctionParameter[] getParameters() {
         return parameters;
     }

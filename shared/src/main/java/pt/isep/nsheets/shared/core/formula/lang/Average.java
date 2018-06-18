@@ -76,4 +76,19 @@ public class Average implements Function {
 	public boolean isVarArg() {
 		return true;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "This calculates the average among a set of numbers";
+	}
+
+	@Override
+	public String funcName() {
+		return "Average";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "AVG(1+1)";
+	}
 }

@@ -9,19 +9,7 @@
 
     <m:MaterialPanel>
 
-        <g:HTMLPanel ui:field="chatPanel">
-
-        </g:HTMLPanel>
-        <m:MaterialRow>
-            <m:MaterialColumn grid="s3">
-                <cb:MaterialComboBox ui:field="comboBox"></cb:MaterialComboBox>
-            </m:MaterialColumn>
-            <m:MaterialColumn grid="s8" ui:field="cards">
-                
-            </m:MaterialColumn>
- 
-        </m:MaterialRow>
-        <g:HTMLPanel>
+        <g:HTMLPanel ui:field="htmlPanel">
             
         </g:HTMLPanel>
         

@@ -6,9 +6,10 @@
 package pt.isep.nsheets.shared.services;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author Paulo Jorge
  */
 @SuppressWarnings("serial")
@@ -20,6 +21,7 @@ public class UserDTO implements Serializable {
     private NicknameDTO nickname;
     private boolean activate;
     private UserTypeDTO userType;
+    private List<ChatDTO> chatList;
 
     public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname) {
         this.email = email;
@@ -28,6 +30,7 @@ public class UserDTO implements Serializable {
         this.nickname = nickname;
         this.activate = true;
         this.userType = UserTypeDTO.USER;
+        this.chatList = new ArrayList<>();
     }
 
     public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname, UserTypeDTO usertype) {
@@ -39,10 +42,21 @@ public class UserDTO implements Serializable {
         this.userType = UserTypeDTO.ADMIN;
     }
 
+    public UserDTO(EmailDTO email, PasswordDTO password, NameDTO name, NicknameDTO nickname, List<ChatDTO> chatListDTO) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserTypeDTO.USER;
+        this.chatList = chatListDTO;
+    }
+
     // It is mandatory to have a default constructor with no arguments to be serializable!
     public UserDTO() {
         this.activate = true;
         this.userType = UserTypeDTO.USER;
+        this.chatList = new ArrayList<>();
     }
 
     public UserTypeDTO getUserType() {
@@ -95,4 +109,20 @@ public class UserDTO implements Serializable {
         this.activate=true;
     }
 
+    public List<ChatDTO> getChatList() {
+        return this.chatList;
+    }
+
+    public void addChat(ChatDTO chat){ this.chatList.add(chat);}
+
+    public void setChatList(List<ChatDTO> chatList){ this.chatList = chatList;}
+
+    public ChatDTO getChatByName(String name){
+        for(ChatDTO chat : this.getChatList()){
+            if(chat.getName().equals(name)){
+                return chat;
+            }
+        }
+        return null;
+    }
 }

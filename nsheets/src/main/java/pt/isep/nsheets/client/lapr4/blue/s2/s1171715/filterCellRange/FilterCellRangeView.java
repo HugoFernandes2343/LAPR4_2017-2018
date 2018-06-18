@@ -21,6 +21,9 @@ public class FilterCellRangeView extends Composite{
     MaterialWindow filterCellRangeWindow;
 
     @UiField
+    MaterialLabel label;
+
+    @UiField
     MaterialTextBox formulaBox, upperCellInfo, lowerCellInfo;
 
     @UiField
@@ -38,8 +41,6 @@ public class FilterCellRangeView extends Composite{
     public FilterCellRangeView(Spreadsheet spreadsheet) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        filterCellRangeWindow.open();
-
         filterCellsButton.addClickHandler(event -> {
 
             String formula = formulaBox.getValue();
@@ -48,12 +49,21 @@ public class FilterCellRangeView extends Composite{
 
             Address upperAdd = spreadsheet.findAddress(upperCell);
             Address lowerAdd = spreadsheet.findAddress(lowerCell);
-
+            MaterialToast.fireToast("Filtering from " + upperCell + " to " + lowerCell);
             range = spreadsheet.getCellRangeMatrix(upperAdd, lowerAdd);
             column = upperAdd.getColumn();
         });
+        MaterialWindow.setOverlay(true);
+        filterCellRangeWindow.open();
+
     }
 
+    /**
+     * Evaluates a Formula in a specified Cell range.
+     * Dummy method for now, as it returns rows "1" and "3", always
+     * @return the indexes (ints) of the Rows that are to be
+     * disabled
+     */
     public List<Integer> evaluate (){
         List<Integer> result = new ArrayList<>();
 

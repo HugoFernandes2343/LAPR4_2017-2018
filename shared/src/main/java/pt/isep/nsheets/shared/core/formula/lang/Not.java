@@ -58,4 +58,19 @@ public class Not implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "NOT DESC";
+	}
+
+	@Override
+	public String funcName() {
+		return "Negation";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "NOT()";
+	}
 }

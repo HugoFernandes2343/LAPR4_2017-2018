@@ -127,13 +127,79 @@ governing permissions and limitations under the License. #L% -->
                     </m:MaterialCollapsibleHeader>
                     <m:MaterialCollapsibleBody>
                         
-                        <m:MaterialButton ui:field="boldButton" waves="LIGHT" backgroundColor="BLUE" iconType="FORMAT_BOLD"/>
-                        <m:MaterialButton ui:field="italicButton" waves="LIGHT" backgroundColor="BLUE" iconType="FORMAT_ITALIC"/>
+                        <m:MaterialButton ui:field="boldButton" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_BOLD"/>
+                        <m:MaterialButton ui:field="italicButton" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ITALIC"/>
+                        <m:MaterialButton ui:field="alignLeftBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ALIGN_LEFT"/>
+                        <m:MaterialButton ui:field="alignRightBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ALIGN_RIGHT"/>
+                        <m:MaterialButton ui:field="alignCenterBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_ALIGN_CENTER"/>
+                        <m:MaterialButton ui:field="underlineBtn" waves="LIGHT" backgroundColor="BLACK" iconType="FORMAT_UNDERLINED"/>
+
+                        <!--1160777-->
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="firstCell" placeholder="First Cell" grid="s2" />
+                            <m:MaterialTextBox ui:field="lastCell" placeholder="Last Cell" grid="s2"  />
+                        </m:MaterialRow>
+
+                        <!--1160777-->
+                        <m:MaterialRow>
+                            <m:MaterialButton ui:field="applyToSetOfCells" text="Apply To Set" grid="s2"/>
+                        </m:MaterialRow>
                         
                     </m:MaterialCollapsibleBody>                     
                 </m:MaterialCollapsibleItem>
             </m:MaterialCollapsible>
         </m:MaterialRow>
+        <m:MaterialRow>
+            <m:MaterialCollapsible ui:field = "colapFuncWizard" type="POPOUT">
+
+                <m:MaterialCollapsibleItem>
+                    <m:MaterialCollapsibleHeader backgroundColor="BLACK" waves="DEFAULT">
+                        <m:MaterialLink ui:field="funcWizardStyle" text="Function Wizard" iconType="POLYMER" textColor="WHITE"/>
+                    </m:MaterialCollapsibleHeader>
+                    <m:MaterialCollapsibleBody>
+
+                        <m:MaterialRow>
+                            <m:MaterialListValueBox ui:field="funcName" placeholder="Choose function"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextArea ui:field="funcDescription" readOnly="true" label="Description"/>
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="funcSyntax" placeholder="Function preview" />
+                        </m:MaterialRow>
+                        <m:MaterialRow>
+                            <m:MaterialButton ui:field="applyFuncWizard" text="Apply"/>
+                        </m:MaterialRow>
+
+                    </m:MaterialCollapsibleBody>
+                </m:MaterialCollapsibleItem>
+            </m:MaterialCollapsible>
+        </m:MaterialRow>
+        
+        <m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Background Color" iconType="FORMAT_COLOR_FILL" ui:field="colorFillButton"  activates="BackgroundColors"/>
+                            
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Confirm" ui:field="confirmBG" />
+            </m:MaterialRow>
+                
+            <m:MaterialDropDown activator="BackgroundColors" constrainWidth="true">
+                <m:MaterialCollection ui:field="backgroundColor"/>
+            </m:MaterialDropDown>
+                
+            <m:MaterialRow>
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Text Color" iconType="FORMAT_COLOR_FILL" ui:field="colorTextButton"  activates="TextColors"/>
+                            
+                <m:MaterialButton waves="LIGHT" backgroundColor="BLUE" text = "Confirm" ui:field="confirmTXT" />
+            </m:MaterialRow>
+            <m:MaterialDropDown activator="TextColors" constrainWidth="true">
+                <m:MaterialCollection ui:field="textColor"/>
+            </m:MaterialDropDown>
+                
+                
+        </m:MaterialRow>
+
+
 
         <m:MaterialRow>
             <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->

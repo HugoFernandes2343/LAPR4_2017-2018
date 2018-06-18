@@ -21,6 +21,10 @@
         <servlet-name>pt.isep.nsheets.shared DownloadToCLSService</servlet-name>
         <servlet-class>pt.isep.nsheets.server.services.DownloadCLSImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pt.isep.nsheets.shared UsersService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.UsersServiceImpl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pt.isep.nsheets.shared ChatService</servlet-name>
         <url-pattern>/shared/chatService</url-pattern>
@@ -29,5 +33,16 @@
         <servlet-name>pt.isep.nsheets.shared DownloadToCLSService</servlet-name>
         <url-pattern>/shared/downloadToCLSService</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>pt.isep.nsheets.shared ExportPDFWorkbookService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportPDFWorkbookImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.shared ExportPDFWorkbookService</servlet-name>
+        <url-pattern>/shared/exportPDFWorkbookService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.shared UsersService</servlet-name>
+        <url-pattern>/shared/usersService</url-pattern>
+    </servlet-mapping>
 </web-app>

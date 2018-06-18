@@ -65,4 +65,19 @@ public class Factorial implements Function {
 	public boolean isVarArg() {
 		return false;
 	}
+
+	@Override
+	public String funcDescription() {
+		return "Calculates the factorial";
+	}
+
+	@Override
+	public String funcName() {
+		return "Factorial";
+	}
+
+	@Override
+	public String funcSyntax() {
+		return "FACTORIAL()";
+	}
 }

@@ -208,19 +208,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     protected void onReveal() {
         super.onReveal();
 
-////        ----------------------------------------------------------
-//
-//        EmailDTO m = new EmailDTO("mail@isep.pt");
-//        PasswordDTO p = new PasswordDTO("pass");
-//        NicknameDTO nn = new NicknameDTO("user");
-//        NameDTO n = new NameDTO("fn", "ln");
-//        UserDTO temp = new UserDTO(m, p, n, nn);
-//
-//        CurrentUser.setCurrentUser(temp);
-//        CurrentUser.setIsLoggedIn(true);
-
-//        ----------------------------------------------------------
-
         SetPageTitleEvent.fire("Home", "The most recent Workbooks", "", "", this);
 
         refreshView();

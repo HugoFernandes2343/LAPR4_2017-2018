@@ -46,7 +46,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     interface Binder extends UiBinder<Widget, TasksView> {
     }
 
-    
     @UiField
     HTMLPanel htmlPanel;
 
@@ -62,7 +61,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     @Inject
     TasksView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-        
+
     }
 
     private MaterialCard createCard(TaskDTO task) {
@@ -76,7 +75,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         cardTitle.setIconType(IconType.DONE);
         cardTitle.setIconPosition(IconPosition.RIGHT);
 
-
         MaterialLabel labelDescritpion = new MaterialLabel();
         labelDescritpion.setText(task.getDescription());
 
@@ -87,7 +85,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         labelPercentage.setText("Percentage of completion: " + task.getPercentage() + "%");
 
         MaterialCardAction cardAction = new MaterialCardAction();
-        
+
         cardTitle.addClickHandler(event -> {
 
             TasksServiceAsync tasksServiceAsync = GWT.create(TasksService.class);
@@ -106,7 +104,7 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
             };
 
             tasksServiceAsync.updatePercentage(task.getTitle(), callback);
-            labelPercentage.setText("Percentage of completion: 100 %" );
+            labelPercentage.setText("Percentage of completion: 100 %");
 
         });
 
@@ -241,7 +239,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
 
         card.add(cardContent);
         card.add(cardAction);
-        
 
         return card;
     }
@@ -257,7 +254,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
         for (TaskDTO task : contents) {
             MaterialCard card = createCard(task);
 
-            
             if (colCount == 1) {
                 row = new MaterialRow();
                 htmlPanel.add(row);
@@ -279,7 +275,6 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     public void clearView() {
         htmlPanel.clear();
     }
-    
 
     @Override
     public void addEventChangeHandler(ValueChangeHandler<String> vc) {
@@ -289,5 +284,5 @@ public class TasksView extends ViewImpl implements TasksPresenter.MyView {
     @Override
     public void addClickHandler(ClickHandler ch) {
         newTaskButton.addClickHandler(ch);
-    }  
+    }
 }

@@ -118,6 +118,9 @@
                             <m.html:ListItem waves="DEFAULT">
                                 <m:MaterialLink targetHistoryToken="{tokens.getChat}" iconPosition="LEFT" iconType="TEXTSMS" text="Social Chat"/>
                             </m.html:ListItem>
+                            <m.html:ListItem waves="DEFAULT">
+                                <m:MaterialLink targetHistoryToken="{tokens.getPrivateChat}" iconPosition="LEFT" iconType="TEXTSMS" text="Private Chat"/>
+                            </m.html:ListItem>
                         </m:html.UnorderedList>
                     </m:MaterialCollapsibleBody>
                 </m:MaterialCollapsibleItem>
@@ -141,6 +144,10 @@
             <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getExchange}" iconPosition="LEFT" iconType="CACHED"
                                 text="Exchange"/>
+            </m.html:ListItem>
+            <m.html:ListItem waves="DEFAULT">
+                <m:MaterialLink targetHistoryToken="{tokens.getExtension}" iconPosition="LEFT" iconType="EXTENSION"
+                                text="Extension"/>
             </m.html:ListItem>
             <m.html:ListItem waves="DEFAULT">
                 <m:MaterialLink targetHistoryToken="{tokens.getAbout}" iconPosition="LEFT" iconType="INFO_OUTLINE"

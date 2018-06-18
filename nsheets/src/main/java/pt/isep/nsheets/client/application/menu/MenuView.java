@@ -17,7 +17,8 @@ import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSideNavPush;
 import gwt.material.design.client.ui.MaterialToast;
 
-class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
+public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
+
 
     interface Binder extends UiBinder<Widget, MenuView> {
     }
@@ -25,7 +26,7 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     @UiField
     MaterialNavBar navBar;
     @UiField
-    MaterialSideNavPush sideNav;
+    static MaterialSideNavPush sideNav;
     @UiField
     MaterialLink btnLogout;
     @UiField
@@ -50,21 +51,23 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     @Inject
     MenuView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-//        userImage.addClickHandler((event) -> {
-//            MaterialToast.fireToast("dd");
-//        });
     }
 
+    public static MaterialSideNavPush getSideNav() {
+        return sideNav;
+    }
+    
     @Override
     public MaterialLink getBtnLogin() {
         return btnLogin;
     }
 
+
     @Override
     public void addClickHandler(ClickHandler ch) {
         btnLogout.addClickHandler(ch);
     }
-    
+
     @Override
     public void addClicker(ClickHandler ch){
         userImage.addClickHandler(ch);

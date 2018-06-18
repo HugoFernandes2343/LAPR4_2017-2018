@@ -15,7 +15,7 @@ import pt.isep.nsheets.shared.services.NicknameDTO;
 import pt.isep.nsheets.shared.services.PasswordDTO;
 import pt.isep.nsheets.shared.services.UserDTO;
 
-;
+;import java.util.List;
 
 /**
  *
@@ -34,4 +34,7 @@ public interface UserRepository extends Repository<User, Long> {
     public Boolean activateUser(UserDTO user);
     
     public Boolean deactivateUser(UserDTO user);
+
+    public Iterable<User> getAllUsers();
+
 }

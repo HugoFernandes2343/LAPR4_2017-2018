@@ -1,0 +1,12 @@
+@startuml
+actor Actor
+  participant "WorkbookView" as WV
+  
+
+  Actor -> WV : starts pressing the colapsible bar and pressing the underline button
+  WV -> WV : activecell= getActiveCell()
+  WV -> CellStyleExtension : new()
+  WV -> CellStyleExtension : setUnderline(Underline)
+  WV -> WV : doStyleExt(UNDERLINE)
+  WV -> Actor : Underline style applied to the cell
+@enduml

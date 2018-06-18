@@ -25,6 +25,7 @@ import java.util.TreeSet;
 
 import pt.isep.nsheets.shared.core.formula.Expression;
 import pt.isep.nsheets.shared.core.formula.Reference;
+import pt.isep.nsheets.shared.core.formula.lapr4.red.s3.s1161110.globalVariables.GlobalVariableReference;
 //import lapr4.gray.s1.lang.n3456789.formula.NaryOperation;
 
 /**
@@ -60,7 +61,7 @@ public class ReferenceFetcher extends AbstractExpressionVisitor {
 		references.add(reference);
 		return reference;
 	}
-        
+	
 //        @Override
 //        public Object visitNaryOperation(NaryOperation operation) {
 //            Expression[] operands=operation.getOperands();

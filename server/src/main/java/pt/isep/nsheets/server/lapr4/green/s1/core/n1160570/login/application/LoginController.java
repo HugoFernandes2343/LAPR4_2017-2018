@@ -21,7 +21,7 @@ public class LoginController implements Controller {
 
     public Iterable<User> allUsers() {
         UserRepository userRepository = PersistenceContext.repositories().user();
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 
     public User getUser(Email email, Password password) {
@@ -49,4 +49,8 @@ public class LoginController implements Controller {
         return userRepository.deactivateUser(user);
     }
 
+    public User getUserByEmail(String email){
+        UserRepository userRepository = PersistenceContext.repositories().user();
+        return userRepository.getUserByEmail(email);
+    }
 }

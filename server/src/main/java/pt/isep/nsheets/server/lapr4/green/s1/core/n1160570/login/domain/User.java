@@ -7,6 +7,13 @@ package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
+import pt.isep.nsheets.server.lapr4.blue.s3.ipc.s1161248.PrivateChat.domain.Chat;
+import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Request;
+import pt.isep.nsheets.shared.services.ChatDTO;
 import javax.persistence.*;
 import pt.isep.nsheets.shared.services.UserDTO;
 import pt.isep.nsheets.shared.services.UserTypeDTO;
@@ -28,6 +35,8 @@ public class User implements AggregateRoot<Email>, Serializable {
     private boolean activate;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+    @ElementCollection
+    private List<Chat> chatList;
 
     public User(Email email, Password password, Nickname nickname, Name name) throws IllegalArgumentException {
         if (email == null || password == null || nickname == null || name == null) {
@@ -39,7 +48,7 @@ public class User implements AggregateRoot<Email>, Serializable {
         this.nickname = nickname;
         this.activate = true;
         this.userType = UserType.USER;
-
+        this.chatList = new ArrayList<>();
     }
     
     public User(Email email, Password password, Nickname nickname, Name name, String admin) throws IllegalArgumentException {
@@ -55,6 +64,19 @@ public class User implements AggregateRoot<Email>, Serializable {
 
     }
 
+
+    public User(Email email, Password password, Nickname nickname, Name name, List<Chat> chatList) throws IllegalArgumentException {
+        if (email == null || password == null || nickname == null || name == null) {
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
+        }
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserType.USER;
+        this.chatList = chatList;
+    }
     // It is mandatory to have a default constructor with no arguments to be
     // serializable and for ORM!
     protected User() {
@@ -113,7 +135,11 @@ public class User implements AggregateRoot<Email>, Serializable {
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+        List<ChatDTO> chatListDTO = new ArrayList<>();
+        for(Chat chat: this.chatList){
+            chatListDTO.add(chat.toDTO());
+        }
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO(), chatListDTO);
     }
     
     public UserDTO toDTOAdmin(UserTypeDTO usertype){
@@ -132,8 +158,16 @@ public class User implements AggregateRoot<Email>, Serializable {
         return name;
     }
 
+    public List<Chat> getChatList(){return chatList;}
+
+    public void addChat(Chat chat){ this.chatList.add(chat);}
+
     public static User fromDTO(UserDTO dto) throws IllegalArgumentException {
-        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()));
+        List<Chat> chatList = new ArrayList<>();
+        for(ChatDTO chat: dto.getChatList()){
+            chatList.add(Chat.fromDTO(chat));
+        }
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()), chatList);
     }
     
     public static User fromDTOAdmin(UserDTO dto, String admin) throws IllegalArgumentException {
