@@ -79,7 +79,7 @@ Tests were created, however, GWT does not allow us to instantiate core classes l
 In terms of tests, I have to make sure that the correct cell address is found for a given input:
 
 
-    /**
+        /**
      * Test of findAddress method, of class SpreadsheetImpl.
      */
     @Test
@@ -90,7 +90,7 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        String reference = "10";
+        String reference = “A1”;
         SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
         Address expResult = new Address(0,0);
         Address result = instance.findAddress(reference);
@@ -107,11 +107,16 @@ In terms of tests, I have to make sure that the correct cell address is found fo
             {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
             {"1", "2", "3", "4", "5", "6", "7"}};
 
-        
-        int index = 0;
-        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
-        Cell[] expResult = new Cell[index];
-        Cell[] result = instance.getColumn(index);
+        SpreadsheetImpl sheet = new SpreadsheetImpl(new Workbook(), "test",contents);
+
+	String reference = “D1”;
+	Address address = sheet.findAddress(reference);
+
+
+        int expResult = 3;
+
+        int result = address.getColumn();
+
         assertArrayEquals(expResult, result);
     }
 

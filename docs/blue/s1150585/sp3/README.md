@@ -1,4 +1,4 @@
-**Daniel Fernandes** (s1150585) - Sprint 2 - Core05.2 - Tasks
+**Daniel Fernandes** (s1150585) - Sprint 3 - IPC05.1 - Export To CSV
 ===============================
 
 # 1. General Notes
@@ -97,17 +97,17 @@ Notes:
 
 - **ExportCsvService** - Interface that will implement the ExportCSVlmpl;
 
-- **ExportCsvService** - Interface that will implement the ExportCSVSpreadsheetlmpl;
+- **ExportCsvSpreadsheetService** - Interface that will implement the ExportCSVSpreadsheetlmpl;
 
-- **ExportCsvService** - Interface that will implement the ExportCSVRangeServicelmpl
+- **ExportCsvRangeService** - Interface that will implement the ExportCSVRangeServicelmpl
 
 **Async Interface**
 
 - **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVlmpl;
 
-- **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVSpreadsheetlmpl;
+- **ExportCsvSpreadsheetServiceAsync** - Interface that will allow to connect the view to the ExportCSVSpreadsheetlmpl;
 
-- **ExportCsvServiceAsync** - Interface that will allow to connect the view to the ExportCSVRangeServicelmpl.
+- **ExportCsvRangeServiceAsync** - Interface that will allow to connect the view to the ExportCSVRangeServicelmpl.
 
 **View**
 
@@ -197,7 +197,7 @@ Although this is the Sprint 3, this UC should have been implemented in Sprint 1.
 
 As I said before, my initial thoughts were to make the IPC05.3. I could have implemented only the CLS file import implemented in IPC05.3. However, the CLS file that was being exported didn't have a regular structure. As I didn't know if this export would be valid I didn't take a change only importing to CLS.
 
-When I finally initiated the IPC04.1 I was hoping to at least implement some IPC05.3 (import CSV), however, due to lack of time, it wasn't possible. I’ve lost most of my time analysing what my colleagues had done in IPC05.1 and IPC04.2, therefore I didn't have any time left to do that implementation. On the other hand, now considering the workload in IPC05.1, I realized that implementing more than one UC by iteration was unrealistic.
+When I finally initiated the IPC05.1 I was hoping to at least implement some IPC05.3 (import CSV), however, due to lack of time, it wasn't possible. I’ve lost most of my time analysing what my colleagues had done in IPC05.1 and IPC05.2, therefore I didn't have any time left to do that implementation. On the other hand, now considering the workload in IPC05.1, I realized that implementing more than one UC by iteration was unrealistic.
 
 I would also highlight that during this sprint I’ve helped my Erasmus colleague Barbara making the technical documentation through attempting to share my knowledge regarding design and problem analysis that I’ve learned in my degree so far.
 
@@ -224,4 +224,8 @@ Lastly, I also highlight the support Rodrigo Soares has shown. Besides being a s
 
 [IPC 05.1 - Export To CSV - Some improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/573167d84d23)
 
-[IPC 05.1 - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/29a3b73a9f5f)
+[IPC 05.1 - Export To CSV - Technical Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/29a3b73a9f5f)
+
+[IPC 05.1 - Export To CSV - Documentation Improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/98370ff7a4b3)
+
+[IPC 05.1 - Export To CSV - Technical Documentation Correction](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/55d5b1272be3)

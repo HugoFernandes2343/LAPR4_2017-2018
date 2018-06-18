@@ -29,26 +29,61 @@ OPERATORS:
 **US2**-Alter code so that the application, when inserting a new formula on the worksheet, saves the global variable data and updates the cell displayed data.
 
 # 3. Analysis
+For this feature increment I need to:
+
+* Create the ANTLR grammar.
+* Create the GlobalVariable object.
+* Create the GlobalVariableReference object.
+* Create the GlobalVariableList object.
+* Ensure that the GlobalVariable exists in the whole workbook context.
+* Update the cell value according to the typed formula.
+
+## 3.1 Grammar and Language
+There was already an previous Use Case that used variables, but temporary variables. Although the differences of this two Use Cases the grammar follows the same logic, so the grammar that I created is the following:
+
+    ARR     : '@' ;
+
+    GLOBAL
+            : ARR LETTER ( NUMBER | LETTER) *
+            ;
+
+To use this grammar I had to add it to the existing one on the formula.g4 file.
+
+    reference
+    :	CELL_REF
+    ( ( COLON ) CELL_REF )?
+                | VARIABLE
+                | spreadsheet_reference
+                | GLOBAL
+    ;
 
 
+## 3.2 Grammar Analysis
+This is an example of the use of this grammar:
 
+={@GV:=4;@GV2:=6+8}
 
-## 3.1 Analysis Diagrams
+This is the result parse tree:
+![Grammar Example](grammar.jpg)
 
+## 3.3 Server and RPC
+There were no changes in this part
+
+## 3.4 Analysis Diagrams
 
 **Use Cases**
 
 ![Use Cases](us.jpg)
 
- **Use Case 1**.
+ **Use Case**.
 
 **Domain Model (for this feature increment)**
 
-- Since I found no specific requirements in terms of domain, I follow the Structure of the existing entitys.
+![Domain Model](domain.jpg)
 
 **System Sequence Diagrams**
 
-![Analysis SD](SSD1.jpg)
+![Analysis SD](SSD.jpg)
 
 # 4. Design
 
@@ -60,14 +95,14 @@ There are not many tests possible for this use case other than the functional us
 
 **Domain classes**
 
-This classes were not changed so there is no need to test anything.
+
 
 **Services/Controllers**
-
+There were no services or controllers used.
 
 
 **Test Coverage**  
-- There was not any change in the domain so there was nothing to test.
+- Due to problems regarding the use of the GWT framework it is not possible to quantify the test coverage.
 
 ## 4.2. Requirements Realization
 
@@ -99,16 +134,7 @@ I followed the recommended organization for packages:
 
 The code for this sprint:  
 
-Project **server**
-
-
 Project **shared**  
-
-
-
-Project **NSheets**
-
-
 
 
 # 6. Integration/Demonstration
@@ -125,6 +151,20 @@ Project **NSheets**
 * Research and Requirements started.
 * Analysis started.
 
+**Friday - June 15**
+ * Created the grammar for the Use Case
+ * Updated the analysis and started the design
+
+**Weekend - June 16 and 17**
+ * Finished the implementation of the Use Case
+ * Updated the design and finished the analysis.
+
+**Monday - June 18**
+ * Methods testing
+ * Updated the design and final touches in the documentation
+
+**Tuesday - June 19**
+* Final touches in the documentation
 
 Commits:
 
