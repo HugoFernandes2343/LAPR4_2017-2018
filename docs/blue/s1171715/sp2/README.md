@@ -73,19 +73,47 @@ I made mockups to show how this task should work properly, in the best case.
 
 ## 4.1 Tests
 
+
+Tests were created, however, GWT does not allow us to instantiate core classes like "SpreadSheet", "Cell", because they use GWT constructors, that are not available in the test packages. As such, these tests will never be able to run, but I believe, that without this technical issue, they would pass (as most of my colleagues are reporting this issue as well)
+
 In terms of tests, I have to make sure that the correct cell address is found for a given input:
 
-@Test
-public void findAddress() {
 
-}
+    /**
+     * Test of findAddress method, of class SpreadsheetImpl.
+     */
+    @Test
+    public void testFindAddress() {
+        System.out.println("findAddress");
 
-Or that the correct range is returned, when supplying two cell addresses.
+        String contents[][] = { // first spreadsheet
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
 
-@Test
-public void getCellRange() {
-		
-}
+        String reference = "10";
+        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
+        Address expResult = new Address(0,0);
+        Address result = instance.findAddress(reference);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getColumn method, of class SpreadsheetImpl.
+     */
+    @Test
+    public void testGetColumn() {
+        System.out.println("getColumn");
+        String contents[][] = { // first spreadsheet
+            {"10", "9", "8", "7", "a", "b", "c"}, {"8", "=1+7", "6", "5", "4", "3", "2"},
+            {"1", "2", "3", "4", "5", "6", "7"}};
+
+        
+        int index = 0;
+        SpreadsheetImpl instance = new SpreadsheetImpl(new Workbook(), "teste",contents);
+        Cell[] expResult = new Cell[index];
+        Cell[] result = instance.getColumn(index);
+        assertArrayEquals(expResult, result);
+    }
 
 
 # 4.2 Requirements Realization
