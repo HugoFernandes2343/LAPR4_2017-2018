@@ -1,0 +1,19 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> ExportToCSVView : Navigate to page
+User -> ExportToCSVView : Select a workbook, spreadsheet or a range of cells
+User -> ExportToCSVView : Write a file name
+ExportToCSVView -> User : What is the directory?
+User -> ExportToCSVView : Select a directory
+ExportToCSVView -> ExportToCSVImpl : generateCSVFromWorkbook(),  generateCSVFromSpreadsheet() or generateCSVFromRangeOfCells()
+ExportToCSVImpl -> ExportToCSVView : Save?
+User -> ExportToCSVView : OK
+ExportToCSVView -> ExportToCSVView : Display a succes message
+
+@enduml
