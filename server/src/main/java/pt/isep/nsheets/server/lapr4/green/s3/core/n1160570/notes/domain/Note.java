@@ -7,12 +7,14 @@ package pt.isep.nsheets.server.lapr4.green.s3.core.n1160570.notes.domain;
 
 import eapli.framework.domain.AggregateRoot;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.shared.services.NoteDTO;
 
@@ -31,13 +33,18 @@ public class Note implements AggregateRoot<Long>, Serializable {
     @ManyToOne
     private User user;
     private String title;
+    private String text;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date date;
 
     protected Note() {
     }
 
-    public Note(User user, String title) {
+    public Note(User user, String title, String text) {
         this.user = user;
         this.title = title;
+        this.text = text;
+        this.date = new Date();
     }
 
     @Override
@@ -47,10 +54,12 @@ public class Note implements AggregateRoot<Long>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.user);
-        hash = 59 * hash + Objects.hashCode(this.title);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.user);
+        hash = 53 * hash + Objects.hashCode(this.title);
+        hash = 53 * hash + Objects.hashCode(this.text);
+        hash = 53 * hash + Objects.hashCode(this.date);
         return hash;
     }
 
@@ -69,10 +78,16 @@ public class Note implements AggregateRoot<Long>, Serializable {
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
+        if (!Objects.equals(this.text, other.text)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
             return false;
         }
         return true;
@@ -89,6 +104,12 @@ public class Note implements AggregateRoot<Long>, Serializable {
             return true;
         }
         if (!this.user.equals(that.user)) {
+            return false;
+        }
+        if (!this.date.equals(that.date)) {
+            return false;
+        }
+        if (!this.text.equals(that.text)) {
             return false;
         }
         if (!this.title.equals(that.title)) {
@@ -108,11 +129,11 @@ public class Note implements AggregateRoot<Long>, Serializable {
     }
 
     public NoteDTO toDTO() {
-        return new NoteDTO(user.toDTO(), title);
+        return new NoteDTO(user.toDTO(), title, text);
     }
 
     public static Note fromDTO(NoteDTO dto) throws IllegalArgumentException {
-        return new Note(User.fromDTO(dto.getUser()), dto.getTitle());
+        return new Note(User.fromDTO(dto.getUser()), dto.getTitle(), dto.getText());
     }
 
 }

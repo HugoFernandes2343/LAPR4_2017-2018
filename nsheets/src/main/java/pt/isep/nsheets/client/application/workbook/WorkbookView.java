@@ -22,37 +22,27 @@ package pt.isep.nsheets.client.application.workbook;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
-import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.popupmenu.MaterialPopupMenu;
 import gwt.material.design.addins.client.window.MaterialWindow;
-import gwt.material.design.client.constants.ButtonSize;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.TextAlign;
-import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.*;
 import gwt.material.design.client.ui.table.MaterialDataTable;
-import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.forms.FormView;
 //import pt.isep.nsheets.client.lapr4.blue.s1.s1150585.formsEditor.FormEditorView;
 import pt.isep.nsheets.client.lapr4.blue.s1161248.BaseJavascriptLanguage.MacrosView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1140420.basicChartWizard.BasicChartWizardView;
-import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF.ExportToPDFView;
-import pt.isep.nsheets.client.lapr4.green.s1.s1150575.application.exportToXML.ExportToXMLView;
 import pt.isep.nsheets.client.lapr4.red.s2.s1160777.application.exportToCLS.ExportToCLSView;
-import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription;
 import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.core.formula.Formula;
 import pt.isep.nsheets.shared.core.formula.Function;
 import pt.isep.nsheets.shared.core.formula.compiler.FormulaCompilationException;
 import pt.isep.nsheets.shared.services.*;
@@ -66,9 +56,9 @@ import java.util.HashMap;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1150585.ExportToCSV.ExportCsvView;
+import pt.isep.nsheets.client.lapr4.blue.s3.s1171715.ExportToXML.ExportXMLView;
 import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.LocalExtension;
 import pt.isep.nsheets.shared.core.Cell;
-import pt.isep.nsheets.shared.core.CellImpl;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
@@ -856,8 +846,10 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 //            }
 //        });
         exportToXMLButton.addClickHandler(event -> {
-            new ExportToXMLView();
+            new ExportXMLView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });
+        
+        
 
         newSpreadsheetButton.addClickHandler((ClickEvent event) -> {
             new addSpreadsheetView();

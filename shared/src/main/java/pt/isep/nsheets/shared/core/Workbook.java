@@ -45,7 +45,7 @@ import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
  *
  * @author Einar Pehrson
  */
-@Entity
+
 public class Workbook implements Iterable<Spreadsheet>, Serializable {
 
     @Id

@@ -19,7 +19,6 @@ import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
  * @author ATB
  *
  */
-@Entity
 public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 
     // ORM primary key
@@ -31,7 +30,8 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
     private String description;
 
     /**
-     * The user email of the user that created this workbook, empty if public workbook
+     * The user email of the user that created this workbook, empty if public
+     * workbook
      */
     private String userMail;
 
@@ -64,7 +64,7 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
         this.name = "";
         this.description = "";
         this.workbook = new Workbook();
-        this.userMail="";
+        this.userMail = "";
     }
 
     public String getName() {
@@ -134,8 +134,8 @@ public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
         this.description = newDescription;
         return true;
     }
-    
-    public Workbook getWorkbook(){
+
+    public Workbook getWorkbook() {
         return this.workbook;
     }
 

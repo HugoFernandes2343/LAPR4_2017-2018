@@ -27,7 +27,7 @@ import pt.isep.nsheets.shared.services.SpreadsheetDTO;
  */
 public class ExportCsvRangeServiceImpl extends RemoteServiceServlet implements ExportCsvRangeService {
 
-    ArrayList<String> toExport;
+    String[][] toExport;
 
     /*@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -49,7 +49,7 @@ public class ExportCsvRangeServiceImpl extends RemoteServiceServlet implements E
         }
     }
 
-    public FileWriter generateCSVFromWorkbook(ArrayList<String> content, String filename) throws FileNotFoundException, IOException {
+    public FileWriter generateCSVFromWorkbook(String[][] content, String filename) throws FileNotFoundException, IOException {
         File file = new File(filename);
         FileWriter fileWriter = null;
         try {
@@ -57,11 +57,14 @@ public class ExportCsvRangeServiceImpl extends RemoteServiceServlet implements E
             fileWriter = new FileWriter(file);
             fileWriter.append("SEP=" + "," + "\n");
 
-            for (String value : content) {
-                fileWriter.append(value);
-                fileWriter.append(",");
+            for (int i = 0; i < content.length; i++) {
+                for (int j = 0; j < content[0].length; j++) {
+                    fileWriter.append(content[i][j]);
+                    fileWriter.append(",");
+                }
+                fileWriter.append("\n");
             }
-            //fileWriter.append("\n");
+
         } catch (Exception e) {
 
             System.out.println("Error in CsvFileWriter !!!");
@@ -81,7 +84,7 @@ public class ExportCsvRangeServiceImpl extends RemoteServiceServlet implements E
     }
 
     @Override
-    public ArrayList<String> exportToDownload(ArrayList<String> toExport) throws DataException {
+    public String[][] exportToDownload(String[][] toExport) throws DataException {
         this.toExport = toExport;
         return toExport;
 

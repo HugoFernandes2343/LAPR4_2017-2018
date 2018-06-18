@@ -17,14 +17,14 @@ import javax.persistence.Version;
  *
  * @author João Santiago <1160696@isep.ipp.pt>
  */
-@Entity
+//@Entity
 public class StylesCellInterfaceImp implements StylesCellInterface {
 
-    @Id
+  //  @Id
     @GeneratedValue
     private Long id;
 
-    @Version
+   // @Version
     private Long version;
 
     private Style.FontWeight fWeight;

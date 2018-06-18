@@ -17,5 +17,5 @@ import pt.isep.nsheets.shared.core.Cell;
  */
 @RemoteServiceRelativePath("exportCsvRangeService")
 public interface ExportCsvRangeService extends RemoteService {
-    ArrayList <String> exportToDownload( ArrayList<String> toExport) throws DataException;
+    String[][] exportToDownload(String[][] toExport) throws DataException;
 }
