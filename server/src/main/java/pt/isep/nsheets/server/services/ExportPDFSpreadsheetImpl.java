@@ -4,6 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import pt.isep.nsheets.shared.services.ExportPDFSpreadsheetService;
 import pt.isep.nsheets.shared.services.SpreadsheetDTO;
@@ -47,6 +48,8 @@ public class ExportPDFSpreadsheetImpl extends RemoteServiceServlet implements Ex
         PdfDocument lowLevelDoc = new PdfDocument(new PdfWriter(filename));
         Document document = new Document(lowLevelDoc);
 
+        document.add(new Paragraph("Spreadsheet Export"));
+        document.add(new Paragraph(""));
         document.add(table);
         document.close();
     }
