@@ -12,7 +12,9 @@ IPC08.2 - Users should now be able to create private chat rooms. They should inv
 Proposal:
 
 US1 - As a User of the Application I want create a private chat so that I can communicate with other users of the Nsheets.
-US2 - As a User of the Application I want accept a invite for a private chat.
+
+US2 - As a User of the Application I want accept or refuse a invite for a private chat.
+
 US3 - As a User of the Application I want send a new message for a chat that I belong.
 
 # 3. Analysis
@@ -55,16 +57,13 @@ In this MVP pattern, the **PrivateChatPresenter** will define a specific interfa
 
 The PrivateChats page displays what seems to be Chats that are an atributte of users that should reside in the server.
 
-In the method **onReveal** the PrivateChat presenter invokes a **UsersService** asynchronously.
+In the method **onReveal** the PrivateChat presenter invokes a **ChatService** asynchronously.
 
 For this purpose I will require an interface for the service. In this case:
 
 	@RemoteServiceRelativePath("privateChatService")
-	public interface UsersServiceAsync {
-        void getUserByEmail(String email, AsyncCallback<UserDTO> callback);
-        void getUser(String email, String password, AsyncCallback<UserDTO> callback);
-        void saveUser(UserDTO user, AsyncCallback<UserDTO> callback);
-        void getAllUser(AsyncCallback<List<UserDTO>> callback);
+	public interface PrivateChatServiceAsync {
+        void getAllChats(AsyncCallback<List<Chat>> callback);
     }
 
 When the RPC is invoked since it will always execute asynchronously, so I have to prove a callback: 
@@ -75,22 +74,22 @@ When the RPC is invoked since it will always execute asynchronously, so I have t
 The callback will be similar to the one developed by John Doe:
 
 	// Set up the callback object.
-	AsyncCallback<List<UserDTO>> callback = new AsyncCallback<List<UserDTO>>() {
+	AsyncCallback<List<ChatDTO>> callback = new AsyncCallback<List<ChatDTO>>() {
 		public void onFailure(Throwable caught) {
 			// TODO: Do something with errors.
 		}
-		public void onSuccess(List<UserDTO> result) {
-			setContents(result.getChatList());
+		public void onSuccess(List<ChatDTO> result) {
+            setContents(result);
 		}
 	}; 
 
 Since the interface is code that must be accessed by both server and client code it will reside in the **shared** project.
 
-The interface must be implemented in the **server** since it will be the one responsible for communicating with the database. The **LoginController** (taking advantage of code already implemented) will be the assign controller for this task of implementing the interface
+The interface must be implemented in the **server** since it will be the one responsible for communicating with the database. The **PrivateChatController** will be the assign controller for this task of implementing the interface
 
-	    public Iterable<User> allUsers() {
-            UserRepository userRepository = PersistenceContext.repositories().user();
-            return userRepository.getAllUsers();
+	    public Iterable<Chat> allChats() {
+            ChatRepository chatRepository = PersistenceContext.repositories().chats();
+            return chatRepository.getAllChats();
         }
 
 Since the service is a servlet it must be declared in the **web.xml** file of the project (see file nsheets/src/main/webapp/WEB-INF/web.xml).
