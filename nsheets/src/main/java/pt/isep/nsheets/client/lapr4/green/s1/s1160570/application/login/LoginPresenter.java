@@ -28,7 +28,6 @@ import pt.isep.nsheets.shared.services.UsersServiceAsync;
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
 //    CurrentUser user;
-
     interface MyView extends View {
 
         MaterialTextBox getTextEmail();
@@ -49,9 +48,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
 //        this.user = currentUser;
-        
-        
-
         getView().addClickHandler((ClickEvent event) -> {
 
             UsersServiceAsync usersSvc = GWT.create(UsersService.class);
@@ -65,20 +61,23 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 }
 
                 @Override
-                public void onSuccess(UserDTO result) {  
+                public void onSuccess(UserDTO result) {
 //                    user.setCurrentUser(result);
 //                    user.setIsLoggedIn(true);
-                    CurrentUser.setCurrentUser(result);
-                    CurrentUser.setIsLoggedIn(true);
-                    MaterialToast.fireToast("Sucess");
-                     
-                    PlaceRequest placeRequest = new PlaceRequest.Builder()
-                            .nameToken(NameTokens.home)
-                            .build();
-                    placeManager.revealPlace(placeRequest);
-                   
-                    CurrentMenu.MenuReload();
-              
+                    if (result.isActivate() == false) {
+                        MaterialToast.fireToast("Your Account is Deactivated!");
+                    } else {
+                        CurrentUser.setCurrentUser(result);
+                        CurrentUser.setIsLoggedIn(true);
+                        MaterialToast.fireToast("Sucess");
+
+                        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                                .nameToken(NameTokens.home)
+                                .build();
+                        placeManager.revealPlace(placeRequest);
+
+                        CurrentMenu.MenuReload();
+                    }
                 }
             };
 

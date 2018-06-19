@@ -153,7 +153,7 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         Iterable<User> itr = controller.allUsers();
         List<UserDTO> lstDTO = new ArrayList<UserDTO>();
         for (User user : itr) {
-            UserDTO dto = user.toDTO();
+            UserDTO dto = user.toDTOActivate(user.isActivate());
             lstDTO.add(dto);
         }
         return lstDTO;

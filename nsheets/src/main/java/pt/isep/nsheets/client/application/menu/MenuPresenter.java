@@ -1,6 +1,7 @@
 package pt.isep.nsheets.client.application.menu;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -16,6 +17,9 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.Display;
+import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.data.component.CategoryComponent;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialImage;
@@ -126,19 +130,28 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     private void editUserProfile() {
 
         MaterialWindow window = new MaterialWindow("Profile Editor");
+        window.setMaximize(true);
+        window.setSeparator(true);
+        window.setOverflow(Style.Overflow.SCROLL);
         MaterialLabel lblFName = new MaterialLabel("First Name");
         MaterialLabel lblLName = new MaterialLabel("Last Name");
         MaterialLabel lblNickname = new MaterialLabel("Nickname");
         MaterialButton deleteAccountButton = new MaterialButton("Delete Account");
-        MaterialButton saveOkButton = new MaterialButton("Ok");
+        MaterialButton saveOkButton = new MaterialButton("Apply Changes");
         MaterialButton saveCancelButton = new MaterialButton("Cancel");
         MaterialButton activateUsers = new MaterialButton("Activate Account");
         MaterialButton deactivateUsers = new MaterialButton("Deactivate Account");
         MaterialTextBox firstNameEditor = new MaterialTextBox(CurrentUser.getCurrentUser().getName().getFirstName());
         MaterialTextBox lastNameEditor = new MaterialTextBox(CurrentUser.getCurrentUser().getName().getLastName());
         MaterialTextBox nicknameEditor = new MaterialTextBox(CurrentUser.getCurrentUser().getNickname().getNickName());
+        
         comboBoxActive = new MaterialComboBox();
         comboBoxNotActive = new MaterialComboBox();
+        comboBoxActive.setLabel("Activated Users");
+        comboBoxNotActive.setLabel("Deactivated Users");
+
+        
+        
         listUsers();
 
         saveOkButton.setSize(ButtonSize.MEDIUM);
@@ -157,25 +170,34 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
         window.add(deleteAccountButton);
         window.add(saveOkButton);
         window.add(saveCancelButton);
+        
         window.add(comboBoxActive);
         window.add(deactivateUsers);
         window.add(comboBoxNotActive);
         window.add(activateUsers);
 
-        comboBoxActive.setPaddingLeft(500);
-        comboBoxActive.setPaddingRight(20);
-        comboBoxActive.setPaddingTop(50);
-        comboBoxActive.setPaddingBottom(50);
+        deactivateUsers.setPaddingRight(200);
+        deactivateUsers.setPaddingLeft(200);
 
-        comboBoxNotActive.setPaddingLeft(500);
-        comboBoxNotActive.setPaddingRight(20);
-        comboBoxNotActive.setPaddingTop(50);
-        comboBoxNotActive.setPaddingBottom(50);
+        activateUsers.setPaddingRight(200);
+        activateUsers.setPaddingLeft(220);
 
-//        if (CurrentUser.getCurrentUser().getUserType() == ADMIN) {
-//            listUsers(userlist);
-//            window.add(userlist);
-//        }
+        comboBoxActive.setPaddingLeft(5);
+        comboBoxActive.setPaddingRight(50);
+//        comboBoxActive.setPaddingTop(50);
+//        comboBoxActive.setPaddingBottom(50);
+//
+        comboBoxNotActive.setPaddingLeft(5);
+        comboBoxNotActive.setPaddingRight(50);
+//        comboBoxNotActive.setPaddingTop(50);
+//        comboBoxNotActive.setPaddingBottom(50);
+
+        if (CurrentUser.getCurrentUser().getUserType() == USER) {
+            comboBoxActive.setVisible(false);
+            comboBoxNotActive.setVisible(false);
+            deactivateUsers.setVisible(false);
+            activateUsers.setVisible(false);
+        }
         window.open();
         deactivateUsers.addClickHandler((event) -> {
             List<UserDTO> listuser = comboBoxActive.getSelectedValue();
@@ -187,20 +209,20 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
             AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error Updating User Profile");
+                    MaterialToast.fireToast("Error deactivating user");
                 }
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    MaterialToast.fireToast("Profile Updated");
+                    MaterialToast.fireToast("User deactivated");
                 }
             };
 
             usersServiceAsync.deactivateUser(dto, callback);
         });
-        
+
         activateUsers.addClickHandler((event) -> {
-            List<UserDTO> listuser = comboBoxActive.getSelectedValue();
+            List<UserDTO> listuser = comboBoxNotActive.getSelectedValue();
             UserDTO dto = listuser.get(0);
             dto.activateUser();
 
@@ -209,16 +231,19 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
             AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error Updating User Profile");
+                    MaterialToast.fireToast("Error activating user");
                 }
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    MaterialToast.fireToast("Profile Updated");
+                    MaterialToast.fireToast("User activated");
                 }
             };
 
             usersServiceAsync.activateUser(dto, callback);
+            comboBoxActive.reload();
+            comboBoxNotActive.reload();
+            listUsers();
         });
 
         saveOkButton.addClickHandler((event) -> {
@@ -227,27 +252,33 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
             String lastname = lastNameEditor.getText();
             String nick = nicknameEditor.getText();
             NicknameDTO nickname = new NicknameDTO(nick);
-            CurrentUser.getCurrentUser().setName(firstname, lastname);
-            CurrentUser.getCurrentUser().setNickname(nick);
 
-            UsersServiceAsync usersServiceAsync = GWT.create(UsersService.class);
+            if (nick != "" || firstname != "" || lastname != "") {
+                CurrentUser.getCurrentUser().setName(firstname, lastname);
+                CurrentUser.getCurrentUser().setNickname(nick);
 
-            AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    MaterialToast.fireToast("Error Updating User Profile");
-                }
+                UsersServiceAsync usersServiceAsync = GWT.create(UsersService.class);
 
-                @Override
-                public void onSuccess(UserDTO result) {
-                    MaterialToast.fireToast("Profile Updated");
-                }
-            };
+                AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("No Changes Were Made");
+                    }
 
-            usersServiceAsync.updateUser(CurrentUser.getCurrentUser(), callback);
-            reloadUser();
-            window.close();
+                    @Override
+                    public void onSuccess(UserDTO result) {
+                        MaterialToast.fireToast("Profile Updated");
+                    }
+                };
 
+                usersServiceAsync.updateUser(CurrentUser.getCurrentUser(), callback);
+
+                reloadUser();
+
+                window.close();
+            } else {
+                MaterialToast.fireToast("You need to fill all fields");
+            }
         });
 
         saveCancelButton.addClickHandler((event) -> {
@@ -280,6 +311,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
 
             usersServiceAsync.deleteUser(CurrentUser.getCurrentUser().getEmail().getEmail(), callback);
         });
+
     }
 
     public void listUsers() {
@@ -300,7 +332,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
                     for (UserDTO userDTO : result) {
                         if (userDTO.isActivate() == true) {
                             comboBoxActive.addItem(userDTO);
-                        } else if(userDTO.isActivate()==false) {
+                        } else if (userDTO.isActivate() == false) {
                             comboBoxNotActive.addItem(userDTO);
                         }
                     }

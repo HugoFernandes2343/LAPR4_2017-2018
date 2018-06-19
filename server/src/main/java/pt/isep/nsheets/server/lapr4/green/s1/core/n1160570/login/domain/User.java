@@ -146,6 +146,16 @@ public class User implements AggregateRoot<Email>, Serializable {
         return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO(), usertype);
     }
     
+    public UserDTO toDTOActivate(boolean activated){
+        UserDTO user = new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+        if(activated==true){
+            user.activateUser();
+        }else{
+            user.deactivateUser();
+        }
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+    }
+    
     public UserType getUserType() {
         return userType;
     }
@@ -180,6 +190,10 @@ public class User implements AggregateRoot<Email>, Serializable {
     
     public void activate(){
         this.activate=true;
+    }
+    
+    public boolean isActivate(){
+        return activate;
     }
 
 }
