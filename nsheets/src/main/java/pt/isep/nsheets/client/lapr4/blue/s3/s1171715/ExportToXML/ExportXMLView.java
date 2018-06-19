@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pt.isep.nsheets.client.lapr4.blue.s3.s1171715.ExportToXML;
 
 import com.google.gwt.core.client.GWT;
@@ -18,22 +19,39 @@ import gwt.material.design.addins.client.window.MaterialWindow;
 import gwt.material.design.client.constants.ButtonSize;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.constants.WavesType;
-import gwt.material.design.client.ui.*;
+import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialListBox;
+import gwt.material.design.client.ui.MaterialPanel;
+import gwt.material.design.client.ui.MaterialRadioButton;
+import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialToast;
+import java.util.ArrayList;
+import java.util.Set;
 import pt.isep.nsheets.shared.core.Address;
+import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.Spreadsheet;
 import pt.isep.nsheets.shared.core.Workbook;
-import pt.isep.nsheets.shared.services.*;
+import pt.isep.nsheets.shared.services.ExportCsvRangeService;
+import pt.isep.nsheets.shared.services.ExportCsvRangeServiceAsync;
+import pt.isep.nsheets.shared.services.ExportCsvService;
+import pt.isep.nsheets.shared.services.ExportCsvServiceAsync;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetService;
+import pt.isep.nsheets.shared.services.ExportCsvSpreadsheetServiceAsync;
+import pt.isep.nsheets.shared.services.ExportXMLCellRangeService;
+import pt.isep.nsheets.shared.services.ExportXMLCellRangeServiceAsync;
+import pt.isep.nsheets.shared.services.ExportXMLSpreadsheetService;
+import pt.isep.nsheets.shared.services.ExportXMLSpreadsheetServiceAsync;
+import pt.isep.nsheets.shared.services.ExportXMLWorkbookService;
+import pt.isep.nsheets.shared.services.ExportXMLWorkbookServiceAsync;
+import pt.isep.nsheets.shared.services.SpreadsheetDTO;
+import pt.isep.nsheets.shared.services.WorkbookDTO;
 
-/**
- *
- * @author Barbara Csonka 1171715
- */
+
 public class ExportXMLView extends Composite {
 
     @UiField
     MaterialWindow window;
-
-    @UiField
-    MaterialListBox format;
 
     @UiField
     MaterialRadioButton radioButtonWorkbook, radioButtonWorksheet, radioButtonPartOfWorksheet;
@@ -109,13 +127,15 @@ public class ExportXMLView extends Composite {
                 Address addLower = wb.getSpreadsheet(0).findAddress(lowerCell);
                 Address addUpper = wb.getSpreadsheet(0).findAddress(upperCell);
 
-                SpreadsheetDTO dto = wb.toDTO().getSpreadsheets().get(0);
+                String nSpreadsheet = Window.prompt("Insert spreadsheet number", "");
+                int nSpreadsheetInt = Integer.parseInt(nSpreadsheet);
+                SpreadsheetDTO sh = wb.getSpreadsheet(nSpreadsheetInt).toDTO();
 
-                String[][] cellRange = dto.getCellRange(addUpper.getRow(), addUpper.getColumn(), addLower.getRow(), addLower.getColumn());
+                String[][] range = sh.getCellRange(addUpper.getRow(), addUpper.getColumn(), addLower.getRow(), addLower.getColumn());
 
                 ExportXMLCellRangeServiceAsync downAsync = GWT.create(ExportXMLCellRangeService.class);
 
-                downAsync.exportToDownload(cellRange, new AsyncCallback<String[][]>() {
+                downAsync.exportToDownload(range, new AsyncCallback<String[][]>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         MaterialToast.fireToast("Error in Export to XML! " + caught.getMessage());
@@ -123,9 +143,8 @@ public class ExportXMLView extends Composite {
 
                     @Override
                     public void onSuccess(String[][] result) {
-                        String url = GWT.getModuleBaseURL() + "exportXMLCellRangeService?filename=" + titleBox.getText() + ".xml";;
+                        String url = GWT.getModuleBaseURL() + "exportXMLCellRangeService?filename=" + titleBox.getText() + ".csv";;
                         Window.open(url, "Download XML file", "status=0,toolbar=0,menubar=0,location=0");
-
                     }
                 });
 
@@ -142,7 +161,7 @@ public class ExportXMLView extends Composite {
 
                     @Override
                     public void onSuccess(WorkbookDTO result) {
-                        String url = GWT.getModuleBaseURL() + "exportXMLWorkbookService?filename=" + titleBox.getText() + ".xml";;
+                        String url = GWT.getModuleBaseURL() + "exportXMLWorkbookService?filename=" + titleBox.getText() + ".csv";;
                         Window.open(url, "Download XML file", "status=0,toolbar=0,menubar=0,location=0");
                     }
                 });
@@ -165,7 +184,7 @@ public class ExportXMLView extends Composite {
 
                         @Override
                         public void onSuccess(SpreadsheetDTO result) {
-                            String url = GWT.getModuleBaseURL() + "exportXMLSpreadhseetService?filename=" + titleBox.getText() + ".xml";;
+                            String url = GWT.getModuleBaseURL() + "exportXMLSpreadsheetService?filename=" + titleBox.getText() + ".csv";;
                             Window.open(url, "Download XML file", "status=0,toolbar=0,menubar=0,location=0");
                         }
 

@@ -12,7 +12,7 @@ Uncomment this for XHTML entities
 
     </ui:style>
     <g:HTMLPanel>
- <ma:window.MaterialWindow ui:field="window" width="70%" title="Export To XML">
+ <ma:window.MaterialWindow ui:field="window" width="70%" title="Export To CSV">
             <m:MaterialPanel>
                 <m:MaterialLabel title="Please select what you wish to export."/>
                 <m:MaterialRadioButton ui:field="radioButtonWorkbook" text="Export Workbook"/>
@@ -22,10 +22,6 @@ Uncomment this for XHTML entities
                 <m:MaterialTextBox ui:field="textBox2" label="Please insert the cell you'd like to finish importing"/>
                 <m:MaterialPanel>
                         <m:MaterialTextBox ui:field = "titleBox" label="Title" length="10"/>
-                        <m:MaterialListBox ui:field="format" placeholder="XML Format:">
-                            <m.html:Option ui:field="fieldSeparator" text="Field Separator"/>
-                            <m.html:Option ui:field="stringDelimiter" text="String Delimiter"/>
-                        </m:MaterialListBox>
                     <m:MaterialButton ui:field="btnExport" text="Export"></m:MaterialButton>
                 </m:MaterialPanel>
             </m:MaterialPanel>

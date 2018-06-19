@@ -78,6 +78,7 @@ pt.isep.nsheets.server.services contains all the servlets thats needed
 
 # 6. Final Remarks
 
+All in all, this sprint was full of with challanges as well, but it went a bit easier than the previous two in comparison.
 
 
 
