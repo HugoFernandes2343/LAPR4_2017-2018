@@ -5,6 +5,7 @@
  */
 package pt.isep.nsheets.shared.core.formula.compiler;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.Value;
 import pt.isep.nsheets.shared.core.formula.BinaryOperation;
@@ -19,11 +20,13 @@ import pt.isep.nsheets.shared.core.formula.lang.Language;
 import pt.isep.nsheets.shared.core.formula.lang.RangeReference;
 import pt.isep.nsheets.shared.core.formula.lang.ReferenceOperation;
 import pt.isep.nsheets.shared.core.formula.lang.UnknownElementException;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.antlr.v4.runtime.Token;
 import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 import pt.isep.nsheets.shared.core.formula.lapr4.blue.s1.lang.n1140420.tempVariables.VariableReference;
@@ -32,7 +35,6 @@ import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Fo
 import pt.isep.nsheets.shared.lapr4.blue.s1.lang.s1091234.blockOfInstructions.Block;
 
 /**
- *
  * @author jrt
  */
 public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
@@ -161,12 +163,11 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     public Expression visitReference(FormulaParser.ReferenceContext ctx) {
         Token t = (Token) ctx.getChild(0).getPayload();
         try {
-             if (t.getType() == FormulaParser.VARIABLE){
+            if (t.getType() == FormulaParser.VARIABLE) {
                 return new VariableReference(cell, t.getText());
-            } else if(t.getType() == FormulaParser.GLOBAL){//1161110
-                 return new GlobalVariableReference(this.cell.getSpreadsheet().getWorkbook(),cell, t.getText());
-            }
-            else if (ctx.getChildCount() == 3) {
+            } else if (t.getType() == FormulaParser.GLOBAL) {//1161110
+                return new GlobalVariableReference(this.cell.getSpreadsheet().getWorkbook(), cell, t.getText());
+            } else if (ctx.getChildCount() == 3) {
                 //BinaryOperator operator = Language.getInstance().getBinaryOperator(ctx.getChild(1).getText());
                 BinaryOperator operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
 
@@ -239,7 +240,7 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
             BinaryOperator operator;
             try {
                 operator = this.language.getBinaryOperator(ctx.getChild(1).getText());
-                
+
                 return new BinaryOperation(
                         visit(ctx.getChild(0)),
                         operator,
@@ -253,9 +254,9 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
 
         return visit(ctx.comparison());
     }
-    
+
     @Override
-    public Expression visitBlock(FormulaParser.BlockContext ctx){
+    public Expression visitBlock(FormulaParser.BlockContext ctx) {
         // Convert function call
         Function blockFunction = null;
         Value value = null;
@@ -288,5 +289,20 @@ public class FormulaEvalVisitor extends FormulaBaseVisitor<Expression> {
     private void addVisitError(String msg) {
         errorBuffer.append(msg).append("\n");
         numberOfErros++;
+    }
+
+    @Override
+    public Expression visitWhiledo(@NotNull FormulaParser.WhiledoContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Expression visitDowhile(@NotNull FormulaParser.DowhileContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Expression visitEval(@NotNull FormulaParser.EvalContext ctx) {
+        return null;
     }
 }

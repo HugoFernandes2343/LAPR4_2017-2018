@@ -77,7 +77,7 @@ public class Eval implements Function {
 
     @Override
     public String funcSyntax() {
-        return "Eval()";
+        return "\"= eval (\" 2 + 3 \")\" ";
     }
 
     public void defineCell(Cell cell) {

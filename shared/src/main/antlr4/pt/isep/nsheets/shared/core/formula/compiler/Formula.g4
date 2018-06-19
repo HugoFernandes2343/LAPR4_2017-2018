@@ -29,6 +29,9 @@ atom
     |   assignment
     |   block
     |   loopfor
+    |   eval
+    |   dowhile
+    |   whiledo
 	;
 
 function_call
@@ -78,9 +81,27 @@ loopfor
         :       FOR LCBRA assignment SEMI comparison (SEMI comparison | SEMI assignment)+ RCBRA
         ;
 
+dowhile
+        :       DOWHILE LPAR comparison RPAR  LPAR eval RPAR
+        ;
+
+whiledo
+        :       WHILEDO LPAR eval RPAR LCBRA comparison RCBRA
+        ;
+
+eval
+    : EVAL LPAR STRING RPAR
+;
 
 /* loopfor operator */
+EVAL    :       'EVAL'
+        ;
+
 FOR     : 'FOR';
+
+DOWHILE      : 'DOWHILE';
+
+WHILEDO   :'WHILEDO';
 
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
 
