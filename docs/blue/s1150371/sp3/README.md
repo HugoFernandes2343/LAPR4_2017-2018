@@ -46,6 +46,14 @@ At the Workbook page, there will be a button that’s going to allow to Search and
 # 4. Design
 
 ## 4.1. Tests
+Due to lack of time i was unable to complete the necessary tests. There is only one class that requires testing, the SearchAndReplaceController class.
+
+	Example test:
+	Workbook wb = new Workbook(contents);
+	SearchAndReplaceController ctrl = new SearchAndReplaceController();
+	ctrl.searchAndReplace("2","4",wb.toDTO());
+	assertEquals(wb.getContents(),expContents);
+	
 
 ## 4.2. Requirements Realization
 In the diagram below you can see how the classes interect and the sucessefull workflow of the use case.
