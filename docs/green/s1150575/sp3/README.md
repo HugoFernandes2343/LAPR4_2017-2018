@@ -82,41 +82,41 @@ Getting it all together this formula would give the A1 cell of the current sprea
 
 In the grammar I added the following tokens and rules:
 
-![1](1.png)
+![1](1.PNG)
 
-![7](7.png)
+![7](7.PNG)
 
-![2](2.png)
+![2](2.PNG)
 
-![3](3.png)
+![3](3.PNG)
 
-![4](4.png)
+![4](4.PNG)
 
-![5](5.png)
+![5](5.PNG)
 
-![6](6.png)
+![6](6.PNG)
 
-![8](8.png)
+![8](8.PNG)
 
-![9](9.png)
+![9](9.PNG)
 
-![10](10.png)
+![10](10.PNG)
 
-![11](11.png)
+![11](11.PNG)
 
-![12](12.png)
+![12](12.PNG)
 
-![13](13.png)
+![13](13.PNG)
 
-![14](14.png)
+![14](14.PNG)
 
-![15](15.png)
+![15](15.PNG)
 
-![16](16.png)
+![16](16.PNG)
 
-![17](17.png)
+![17](17.PNG)
 
-![18](18.png)
+![18](18.PNG)
 
 ## 3.4 Grammar Analysis
 
@@ -327,3 +327,5 @@ As you'll notice reading the documentation I didn't did much because I really go
 [Core01.2: Updated the documentation structure for sprint 3.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/add6f81f2c0da10e022d552896e08770453931e1)
 
 [Core01.2: Created the language in Formula.g4 in order to be able to refer another spreadsheets.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/add6f81f2c0da10e022d552896e08770453931e1)
+
+[Core01.2: Final Documentation added.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/add6f81f2c0da10e022d552896e08770453931e1)
