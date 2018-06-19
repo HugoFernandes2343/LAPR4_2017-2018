@@ -6,8 +6,10 @@ import java.util.Properties;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pt.isep.nsheets.server.lapr4.blue.s3.ipc.n1150371.searchAndReplace.application.SearchAndReplaceController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddSpreadsheetToWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookController;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.application.AddWorkbookDescriptionController;
@@ -180,6 +182,19 @@ public class WorkbooksServiceImpl extends RemoteServiceServlet implements Workbo
             Logger.getLogger(WorkbooksServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public List<String> searchReplace(String input, String replace, WorkbookDTO workbookDTO) {
+        // PersistenceContext.setSettings(this.getPersistenceSettings());
+        SearchAndReplaceController ctrl = new SearchAndReplaceController();
+        try {
+            return ctrl.searchAndReplace(input, replace, workbookDTO);
+        } catch (Exception e) {
+
+        }
+
+        return null;
     }
 
 }

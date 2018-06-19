@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.List;
 import pt.isep.nsheets.shared.core.Cell;
 import pt.isep.nsheets.shared.core.CellImpl;
 import pt.isep.nsheets.shared.core.Workbook;
@@ -26,5 +27,6 @@ public interface WorkbooksService extends RemoteService {
     boolean addSpreadsheetToWorkbook(WorkbookDTO wbDTO, SpreadsheetDTO ssDTO);
 
     boolean activateConditional(CellImplDTO activeCell, String name, String operation, String value);
-
+    
+    List<String> searchReplace(String input, String replace, WorkbookDTO workbookDTO);
 }
