@@ -122,7 +122,7 @@ In the grammar I added the following tokens and rules:
 
 I used IntelliJ to be able to generate the parse tree that will be presented bellow(the presented parse tree is generated using the formula referred above):
 
-![Tree](Arvore.png)
+![Tree](Arvore.PNG)
 
 ## 3.5 Which classes/packages am I gonna interact with (mainly)?
 
