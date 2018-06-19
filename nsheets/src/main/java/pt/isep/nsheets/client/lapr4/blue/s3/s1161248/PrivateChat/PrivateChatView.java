@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -71,6 +72,30 @@ public class PrivateChatView extends ViewImpl implements PrivateChatPresenter.My
             invites.setBackgroundColor(Color.BLUE_DARKEN_1);
 
         });
+
+        Timer timer = new Timer() {
+            @Override
+            public void run() {
+                UsersServiceAsync userSvc = GWT.create(UsersService.class);
+                // Set up the callback object.
+                AsyncCallback<UserDTO> callback = new AsyncCallback<UserDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast("Error! " + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(UserDTO user) {
+                        setContents(user.getChatList());
+                    }
+                };
+
+                userSvc.getUserByEmail(user.getEmail().getEmail(), callback);
+            }
+        };
+        timer.scheduleRepeating(2000);
+
+
         refresh.addClickHandler(clickEvent -> {
 
             UsersServiceAsync userSvc = GWT.create(UsersService.class);
