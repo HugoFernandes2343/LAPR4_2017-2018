@@ -151,6 +151,7 @@ public class MacrosView extends Composite {
         MaterialCardAction cardAction = new MaterialCardAction();
 
         MaterialLink openLink = new MaterialLink();
+        MaterialLink runLink = new MaterialLink();
         MaterialLink deleteLink = new MaterialLink();
 
         card.setBackgroundColor(Color.BLUE_DARKEN_1);
@@ -166,11 +167,17 @@ public class MacrosView extends Composite {
         openLink.setIconColor(Color.INDIGO);
         openLink.setTextColor(Color.WHITE);
         openLink.addClickHandler(event -> {
-//            String text = m.getInput();
-//            String temp[] = text.split("=");
-//            text = temp[temp.length-1].replace(" ", "");
             macroCode.setValue(macroCode.getValue() + "@" + m.getName());
             macroCode.setFocus(true);
+        });
+
+        runLink.setText("Run");
+        runLink.setIconType(IconType.PLAY_CIRCLE_OUTLINE);
+        runLink.setIconColor(Color.INDIGO);
+        runLink.setTextColor(Color.WHITE);
+        runLink.addClickHandler(event -> {
+            MaterialToast.fireToast("Executing macro...");
+            MaterialToast.fireToast("Result: " + macro.runMacro());
         });
 
 
@@ -187,6 +194,7 @@ public class MacrosView extends Composite {
         cardContent.add(label);
 
         cardAction.add(openLink);
+        cardAction.add(runLink);
         cardAction.add(deleteLink);
 
         card.add(cardContent);

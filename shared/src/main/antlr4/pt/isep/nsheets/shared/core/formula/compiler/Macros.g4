@@ -47,14 +47,14 @@ atom
     ;
 
 
-CELL_REF:
-     		( ABS )? LETTER ( LETTER )?
-     		( ABS )? ( INT )+
-     	;
+CELL_REF    :
+     		    ( ABS )? LETTER ( LETTER )?
+     		    ( ABS )? ( INT )+
+     	        ;
 
 MACRO_REF :
-            ( AT ) ID
-            ;
+                ( AT ) ID
+                ;
 
 
 INT    : [0-9]+;
