@@ -69,13 +69,8 @@ This is a table that should display the overall planning of the team. This is si
 | Red  |[Filipe Simão](red/s1161213/) 	 | [Core 06.1](red/s1161213/sp1) |[IPC 03.1](red/s1161213/sp2)	 |		|
 | Red  |[Norberto Sousa](red/s1120608/)  | [Core 01.1](red/s1120608/sp1) |[IPC 06.2](red/s1120608/sp2)	 |		|
 | Red  |[Ricardo Correia](red/s1151231/) |        MIA       |           MIA      |  MIA  |
-<<<<<<< HEAD
-| Green |[Carlos Rodrigues](green/s1151136/) |  [IPC06.1](green/s1151136/sp1)|								 |		|
 | Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)|[Lang02.1](green/s1150575/sp2)|		| [Core01.2](green/s1150575/sp3)
-=======
 | Green |[Carlos Rodrigues](green/s1151136/) | [IPC06.1](green/s1151136/sp1) | [Lang06.1](green/s1151136/sp2) | [Core02.2](green/s1151136/sp3)		|
-| Green |[João Vieira](green/s1150575/) 		 | 	[IPC04.1](green/s1150575/sp1)|[Lang02.1](green/s1150575/sp2)|		|
->>>>>>> 2922ae5e50d91b21130c1cac8316d319c0b07dbe
 | Green |[João Santiago](green/s1160696/) 	 | [IPC05.1](green/s1160696/sp1)|								 |		|
 | Green |[Paulo Magalhães](green/s1160570/)  | [IPC01.1](green/s1160570/sp1)|[Lang01.2](green/s1160570/sp2)|	[Core07.1](green/s1160570/sp3)	|
 | Green |[Nemanja Cosic](green/s1171776/)  	 | 							|								 |		|
