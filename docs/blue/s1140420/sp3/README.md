@@ -70,6 +70,7 @@ As it can be seen on the diagram as well, the core of this task were the followi
 
 	Both the Server and Client knows that the communication service exist (DownloadToPDFServiceAsync); Those two interfaces were being defined in Shared module.
 
+ **IMPORTANT**: make sure to check out the Service-Servlet mapping in the Client's "web.xml" file at **nsheets/src/main/webapp/WEB-INF/web.xml**, annotated with my student number, "1140420"
 
 ##Shared module
 
@@ -286,8 +287,9 @@ As it can be seen on the diagram as well, the core of this task were the followi
 ![SD_CellRange](SD_CellRange.png)
 
 
+# 5. Implementation
 
-## 4.3. Used and modified classes
+## 5.1. Used and modified classes
 
 
 **Client**
@@ -429,21 +431,22 @@ DownloadUtility.java
     }
 
 
+## 5.2. Code organization overview
 **Spreadsheet and Cell Range**
 
  To avoid making this documentation overly verbose, the "Client", "Shared" and "Server" sections above refer only to the "Export Workbook" User Story. Here are the corresponding classes for the remaining User Stories. The code itself is very similar:
 
- **Server (Servlet Implementations)**
+ **Server (Servlet Implementations)** - **pt.isep.nsheets.server.services**
 
-  - **DownloadUtility** - created a posteriori to contain methods common to all Servlets, as a code cleanup
+ - **DownloadUtility** - created a posteriori to contain methods common to all Servlets, as a code cleanup
 
-  - **ExportPDFWorkbookImpl**
+ - **ExportPDFWorkbookImpl**
 
-  - **ExportPDFSpreadsheetImpl**
+ - **ExportPDFSpreadsheetImpl**
 
-  - **ExportPDFCellRangeImpl**
+ - **ExportPDFCellRangeImpl**
 
- **Shared (Service Synchronous Interfaces)**
+ **Shared (Service Synchronous Interfaces)** - **pt.isep.nsheets.shared.services**
 
  - **ExportPDFWorkbookService**
 
@@ -451,7 +454,7 @@ DownloadUtility.java
 
  - **ExportPDFCellRangeService**
 
- **Shared (Service Asynchronous Interfaces)**
+ **Shared (Service Asynchronous Interfaces)** - **pt.isep.nsheets.shared.services**
 
  - **ExportPDFWorkbookServiceAsync**
 
@@ -459,7 +462,81 @@ DownloadUtility.java
 
  - **ExportPDFRangeServiceAsync**
 
+ **Client (Views)**
+
+ - **WorkbookView** - **pt.isep.nsheets.client.application.workbook**
+
+ - **ExportPDFView** - **pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF**
+
+ In addition, Service-Servlet mapping is **ESSENTIAL**:
+
+ - **web.xml** - **nsheets/src/main/webapp/WEB-INF/web.xml**
+
 
 # 7. Work log
 
-[IPC 05.1 - Export To CSV - UI structure](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b2560126469c)
+"Assigning to me given it is necessary for IPC03.2. Conferred with Filipe Simao"
+
+[IPC03.1 - Added iText library dependency to POM.xml](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/687b14a0effd)
+
+[IPC03.1 - Modified iText library dependency for an older version with more tutorials](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2d78e10f54f9)
+
+[IPC03.1 - Created class responsible for converting Workbook DTOs to PDF Elements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/ad9b24f52043)
+
+[IPC03.1 - Created 1st major tests for the PDF conversion methods, 100% success on "mvn test"](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b15464aaf99c)
+
+[IPC03.1 - Created method "generatePDFFromWorkbook()", which I will test to see if it works in a view](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c3d79ac7073c)
+
+[IPC03.1 - Using iText7 again and ditching the older version (iText5)](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/225a3aa42a03)
+
+[IPC03.1 - Created my own View, don't want to delete Filipe's just yet, might prove useful](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/31be82cdc3d9)
+
+[IPC03.1 - Commenting out everything on Filipe's Servlet implementation, to make sure I don't accidentally use it. Will delete this class once mine is 100% operational](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/888fa282eb2e)
+
+[IPC03.1 - Created basic Domain methods to generate PDF entities from WorkbookDTOs, using the iText7 library.](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d238861e2f46)
+
+[IPC03.1 - Updated Domain tests](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/130161ef230e)
+
+[IPC03.1 - Updated "web.xml" files both on "Client" and "Shared" to map my Servlets](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d64319e3d37f)
+
+[IPC03.1 - Integrated my functionality into the "WorkbookView", replacing Filipe's](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/73e6373df85b)
+
+[IPC03.1 - Tests now generate relevant PDF documents to help detect false-failures](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/5ef00a32d332)
+
+[IPC03.1 - Disabling the PDF test files generation, as it is causing minor Git conflicts for other people. Will have to add ".pdf" files to gitignore later](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/3b13acbd9737)
+
+[IPC03.1 - Now the download accepts a "filename"](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/46349c9aac0f)
+
+[IPC03.1 - Renamed Service and Servlet to be consistent with other Exports](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/09c49fd3fc27)
+
+[IPC03.1 - Deleted old PDF Servlet, no longer needed](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/51dae0e102ee)
+
+[IPC03.1 - SpreadsheetDTO can now return a sub-matrix of its content](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a56c78a58afa)
+
+[IPC03.1 - Created Class Diagram](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a909007f6f05)
+
+[IPC03.1 - Created Service interface for Spreadsheet export](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c865101b83cd)
+
+[IPC03.1 - Created Service interface for cell range export](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/90846d4c0d4e)
+
+[IPC03.1 - Implemented Service interface for Spreadsheet export as a Servlet](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f7168533e6cd)
+
+[IPC03.1 - Removed duplicate code](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/e05a159e2c1e)
+
+[IPC03.1 - Reusing Daniel's UI since he is now able to choose Workbook, Spreadsheet or cell range](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/7db23bc198b5)
+
+[IPC03.1 - Service-Servlet mapping](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/13f1b485024e)
+
+[IPC03.1 - Defined User Stories](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d17d4895ae23)
+
+[IPC03.1 - Completed Class Diagram](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d0d9a2fc29db)
+
+[IPC03.1 - Created Sequence Diagrams for all User Stories](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/319539811012)
+
+[IPC03.1 - README 1st draft](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2bc541a70c93)
+
+[IPC03.1 - Created SSD for all User Stories](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/15bf2990cf5c)
+
+[IPC03.1 - README 1st draft](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/2bc541a70c93)
+
+[IPC03.1 - Completed Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/0cb3ded50a40)
