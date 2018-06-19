@@ -2,7 +2,7 @@
 ===============================
 
 # 1. General Notes
-
+This Use Case is really close to the previous one, the main difference is that the variables are saved in the workbook, and that way can be used in any cell of the same workbook.
 
 # 2. Requirements
 
@@ -270,12 +270,16 @@ There were no services or controllers used.
 
 ## 4.2. Requirements Realization
 
-**For US1**
+**For US**
 
-![SD US1](SD.jpg)
+![SD US](sd.jpg)
 
 Notes:  
-
+- The diagram only depicts the less technical details of the scenario;
+- **CellImpl** extends **Cell** making it the information expert regarding contents of a cell;
+- **ExcelExpressionCompiler** is the compiler that will compile the block with the global variables;
+- **FormulaEvalVisitor** is the visitor that will visit every node of the block with the global variables;
+- **GlobalVariableReference** is the reference to a global variable.
 
 ## 4.3. Classes
 For this Use Case I created 3 classes:
@@ -295,7 +299,7 @@ In this sprint I used:
 
 **For US**
 
-
+As stated previously, all development was done only on the "NShared" module - User Input and Persistence are not my concerns for this Sprint, so no need to deal with Client or Server.
 
 **Code Organization**  
 
@@ -309,6 +313,10 @@ Project **shared**
  * GlobalVariableList
 
 # 6. Integration/Demonstration
+The demonstration of this Use Case is very simple,  as shown on the following images:
+![Impl_01](impl_01.JPG)
+
+![Impl_02](impl_02.JPG)
 
 
 # 7. Final Remarks
@@ -342,10 +350,10 @@ Commits:
 
 [Documentation Start](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/1514ceb2a44e)
 
-[Requirements]()
+[Requirements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c3f10f03c610)
 
-[Analysis]()
+[Analysis](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a6c75f0df2b7)
 
 [Design]()
 
-[Code Implementation ]()
+[Code Implementation ](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f40e297d4a41)
