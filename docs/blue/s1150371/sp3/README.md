@@ -34,7 +34,7 @@ The main idea for the "workflow" of this feature increment.
 
 **System Sequence Diagrams**
 
-![snr](ssdsnr.png)
+![snr](ssdsnr.PNG)
 
 - The user selects the button Search and Replace. The system 'asks' for the value or text to find and the replacement.The user inputs the values and the replacement and press Search And Replace.The system for each find, shows a new window with the information of the find(Location,Content) and asks if the user wants to replace or next(skip). The user selects replace. The system replaces the cell content.
 
@@ -52,7 +52,7 @@ In the diagram below you can see how the classes interect and the sucessefull wo
 
 **US1-Search and Replace**
 
-![snr](snrsd.png)
+![snr](snrsd.PNG)
 
 Notes:  
 - **WorkbooksServices** performs the GWT RPC mechanism;
@@ -85,7 +85,7 @@ By memory we apply/use:
 
 To trigger the search and replace window I implemented the following button: 
 
-![snr](searchAndReplaceButton.png)
+![snr](searchAndReplaceButton.PNG)
 
 Button code in WorkbookView.xml:
 
@@ -93,7 +93,7 @@ Button code in WorkbookView.xml:
 
 After the search and replace button is click a SearchAndReplace pop-up window should appear:
 
-![snr](searchandReplaceWindow.png)
+![snr](searchandReplaceWindow.PNG)
 
 SearchAndReplaceWindow code in WorkbookView.xml:
 	 
@@ -141,28 +141,28 @@ This usercase is not fully implemented, altought it is functional. The user is a
   
 *Search Button*
 
-![snr](searchButton.png)
+![snr](searchButton.PNG)
 
 *Next Button*
 
-![snr](nextButton.png)
+![snr](nextButton.PNG)
 
 *Next Button - End of Search*
 
-![snr](nextEndOfSearch.png)
+![snr](nextEndOfSearch.PNG)
 
 *Replacement Button (Single Replacement)*
 
-![snr](singleReplacement.png)
+![snr](singleReplacement.PNG)
 
-![snr](singleReplacementSheet.png)
+![snr](singleReplacementSheet.PNG)
 
 
 *Replacement All Button*
 
-![snr](replaceAll.png)
+![snr](replaceAll.PNG)
 
-![snr](replaceAllSheet.png)
+![snr](replaceAllSheet.PNG)
 
 To improve later: Parameters to refine the search, server sided replacements.
 
