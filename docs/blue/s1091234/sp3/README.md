@@ -47,9 +47,15 @@ For a superUser to be able to activate/deactivate an account I created the follo
 
 For a user to edit it's information (Firstname, Lastname, Nickname) I created the following SSD:
 
+![editInformation SSD](us1-Edit name_nickname.png)
+
 For a user to to delete it's account I created the following SSD:
 
+![deleteAccount SSD](us2-DeleteAccount.png)
+
 For a superUser to be able to activate/deactivate an account I created the following SSD:
+
+![activateDeactivate SSD](us3-activateDeactivateUsers.png)
 
 ## 4.1. Tests
 
@@ -63,22 +69,8 @@ For a superUser to be able to activate/deactivate an account I created the follo
 
 # 7. Final Remarks
 
-This sprint was extremely difficult to complete, since the use case I was assigned with was dependent on the good execution on the previous one. To be able to partially implement Core01.2, I had to completely reconstruct our project structure an integrate it with the already completed use cases. With the help of my colleague Norberto, we were able to do so.
+This sprint was relatively easy to do. I had some difficulties because I was not familiar with the GWT material framework and was hard to format a good looking UI
 
 # 8. Work Log
 
 Important Commits:
-
-[Core01.2 - Start of Documentation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/d2472487d8b649c81bbd5665b69b20195ce06a2f)
-
-[Core01.1 - Project restructuring](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/c009c497f74a76675fcf4297fb71809c2dec42ca)This was an huge commit
-
-[Core01.1 - Project pesistence.xml updated to accept new entity classes and entities](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/99299130eeddafce59028b3d6ea084ddaae97ddb)
-
-[Core01.1 - Project pesistence.xml updated to accept new entity classes and entities](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/8baa2b1f3af7f80a4cb121e62bb112b39603c625)
-
-[Core01.1 - Project pesistence.xml more updates](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/27d83711ac83d8251d7d22f9d590b65cb6bb2562)
-
-[Core01.2 - Delete workbook implementation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/708a73da9b4c9185cd8feae2770d00b8ccb7271b)
-
-[Core01.2 - Rename and adding spreadsheet to workbook implementation](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/98e8ae16ba7e378f875259cd5a8a0ff8cafc1aa7)
