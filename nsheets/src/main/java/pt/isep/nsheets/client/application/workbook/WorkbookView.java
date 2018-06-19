@@ -53,12 +53,16 @@ import java.util.List;
 
 import static gwt.material.design.jquery.client.api.JQuery.$;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1091234.addSpreadsheet.addSpreadsheetView;
 import pt.isep.nsheets.client.lapr4.blue.s2.s1171715.filterCellRange.FilterCellRangeView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1150585.ExportToCSV.ExportCsvView;
 import pt.isep.nsheets.client.lapr4.blue.s3.s1171715.ExportToXML.ExportXMLView;
 import pt.isep.nsheets.client.lapr4.red.s1.s1160777.application.extensionmanager.LocalExtension;
 import pt.isep.nsheets.shared.core.Cell;
+import pt.isep.nsheets.shared.core.CellImpl;
+import pt.isep.nsheets.shared.core.IllegalValueTypeException;
 
 import pt.isep.nsheets.shared.core.SpreadsheetImpl;
 import pt.isep.nsheets.shared.core.formula.lang.Language;
@@ -981,7 +985,103 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
         exportToCSVButton.addClickHandler(event -> {
             new ExportCsvView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });
+        List<String> resultList = new ArrayList<>();
 
+        nextButton.addClickHandler(event -> {
+            if (resultList.size() > 1) {
+                resultList.remove(0);
+                resultsSearchAndReplace.setText(resultList.get(0));
+            } else {
+                resultsSearchAndReplace.setText("End of search");
+
+            }
+
+        });
+
+        btnSearchReplace.addClickHandler(event
+                -> {
+            String searchFor = this.getTextBoxSearchFor().getText();
+            String replaceWith = this.getTextBoxReplacementText().getText();
+
+            if (searchFor.isEmpty() || replaceWith.isEmpty()) {
+                MaterialToast.fireToast("Search and Replace:Error! Missing Parameters");
+            } else {
+                WorkbooksServiceAsync wbService = GWT.create(WorkbooksService.class);
+                AsyncCallback<List<String>> callback = new AsyncCallback<List<String>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        MaterialToast.fireToast(caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(List<String> result) {
+                        resultList.clear();
+                        resultList.addAll(result);
+                        if (result.isEmpty()) {
+                            resultsSearchAndReplace.setText("No results found.");
+                        } else {
+
+                            StringBuilder sb = new StringBuilder();
+                            CellImpl preview = new CellImpl();
+                            try {
+                                preview.setContent(textBoxReplacementText.getText());
+
+                            } catch (FormulaCompilationException ex) {
+                                MaterialToast.fireToast("Error:" + ex.toString());
+                            }
+                            try {
+                                resultsSearchAndReplace.setText(result.get(0) + "\t" + "preview:" + preview.formula.evaluate());
+                            } catch (IllegalValueTypeException ex) {
+                                MaterialToast.fireToast("Error:" + ex.toString());
+                            }
+
+                        }
+
+                    }
+                };
+                wbService.searchReplace(searchFor, replaceWith, CurrentWorkbook.getCurrentWorkbook().toDTO(), callback);
+
+            }
+
+        }
+        );
+        replaceButton.addClickHandler(event -> {
+            if (!resultList.isEmpty()) {
+                String[] splitString = resultList.get(0).split("\\s+");
+                int row = Integer.parseInt(splitString[1].split(":")[1].split(",")[0]);
+                int col = Integer.parseInt(splitString[1].split(":")[1].split(",")[1]);
+                try {
+                    CurrentWorkbook.getCurrentSpreadsheet().getCell(col, row).setContent(textBoxReplacementText.getText());
+                } catch (FormulaCompilationException ex) {
+                    Logger.getLogger(WorkbookView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                MaterialToast.fireToast("Replaced With Success");
+                customTable.getView().setRedraw(true);
+                customTable.getView().refresh();
+            } else {
+                MaterialToast.fireToast("No results");
+            }
+        });
+
+        replaceAllButton.addClickHandler(event -> {
+            for (String s : resultList) {
+                if (!resultList.isEmpty()) {
+                    String[] splitString = s.split("\\s+");
+                    int row = Integer.parseInt(splitString[1].split(":")[1].split(",")[0]);
+                    int col = Integer.parseInt(splitString[1].split(":")[1].split(",")[1]);
+                    try {
+                        CurrentWorkbook.getCurrentSpreadsheet().getCell(col, row).setContent(textBoxReplacementText.getText());
+                    } catch (FormulaCompilationException ex) {
+                        Logger.getLogger(WorkbookView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    MaterialToast.fireToast("Replaced With Success");
+                    customTable.getView().setRedraw(true);
+                    customTable.getView().refresh();
+                } else {
+                    MaterialToast.fireToast("No results");
+                }
+            }
+        });
         // Added access to ToolPanel to add icon widget
         Panel panel = customTable.getScaffolding().getToolPanel();
         panel.clear();
