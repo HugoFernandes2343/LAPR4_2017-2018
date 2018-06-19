@@ -10,7 +10,7 @@ I also had some doubts about what i was supposed to do in concrete  regarding th
 
 - **Core02.2 - Full Extension Mechanism**
 
-The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
+> The extensions should now contribute also with popup menus in cells, menu options in the navigator and side bars.
 
 Proposal:
 
@@ -26,7 +26,7 @@ For this feature increment, since it is the first one to be developed in a new p
 
 - Understand how the application works and also understand the key aspects of GWT, since it is the main technology behind the application  
 
-- Understand how the Home Page is implemented (for instance, how the UI gets the Workbook Descriptions that are displayed)    
+- Understand how to create/add new fields through other classes   
 
 ## 3.4 Analysis Diagrams
 
@@ -38,21 +38,21 @@ For this feature increment, since it is the first one to be developed in a new p
 
 **For US1**
 
-![SSD_US1](sequenceDiagramSP3_US1.png)
+![SSD_US1](SequenceDiagramSP3_US1.jpg)
 
 **For US2**
 
-![SSD_US2](sequenceDiagramSP3_US2.png)
+![SSD_US2](SequenceDiagramSP3_US2.jpg)
 
 **For US3**
 
-![SSD_US3](sequenceDiagramSP3_US3.png)
+![SSD_US3](SequenceDiagramSP3_US3.jpg)
 
 # 4. Design
 
 ## 4.1. Tests
 
-No tests were developed, no need.
+No tests were developed, not was necessary.
 
 ## 4.3. Classes
 
@@ -67,11 +67,22 @@ No design patterns were used.
 
 # 5. Implementation
 
+- I initially created a new menu in the main side bar, named Extension, where there were three options of extensions.
+
 **For US1**
+
+> Create/add a popup menu
+- When selected the option to create a new popup menu, after entering the name is added to the popup list items in workbook class. To make this possible it was necessary to change the static reference in WorkbookView class, popupMenu field and make a get of the same.
 
 **For US2**
 
+> Create/add a new menu in the main side bar
+- When selectd the option to create a new menu in the main side bar, after entering the name is added to the list items in Menu class. To make this possible it was necessary change to static the reference in MenuView class the sideNav field and make a get.
+
 **For US3**
+
+> Create side bars
+- Unfortunately I couldn't finish this user storie, the attempts were several, but I did not have time to find a solution with the expected result. All of them changed the visual aspect of the application, which made it unpleasant to see and made it lose some of the functionality already implemented.
 
 # 6. Integration/Demonstration
 
