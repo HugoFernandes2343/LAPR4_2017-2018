@@ -1,0 +1,19 @@
+  @startuml sd_SearchAndReplace.png
+
+  participant "SearchAndReplacePanel"
+  participant "ReplaceUI"
+  participant "SearchAndReplace"
+  participant "Cell"
+
+  ->SearchAndReplacePanel : input(String find,String replace)
+  SearchAndReplacePanel -> SearchAndReplace : List<Cell> listOfCells=searchExpression(String find)
+  note right of SearchAndReplacePanel: Exact same as in the previous uc's, but return List<Cell> intead of List<Address>
+  create ReplaceUI
+    SearchAndReplacePanel -> ReplaceUI : create(SearchAndReplace controller,List<Cell>, int element, String replace)
+    note right of ReplaceUI: ReplaceUI is recursive, the element is the current Cell position on the list
+  loop
+  ReplaceUI -> ReplaceUI : create(SearchAndReplace controller,List<Cell>, int element+, String replace)
+  ReplaceUI -> SearchAndReplace : replace(Cell cell,String replace)
+  end
+
+  @enduml

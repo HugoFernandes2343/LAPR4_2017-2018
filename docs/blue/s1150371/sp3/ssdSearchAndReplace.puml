@@ -1,0 +1,14 @@
+@startuml
+actor User
+participant System
+
+User -> System : selects the button Search and Replace
+System->User : 'asks' for the value or text to find and the replacement
+User -> System : inputs the values and the replacement and press Search And Replace
+loop
+System->User : shows a new window with the information of the find(Location,Content) and asks if the user wants to replace or next(skip)
+User -> System : selects replace
+System->User : replaces the cell content
+end
+
+@enduml

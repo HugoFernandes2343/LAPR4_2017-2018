@@ -1,0 +1,35 @@
+@startuml
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+control WorkbookServices
+control SearchAndReplaceController
+
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter
+end box
+box "Server"
+control WorkbookServices
+control SearchAndReplaceController
+end box
+
+
+
+User -> WorkbookView : navigate to page
+WorkbookView -> WorkbookPresenter:onClick() 
+WorkbookPresenter ->> WorkbookServices : searchAndReplace(input, replace, CurrentWorkbook.getCurrentWorkbook().toDTO())
+WorkbookServices -> SearchAndReplaceController : searchAndReplace(input, replace, wbDTO)
+
+WorkbookServices ->> WorkbookPresenter : onSuccess()
+WorkbookPresenter -> WorkbookView : showResults()
+
+User -> WorkbookView:confirms replacements
+WorkbookView->WorkbookPresenter:replace()
+WorkbookPresenter->WorkbookServices:replace()
+WorkbookServices->SearchAndReplaceController:replace()
+WorkbookServices->WorkbookPresenter:onSucess()
+WorkbookPresenter->WorkbookView:setContents()
+WorkbookView->User:Informs Sucess
+@enduml

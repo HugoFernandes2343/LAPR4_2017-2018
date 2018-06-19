@@ -229,3 +229,4 @@ Lastly, I also highlight the support Rodrigo Soares has shown. Besides being a s
 [IPC 05.1 - Export To CSV - Documentation Improvements](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/98370ff7a4b3)
 
 [IPC 05.1 - Export To CSV - Technical Documentation Correction](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/55d5b1272be3)
+
