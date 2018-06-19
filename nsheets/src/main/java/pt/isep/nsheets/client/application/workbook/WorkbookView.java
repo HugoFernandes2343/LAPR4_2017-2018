@@ -1045,6 +1045,43 @@ public class WorkbookView extends ViewImpl implements WorkbookPresenter.MyView {
 
         }
         );
+        replaceButton.addClickHandler(event -> {
+            if (!resultList.isEmpty()) {
+                String[] splitString = resultList.get(0).split("\\s+");
+                int row = Integer.parseInt(splitString[1].split(":")[1].split(",")[0]);
+                int col = Integer.parseInt(splitString[1].split(":")[1].split(",")[1]);
+                try {
+                    CurrentWorkbook.getCurrentSpreadsheet().getCell(col, row).setContent(textBoxReplacementText.getText());
+                } catch (FormulaCompilationException ex) {
+                    Logger.getLogger(WorkbookView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                MaterialToast.fireToast("Replaced With Success");
+                customTable.getView().setRedraw(true);
+                customTable.getView().refresh();
+            } else {
+                MaterialToast.fireToast("No results");
+            }
+        });
+
+        replaceAllButton.addClickHandler(event -> {
+            for (String s : resultList) {
+                if (!resultList.isEmpty()) {
+                    String[] splitString = s.split("\\s+");
+                    int row = Integer.parseInt(splitString[1].split(":")[1].split(",")[0]);
+                    int col = Integer.parseInt(splitString[1].split(":")[1].split(",")[1]);
+                    try {
+                        CurrentWorkbook.getCurrentSpreadsheet().getCell(col, row).setContent(textBoxReplacementText.getText());
+                    } catch (FormulaCompilationException ex) {
+                        Logger.getLogger(WorkbookView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    MaterialToast.fireToast("Replaced With Success");
+                    customTable.getView().setRedraw(true);
+                    customTable.getView().refresh();
+                } else {
+                    MaterialToast.fireToast("No results");
+                }
+            }
+        });
         // Added access to ToolPanel to add icon widget
         Panel panel = customTable.getScaffolding().getToolPanel();
         panel.clear();
