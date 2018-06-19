@@ -1,4 +1,4 @@
-**JosÃ© Silva** (s1150371)  - Sprint 3 - IPC02.2
+**José Silva** (s1150371)  - Sprint 3 - IPC02.2
 ===============================
 
 # 1. General Notes
@@ -30,7 +30,7 @@ The main idea for the "workflow" of this feature increment.
 
 **Domain Model**
 
-![dm](dm.png)
+![dm](dm.PNG)
 
 **System Sequence Diagrams**
 
@@ -39,7 +39,7 @@ The main idea for the "workflow" of this feature increment.
 - The user selects the button Search and Replace. The system 'asks' for the value or text to find and the replacement.The user inputs the values and the replacement and press Search And Replace.The system for each find, shows a new window with the information of the find(Location,Content) and asks if the user wants to replace or next(skip). The user selects replace. The system replaces the cell content.
 
 ## 3.4 Presentation
-At the Workbook page, there will be a button thatâ€™s going to allow to Search and Replace. This button, when clicked, opens a Window to search and replace.
+At the Workbook page, there will be a button that’s going to allow to Search and Replace. This button, when clicked, opens a Window to search and replace.
 
 ![snr](snrview.png)
 
