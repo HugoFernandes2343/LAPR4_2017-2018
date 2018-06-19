@@ -314,14 +314,16 @@ Project **shared**
 
 # 6. Integration/Demonstration
 The demonstration of this Use Case is very simple,  as shown on the following images:
+
 ![Impl_01](impl_01.JPG)
 
 ![Impl_02](impl_02.JPG)
 
 
 # 7. Final Remarks
-For this sprint I have to thanks to Jo√£o Vieira from team Green, he had the previous Use Case and helped a lot understanding how the program compiles formulas and how I could add my features.
-
+For this sprint I have to thanks to Jo„o Vieira from team Green, he had the previous Use Case and helped a lot understanding how the program compiles formulas and how I could add my features.
+Like stated before this Use Case was very similar to the previous one (LANG2.1), I implemented one major change and adapted several classes. 
+The most dificult was understand how was the architecture of the program and how to use the debug plataform for Lang Use Cases.
 
 # 8. Work Log
 **Wednesday - June 13**
