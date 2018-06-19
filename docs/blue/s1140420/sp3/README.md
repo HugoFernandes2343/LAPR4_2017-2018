@@ -1,27 +1,72 @@
-**Rodrigo Fontes Soares** (1140420) - Sprint 3 - IPC03.1
+**Rodrigo Soares** (1140420) - Sprint 3 - IPC03.1
 ===============================
 
 # 1. General Notes
 
-In this sprint, it took me a very serious amount of time to get familiar with client-server communcation in GWT. 
+Filipe from Team RED was responsible for this UC in the previous Sprint. He was friendly and honest briefing me and was fine with me starting this UC from scratch.
+
+Marco Carneiro (also Team RED), who had done the CLS export, took the time to brief me on how he did it - although I must confess I didn't understand any of it, through no faul of his own.
+
+In this sprint, it took me a very serious amount of time to get familiar with client-server communication in GWT. I literally had to stay up one night banging my head against the wall trying to understand what a "Servlet" and "Service" are, how they're related, how to map them properly in the "Web.xml" files, etc.
+
+**Teamwork**
+
+ Since myself, Barbara and Daniel had 3 very similar Use Cases (Export PDF/XML/CSV, respectively), we decided on Day 1 to pool our resources together. Although everybody did a bit of Design, Backend and Frontend, here's the highlights of our collaborative workflow:
+
+  - I figured out the GWT Client-Server communication and explained it to Daniel and Barbara. From there it was relatively simple for them to develop their own implementations based on mine;
+  - Daniel worked on the UI and how to capture current Workbook or select a specific Spreadsheet. Barbara and I adapted his UI almost verbatim
+  - Barbara worked on mapping the implementation to correct and insightful Design diagrams
+
+ Here are our main limitations:
+
+  - Rodrigo (myself): missed 2nd half of RCOMP, no understanding of Client-Server communication. Also the Scrum Master, so considerable time dedicated to helping out other team members;
+  - Daniel: difficulties understanding Client-Server communication as well;
+  - Barbara (Erasmus): no prior experience with Java, was not enrolled in any of the other subjects like LPROG, RCOMP, SCOMP, EAPLI, so in a massive disadvantage compared to other students.
+
+ I can confidently say that if these 3 average students had not worked together, each would have most likely NOT have produced a functional UC. Instead, even though all 3 UCs need improving, we are proud of our work and confident that given extra time that would be a possiblity.
 
 # 2. Requirements
 
  It should be possible to export to PDF an entire workbook, a spreadsheet or a range of cells. The contents should include only the values of the cells (and not its formulas, for instance). The user should be able to select the content to be exported and also if the document should have a table of contents with links to the sections or not. If select, sections/chapters should be generated for each spreadsheet of the workbook. The generated PDF should be downloaded to the user local file system.
 
+ ![US](US.png)
+
+ During interpretation of the use case, I was able to identify three different user stories as represented in the use case diagram above.
+
+ **US1** Export Workbook
+
+ **US2** Export Spreadhsheet
+
+ **US3** Export Cell range
+
+Here are the Requirements that have NOT been met due to time-constraints (including my Scrum Master responsibilities):
+
+ - Export Values of Cells. The demo purposefully includes an example of a Cell with "=14+7" which is exported verbatim. This should be converted to "21" instead, but that would imply further modifications to the "Spreadsheet" class to generate a DTO with only Values, which was a bit outside the scope of this specific UC (and I didn't have time to do this extra)
+
 # 3. Analysis
 
 As it can be seen on the diagram as well, the core of this task were the following modules and its details:
 
+## 3.1 Analysis Diagrams
+
+**Domain Model**
+
+![CD](CD.png)
+
+
+**Sequence Diagram (encapsulating all User Stories)**
+
+![SSD](SSD.png)
+
 ##Client module
 
-	ExportToPDFView class
+	ExportPDFView class, in pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF
 
 	- btnExport() method
 
-	On the Client side, there is this specific view, called ExportToPDFView, which is a window that has the users interactions. It has a button called btnExport(), and once it was clicked by the user, it starts the whole process itself.
+	On the Client side, there is this specific view, called ExportPDFView, which is a window that has the users interactions. It has a button called btnExport(), and once it was clicked by the user, it starts the whole process itself.
 
-	The button uses the exportToDownload() method in DownloadToPDFServiceAsync interface, and the Server will actually implement it in the Shared module as well, in the DownloadToPDFService. 
+	The button uses the exportToDownload() method in DownloadToPDFServiceAsync interface, and the Server will actually implement it in the Shared module as well, in the DownloadToPDFService.
 
 	Both the Server and Client knows that the communication service exist (DownloadToPDFServiceAsync); Those two interfaces were being defined in Shared module.
 
@@ -43,7 +88,7 @@ As it can be seen on the diagram as well, the core of this task were the followi
 
 	- doGet(HttpServletRequest request, HttpServletResponse, response)
 
-	When the client sends a request to the server, and it gets a response as well. Once the Server gets the request from the Client side, this doGet method will automatically execute. This is basically an HTTP protocol, that all servers needs to do. 
+	When the client sends a request to the server, and it gets a response as well. Once the Server gets the request from the Client side, this doGet method will automatically execute. This is basically an HTTP protocol, that all servers needs to do.
 
 	- generatePDFFromWorkbook(WorkbookDTO workbookDTO, String fileMame)
 
@@ -52,17 +97,19 @@ As it can be seen on the diagram as well, the core of this task were the followi
 
 	- sendPDFfile(HttpServletResponse response, String fileName)
 
- 	This method basically opens up the file that already exists on the server, and converts it to array of bytes. Once I have an array of bytes, I just create an OutputStream, and write them. When this thing executes, the client already has the file on their end. 
+ 	This method basically opens up the file that already exists on the server, and converts it to array of bytes. Once I have an array of bytes, I just create an OutputStream, and write them. When this thing executes, the client already has the file on their end.
 
 	- exportToDownload(WorkbookDTO toExport)
 
 	This method is familiar to each side (to the Server and to the Client also). Here, it is being captured what the client sent through. It is going to be saved in a local field. Whenever the exportToDownload is called, this field has to be set in order to define the actual Workbook that has to be downloaded.
 
-	Moreover, as it was mentioned before, the DownloadPFImpl class..:
+	Moreover, as it was mentioned before, the DownloadPFImpl class:
 
 	- extends RemoteServiceServlet class, which has already existed. The class DonwloadPDFImpl extends it, in order to be able to use it during the work.
 
 	- implements iText, which is an external library.
+
+
 
 # 4. Design
 
@@ -225,7 +272,27 @@ As it can be seen on the diagram as well, the core of this task were the followi
         }
     }
 
-## 4.2. Used and modified classes
+    These tests generate PDF files server-side, which were very useful to determine if the PDF conversion was working regardless of the hours I spent trying to make the Client-Server communication work. They saved my life in this UC
+
+## 4.2. Design diagrams
+
+**For US1**
+![SD_Workbook](SD_Workbook.png)
+
+**For US2**
+![SD_Spreadsheet](SD_Spreadsheet.png)
+
+**For US3**
+![SD_CellRange](SD_CellRange.png)
+
+
+
+## 4.3. Used and modified classes
+
+
+**Client**
+- User Interface - **pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF**
+
 
 	WorkbookView.java class (Client side)
 
@@ -233,9 +300,11 @@ As it can be seen on the diagram as well, the core of this task were the followi
             new ExportToPDFView(this.getActiveCell().getSpreadsheet().getWorkbook());
         });
 
- The actual button that shows up on the website. It uses the current workbook (getWorkbook()). 
+ The actual button that shows up on the website. It uses the current workbook (getWorkbook()).
 
-	ExportTOPDFView.java class (Client side)
+	ExportPDFView.java class (Client side), pt.isep.nsheets.client.lapr4.blue.s3.s1140420ExportToPDF
+
+ Here is a simplified snapshot of how a Workbook can be exported. The actual method has additional logic to allow selection of a Spreadhsheet or a Cell range
 
  btnExport.addClickHandler(event -> {
 
@@ -260,26 +329,33 @@ As it can be seen on the diagram as well, the core of this task were the followi
 
    After the button was clicked, a dto will be generated (WorkbookDTO dto = workbook.toDTO();). It is important to notice that this class has the whole Workbook as a parameter, but once again, we are only using the trimmed down version - that's why the DTO shows up here.
 
-   Then, an asynchronous service will be done by GWT, based on the "normal" one (DownloadToPDFService.class). From this service, I am going to call the method exportToDownload ( downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>()). 
+   Then, an asynchronous service will be done by GWT, based on the "normal" one (DownloadToPDFService.class). From this service, I am going to call the method exportToDownload ( downAsync.exportToDownload(dto, new AsyncCallback<WorkbookDTO>()).
 
 
-   It needs the actual Workbook, and a new asynchronous call back to this view, that what should happen. 
+   It needs the actual Workbook, and a new asynchronous call back to this view, that what should happen.
 
-   If it manages to reach the server, it is a success (onSuccess(WorkbookDTO result)), so we will get the URL (GWT.getModuleBaseURL()), which is the path of the file located on the server. Then I specify the file name what I want, I give a name, and then a window will open up, telling that the file is downloading. 
+   If it manages to reach the server, it is a success (onSuccess(WorkbookDTO result)), so we will get the URL (GWT.getModuleBaseURL()), which is the path of the file located on the server. Then I specify the file name what I want, I give a name, and then a window will open up, telling that the file is downloading.
 
-	DownloadPDFImplRod.java class (Server side)
+**Shared**
+- Shared Services - **pt.isep.nsheets.shared.services**
+
+
+**Server**
+- Services - **pt.isep.nsheets.server.services**
+
+	DownloadPDFWorkbookImpl.java class (Server side)
 
     public WorkbookDTO exportToDownload(WorkbookDTO toExport) {
         this.toExport = toExport;
         return toExport;
     }
 
-    This method is familiar to each side (to the Server and to the Client also). Here, it is being captured what the client sent through. It is going to be saved in a local field. Whenever the exportToDownload is called, this field has to be set in order to define the actual Workbook that has to be downloaded. 
+    This method is familiar to each side (to the Server and to the Client also). Here, it is being captured what the client sent through. It is going to be saved in a local field. Whenever the exportToDownload is called, this field has to be set in order to define the actual Workbook that has to be downloaded.
 
-    This class extends RemoteServiceServlet, and implements DownloadToPDFService.
+    This class extends RemoteServiceServlet, and implements ExportPDFWorkbookService.
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        String fileName = "generatedPDF.pdf";//request.getParameter("filename");
+        String fileName = request.getParameter("filename");
 
         try {
             //1st, generate a local PDF file
@@ -295,7 +371,7 @@ As it can be seen on the diagram as well, the core of this task were the followi
 
     Since this is a method that already exists, I used override. It has a request, and a corresponding response as a parameter.
 
-    In the fileName, I'm using a default name ( String fileName = "generatedPDF.pdf";//request.getParameter("filename");). So what the server has to do - as it is written in comments too -, first, to generate a local PDF file, and second, to send it through. 
+    In the fileName, I'm using a default name ( String fileName = "generatedPDF.pdf";//request.getParameter("filename");). So what the server has to do - as it is written in comments too -, first, to generate a local PDF file, and second, to send it through.
 
 	public PdfDocument generatePDFFromWorkbook (WorkbookDTO workbookDTO, String filename) throws FileNotFoundException {
         List<Table> result = workbookToPDF(workbookDTO);
@@ -312,7 +388,7 @@ As it can be seen on the diagram as well, the core of this task were the followi
         return lowLevelDoc;
     }
 
-    This method uses things from iText, which is an existing library that can be used to create PDF from Java. Once this method executes, there will be a file wherever on the Client's computer, with the given name, and sendPDFfile method sends it through. 
+    This method uses things from iText, which is an existing library that can be used to create PDF from Java. Once this method executes, there will be a file wherever on the Client's computer (this uses browsers' built-in "Download" windows, most of them allowing the user to choose a Download location), with the given name, and sendFile method sends it through.
 
 
  	public byte[] getFile(String filename) {
@@ -336,9 +412,11 @@ As it can be seen on the diagram as well, the core of this task were the followi
         return bytes;
     }
 
-    This method basically opens up the file that already exists on the server, and converts it to array of bytes. Once I have an array of bytes, I just create an OutputStream, and write them. When this thing executes, the client already has the file on their end. 
 
-     private void sendPDFfile(HttpServletResponse response, String fileName) throws IOException {
+DownloadUtility.java
+    This method basically opens up the file that already exists on the server, and converts it to array of bytes. Once I have an array of bytes, I just create an OutputStream, and write them. When this thing executes, the client already has the file on their end.
+
+     public void sendfile(HttpServletResponse response, String fileName) throws IOException {
         int BUFFER = 1024 * 100;//set a reasonable size
         response.setContentType( "application/octet-stream" );
         response.setHeader( "Content-Disposition:", "attachment;filename=" + fileName);
@@ -350,8 +428,38 @@ As it can be seen on the diagram as well, the core of this task were the followi
         outputStream.close();
     }
 
-# 5. Implementation
 
-# 6. Integration/Demonstration
+**Spreadsheet and Cell Range**
 
-# 7. Final Remarks
+ To avoid making this documentation overly verbose, the "Client", "Shared" and "Server" sections above refer only to the "Export Workbook" User Story. Here are the corresponding classes for the remaining User Stories. The code itself is very similar:
+
+ **Server (Servlet Implementations)**
+
+  - **DownloadUtility** - created a posteriori to contain methods common to all Servlets, as a code cleanup
+
+  - **ExportPDFWorkbookImpl**
+
+  - **ExportPDFSpreadsheetImpl**
+
+  - **ExportPDFCellRangeImpl**
+
+ **Shared (Service Synchronous Interfaces)**
+
+ - **ExportPDFWorkbookService**
+
+ - **ExportPDFSpreadsheetService**
+
+ - **ExportPDFCellRangeService**
+
+ **Shared (Service Asynchronous Interfaces)**
+
+ - **ExportPDFWorkbookServiceAsync**
+
+ - **ExportPDFSpreadsheetServiceAsync**
+
+ - **ExportPDFRangeServiceAsync**
+
+
+# 7. Work log
+
+[IPC 05.1 - Export To CSV - UI structure](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/b2560126469c)
