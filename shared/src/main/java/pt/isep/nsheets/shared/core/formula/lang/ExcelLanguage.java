@@ -22,7 +22,9 @@ public class ExcelLanguage extends Language {
 		functions.add(new True());
                 functions.add(new For());
                 functions.add(new Block());
-                
+          //      functions.add(new Eval());
+		//functions.add(new DoWhile());
+	  //  functions.add(new WhileDo());
 	}
 
 	@Override
