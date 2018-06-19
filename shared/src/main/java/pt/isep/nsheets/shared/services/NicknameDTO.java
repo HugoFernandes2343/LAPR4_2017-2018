@@ -27,5 +27,10 @@ public class NicknameDTO implements Serializable{
         return this.nickName;
     }
 
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    
 }
 

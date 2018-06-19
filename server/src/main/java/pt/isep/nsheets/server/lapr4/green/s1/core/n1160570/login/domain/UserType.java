@@ -6,6 +6,7 @@
 package pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain;
 
 import javax.persistence.Embeddable;
+import pt.isep.nsheets.shared.services.UserTypeDTO;
 
 /**
  *

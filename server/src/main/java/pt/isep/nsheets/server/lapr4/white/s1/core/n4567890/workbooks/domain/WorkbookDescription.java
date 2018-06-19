@@ -19,6 +19,7 @@ import pt.isep.nsheets.shared.services.WorkbookDescriptionDTO;
  * @author ATB
  *
  */
+@Entity
 public class WorkbookDescription implements AggregateRoot<Long>, Serializable {
 
     // ORM primary key

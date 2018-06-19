@@ -1,5 +1,6 @@
 package pt.isep.nsheets.client.application.menu;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 import javax.inject.Inject;
@@ -14,8 +15,9 @@ import gwt.material.design.client.ui.MaterialLink;
 
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSideNavPush;
+import gwt.material.design.client.ui.MaterialToast;
 
-class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
+public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
 
 
     interface Binder extends UiBinder<Widget, MenuView> {
@@ -24,7 +26,7 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     @UiField
     MaterialNavBar navBar;
     @UiField
-    MaterialSideNavPush sideNav;
+    static MaterialSideNavPush sideNav;
     @UiField
     MaterialLink btnLogout;
     @UiField
@@ -51,6 +53,10 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
         initWidget(uiBinder.createAndBindUi(this));
     }
 
+    public static MaterialSideNavPush getSideNav() {
+        return sideNav;
+    }
+    
     @Override
     public MaterialLink getBtnLogin() {
         return btnLogin;
@@ -63,6 +69,12 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     }
 
     @Override
+    public void addClicker(ClickHandler ch){
+        userImage.addClickHandler(ch);
+     
+    }
+
+    @Override
     public MaterialLink getBtnLogout() {
         return btnLogout;
     }
@@ -71,6 +83,5 @@ class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresent
     public MaterialLink getSingUp() {
         return btnSingUp;
     }
-
 
 }

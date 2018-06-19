@@ -17,13 +17,20 @@ import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.application.Log
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Email;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.Password;
 import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
+import static pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.UserType.ADMIN;
+import pt.isep.nsheets.server.lapr4.green.s1.core.n1160570.login.domain.User;
 import pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161109.register.application.RegisterController;
 
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceContext;
 import pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.persistence.PersistenceSettings;
+import pt.isep.nsheets.shared.services.EmailDTO;
+import pt.isep.nsheets.shared.services.NameDTO;
+import pt.isep.nsheets.shared.services.NicknameDTO;
+import pt.isep.nsheets.shared.services.PasswordDTO;
 
 import pt.isep.nsheets.shared.services.DataException;
 import pt.isep.nsheets.shared.services.UserDTO;
+import pt.isep.nsheets.shared.services.UserTypeDTO;
 
 import pt.isep.nsheets.shared.services.UsersService;
 
@@ -104,8 +111,15 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         PersistenceContext.setSettings(this.getPersistenceSettings());
 
         LoginController ctrl = new LoginController();
+        User user = ctrl.getUser(new Email(email), new Password(password));
 
-        return ctrl.getUser(new Email(email), new Password(password)).toDTO();
+        if (user.getUserType() == ADMIN) {
+            UserTypeDTO usertype = UserTypeDTO.ADMIN;
+            return ctrl.getUser(new Email(email), new Password(password)).toDTOAdmin(usertype);
+        } else {
+
+            return ctrl.getUser(new Email(email), new Password(password)).toDTO();
+        }
 
     }
 
@@ -125,6 +139,45 @@ public class UsersServiceImpl extends RemoteServiceServlet implements UsersServi
         }
 
         return null;
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO user) {
+        LoginController controller = new LoginController();
+        return controller.updateUser(user);
+    }
+
+    @Override
+    public List<UserDTO> getUsers() {
+        LoginController controller = new LoginController();
+        Iterable<User> itr = controller.allUsers();
+        List<UserDTO> lstDTO = new ArrayList<UserDTO>();
+        for (User user : itr) {
+            UserDTO dto = user.toDTOActivate(user.isActivate());
+            lstDTO.add(dto);
+        }
+        return lstDTO;
+    }
+
+    @Override
+    public Boolean deleteUser(String email) {
+        LoginController controller = new LoginController();
+        controller.deleteUser(email);
+        return true;
+    }
+
+    @Override
+    public Boolean activateUser(UserDTO user) {
+        LoginController controller = new LoginController();
+        controller.activateUser(user);
+        return true;
+    }
+
+    @Override
+    public Boolean deactivateUser(UserDTO user) {
+        LoginController controller = new LoginController();
+        controller.deactivateUser(user);
+        return true;
     }
 
 }

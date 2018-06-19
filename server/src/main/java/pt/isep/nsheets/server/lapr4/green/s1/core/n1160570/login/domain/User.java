@@ -16,6 +16,7 @@ import pt.isep.nsheets.server.lapr4.red.s1.core.n1161155.community.domain.Reques
 import pt.isep.nsheets.shared.services.ChatDTO;
 import javax.persistence.*;
 import pt.isep.nsheets.shared.services.UserDTO;
+import pt.isep.nsheets.shared.services.UserTypeDTO;
 
 /**
  *
@@ -48,6 +49,19 @@ public class User implements AggregateRoot<Email>, Serializable {
         this.activate = true;
         this.userType = UserType.USER;
         this.chatList = new ArrayList<>();
+    }
+    
+    public User(Email email, Password password, Nickname nickname, Name name, String admin) throws IllegalArgumentException {
+        if (email == null || password == null || nickname == null || name == null) {
+            throw new IllegalArgumentException("email or password or nickname or name must be non-null");
+        }
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.activate = true;
+        this.userType = UserType.ADMIN;
+
     }
 
 
@@ -127,7 +141,21 @@ public class User implements AggregateRoot<Email>, Serializable {
         }
         return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO(), chatListDTO);
     }
-
+    
+    public UserDTO toDTOAdmin(UserTypeDTO usertype){
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO(), usertype);
+    }
+    
+    public UserDTO toDTOActivate(boolean activated){
+        UserDTO user = new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+        if(activated==true){
+            user.activateUser();
+        }else{
+            user.deactivateUser();
+        }
+        return new UserDTO(email.toDTO(), password.toDTO(), name.toDTO(), nickname.toDTO());
+    }
+    
     public UserType getUserType() {
         return userType;
     }
@@ -150,6 +178,22 @@ public class User implements AggregateRoot<Email>, Serializable {
             chatList.add(Chat.fromDTO(chat));
         }
         return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()), chatList);
+    }
+    
+    public static User fromDTOAdmin(UserDTO dto, String admin) throws IllegalArgumentException {
+        return new User(Email.fromDTO(dto.getEmail()), Password.fromDTO(dto.getPassword()), Nickname.fromDTO(dto.getNickname()), Name.fromDTO(dto.getName()), admin);
+    }
+    
+    public void deactivate(){
+        this.activate=false;
+    }
+    
+    public void activate(){
+        this.activate=true;
+    }
+    
+    public boolean isActivate(){
+        return activate;
     }
 
 }

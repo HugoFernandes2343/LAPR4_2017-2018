@@ -44,12 +44,12 @@
                     </m:MaterialRow>
                     <m:MaterialRow>
                         <m:MaterialColumn grid="s6">
-                            <m:MaterialButton text="Activate"/>
-                            <m:MaterialButton text="Disactivate"/>
+                            <m:MaterialButton ui:field="btnCommentsAct" text="Activate"/>
+                            <m:MaterialButton ui:field="btnCommentsDis" text="Disactivate"/>
                         </m:MaterialColumn>
                         <m:MaterialColumn grid="s6">
-                            <m:MaterialButton text="Activate"/>
-                            <m:MaterialButton text="Disactivate"/>
+                            <m:MaterialButton ui:field="btnImagesAct" text="Activate"/>
+                            <m:MaterialButton ui:field="btnImagesDis" text="Disactivate"/>
                         </m:MaterialColumn>
                     </m:MaterialRow>
                 </m:MaterialCollapsibleBody>
