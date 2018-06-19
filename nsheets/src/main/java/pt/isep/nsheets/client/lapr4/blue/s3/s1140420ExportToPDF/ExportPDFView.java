@@ -113,7 +113,7 @@ public class ExportPDFView extends Composite {
 
                     @Override
                     public void onSuccess(String[][] result) {
-                        String url = GWT.getModuleBaseURL() + "exportPDFRangeService?filename=" + titleBox.getText() + ".pdf";
+                        String url = GWT.getModuleBaseURL() + "exportPDFCellRangeService?filename=" + titleBox.getText() + ".pdf";
                         Window.open(url, "Download CSV file", "status=0,toolbar=0,menubar=0,location=0");
                     }
                 });
