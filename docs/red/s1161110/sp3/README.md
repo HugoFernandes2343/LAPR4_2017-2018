@@ -354,6 +354,6 @@ Commits:
 
 [Analysis](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a6c75f0df2b7)
 
-[Design]()
+[Design](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/a1cdec6a7370)
 
 [Code Implementation ](https://bitbucket.org/lei-isep/lapr4-18-2dl/commits/f40e297d4a41)
